@@ -1,18 +1,65 @@
-const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kintra — Pilot</title>
+    <style>
+      html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+      .wrap{min-height:100dvh;display:flex;align-items:center;justify-content:center}
+      .card{max-width:720px;padding:32px;border:1px solid #ddd;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+      h1{margin:0 0 8px 0}
+      p{margin:8px 0}
+      .muted{color:#666}
+      .cta{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;border:1px solid #222;cursor:pointer}
+      input{padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;max-width:320px}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>Hello Kintra 👋</h1>
+        <p class="muted">Pilot skeleton is live. This proves “planning → execution”.</p>
+        <p>Next steps: wire API → run end-to-end test → demo.</p>
 
-async function testCall() {
-  const resultEl = document.getElementById('result');
-  const q = (document.getElementById('q')?.value || '').trim() || 'ciao';
-  resultEl.textContent = 'Running test...';
-  try {
-    const res = await fetch(WORKER_BASE + '/api/prompt', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: q })
-    });
-    const json = await res.json();
-    resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
-  } catch (e) {
-    resultEl.textContent = 'Error: ' + e.message;
-  }
-}
+        <!-- Input box -->
+        <input id="q" placeholder="Type something… (optional)" />
+
+        <!-- Button (no inline onclick) -->
+        <a class="cta" href="#" id="testBtn">Test Button</a>
+
+        <!-- Results appear here -->
+        <p id="result" class="muted"></p>
+
+        <p class="muted">Build: static HTML (no dependencies). Update this page anytime and redeploy.</p>
+      </div>
+    </div>
+
+    <script>
+      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
+
+      async function testCall() {
+        const resultEl = document.getElementById('result');
+        const q = (document.getElementById('q')?.value || '').trim() || 'ciao';
+        resultEl.textContent = 'Running test...';
+        try {
+          const res = await fetch(WORKER_BASE + '/api/prompt', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: q })
+          });
+          const json = await res.json();
+          resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
+        } catch (e) {
+          resultEl.textContent = 'Error: ' + e.message;
+        }
+      }
+
+      // Wire the button
+      document.getElementById('testBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        testCall();
+      });
+    </script>
+  </body>
+</html>
