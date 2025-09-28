@@ -1,35 +1,18 @@
-export default {
-  async fetch(request, env, ctx) {
-    const origin = request.headers.get("Origin") || "*";
-    const headers = {
-      "Access-Control-Allow-Origin": origin, // lock down later
-      "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type,Authorization",
-    };
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers });
+const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
 
-    const url = new URL(request.url);
-
-    if (url.pathname === "/") {
-      return new Response("Kintra API is live. Try /api/echo?q=ciao or POST /api/prompt", { headers });
-    }
-
-    if (url.pathname === "/api/echo") {
-      const q = (url.searchParams.get("q") || "").trim() || "ciao";
-      return Response.json({ ok: true, echo: q, timestamp: new Date().toISOString() }, { headers });
-    }
-
-    if (url.pathname === "/api/prompt") {
-      if (request.method !== "POST") return new Response("Use POST", { status: 405, headers });
-      const body = await request.json().catch(() => ({}));
-      const text = (body.text || "").trim();
-      if (!text) return Response.json({ ok: false, error: "Missing text" }, { status: 400, headers });
-
-      // Mock processing — swap this with real Italian workflow later
-      const result = `IT-PROMPT: "${text}" → [mock translation/analysis]`;
-      return Response.json({ ok: true, result, ts: new Date().toISOString() }, { headers });
-    }
-
-    return new Response("Not Found", { status: 404, headers });
-  },
-};
+async function testCall() {
+  const resultEl = document.getElementById('result');
+  const q = (document.getElementById('q')?.value || '').trim() || 'ciao';
+  resultEl.textContent = 'Running test...';
+  try {
+    const res = await fetch(WORKER_BASE + '/api/prompt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: q })
+    });
+    const json = await res.json();
+    resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
+  } catch (e) {
+    resultEl.textContent = 'Error: ' + e.message;
+  }
+}
