@@ -22,12 +22,30 @@
         <p class="muted">Pilot skeleton is live. This proves “planning → execution”.</p>
         <p>Next steps: wire API → run end-to-end test → demo.</p>
         <a class="cta" href="#" onclick="alert('Placeholder action');return false;">Test Button</a>
+        <p id="result" class="muted"></p>
+
         <p class="muted">Build: static HTML (no dependencies). Update this page anytime and redeploy.</p>
       </div>
     </div>
     <script>
-      // Placeholder for later: fetch('/api/...') and show response
-      console.log('Kintra pilot skeleton loaded');
-    </script>
+  async function testCall() {
+    const resultEl = document.getElementById('result');
+    resultEl.textContent = 'Running test...';
+    try {
+      const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+      const json = await res.json();
+      resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
+    } catch (e) {
+      resultEl.textContent = 'Error: ' + e.message;
+    }
+  }
+
+  // Wire the button
+  document.querySelector('.cta').addEventListener('click', (e) => {
+    e.preventDefault();
+    testCall();
+  });
+</script>
+
   </body>
 </html>
