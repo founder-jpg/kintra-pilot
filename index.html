@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Kintra — Pilot</title>
+    <!-- Favicon (optional). Upload favicon.png to the repo root to enable. -->
     <link rel="icon" type="image/png" href="favicon.png" />
     <style>
       :root{--border:#e5e7eb;--text:#111827;--muted:#6b7280;--bg:#ffffff}
@@ -19,7 +20,8 @@
       .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 6px}
       input{padding:10px 12px;border:1px solid var(--border);border-radius:10px;min-width:260px;flex:1}
       .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #111827;cursor:pointer;text-decoration:none;user-select:none}
-      #result{min-height:22px}
+      .btn[aria-busy="true"]{opacity:.6;pointer-events:none}
+      #result{min-height:22px;white-space:pre-wrap;word-break:break-word}
       .hr{height:1px;background:var(--border);margin:14px 0}
       @media (max-width:480px){.brand-logo{height:48px}.brand-name{font-size:1.25rem}}
     </style>
@@ -49,10 +51,10 @@
         <!-- Results -->
         <p id="result" class="muted"></p>
 
+        <!-- CTA -->
         <p style="margin-top:12px">
-  <em>Ready for a pilot?</em> Email <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
-</p>
-
+          <em>Ready for a pilot?</em> Email <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
+        </p>
 
         <div class="hr"></div>
         <p class="muted">Build: static HTML (no dependencies). Update this page anytime and redeploy.</p>
@@ -60,12 +62,17 @@
     </div>
 
     <script>
-      // Point this at your Worker base (no trailing slash)
-      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
+      // --------------- CONFIG ---------------
+      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev'; // no trailing slash
+
+      // --------------- UI HANDLERS ---------------
+      const inputEl = document.getElementById('q');
+      const btnEl = document.getElementById('testBtn');
+      const resultEl = document.getElementById('result');
 
       async function testCall() {
-        const resultEl = document.getElementById('result');
-        const q = (document.getElementById('q')?.value || '').trim() || 'ciao';
+        const q = (inputEl?.value || '').trim() || 'ciao';
+        btnEl.setAttribute('aria-busy', 'true');
         resultEl.textContent = 'Running test...';
         try {
           const res = await fetch(WORKER_BASE + '/api/prompt', {
@@ -73,16 +80,28 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: q })
           });
+
+          // Handle non-200s explicitly
+          if (!res.ok) {
+            const txt = await res.text().catch(()=> '');
+            throw new Error(`HTTP ${res.status} ${res.statusText} ${txt ? '— ' + txt.slice(0,140) : ''}`);
+          }
+
           const json = await res.json();
           resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
         } catch (e) {
-          resultEl.textContent = 'Error: ' + e.message;
+          resultEl.textContent = 'Error: ' + (e?.message || e);
+        } finally {
+          btnEl.removeAttribute('aria-busy');
         }
       }
 
-      document.getElementById('testBtn').addEventListener('click', (e) => {
-        e.preventDefault();
-        testCall();
+      // Click button
+      btnEl.addEventListener('click', (e) => { e.preventDefault(); testCall(); });
+
+      // Press Enter in the input to run
+      inputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); testCall(); }
       });
     </script>
   </body>
