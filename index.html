@@ -4,10 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Kintra — Pilot</title>
-    <!-- Favicon (optional). Upload favicon.png to the repo root to enable. -->
     <link rel="icon" type="image/png" href="favicon.png" />
     <style>
-      :root{--border:#e5e7eb;--text:#111827;--muted:#6b7280;--bg:#ffffff}
+      :root{
+        --border:#e5e7eb;
+        --text:#111827;
+        --muted:#6b7280;
+        --bg:#ffffff;
+        --ok:#065f46;
+        --err:#b91c1c;
+      }
       html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:System-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
       .wrap{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
       .card{max-width:760px;width:100%;padding:28px 28px 20px;border:1px solid var(--border);border-radius:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:#fff}
@@ -21,7 +27,9 @@
       input{padding:10px 12px;border:1px solid var(--border);border-radius:10px;min-width:260px;flex:1}
       .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #111827;cursor:pointer;text-decoration:none;user-select:none}
       .btn[aria-busy="true"]{opacity:.6;pointer-events:none}
-      #result{min-height:22px;white-space:pre-wrap;word-break:break-word}
+      #result{min-height:22px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:.9rem;padding-top:4px}
+      #result.ok{color:var(--ok);}
+      #result.err{color:var(--err);}
       .hr{height:1px;background:var(--border);margin:14px 0}
       @media (max-width:480px){.brand-logo{height:48px}.brand-name{font-size:1.25rem}}
     </style>
@@ -44,7 +52,7 @@
 
         <!-- Test input & button -->
         <div class="row">
-          <input id="q" placeholder="Type something… (optional)" />
+          <input id="q" placeholder="Type something…" autofocus />
           <a class="btn" href="#" id="testBtn">Test Button</a>
         </div>
 
@@ -62,10 +70,7 @@
     </div>
 
     <script>
-      // --------------- CONFIG ---------------
-      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev'; // no trailing slash
-
-      // --------------- UI HANDLERS ---------------
+      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
       const inputEl = document.getElementById('q');
       const btnEl = document.getElementById('testBtn');
       const resultEl = document.getElementById('result');
@@ -74,35 +79,33 @@
         const q = (inputEl?.value || '').trim() || 'ciao';
         btnEl.setAttribute('aria-busy', 'true');
         resultEl.textContent = 'Running test...';
+        resultEl.className = '';
         try {
           const res = await fetch(WORKER_BASE + '/api/prompt', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: q })
           });
-
-          // Handle non-200s explicitly
           if (!res.ok) {
             const txt = await res.text().catch(()=> '');
             throw new Error(`HTTP ${res.status} ${res.statusText} ${txt ? '— ' + txt.slice(0,140) : ''}`);
           }
-
           const json = await res.json();
-          resultEl.textContent = 'OK → received: ' + JSON.stringify(json);
+          resultEl.textContent = 'OK → ' + JSON.stringify(json, null, 2);
+          resultEl.className = 'ok';
         } catch (e) {
           resultEl.textContent = 'Error: ' + (e?.message || e);
+          resultEl.className = 'err';
         } finally {
           btnEl.removeAttribute('aria-busy');
+          // Auto-select input text for quick retests
+          inputEl.focus();
+          inputEl.select();
         }
       }
 
-      // Click button
       btnEl.addEventListener('click', (e) => { e.preventDefault(); testCall(); });
-
-      // Press Enter in the input to run
-      inputEl.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') { e.preventDefault(); testCall(); }
-      });
+      inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); testCall(); } });
     </script>
   </body>
 </html>
