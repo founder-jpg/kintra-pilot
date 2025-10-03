@@ -37,32 +37,26 @@
     }
     .brand img { width: 100px; height: auto; display: block; }
 
-    /* Centered content block; we can choose text-align per slide */
     .stack { max-width: 900px; width: min(90vw, 900px); }
     .stack.center { text-align: center; }
     .stack.left   { text-align: left; }
-    .stack .muted { color: #e5e7eb; }
 
     h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
     h2 { font-size: 2em;   margin: 0.2em 0 0.6em; color: #e5e7eb; }
     p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
-    /* Bullets (general) */
-    .k-list { margin: 12px 0 0 1.2em; padding: 0; list-style: disc; }
-    .k-list li { margin: .35em 0; line-height: 1.45; font-size: 1.25em; color: #e5e7eb; }
-
-    /* Pilot Plan: centered checklist with ticks */
+    /* Checklist: centered column under heading */
     .checklist {
       list-style: none;
-      margin: 14px auto 0;
+      margin: 18px auto 0;
       padding: 0;
-      max-width: 760px;          /* narrows the column so it feels centered tight */
+      display: inline-block;     /* makes the list itself center under heading */
       text-align: left;          /* keep items left for readability */
     }
     .checklist li {
       margin: .5em 0;
       line-height: 1.5;
-      font-size: 1.3em;          /* slightly larger for presence */
+      font-size: 1.3em;
       position: relative;
       padding-left: 1.6em;
     }
@@ -71,7 +65,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      color: #A7F3D0;            /* mint tick to match brand accents */
+      color: #A7F3D0;
       font-weight: 700;
     }
 
@@ -102,7 +96,7 @@
       .dots, .brand { display: none; }
       .overlay { background: rgba(255,255,255,0.95); color: #111; }
       body { color: #111; }
-      h2, p, .k-list li, .checklist li { color: #111; }
+      h2, p, .checklist li { color: #111; }
     }
   </style>
 </head>
@@ -153,7 +147,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4: Pilot Plan (centered block + centered heading + centered checklist column) -->
+  <!-- Slide 4: Pilot Plan -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
@@ -172,7 +166,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 5: Call to Action -->
+  <!-- Slide 5: CTA -->
   <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
       <div class="brand">
@@ -221,7 +215,6 @@
       if (!clickable) nextSlide();
     }, { passive: true });
 
-    // Init
     showSlide(slideIndex);
   </script>
 </body>
