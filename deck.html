@@ -22,7 +22,7 @@
       position: relative;
     }
     .overlay {
-      background: rgba(0,0,0,0.6); /* darker for readability */
+      background: rgba(0,0,0,0.6);
       position: absolute;
       inset: 0;
       display: flex;
@@ -70,10 +70,10 @@
 <body>
 
   <!-- Slide 1: Cover -->
-  <div class="slide" style="background-image:url('image/cover.jpg');">
+  <div class="slide" style="background-image:url('img/cover.jpg');">
     <div class="overlay">
       <div class="brand">
-        <img src="image/logo.png.png" alt="Kintra logo" />
+        <img src="img/logo.png.png" alt="Kintra logo" />
         <span>Kintra</span>
       </div>
       <h1>From listing to leads, faster.</h1>
@@ -84,10 +84,10 @@
   </div>
 
   <!-- Slide 2: Problem -->
-  <div class="slide" style="background-image:url('image/problem.jpg');">
+  <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
       <div class="brand">
-        <img src="image/logo.png.png" alt="Kintra logo" />
+        <img src="img/logo.png.png" alt="Kintra logo" />
         <span>Kintra</span>
       </div>
       <h1>🚩 The Problem</h1>
@@ -98,10 +98,10 @@
   </div>
 
   <!-- Slide 3: Solution -->
-  <div class="slide" style="background-image:url('image/solution.jpg');">
+  <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
-        <img src="image/logo.png.png" alt="Kintra logo" />
+        <img src="img/logo.png.png" alt="Kintra logo" />
         <span>Kintra</span>
       </div>
       <h1>💡 The Solution</h1>
@@ -112,10 +112,10 @@
   </div>
 
   <!-- Slide 4: Pilot Plan -->
-  <div class="slide" style="background-image:url('image/solution.jpg');">
+  <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
-        <img src="image/logo.png.png" alt="Kintra logo" />
+        <img src="img/logo.png.png" alt="Kintra logo" />
         <span>Kintra</span>
       </div>
       <h1>🎯 Pilot Plan</h1>
@@ -128,10 +128,10 @@
   </div>
 
   <!-- Slide 5: Call to Action -->
-  <div class="slide" style="background-image:url('image/cta.jpg');">
+  <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
       <div class="brand">
-        <img src="image/logo.png.png" alt="Kintra logo" />
+        <img src="img/logo.png.png" alt="Kintra logo" />
         <span>Kintra</span>
       </div>
       <h1>Ready for a Pilot?</h1>
@@ -170,13 +170,11 @@
       if (e.key === 'End')  { slideIndex = total - 1; showSlide(slideIndex); }
     });
 
-    // Click/tap anywhere not on a link to advance
     document.addEventListener('click', e => {
       const clickable = e.target.closest('a,button,input,textarea');
       if (!clickable) nextSlide();
     }, { passive: true });
 
-    // Init
     showSlide(slideIndex);
   </script>
 </body>
