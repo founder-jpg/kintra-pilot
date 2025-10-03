@@ -22,7 +22,7 @@
       position: relative;
     }
     .overlay {
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.6); /* darker for readability */
       position: absolute;
       inset: 0;
       display: flex;
@@ -31,15 +31,24 @@
       align-items: center;
       padding: 40px;
     }
+    /* Left-align variant for overlays (used on Pilot slide) */
+    .overlay-left { align-items: flex-start; text-align: left; padding-left: 60px; }
+    .overlay-left > *:not(.brand) { max-width: 900px; }
+
     .brand {
       position: absolute; top: 20px; left: 20px;
       display: flex; align-items: center; gap: 10px;
     }
     .brand img { width: 100px; height: auto; display: block; }
-    .brand span { font-weight: 700; letter-spacing: .3px; }
+
     h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
     h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
     p  { font-size: 1.25em; line-height: 1.5; max-width: 900px; margin: 0.25em 0; color: #e5e7eb; }
+
+    /* Nice, consistent bullets */
+    .k-list { margin: 12px 0 0 1.2em; padding: 0; list-style: disc; }
+    .k-list li { margin: .35em 0; line-height: 1.45; font-size: 1.25em; color: #e5e7eb; }
+
     .dots {
       position: absolute; bottom: 20px; width: 100%;
       text-align: center;
@@ -53,17 +62,20 @@
       transition: all .2s ease;
     }
     .dot.active { background: #ffffff; width: 28px; border-radius: 999px; }
+
     @media (max-width: 640px) {
       h1 { font-size: 2.2em; }
       h2 { font-size: 1.4em; }
       p  { font-size: 1.05em; }
       .brand img { width: 80px; }
+      .overlay-left { padding-left: 28px; }
     }
+
     @media print {
       .dots, .brand { display: none; }
-      .overlay { background: rgba(255,255,255,0.9); color: #111; }
+      .overlay { background: rgba(255,255,255,0.95); color: #111; }
       body { color: #111; }
-      h2, p { color: #111; }
+      h2, p, .k-list li { color: #111; }
     }
   </style>
 </head>
@@ -74,7 +86,6 @@
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra</span>
       </div>
       <h1>From listing to leads, faster.</h1>
       <h2>AI-powered property marketing for real estate agencies</h2>
@@ -88,7 +99,6 @@
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra</span>
       </div>
       <h1>🚩 The Problem</h1>
       <p>Agents juggle WhatsApp, email, and scattered notes.</p>
@@ -102,7 +112,6 @@
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra</span>
       </div>
       <h1>💡 The Solution</h1>
       <p>Kintra captures every client interaction, summarizes instantly, and generates smart next-steps.</p>
@@ -111,18 +120,19 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4: Pilot Plan -->
+  <!-- Slide 4: Pilot Plan (left-aligned) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
-    <div class="overlay">
+    <div class="overlay overlay-left">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra</span>
       </div>
       <h1>🎯 Pilot Plan</h1>
-      <p>• 2–4 week pilot tailored to your workflow<br/>
-         • Test with 3–5 live client interactions<br/>
-         • Auto-summaries + smart prompts<br/>
-         • Success = 30+ minutes saved per rep daily</p>
+      <ul class="k-list">
+        <li>2–4 week pilot tailored to your workflow</li>
+        <li>Test with 3–5 live client interactions</li>
+        <li>Auto-summaries + smart prompts</li>
+        <li>Success = 30+ minutes saved per rep daily</li>
+      </ul>
     </div>
     <div class="dots"></div>
   </div>
@@ -132,7 +142,6 @@
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra</span>
       </div>
       <h1>Ready for a Pilot?</h1>
       <p>Email us: <b>pilot@kintra.xyz</b></p>
@@ -175,6 +184,7 @@
       if (!clickable) nextSlide();
     }, { passive: true });
 
+    // Init
     showSlide(slideIndex);
   </script>
 </body>
