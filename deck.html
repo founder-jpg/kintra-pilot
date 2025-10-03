@@ -22,13 +22,13 @@
       position: relative;
     }
     .overlay {
-      background: rgba(0,0,0,0.6); /* darker for readability */
+      background: rgba(0,0,0,0.6);
       position: absolute;
       inset: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;   /* center the content block */
-      align-items: center;       /* center the content block */
+      justify-content: center;
+      align-items: center;
       padding: 40px;
     }
     .brand {
@@ -37,7 +37,7 @@
     }
     .brand img { width: 100px; height: auto; display: block; }
 
-    /* Centered block; let us choose text alignment per slide */
+    /* Centered content block; we can choose text-align per slide */
     .stack { max-width: 900px; width: min(90vw, 900px); }
     .stack.center { text-align: center; }
     .stack.left   { text-align: left; }
@@ -47,9 +47,33 @@
     h2 { font-size: 2em;   margin: 0.2em 0 0.6em; color: #e5e7eb; }
     p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
-    /* Consistent bullets */
+    /* Bullets (general) */
     .k-list { margin: 12px 0 0 1.2em; padding: 0; list-style: disc; }
     .k-list li { margin: .35em 0; line-height: 1.45; font-size: 1.25em; color: #e5e7eb; }
+
+    /* Pilot Plan: centered checklist with ticks */
+    .checklist {
+      list-style: none;
+      margin: 14px auto 0;
+      padding: 0;
+      max-width: 760px;          /* narrows the column so it feels centered tight */
+      text-align: left;          /* keep items left for readability */
+    }
+    .checklist li {
+      margin: .5em 0;
+      line-height: 1.5;
+      font-size: 1.3em;          /* slightly larger for presence */
+      position: relative;
+      padding-left: 1.6em;
+    }
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #A7F3D0;            /* mint tick to match brand accents */
+      font-weight: 700;
+    }
 
     .dots {
       position: absolute; bottom: 20px; width: 100%;
@@ -71,19 +95,20 @@
       p  { font-size: 1.05em; }
       .brand img { width: 80px; }
       .stack { width: 92vw; }
+      .checklist { max-width: 92vw; }
     }
 
     @media print {
       .dots, .brand { display: none; }
       .overlay { background: rgba(255,255,255,0.95); color: #111; }
       body { color: #111; }
-      h2, p, .k-list li { color: #111; }
+      h2, p, .k-list li, .checklist li { color: #111; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Slide 1: Cover (centered) -->
+  <!-- Slide 1: Cover -->
   <div class="slide" style="background-image:url('img/cover.jpg');">
     <div class="overlay">
       <div class="brand">
@@ -98,7 +123,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 2: Problem (centered block & centered text; no red flag) -->
+  <!-- Slide 2: Problem -->
   <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
       <div class="brand">
@@ -113,7 +138,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 3: Solution (centered) -->
+  <!-- Slide 3: Solution -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
@@ -128,15 +153,15 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4: Pilot Plan (centered block, left-aligned bullets) -->
+  <!-- Slide 4: Pilot Plan (centered block + centered heading + centered checklist column) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack left">
+      <div class="stack center">
         <h1>Pilot Plan</h1>
-        <ul class="k-list">
+        <ul class="checklist">
           <li>2–4 week pilot tailored to your workflow</li>
           <li>Test with 3–5 live client interactions</li>
           <li>Auto-summaries + smart prompts</li>
@@ -147,7 +172,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 5: Call to Action (centered) -->
+  <!-- Slide 5: Call to Action -->
   <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
       <div class="brand">
