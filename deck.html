@@ -27,23 +27,26 @@
       inset: 0;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: center;   /* center the content block */
+      align-items: center;       /* center the content block */
       padding: 40px;
     }
-    /* Left-align variant for overlays (used on Pilot slide) */
-    .overlay-left { align-items: flex-start; text-align: left; padding-left: 60px; }
-    .overlay-left > *:not(.brand) { max-width: 900px; }
-
     .brand {
       position: absolute; top: 20px; left: 20px;
       display: flex; align-items: center; gap: 10px;
     }
     .brand img { width: 100px; height: auto; display: block; }
 
+    /* Centered block with left-aligned text inside */
+    .stack {
+      max-width: 900px;
+      width: min(90vw, 900px);
+      text-align: left;
+    }
+
     h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
     h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
-    p  { font-size: 1.25em; line-height: 1.5; max-width: 900px; margin: 0.25em 0; color: #e5e7eb; }
+    p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
     /* Nice, consistent bullets */
     .k-list { margin: 12px 0 0 1.2em; padding: 0; list-style: disc; }
@@ -68,7 +71,7 @@
       h2 { font-size: 1.4em; }
       p  { font-size: 1.05em; }
       .brand img { width: 80px; }
-      .overlay-left { padding-left: 28px; }
+      .stack { width: 92vw; }
     }
 
     @media print {
@@ -87,52 +90,60 @@
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <h1>From listing to leads, faster.</h1>
-      <h2>AI-powered property marketing for real estate agencies</h2>
-      <p>Plug into WhatsApp & web — structure, translate, and reply in seconds. Faster responses → more booked viewings.</p>
+      <div class="stack" style="text-align:center;">
+        <h1>From listing to leads, faster.</h1>
+        <h2>AI-powered property marketing for real estate agencies</h2>
+        <p style="text-align:center;">Plug into WhatsApp & web — structure, translate, and reply in seconds. Faster responses → more booked viewings.</p>
+      </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 2: Problem -->
+  <!-- Slide 2: Problem (no red flag emoji) -->
   <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <h1>🚩 The Problem</h1>
-      <p>Agents juggle WhatsApp, email, and scattered notes.</p>
-      <p>Conversations slip. Follow-ups get missed. Deals fall through.</p>
+      <div class="stack">
+        <h1>The Problem</h1>
+        <p>Agents juggle WhatsApp, email, and scattered notes.</p>
+        <p>Conversations slip. Follow-ups get missed. Deals fall through.</p>
+      </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 3: Solution -->
+  <!-- Slide 3: Solution (keep 💡) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <h1>💡 The Solution</h1>
-      <p>Kintra captures every client interaction, summarizes instantly, and generates smart next-steps.</p>
-      <p>Nothing missed. Every lead nurtured.</p>
+      <div class="stack">
+        <h1>💡 The Solution</h1>
+        <p>Kintra captures every client interaction, summarizes instantly, and generates smart next-steps.</p>
+        <p>Nothing missed. Every lead nurtured.</p>
+      </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4: Pilot Plan (left-aligned) -->
+  <!-- Slide 4: Pilot Plan (centered block, left-aligned bullets) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
-    <div class="overlay overlay-left">
+    <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <h1>🎯 Pilot Plan</h1>
-      <ul class="k-list">
-        <li>2–4 week pilot tailored to your workflow</li>
-        <li>Test with 3–5 live client interactions</li>
-        <li>Auto-summaries + smart prompts</li>
-        <li>Success = 30+ minutes saved per rep daily</li>
-      </ul>
+      <div class="stack">
+        <h1>Pilot Plan</h1>
+        <ul class="k-list">
+          <li>2–4 week pilot tailored to your workflow</li>
+          <li>Test with 3–5 live client interactions</li>
+          <li>Auto-summaries + smart prompts</li>
+          <li>Success = 30+ minutes saved per rep daily</li>
+        </ul>
+      </div>
     </div>
     <div class="dots"></div>
   </div>
@@ -143,9 +154,11 @@
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <h1>Ready for a Pilot?</h1>
-      <p>Email us: <b>pilot@kintra.xyz</b></p>
-      <p><a href="mailto:pilot@kintra.xyz" style="background:#10B981;color:#06241F;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px;">Start Pilot</a></p>
+      <div class="stack" style="text-align:center;">
+        <h1>Ready for a Pilot?</h1>
+        <p>Email us: <b>pilot@kintra.xyz</b></p>
+        <p><a href="mailto:pilot@kintra.xyz" style="background:#10B981;color:#06241F;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px;">Start Pilot</a></p>
+      </div>
     </div>
     <div class="dots"></div>
   </div>
