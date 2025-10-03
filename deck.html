@@ -37,18 +37,17 @@
     }
     .brand img { width: 100px; height: auto; display: block; }
 
-    /* Centered block with left-aligned text inside */
-    .stack {
-      max-width: 900px;
-      width: min(90vw, 900px);
-      text-align: left;
-    }
+    /* Centered block; let us choose text alignment per slide */
+    .stack { max-width: 900px; width: min(90vw, 900px); }
+    .stack.center { text-align: center; }
+    .stack.left   { text-align: left; }
+    .stack .muted { color: #e5e7eb; }
 
     h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
-    h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
+    h2 { font-size: 2em;   margin: 0.2em 0 0.6em; color: #e5e7eb; }
     p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
-    /* Nice, consistent bullets */
+    /* Consistent bullets */
     .k-list { margin: 12px 0 0 1.2em; padding: 0; list-style: disc; }
     .k-list li { margin: .35em 0; line-height: 1.45; font-size: 1.25em; color: #e5e7eb; }
 
@@ -84,28 +83,28 @@
 </head>
 <body>
 
-  <!-- Slide 1: Cover -->
+  <!-- Slide 1: Cover (centered) -->
   <div class="slide" style="background-image:url('img/cover.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack" style="text-align:center;">
+      <div class="stack center">
         <h1>From listing to leads, faster.</h1>
         <h2>AI-powered property marketing for real estate agencies</h2>
-        <p style="text-align:center;">Plug into WhatsApp & web — structure, translate, and reply in seconds. Faster responses → more booked viewings.</p>
+        <p>Plug into WhatsApp & web — structure, translate, and reply in seconds. Faster responses → more booked viewings.</p>
       </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 2: Problem (no red flag emoji) -->
+  <!-- Slide 2: Problem (centered block & centered text; no red flag) -->
   <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack">
+      <div class="stack center">
         <h1>The Problem</h1>
         <p>Agents juggle WhatsApp, email, and scattered notes.</p>
         <p>Conversations slip. Follow-ups get missed. Deals fall through.</p>
@@ -114,13 +113,13 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 3: Solution (keep 💡) -->
+  <!-- Slide 3: Solution (centered) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack">
+      <div class="stack center">
         <h1>💡 The Solution</h1>
         <p>Kintra captures every client interaction, summarizes instantly, and generates smart next-steps.</p>
         <p>Nothing missed. Every lead nurtured.</p>
@@ -135,7 +134,7 @@
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack">
+      <div class="stack left">
         <h1>Pilot Plan</h1>
         <ul class="k-list">
           <li>2–4 week pilot tailored to your workflow</li>
@@ -148,13 +147,13 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 5: Call to Action -->
+  <!-- Slide 5: Call to Action (centered) -->
   <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
       <div class="brand">
         <img src="img/logo.png.png" alt="Kintra logo" />
       </div>
-      <div class="stack" style="text-align:center;">
+      <div class="stack center">
         <h1>Ready for a Pilot?</h1>
         <p>Email us: <b>pilot@kintra.xyz</b></p>
         <p><a href="mailto:pilot@kintra.xyz" style="background:#10B981;color:#06241F;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;display:inline-block;margin-top:8px;">Start Pilot</a></p>
