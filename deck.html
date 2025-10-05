@@ -5,66 +5,17 @@
   <title>Kintra — Pilot Deck</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-
-<!-- PDF libs -->
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-<style>
-  .download-btn {
-    position: fixed; right: 18px; bottom: 18px; z-index: 9999;
-    background:#10B981; color:#06241F; border:none; border-radius:12px;
-    padding:12px 16px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25);
-  }
-  @media print { .download-btn { display: none; } }
-</style>
-
-<button class="download-btn" id="dlpdf">Download PDF</button>
-
-<script>
-  document.getElementById('dlpdf').addEventListener('click', async () => {
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
-
-    const slides = [...document.querySelectorAll('.slide')];
-    const W = 1122;  // A4 landscape width in pt
-    const H = 793;   // A4 landscape height in pt
-
-    // Temporarily show all slides for capture
-    const prevOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = 'auto';
-    slides.forEach(s => s.style.display = 'block');
-
-    // Give backgrounds a tick to render
-    await new Promise(r => setTimeout(r, 250));
-
-    for (let i = 0; i < slides.length; i++) {
-      const node = slides[i];
-      const canvas = await html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null });
-      const img = canvas.toDataURL('image/jpeg', 0.92);
-      if (i > 0) pdf.addPage('a4', 'landscape');
-      pdf.addImage(img, 'JPEG', 0, 0, W, H);
-    }
-
-    // Restore single-slide view
-    slides.forEach((s, idx) => s.style.display = (idx === 0 ? 'block' : 'none'));
-    document.documentElement.style.overflow = prevOverflow || 'hidden';
-
-    pdf.save('Kintra_PilotDeck_v1.pdf');
-  });
-</script>
-
-    
-    body, html {
+    /* ---------- Base (web) ---------- */
+    html, body {
       margin: 0; padding: 0;
       font-family: Arial, Helvetica, sans-serif;
       height: 100%; width: 100%;
-      overflow: hidden;
+      overflow: hidden;                  /* show one slide at a time */
       color: #fff;
       background: #0b1215;
     }
     .slide {
-      display: none;
+      display: none;                     /* JS shows one at a time */
       height: 100vh; width: 100vw;
       text-align: center;
       background-size: cover;
@@ -72,13 +23,10 @@
       position: relative;
     }
     .overlay {
-      background: rgba(0,0,0,0.6);
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background: rgba(0,0,0,0.6);       /* readability over photos */
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
       padding: 40px;
     }
     .brand {
@@ -92,27 +40,22 @@
     h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
     p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
+    /* Pilot Plan: centered checklist column with ticks */
     .checklist {
       list-style: none;
       margin: 18px auto 0;
       padding: 0;
-      display: inline-block;
-      text-align: left;
+      display: inline-block;             /* centers the column under heading */
+      text-align: left;                  /* items left for readability */
     }
     .checklist li {
-      margin: .5em 0;
-      line-height: 1.5;
-      font-size: 1.3em;
-      position: relative;
-      padding-left: 1.6em;
+      margin: .5em 0; line-height: 1.5; font-size: 1.3em;
+      position: relative; padding-left: 1.6em;
     }
     .checklist li::before {
       content: "✓";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: #A7F3D0;
-      font-weight: 700;
+      position: absolute; left: 0; top: 0;
+      color: #A7F3D0; font-weight: 700;
     }
 
     .dots {
@@ -120,44 +63,24 @@
       text-align: center;
     }
     .dot {
-      height: 10px; width: 10px;
-      margin: 0 5px;
-      background: #6b7280;
-      border-radius: 50%;
-      display: inline-block;
-      transition: all .2s ease;
+      height: 10px; width: 10px; margin: 0 5px;
+      background: #6b7280; border-radius: 50%;
+      display: inline-block; transition: all .2s ease;
     }
     .dot.active { background: #ffffff; width: 28px; border-radius: 999px; }
 
     /* Button row for CTA */
     .cta-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 12px;
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 12px;
     }
     .cta-btn {
-      text-decoration: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-weight: 700;
-      display: inline-block;
-      transition: all .2s ease;
+      text-decoration: none; border-radius: 12px; padding: 12px 18px;
+      font-weight: 700; display: inline-block; transition: all .2s ease;
     }
-    .primary-btn {
-      background: #10B981;
-      color: #06241F;
-    }
+    .primary-btn { background: #10B981; color: #06241F; }
     .primary-btn:hover { background: #34D399; }
-    .secondary-btn {
-      background: transparent;
-      color: #10B981;
-      border: 2px solid #10B981;
-    }
-    .secondary-btn:hover {
-      background: rgba(16,185,129,0.1);
-    }
+    .secondary-btn { background: transparent; color: #10B981; border: 2px solid #10B981; }
+    .secondary-btn:hover { background: rgba(16,185,129,0.1); }
 
     @media (max-width: 640px) {
       h1 { font-size: 2.2em; }
@@ -166,7 +89,7 @@
       .brand img { width: 80px; }
     }
 
-    /* Print / PDF */
+    /* ---------- Print / PDF (browser print fallback) ---------- */
     @page { size: A4 landscape; margin: 0; }
     @media print {
       html, body { height: auto; overflow: visible; background: #fff; color:#111; }
@@ -179,6 +102,14 @@
       .overlay { background: rgba(0,0,0,0.5); color: #fff; }
       .brand, .dots { display: none; }
     }
+
+    /* ---------- Download PDF button ---------- */
+    .download-btn {
+      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+      background:#10B981; color:#06241F; border:none; border-radius:12px;
+      padding:12px 16px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25);
+    }
+    @media print { .download-btn { display: none; } }
   </style>
 </head>
 <body>
@@ -196,7 +127,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 2 -->
+  <!-- Slide 2 (no red flag) -->
   <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
       <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
@@ -209,7 +140,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 3 -->
+  <!-- Slide 3 (keep 💡) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
@@ -222,7 +153,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4 -->
+  <!-- Slide 4 (centered heading + centered checklist column) -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
       <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
@@ -239,7 +170,7 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 5 -->
+  <!-- Slide 5 (CTA with two buttons) -->
   <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
       <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
@@ -255,6 +186,7 @@
     <div class="dots"></div>
   </div>
 
+  <!-- ONE-SLIDE WEB NAV -->
   <script>
     let slideIndex = 0;
     const slides = document.querySelectorAll('.slide');
@@ -281,13 +213,53 @@
       if (e.key === 'Home') { slideIndex = 0; showSlide(slideIndex); }
       if (e.key === 'End')  { slideIndex = total - 1; showSlide(slideIndex); }
     });
-
     document.addEventListener('click', e => {
       const clickable = e.target.closest('a,button,input,textarea');
       if (!clickable) nextSlide();
     }, { passive: true });
 
+    // Init
     showSlide(slideIndex);
+  </script>
+
+  <!-- PDF libs (kept at the very end to avoid layout flicker) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- One-click Download PDF (robust, no print dialog) -->
+  <button class="download-btn" id="dlpdf">Download PDF</button>
+  <script>
+    document.getElementById('dlpdf').addEventListener('click', async () => {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
+
+      const slides = [...document.querySelectorAll('.slide')];
+      const W = 1122;   // A4 landscape width (pt)
+      const H = 793;    // A4 landscape height (pt)
+
+      // Temporarily reveal all slides for capture and pause nav dots
+      const prevOverflow = document.documentElement.style.overflow;
+      document.documentElement.style.overflow = 'auto';
+      slides.forEach(s => s.style.display = 'block');
+
+      // Let images/backs settle
+      await new Promise(r => setTimeout(r, 300));
+
+      for (let i = 0; i < slides.length; i++) {
+        const node = slides[i];
+        // high-res render for crisp PDF
+        const canvas = await html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null });
+        const img = canvas.toDataURL('image/jpeg', 0.95);
+        if (i > 0) pdf.addPage('a4', 'landscape');
+        pdf.addImage(img, 'JPEG', 0, 0, W, H);
+      }
+
+      // Restore single-slide view
+      slides.forEach((s, idx) => s.style.display = (idx === 0 ? 'block' : 'none'));
+      document.documentElement.style.overflow = prevOverflow || 'hidden';
+
+      pdf.save('Kintra_PilotDeck_v1.pdf');
+    });
   </script>
 </body>
 </html>
