@@ -66,6 +66,24 @@
     .ok{color:#A7F3D0;font-size:.95rem;margin-top:8px;display:none}
     .err{color:#fecaca;font-size:.95rem;margin-top:8px;display:none}
 
+    /* Demo widget (collapsed) */
+    .demo{
+      margin-top:26px;background:linear-gradient(180deg, #0e1920 0%, #0b1418 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:16px 16px 14px
+    }
+    .demo-toggle{
+      display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none
+    }
+    .caret{transition:transform .18s ease}
+    .caret.open{transform:rotate(90deg)}
+    .demo-body{display:none;margin-top:12px}
+    .row{display:flex;gap:8px}
+    @media (max-width:560px){.row{flex-direction:column}}
+    .btn-test{border-radius:10px;background:#1f2937;color:#fff;padding:12px 14px;font-weight:700;border:0}
+    .btn-test:hover{filter:brightness(1.05)}
+    .result{margin-top:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size:.95rem;color:#d1fae5;white-space:pre-wrap}
+
     /* Social proof */
     .proof{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
     @media (max-width:900px){.proof{grid-template-columns:1fr}}
@@ -95,7 +113,26 @@
           <a class="btn btn-secondary" href="deck.html" target="_blank">View Live Deck</a>
           <a class="btn btn-secondary" href="deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
         </div>
+
+        <!-- Tiny demo (collapsed by default) -->
+        <div class="demo" id="demo">
+          <div class="demo-toggle" id="demoToggle" aria-controls="demoBody" aria-expanded="false">
+            <svg class="caret" id="caret" width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M8 5l8 7-8 7" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <b>Try a 10-second demo</b>
+            <span style="color:#94a3b8;">(optional)</span>
+          </div>
+          <div class="demo-body" id="demoBody">
+            <div class="row" style="margin-top:10px;">
+              <input id="q" type="text" placeholder="Type a buyer message… (e.g., 'hello please')" />
+              <button class="btn-test" id="testBtn" type="button">Run</button>
+            </div>
+            <div class="result" id="result"></div>
+          </div>
+        </div>
       </div>
+
       <div class="hero-art" role="img" aria-label="Modern apartment interior">
         <div class="hero-scrim"></div>
       </div>
@@ -164,8 +201,39 @@
     // Year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Lead submit
+    // Collapse/expand demo
+    const t = document.getElementById('demoToggle');
+    const b = document.getElementById('demoBody');
+    const c = document.getElementById('caret');
+    t.addEventListener('click', () => {
+      const open = b.style.display === 'block';
+      b.style.display = open ? 'none' : 'block';
+      c.classList.toggle('open', !open);
+      t.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Worker base (update if your hostname differs)
     const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
+
+    // Demo call
+    document.getElementById('testBtn').addEventListener('click', async () => {
+      const q = (document.getElementById('q').value || '').trim() || 'hello please';
+      const resultEl = document.getElementById('result');
+      resultEl.textContent = 'Running…';
+      try {
+        const res = await fetch(WORKER_BASE + '/api/prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: q })
+        });
+        const json = await res.json();
+        resultEl.textContent = 'OK → ' + JSON.stringify(json);
+      } catch (e) {
+        resultEl.textContent = 'Error: ' + e.message;
+      }
+    });
+
+    // Lead submit
     const sendBtn = document.getElementById('send');
     const okEl = document.getElementById('ok');
     const errEl = document.getElementById('err');
@@ -202,7 +270,6 @@
         }
         throw new Error('Bad response');
       } catch (e) {
-        // Fallback: open mailto prefilled
         const subject = encodeURIComponent('Kintra Pilot Access');
         const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${msg}`);
         window.location.href = `mailto:pilot@kintra.xyz?subject=${subject}&body=${body}`;
