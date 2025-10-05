@@ -1,111 +1,200 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Kintra — Pilot</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <style>
-      :root{
-        --border:#e5e7eb;
-        --text:#111827;
-        --muted:#6b7280;
-        --bg:#ffffff;
-        --ok:#065f46;
-        --err:#b91c1c;
-      }
-      html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:System-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-      .wrap{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px}
-      .card{max-width:760px;width:100%;padding:28px 28px 20px;border:1px solid var(--border);border-radius:18px;box-shadow:0 2px 10px rgba(0,0,0,.06);background:#fff}
-      .brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px}
-      .brand-logo{height:56px;width:auto}
-      .brand-name{font-size:1.5rem;font-weight:700;letter-spacing:.3px}
-      h1{margin:8px 0 6px 0;font-size:1.25rem}
-      p{margin:8px 0}
-      .muted{color:var(--muted)}
-      .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 6px}
-      input{padding:10px 12px;border:1px solid var(--border);border-radius:10px;min-width:260px;flex:1}
-      .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #111827;cursor:pointer;text-decoration:none;user-select:none}
-      .btn[aria-busy="true"]{opacity:.6;pointer-events:none}
-      #result{min-height:22px;white-space:pre-wrap;word-break:break-word;font-family:monospace;font-size:.9rem;padding-top:4px}
-      #result.ok{color:var(--ok);}
-      #result.err{color:var(--err);}
-      .hr{height:1px;background:var(--border);margin:14px 0}
-      @media (max-width:480px){.brand-logo{height:48px}.brand-name{font-size:1.25rem}}
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <div class="card">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra — AI for Property Marketing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Kintra helps real estate agencies respond faster, structure conversations, and book more viewings." />
+  <style>
+    :root{
+      --bg:#0b1215;
+      --fg:#f8fafc;
+      --muted:#cbd5e1;
+      --brand:#10B981;
+      --ink:#06241F;
+      --card:#0f1a1e;
+      --card2:#0d171a;
+      --ring:#1f2937;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--fg);
+      background:linear-gradient(180deg, #0b1215 0%, #0e171b 100%);
+    }
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1080px;margin:0 auto;padding:28px 20px}
+    /* Brand */
+    .brand{
+      display:flex;align-items:center;gap:12px;margin-bottom:22px
+    }
+    .brand img{width:110px;height:auto;display:block}
+    .brand-name{font-size:1.2rem;color:var(--muted);letter-spacing:.04em}
+    /* Hero */
+    .hero{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;
+    }
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .hero-copy h1{
+      font-size:clamp(2rem,4.8vw,3.2rem);
+      margin:.2em 0 .15em;line-height:1.08
+    }
+    .hero-copy p{
+      color:var(--muted);font-size:clamp(1rem,2.2vw,1.25rem);margin:.4em 0 1em;
+    }
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:.6rem}
+    .btn{
+      display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;
+      transition:.18s all ease;border:2px solid transparent
+    }
+    .btn-primary{background:var(--brand);color:var(--ink)}
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-secondary{background:transparent;color:var(--brand);border-color:var(--brand)}
+    .btn-secondary:hover{background:rgba(16,185,129,.08)}
+    .hero-art{
+      position:relative;border-radius:20px;overflow:hidden;
+      background:url('img/cover.jpg') center/cover no-repeat;min-height:320px;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    .hero-scrim{
+      position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+    }
+    /* Features strip */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+    @media (max-width:900px){.features{grid-template-columns:1fr}}
+    .feat{
+      background:linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:16px 18px
+    }
+    .feat b{display:block;margin-bottom:6px}
+    .feat p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.45}
 
-        <!-- Brand header -->
-        <div class="brand">
-          <img src="logo.png.png" alt="Kintra logo" class="brand-logo" />
-          <span class="brand-name">Kintra</span>
-        </div>
-        <p class="muted" style="margin-top:0;">AI-powered property marketing for real estate agencies.</p>
+    /* Demo widget (collapsed by default) */
+    .demo{
+      margin-top:26px;background:linear-gradient(180deg, #0e1920 0%, #0b1418 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:16px 16px 14px
+    }
+    .demo-toggle{
+      display:flex;align-items:center;gap:8px;cursor:pointer;
+      user-select:none
+    }
+    .caret{transition:transform .18s ease}
+    .caret.open{transform:rotate(90deg)}
+    .demo-body{display:none;margin-top:12px}
+    .row{display:flex;gap:8px}
+    @media (max-width:560px){.row{flex-direction:column}}
+    input[type="text"]{
+      flex:1;min-width:200px;border-radius:10px;border:1px solid #24303a;background:#0b1215;
+      color:var(--fg);padding:12px 12px;font-size:1rem;outline:none
+    }
+    .btn-test{border-radius:10px;background:#1f2937;color:#fff;padding:12px 14px;font-weight:700;border:0}
+    .btn-test:hover{filter:brightness(1.05)}
+    .result{margin-top:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size:.95rem;color:#d1fae5;white-space:pre-wrap
+    }
 
-        <!-- Intro -->
-        <h1>Hello Kintra 👋</h1>
-        <p class="muted">Pilot skeleton is live. This proves “planning → execution”.</p>
-        <p>Next steps: wire API → run end-to-end test → demo.</p>
-
-        <!-- Test input & button -->
-        <div class="row">
-          <input id="q" placeholder="Type something…" autofocus />
-          <a class="btn" href="#" id="testBtn">Test Button</a>
-        </div>
-
-        <!-- Results -->
-        <p id="result" class="muted"></p>
-
-        <!-- CTA -->
-        <p style="margin-top:12px">
-          <em>Ready for a pilot?</em> Email <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
-        </p>
-
-        <div class="hr"></div>
-        <p class="muted">Build: static HTML (no dependencies). Update this page anytime and redeploy.</p>
-      </div>
+    footer{margin-top:40px;padding:26px 0;color:#93a3b3;font-size:.95rem;border-top:1px dashed #1f2a33}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Brand -->
+    <div class="brand">
+      <img src="img/logo.png.png" alt="Kintra logo" />
+      <div class="brand-name">Kintra</div>
     </div>
 
-    <script>
-      const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
-      const inputEl = document.getElementById('q');
-      const btnEl = document.getElementById('testBtn');
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>From listing to leads, faster.</h1>
+        <p>Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:pilot@kintra.xyz">Start Pilot</a>
+          <a class="btn btn-secondary" href="deck.html" target="_blank">View Live Deck</a>
+          <a class="btn btn-secondary" href="deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
+        </div>
+
+        <!-- Optional tiny demo (collapsed by default) -->
+        <div class="demo" id="demo">
+          <div class="demo-toggle" id="demoToggle" aria-controls="demoBody" aria-expanded="false">
+            <svg class="caret" id="caret" width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M8 5l8 7-8 7" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <b>Try a 10-second demo</b>
+            <span style="color:#94a3b8;">(optional)</span>
+          </div>
+          <div class="demo-body" id="demoBody">
+            <div class="row" style="margin-top:10px;">
+              <input id="q" type="text" placeholder="Type a buyer message… (e.g., 'hello please')" />
+              <button class="btn-test" id="testBtn">Run</button>
+            </div>
+            <div class="result" id="result"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="Modern apartment interior">
+        <div class="hero-scrim"></div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <div class="feat">
+        <b>Faster responses</b>
+        <p>Structure and translate replies in seconds — fewer delays, more booked viewings.</p>
+      </div>
+      <div class="feat">
+        <b>Nothing slips</b>
+        <p>Summaries + next-steps ensure every lead is nurtured, across WhatsApp and web.</p>
+      </div>
+      <div class="feat">
+        <b>Pilot in 2–4 weeks</b>
+        <p>Lightweight setup, run with 3–5 live interactions, measure minutes saved.</p>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="yr"></span> Kintra. Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
+    </footer>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Collapse/expand demo
+    const t = document.getElementById('demoToggle');
+    const b = document.getElementById('demoBody');
+    const c = document.getElementById('caret');
+    t.addEventListener('click', () => {
+      const open = b.style.display === 'block';
+      b.style.display = open ? 'none' : 'block';
+      c.classList.toggle('open', !open);
+      t.setAttribute('aria-expanded', String(!open));
+    });
+
+    // Demo call (wired to your existing Worker)
+    const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
+    document.getElementById('testBtn').addEventListener('click', async () => {
+      const q = (document.getElementById('q').value || '').trim() || 'ciao';
       const resultEl = document.getElementById('result');
-
-      async function testCall() {
-        const q = (inputEl?.value || '').trim() || 'ciao';
-        btnEl.setAttribute('aria-busy', 'true');
-        resultEl.textContent = 'Running test...';
-        resultEl.className = '';
-        try {
-          const res = await fetch(WORKER_BASE + '/api/prompt', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: q })
-          });
-          if (!res.ok) {
-            const txt = await res.text().catch(()=> '');
-            throw new Error(`HTTP ${res.status} ${res.statusText} ${txt ? '— ' + txt.slice(0,140) : ''}`);
-          }
-          const json = await res.json();
-          resultEl.textContent = 'OK → ' + JSON.stringify(json, null, 2);
-          resultEl.className = 'ok';
-        } catch (e) {
-          resultEl.textContent = 'Error: ' + (e?.message || e);
-          resultEl.className = 'err';
-        } finally {
-          btnEl.removeAttribute('aria-busy');
-          // Auto-select input text for quick retests
-          inputEl.focus();
-          inputEl.select();
-        }
+      resultEl.textContent = 'Running…';
+      try {
+        const res = await fetch(WORKER_BASE + '/api/prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: q })
+        });
+        const json = await res.json();
+        resultEl.textContent = 'OK → ' + JSON.stringify(json);
+      } catch (e) {
+        resultEl.textContent = 'Error: ' + e.message;
       }
-
-      btnEl.addEventListener('click', (e) => { e.preventDefault(); testCall(); });
-      inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); testCall(); } });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
