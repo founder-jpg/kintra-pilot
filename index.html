@@ -7,93 +7,72 @@
   <meta name="description" content="Kintra helps real estate agencies respond faster, structure conversations, and book more viewings." />
   <style>
     :root{
-      --bg:#0b1215;
-      --fg:#f8fafc;
-      --muted:#cbd5e1;
-      --brand:#10B981;
-      --ink:#06241F;
-      --card:#0f1a1e;
-      --card2:#0d171a;
-      --ring:#1f2937;
+      --bg:#0b1215; --fg:#f8fafc; --muted:#cbd5e1; --brand:#10B981; --ink:#06241F;
+      --card:#0f1a1e; --card2:#0d171a; --ring:#1f2937;
     }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      color:var(--fg);
-      background:linear-gradient(180deg, #0b1215 0%, #0e171b 100%);
-    }
+    body{font-family:Arial,Helvetica,sans-serif;color:var(--fg);
+      background:linear-gradient(180deg,#0b1215 0%,#0e171b 100%)}
+
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1080px;margin:0 auto;padding:28px 20px}
+
     /* Brand */
-    .brand{
-      display:flex;align-items:center;gap:12px;margin-bottom:22px
-    }
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
     .brand img{width:110px;height:auto;display:block}
     .brand-name{font-size:1.2rem;color:var(--muted);letter-spacing:.04em}
+
     /* Hero */
-    .hero{
-      display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;
-    }
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
     @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    .hero-copy h1{
-      font-size:clamp(2rem,4.8vw,3.2rem);
-      margin:.2em 0 .15em;line-height:1.08
-    }
-    .hero-copy p{
-      color:var(--muted);font-size:clamp(1rem,2.2vw,1.25rem);margin:.4em 0 1em;
-    }
+    .hero-copy h1{font-size:clamp(2rem,4.8vw,3.2rem);margin:.2em 0 .15em;line-height:1.08}
+    .hero-copy p{color:var(--muted);font-size:clamp(1rem,2.2vw,1.25rem);margin:.4em 0 1em}
     .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:.6rem}
-    .btn{
-      display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;
-      transition:.18s all ease;border:2px solid transparent
-    }
+    .btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;
+      transition:.18s all ease;border:2px solid transparent}
     .btn-primary{background:var(--brand);color:var(--ink)}
     .btn-primary:hover{filter:brightness(1.05)}
     .btn-secondary{background:transparent;color:var(--brand);border-color:var(--brand)}
     .btn-secondary:hover{background:rgba(16,185,129,.08)}
-    .hero-art{
-      position:relative;border-radius:20px;overflow:hidden;
+    .hero-art{position:relative;border-radius:20px;overflow:hidden;
       background:url('img/cover.jpg') center/cover no-repeat;min-height:320px;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    .hero-scrim{
-      position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
-    }
-    /* Features strip */
+      box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55))}
+
+    /* Features */
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
     @media (max-width:900px){.features{grid-template-columns:1fr}}
-    .feat{
-      background:linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
-      border:1px solid var(--ring);border-radius:16px;padding:16px 18px
-    }
+    .feat{background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:16px 18px}
     .feat b{display:block;margin-bottom:6px}
     .feat p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.45}
 
-    /* Demo widget (collapsed by default) */
-    .demo{
-      margin-top:26px;background:linear-gradient(180deg, #0e1920 0%, #0b1418 100%);
-      border:1px solid var(--ring);border-radius:16px;padding:16px 16px 14px
+    /* Lead form card */
+    .lead{margin-top:26px;background:linear-gradient(180deg,#0e1920 0%,#0b1418 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:18px 18px 16px}
+    .lead h3{margin:.1em 0 .6em;font-size:1.35rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
+    label{font-size:.9rem;color:#9fb0bf}
+    input,textarea{
+      width:100%;border-radius:10px;border:1px solid #24303a;background:#0b1215;
+      color:var(--fg);padding:12px;font-size:1rem;outline:none
     }
-    .demo-toggle{
-      display:flex;align-items:center;gap:8px;cursor:pointer;
-      user-select:none
-    }
-    .caret{transition:transform .18s ease}
-    .caret.open{transform:rotate(90deg)}
-    .demo-body{display:none;margin-top:12px}
-    .row{display:flex;gap:8px}
-    @media (max-width:560px){.row{flex-direction:column}}
-    input[type="text"]{
-      flex:1;min-width:200px;border-radius:10px;border:1px solid #24303a;background:#0b1215;
-      color:var(--fg);padding:12px 12px;font-size:1rem;outline:none
-    }
-    .btn-test{border-radius:10px;background:#1f2937;color:#fff;padding:12px 14px;font-weight:700;border:0}
-    .btn-test:hover{filter:brightness(1.05)}
-    .result{margin-top:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size:.95rem;color:#d1fae5;white-space:pre-wrap
-    }
+    textarea{min-height:96px;resize:vertical}
+    .row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .note{color:#93a3b3;font-size:.9rem}
+    .ok{color:#A7F3D0;font-size:.95rem;margin-top:8px;display:none}
+    .err{color:#fecaca;font-size:.95rem;margin-top:8px;display:none}
+
+    /* Social proof */
+    .proof{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+    @media (max-width:900px){.proof{grid-template-columns:1fr}}
+    .quote{background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);
+      border:1px solid var(--ring);border-radius:16px;padding:16px 18px;color:#e5e7eb}
+    .quote i{color:#A7F3D0}
+    .quote .at{color:#9fb0bf;font-size:.95rem;margin-top:6px;display:block}
 
     footer{margin-top:40px;padding:26px 0;color:#93a3b3;font-size:.95rem;border-top:1px dashed #1f2a33}
   </style>
@@ -112,30 +91,11 @@
         <h1>From listing to leads, faster.</h1>
         <p>Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="mailto:pilot@kintra.xyz">Start Pilot</a>
+          <a class="btn btn-primary" href="#lead">Request Pilot Access</a>
           <a class="btn btn-secondary" href="deck.html" target="_blank">View Live Deck</a>
           <a class="btn btn-secondary" href="deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
         </div>
-
-        <!-- Optional tiny demo (collapsed by default) -->
-        <div class="demo" id="demo">
-          <div class="demo-toggle" id="demoToggle" aria-controls="demoBody" aria-expanded="false">
-            <svg class="caret" id="caret" width="12" height="12" viewBox="0 0 24 24" fill="none">
-              <path d="M8 5l8 7-8 7" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <b>Try a 10-second demo</b>
-            <span style="color:#94a3b8;">(optional)</span>
-          </div>
-          <div class="demo-body" id="demoBody">
-            <div class="row" style="margin-top:10px;">
-              <input id="q" type="text" placeholder="Type a buyer message… (e.g., 'hello please')" />
-              <button class="btn-test" id="testBtn">Run</button>
-            </div>
-            <div class="result" id="result"></div>
-          </div>
-        </div>
       </div>
-
       <div class="hero-art" role="img" aria-label="Modern apartment interior">
         <div class="hero-scrim"></div>
       </div>
@@ -157,6 +117,44 @@
       </div>
     </section>
 
+    <!-- Lead capture -->
+    <section class="lead" id="lead">
+      <h3>Request Pilot Access</h3>
+      <div class="grid">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Alex Rossi" />
+        </div>
+        <div>
+          <label for="email">Work email</label>
+          <input id="email" type="email" placeholder="alex.rossi@agency.it" />
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label for="msg">What’s your current workflow? (optional)</label>
+        <textarea id="msg" placeholder="We handle inbound on WhatsApp + email, want faster replies…"></textarea>
+      </div>
+      <div class="row-actions">
+        <button id="send" class="btn btn-primary" type="button">Join Pilot Waitlist</button>
+        <a class="btn btn-secondary" href="mailto:pilot@kintra.xyz?subject=Kintra Pilot Access&body=Hi, we’d like to join the pilot. Our workflow: ..." target="_blank">Or email us</a>
+      </div>
+      <div class="note">No spam. Limited early access.</div>
+      <div class="ok" id="ok">Thanks — we’ll be in touch within 24 hours.</div>
+      <div class="err" id="err">Sorry, something went wrong. You can email <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>.</div>
+    </section>
+
+    <!-- Social proof (placeholder) -->
+    <section class="proof">
+      <div class="quote">
+        <i>“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”</i>
+        <span class="at">— Early partner (pilot)</span>
+      </div>
+      <div class="quote">
+        <i>“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”</i>
+        <span class="at">— Agency lead (pilot)</span>
+      </div>
+    </section>
+
     <footer>
       © <span id="yr"></span> Kintra. Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
     </footer>
@@ -166,33 +164,48 @@
     // Year
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Collapse/expand demo
-    const t = document.getElementById('demoToggle');
-    const b = document.getElementById('demoBody');
-    const c = document.getElementById('caret');
-    t.addEventListener('click', () => {
-      const open = b.style.display === 'block';
-      b.style.display = open ? 'none' : 'block';
-      c.classList.toggle('open', !open);
-      t.setAttribute('aria-expanded', String(!open));
-    });
-
-    // Demo call (wired to your existing Worker)
+    // Lead submit
     const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
-    document.getElementById('testBtn').addEventListener('click', async () => {
-      const q = (document.getElementById('q').value || '').trim() || 'ciao';
-      const resultEl = document.getElementById('result');
-      resultEl.textContent = 'Running…';
+    const sendBtn = document.getElementById('send');
+    const okEl = document.getElementById('ok');
+    const errEl = document.getElementById('err');
+
+    function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    sendBtn.addEventListener('click', async () => {
+      okEl.style.display = 'none'; errEl.style.display = 'none';
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+
+      if (!name || !validateEmail(email)) {
+        errEl.textContent = 'Please enter your name and a valid work email.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      // Try worker first; fall back to mailto if it fails
       try {
-        const res = await fetch(WORKER_BASE + '/api/prompt', {
+        const res = await fetch(WORKER_BASE + '/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: q })
+          body: JSON.stringify({ name, email, message: msg, ts: new Date().toISOString() })
         });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         const json = await res.json();
-        resultEl.textContent = 'OK → ' + JSON.stringify(json);
+        if (json && json.ok) {
+          okEl.style.display = 'block';
+          (document.getElementById('name').value = '');
+          (document.getElementById('email').value = '');
+          (document.getElementById('msg').value = '');
+          return;
+        }
+        throw new Error('Bad response');
       } catch (e) {
-        resultEl.textContent = 'Error: ' + e.message;
+        // Fallback: open mailto prefilled
+        const subject = encodeURIComponent('Kintra Pilot Access');
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMessage: ${msg}`);
+        window.location.href = `mailto:pilot@kintra.xyz?subject=${subject}&body=${body}`;
       }
     });
   </script>
