@@ -5,17 +5,27 @@
   <title>Kintra — AI for Property Marketing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Kintra helps real estate agencies respond faster, structure conversations, and book more viewings." />
+
+  <!-- Favicon + Social share -->
+  <link rel="icon" href="img/logo.png.png" />
+  <meta property="og:title" content="Kintra — AI for Property Marketing" />
+  <meta property="og:description" content="Respond faster, structure conversations, and book more viewings — across WhatsApp and web." />
+  <meta property="og:image" content="https://founder-jpg.github.io/kintra-pilot/img/cover.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kintra — AI for Property Marketing" />
+  <meta name="twitter:description" content="Respond faster, structure conversations, and book more viewings — across WhatsApp and web." />
+  <meta name="twitter:image" content="https://founder-jpg.github.io/kintra-pilot/img/cover.jpg" />
+
+  <!-- Perf: Preload hero image -->
+  <link rel="preload" as="image" href="img/cover.jpg">
+
   <style>
-    :root{
-      --bg:#0b1215; --fg:#f8fafc; --muted:#cbd5e1; --brand:#10B981; --ink:#06241F;
-      --card:#0f1a1e; --card2:#0d171a; --ring:#1f2937;
-    }
+    :root{ --bg:#0b1215; --fg:#f8fafc; --muted:#cbd5e1; --brand:#10B981; --ink:#06241F; --card:#0f1a1e; --card2:#0d171a; --ring:#1f2937; }
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
-    body{font-family:Arial,Helvetica,sans-serif;color:var(--fg);
-      background:linear-gradient(180deg,#0b1215 0%,#0e171b 100%)}
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
+    body{font-family:Arial,Helvetica,sans-serif;color:var(--fg);background:linear-gradient(180deg,#0b1215 0%,#0e171b 100%)}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:1080px;margin:0 auto;padding:28px 20px}
 
     .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
@@ -32,10 +42,8 @@
     .hero-copy p{color:var(--muted);font-size:clamp(1rem,2.2vw,1.25rem);margin:.4em 0 1em}
     .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:.6rem}
     .btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;transition:.18s all ease;border:2px solid transparent}
-    .btn-primary{background:var(--brand);color:var(--ink)}
-    .btn-primary:hover{filter:brightness(1.05)}
-    .btn-secondary{background:transparent;color:var(--brand);border-color:var(--brand)}
-    .btn-secondary:hover{background:rgba(16,185,129,.08)}
+    .btn-primary{background:var(--brand);color:var(--ink)} .btn-primary:hover{filter:brightness(1.05)}
+    .btn-secondary{background:transparent;color:var(--brand);border-color:var(--brand)} .btn-secondary:hover{background:rgba(16,185,129,.08)}
     .hero-art{position:relative;border-radius:20px;overflow:hidden;background:url('img/cover.jpg') center/cover no-repeat;min-height:320px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55))}
 
@@ -56,6 +64,9 @@
     .btn-test{border-radius:10px;background:#1f2937;color:#fff;padding:12px 14px;font-weight:700;border:0}
     .btn-test:hover{filter:brightness(1.05)}
     .result{margin-top:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:.95rem;color:#d1fae5;white-space:pre-wrap}
+    .copy-row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+    .btn-copy{border-radius:10px;background:#0b6d53;color:#fff;padding:10px 12px;font-weight:700;border:0}
+    .toast{display:none;margin-left:6px;color:#A7F3D0;font-size:.95rem}
 
     .lead{margin-top:26px;background:linear-gradient(180deg,#0e1920 0%,#0b1418 100%);border:1px solid var(--ring);border-radius:16px;padding:18px 18px 16px}
     .lead h3{margin:.1em 0 .6em;font-size:1.35rem}
@@ -77,6 +88,10 @@
 
     footer{margin-top:40px;padding:26px 0;color:#93a3b3;font-size:.95rem;border-top:1px dashed #1f2a33}
   </style>
+
+  <!-- Cloudflare Web Analytics (free, privacy-friendly). Replace token if you have one. -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "00000000000000000000000000000000"}'></script>
 </head>
 <body>
   <div class="container">
@@ -98,7 +113,7 @@
         <div class="cta-row">
           <a class="btn btn-primary" href="#lead" data-i18n="ctaPrimary">Request Pilot Access</a>
           <a class="btn btn-secondary" href="deck.html" target="_blank" data-i18n="ctaDeck">View Live Deck</a>
-          <a class="btn btn-secondary" href="deck/Kintra_PilotDeck_v1.pdf" target="_blank" data-i18n="ctaPDF">View Deck PDF</a>
+          <a class="btn btn-secondary" href="deck/Kintra_PilotDeck_v1.pdf" target="_blank" download data-i18n="ctaPDF">View Deck PDF</a>
         </div>
 
         <div class="demo" id="demo">
@@ -115,6 +130,10 @@
               <button class="btn-test" id="testBtn" type="button" data-i18n="demoRun">Run</button>
             </div>
             <div class="result" id="result"></div>
+            <div class="copy-row">
+              <button class="btn-copy" id="copyBtn">Copy reply</button>
+              <span class="toast" id="toast">Copied ✓</span>
+            </div>
           </div>
         </div>
       </div>
@@ -139,6 +158,8 @@
       <div style="margin-top:10px">
         <label for="msg" data-i18n="labelMsg">What’s your current workflow? (optional)</label>
         <textarea id="msg" placeholder="We handle inbound on WhatsApp + email, want faster replies…"></textarea>
+        <!-- Honeypot -->
+        <input id="website" type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true" />
       </div>
       <div class="row-actions">
         <button id="send" class="btn btn-primary" type="button" data-i18n="leadBtn">Join Pilot Waitlist</button>
@@ -161,10 +182,7 @@
     document.getElementById('yr').textContent = new Date().getFullYear();
 
     const I18N = {
-      en: {
-        brandName:'Kintra',
-        heroH1:'From listing to leads, faster.',
-        heroP:'Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.',
+      en: { brandName:'Kintra', heroH1:'From listing to leads, faster.', heroP:'Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.',
         ctaPrimary:'Request Pilot Access', ctaDeck:'View Live Deck', ctaPDF:'View Deck PDF',
         demoTitle:'Try a 10-second demo', demoOpt:'(optional)', demoPlaceholder:"Type a buyer message… (e.g., 'hello please')", demoRun:'Run',
         f1H:'Faster responses', f1P:'Structure and translate replies in seconds — fewer delays, more booked viewings.',
@@ -174,14 +192,10 @@
         leadBtn:'Join Pilot Waitlist', leadAlt:'Or email us', leadNote:'No spam. Limited early access.', leadOk:'Thanks — we’ll be in touch within 24 hours.',
         q1:'“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”', q1at:'— Early partner (pilot)',
         q2:'“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”', q2at:'— Agency lead (pilot)',
-        footer:'Pilot inquiries:',
-        // Demo labels
-        labSummary:'Summary', labNext:'Next step', labReply:'Reply'
+        footer:'Pilot inquiries:', labSummary:'Summary', labNext:'Next step', labReply:'Reply',
+        running:'Running…', err:'Error: ', copied:'Copied ✓'
       },
-      it: {
-        brandName:'Kintra',
-        heroH1:'Dall’annuncio ai lead, più velocemente.',
-        heroP:'Kintra aiuta i team immobiliari a rispondere più in fretta, strutturare le conversazioni e fissare più visite — su WhatsApp e web.',
+      it: { brandName:'Kintra', heroH1:'Dall’annuncio ai lead, più velocemente.', heroP:'Kintra aiuta i team immobiliari a rispondere più in fretta, strutturare le conversazioni e fissare più visite — su WhatsApp e web.',
         ctaPrimary:'Richiedi accesso al pilot', ctaDeck:'Guarda il deck', ctaPDF:'Scarica il PDF',
         demoTitle:'Prova demo da 10 secondi', demoOpt:'(opzionale)', demoPlaceholder:"Scrivi un messaggio dell’acquirente… (es. 'hello please')", demoRun:'Esegui',
         f1H:'Risposte più rapide', f1P:'Struttura e traduci le risposte in pochi secondi — meno attese, più visite fissate.',
@@ -191,8 +205,8 @@
         leadBtn:'Unisciti alla lista d’attesa', leadAlt:'Oppure scrivici', leadNote:'Niente spam. Accesso anticipato limitato.', leadOk:'Grazie — ti ricontatteremo entro 24 ore.',
         q1:'“Kintra ha fatto risparmiare tempo ai nostri agenti. Risposte più veloci, follow-up sempre sotto controllo.”', q1at:'— Partner iniziale (pilot)',
         q2:'“Setup semplice. Abbiamo collegato WhatsApp + web e visto valore nella stessa settimana.”', q2at:'— Responsabile agenzia (pilot)',
-        footer:'Richieste per il pilot:',
-        labSummary:'Riepilogo', labNext:'Prossima azione', labReply:'Risposta'
+        footer:'Richieste per il pilot:', labSummary:'Riepilogo', labNext:'Prossima azione', labReply:'Risposta',
+        running:'In esecuzione…', err:'Errore: ', copied:'Copiato ✓'
       }
     };
 
@@ -216,12 +230,8 @@
     document.getElementById('langIt').addEventListener('click', () => applyLang('it'));
 
     const savedLang = localStorage.getItem('kintraLang');
-    if (savedLang) {
-      applyLang(savedLang);
-    } else {
-      const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      applyLang(userLang.startsWith('it') ? 'it' : 'en');
-    }
+    if (savedLang) applyLang(savedLang);
+    else applyLang((navigator.language || 'en').toLowerCase().startsWith('it') ? 'it' : 'en');
 
     // Demo expand/collapse
     const t = document.getElementById('demoToggle');
@@ -234,25 +244,23 @@
       t.setAttribute('aria-expanded', String(!open));
     });
 
-    // Worker base
-    const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev'; // change if yours differs
+    const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev'; // update if different
+    const resultEl = document.getElementById('result');
+    const copyBtn = document.getElementById('copyBtn');
+    const toast = document.getElementById('toast');
 
-    // Helper to get current UI lang
-    function currentLang() { return document.documentElement.lang === 'it' ? 'it' : 'en'; }
+    function currentLang(){ return document.documentElement.lang === 'it' ? 'it' : 'en'; }
 
-    // Demo call: /api/prompt with lang + pretty print + localized labels
+    // Demo call
     document.getElementById('testBtn').addEventListener('click', async () => {
+      const dict = I18N[currentLang()] || I18N.en;
       const q = (document.getElementById('q').value || '').trim() || 'hello please';
-      const resultEl = document.getElementById('result');
-      const lang = currentLang();
-      const dict = I18N[lang] || I18N.en;
-
-      resultEl.textContent = lang === 'it' ? 'In esecuzione…' : 'Running…';
+      resultEl.textContent = dict.running;
       try {
         const res = await fetch(WORKER_BASE + '/api/prompt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: q, lang })
+          body: JSON.stringify({ text: q, lang: currentLang() })
         });
         const json = await res.json();
         const r = json.result || {};
@@ -260,13 +268,28 @@
           `OK\n` +
           `• ${dict.labSummary}: ${r.summary || '—'}\n` +
           `• ${dict.labNext}: ${r.next_step || '—'}\n` +
-          `• ${dict.labReply} (${(r.reply && r.reply.language) || lang}):\n${(r.reply && r.reply.text) ? r.reply.text : '—'}`;
+          `• ${dict.labReply} (${(r.reply && r.reply.language) || currentLang()}):\n${(r.reply && r.reply.text) ? r.reply.text : '—'}`;
+        copyBtn.dataset.reply = (r.reply && r.reply.text) ? r.reply.text : '';
       } catch (e) {
-        resultEl.textContent = (lang === 'it' ? 'Errore: ' : 'Error: ') + e.message;
+        resultEl.textContent = (I18N[currentLang()]?.err || 'Error: ') + e.message;
+        copyBtn.dataset.reply = '';
       }
     });
 
-    // Lead submit: /api/lead with mailto fallback
+    // Copy reply
+    copyBtn.addEventListener('click', async () => {
+      const dict = I18N[currentLang()] || I18N.en;
+      const text = copyBtn.dataset.reply || '';
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.textContent = dict.copied;
+        toast.style.display = 'inline';
+        setTimeout(() => { toast.style.display = 'none'; }, 1400);
+      } catch {}
+    });
+
+    // Lead submit with honeypot
     const sendBtn = document.getElementById('send');
     const okEl = document.getElementById('ok');
     const errEl = document.getElementById('err');
@@ -277,6 +300,8 @@
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const msg = document.getElementById('msg').value.trim();
+      const website = document.getElementById('website').value.trim(); // honeypot
+
       if (!name || !validateEmail(email)) {
         errEl.textContent = (currentLang()==='it')
           ? 'Inserisci nome ed una email valida.'
@@ -284,11 +309,12 @@
         errEl.style.display = 'block';
         return;
       }
+
       try {
         const res = await fetch(WORKER_BASE + '/api/lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, message: msg, ts: new Date().toISOString() })
+          body: JSON.stringify({ name, email, message: msg, website, ts: new Date().toISOString() })
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const json = await res.json();
@@ -297,6 +323,7 @@
           document.getElementById('name').value = '';
           document.getElementById('email').value = '';
           document.getElementById('msg').value = '';
+          document.getElementById('website').value = '';
           return;
         }
         throw new Error('Bad response');
