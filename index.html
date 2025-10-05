@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Kintra helps real estate agencies respond faster, structure conversations, and book more viewings." />
 
-  <!-- Favicon + Social share -->
   <link rel="icon" href="img/logo.png.png" />
   <meta property="og:title" content="Kintra — AI for Property Marketing" />
   <meta property="og:description" content="Respond faster, structure conversations, and book more viewings — across WhatsApp and web." />
@@ -16,8 +15,6 @@
   <meta name="twitter:title" content="Kintra — AI for Property Marketing" />
   <meta name="twitter:description" content="Respond faster, structure conversations, and book more viewings — across WhatsApp and web." />
   <meta name="twitter:image" content="https://founder-jpg.github.io/kintra-pilot/img/cover.jpg" />
-
-  <!-- Perf: Preload hero image -->
   <link rel="preload" as="image" href="img/cover.jpg">
 
   <style>
@@ -63,9 +60,15 @@
     input[type="text"], input[type="email"]{flex:1;min-width:200px;border-radius:10px;border:1px solid #24303a;background:#0b1215;color:var(--fg);padding:12px 12px;font-size:1rem;outline:none}
     .btn-test{border-radius:10px;background:#1f2937;color:#fff;padding:12px 14px;font-weight:700;border:0}
     .btn-test:hover{filter:brightness(1.05)}
-    .result{margin-top:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:.95rem;color:#d1fae5;white-space:pre-wrap}
-    .copy-row{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
-    .btn-copy{border-radius:10px;background:#0b6d53;color:#fff;padding:10px 12px;font-weight:700;border:0}
+    .result{margin-top:10px;color:#d1fae5}
+    .card{background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--ring);border-radius:12px;padding:12px}
+    .result h4{margin:.1em 0 .4em;font-size:1.05rem;color:#A7F3D0}
+    .result .line{margin:.2em 0;color:#cde8df}
+    .result .reply{margin-top:.6em;background:#0a231d;border:1px solid #124b3d;border-radius:10px;padding:10px 12px;color:#e6fffa}
+
+    .copy-row{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap}
+    .btn-copy,.btn-wa{border-radius:10px;background:#0b6d53;color:#fff;padding:10px 12px;font-weight:700;border:0}
+    .btn-wa{background:#128C7E} .btn-wa:hover{filter:brightness(1.05)}
     .toast{display:none;margin-left:6px;color:#A7F3D0;font-size:.95rem}
 
     .lead{margin-top:26px;background:linear-gradient(180deg,#0e1920 0%,#0b1418 100%);border:1px solid var(--ring);border-radius:16px;padding:18px 18px 16px}
@@ -86,9 +89,21 @@
     .quote .at{color:#9fb0bf;font-size:.95rem;margin-top:6px;display:block}
 
     footer{margin-top:40px;padding:26px 0;color:#93a3b3;font-size:.95rem;border-top:1px dashed #1f2a33}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:50}
+    .overlay{position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .modal-card{position:relative;max-width:520px;width:92%;background:#091112;border:1px solid #163136;border-radius:16px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+    .modal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .modal-h h4{margin:0;font-size:1.05rem;color:#A7F3D0}
+    .x{cursor:pointer;border:1px solid #17343b;border-radius:8px;padding:4px 8px;color:#9fb0bf}
+    .wa-chat{background:#0a1414;border:1px solid #113033;border-radius:12px;padding:12px;max-height:60vh;overflow:auto}
+    .bubble{max-width:82%;padding:10px 12px;border-radius:12px;margin:8px 0;line-height:1.35}
+    .me{margin-left:auto;background:#005C4B;color:#e7fffa;border-top-right-radius:4px}
+    .them{margin-right:auto;background:#202c33;color:#e5e7eb;border-top-left-radius:4px}
+    .meta{font-size:.8rem;color:#9fb0bf;margin-top:2px}
   </style>
 
-  <!-- Cloudflare Web Analytics (free, privacy-friendly). Replace token if you have one. -->
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
     data-cf-beacon='{"token": "00000000000000000000000000000000"}'></script>
 </head>
@@ -128,9 +143,13 @@
               <input id="q" type="text" data-i18n-placeholder="demoPlaceholder" placeholder="Type a buyer message… (e.g., 'hello please')" />
               <button class="btn-test" id="testBtn" type="button" data-i18n="demoRun">Run</button>
             </div>
+
+            <!-- Human-friendly result -->
             <div class="result" id="result"></div>
+
             <div class="copy-row">
               <button class="btn-copy" id="copyBtn">Copy reply</button>
+              <button class="btn-wa" id="waBtn">Send to WhatsApp (Preview)</button>
               <span class="toast" id="toast">Copied ✓</span>
             </div>
           </div>
@@ -163,7 +182,6 @@
       <div style="margin-top:10px">
         <label for="msg" data-i18n="labelMsg">What’s your current workflow? (optional)</label>
         <textarea id="msg" data-i18n-placeholder="msgPH" placeholder="We handle inbound on WhatsApp + email, want faster replies…"></textarea>
-        <!-- Honeypot -->
         <input id="website" type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true" />
       </div>
       <div class="row-actions">
@@ -181,6 +199,20 @@
     </section>
 
     <footer>© <span id="yr"></span> Kintra. <span data-i18n="footer">Pilot inquiries:</span> <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></footer>
+  </div>
+
+  <!-- WhatsApp Preview Modal -->
+  <div class="modal" id="modal">
+    <div class="overlay" id="ov"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mh">
+      <div class="modal-h">
+        <h4 id="mh">WhatsApp Preview</h4>
+        <span class="x" id="xBtn">Close</span>
+      </div>
+      <div class="wa-chat" id="chat">
+        <!-- bubbles injected here -->
+      </div>
+    </div>
   </div>
 
   <script>
@@ -203,10 +235,8 @@
         footer:'Pilot inquiries:',
         labSummary:'Summary', labNext:'Next step', labReply:'Reply',
         running:'Running…', err:'Error: ', copied:'Copied ✓',
-        // NEW placeholders
-        namePH:'Alex Rossi',
-        emailPH:'alex.rossi@agency.it',
-        msgPH:'We handle inbound on WhatsApp + email, want faster replies…'
+        namePH:'Alex Rossi', emailPH:'alex.rossi@agency.it', msgPH:'We handle inbound on WhatsApp + email, want faster replies…',
+        waPreview:'Send to WhatsApp (Preview)', waClose:'Close', waYou:'Buyer', waAgent:'Kintra'
       },
       it: {
         brandName:'Kintra',
@@ -224,21 +254,17 @@
         footer:'Richieste per il pilot:',
         labSummary:'Riepilogo', labNext:'Prossima azione', labReply:'Risposta',
         running:'In esecuzione…', err:'Errore: ', copied:'Copiato ✓',
-        // NEW placeholders (Italian)
-        namePH:'Alex Rossi',
-        emailPH:'alex.rossi@agency.it',
-        msgPH:'Gestiamo i messaggi in entrata su WhatsApp ed email, vogliamo risposte più rapide…'
+        namePH:'Alex Rossi', emailPH:'alex.rossi@agency.it', msgPH:'Gestiamo i messaggi in entrata su WhatsApp ed email, vogliamo risposte più rapide…',
+        waPreview:'Invia su WhatsApp (Anteprima)', waClose:'Chiudi', waYou:'Acquirente', waAgent:'Kintra'
       }
     };
 
     function applyLang(lang) {
       const dict = I18N[lang] || I18N.en;
-      // Visible text
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) el.textContent = dict[key];
       });
-      // Placeholders
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (dict[key]) el.setAttribute('placeholder', dict[key]);
@@ -247,6 +273,9 @@
       document.getElementById('langIt').classList.toggle('active', lang === 'it');
       document.documentElement.lang = lang;
       localStorage.setItem('kintraLang', lang);
+      // buttons text
+      document.getElementById('waBtn').textContent = dict.waPreview;
+      document.getElementById('xBtn').textContent = dict.waClose;
     }
 
     document.getElementById('langEn').addEventListener('click', () => applyLang('en'));
@@ -267,18 +296,25 @@
       t.setAttribute('aria-expanded', String(!open));
     });
 
-    const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev'; // update if different
+    const WORKER_BASE = 'https://kintra-api.founder-60b.workers.dev';
     const resultEl = document.getElementById('result');
     const copyBtn = document.getElementById('copyBtn');
+    const waBtn = document.getElementById('waBtn');
     const toast = document.getElementById('toast');
 
     function currentLang(){ return document.documentElement.lang === 'it' ? 'it' : 'en'; }
 
-    // Demo call
+    let lastInput = '';
+    let lastReply = '';
+    let lastSummary = '';
+    let lastNext = '';
+    let lastLang = 'en';
+
+    // Demo call: render human-friendly card
     document.getElementById('testBtn').addEventListener('click', async () => {
       const dict = I18N[currentLang()] || I18N.en;
       const q = (document.getElementById('q').value || '').trim() || 'hello please';
-      resultEl.textContent = dict.running;
+      resultEl.innerHTML = `<div class="card">${dict.running}</div>`;
       try {
         const res = await fetch(WORKER_BASE + '/api/prompt', {
           method: 'POST',
@@ -287,17 +323,29 @@
         });
         const json = await res.json();
         const r = json.result || {};
-        resultEl.textContent =
-          `OK\n` +
-          `• ${dict.labSummary}: ${r.summary || '—'}\n` +
-          `• ${dict.labNext}: ${r.next_step || '—'}\n` +
-          `• ${dict.labReply} (${(r.reply && r.reply.language) || currentLang()}):\n${(r.reply && r.reply.text) ? r.reply.text : '—'}`;
-        copyBtn.dataset.reply = (r.reply && r.reply.text) ? r.reply.text : '';
+        lastInput = r.input || q;
+        lastReply = (r.reply && r.reply.text) ? r.reply.text : '';
+        lastSummary = r.summary || '';
+        lastNext = r.next_step || '';
+        lastLang = (r.reply && r.reply.language) || currentLang();
+
+        // Friendly render
+        resultEl.innerHTML = `
+          <div class="card">
+            <h4>${lastLang==='it' ? 'Pronto per l’invio' : 'Ready to send'}</h4>
+            <div class="line"><b>${lastLang==='it' ? 'Messaggio del cliente:' : 'Buyer message:'}</b> ${escapeHtml(lastInput)}</div>
+            <div class="line"><b>${I18N[currentLang()].labSummary}:</b> ${escapeHtml(lastSummary)}</div>
+            <div class="line"><b>${I18N[currentLang()].labNext}:</b> ${escapeHtml(lastNext)}</div>
+            <div class="reply"><b>${I18N[currentLang()].labReply}:</b><br>${escapeHtml(lastReply || '—')}</div>
+          </div>`;
+        copyBtn.dataset.reply = lastReply || '';
       } catch (e) {
-        resultEl.textContent = (I18N[currentLang()]?.err || 'Error: ') + e.message;
+        resultEl.innerHTML = `<div class="card">${(I18N[currentLang()]?.err || 'Error: ')}${e.message}</div>`;
         copyBtn.dataset.reply = '';
       }
     });
+
+    function escapeHtml(s){return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 
     // Copy reply
     copyBtn.addEventListener('click', async () => {
@@ -312,7 +360,7 @@
       } catch {}
     });
 
-    // Lead submit with honeypot
+    // Lead submit (unchanged)
     const sendBtn = document.getElementById('send');
     const okEl = document.getElementById('ok');
     const errEl = document.getElementById('err');
@@ -323,7 +371,7 @@
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const msg = document.getElementById('msg').value.trim();
-      const website = document.getElementById('website').value.trim(); // honeypot
+      const website = document.getElementById('website').value.trim();
 
       if (!name || !validateEmail(email)) {
         errEl.textContent = (currentLang()==='it')
@@ -356,6 +404,31 @@
         window.location.href = `mailto:pilot@kintra.xyz?subject=${subject}&body=${body}`;
       }
     });
+
+    // --- WhatsApp Preview Modal ---
+    const modal = document.getElementById('modal');
+    const ov = document.getElementById('ov');
+    const xBtn = document.getElementById('xBtn');
+    const chat = document.getElementById('chat');
+
+    function openModal(){
+      // build simple chat preview: buyer → agent
+      const dict = I18N[currentLang()] || I18N.en;
+      chat.innerHTML = `
+        <div class="bubble them"><b>${dict.waYou}:</b> ${escapeHtml(lastInput || 'Ciao, è disponibile?')}</div>
+        <div class="meta">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+        <div class="bubble me"><b>${dict.waAgent}:</b> ${escapeHtml(lastReply || (currentLang()==='it'
+          ? 'Ciao! Possiamo fissare una visita. Le vanno bene domani alle 17:00 o mercoledì alle 10:30?'
+          : 'Hi! We can arrange a viewing. Would tomorrow at 5pm or Wednesday at 10:30am work?'))}</div>
+        <div class="meta">${new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
+      `;
+      modal.style.display = 'flex';
+    }
+    function closeModal(){ modal.style.display = 'none'; }
+
+    waBtn.addEventListener('click', () => openModal());
+    ov.addEventListener('click', () => closeModal());
+    xBtn.addEventListener('click', () => closeModal());
   </script>
 </body>
 </html>
