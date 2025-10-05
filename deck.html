@@ -69,7 +69,7 @@
     }
     .dot.active { background: #ffffff; width: 28px; border-radius: 999px; }
 
-    /* Button row for CTA */
+    /* CTA buttons */
     .cta-buttons {
       display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 12px;
     }
@@ -89,7 +89,7 @@
       .brand img { width: 80px; }
     }
 
-    /* ---------- Print / PDF (browser print fallback) ---------- */
+    /* ---------- Print (fallback if you use browser print) ---------- */
     @page { size: A4 landscape; margin: 0; }
     @media print {
       html, body { height: auto; overflow: visible; background: #fff; color:#111; }
@@ -103,7 +103,7 @@
       .brand, .dots { display: none; }
     }
 
-    /* ---------- Download PDF button ---------- */
+    /* ---------- One-click Download PDF button ---------- */
     .download-btn {
       position: fixed; right: 18px; bottom: 18px; z-index: 9999;
       background:#10B981; color:#06241F; border:none; border-radius:12px;
@@ -222,36 +222,48 @@
     showSlide(slideIndex);
   </script>
 
-  <!-- PDF libs (kept at the very end to avoid layout flicker) -->
+  <!-- PDF libs (end to avoid layout flicker) -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
-  <!-- One-click Download PDF (robust, no print dialog) -->
+  <!-- One-click Download PDF (A4 landscape, scaled & centered) -->
   <button class="download-btn" id="dlpdf">Download PDF</button>
   <script>
     document.getElementById('dlpdf').addEventListener('click', async () => {
       const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
 
+      // True A4 landscape in points (72 pt/inch)
+      const PAGE_W = 842;
+      const PAGE_H = 595;
+
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [PAGE_W, PAGE_H] });
       const slides = [...document.querySelectorAll('.slide')];
-      const W = 1122;   // A4 landscape width (pt)
-      const H = 793;    // A4 landscape height (pt)
 
-      // Temporarily reveal all slides for capture and pause nav dots
+      // Show all slides for capture
       const prevOverflow = document.documentElement.style.overflow;
       document.documentElement.style.overflow = 'auto';
       slides.forEach(s => s.style.display = 'block');
 
-      // Let images/backs settle
+      // Ensure backgrounds are ready
       await new Promise(r => setTimeout(r, 300));
 
       for (let i = 0; i < slides.length; i++) {
         const node = slides[i];
-        // high-res render for crisp PDF
         const canvas = await html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null });
-        const img = canvas.toDataURL('image/jpeg', 0.95);
-        if (i > 0) pdf.addPage('a4', 'landscape');
-        pdf.addImage(img, 'JPEG', 0, 0, W, H);
+        const imgW = canvas.width;
+        const imgH = canvas.height;
+
+        // Fit image onto A4 landscape while preserving aspect
+        const scale = Math.min(PAGE_W / imgW, PAGE_H / imgH);
+        const drawW = imgW * scale;
+        const drawH = imgH * scale;
+        const offsetX = (PAGE_W - drawW) / 2;
+        const offsetY = (PAGE_H - drawH) / 2;
+
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+        if (i > 0) pdf.addPage([PAGE_W, PAGE_H], 'landscape');
+        pdf.addImage(imgData, 'JPEG', offsetX, offsetY, drawW, drawH);
       }
 
       // Restore single-slide view
