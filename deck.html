@@ -5,6 +5,56 @@
   <title>Kintra — Pilot Deck</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
+
+<!-- PDF libs -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<style>
+  .download-btn {
+    position: fixed; right: 18px; bottom: 18px; z-index: 9999;
+    background:#10B981; color:#06241F; border:none; border-radius:12px;
+    padding:12px 16px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25);
+  }
+  @media print { .download-btn { display: none; } }
+</style>
+
+<button class="download-btn" id="dlpdf">Download PDF</button>
+
+<script>
+  document.getElementById('dlpdf').addEventListener('click', async () => {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
+
+    const slides = [...document.querySelectorAll('.slide')];
+    const W = 1122;  // A4 landscape width in pt
+    const H = 793;   // A4 landscape height in pt
+
+    // Temporarily show all slides for capture
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'auto';
+    slides.forEach(s => s.style.display = 'block');
+
+    // Give backgrounds a tick to render
+    await new Promise(r => setTimeout(r, 250));
+
+    for (let i = 0; i < slides.length; i++) {
+      const node = slides[i];
+      const canvas = await html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null });
+      const img = canvas.toDataURL('image/jpeg', 0.92);
+      if (i > 0) pdf.addPage('a4', 'landscape');
+      pdf.addImage(img, 'JPEG', 0, 0, W, H);
+    }
+
+    // Restore single-slide view
+    slides.forEach((s, idx) => s.style.display = (idx === 0 ? 'block' : 'none'));
+    document.documentElement.style.overflow = prevOverflow || 'hidden';
+
+    pdf.save('Kintra_PilotDeck_v1.pdf');
+  });
+</script>
+
+    
     body, html {
       margin: 0; padding: 0;
       font-family: Arial, Helvetica, sans-serif;
