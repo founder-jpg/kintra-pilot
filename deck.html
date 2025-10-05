@@ -5,18 +5,13 @@
   <title>Kintra — Pilot Deck</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root {
-      --accent: #10B981;   /* mint green for CTA/checks */
-      --ink:    #e5e7eb;   /* light text */
-      --bg:     #0b1215;   /* deep background */
-    }
     body, html {
       margin: 0; padding: 0;
       font-family: Arial, Helvetica, sans-serif;
       height: 100%; width: 100%;
       overflow: hidden;
       color: #fff;
-      background: var(--bg);
+      background: #0b1215;
     }
     .slide {
       display: none;
@@ -25,7 +20,6 @@
       background-size: cover;
       background-position: center;
       position: relative;
-      page-break-after: always; /* ✅ one slide per printed page */
     }
     .overlay {
       background: rgba(0,0,0,0.6);
@@ -43,21 +37,17 @@
     }
     .brand img { width: 100px; height: auto; display: block; }
 
-    .stack { max-width: 900px; width: min(90vw, 900px); }
-    .stack.center { text-align: center; }
-    .stack.left   { text-align: left; }
-
+    .stack { max-width: 900px; width: min(90vw, 900px); text-align: center; }
     h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
-    h2 { font-size: 2em;   margin: 0.2em 0 0.6em; color: var(--ink); }
-    p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: var(--ink); }
+    h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
+    p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
 
-    /* Centered checklist column under heading */
     .checklist {
       list-style: none;
       margin: 18px auto 0;
       padding: 0;
-      display: inline-block;   /* centers the column */
-      text-align: left;        /* keep items readable */
+      display: inline-block;
+      text-align: left;
     }
     .checklist li {
       margin: .5em 0;
@@ -75,17 +65,6 @@
       font-weight: 700;
     }
 
-    .btn {
-      background: var(--accent);
-      color: #06241F;
-      padding: 12px 18px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-block;
-      margin-top: 8px;
-    }
-
     .dots {
       position: absolute; bottom: 20px; width: 100%;
       text-align: center;
@@ -100,51 +79,78 @@
     }
     .dot.active { background: #ffffff; width: 28px; border-radius: 999px; }
 
+    /* Button row for CTA */
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .cta-btn {
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      display: inline-block;
+      transition: all .2s ease;
+    }
+    .primary-btn {
+      background: #10B981;
+      color: #06241F;
+    }
+    .primary-btn:hover { background: #34D399; }
+    .secondary-btn {
+      background: transparent;
+      color: #10B981;
+      border: 2px solid #10B981;
+    }
+    .secondary-btn:hover {
+      background: rgba(16,185,129,0.1);
+    }
+
     @media (max-width: 640px) {
       h1 { font-size: 2.2em; }
       h2 { font-size: 1.4em; }
       p  { font-size: 1.05em; }
       .brand img { width: 80px; }
-      .stack { width: 92vw; }
-      .checklist { max-width: 92vw; }
     }
 
-    /* ✅ Print as proper landscape slides */
+    /* Print / PDF */
     @page { size: A4 landscape; margin: 0; }
     @media print {
-      body, html { overflow: visible; background: #fff; }
-      .slide { display: block !important; height: 100vh; width: 100vw; }
-      .dots { display: none; }       /* hide nav dots in PDF */
-      /* Keep brand/logo visible for print */
-      .overlay { background: rgba(0,0,0,0.35); } /* slightly lighter for print ink */
-      h2, p, .checklist li { color: #111; }      /* darker text for paper readability */
+      html, body { height: auto; overflow: visible; background: #fff; color:#111; }
+      .slide {
+        display: block !important;
+        height: 190mm; width: 277mm;
+        page-break-after: always;
+        background-color: #000;
+      }
+      .overlay { background: rgba(0,0,0,0.5); color: #fff; }
+      .brand, .dots { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Slide 1: Cover (centered) -->
+  <!-- Slide 1 -->
   <div class="slide" style="background-image:url('img/cover.jpg');">
     <div class="overlay">
-      <div class="brand">
-        <img src="img/logo.png.png" alt="Kintra logo" />
-      </div>
-      <div class="stack center">
+      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
+      <div class="stack">
         <h1>From listing to leads, faster.</h1>
         <h2>AI-powered property marketing for real estate agencies</h2>
-        <p>Plug into WhatsApp & web — structure, translate, and reply in seconds. Faster responses → more booked viewings.</p>
+        <p>Plug into WhatsApp & web — structure, translate, and reply in seconds.<br>Faster responses → more booked viewings.</p>
       </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 2: Problem (no red flag, centered block/text) -->
+  <!-- Slide 2 -->
   <div class="slide" style="background-image:url('img/problem.jpg');">
     <div class="overlay">
-      <div class="brand">
-        <img src="img/logo.png.png" alt="Kintra logo" />
-      </div>
-      <div class="stack center">
+      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
+      <div class="stack">
         <h1>The Problem</h1>
         <p>Agents juggle WhatsApp, email, and scattered notes.</p>
         <p>Conversations slip. Follow-ups get missed. Deals fall through.</p>
@@ -153,28 +159,24 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 3: Solution (keep 💡, centered) -->
+  <!-- Slide 3 -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
-      <div class="brand">
-        <img src="img/logo.png.png" alt="Kintra logo" />
-      </div>
-      <div class="stack center">
+      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
+      <div class="stack">
         <h1>💡 The Solution</h1>
-        <p>Kintra captures every client interaction, summarizes instantly, and generates smart next-steps.</p>
+        <p>Kintra captures every client interaction, summarizes instantly,<br>and generates smart next-steps.</p>
         <p>Nothing missed. Every lead nurtured.</p>
       </div>
     </div>
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 4: Pilot Plan (centered heading + centered checklist column; no dartboard) -->
+  <!-- Slide 4 -->
   <div class="slide" style="background-image:url('img/solution.jpg');">
     <div class="overlay">
-      <div class="brand">
-        <img src="img/logo.png.png" alt="Kintra logo" />
-      </div>
-      <div class="stack center">
+      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
+      <div class="stack">
         <h1>Pilot Plan</h1>
         <ul class="checklist">
           <li>2–4 week pilot tailored to your workflow</li>
@@ -187,16 +189,17 @@
     <div class="dots"></div>
   </div>
 
-  <!-- Slide 5: CTA (centered + green button restored) -->
+  <!-- Slide 5 -->
   <div class="slide" style="background-image:url('img/cta.jpg');">
     <div class="overlay">
-      <div class="brand">
-        <img src="img/logo.png.png" alt="Kintra logo" />
-      </div>
-      <div class="stack center">
+      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
+      <div class="stack">
         <h1>Ready for a Pilot?</h1>
         <p>Email us: <b>pilot@kintra.xyz</b></p>
-        <p><a class="btn" href="mailto:pilot@kintra.xyz">Start Pilot</a></p>
+        <div class="cta-buttons">
+          <a href="mailto:pilot@kintra.xyz" class="cta-btn primary-btn">Start Pilot</a>
+          <a href="deck/Kintra_PilotDeck_v1.pdf" target="_blank" class="cta-btn secondary-btn">View Deck PDF</a>
+        </div>
       </div>
     </div>
     <div class="dots"></div>
@@ -223,17 +226,17 @@
     function prevSlide() { slideIndex = (slideIndex - 1 + total) % total; showSlide(slideIndex); }
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') nextSlide();
-      if (e.key === 'ArrowLeft'  || e.key === 'PageUp') prevSlide();
+      if (['ArrowRight','PageDown',' '].includes(e.key)) nextSlide();
+      if (['ArrowLeft','PageUp'].includes(e.key)) prevSlide();
       if (e.key === 'Home') { slideIndex = 0; showSlide(slideIndex); }
       if (e.key === 'End')  { slideIndex = total - 1; showSlide(slideIndex); }
     });
+
     document.addEventListener('click', e => {
       const clickable = e.target.closest('a,button,input,textarea');
       if (!clickable) nextSlide();
     }, { passive: true });
 
-    // Init
     showSlide(slideIndex);
   </script>
 </body>
