@@ -140,6 +140,7 @@
             <b data-i18n="demoTitle">Try a 10-second demo</b>
             <span style="color:#94a3b8;" data-i18n="demoOpt">(optional)</span>
           </div>
+
           <div class="demo-body" id="demoBody">
             <div class="row" style="margin-top:10px;">
               <input id="q" type="text" data-i18n-placeholder="demoPlaceholder" placeholder="Type a buyer message… (e.g., 'hello please')" />
@@ -148,13 +149,25 @@
               <button class="btn-sum" id="sumBtn" type="button">Generate Summary</button>
             </div>
 
+            <!-- Auto-preview + Preview now -->
+            <div style="margin-top:6px; display:flex; align-items:center; gap:12px;">
+              <label style="display:flex; align-items:center; gap:8px; font-size:.95rem; color:#9fb0bf;">
+                <input type="checkbox" id="autoPrev" />
+                Auto-preview WhatsApp after AI Suggest
+              </label>
+              <a href="#" id="previewNow" style="font-size:.95rem; color:#A7F3D0; text-decoration:underline;">Preview now</a>
+            </div>
+
             <!-- Human-friendly result -->
             <div class="result" id="result"></div>
 
             <div class="copy-row">
               <button class="btn-copy" id="copyBtn">Copy reply</button>
-              <button class="btn-wa" id="waBtn">Send to WhatsApp (Preview)</button>
+              <button class="btn-wa" id="waBtn">Send via WhatsApp</button>
               <span class="toast" id="toast">Copied ✓</span>
+            </div>
+            <div class="note" style="margin-top:6px;color:#8aa0b3;font-size:.9rem;">
+              Tip: opens WhatsApp with the reply pre-filled. You can still adjust before sending.
             </div>
           </div>
         </div>
@@ -238,7 +251,7 @@
         labSummary:'Summary', labNext:'Next step', labReply:'Reply',
         running:'Running…', err:'Error: ', copied:'Copied ✓',
         namePH:'Alex Rossi', emailPH:'alex.rossi@agency.it', msgPH:'We handle inbound on WhatsApp + email, want faster replies…',
-        waPreview:'Send to WhatsApp (Preview)', waClose:'Close', waYou:'Buyer', waAgent:'Kintra'
+        waPreview:'Send via WhatsApp', waClose:'Close', waYou:'Buyer', waAgent:'Kintra'
       },
       it: {
         brandName:'Kintra',
@@ -257,7 +270,7 @@
         labSummary:'Riepilogo', labNext:'Prossima azione', labReply:'Risposta',
         running:'In esecuzione…', err:'Errore: ', copied:'Copiato ✓',
         namePH:'Alex Rossi', emailPH:'alex.rossi@agency.it', msgPH:'Gestiamo i messaggi in entrata su WhatsApp ed email, vogliamo risposte più rapide…',
-        waPreview:'Invia su WhatsApp (Anteprima)', waClose:'Chiudi', waYou:'Acquirente', waAgent:'Kintra'
+        waPreview:'Invia su WhatsApp', waClose:'Chiudi', waYou:'Acquirente', waAgent:'Kintra'
       }
     };
 
@@ -303,8 +316,14 @@
     const waBtn = document.getElementById('waBtn');
     const toast = document.getElementById('toast');
 
+    // Auto-preview + Preview now
+    const autoPrev = document.getElementById('autoPrev');
+    const previewNow = document.getElementById('previewNow');
+    previewNow.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+
     function currentLang(){ return document.documentElement.lang === 'it' ? 'it' : 'en'; }
     function escapeHtml(s){return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+    function isMobile(){ return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent); }
 
     let lastInput = '';
     let lastReply = '';
@@ -312,7 +331,7 @@
     let lastNext = '';
     let lastLang = 'en';
 
-    // Generic runner (helper)
+    // Generic runner
     async function runEndpoint(path, body, onOk){
       const dict = I18N[currentLang()] || I18N.en;
       resultEl.innerHTML = `<div class="card">${dict.running}</div>`;
@@ -328,8 +347,8 @@
         lastSummary = r.summary || lastSummary || '';
         lastNext = r.next_step || lastNext || '';
         lastLang = (r.reply && r.reply.language) || currentLang();
-        onOk && onOk(r);
         renderResult();
+        if (typeof onOk === 'function') onOk(r);
       }catch(e){
         resultEl.innerHTML = `<div class="card">${(I18N[currentLang()]?.err || 'Error: ')}${e.message}</div>`;
       }
@@ -352,16 +371,19 @@
     // Buttons
     document.getElementById('testBtn').addEventListener('click', () => {
       const q = (document.getElementById('q').value || '').trim() || 'hello please';
-      runEndpoint('/api/prompt', { text:q, lang: currentLang() });
+      runEndpoint('/api/prompt', { text:q, lang: currentLang() }, () => {
+        if (autoPrev.checked) openModal();
+      });
     });
 
     document.getElementById('suggestBtn').addEventListener('click', () => {
       const q = (document.getElementById('q').value || '').trim() || 'Ciao, è disponibile domani?';
-      runEndpoint('/api/suggest', { text:q, lang: currentLang() });
+      runEndpoint('/api/suggest', { text:q, lang: currentLang() }, () => {
+        if (autoPrev.checked) openModal();
+      });
     });
 
     document.getElementById('sumBtn').addEventListener('click', () => {
-      // Use lastInput if present; else current box
       const text = (lastInput || document.getElementById('q').value || '').trim() || 'Ciao, info sull’appartamento?';
       runEndpoint('/api/summarize', { text, lang: currentLang() });
     });
@@ -377,7 +399,39 @@
       } catch {}
     });
 
-    // Lead submit (unchanged)
+    // Ensure there is a reply before sending
+    async function ensureReply(){
+      if ((lastReply || '').trim()) return true;
+      // No reply yet → generate one quickly
+      const seed = (document.getElementById('q').value || '').trim() || (currentLang()==='it'
+        ? 'Ciao, è disponibile domani?'
+        : 'Hi, is it available tomorrow?');
+      await runEndpoint('/api/suggest', { text: seed, lang: currentLang() });
+      return (lastReply || '').trim().length > 0;
+    }
+
+    // Send via WhatsApp (deep link)
+    async function sendViaWhatsApp(){
+      const ok = await ensureReply();
+      if (!ok) return;
+
+      // Prefer Italian newlines made web-safe
+      const text = lastReply || '';
+      const encoded = encodeURIComponent(text);
+
+      // Desktop vs Mobile handling
+      const url = isMobile()
+        ? `whatsapp://send?text=${encoded}`
+        : `https://web.whatsapp.com/send?text=${encoded}`;
+
+      // Best-effort: also copy to clipboard (safety)
+      try { await navigator.clipboard.writeText(text); } catch {}
+
+      // Open WA
+      window.open(url, '_blank');
+    }
+
+    // Lead submit
     const sendBtn = document.getElementById('send');
     const okEl = document.getElementById('ok');
     const errEl = document.getElementById('err');
@@ -439,7 +493,7 @@
     }
     function closeModal(){ modal.style.display = 'none'; }
 
-    waBtn.addEventListener('click', () => openModal());
+    document.getElementById('waBtn').addEventListener('click', () => sendViaWhatsApp());
     ov.addEventListener('click', () => closeModal());
     xBtn.addEventListener('click', () => closeModal());
   </script>
