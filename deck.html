@@ -3,112 +3,140 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kintra — Pilot Deck (Live)</title>
-<meta name="description" content="Live HTML deck for the Kintra pilot.">
 <link rel="icon" href="data:,">
 <style>
-:root{--bg:#0b1220;--panel:#0f172a;--card:#111a2c;--border:#22304b;--fg:#f5f7fb;--muted:#a8b3c7;--accent:#0ea5e9;--good:#10b981}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-a{color:var(--accent);text-decoration:none}.wrap{max-width:1100px;margin:0 auto;padding:22px}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:10px}.brand img{width:28px;height:28px}
-.lang{display:flex;gap:8px;align-items:center}.pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer}
-.pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
-.kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
-.hero{border:1px solid var(--border);border-radius:14px;padding:18px;background:linear-gradient(180deg,#0f172a,#0b1220);margin-bottom:16px}
-h1{font-size:28px;margin:0 0 6px}.lead{color:#cfe4ff;margin:0 0 8px}
-.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:8px 12px;margin-right:8px;transition:.15s transform ease}
-.btn:hover{transform:translateY(-1px)}.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-.subtle{color:var(--muted)}.step{font-weight:600;color:#9cc8ff;margin-bottom:6px}
-.deck{display:grid;gap:16px}
-.slide{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:24px}
-.slide h2{margin:0 0 8px}.muted{color:#a8b3c7}.cta{background:linear-gradient(90deg,#0ea5e9,#10b981)}
-.foot{margin:18px 0 6px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+:root{--ink:#0b1220;--muted:#6c7a90;--accent:#0ea5e9;--overlay:rgba(0,0,0,.42)}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:#000}
+.slide{position:relative;min-height:100vh;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}
+.slide .inner{max-width:900px;padding:28px}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.7)}
+.overlay{position:absolute;inset:0;background:var(--overlay)}
+.logo{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:8px}
+.logo img{width:28px;height:28px}
+.kicker{display:inline-block;margin-bottom:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:4px 10px;border-radius:999px}
+h1{font-size:44px;line-height:1.15;margin:8px 0}
+h2{font-size:34px;line-height:1.2;margin:8px 0}
+.lead{opacity:.95;margin-top:6px}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none;margin-top:14px}
+.pills{position:fixed;top:16px;right:16px;display:flex;gap:8px;z-index:20}
+.pill{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35);color:#fff;cursor:pointer;background:rgba(0,0,0,.25)}
+.pill.active{background:rgba(14,165,233,.25);border-color:#8bd7ff}
+.band{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:6px 10px;border-radius:999px;font-size:14px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="brand"><img src="./img/logo.png.png" alt="" onerror="this.style.display='none'"><b>Kintra</b></div>
-    <div class="lang">
-      <span class="kbadge" id="badge">Pilot Deck (live)</span>
-      <div class="pill" id="langEN">EN</div><div class="pill" id="langIT">IT</div>
-    </div>
-  </header>
 
-  <section class="hero">
-    <h1 id="h_title">Kintra — Pilot Deck</h1>
-    <p class="lead" id="h_sub">A fast overview you can skim in 60 seconds.</p>
-    <a class="btn" href="./index.html" id="btn_back">Back to Landing</a>
-    <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" rel="noopener" id="btn_pdf">View PDF</a>
-    <div class="subtle" id="h_note">Live HTML deck below mirrors the PDF — easier to share and update.</div>
-  </section>
-
-  <section class="deck">
-    <div class="slide">
-      <div class="step" id="s1">🧭 Slide 1 — Problem</div>
-      <h2 id="p_title">Conversations everywhere, follow-ups slipping.</h2>
-      <p class="muted" id="p_text">Agents juggle WhatsApp, email, and notes. Replies slow down; viewings get missed. Managers can’t see where time is lost.</p>
-    </div>
-
-    <div class="slide">
-      <div class="step" id="s2">💡 Slide 2 — Solution</div>
-      <h2 id="s_title">An agent that drafts replies + next-steps.</h2>
-      <p class="muted" id="s_text">Kintra plugs into WhatsApp and web, normalizes inbound, drafts smart responses, and proposes next actions automatically.</p>
-    </div>
-
-    <div class="slide">
-      <div class="step" id="s3">📈 Slide 3 — Pilot</div>
-      <h2 id="pl_title">2–4 week pilot, measurable outcomes.</h2>
-      <p class="muted" id="pl_text">Run with 3–5 live interactions. Success = 30+ minutes saved per rep daily via faster replies and structured follow-ups.</p>
-    </div>
-
-    <div class="slide">
-      <div class="step" id="s4">🧪 Slide 4 — What you’ll see</div>
-      <h2 id="see_title">Faster replies, nothing slips, booked viewings.</h2>
-      <p class="muted" id="see_text">Auto-summaries with action prompts; WhatsApp + dashboard in sync; a daily snapshot managers can trust.</p>
-    </div>
-
-    <div class="slide">
-      <div class="step" id="s5">🚀 Slide 5 — Call to action</div>
-      <h2 id="cta_title">Ready to pilot?</h2>
-      <p class="muted" id="cta_text">Light setup. Quick value. If it saves time, continue; if not, stop — no risk.</p>
-      <a class="btn cta" href="./index.html#pilotForm" id="cta_btn">Request Pilot Access</a>
-      <a class="btn ghost" href="./dashboard.html" id="cta_dash">Preview Dashboard</a>
-    </div>
-  </section>
-
-  <div class="foot"><span>© 2025 Kintra.</span><span id="foot_contact">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
+<div class="pills">
+  <span id="pillEN" class="pill">EN</span>
+  <span id="pillIT" class="pill">IT</span>
 </div>
+
+<!-- Slide 1 -->
+<section class="slide" aria-label="Cover">
+  <div class="bg" style="background-image:url('./img/cover.jpg')"></div>
+  <div class="overlay"></div>
+  <div class="logo"><img src="./img/logo.png.png" alt="" onerror="this.style.display='none'"><b>Kintra</b></div>
+  <div class="inner">
+    <div class="kicker" id="s1_k">From listing to leads, faster</div>
+    <h1 id="s1_h">AI-powered property marketing for real estate agencies.</h1>
+    <p class="lead" id="s1_l">Reply faster. Keep follow-ups tight. Book more viewings — across WhatsApp & web.</p>
+    <a class="btn" href="./index.html" id="s1_btn">Open Live Pilot</a>
+  </div>
+  <div class="band" id="s1_b">🧭 Trusted by Italian agents building faster funnels.</div>
+</section>
+
+<!-- Slide 2 -->
+<section class="slide" aria-label="Problem">
+  <div class="bg" style="background-image:url('./img/problem.jpg')"></div>
+  <div class="overlay"></div>
+  <div class="inner">
+    <h2 id="s2_h">The Problem</h2>
+    <p class="lead" id="s2_l">Agents juggle WhatsApp, email, and notes. Slow replies → missed viewings.</p>
+  </div>
+  <div class="band" id="s2_b">⚡ Every minute saved here compounds by the hour.</div>
+</section>
+
+<!-- Slide 3 -->
+<section class="slide" aria-label="Solution">
+  <div class="bg" style="background-image:url('./img/solution.jpg')"></div>
+  <div class="overlay"></div>
+  <div class="inner">
+    <h2 id="s3_h">The Solution</h2>
+    <p class="lead" id="s3_l">Kintra drafts replies, suggests next steps, and keeps every thread moving.</p>
+  </div>
+  <div class="band" id="s3_b">💬 Real replies. Real appointments. Real growth.</div>
+</section>
+
+<!-- Slide 4 -->
+<section class="slide" aria-label="Pilot Plan">
+  <div class="bg" style="background-image:url('./img/cta.jpg')"></div>
+  <div class="overlay"></div>
+  <div class="inner">
+    <h2 id="s4_h">Pilot Plan</h2>
+    <p class="lead" id="s4_l">2–4 weeks • 3–5 live interactions • measure minutes saved</p>
+    <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" rel="noopener" id="s4_btn">Download PDF</a>
+  </div>
+  <div class="band" id="s4_b">🧩 Built on Meta Cloud infrastructure.</div>
+</section>
 
 <script>
 const $=id=>document.getElementById(id);
 const dict={
-  en:{badge:'Pilot Deck (live)',h_title:'Kintra — Pilot Deck',h_sub:'A fast overview you can skim in 60 seconds.',h_note:'Live HTML deck below mirrors the PDF — easier to share and update.',btn_back:'Back to Landing',btn_pdf:'View PDF',
-      s1:'🧭 Slide 1 — Problem',p_title:'Conversations everywhere, follow-ups slipping.',p_text:'Agents juggle WhatsApp, email, and notes. Replies slow down; viewings get missed. Managers can’t see where time is lost.',
-      s2:'💡 Slide 2 — Solution',s_title:'An agent that drafts replies + next-steps.',s_text:'Kintra plugs into WhatsApp and web, normalizes inbound, drafts smart responses, and proposes next actions automatically.',
-      s3:'📈 Slide 3 — Pilot',pl_title:'2–4 week pilot, measurable outcomes.',pl_text:'Run with 3–5 live interactions. Success = 30+ minutes saved per rep daily via faster replies and structured follow-ups.',
-      s4:'🧪 Slide 4 — What you’ll see',see_title:'Faster replies, nothing slips, booked viewings.',see_text:'Auto-summaries with action prompts; WhatsApp + dashboard in sync; a daily snapshot managers can trust.',
-      s5:'🚀 Slide 5 — Call to action',cta_title:'Ready to pilot?',cta_text:'Light setup. Quick value. If it saves time, continue; if not, stop — no risk.',cta_btn:'Request Pilot Access',cta_dash:'Preview Dashboard',
-      foot:'Pilot inquiries: '},
-  it:{badge:'Pilot Deck (live)',h_title:'Kintra — Pilot Deck',h_sub:'Panoramica rapida da leggere in 60 secondi.',h_note:'Il deck HTML rispecchia il PDF — più facile da condividere e aggiornare.',btn_back:'Torna alla Landing',btn_pdf:'Vedi PDF',
-      s1:'🧭 Slide 1 — Problema',p_title:'Conversazioni ovunque, follow-up che sfuggono.',p_text:'Gli agenti gestiscono WhatsApp, email e note. Le risposte rallentano; le visite si perdono. I manager faticano a capire dove si perde tempo.',
-      s2:'💡 Slide 2 — Soluzione',s_title:'Un agente che prepara risposte e prossime azioni.',s_text:'Kintra si integra con WhatsApp e web, normalizza l’inbound, redige risposte smart e propone le azioni successive in automatico.',
-      s3:'📈 Slide 3 — Pilot',pl_title:'Pilot da 2–4 settimane, risultati misurabili.',pl_text:'Esegui con 3–5 interazioni reali. Successo = 30+ minuti risparmiati al giorno per agente grazie a risposte più rapide e follow-up strutturati.',
-      s4:'🧪 Slide 4 — Cosa vedrai',see_title:'Risposte più veloci, nulla sfugge, visite fissate.',see_text:'Auto-sintesi con suggerimenti d’azione; WhatsApp + dashboard sincronizzati; un’istantanea quotidiana affidabile per i manager.',
-      s5:'🚀 Slide 5 — Call to action',cta_title:'Pronto per il pilot?',cta_text:'Setup leggero. Valore rapido. Se fa risparmiare tempo si continua; altrimenti si interrompe — zero rischi.',cta_btn:'Richiedi accesso al Pilot',cta_dash:'Anteprima Dashboard',
-      foot:'Richieste pilot: '}
+  en:{
+    s1_k:'From listing to leads, faster',
+    s1_h:'AI-powered property marketing for real estate agencies.',
+    s1_l:'Reply faster. Keep follow-ups tight. Book more viewings — across WhatsApp & web.',
+    s1_btn:'Open Live Pilot',
+    s1_b:'🧭 Trusted by Italian agents building faster funnels.',
+
+    s2_h:'The Problem',
+    s2_l:'Agents juggle WhatsApp, email, and notes. Slow replies → missed viewings.',
+    s2_b:'⚡ Every minute saved here compounds by the hour.',
+
+    s3_h:'The Solution',
+    s3_l:'Kintra drafts replies, suggests next steps, and keeps every thread moving.',
+    s3_b:'💬 Real replies. Real appointments. Real growth.',
+
+    s4_h:'Pilot Plan',
+    s4_l:'2–4 weeks • 3–5 live interactions • measure minutes saved',
+    s4_btn:'Download PDF',
+    s4_b:'🧩 Built on Meta Cloud infrastructure.'
+  },
+  it:{
+    s1_k:'Dagli annunci ai lead, più velocemente',
+    s1_h:'Marketing immobiliare con AI per agenzie.',
+    s1_l:'Rispondi più in fretta. Segui i lead. Prenota più visite — su WhatsApp & web.',
+    s1_btn:'Apri il Pilot Live',
+    s1_b:'🧭 Scelto da agenti italiani che accelerano i funnel.',
+
+    s2_h:'Il Problema',
+    s2_l:'Gli agenti gestiscono WhatsApp, email e note. Risposte lente → visite perse.',
+    s2_b:'⚡ Ogni minuto risparmiato qui si moltiplica nelle ore.',
+
+    s3_h:'La Soluzione',
+    s3_l:'Kintra propone risposte, prossime azioni e fa avanzare ogni thread.',
+    s3_b:'💬 Risposte vere. Appuntamenti veri. Crescita reale.',
+
+    s4_h:'Piano Pilot',
+    s4_l:'2–4 settimane • 3–5 interazioni live • minuti risparmiati',
+    s4_btn:'Scarica PDF',
+    s4_b:'🧩 Costruito su infrastruttura Meta Cloud.'
+  }
 };
-function applyLang(lang){
+function setLang(lang){
   localStorage.setItem('kintra_lang',lang);
   document.documentElement.lang=(lang==='it'?'it':'en');
-  const m=dict[lang];
-  for(const [k,v] of Object.entries(m)){const el=$(k);if(el) el.textContent=v}
-  $('foot_contact').innerHTML=(dict[lang].foot)+'<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
-  $('langEN').classList.toggle('active',lang==='en');$('langIT').classList.toggle('active',lang==='it');
+  const t=dict[lang];
+  ['s1_k','s1_h','s1_l','s1_btn','s1_b','s2_h','s2_l','s2_b','s3_h','s3_l','s3_b','s4_h','s4_l','s4_btn','s4_b']
+    .forEach(id=>{ $(id).textContent=t[id]; });
+  document.getElementById('pillEN').classList.toggle('active',lang==='en');
+  document.getElementById('pillIT').classList.toggle('active',lang==='it');
 }
-const savedLang=()=>localStorage.getItem('kintra_lang')||((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en');
-applyLang(savedLang());
-$('langEN').onclick=()=>applyLang('en');$('langIT').onclick=()=>applyLang('it');
+const saved=localStorage.getItem('kintra_lang')||((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en');
+setLang(saved);
+document.getElementById('pillEN').onclick=()=>setLang('en');
+document.getElementById('pillIT').onclick=()=>setLang('it');
 </script>
 </body>
 </html>
