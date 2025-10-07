@@ -2,370 +2,305 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kintra — From listing to leads, faster.</title>
-  <meta name="description" content="Kintra helps real-estate teams reply faster on WhatsApp and web, with on-brand, ready-to-send messages and next actions." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kintra — PulseView Dashboard</title>
+  <meta name="description" content="Today’s WhatsApp leads — live view." />
   <style>
     :root{
-      --bg:#ffffff;
-      --fg:#0f172a;      /* slate-900 */
-      --muted:#475569;   /* slate-600 */
-      --brand:#2563eb;   /* blue-600 */
-      --brand-700:#1d4ed8;
-      --line:#e2e8f0;    /* slate-200 */
-      --card:#f8fafc;    /* slate-50 */
-      --good:#16a34a;
-      --warn:#f97316;
+      --bg:#ffffff; --fg:#0e1726; --muted:#5b6475; --line:#e8ecf1;
+      --brand:#0ea5a6; --brand-2:#5dd1c1; --good:#10b981; --warn:#f59e0b; --info:#3b82f6;
+      --card:#ffffff; --shadow:0 8px 24px rgba(16,23,40,.06); --radius:18px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1080px;margin:0 auto;padding:24px}
-    header{display:flex;align-items:center;gap:14px;padding:8px 0 20px}
-    header img.logo{width:28px;height:28px;object-fit:contain}
-    header .brand{font-weight:800;letter-spacing:.2px}
-    nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .btn{display:inline-block;border:1px solid var(--line);background:#fff;color:var(--fg);padding:8px 12px;border-radius:10px;font-weight:600;font-size:14px}
-    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    .btn.primary:hover{background:var(--brand-700)}
-    .btn.ghost{background:#fff}
-    .lang{border:1px solid var(--line);border-radius:10px;overflow:hidden}
-    .lang button{border:0;background:#fff;padding:8px 10px;font-weight:600;cursor:pointer}
-    .lang button.active{background:var(--brand);color:#fff}
-    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    .h1{font-size:34px;line-height:1.15;font-weight:800;margin:6px 0 12px}
-    .sub{font-size:17px;color:var(--muted)}
-    .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-    .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    @media (max-width:900px){.split{grid-template-columns:1fr}}
-    .label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-    input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
-    textarea{min-height:88px;resize:vertical}
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .muted{color:var(--muted);font-size:14px}
-    .ok{color:var(--good);font-weight:700}
-    .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-    .kpi{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
-    .pill{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;background:#fff}
-    .hint{font-size:13px;color:var(--muted)}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
-    .success{border-left:4px solid var(--good);padding-left:10px}
-    .warn{border-left:4px solid var(--warn);padding-left:10px}
-    .badge{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#3730a3;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px}
-    .tight{margin-top:6px}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 64px}
+
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+    .brand img{width:26px;height:26px;object-fit:contain;border-radius:6px}
+    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
+    .btn.primary{border:none;background:var(--fg);color:#fff}
+    .btn.small{padding:8px 12px;font-size:14px}
+
+    .hero{
+      position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+      background:
+        radial-gradient(1200px 300px at -10% -20%, rgba(14,165,166,.15), transparent 60%),
+        radial-gradient(900px 250px at 110% -30%, rgba(93,209,193,.18), transparent 55%),
+        #ffffff;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:-2px;
+      background:linear-gradient(90deg, rgba(14,165,166,.18), rgba(93,209,193,.10), rgba(59,130,246,.12));
+      filter:blur(28px);opacity:.6;animation:glide 8s linear infinite;pointer-events:none;
+    }
+    @keyframes glide{0%{transform:translateX(-30%)}100%{transform:translateX(30%)}}
+    .hero-inner{position:relative;padding:22px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .h-title{font-size:22px;font-weight:750;letter-spacing:.2px}
+    .h-sub{color:var(--muted);font-size:14px;margin-top:4px}
+
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px 14px 18px}
+    .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;
+      box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .kpi .label{color:var(--muted);font-size:13px}
+    .kpi .value{font-size:22px;font-weight:800;letter-spacing:.2px}
+    .kpi .delta{font-size:12px;border-radius:999px;padding:6px 8px}
+    .delta.up{background:rgba(16,185,129,.12);color:var(--good);border:1px solid rgba(16,185,129,.3)}
+    .delta.flat{background:rgba(59,130,246,.10);color:var(--info);border:1px solid rgba(59,130,246,.25)}
+    .delta.down{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.3)}
+
+    .lead-grid{display:grid;grid-template-columns:1fr;gap:14px;padding:8px 2px;margin-top:6px}
+    @media (min-width:641px){.lead-grid{grid-template-columns:1fr}}
+    @media (min-width:981px){.lead-grid{grid-template-columns:1fr 1fr 1fr}} /* desktop: 3 per row */
+
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;
+      box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-height:150px;
+      transform:translateZ(0);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(16,23,40,.08);border-color:#dfe6ee}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .id{font-weight:700}
+    .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid}
+    .b-new{color:var(--good);background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.25)}
+    .b-wait{color:var(--warn);background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.25)}
+    .b-sent{color:var(--info);background:rgba(59,130,246,.10);border-color:rgba(59,130,246,.25)}
+    .snippet{color:var(--muted);font-size:14px;border-left:3px solid #e6eef7;padding-left:10px}
+    .meta{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}
+    .cta{display:flex;gap:8px;margin-top:auto}
+    .cta .btn{border-radius:10px}
+
+    .roi{margin:22px 2px 8px;color:var(--muted);font-size:14px}
+    footer{margin-top:18px;color:#8b94a6;font-size:12px;display:flex;justify-content:flex-end}
+
+    .pulse{animation:pulse 1.8s ease-in-out 1}
+    @keyframes pulse{
+      0%{box-shadow:var(--shadow)}
+      50%{box-shadow:0 14px 36px rgba(14,165,166,.18)}
+      100%{box-shadow:var(--shadow)}
+    }
+
+    .wa{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:6px;background:#25D366;color:#fff;font-size:12px}
+    .lang{display:flex;gap:6px}
+    .lang button{border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:10px;cursor:pointer}
+    .lang button.active{background:#0e1726;color:#fff;border-color:#0e1726}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <img class="logo" src="./img/logo.png.png" alt="Kintra logo" />
-      <div class="brand">Kintra</div>
-      <nav>
-        <a class="btn ghost" href="./dashboard.html" id="btnDash">Preview Dashboard</a>
-        <a class="btn ghost" href="./deck.html" id="btnDeck">View Live Deck</a>
-        <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" id="btnPDF">View Deck PDF</a>
-        <a class="btn primary" href="#pilot" id="btnCTA">Request Pilot Access</a>
+    <div class="topbar">
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo" />
+        <span>Kintra — <span data-i18n="dash_title_small">PulseView</span></span>
+      </div>
+      <div class="actions">
+        <a class="btn small" href="./index.html" data-i18n="back_landing">← Back to landing</a>
+        <a class="btn small" href="./index.html#pilot" data-i18n="request_pilot">Request Pilot</a>
         <div class="lang">
-          <button id="enBtn" class="active">EN</button>
-          <button id="itBtn">IT</button>
-        </div>
-      </nav>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div>
-        <div class="badge" id="heroBadge">8 agencies testing now</div>
-        <h1 class="h1" id="heroTitle">From listing to leads, faster.</h1>
-        <p class="sub" id="heroSub">
-          Kintra helps real-estate teams reply faster, keep conversations structured, and book more viewings — across WhatsApp and web.
-        </p>
-        <div class="kpi">
-          <span class="pill" id="kpi1">⏱️ 30+ min saved/rep daily</span>
-          <span class="pill" id="kpi2">🇮🇹 Native-tone replies</span>
-          <span class="pill" id="kpi3">✅ No thread slips</span>
-        </div>
-        <div class="stack">
-          <a class="btn primary" href="#pilot" id="ctaPrimary">Request Pilot Access</a>
-          <a class="btn" href="#demo" id="ctaDemo">Try a 10-second demo</a>
-        </div>
-        <p class="hint tight" id="heroWhy"><strong>Why this matters:</strong> time = money. Faster replies → more viewings booked.</p>
-      </div>
-
-      <!-- 10-SECOND DEMO -->
-      <div class="card" id="demo">
-        <div class="label" id="demoLabel">Try a 10-second demo</div>
-        <p class="hint" id="demoHint">
-          Type any message (IT/EN). Click <em>Run</em>, then <em>AI suggests reply</em> to see a ready-to-send draft. <span class="mono">No data stored.</span>
-        </p>
-        <textarea id="q" placeholder="e.g., Client asks if Friday 18:30 works for a viewing…"></textarea>
-        <div class="row" style="margin-top:10px">
-          <button class="btn primary" id="btnRun">Run</button>
-          <button class="btn" id="btnReply">AI suggests reply</button>
-          <button class="btn" id="btnSummary">Generate summary</button>
-        </div>
-        <div style="margin-top:14px">
-          <div class="label">Result</div>
-          <div id="result" class="mono card" style="background:#fff"></div>
-        </div>
-        <div style="margin-top:10px">
-          <div class="label">AI suggested reply</div>
-          <div id="replyOut" class="card success" style="background:#ecfdf5">—</div>
-        </div>
-        <div style="margin-top:10px">
-          <div class="label">Summary</div>
-          <div id="summaryOut" class="card">—</div>
+          <button id="btn-en" class="active">EN</button>
+          <button id="btn-it">IT</button>
         </div>
       </div>
-    </section>
-
-    <!-- VALUE BLOCKS -->
-    <section class="split" style="margin-top:28px">
-      <div class="card">
-        <div class="label" id="val1h">Faster responses</div>
-        <p id="val1p">On-brand replies in seconds — fewer delays, more viewings booked.</p>
-      </div>
-      <div class="card">
-        <div class="label" id="val2h">Nothing slips</div>
-        <p id="val2p">Each message can create a next step — follow-ups don’t get lost.</p>
-      </div>
-    </section>
-
-    <!-- WHATSAPP TEST (Meta test number) -->
-    <section class="card" style="margin-top:28px">
-      <div class="label" id="waLabel">Send via WhatsApp (Meta demo)</div>
-      <p class="hint" id="waHint">
-        Uses Meta Cloud API (test number). Make sure the recipient first sends <span class="mono">hello</span> to your Meta test number.
-      </p>
-      <div class="split">
-        <div>
-          <div class="label" id="waToLab">Recipient phone (E.164)</div>
-          <input id="waTo" placeholder="+39… or +351…" />
-        </div>
-        <div>
-          <div class="label" id="waMsgLab">Message</div>
-          <input id="waMsg" placeholder="e.g., Ciao! Va bene domani alle 18:30?" />
-        </div>
-      </div>
-      <div class="row" style="margin-top:12px">
-        <button class="btn primary" id="btnWA">Send WhatsApp</button>
-        <span class="hint" id="waNote">E.164 = +countrycode + number (no spaces). Example: +390212345678.</span>
-      </div>
-      <div style="margin-top:12px">
-        <div class="label">Status</div>
-        <div id="waOut" class="card mono">—</div>
-      </div>
-    </section>
-
-    <!-- PILOT FORM -->
-    <section id="pilot" class="card" style="margin-top:28px">
-      <div class="label" id="pilotLab">Request Pilot Access</div>
-      <div class="split">
-        <div>
-          <div class="label" id="nameLab">Name</div>
-          <input id="name" placeholder="Alex Rossi" />
-        </div>
-        <div>
-          <div class="label" id="mailLab">Work email</div>
-          <input id="email" placeholder="alex.rossi@agency.it" />
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <div class="label" id="flowLab">What’s your current workflow? (optional)</div>
-        <textarea id="flow" placeholder="Gestiamo gli inbound su WhatsApp + email, vogliamo risposte più rapide…"></textarea>
-      </div>
-      <div class="row" style="margin-top:12px">
-        <button class="btn primary" id="btnLead">Join Pilot Waitlist</button>
-        <a class="btn ghost" href="mailto:pilot@kintra.xyz" id="mailAlt">Or email us</a>
-      </div>
-      <p class="hint" id="noSpam">No spam. Limited early access.</p>
-      <div id="leadOut" class="card mono" style="margin-top:10px">—</div>
-    </section>
-
-    <!-- SOCIAL PROOF -->
-    <section class="split" style="margin-top:28px">
-      <div class="card">
-        <p class="muted" id="t1">“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”<br><em>— Early partner (pilot)</em></p>
-      </div>
-      <div class="card">
-        <p class="muted" id="t2">“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”<br><em>— Agency lead (pilot)</em></p>
-      </div>
-    </section>
-
-    <div class="foot">
-      <span id="copy">© 2025 Kintra. Pilot inquiries: pilot@kintra.xyz</span>
-      <span class="mono" id="status">Ready.</span>
     </div>
+
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="h-title" data-i18n="hero_title">Today’s WhatsApp Leads</div>
+          <div class="h-sub"><span id="live-sub" data-i18n="hero_sub">Updated live — 8 new threads since morning.</span></div>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="#" id="btn-refresh" data-i18n="refresh_fake">Refresh (demo)</a>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi" id="kpi-card-leads">
+          <div>
+            <div class="label" data-i18n="kpi_new_leads">New leads today</div>
+            <div class="value" id="kpi-leads">8</div>
+          </div>
+          <div class="delta up" id="delta-leads">+12%</div>
+        </div>
+        <div class="kpi" id="kpi-card-reply">
+          <div>
+            <div class="label" data-i18n="kpi_avg_reply">Avg. reply time</div>
+            <div class="value" id="kpi-reply">2m 12s</div>
+          </div>
+          <div class="delta flat" id="delta-reply" data-i18n="flat_vs_yday">stable vs. yesterday</div>
+        </div>
+        <div class="kpi" id="kpi-card-closed">
+          <div>
+            <div class="label" data-i18n="kpi_closed">Closed today</div>
+            <div class="value" id="kpi-closed">3</div>
+          </div>
+          <div class="delta up" id="delta-closed">+1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-grid" id="lead-grid">
+      <div class="card" data-mins="180">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 347 221 88 32</div>
+          <span class="badge b-new" data-i18n="st_new">New</span>
+        </div>
+        <div class="snippet">“Buongiorno, interessato al trilocale zona Navigli. È disponibile nel weekend?”</div>
+        <div class="row meta"><span class="ago">3h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Luca</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+
+      <div class="card" data-mins="47">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 320 991 44 07</div>
+          <span class="badge b-wait" data-i18n="st_wait">Awaiting reply</span>
+        </div>
+        <div class="snippet">“Foto ulteriori del bilocale in via Roma? Budget 1.200€/mese.”</div>
+        <div class="row meta"><span class="ago">47m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Silvia</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+
+      <div class="card" data-mins="60">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 335 770 12 66</div>
+          <span class="badge b-sent" data-i18n="st_sent">Follow-up sent</span>
+        </div>
+        <div class="snippet">“Grazie! Appuntamento fissato per martedì ore 18.”</div>
+        <div class="row meta"><span class="ago">1h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Marta</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+
+      <div class="card" data-mins="12">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 338 991 55 02</div>
+          <span class="badge b-new" data-i18n="st_new">New</span>
+        </div>
+        <div class="snippet">“È possibile vedere l’attico giovedì? Siamo in due.”</div>
+        <div class="row meta"><span class="ago">12m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Paolo</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+
+      <div class="card" data-mins="9">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 329 800 77 61</div>
+          <span class="badge b-wait" data-i18n="st_wait">Awaiting reply</span>
+        </div>
+        <div class="snippet">“Contratto transitorio 6 mesi? Zona centro.”</div>
+        <div class="row meta"><span class="ago">9m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Giulia</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+
+      <div class="card" data-mins="120">
+        <div class="row">
+          <div class="id"><span class="wa">w</span> +39 331 221 44 09</div>
+          <span class="badge b-sent" data-i18n="st_sent">Follow-up sent</span>
+        </div>
+        <div class="snippet">“Inviata scheda immobile e planimetria.”</div>
+        <div class="row meta"><span class="ago">2h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Elisa</div>
+        <div class="cta"><a class="btn small" href="#" data-i18n="open_thread">Open thread</a><a class="btn small" href="./index.html#demo" data-i18n="draft_reply">Instant reply draft</a></div>
+      </div>
+    </div>
+
+    <div class="roi" data-i18n="roi">
+      Every Kintra reply draft saves ~2.5 minutes. That’s ~1 hour reclaimed daily — per agent.
+    </div>
+
+    <footer>
+      <div data-i18n="seal">Powered by Kintra AI — built for real estate teams.</div>
+    </footer>
   </div>
 
   <script>
-    // === CONFIG ===
-    const WORKER_PROMPT = 'https://kintra-api.founder-60b.workers.dev/api/prompt';
-    const WORKER_WA     = 'https://kintra-wa-meta.founder-60b.workers.dev/api/wa';
-
-    // === i18n minimal toggle ===
-    const state = { lang: 'en', lastDemo: null };
-    const $ = (id) => document.getElementById(id);
+    // --- EN/IT dictionary
+    const dict = {
+      en:{dash_title_small:"PulseView",back_landing:"← Back to landing",request_pilot:"Request Pilot",
+          hero_title:"Today’s WhatsApp Leads",hero_sub:"Updated live — 8 new threads since morning.",
+          refresh_fake:"Refresh (demo)",kpi_new_leads:"New leads today",kpi_avg_reply:"Avg. reply time",
+          kpi_closed:"Closed today",flat_vs_yday:"stable vs. yesterday",st_new:"New",st_wait:"Awaiting reply",
+          st_sent:"Follow-up sent",agent:"Agent",open_thread:"Open thread",draft_reply:"Instant reply draft",
+          roi:"Every Kintra reply draft saves ~2.5 minutes. That’s ~1 hour reclaimed daily — per agent.",
+          seal:"Powered by Kintra AI — built for real estate teams."},
+      it:{dash_title_small:"PulseView",back_landing:"← Torna alla pagina",request_pilot:"Richiedi Pilot",
+          hero_title:"Lead WhatsApp di oggi",hero_sub:"Aggiornato in tempo reale — 8 nuove conversazioni da stamattina.",
+          refresh_fake:"Aggiorna (demo)",kpi_new_leads:"Nuovi lead oggi",kpi_avg_reply:"Tempo medio di risposta",
+          kpi_closed:"Chiusure di oggi",flat_vs_yday:"stabile vs. ieri",st_new:"Nuovo",st_wait:"In attesa",
+          st_sent:"Follow-up inviato",agent:"Agente",open_thread:"Apri conversazione",draft_reply:"Bozza risposta istantanea",
+          roi:"Ogni bozza Kintra fa risparmiare ~2,5 minuti. ~1 ora recuperata al giorno — per agente.",
+          seal:"Tecnologia Kintra AI — creata per i team immobiliari."}
+    };
 
     function setLang(lang){
-      state.lang = lang;
-      $('enBtn').classList.toggle('active', lang==='en');
-      $('itBtn').classList.toggle('active', lang==='it');
-
-      const tr = {
-        heroBadge: {en:'8 agencies testing now', it:'8 agenzie in test'},
-        heroTitle: {en:'From listing to leads, faster.', it:'Dall’annuncio ai contatti, più velocemente.'},
-        heroSub: {
-          en:'Kintra helps real-estate teams reply faster, keep conversations structured, and book more viewings — across WhatsApp and web.',
-          it:'Kintra aiuta i team immobiliari a rispondere più velocemente, strutturare le conversazioni e fissare più visite — su WhatsApp e web.'
-        },
-        kpi1:{en:'⏱️ 30+ min saved/rep daily', it:'⏱️ 30+ min risparmiati/agente al giorno'},
-        kpi2:{en:'🇮🇹 Native-tone replies', it:'🇮🇹 Risposte nel tono giusto'},
-        kpi3:{en:'✅ No thread slips', it:'✅ Nessun seguito perso'},
-        heroWhy:{en:'Why this matters: time = money. Faster replies → more viewings booked.',
-                 it:'Perché conta: tempo = denaro. Risposte più rapide → più visite fissate.'},
-        demoLabel:{en:'Try a 10-second demo', it:'Prova la demo in 10 secondi'},
-        demoHint:{
-          en:'Type any message (IT/EN). Click Run, then AI suggests reply to see a ready-to-send draft. No data stored.',
-          it:'Scrivi un messaggio (IT/EN). Clicca Esegui, poi AI suggerisce risposta per vedere una bozza pronta all’invio. Nessun dato salvato.'
-        },
-        val1h:{en:'Faster responses', it:'Risposte più rapide'},
-        val1p:{en:'On-brand replies in seconds — fewer delays, more viewings booked.',
-               it:'Risposte in pochi secondi — meno attese, più visite fissate.'},
-        val2h:{en:'Nothing slips', it:'Nulla sfugge'},
-        val2p:{en:'Each message can create a next step — follow-ups don’t get lost.',
-               it:'Ogni messaggio può creare il prossimo passo — i follow-up non si perdono.'},
-        waLabel:{en:'Send via WhatsApp (Meta demo)', it:'Invia via WhatsApp (demo Meta)'},
-        waHint:{en:'Uses Meta Cloud API (test number). Make sure the recipient first sends "hello" to your Meta test number.',
-                it:'Usa Meta Cloud API (numero di test). Assicurati che il destinatario invii prima "hello" al tuo numero di test Meta.'},
-        waToLab:{en:'Recipient phone (E.164)', it:'Numero destinatario (E.164)'},
-        waMsgLab:{en:'Message', it:'Messaggio'},
-        waNote:{en:'E.164 = +countrycode + number (no spaces). Example: +390212345678.',
-                it:'E.164 = +prefisso paese + numero (senza spazi). Esempio: +390212345678.'},
-        pilotLab:{en:'Request Pilot Access', it:'Richiedi l’accesso al pilot'},
-        nameLab:{en:'Name', it:'Nome'},
-        mailLab:{en:'Work email', it:'Email lavoro'},
-        flowLab:{en:'What’s your current workflow? (optional)', it:'Qual è il tuo flusso attuale? (opz.)'},
-        mailAlt:{en:'Or email us', it:'Oppure scrivici'},
-        noSpam:{en:'No spam. Limited early access.', it:'Niente spam. Accesso anticipato limitato.'},
-        t1:{en:'“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”\n— Early partner (pilot)',
-            it:'“Kintra ha fatto risparmiare davvero tempo agli agenti. Risposte più veloci e follow-up puntuali.”\n— Partner iniziale (pilot)'},
-        t2:{en:'“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”\n— Agency lead (pilot)',
-            it:'“Setup semplice. Collegati WhatsApp + web e valore già nella stessa settimana.”\n— Responsabile agenzia (pilot)'},
-        btnCTA:{en:'Request Pilot Access', it:'Richiedi accesso al pilot'},
-        ctaPrimary:{en:'Request Pilot Access', it:'Richiedi accesso al pilot'},
-        ctaDemo:{en:'Try a 10-second demo', it:'Prova la demo in 10 secondi'},
-        btnDash:{en:'Preview Dashboard', it:'Anteprima Dashboard'},
-        btnDeck:{en:'View Live Deck', it:'Vedi il Deck'},
-        btnPDF:{en:'View Deck PDF', it:'PDF del Deck'}
-      };
-      for (const id in tr){ if($(id)) $(id).innerText = tr[id][lang]; }
-
-      // placeholders
-      $('q').placeholder = (lang==='en')
-        ? 'e.g., Client asks if Friday 18:30 works for a viewing…'
-        : 'es.: Il cliente chiede se venerdì alle 18:30 va bene per una visita…';
-      $('waTo').placeholder = (lang==='en')? '+39… or +351…' : '+39… o +351…';
-      $('waMsg').placeholder = (lang==='en')
-        ? 'e.g., Ciao! Does 18:30 tomorrow work for you?'
-        : 'es.: Ciao! Va bene domani alle 18:30?';
-      $('flow').placeholder = (lang==='en')
-        ? 'We handle inbound on WhatsApp + email, want faster replies…'
-        : 'Gestiamo gli inbound su WhatsApp + email, vogliamo risposte più rapide…';
+      const map = dict[lang] || dict.en;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n'); if(map[k]) el.textContent = map[k];
+      });
+      document.getElementById('btn-en').classList.toggle('active', lang==='en');
+      document.getElementById('btn-it').classList.toggle('active', lang==='it');
+      document.documentElement.lang = lang;
+      try{ localStorage.setItem('kintra_lang', lang); }catch(e){}
     }
 
-    $('enBtn').onclick = ()=> setLang('en');
-    $('itBtn').onclick = ()=> setLang('it');
-    setLang('en');
+    function initLang(){
+      let saved;
+      try{ saved = localStorage.getItem('kintra_lang'); }catch(e){}
+      if(saved) return setLang(saved);
+      const nav = (navigator.language || '').toLowerCase();
+      if(nav.startsWith('it')) setLang('it'); else setLang('en');
+    }
 
-    // === DEMO ACTIONS ===
-    $('btnRun').onclick = async ()=>{
-      const txt = $('q').value.trim() || (state.lang==='en'
-        ? 'Client would like a viewing Friday around 18:30. Ask if 18:30 works.'
-        : 'Il cliente vorrebbe una visita venerdì verso le 18:30. Chiedi se va bene 18:30.');
-      $('result').textContent = 'Running…';
-      $('replyOut').textContent = '—';
-      $('summaryOut').textContent = '—';
-      try{
-        const res = await fetch(WORKER_PROMPT, {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({ text: txt })
-        });
-        const json = await res.json();
-        state.lastDemo = json;
-        $('result').textContent = JSON.stringify(json, null, 2);
-      }catch(e){
-        $('result').textContent = 'Error: '+ e.message;
+    document.getElementById('btn-en').addEventListener('click', ()=>setLang('en'));
+    document.getElementById('btn-it').addEventListener('click', ()=>setLang('it'));
+    initLang();
+
+    // --- Fake-live timer: tick card timestamps each 60s, bump KPI occasionally
+    const cards = [...document.querySelectorAll('.card')];
+    function renderAgo(el, mins){
+      if(mins < 60) el.textContent = `${mins}m ago`;
+      else el.textContent = `${Math.floor(mins/60)}h ago`;
+    }
+    // initialize mins from data-mins attr
+    cards.forEach(c=>{
+      const mins = parseInt(c.getAttribute('data-mins')||'0',10);
+      const ago = c.querySelector('.ago'); if(ago) renderAgo(ago, mins);
+    });
+
+    // increment minutes every 60s
+    setInterval(()=>{
+      cards.forEach(c=>{
+        const cur = parseInt(c.getAttribute('data-mins')||'0',10) + 1;
+        c.setAttribute('data-mins', String(cur));
+        const ago = c.querySelector('.ago'); if(ago) renderAgo(ago, cur);
+      });
+    }, 60000);
+
+    // bump KPI + pulse one random card every ~2–3 mins
+    function pulseOne(){
+      const pool = cards.length? cards : [];
+      if(pool.length){
+        const pick = pool[Math.floor(Math.random()*pool.length)];
+        pick.classList.remove('pulse'); void pick.offsetWidth; pick.classList.add('pulse');
       }
-    };
+      const leadsEl = document.getElementById('kpi-leads');
+      const n = parseInt(leadsEl.textContent,10) || 8;
+      leadsEl.textContent = n + 1;
+      document.getElementById('kpi-card-leads').classList.remove('pulse');
+      void document.getElementById('kpi-card-leads').offsetWidth;
+      document.getElementById('kpi-card-leads').classList.add('pulse');
 
-    $('btnReply').onclick = ()=>{
-      const fallback = (state.lang==='en')
-        ? 'Ciao! Does 18:30 on Friday work for you? I can confirm the viewing.'
-        : 'Ciao! Va bene venerdì alle 18:30? Posso confermare la visita.';
-      if (!state.lastDemo){
-        $('replyOut').textContent = fallback + '  (Tip: click “Run” first for a tailored reply.)';
-        return;
+      // subtle subtext tick
+      const sub = document.getElementById('live-sub');
+      if(sub && /(\d+)/.test(sub.textContent)){
+        const m = Number(RegExp.$1)+1;
+        sub.textContent = sub.textContent.replace(/\d+/, String(m));
       }
-      // Prefer the worker’s italian_hint if present; otherwise format something clean.
-      const hint = state.lastDemo?.result?.italian_hint || state.lastDemo?.italian_hint || fallback;
-      $('replyOut').textContent = hint;
-    };
+    }
+    setInterval(pulseOne, 140000); // 140s
 
-    $('btnSummary').onclick = ()=>{
-      const text = $('q').value.trim();
-      if (!text){
-        $('summaryOut').textContent = (state.lang==='en')
-          ? 'No input yet. Type something above.'
-          : 'Nessun testo inserito. Scrivi qualcosa sopra.';
-        return;
-      }
-      // Very lightweight summary demo
-      const whenMatch = text.match(/\b(\d{1,2}[:\.]?\d{0,2})\b/i) || text.match(/\b(1?\d)(?:am|pm)\b/i);
-      const when = whenMatch ? whenMatch[0] : (state.lang==='en'?'a proposed time':'un orario proposto');
-      $('summaryOut').textContent = (state.lang==='en')
-        ? `Ask to confirm a viewing at ${when}; if accepted, send calendar slot and save thread.`
-        : `Chiedi di confermare una visita alle ${when}; se accetta, invia slot in agenda e salva la conversazione.`;
-    };
+    // Refresh (demo) button triggers immediate pulse
+    document.getElementById('btn-refresh').addEventListener('click', (e)=>{ e.preventDefault(); pulseOne(); });
 
-    // === WHATSAPP SEND (Meta test number flow) ===
-    $('btnWA').onclick = async ()=>{
-      const to = $('waTo').value.trim();
-      const msg = $('waMsg').value.trim() || (state.lang==='en'
-        ? 'Ciao! Quick test from Kintra.'
-        : 'Ciao! Test rapido da Kintra.');
-      if (!to){ $('waOut').textContent = 'Enter recipient in E.164 (e.g., +390212345678).'; return; }
-      $('waOut').textContent = 'Sending…';
-      try{
-        const res = await fetch(WORKER_WA, {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({ to, text: msg })
-        });
-        const text = await res.text();
-        $('waOut').textContent = text;
-      }catch(e){
-        $('waOut').textContent = 'Error: ' + e.message;
-      }
-    };
-
-    // === PILOT “LEAD” CAPTURE (simple echo to status; expand later) ===
-    $('btnLead').onclick = ()=>{
-      const name = $('name').value.trim();
-      const email = $('email').value.trim();
-      const flow = $('flow').value.trim();
-      const payload = { name, email, flow, ts:new Date().toISOString() };
-      $('leadOut').textContent = 'Thanks — we’ll be in touch within 24 hours.\n' + JSON.stringify(payload, null, 2);
-      $('status').textContent = 'Lead captured (local preview).';
-      // Later: POST to your Worker or a form backend.
-    };
   </script>
 </body>
 </html>
