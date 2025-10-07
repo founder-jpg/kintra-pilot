@@ -29,7 +29,6 @@
     input,textarea{width:100%;padding:10px 12px;font-size:15px;border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
     button{padding:10px 14px;font-size:15px;border-radius:10px;border:none;background:var(--fg);color:#fff;cursor:pointer}
     button:hover{background:#222c3d}
-    .micro{color:#8b94a6;font-size:12.5px;margin-top:8px}
     footer{margin-top:50px;color:#8b94a6;font-size:13px;text-align:right}
     .why{color:var(--muted);font-size:15px;line-height:1.6}
     .lang{display:flex;gap:6px}
@@ -69,8 +68,7 @@
         <input type="text" id="to" placeholder="+39..." />
         <label data-i18n="msg_label">Message:</label>
         <textarea id="text" rows="2" placeholder="Scrivi qui..."></textarea>
-        <button id="sendBtn" data-i18n="send_btn">Instant reply draft (send via WhatsApp demo)</button>
-        <div class="micro" data-i18n="micro_ai">Powered by AI — invisible, fast.</div>
+        <button id="sendBtn" data-i18n="send_btn">Send via WhatsApp (Meta demo)</button>
         <p id="result" style="font-size:14px;color:#5b6475;margin-top:10px;"></p>
       </div>
     </section>
@@ -89,7 +87,6 @@
   </div>
 
   <script>
-    // --- Language dictionary (EN / IT)
     const dict = {
       en:{
         preview_dash:"Preview Dashboard",view_deck:"View Live Deck",view_pdf:"View Deck PDF",
@@ -97,26 +94,20 @@
         hero_sub:"Trusted by Italian agencies testing now. Time = Money. Let Kintra do the first reply.",
         try_demo:"Try a 10-second demo",demo_title:"Try a 10-second demo",
         demo_note:"Make sure the recipient first messages your Meta test number with “hello.” Then send any text below — Kintra will instantly reply.",
-        to_label:"Recipient phone (E.164):",msg_label:"Message:",
-        send_btn:"Instant reply draft (send via WhatsApp demo)",
-        micro_ai:"Powered by AI — invisible, fast.",
+        to_label:"Recipient phone (E.164):",msg_label:"Message:",send_btn:"Send via WhatsApp (Meta demo)",
         why_title:"Why this matters",
         why_copy:"Every minute an agent spends retyping “Hi, yes it’s available” is a minute lost to new leads. Kintra drafts instant WhatsApp replies so you focus on deals — not copy-pasting chats.",
-        footer:"Powered by Kintra AI — built for real estate teams."
-      },
+        footer:"Powered by Kintra AI — built for real estate teams."},
       it:{
         preview_dash:"Anteprima Dashboard",view_deck:"Visualizza Deck Live",view_pdf:"Apri Deck PDF",
         hero_title:"Costruisci funnel WhatsApp più veloci — senza assumere personale extra.",
         hero_sub:"Già testato da agenzie italiane. Tempo = Denaro. Lascia che Kintra risponda per primo.",
         try_demo:"Prova la demo di 10 secondi",demo_title:"Prova la demo di 10 secondi",
         demo_note:"Assicurati che il destinatario scriva prima “hello” al tuo numero di test Meta. Poi invia un testo qui sotto — Kintra risponderà subito.",
-        to_label:"Telefono destinatario (E.164):",msg_label:"Messaggio:",
-        send_btn:"Bozza di risposta istantanea (invio via WhatsApp demo)",
-        micro_ai:"Tecnologia AI — invisibile, veloce.",
+        to_label:"Telefono destinatario (E.164):",msg_label:"Messaggio:",send_btn:"Invia tramite WhatsApp (demo Meta)",
         why_title:"Perché è importante",
         why_copy:"Ogni minuto speso a riscrivere 'Sì, è disponibile' è un minuto perso per nuovi lead. Kintra crea risposte WhatsApp istantanee così puoi concentrarti sulle vendite.",
-        footer:"Tecnologia Kintra AI — creata per i team immobiliari."
-      }
+        footer:"Tecnologia Kintra AI — creata per i team immobiliari."}
     };
 
     function setLang(lang){
@@ -142,7 +133,6 @@
     document.getElementById('btn-it').addEventListener('click',()=>setLang('it'));
     initLang();
 
-    // --- WhatsApp demo call
     document.getElementById('sendBtn').addEventListener('click',async()=>{
       const to=document.getElementById('to').value.trim();
       const text=document.getElementById('text').value.trim();
@@ -154,10 +144,9 @@
           method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({to,text})
         });
-        const ct = res.headers.get('content-type')||'';
-        const data = ct.includes('application/json') ? await res.json() : {ok:false,error:await res.text()};
-        if(res.ok && data.ok){result.textContent='✅ Message sent! Check WhatsApp.';}
-        else{result.textContent='⚠️ Failed: '+(data.error||('HTTP '+res.status));}
+        const data=await res.json();
+        if(data.ok){result.textContent='✅ Message sent! Check WhatsApp.';}
+        else{result.textContent='⚠️ Failed: '+(data.error||'Unknown error');}
       }catch(e){result.textContent='Error: '+e.message;}
     });
   </script>
