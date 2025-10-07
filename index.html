@@ -7,13 +7,13 @@
 <link rel="icon" href="data:,">
 <style>
 :root{
-  --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
-  --fg:#f5f7fb; --muted:#a8b3c7; --accent:#0ea5e9; --accent2:#10b981;
-  --ink:#0b1220; --paper:#ffffff; --paper2:#f6f8fc;
+  --paper:#ffffff; --paper2:#f6f8fc;
+  --ink:#0b1220; --muted:#6c7a90;
+  --border:#e7ecf5; --accent:#0ea5e9; --accent2:#10b981;
+  --band:#f3f8ff; --bandInk:#0c2a43;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--paper);color:#0b1220;font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
 a{color:var(--accent);text-decoration:none}
 .wrap{max-width:1100px;margin:0 auto;padding:20px}
 
@@ -21,12 +21,13 @@ a{color:var(--accent);text-decoration:none}
 header{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand img{width:28px;height:28px}
+.badge{display:inline-block;border:1px solid #dfe6f3;border-radius:999px;padding:2px 8px;color:#476184;background:#fff;font-size:12px}
 .pills{display:flex;align-items:center;gap:8px}
 .pill{padding:6px 10px;border:1px solid #dbe2ef;border-radius:999px;color:#264362;cursor:pointer;background:#fff}
 .pill.active{border-color:var(--accent);background:rgba(14,165,233,.1);color:#0c2a43}
 
 /* Hero */
-.hero{margin:18px 0;border:1px solid #e7ecf5;background:#fff;border-radius:16px;padding:24px}
+.hero{margin:18px 0;border:1px solid var(--border);background:#fff;border-radius:16px;padding:24px}
 .kicker{display:inline-block;padding:4px 10px;border-radius:999px;background:#eff7ff;color:#0c2a43;border:1px solid #d7e9fb;font-weight:600;font-size:12px}
 h1{font-size:34px;line-height:1.2;margin:10px 0 8px}
 .lead{color:#4b607a;margin:0 0 14px}
@@ -34,18 +35,18 @@ h1{font-size:34px;line-height:1.2;margin:10px 0 8px}
 .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;transition:.15s transform ease;font-weight:600}
 .btn:hover{transform:translateY(-1px)}
 .btn.ghost{background:#fff;color:var(--accent);border:1px solid var(--accent)}
-.cta-sub{font-size:13px;color:#6c7a90}
+.cta-sub{font-size:13px;color:var(--muted)}
 
-/* Proof band */
-.band{margin:10px 0;border:1px dashed #dfe6f3;background:#f7fbff;border-radius:12px;padding:10px 12px;color:#294661}
+/* Micro-band */
+.band{margin:14px 0;border:1px dashed #dfe6f3;background:var(--band);border-radius:12px;padding:10px 12px;color:var(--bandInk)}
 .band b{color:#0a2943}
 
-/* Grid */
+/* Grid + cards */
 .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
 @media(max-width:980px){.grid{grid-template-columns:1fr}}
-.card{border:1px solid #e7ecf5;background:#fff;border-radius:14px;padding:16px}
+.card{border:1px solid var(--border);background:#fff;border-radius:14px;padding:16px}
 .card h3{margin:0 0 6px}
-.small{color:#6c7a90;font-size:13px;margin:6px 0}
+.small{color:var(--muted);font-size:13px;margin:6px 0}
 
 /* WhatsApp preview block */
 .preview{border:1px solid #e1e8f5;background:linear-gradient(180deg,#f9fbff,#f3f8ff);border-radius:12px;padding:12px}
@@ -58,16 +59,14 @@ input,textarea{width:100%;padding:10px 12px;border:1px solid #dfe6f3;border-radi
 textarea{min-height:90px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:700px){.row{grid-template-columns:1fr}}
-.help{font-size:12px;color:#6c7a90;margin-top:4px}
 
 /* Result box */
-.result{margin-top:10px;padding:10px 12px;border-radius:10px;background:#f6f8fc;border:1px solid #e5eaf5;color:#0b1220;white-space:pre-wrap}
+.result{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--paper2);border:1px solid #e5eaf5;color:var(--ink);white-space:pre-wrap}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#294661}
+hr.sep{border:0;border-top:1px solid var(--border);margin:14px 0}
 
 /* Footer */
-.foot{margin:18px 0 6px;color:#6c7a90;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
-.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:#294661}
-.badge{display:inline-block;border:1px solid #dfe6f3;border-radius:999px;padding:2px 8px;color:#476184;background:#fff;font-size:12px}
+.foot{margin:18px 0 6px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
@@ -102,7 +101,7 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
     </div>
     <div class="cta-sub" id="cta_hint">See the live preview, then start a 2–4 week pilot. No risk if it doesn’t save time.</div>
 
-    <div class="band" id="band_copy"><b>🔥 8 agencies in Italy testing now</b> • Next pilot wave opens <b>October 20</b>.</div>
+    <div class="band" id="band_hero"><b>🧭 Trusted by Italian agents building faster funnels.</b></div>
   </section>
 
   <!-- Value framing -->
@@ -111,9 +110,11 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
     <p class="small" id="vf_text">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</p>
   </section>
 
+  <div class="band" id="band_val"><b>⚡ Every minute saved here compounds by the hour.</b></div>
+
   <section class="grid">
 
-    <!-- Left column: WhatsApp preview + 10s demo -->
+    <!-- Left column -->
     <div class="card">
       <h3 id="wa_title">WhatsApp preview</h3>
       <p class="small" id="wa_text">Kintra drafts structured replies and action prompts so nothing slips.</p>
@@ -136,13 +137,9 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
         <span class="small mono" id="test_status"></span>
       </div>
       <div class="result" id="result">—</div>
-
-      <div class="small" style="margin-top:8px" id="t_quote">
-        “We plugged Kintra into WhatsApp and saw replies go from 2h → 10m.” — Sara B., Milano
-      </div>
     </div>
 
-    <!-- Right column: Pilot form + Meta WhatsApp demo -->
+    <!-- Right column -->
     <div class="card" id="pilotForm">
       <h3 id="pf_title">Start your 2–4 week pilot</h3>
       <p class="small" id="pf_text">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
@@ -157,6 +154,8 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
         <span class="small" id="pf_hint">No spam. Limited early access.</span>
       </div>
       <div class="result" id="pf_result">—</div>
+
+      <div class="band" id="band_form"><b>🧩 Built on Meta Cloud infrastructure.</b></div>
 
       <hr class="sep">
 
@@ -174,6 +173,8 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
     </div>
   </section>
 
+  <div class="band" id="band_outcomes"><b>💬 Real replies. Real appointments. Real growth.</b></div>
+
   <section class="card">
     <h3 id="proof_title">What you’ll see in the pilot</h3>
     <ul class="small" style="margin:6px 0 0 18px">
@@ -182,6 +183,8 @@ hr.sep{border:0;border-top:1px solid #e7ecf5;margin:14px 0}
       <li id="proof_3">A daily snapshot managers can trust.</li>
     </ul>
   </section>
+
+  <div class="band" id="band_global"><b>🌍 From Italy to the world — join the next wave.</b></div>
 
   <div class="foot">
     <span>© 2025 Kintra.</span>
@@ -203,27 +206,39 @@ const dict = {
     hero_title:'AI tools that help agents reply faster and book more viewings — inside WhatsApp.',
     hero_sub:'Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.',
     cta_primary:'Request Pilot Access', cta_hint:'See the live preview, then start a 2–4 week pilot. No risk if it doesn’t save time.',
-    band_copy:'🔥 8 agencies in Italy testing now • Next pilot wave opens October 20.',
+
     vf_title:'Why this matters (time → money)',
     vf_text:'If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.',
+
     wa_title:'WhatsApp preview', wa_text:'Kintra drafts structured replies and action prompts so nothing slips.',
     demo_title:'Try a 10-second demo',
     demo_text:'We normalize your text and suggest an Italian hint. In the pilot this becomes a real reply + next action.',
     demo_label_input:'Your text',
+
     pf_title:'Start your 2–4 week pilot',
     pf_text:'Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.',
     pf_name_label:'Name', pf_email_label:'Work email',
     pf_flow_label:'What’s your current workflow? (optional)',
     pf_submit:'→ Start My Pilot',
+
     wa_demo_title:'Send via WhatsApp (Meta demo)',
     wa_demo_text:'Uses Meta Cloud API (test number) to send a real message.',
-    wa_to_label:'Recipient phone (E.164)', wa_msg_label:'Message',
+    wa_to_label:'Recipient phone (E.164)',
+    wa_msg_label:'Message',
     wa_help:'Tip: The recipient must first send “hello” to the Meta test number.',
+
     proof_title:'What you’ll see in the pilot',
     proof_1:'Faster replies with suggested phrasing in Italian.',
     proof_2:'Nothing slips: summaries + next-steps across WhatsApp and web.',
     proof_3:'A daily snapshot managers can trust.',
-    t_quote:'“We plugged Kintra into WhatsApp and saw replies go from 2h → 10m.” — Sara B., Milano',
+
+    // Bands
+    band_hero:'🧭 Trusted by Italian agents building faster funnels.',
+    band_val:'⚡ Every minute saved here compounds by the hour.',
+    band_form:'🧩 Built on Meta Cloud infrastructure.',
+    band_outcomes:'💬 Real replies. Real appointments. Real growth.',
+    band_global:'🌍 From Italy to the world — join the next wave.',
+
     placeholders:{name:'Alex Rossi', email:'alex.rossi@agency.it', flow:'We handle inbound on WhatsApp + email, want faster replies…', q:'hello please', wa_to:'+39…', wa_msg:'Ciao 👋 from the Kintra pilot!'}
   },
   it: {
@@ -232,120 +247,118 @@ const dict = {
     hero_title:'Strumenti AI che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.',
     hero_sub:'Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, prepara le risposte e suggerisce le prossime azioni.',
     cta_primary:'Richiedi accesso al Pilot', cta_hint:'Guarda l’anteprima live, poi avvia un pilot di 2–4 settimane. Nessun rischio se non fa risparmiare tempo.',
-    band_copy:'🔥 8 agenzie in Italia stanno testando ora • Il prossimo ciclo apre il 20 ottobre.',
+
     vf_title:'Perché conta (tempo → denaro)',
     vf_text:'Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.',
+
     wa_title:'Anteprima WhatsApp', wa_text:'Kintra propone risposte strutturate e suggerimenti d’azione: non sfugge nulla.',
     demo_title:'Prova in 10 secondi',
     demo_text:'Normalizziamo il testo e suggeriamo un hint in italiano. Nel pilot diventa risposta reale + prossima azione.',
     demo_label_input:'Il tuo testo',
+
     pf_title:'Avvia il pilot da 2–4 settimane',
     pf_text:'Setup leggero. Valore rapido. Se funziona per te, continui; altrimenti interrompi — zero rischi.',
     pf_name_label:'Nome', pf_email_label:'Email di lavoro',
     pf_flow_label:'Qual è il tuo flusso attuale? (opzionale)',
     pf_submit:'→ Avvia il mio Pilot',
+
     wa_demo_title:'Invia via WhatsApp (demo Meta)',
     wa_demo_text:'Usa Meta Cloud API (numero di test) per inviare un messaggio reale.',
-    wa_to_label:'Telefono destinatario (E.164)', wa_msg_label:'Messaggio',
+    wa_to_label:'Telefono destinatario (E.164)',
+    wa_msg_label:'Messaggio',
     wa_help:'Suggerimento: il destinatario deve prima inviare “hello” al numero di test Meta.',
+
     proof_title:'Cosa vedrai nel pilot',
     proof_1:'Risposte più veloci con frasi suggerite in italiano.',
     proof_2:'Nulla sfugge: sintesi + prossime azioni su WhatsApp e web.',
     proof_3:'Un’istantanea quotidiana affidabile per i manager.',
-    t_quote:'“Abbiamo collegato Kintra a WhatsApp e le risposte sono passate da 2h → 10m.” — Sara B., Milano',
+
+    band_hero:'🧭 Scelto da agenti italiani che accelerano i funnel.',
+    band_val:'⚡ Ogni minuto risparmiato qui si moltiplica nelle ore.',
+    band_form:'🧩 Costruito su infrastruttura Meta Cloud.',
+    band_outcomes:'💬 Risposte vere. Appuntamenti veri. Crescita reale.',
+    band_global:'🌍 Dall’Italia al mondo — unisciti alla prossima ondata.',
+
     placeholders:{name:'Alex Rossi', email:'alex.rossi@agency.it', flow:'Gestiamo inbound su WhatsApp + email, vogliamo risposte più rapide…', q:'ciao per favore', wa_to:'+39…', wa_msg:'Ciao 👋 dal pilot Kintra!'}
   }
 };
 
+const $id = (id)=>document.getElementById(id);
 function applyLang(lang){
   localStorage.setItem('kintra_lang',lang);
   document.documentElement.lang = (lang==='it'?'it':'en');
   const t = dict[lang];
+
   const map = [
     ['badge_tenant','badge_tenant'],['hero_kicker','hero_kicker'],['hero_title','hero_title'],['hero_sub','hero_sub'],
-    ['cta_hint','cta_hint'],['band_copy','band_copy'],['vf_title','vf_title'],['vf_text','vf_text'],
-    ['wa_title','wa_title'],['wa_text','wa_text'],['demo_title','demo_title'],['demo_text','demo_text'],
-    ['demo_label_input','demo_label_input'],['pf_title','pf_title'],['pf_text','pf_text'],
-    ['pf_name_label','pf_name_label'],['pf_email_label','pf_email_label'],['pf_flow_label','pf_flow_label'],
-    ['wa_demo_title','wa_demo_title'],['wa_demo_text','wa_demo_text'],['wa_to_label','wa_to_label'],['wa_msg_label','wa_msg_label'],
-    ['wa_help','wa_help'],['proof_title','proof_title'],['proof_1','proof_1'],['proof_2','proof_2'],['proof_3','proof_3'],['t_quote','t_quote']
+    ['cta_hint','cta_hint'],
+    ['vf_title','vf_title'],['vf_text','vf_text'],
+    ['wa_title','wa_title'],['wa_text','wa_text'],['demo_title','demo_title'],['demo_text','demo_text'],['demo_label_input','demo_label_input'],
+    ['pf_title','pf_title'],['pf_text','pf_text'],['pf_name_label','pf_name_label'],['pf_email_label','pf_email_label'],['pf_flow_label','pf_flow_label'],
+    ['wa_demo_title','wa_demo_title'],['wa_demo_text','wa_demo_text'],['wa_to_label','wa_to_label'],['wa_msg_label','wa_msg_label'],['wa_help','wa_help'],
+    ['proof_title','proof_title'],['proof_1','proof_1'],['proof_2','proof_2'],['proof_3','proof_3'],
+    ['band_hero','band_hero'],['band_val','band_val'],['band_form','band_form'],['band_outcomes','band_outcomes'],['band_global','band_global']
   ];
-  map.forEach(([k,id])=>{ const el=$(id); if(el) el.textContent=t[k]; });
-  $('cta_primary').textContent = t.cta_primary;
-  $('pf_submit').textContent  = t.pf_submit;
+  map.forEach(([k,id])=>{ const el=$id(id); if(el) el.textContent=t[k]; });
 
-  // Placeholders
-  $('pf_name').placeholder = t.placeholders.name;
-  $('pf_email').placeholder= t.placeholders.email;
-  $('pf_flow').placeholder = t.placeholders.flow;
-  $('q').placeholder       = t.placeholders.q;
-  $('wa_to').placeholder   = t.placeholders.wa_to;
-  $('wa_msg').placeholder  = t.placeholders.wa_msg;
+  // buttons
+  $id('cta_primary').textContent = t.cta_primary;
+  $id('pf_submit').textContent  = t.pf_submit;
 
-  // Active pills
-  $('pillEN').classList.toggle('active',lang==='en');
-  $('pillIT').classList.toggle('active',lang==='it');
+  // placeholders
+  $id('pf_name').placeholder = t.placeholders.name;
+  $id('pf_email').placeholder= t.placeholders.email;
+  $id('pf_flow').placeholder = t.placeholders.flow;
+  $id('q').placeholder       = t.placeholders.q;
+  $id('wa_to').placeholder   = t.placeholders.wa_to;
+  $id('wa_msg').placeholder  = t.placeholders.wa_msg;
+
+  // active pills
+  $id('pillEN').classList.toggle('active',lang==='en');
+  $id('pillIT').classList.toggle('active',lang==='it');
 }
 const saved = localStorage.getItem('kintra_lang') || ((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en');
 applyLang(saved);
-$('pillEN').onclick=()=>applyLang('en');
-$('pillIT').onclick=()=>applyLang('it');
+$id('pillEN').onclick=()=>applyLang('en');
+$id('pillIT').onclick=()=>applyLang('it');
 
-/* ---- 10s Demo (prompt worker) ---- */
+/* 10s Demo */
 async function runDemo(){
-  const status = $('test_status'); const result = $('result');
-  const q = ($('q').value||'').trim() || (document.documentElement.lang==='it' ? 'ciao per favore' : 'hello please');
-  status.textContent = 'Running…';
-  result.textContent = '—';
+  const status = $id('test_status'); const result = $id('result');
+  const q = ($id('q').value||'').trim() || (document.documentElement.lang==='it' ? 'ciao per favore' : 'hello please');
+  status.textContent = 'Running…'; result.textContent = '—';
   try{
-    const res = await fetch(WORKER_PROMPT, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ text:q })
-    });
-    const text = await res.text();
-    let json; try{ json = JSON.parse(text);}catch(_){}
+    const res = await fetch(WORKER_PROMPT, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ text:q }) });
+    const text = await res.text(); let json; try{ json = JSON.parse(text);}catch(_){}
     if(!res.ok){ throw new Error((json && json.error) || text || ('HTTP '+res.status)); }
-    result.textContent = 'OK → received: ' + JSON.stringify(json);
-    status.textContent = 'Done';
-  }catch(e){
-    result.textContent = 'Error: ' + e.message;
-    status.textContent = 'Failed';
-  }
+    result.textContent = 'OK → received: ' + JSON.stringify(json); status.textContent = 'Done';
+  }catch(e){ result.textContent = 'Error: ' + e.message; status.textContent = 'Failed'; }
 }
-$('btnTest').onclick = runDemo;
+$id('btnTest').onclick = runDemo;
 
-/* ---- Pilot form (mock submit) ---- */
-$('pf_submit').onclick = (e)=>{
+/* Pilot mock submit */
+$id('pf_submit').onclick = (e)=>{
   e.preventDefault();
-  const name = $('pf_name').value.trim() || '(no name)';
-  const email= $('pf_email').value.trim() || '(no email)';
-  const flow = $('pf_flow').value.trim() || '(no notes)';
-  $('pf_result').textContent = `Thanks, ${name}. We’ll reach out within 24 hours.\n— email: ${email}\n— notes: ${flow}`;
-  // (Optional) send to a lightweight logging endpoint later.
+  const name = $id('pf_name').value.trim() || '(no name)';
+  const email= $id('pf_email').value.trim() || '(no email)';
+  const flow = $id('pf_flow').value.trim() || '(no notes)';
+  $id('pf_result').textContent = `Thanks, ${name}. We’ll reach out within 24 hours.\n— email: ${email}\n— notes: ${flow}`;
 };
 
-/* ---- WhatsApp Meta demo ---- */
+/* WhatsApp Meta demo */
 async function sendWA(){
-  const out = $('wa_result'); out.textContent='Sending…';
+  const out = $id('wa_result'); out.textContent='Sending…';
   try{
-    const to = $('wa_to').value.trim();
-    const text = $('wa_msg').value.trim() || (document.documentElement.lang==='it' ? 'Ciao 👋 dal pilot Kintra!' : 'Ciao 👋 from the Kintra pilot!');
+    const to = $id('wa_to').value.trim();
+    const text = $id('wa_msg').value.trim() || (document.documentElement.lang==='it' ? 'Ciao 👋 dal pilot Kintra!' : 'Ciao 👋 from the Kintra pilot!');
     if(!to) throw new Error('Missing phone (E.164).');
-    const res = await fetch(WORKER_WA, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({ to, text })
-    });
-    const raw = await res.text();
-    let json; try{ json = JSON.parse(raw);}catch(_){}
+    const res = await fetch(WORKER_WA, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ to, text }) });
+    const raw = await res.text(); let json; try{ json = JSON.parse(raw);}catch(_){}
     if(!res.ok){ throw new Error((json && (json.error||json.message)) || raw || ('HTTP '+res.status)); }
     out.textContent = 'OK → ' + JSON.stringify(json);
-  }catch(err){
-    out.textContent = 'Error: ' + err.message;
-  }
+  }catch(err){ out.textContent = 'Error: ' + err.message; }
 }
-$('wa_send').onclick = (e)=>{ e.preventDefault(); sendWA(); };
+$id('wa_send').onclick = (e)=>{ e.preventDefault(); sendWA(); };
 </script>
 </body>
 </html>
