@@ -27,7 +27,7 @@
 
   .center{display:grid;grid-template-rows:auto 1fr; border-right:1px solid var(--border); background:var(--panel)}
   .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
-  .search{flex:1;display:flex;gap:8px}
+  .search{flex:1;display:flex;gap:8px;align-items:center}
   .search input{flex:1;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:8px 10px;border-radius:10px;outline:none}
   .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
 
@@ -101,15 +101,11 @@
 
     <div class="main">
       <!-- Conversation list -->
-      <div class="list" id="convList">
-        <!-- Filled by JS -->
-      </div>
+      <div class="list" id="convList"></div>
 
       <!-- Chat pane -->
       <div class="chat">
-        <div class="msgs" id="msgs">
-          <!-- Filled by JS -->
-        </div>
+        <div class="msgs" id="msgs"></div>
         <div class="composer">
           <textarea id="composer" placeholder="Scrivi una risposta… (Shift+Enter per nuova riga)"></textarea>
           <button class="btn" id="sendBtn">Send</button>
@@ -142,9 +138,7 @@
 
     <div class="section">
       <h4>Suggested replies</h4>
-      <div class="replies" id="suggestions">
-        <!-- Filled by JS -->
-      </div>
+      <div class="replies" id="suggestions"></div>
     </div>
 
     <div class="section scroll">
@@ -165,7 +159,10 @@
 </div>
 
 <script>
-/** Mock data **/
+// ===== Config =====
+const API_BASE = 'https://kintra-api.founder-60b.workers.dev'.trim(); // your echo/mock worker
+
+/** Mock conversations (static for now) **/
 const conversations = [
   { id:'c1', name:'Giulia Bianchi', phone:'+39 333 123 4567', last:'Posso vedere l’appartamento oggi?', time:'09:11', unread:2,
     msgs:[
@@ -190,16 +187,16 @@ const conversations = [
   }
 ];
 
-const suggestionsFor = (conv) => ([
-  'Confermo visita alle 17:00. Le invio posizione e dettagli tra poco.',
-  'Disponibile anche domani alle 10:30 se preferisce.',
-  'Desidera ricevere la scheda dell’immobile in PDF?'
-]);
-
-/** Populate list **/
+// ===== UI wiring =====
 const listEl = document.getElementById('convList');
 const msgsEl = document.getElementById('msgs');
 const suggEl = document.getElementById('suggestions');
+const summaryEl = document.getElementById('summary');
+const nextEl = document.getElementById('next');
+const composer = document.getElementById('composer');
+const sendBtn = document.getElementById('sendBtn');
+const suggestBtn = document.getElementById('suggestBtn');
+
 let active = conversations[0];
 
 function renderList(){
@@ -234,26 +231,24 @@ function renderChat(){
 
 function renderSugg(){
   suggEl.innerHTML = '';
-  suggestionsFor(active).forEach(s=>{
+  const suggs = [
+    'Confermo visita alle 17:00. Le invio posizione e dettagli tra poco.',
+    'Disponibile anche domani alle 10:30 se preferisce.',
+    'Desidera ricevere la scheda dell’immobile in PDF?'
+  ];
+  suggs.forEach(s=>{
     const d=document.createElement('div');
     d.className='reply';
     d.textContent=s;
-    d.onclick = ()=>{
-      const ta = document.getElementById('composer');
-      ta.value = s;
-      ta.focus();
-    };
+    d.onclick = ()=>{ composer.value = s; composer.focus(); };
     suggEl.appendChild(d);
   });
 }
 
+// Initial render
 renderList(); renderChat(); renderSugg();
 
-/** Composer interactions (mock send) **/
-const sendBtn = document.getElementById('sendBtn');
-const suggestBtn = document.getElementById('suggestBtn');
-const composer = document.getElementById('composer');
-
+// Mock send (local only)
 sendBtn.onclick = ()=>{
   const txt = composer.value.trim();
   if(!txt) return;
@@ -261,13 +256,39 @@ sendBtn.onclick = ()=>{
   composer.value='';
   renderChat();
 };
-suggestBtn.onclick = ()=>{
-  const sug = suggestionsFor(active)[0];
-  composer.value = sug;
-  composer.focus();
+
+// ===== AI Suggest (live call to your echo worker) =====
+suggestBtn.onclick = async ()=>{
+  // Grab the last inbound message as context
+  const lastInbound = [...active.msgs].reverse().find(m=>m.dir==='in')?.text || 'Ciao, vorrei informazioni';
+  suggestBtn.disabled = true; suggestBtn.textContent = 'Thinking…';
+  try {
+    const res = await fetch(API_BASE + '/api/prompt', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ text: lastInbound })
+    });
+    const j = await res.json();
+    // j.result may be a mock; build a friendly suggestion:
+    const itHint = j?.result?.italian_hint || 'Possiamo fissare una visita oggi alle 17:00?';
+    const suggested = `Grazie per il messaggio! ${itHint} Le invio posizione e dettagli tra poco.`;
+    composer.value = suggested;
+
+    // Update right panel lightly
+    summaryEl.textContent = 'Richiesta cliente: ' + lastInbound;
+    nextEl.innerHTML = `
+      <li>Conferma disponibilità e orario.</li>
+      <li>Condividi posizione e dettagli dell’immobile.</li>
+      <li>Imposta promemoria follow-up entro 24h.</li>
+    `;
+  } catch(e){
+    composer.value = 'Proposta: Posso aiutarla con una visita oggi alle 17:00?';
+  } finally {
+    suggestBtn.disabled = false; suggestBtn.textContent = 'AI Suggest';
+  }
 };
 
-// Shortcut: send on Ctrl+Enter / Cmd+Enter
+// Shortcut: send on Ctrl/Cmd+Enter
 composer.addEventListener('keydown', (e)=>{
   if((e.ctrlKey||e.metaKey) && e.key==='Enter'){ sendBtn.click(); }
 });
