@@ -3,242 +3,369 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kintra — Turn Listings Into Premium Marketing, Fast</title>
-  <meta name="description" content="Kintra turns real-estate listings into premium marketing packs in minutes: brochure, social ads, WhatsApp share, and more. Pilot cohort now open." />
-  <meta property="og:title" content="Kintra — Turn Listings Into Premium Marketing, Fast" />
-  <meta property="og:description" content="Upload listings → get a full AI marketing pack. Built for agencies. Pilot cohort now open." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0ea5e9" />
-  <link rel="icon" href="/favicon.ico" />
-  
-  <!-- Tailwind CDN for rapid iteration. Swap to compiled CSS later for performance. -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Kintra — From listing to leads, faster.</title>
+  <meta name="description" content="Kintra helps real-estate teams reply faster on WhatsApp and web, with on-brand, ready-to-send messages and next actions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --fg:#0f172a;      /* slate-900 */
+      --muted:#475569;   /* slate-600 */
+      --brand:#2563eb;   /* blue-600 */
+      --brand-700:#1d4ed8;
+      --line:#e2e8f0;    /* slate-200 */
+      --card:#f8fafc;    /* slate-50 */
+      --good:#16a34a;
+      --warn:#f97316;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1080px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;gap:14px;padding:8px 0 20px}
+    header img.logo{width:28px;height:28px;object-fit:contain}
+    header .brand{font-weight:800;letter-spacing:.2px}
+    nav{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-block;border:1px solid var(--line);background:#fff;color:var(--fg);padding:8px 12px;border-radius:10px;font-weight:600;font-size:14px}
+    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    .btn.primary:hover{background:var(--brand-700)}
+    .btn.ghost{background:#fff}
+    .lang{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .lang button{border:0;background:#fff;padding:8px 10px;font-weight:600;cursor:pointer}
+    .lang button.active{background:var(--brand);color:#fff}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;padding:28px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    .h1{font-size:34px;line-height:1.15;font-weight:800;margin:6px 0 12px}
+    .sub{font-size:17px;color:var(--muted)}
+    .stack{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    @media (max-width:900px){.split{grid-template-columns:1fr}}
+    .label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    input,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit}
+    textarea{min-height:88px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:14px}
+    .ok{color:var(--good);font-weight:700}
+    .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+    .kpi{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+    .pill{border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-weight:600;font-size:13px;background:#fff}
+    .hint{font-size:13px;color:var(--muted)}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:13px}
+    .success{border-left:4px solid var(--good);padding-left:10px}
+    .warn{border-left:4px solid var(--warn);padding-left:10px}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#3730a3;border-radius:999px;padding:6px 10px;font-weight:700;font-size:12px}
+    .tight{margin-top:6px}
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
-  <!-- Top notice / Scarcity -->
-  <div class="bg-cyan-600 text-white text-sm">
-    <div class="max-w-6xl mx-auto px-4 py-2 text-center">
-      <strong>Pilot Cohort:</strong> 2 agency slots left · <a href="#cta" class="underline font-semibold">Book 15‑min intro</a>
+<body>
+  <div class="wrap">
+    <header>
+      <img class="logo" src="./img/logo.png.png" alt="Kintra logo" />
+      <div class="brand">Kintra</div>
+      <nav>
+        <a class="btn ghost" href="./dashboard.html" id="btnDash">Preview Dashboard</a>
+        <a class="btn ghost" href="./deck.html" id="btnDeck">View Live Deck</a>
+        <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" id="btnPDF">View Deck PDF</a>
+        <a class="btn primary" href="#pilot" id="btnCTA">Request Pilot Access</a>
+        <div class="lang">
+          <button id="enBtn" class="active">EN</button>
+          <button id="itBtn">IT</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div>
+        <div class="badge" id="heroBadge">8 agencies testing now</div>
+        <h1 class="h1" id="heroTitle">From listing to leads, faster.</h1>
+        <p class="sub" id="heroSub">
+          Kintra helps real-estate teams reply faster, keep conversations structured, and book more viewings — across WhatsApp and web.
+        </p>
+        <div class="kpi">
+          <span class="pill" id="kpi1">⏱️ 30+ min saved/rep daily</span>
+          <span class="pill" id="kpi2">🇮🇹 Native-tone replies</span>
+          <span class="pill" id="kpi3">✅ No thread slips</span>
+        </div>
+        <div class="stack">
+          <a class="btn primary" href="#pilot" id="ctaPrimary">Request Pilot Access</a>
+          <a class="btn" href="#demo" id="ctaDemo">Try a 10-second demo</a>
+        </div>
+        <p class="hint tight" id="heroWhy"><strong>Why this matters:</strong> time = money. Faster replies → more viewings booked.</p>
+      </div>
+
+      <!-- 10-SECOND DEMO -->
+      <div class="card" id="demo">
+        <div class="label" id="demoLabel">Try a 10-second demo</div>
+        <p class="hint" id="demoHint">
+          Type any message (IT/EN). Click <em>Run</em>, then <em>AI suggests reply</em> to see a ready-to-send draft. <span class="mono">No data stored.</span>
+        </p>
+        <textarea id="q" placeholder="e.g., Client asks if Friday 18:30 works for a viewing…"></textarea>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary" id="btnRun">Run</button>
+          <button class="btn" id="btnReply">AI suggests reply</button>
+          <button class="btn" id="btnSummary">Generate summary</button>
+        </div>
+        <div style="margin-top:14px">
+          <div class="label">Result</div>
+          <div id="result" class="mono card" style="background:#fff"></div>
+        </div>
+        <div style="margin-top:10px">
+          <div class="label">AI suggested reply</div>
+          <div id="replyOut" class="card success" style="background:#ecfdf5">—</div>
+        </div>
+        <div style="margin-top:10px">
+          <div class="label">Summary</div>
+          <div id="summaryOut" class="card">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUE BLOCKS -->
+    <section class="split" style="margin-top:28px">
+      <div class="card">
+        <div class="label" id="val1h">Faster responses</div>
+        <p id="val1p">On-brand replies in seconds — fewer delays, more viewings booked.</p>
+      </div>
+      <div class="card">
+        <div class="label" id="val2h">Nothing slips</div>
+        <p id="val2p">Each message can create a next step — follow-ups don’t get lost.</p>
+      </div>
+    </section>
+
+    <!-- WHATSAPP TEST (Meta test number) -->
+    <section class="card" style="margin-top:28px">
+      <div class="label" id="waLabel">Send via WhatsApp (Meta demo)</div>
+      <p class="hint" id="waHint">
+        Uses Meta Cloud API (test number). Make sure the recipient first sends <span class="mono">hello</span> to your Meta test number.
+      </p>
+      <div class="split">
+        <div>
+          <div class="label" id="waToLab">Recipient phone (E.164)</div>
+          <input id="waTo" placeholder="+39… or +351…" />
+        </div>
+        <div>
+          <div class="label" id="waMsgLab">Message</div>
+          <input id="waMsg" placeholder="e.g., Ciao! Va bene domani alle 18:30?" />
+        </div>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" id="btnWA">Send WhatsApp</button>
+        <span class="hint" id="waNote">E.164 = +countrycode + number (no spaces). Example: +390212345678.</span>
+      </div>
+      <div style="margin-top:12px">
+        <div class="label">Status</div>
+        <div id="waOut" class="card mono">—</div>
+      </div>
+    </section>
+
+    <!-- PILOT FORM -->
+    <section id="pilot" class="card" style="margin-top:28px">
+      <div class="label" id="pilotLab">Request Pilot Access</div>
+      <div class="split">
+        <div>
+          <div class="label" id="nameLab">Name</div>
+          <input id="name" placeholder="Alex Rossi" />
+        </div>
+        <div>
+          <div class="label" id="mailLab">Work email</div>
+          <input id="email" placeholder="alex.rossi@agency.it" />
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="label" id="flowLab">What’s your current workflow? (optional)</div>
+        <textarea id="flow" placeholder="Gestiamo gli inbound su WhatsApp + email, vogliamo risposte più rapide…"></textarea>
+      </div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" id="btnLead">Join Pilot Waitlist</button>
+        <a class="btn ghost" href="mailto:pilot@kintra.xyz" id="mailAlt">Or email us</a>
+      </div>
+      <p class="hint" id="noSpam">No spam. Limited early access.</p>
+      <div id="leadOut" class="card mono" style="margin-top:10px">—</div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="split" style="margin-top:28px">
+      <div class="card">
+        <p class="muted" id="t1">“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”<br><em>— Early partner (pilot)</em></p>
+      </div>
+      <div class="card">
+        <p class="muted" id="t2">“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”<br><em>— Agency lead (pilot)</em></p>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span id="copy">© 2025 Kintra. Pilot inquiries: pilot@kintra.xyz</span>
+      <span class="mono" id="status">Ready.</span>
     </div>
   </div>
-
-  <!-- Header -->
-  <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-    <a href="#" class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-xl bg-cyan-600"></div>
-      <span class="font-semibold">Kintra</span>
-    </a>
-    <nav class="hidden md:flex items-center gap-8 text-sm">
-      <a href="#how" class="hover:text-cyan-700">How it works</a>
-      <a href="#features" class="hover:text-cyan-700">Features</a>
-      <a href="#results" class="hover:text-cyan-700">Results</a>
-      <a href="#faq" class="hover:text-cyan-700">FAQ</a>
-      <a href="#cta" class="bg-slate-900 text-white px-4 py-2 rounded-xl hover:bg-slate-800">Book intro</a>
-    </nav>
-    <button aria-label="Open menu" class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl border border-slate-300" onclick="document.getElementById('mnav').classList.toggle('hidden')">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M3.75 5.25h16.5v1.5H3.75zm0 6h16.5v1.5H3.75zm0 6h16.5v1.5H3.75z"/></svg>
-    </button>
-  </header>
-  <div id="mnav" class="md:hidden hidden px-4">
-    <div class="flex flex-col gap-3 pb-4 text-sm">
-      <a href="#how" class="py-2 border-b">How it works</a>
-      <a href="#features" class="py-2 border-b">Features</a>
-      <a href="#results" class="py-2 border-b">Results</a>
-      <a href="#faq" class="py-2 border-b">FAQ</a>
-      <a href="#cta" class="py-2">Book intro</a>
-    </div>
-  </div>
-
-  <!-- Hero / Above the fold -->
-  <section class="max-w-6xl mx-auto px-4 pt-4 pb-12 grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <h1 class="text-3xl sm:text-5xl font-bold leading-tight">Turn listings into premium marketing — in minutes.</h1>
-      <p class="mt-4 text-lg text-slate-700">Upload property details → get a full AI marketing pack: brochure, social assets, WhatsApp share, and more. Built for agencies that want results, not prompts.</p>
-      <div class="mt-6 flex flex-col sm:flex-row gap-3">
-        <a id="cta" href="#booking" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-cyan-600 text-white font-semibold hover:bg-cyan-700">Book 15‑min intro</a>
-        <a href="#how" class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-slate-300 font-semibold">See how it works</a>
-      </div>
-      <div class="mt-6 flex items-center gap-6 text-xs text-slate-600">
-        <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span> Pilot ready</div>
-        <div>WhatsApp sharing</div>
-        <div>Ad-ready creatives</div>
-      </div>
-      <!-- Social proof logos (placeholders) -->
-      <div class="mt-8 opacity-75">
-        <p class="text-xs uppercase tracking-wider text-slate-500">Built with advisors from</p>
-        <div class="mt-3 grid grid-cols-3 sm:grid-cols-6 gap-4">
-          <div class="h-8 bg-slate-200 rounded"></div>
-          <div class="h-8 bg-slate-200 rounded"></div>
-          <div class="h-8 bg-slate-200 rounded"></div>
-          <div class="h-8 bg-slate-200 rounded"></div>
-          <div class="h-8 bg-slate-200 rounded"></div>
-          <div class="h-8 bg-slate-200 rounded"></div>
-        </div>
-      </div>
-    </div>
-    <!-- Product snapshot card -->
-    <div class="relative">
-      <div class="rounded-2xl border bg-white shadow-sm p-4">
-        <div class="aspect-video rounded-xl bg-slate-100 mb-4"></div>
-        <div class="grid grid-cols-3 gap-2">
-          <div class="h-16 bg-slate-100 rounded"></div>
-          <div class="h-16 bg-slate-100 rounded"></div>
-          <div class="h-16 bg-slate-100 rounded"></div>
-        </div>
-        <p class="mt-3 text-xs text-slate-500">Snapshot: brochure preview · social tiles · WhatsApp share card</p>
-      </div>
-      <div class="absolute -bottom-4 -right-4 bg-white shadow-lg rounded-xl p-3 text-xs">
-        <div class="font-semibold">Avg. setup time</div>
-        <div class="text-slate-600">Under 10 minutes</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section id="how" class="bg-white border-t border-b">
-    <div class="max-w-6xl mx-auto px-4 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold">How it works</h2>
-      <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border">
-          <div class="text-sm font-semibold text-cyan-700">1. Upload</div>
-          <p class="mt-2 text-slate-700">Drop your listing URL or PDF. We fetch photos, features, and copy.
-          </p>
-        </div>
-        <div class="p-6 rounded-2xl border">
-          <div class="text-sm font-semibold text-cyan-700">2. Generate</div>
-          <p class="mt-2 text-slate-700">Kintra composes a premium brochure, social tiles, and a WhatsApp-ready share card.</p>
-        </div>
-        <div class="p-6 rounded-2xl border">
-          <div class="text-sm font-semibold text-cyan-700">3. Publish</div>
-          <p class="mt-2 text-slate-700">Export, share, or request ad copy variants for Meta/Google in one click.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Feature grid -->
-  <section id="features" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl sm:text-3xl font-bold">Everything you need to market a listing</h2>
-    <div class="mt-8 grid md:grid-cols-3 gap-6">
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Brochure, beautifully</h3>
-        <p class="mt-2 text-sm text-slate-700">Auto-lays out images, features, and agent details into a polished PDF.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Social tiles</h3>
-        <p class="mt-2 text-sm text-slate-700">Square, portrait, and story formats exported at platform-perfect sizes.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">WhatsApp share</h3>
-        <p class="mt-2 text-sm text-slate-700">One-tap share with clean preview text and image. Drive inquiries faster.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Ad-ready copy</h3>
-        <p class="mt-2 text-sm text-slate-700">Variants for Meta & Google with character limits and callouts handled.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Brand control</h3>
-        <p class="mt-2 text-sm text-slate-700">Upload logos, colors, and templates to stay on-brand automatically.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Team workflow</h3>
-        <p class="mt-2 text-sm text-slate-700">Assign, review, and approve assets. Keep the pipeline moving.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Results / Proof -->
-  <section id="results" class="bg-white border-t border-b">
-    <div class="max-w-6xl mx-auto px-4 py-16">
-      <h2 class="text-2xl sm:text-3xl font-bold">Results you can show the boss</h2>
-      <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border bg-slate-50">
-          <div class="text-3xl font-bold">3×</div>
-          <p class="mt-2 text-sm text-slate-700">Faster time from listing to marketing pack.</p>
-        </div>
-        <div class="p-6 rounded-2xl border bg-slate-50">
-          <div class="text-3xl font-bold">-70%</div>
-          <p class="mt-2 text-sm text-slate-700">Less back-and-forth between sales & marketing.</p>
-        </div>
-        <div class="p-6 rounded-2xl border bg-slate-50">
-          <div class="text-3xl font-bold">+42%</div>
-          <p class="mt-2 text-sm text-slate-700">Uplift in social reach on new listings.</p>
-        </div>
-      </div>
-      <p class="mt-4 text-xs text-slate-500">Figures are pilot targets; we’ll replace with live case studies.</p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="booking" class="max-w-6xl mx-auto px-4 py-16">
-    <div class="p-8 rounded-2xl border bg-slate-900 text-white">
-      <h2 class="text-2xl sm:text-3xl font-bold">Join the pilot cohort</h2>
-      <p class="mt-2 text-slate-200">Limited to 2 agencies this month. We set you up and deliver your first pack within a week.</p>
-      <form class="mt-6 grid md:grid-cols-[1fr_1fr_auto] gap-3">
-        <input type="text" name="name" placeholder="Your name" class="w-full px-4 py-3 rounded-xl text-slate-900" />
-        <input type="email" name="email" placeholder="Work email" class="w-full px-4 py-3 rounded-xl text-slate-900" />
-        <button class="px-6 py-3 rounded-xl bg-cyan-600 font-semibold hover:bg-cyan-700">Request intro</button>
-      </form>
-      <p class="mt-3 text-xs">Prefer WhatsApp? <a href="#" class="underline">Tap here to message us</a>.</p>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl sm:text-3xl font-bold">FAQ</h2>
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Do we need to change our CRM or website?</h3>
-        <p class="mt-2 text-sm text-slate-700">No. Keep your stack. Kintra sits on top and exports assets wherever you need them.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Is this just prompts with a UI?</h3>
-        <p class="mt-2 text-sm text-slate-700">No. We ship opinionated templates, guardrails, and brand controls so outputs are reliable.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">What about languages?</h3>
-        <p class="mt-2 text-sm text-slate-700">We support multi-language copy. Start with Italian/English, expand as needed.</p>
-      </article>
-      <article class="p-6 rounded-2xl border">
-        <h3 class="font-semibold">Pricing?</h3>
-        <p class="mt-2 text-sm text-slate-700">Pilot pricing on intro call. Goal is ROI-positive from listing #1.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="border-t">
-    <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8 text-sm">
-      <div>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-cyan-600"></div>
-          <span class="font-semibold">Kintra</span>
-        </div>
-        <p class="mt-3 text-slate-600">The premium AI layer for real‑estate marketing.</p>
-      </div>
-      <div>
-        <div class="font-semibold mb-2">Product</div>
-        <ul class="space-y-2 text-slate-600">
-          <li><a href="#how" class="hover:text-cyan-700">How it works</a></li>
-          <li><a href="#features" class="hover:text-cyan-700">Features</a></li>
-          <li><a href="#results" class="hover:text-cyan-700">Results</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="font-semibold mb-2">Company</div>
-        <ul class="space-y-2 text-slate-600">
-          <li><a href="#booking" class="hover:text-cyan-700">Book intro</a></li>
-          <li><a href="#" class="hover:text-cyan-700">Privacy</a></li>
-          <li><a href="#" class="hover:text-cyan-700">Terms</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="text-center text-xs text-slate-500 pb-8">© <span id="year"></span> Kintra. All rights reserved.</div>
-  </footer>
 
   <script>
-    // Simple util
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // === CONFIG ===
+    const WORKER_PROMPT = 'https://kintra-api.founder-60b.workers.dev/api/prompt';
+    const WORKER_WA     = 'https://kintra-wa-meta.founder-60b.workers.dev/api/wa';
+
+    // === i18n minimal toggle ===
+    const state = { lang: 'en', lastDemo: null };
+    const $ = (id) => document.getElementById(id);
+
+    function setLang(lang){
+      state.lang = lang;
+      $('enBtn').classList.toggle('active', lang==='en');
+      $('itBtn').classList.toggle('active', lang==='it');
+
+      const tr = {
+        heroBadge: {en:'8 agencies testing now', it:'8 agenzie in test'},
+        heroTitle: {en:'From listing to leads, faster.', it:'Dall’annuncio ai contatti, più velocemente.'},
+        heroSub: {
+          en:'Kintra helps real-estate teams reply faster, keep conversations structured, and book more viewings — across WhatsApp and web.',
+          it:'Kintra aiuta i team immobiliari a rispondere più velocemente, strutturare le conversazioni e fissare più visite — su WhatsApp e web.'
+        },
+        kpi1:{en:'⏱️ 30+ min saved/rep daily', it:'⏱️ 30+ min risparmiati/agente al giorno'},
+        kpi2:{en:'🇮🇹 Native-tone replies', it:'🇮🇹 Risposte nel tono giusto'},
+        kpi3:{en:'✅ No thread slips', it:'✅ Nessun seguito perso'},
+        heroWhy:{en:'Why this matters: time = money. Faster replies → more viewings booked.',
+                 it:'Perché conta: tempo = denaro. Risposte più rapide → più visite fissate.'},
+        demoLabel:{en:'Try a 10-second demo', it:'Prova la demo in 10 secondi'},
+        demoHint:{
+          en:'Type any message (IT/EN). Click Run, then AI suggests reply to see a ready-to-send draft. No data stored.',
+          it:'Scrivi un messaggio (IT/EN). Clicca Esegui, poi AI suggerisce risposta per vedere una bozza pronta all’invio. Nessun dato salvato.'
+        },
+        val1h:{en:'Faster responses', it:'Risposte più rapide'},
+        val1p:{en:'On-brand replies in seconds — fewer delays, more viewings booked.',
+               it:'Risposte in pochi secondi — meno attese, più visite fissate.'},
+        val2h:{en:'Nothing slips', it:'Nulla sfugge'},
+        val2p:{en:'Each message can create a next step — follow-ups don’t get lost.',
+               it:'Ogni messaggio può creare il prossimo passo — i follow-up non si perdono.'},
+        waLabel:{en:'Send via WhatsApp (Meta demo)', it:'Invia via WhatsApp (demo Meta)'},
+        waHint:{en:'Uses Meta Cloud API (test number). Make sure the recipient first sends "hello" to your Meta test number.',
+                it:'Usa Meta Cloud API (numero di test). Assicurati che il destinatario invii prima "hello" al tuo numero di test Meta.'},
+        waToLab:{en:'Recipient phone (E.164)', it:'Numero destinatario (E.164)'},
+        waMsgLab:{en:'Message', it:'Messaggio'},
+        waNote:{en:'E.164 = +countrycode + number (no spaces). Example: +390212345678.',
+                it:'E.164 = +prefisso paese + numero (senza spazi). Esempio: +390212345678.'},
+        pilotLab:{en:'Request Pilot Access', it:'Richiedi l’accesso al pilot'},
+        nameLab:{en:'Name', it:'Nome'},
+        mailLab:{en:'Work email', it:'Email lavoro'},
+        flowLab:{en:'What’s your current workflow? (optional)', it:'Qual è il tuo flusso attuale? (opz.)'},
+        mailAlt:{en:'Or email us', it:'Oppure scrivici'},
+        noSpam:{en:'No spam. Limited early access.', it:'Niente spam. Accesso anticipato limitato.'},
+        t1:{en:'“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”\n— Early partner (pilot)',
+            it:'“Kintra ha fatto risparmiare davvero tempo agli agenti. Risposte più veloci e follow-up puntuali.”\n— Partner iniziale (pilot)'},
+        t2:{en:'“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”\n— Agency lead (pilot)',
+            it:'“Setup semplice. Collegati WhatsApp + web e valore già nella stessa settimana.”\n— Responsabile agenzia (pilot)'},
+        btnCTA:{en:'Request Pilot Access', it:'Richiedi accesso al pilot'},
+        ctaPrimary:{en:'Request Pilot Access', it:'Richiedi accesso al pilot'},
+        ctaDemo:{en:'Try a 10-second demo', it:'Prova la demo in 10 secondi'},
+        btnDash:{en:'Preview Dashboard', it:'Anteprima Dashboard'},
+        btnDeck:{en:'View Live Deck', it:'Vedi il Deck'},
+        btnPDF:{en:'View Deck PDF', it:'PDF del Deck'}
+      };
+      for (const id in tr){ if($(id)) $(id).innerText = tr[id][lang]; }
+
+      // placeholders
+      $('q').placeholder = (lang==='en')
+        ? 'e.g., Client asks if Friday 18:30 works for a viewing…'
+        : 'es.: Il cliente chiede se venerdì alle 18:30 va bene per una visita…';
+      $('waTo').placeholder = (lang==='en')? '+39… or +351…' : '+39… o +351…';
+      $('waMsg').placeholder = (lang==='en')
+        ? 'e.g., Ciao! Does 18:30 tomorrow work for you?'
+        : 'es.: Ciao! Va bene domani alle 18:30?';
+      $('flow').placeholder = (lang==='en')
+        ? 'We handle inbound on WhatsApp + email, want faster replies…'
+        : 'Gestiamo gli inbound su WhatsApp + email, vogliamo risposte più rapide…';
+    }
+
+    $('enBtn').onclick = ()=> setLang('en');
+    $('itBtn').onclick = ()=> setLang('it');
+    setLang('en');
+
+    // === DEMO ACTIONS ===
+    $('btnRun').onclick = async ()=>{
+      const txt = $('q').value.trim() || (state.lang==='en'
+        ? 'Client would like a viewing Friday around 18:30. Ask if 18:30 works.'
+        : 'Il cliente vorrebbe una visita venerdì verso le 18:30. Chiedi se va bene 18:30.');
+      $('result').textContent = 'Running…';
+      $('replyOut').textContent = '—';
+      $('summaryOut').textContent = '—';
+      try{
+        const res = await fetch(WORKER_PROMPT, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({ text: txt })
+        });
+        const json = await res.json();
+        state.lastDemo = json;
+        $('result').textContent = JSON.stringify(json, null, 2);
+      }catch(e){
+        $('result').textContent = 'Error: '+ e.message;
+      }
+    };
+
+    $('btnReply').onclick = ()=>{
+      const fallback = (state.lang==='en')
+        ? 'Ciao! Does 18:30 on Friday work for you? I can confirm the viewing.'
+        : 'Ciao! Va bene venerdì alle 18:30? Posso confermare la visita.';
+      if (!state.lastDemo){
+        $('replyOut').textContent = fallback + '  (Tip: click “Run” first for a tailored reply.)';
+        return;
+      }
+      // Prefer the worker’s italian_hint if present; otherwise format something clean.
+      const hint = state.lastDemo?.result?.italian_hint || state.lastDemo?.italian_hint || fallback;
+      $('replyOut').textContent = hint;
+    };
+
+    $('btnSummary').onclick = ()=>{
+      const text = $('q').value.trim();
+      if (!text){
+        $('summaryOut').textContent = (state.lang==='en')
+          ? 'No input yet. Type something above.'
+          : 'Nessun testo inserito. Scrivi qualcosa sopra.';
+        return;
+      }
+      // Very lightweight summary demo
+      const whenMatch = text.match(/\b(\d{1,2}[:\.]?\d{0,2})\b/i) || text.match(/\b(1?\d)(?:am|pm)\b/i);
+      const when = whenMatch ? whenMatch[0] : (state.lang==='en'?'a proposed time':'un orario proposto');
+      $('summaryOut').textContent = (state.lang==='en')
+        ? `Ask to confirm a viewing at ${when}; if accepted, send calendar slot and save thread.`
+        : `Chiedi di confermare una visita alle ${when}; se accetta, invia slot in agenda e salva la conversazione.`;
+    };
+
+    // === WHATSAPP SEND (Meta test number flow) ===
+    $('btnWA').onclick = async ()=>{
+      const to = $('waTo').value.trim();
+      const msg = $('waMsg').value.trim() || (state.lang==='en'
+        ? 'Ciao! Quick test from Kintra.'
+        : 'Ciao! Test rapido da Kintra.');
+      if (!to){ $('waOut').textContent = 'Enter recipient in E.164 (e.g., +390212345678).'; return; }
+      $('waOut').textContent = 'Sending…';
+      try{
+        const res = await fetch(WORKER_WA, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({ to, text: msg })
+        });
+        const text = await res.text();
+        $('waOut').textContent = text;
+      }catch(e){
+        $('waOut').textContent = 'Error: ' + e.message;
+      }
+    };
+
+    // === PILOT “LEAD” CAPTURE (simple echo to status; expand later) ===
+    $('btnLead').onclick = ()=>{
+      const name = $('name').value.trim();
+      const email = $('email').value.trim();
+      const flow = $('flow').value.trim();
+      const payload = { name, email, flow, ts:new Date().toISOString() };
+      $('leadOut').textContent = 'Thanks — we’ll be in touch within 24 hours.\n' + JSON.stringify(payload, null, 2);
+      $('status').textContent = 'Lead captured (local preview).';
+      // Later: POST to your Worker or a form backend.
+    };
   </script>
 </body>
 </html>
