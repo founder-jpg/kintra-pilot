@@ -497,5 +497,47 @@
     ov.addEventListener('click', () => closeModal());
     xBtn.addEventListener('click', () => closeModal());
   </script>
+
+<script>
+  // Use your live Worker base:
+  const WA_WORKER_BASE = 'https://kintra-wa-meta.founder-60b.workers.dev';
+
+  async function sendViaWhatsApp() {
+    const to = (document.getElementById('wa_to').value || '').trim();
+    const text = (document.getElementById('wa_text').value || '').trim();
+    const statusEl = document.getElementById('wa_status');
+    if (!to || !text) { statusEl.textContent = 'Please enter phone + message.'; return; }
+    statusEl.textContent = 'Sending…';
+    try {
+      const res = await fetch(WA_WORKER_BASE + '/api/wa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ to, text })
+      });
+      const json = await res.json();
+      statusEl.textContent = json.ok
+        ? `Sent ✓ (ID: ${json.id || 'n/a'})`
+        : `Error: ${json.error || 'Unknown'}`;
+    } catch (e) {
+      statusEl.textContent = 'Network error: ' + e.message;
+    }
+  }
+</script>
+
+
+  <div class="card" style="max-width:680px;margin:24px auto;padding:16px;border:1px solid #e7e7e7;border-radius:12px">
+  <h3 style="margin:0 0 8px">Send via WhatsApp (Meta demo)</h3>
+  <p style="margin:0 0 12px;color:#555">Uses Meta Cloud API (test number) to send a real message.</p>
+  <label>Recipient phone (E.164):</label>
+  <input id="wa_to" type="tel" placeholder="+3519XXXXXXXX" style="width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ddd;border-radius:8px">
+  <label>Message:</label>
+  <textarea id="wa_text" rows="3" placeholder="Ciao! Possiamo fissare una visita alle 17:00?" style="width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ddd;border-radius:8px"></textarea>
+  <button onclick="sendViaWhatsApp()" style="padding:10px 14px;border:0;border-radius:8px;background:#0ea5e9;color:#fff;cursor:pointer">
+    Send WhatsApp
+  </button>
+  <div id="wa_status" style="margin-top:10px;color:#444"></div>
+</div>
+
+  
 </body>
 </html>
