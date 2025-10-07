@@ -1,277 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Kintra — Pilot Deck</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    /* ---------- Base (web) ---------- */
-    html, body {
-      margin: 0; padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      height: 100%; width: 100%;
-      overflow: hidden;                  /* show one slide at a time */
-      color: #fff;
-      background: #0b1215;
-    }
-    .slide {
-      display: none;                     /* JS shows one at a time */
-      height: 100vh; width: 100vw;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-    .overlay {
-      background: rgba(0,0,0,0.6);       /* readability over photos */
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      padding: 40px;
-    }
-    .brand {
-      position: absolute; top: 20px; left: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .brand img { width: 100px; height: auto; display: block; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kintra — Pilot Deck</title>
+<meta name="description" content="Kintra pilot deck — problem, solution, plan, and CTA.">
+<link rel="icon" href="data:,">
+<style>
+  :root{
+    --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
+    --fg:#f5f7fb; --muted:#9aa3b5; --accent:#0ea5e9; --good:#10b981;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#0b1220;color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:22px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{width:28px;height:28px}
+  .lang{display:flex;gap:8px;align-items:center}
+  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer;user-select:none}
+  .pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
+  .kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
 
-    .stack { max-width: 900px; width: min(90vw, 900px); text-align: center; }
-    h1 { font-size: 3.2em; margin: 0.4em 0 0.2em; line-height: 1.1; }
-    h2 { font-size: 2em; margin: 0.2em 0 0.6em; color: #e5e7eb; }
-    p  { font-size: 1.25em; line-height: 1.5; margin: 0.35em 0; color: #e5e7eb; }
-
-    /* Pilot Plan: centered checklist column with ticks */
-    .checklist {
-      list-style: none;
-      margin: 18px auto 0;
-      padding: 0;
-      display: inline-block;             /* centers the column under heading */
-      text-align: left;                  /* items left for readability */
-    }
-    .checklist li {
-      margin: .5em 0; line-height: 1.5; font-size: 1.3em;
-      position: relative; padding-left: 1.6em;
-    }
-    .checklist li::before {
-      content: "✓";
-      position: absolute; left: 0; top: 0;
-      color: #A7F3D0; font-weight: 700;
-    }
-
-    .dots {
-      position: absolute; bottom: 20px; width: 100%;
-      text-align: center;
-    }
-    .dot {
-      height: 10px; width: 10px; margin: 0 5px;
-      background: #6b7280; border-radius: 50%;
-      display: inline-block; transition: all .2s ease;
-    }
-    .dot.active { background: #ffffff; width: 28px; border-radius: 999px; }
-
-    /* CTA buttons */
-    .cta-buttons {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 12px;
-    }
-    .cta-btn {
-      text-decoration: none; border-radius: 12px; padding: 12px 18px;
-      font-weight: 700; display: inline-block; transition: all .2s ease;
-    }
-    .primary-btn { background: #10B981; color: #06241F; }
-    .primary-btn:hover { background: #34D399; }
-    .secondary-btn { background: transparent; color: #10B981; border: 2px solid #10B981; }
-    .secondary-btn:hover { background: rgba(16,185,129,0.1); }
-
-    @media (max-width: 640px) {
-      h1 { font-size: 2.2em; }
-      h2 { font-size: 1.4em; }
-      p  { font-size: 1.05em; }
-      .brand img { width: 80px; }
-    }
-
-    /* ---------- Print (fallback if you use browser print) ---------- */
-    @page { size: A4 landscape; margin: 0; }
-    @media print {
-      html, body { height: auto; overflow: visible; background: #fff; color:#111; }
-      .slide {
-        display: block !important;
-        height: 190mm; width: 277mm;
-        page-break-after: always;
-        background-color: #000;
-      }
-      .overlay { background: rgba(0,0,0,0.5); color: #fff; }
-      .brand, .dots { display: none; }
-    }
-
-    /* ---------- One-click Download PDF button ---------- */
-    .download-btn {
-      position: fixed; right: 18px; bottom: 18px; z-index: 9999;
-      background:#10B981; color:#06241F; border:none; border-radius:12px;
-      padding:12px 16px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25);
-    }
-    @media print { .download-btn { display: none; } }
-  </style>
+  .deck{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#0f172a}
+  .slide{
+    min-height:540px;display:grid;align-items:center;grid-template-columns:1fr;
+    background-size:cover;background-position:center;padding:34px
+  }
+  .scrim{background:rgba(7,12,22,.55);backdrop-filter:saturate(120%) blur(1px);padding:26px;border-radius:14px;max-width:800px}
+  h1{font-size:34px;line-height:1.2;margin:0 0 8px}
+  h2{font-size:26px;margin:0 0 10px}
+  p.lead{color:#cfe4ff;margin:0 0 10px}
+  ul{margin:8px 0 0 18px}
+  li{margin:6px 0}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;margin-right:8px}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:10px;border-top:1px solid var(--border);background:#0f172a}
+  .nav .left, .nav .right{display:flex;gap:8px;align-items:center}
+  .nav .idx{color:#c7cfda}
+  .muted{color:var(--muted)}
+  @media (max-width:800px){ .slide{min-height:520px;padding:20px} h1{font-size:28px} h2{font-size:22px} }
+</style>
 </head>
 <body>
+<div class="wrap">
 
-  <!-- Slide 1 -->
-  <div class="slide" style="background-image:url('img/cover.jpg');">
-    <div class="overlay">
-      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
-      <div class="stack">
-        <h1>From listing to leads, faster.</h1>
-        <h2>AI-powered property marketing for real estate agencies</h2>
-        <p>Plug into WhatsApp & web — structure, translate, and reply in seconds.<br>Faster responses → more booked viewings.</p>
-      </div>
+  <header>
+    <div class="brand">
+      <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'">
+      <b>Kintra</b>
     </div>
-    <div class="dots"></div>
-  </div>
-
-  <!-- Slide 2 (no red flag) -->
-  <div class="slide" style="background-image:url('img/problem.jpg');">
-    <div class="overlay">
-      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
-      <div class="stack">
-        <h1>The Problem</h1>
-        <p>Agents juggle WhatsApp, email, and scattered notes.</p>
-        <p>Conversations slip. Follow-ups get missed. Deals fall through.</p>
-      </div>
+    <div class="lang">
+      <span class="kbadge" id="badge">Pilot • IT + WhatsApp</span>
+      <div class="pill" id="langEN">EN</div>
+      <div class="pill" id="langIT">IT</div>
     </div>
-    <div class="dots"></div>
-  </div>
+  </header>
 
-  <!-- Slide 3 (keep 💡) -->
-  <div class="slide" style="background-image:url('img/solution.jpg');">
-    <div class="overlay">
-      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
-      <div class="stack">
-        <h1>💡 The Solution</h1>
-        <p>Kintra captures every client interaction, summarizes instantly,<br>and generates smart next-steps.</p>
-        <p>Nothing missed. Every lead nurtured.</p>
+  <div class="deck" id="deck">
+
+    <!-- Slide 1 — Cover -->
+    <section class="slide" id="s1" style="background-image:url('./img/cover.jpg')">
+      <div class="scrim">
+        <h1 id="s1_h1">From listing to leads, faster.</h1>
+        <p class="lead" id="s1_p">Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.</p>
+        <a class="btn" href="./index.html" id="s1_btn1">Open live site</a>
+        <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" rel="noopener" id="s1_btn2">Download PDF</a>
       </div>
-    </div>
-    <div class="dots"></div>
-  </div>
+    </section>
 
-  <!-- Slide 4 (centered heading + centered checklist column) -->
-  <div class="slide" style="background-image:url('img/solution.jpg');">
-    <div class="overlay">
-      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
-      <div class="stack">
-        <h1>Pilot Plan</h1>
-        <ul class="checklist">
-          <li>2–4 week pilot tailored to your workflow</li>
-          <li>Test with 3–5 live client interactions</li>
-          <li>Auto-summaries + smart prompts</li>
-          <li>Success = 30+ minutes saved per rep daily</li>
+    <!-- Slide 2 — Problem -->
+    <section class="slide" id="s2" style="background-image:url('./img/problem.jpg')">
+      <div class="scrim">
+        <h2 id="s2_h2">The Problem</h2>
+        <p class="lead" id="s2_p">
+          Agents lose hours juggling WhatsApp, email and notes. Follow-ups slip; bookings are missed.
+        </p>
+        <ul id="s2_list">
+          <li>Conversations scattered across channels</li>
+          <li>No quick structure or translation</li>
+          <li>Noisy threads → lost opportunities</li>
         </ul>
       </div>
-    </div>
-    <div class="dots"></div>
-  </div>
+    </section>
 
-  <!-- Slide 5 (CTA with two buttons) -->
-  <div class="slide" style="background-image:url('img/cta.jpg');">
-    <div class="overlay">
-      <div class="brand"><img src="img/logo.png.png" alt="Kintra logo" /></div>
-      <div class="stack">
-        <h1>Ready for a Pilot?</h1>
-        <p>Email us: <b>pilot@kintra.xyz</b></p>
-        <div class="cta-buttons">
-          <a href="mailto:pilot@kintra.xyz" class="cta-btn primary-btn">Start Pilot</a>
-          <a href="deck/Kintra_PilotDeck_v1.pdf" target="_blank" class="cta-btn secondary-btn">View Deck PDF</a>
-        </div>
+    <!-- Slide 3 — Solution -->
+    <section class="slide" id="s3" style="background-image:url('./img/solution.jpg')">
+      <div class="scrim">
+        <h2 id="s3_h2">The Solution</h2>
+        <p class="lead" id="s3_p">
+          An assistant that lives where Italy already works — WhatsApp + Web — and turns messages into next steps.
+        </p>
+        <ul id="s3_list">
+          <li>Smart summaries & suggested replies</li>
+          <li>Auto-detect & translate (IT/EN)</li>
+          <li>Nothing slips: reminders & follow-ups</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 4 — Pilot Plan -->
+    <section class="slide" id="s4" style="background-image:url('./img/cta.jpg')">
+      <div class="scrim">
+        <h2 id="s4_h2">Pilot Plan (2–4 weeks)</h2>
+        <ul id="s4_list">
+          <li>Connect 1 channel (WhatsApp/Web)</li>
+          <li>Run with 3–5 real client interactions</li>
+          <li>Measure minutes saved & bookings</li>
+          <li>Decision: extend or contract</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Slide 5 — CTA -->
+    <section class="slide" id="s5" style="background-image:url('./img/cover.jpg')">
+      <div class="scrim">
+        <h2 id="s5_h2">Ready for a pilot?</h2>
+        <p class="lead" id="s5_p">Lightweight setup. Built for Italy. Results in days, not months.</p>
+        <a class="btn" href="./index.html#pilot" id="s5_btn1">Request Pilot Access</a>
+        <a class="btn ghost" href="mailto:pilot@kintra.xyz" id="s5_btn2">Email pilot@kintra.xyz</a>
+      </div>
+    </section>
+
+    <!-- Nav -->
+    <div class="nav">
+      <div class="left">
+        <button class="btn ghost" id="prevBtn">◀ Prev</button>
+        <span class="idx" id="idx">1 / 5</span>
+      </div>
+      <div class="right">
+        <a class="btn" href="./index.html">Live site</a>
+        <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" rel="noopener">PDF</a>
       </div>
     </div>
-    <div class="dots"></div>
+
   </div>
 
-  <!-- ONE-SLIDE WEB NAV -->
-  <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const total = slides.length;
+  <p class="muted" style="margin-top:10px">
+    Tip: Use ← → keys to navigate.
+  </p>
 
-    function renderDots(n) {
-      document.querySelectorAll('.dots').forEach(dotBox => {
-        dotBox.innerHTML = '';
-        for (let j = 0; j < total; j++) {
-          dotBox.innerHTML += `<span class="dot ${j === n ? 'active' : ''}"></span>`;
-        }
-      });
+</div>
+
+<script>
+  // ================== i18n ==================
+  const dict = {
+    en: {
+      badge:'Pilot • IT + WhatsApp',
+
+      s1_h1:'From listing to leads, faster.',
+      s1_p:'Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.',
+      s1_btn1:'Open live site',
+      s1_btn2:'Download PDF',
+
+      s2_h2:'The Problem',
+      s2_p:'Agents lose hours juggling WhatsApp, email and notes. Follow-ups slip; bookings are missed.',
+      s2_list:[
+        'Conversations scattered across channels',
+        'No quick structure or translation',
+        'Noisy threads → lost opportunities'
+      ],
+
+      s3_h2:'The Solution',
+      s3_p:'An assistant that lives where Italy already works — WhatsApp + Web — and turns messages into next steps.',
+      s3_list:[
+        'Smart summaries & suggested replies',
+        'Auto-detect & translate (IT/EN)',
+        'Nothing slips: reminders & follow-ups'
+      ],
+
+      s4_h2:'Pilot Plan (2–4 weeks)',
+      s4_list:[
+        'Connect 1 channel (WhatsApp/Web)',
+        'Run with 3–5 real client interactions',
+        'Measure minutes saved & bookings',
+        'Decision: extend or contract'
+      ],
+
+      s5_h2:'Ready for a pilot?',
+      s5_p:'Lightweight setup. Built for Italy. Results in days, not months.',
+      s5_btn1:'Request Pilot Access',
+      s5_btn2:'Email pilot@kintra.xyz'
+    },
+    it: {
+      badge:'Pilot • IT + WhatsApp',
+
+      s1_h1:'Dall’annuncio ai contatti, più velocemente.',
+      s1_p:'Kintra aiuta i team immobiliari a rispondere più in fretta, strutturare le conversazioni e fissare più visite — su WhatsApp e web.',
+      s1_btn1:'Apri il sito live',
+      s1_btn2:'Scarica PDF',
+
+      s2_h2:'Il Problema',
+      s2_p:'Gli agenti perdono ore tra WhatsApp, email e note. I follow-up saltano; le prenotazioni si perdono.',
+      s2_list:[
+        'Conversazioni sparse tra i canali',
+        'Nessuna struttura o traduzione rapida',
+        'Thread rumorosi → opportunità perse'
+      ],
+
+      s3_h2:'La Soluzione',
+      s3_p:'Un assistente che vive dove lavora già l’Italia — WhatsApp + Web — e trasforma i messaggi in prossimi passi.',
+      s3_list:[
+        'Riepiloghi smart e risposte suggerite',
+        'Rilevamento automatico & traduzione (IT/EN)',
+        'Nulla sfugge: promemoria e follow-up'
+      ],
+
+      s4_h2:'Piano Pilot (2–4 settimane)',
+      s4_list:[
+        'Collega 1 canale (WhatsApp/Web)',
+        'Esegui con 3–5 interazioni reali',
+        'Misura minuti risparmiati & prenotazioni',
+        'Decisione: estendere o contratto'
+      ],
+
+      s5_h2:'Pronti per un pilot?',
+      s5_p:'Setup leggero. Creato per l’Italia. Risultati in giorni, non mesi.',
+      s5_btn1:'Richiedi accesso al Pilot',
+      s5_btn2:'Email a pilot@kintra.xyz'
     }
-    function showSlide(n) {
-      slides.forEach((s, i) => s.style.display = i === n ? 'block' : 'none');
-      renderDots(n);
-    }
-    function nextSlide() { slideIndex = (slideIndex + 1) % total; showSlide(slideIndex); }
-    function prevSlide() { slideIndex = (slideIndex - 1 + total) % total; showSlide(slideIndex); }
+  };
 
-    document.addEventListener('keydown', e => {
-      if (['ArrowRight','PageDown',' '].includes(e.key)) nextSlide();
-      if (['ArrowLeft','PageUp'].includes(e.key)) prevSlide();
-      if (e.key === 'Home') { slideIndex = 0; showSlide(slideIndex); }
-      if (e.key === 'End')  { slideIndex = total - 1; showSlide(slideIndex); }
-    });
-    document.addEventListener('click', e => {
-      const clickable = e.target.closest('a,button,input,textarea');
-      if (!clickable) nextSlide();
-    }, { passive: true });
+  const $ = id => document.getElementById(id);
+  const els = {
+    badge:$('badge'),
+    // slides
+    s1_h1:$('s1_h1'), s1_p:$('s1_p'), s1_btn1:$('s1_btn1'), s1_btn2:$('s1_btn2'),
+    s2_h2:$('s2_h2'), s2_p:$('s2_p'), s2_list:$('s2_list'),
+    s3_h2:$('s3_h2'), s3_p:$('s3_p'), s3_list:$('s3_list'),
+    s4_h2:$('s4_h2'), s4_list:$('s4_list'),
+    s5_h2:$('s5_h2'), s5_p:$('s5_p'), s5_btn1:$('s5_btn1'), s5_btn2:$('s5_btn2'),
+    langEN:$('langEN'), langIT:$('langIT'), idx:$('idx')
+  };
 
-    // Init
-    showSlide(slideIndex);
-  </script>
+  function setLang(lang){
+    const d = dict[lang] || dict.en;
+    els.badge.textContent = d.badge;
 
-  <!-- PDF libs (end to avoid layout flicker) -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    els.s1_h1.textContent = d.s1_h1;
+    els.s1_p.textContent  = d.s1_p;
+    els.s1_btn1.textContent = d.s1_btn1;
+    els.s1_btn2.textContent = d.s1_btn2;
 
-  <!-- One-click Download PDF (A4 landscape, scaled & centered) -->
-  <button class="download-btn" id="dlpdf">Download PDF</button>
-  <script>
-    document.getElementById('dlpdf').addEventListener('click', async () => {
-      const { jsPDF } = window.jspdf;
+    els.s2_h2.textContent = d.s2_h2;
+    els.s2_p.textContent  = d.s2_p;
+    setList(els.s2_list, d.s2_list);
 
-      // True A4 landscape in points (72 pt/inch)
-      const PAGE_W = 842;
-      const PAGE_H = 595;
+    els.s3_h2.textContent = d.s3_h2;
+    els.s3_p.textContent  = d.s3_p;
+    setList(els.s3_list, d.s3_list);
 
-      const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [PAGE_W, PAGE_H] });
-      const slides = [...document.querySelectorAll('.slide')];
+    els.s4_h2.textContent = d.s4_h2;
+    setList(els.s4_list, d.s4_list);
 
-      // Show all slides for capture
-      const prevOverflow = document.documentElement.style.overflow;
-      document.documentElement.style.overflow = 'auto';
-      slides.forEach(s => s.style.display = 'block');
+    els.s5_h2.textContent = d.s5_h2;
+    els.s5_p.textContent  = d.s5_p;
+    els.s5_btn1.textContent = d.s5_btn1;
+    els.s5_btn2.textContent = d.s5_btn2;
 
-      // Ensure backgrounds are ready
-      await new Promise(r => setTimeout(r, 300));
+    els.langEN.classList.toggle('active', lang==='en');
+    els.langIT.classList.toggle('active', lang==='it');
 
-      for (let i = 0; i < slides.length; i++) {
-        const node = slides[i];
-        const canvas = await html2canvas(node, { scale: 2, useCORS: true, backgroundColor: null });
-        const imgW = canvas.width;
-        const imgH = canvas.height;
+    localStorage.setItem('kintra_lang', lang);
+    document.documentElement.lang = (lang==='it'?'it':'en');
+  }
 
-        // Fit image onto A4 landscape while preserving aspect
-        const scale = Math.min(PAGE_W / imgW, PAGE_H / imgH);
-        const drawW = imgW * scale;
-        const drawH = imgH * scale;
-        const offsetX = (PAGE_W - drawW) / 2;
-        const offsetY = (PAGE_H - drawH) / 2;
+  function setList(ul, items){
+    ul.innerHTML = '';
+    items.forEach(t=>{ const li=document.createElement('li'); li.textContent=t; ul.appendChild(li); });
+  }
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+  const saved = localStorage.getItem('kintra_lang');
+  const browserPref = (navigator.language||'en').toLowerCase().startsWith('it') ? 'it' : 'en';
+  setLang(saved || browserPref || 'en');
+  $('langEN').onclick = ()=>setLang('en');
+  $('langIT').onclick = ()=>setLang('it');
 
-        if (i > 0) pdf.addPage([PAGE_W, PAGE_H], 'landscape');
-        pdf.addImage(imgData, 'JPEG', offsetX, offsetY, drawW, drawH);
-      }
-
-      // Restore single-slide view
-      slides.forEach((s, idx) => s.style.display = (idx === 0 ? 'block' : 'none'));
-      document.documentElement.style.overflow = prevOverflow || 'hidden';
-
-      pdf.save('Kintra_PilotDeck_v1.pdf');
-    });
-  </script>
+  // ============== navigation ==============
+  const slides = ['s1','s2','s3','s4','s5'].map(id=>document.getElementById(id));
+  let cur = 0;
+  function show(i){
+    cur = (i+slides.length)%slides.length;
+    slides.forEach((el,idx)=> el.style.display = (idx===cur?'grid':'none'));
+    els.idx.textContent = (cur+1)+' / '+slides.length;
+  }
+  show(0);
+  document.getElementById('prevBtn').onclick = ()=>show(cur-1);
+  // make the right side of nav a next button via key
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') show(cur+1);
+    if (e.key === 'ArrowLeft')  show(cur-1);
+  });
+</script>
 </body>
 </html>
