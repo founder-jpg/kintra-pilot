@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kintra — Dashboard (Mock)</title>
+<meta name="description" content="Kintra command dashboard mock: conversations, AI insights, and suggested replies.">
+<link rel="icon" href="data:,">
+<style>
+  :root{
+    --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
+    --fg:#f5f7fb; --muted:#9aa3b5; --accent:#0ea5e9; --good:#10b981; --warn:#f59e0b; --bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%, #16315b 0%, #0b1220 55%);color:var(--fg);
+       font:14.5px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  a{color:var(--accent);text-decoration:none}
+  .app{display:grid;grid-template-columns:240px 1fr 360px;min-height:100vh}
+  .side{background:var(--panel);border-right:1px solid var(--border);padding:16px}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .brand img{width:28px;height:28px}
+  .brand strong{letter-spacing:.2px}
+  .nav a{display:block;padding:10px 12px;border-radius:10px;color:var(--fg)}
+  .nav a:hover{background:#0e1a30}
+  .nav .active{background:#0e1f36;border:1px solid var(--border)}
+  .badge{font-size:12px;color:#d1eaff;background:#0a2238;border:1px solid #10375a;border-radius:999px;padding:2px 8px}
+
+  .center{display:grid;grid-template-rows:auto 1fr; border-right:1px solid var(--border); background:var(--panel)}
+  .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
+  .search{flex:1;display:flex;gap:8px}
+  .search input{flex:1;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:8px 10px;border-radius:10px;outline:none}
+  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+
+  .main{display:grid;grid-template-columns:320px 1fr;min-height:0}
+  .list{border-right:1px solid var(--border);overflow:auto}
+  .conv{padding:12px 14px;border-bottom:1px solid #162238;cursor:pointer}
+  .conv:hover{background:#0e1a2d}
+  .conv.active{background:#0e1f36}
+  .conv .who{display:flex;align-items:center;justify-content:space-between}
+  .conv .who b{font-weight:700}
+  .conv small{color:var(--muted)}
+  .conv .snip{color:#c7cfda;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .chat{display:grid;grid-template-rows:1fr auto;min-height:0}
+  .msgs{padding:16px;overflow:auto}
+  .msg{max-width:70%;padding:10px 12px;border-radius:12px;margin:6px 0}
+  .in {background:#0b5;color:#fff;border-top-left-radius:4px}
+  .out{background:#111827;color:#e5e7eb;border-top-right-radius:4px;margin-left:auto}
+  .meta{color:#8aa0bf;font-size:12px;margin:2px 0 10px}
+  .composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:#0e1729}
+  .composer textarea{flex:1;resize:none;min-height:44px;max-height:120px;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:10px;border-radius:10px}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
+
+  .right{background:var(--panel);display:grid;grid-template-rows:auto auto 1fr;border-left:1px solid var(--border)}
+  .section{padding:14px 16px;border-bottom:1px solid var(--border)}
+  .section h4{margin:0 0 8px;font-size:15px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px}
+  .kpi{display:flex;gap:8px;align-items:center;color:var(--muted)}
+  .kpi strong{color:#e7eefb}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--border);padding:6px 8px;border-radius:999px;color:#c7cfda}
+  .replies{display:grid;gap:8px}
+  .reply{background:#0e1729;border:1px solid #2a3a57;color:#e5e7eb;border-radius:10px;padding:10px;cursor:pointer}
+  .reply:hover{background:#102036}
+  .scroll{overflow:auto}
+  @media (max-width:1200px){ .app{grid-template-columns:200px 1fr} .right{display:none} }
+  @media (max-width:900px){ .app{grid-template-columns:1fr} .side{display:none} }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="side">
+    <div class="brand">
+      <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'">
+      <strong>Kintra</strong>
+    </div>
+    <div class="nav">
+      <a class="active" href="#">Conversations <span class="badge">12</span></a>
+      <a href="#">Leads</a>
+      <a href="#">Calendar</a>
+      <a href="#">Templates</a>
+      <a href="#">Analytics</a>
+      <a href="#">Settings</a>
+    </div>
+  </aside>
+
+  <!-- Center (search + list + chat) -->
+  <section class="center">
+    <div class="topbar">
+      <div class="search">
+        <input id="search" placeholder="Search: name, phone, message…">
+        <div class="pill">IT auto-detect</div>
+        <div class="pill">WhatsApp • Web</div>
+      </div>
+      <a class="pill" href="./index.html">← Back to site</a>
+    </div>
+
+    <div class="main">
+      <!-- Conversation list -->
+      <div class="list" id="convList">
+        <!-- Filled by JS -->
+      </div>
+
+      <!-- Chat pane -->
+      <div class="chat">
+        <div class="msgs" id="msgs">
+          <!-- Filled by JS -->
+        </div>
+        <div class="composer">
+          <textarea id="composer" placeholder="Scrivi una risposta… (Shift+Enter per nuova riga)"></textarea>
+          <button class="btn" id="sendBtn">Send</button>
+          <button class="btn ghost" id="suggestBtn">AI Suggest</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Right (AI insights) -->
+  <aside class="right">
+    <div class="section">
+      <h4>AI Insights</h4>
+      <div class="card" id="insights">
+        <div class="kpi"><span style="width:8px;height:8px;background:var(--good);border-radius:50%;display:inline-block"></span>
+          &nbsp;<strong>Lead status:</strong>&nbsp; Warm • wants 17:00 viewing
+        </div>
+        <div style="height:8px"></div>
+        <div><strong>Summary</strong></div>
+        <div class="muted" id="summary">Cliente chiede disponibilità per visita. Preferenza: oggi 17:00. Confermare indirizzo e contatto.</div>
+        <div style="height:8px"></div>
+        <div><strong>Next steps</strong></div>
+        <ul class="muted" id="next">
+          <li>Conferma orario 17:00 e indirizzo.</li>
+          <li>Invia PDF scheda immobile.</li>
+          <li>Aggiungi promemoria follow-up per domani 10:00.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Suggested replies</h4>
+      <div class="replies" id="suggestions">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <div class="section scroll">
+      <h4>Lead details</h4>
+      <div class="card">
+        <div class="chips">
+          <span class="chip">#IT</span>
+          <span class="chip">WhatsApp</span>
+          <span class="chip">New lead</span>
+          <span class="chip">Milano</span>
+        </div>
+        <div style="height:10px"></div>
+        <div class="muted">Source: WhatsApp • Added: today 09:12</div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+/** Mock data **/
+const conversations = [
+  { id:'c1', name:'Giulia Bianchi', phone:'+39 333 123 4567', last:'Posso vedere l’appartamento oggi?', time:'09:11', unread:2,
+    msgs:[
+      {dir:'in',  text:'Buongiorno, l’appartamento in Via Torino è ancora disponibile?', ts:'09:05'},
+      {dir:'out', text:'Buongiorno Giulia! Sì, disponibile. Quando preferisce visitarlo?', ts:'09:07'},
+      {dir:'in',  text:'Oggi alle 17:00 è possibile?', ts:'09:11'}
+    ]
+  },
+  { id:'c2', name:'Marco Rossi', phone:'+39 320 987 2222', last:'Grazie, a domani', time:'08:58', unread:0,
+    msgs:[
+      {dir:'in',  text:'Serve posto auto in zona?', ts:'08:40'},
+      {dir:'out', text:'C’è parcheggio in strada; box opzionale a 120€/mese.', ts:'08:45'},
+      {dir:'in',  text:'Perfetto. Grazie, a domani', ts:'08:58'}
+    ]
+  },
+  { id:'c3', name:'Elena Conti', phone:'+39 345 765 9090', last:'Ok, invio documenti', time:'08:21', unread:1,
+    msgs:[
+      {dir:'in',  text:'Quali documenti servono per proposta?', ts:'08:11'},
+      {dir:'out', text:'Carta d’identità e ultime 2 buste paga vanno bene.', ts:'08:14'},
+      {dir:'in',  text:'Ok, invio documenti', ts:'08:21'}
+    ]
+  }
+];
+
+const suggestionsFor = (conv) => ([
+  'Confermo visita alle 17:00. Le invio posizione e dettagli tra poco.',
+  'Disponibile anche domani alle 10:30 se preferisce.',
+  'Desidera ricevere la scheda dell’immobile in PDF?'
+]);
+
+/** Populate list **/
+const listEl = document.getElementById('convList');
+const msgsEl = document.getElementById('msgs');
+const suggEl = document.getElementById('suggestions');
+let active = conversations[0];
+
+function renderList(){
+  listEl.innerHTML = '';
+  conversations.forEach(c=>{
+    const div = document.createElement('div');
+    div.className = 'conv' + (c.id===active.id?' active':'');
+    div.onclick = ()=>{ active=c; renderList(); renderChat(); renderSugg(); };
+    div.innerHTML = `
+      <div class="who"><b>${c.name}</b><small>${c.time}</small></div>
+      <small>${c.phone}</small>
+      <div class="snip">${c.last}</div>
+    `;
+    listEl.appendChild(div);
+  });
+}
+
+function renderChat(){
+  msgsEl.innerHTML = '';
+  active.msgs.forEach(m=>{
+    const b = document.createElement('div');
+    b.className = 'msg ' + (m.dir==='in'?'in':'out');
+    b.textContent = m.text;
+    msgsEl.appendChild(b);
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.textContent = (m.dir==='in'?'Client • ':'You • ') + m.ts;
+    msgsEl.appendChild(meta);
+  });
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+}
+
+function renderSugg(){
+  suggEl.innerHTML = '';
+  suggestionsFor(active).forEach(s=>{
+    const d=document.createElement('div');
+    d.className='reply';
+    d.textContent=s;
+    d.onclick = ()=>{
+      const ta = document.getElementById('composer');
+      ta.value = s;
+      ta.focus();
+    };
+    suggEl.appendChild(d);
+  });
+}
+
+renderList(); renderChat(); renderSugg();
+
+/** Composer interactions (mock send) **/
+const sendBtn = document.getElementById('sendBtn');
+const suggestBtn = document.getElementById('suggestBtn');
+const composer = document.getElementById('composer');
+
+sendBtn.onclick = ()=>{
+  const txt = composer.value.trim();
+  if(!txt) return;
+  active.msgs.push({dir:'out', text:txt, ts:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})});
+  composer.value='';
+  renderChat();
+};
+suggestBtn.onclick = ()=>{
+  const sug = suggestionsFor(active)[0];
+  composer.value = sug;
+  composer.focus();
+};
+
+// Shortcut: send on Ctrl+Enter / Cmd+Enter
+composer.addEventListener('keydown', (e)=>{
+  if((e.ctrlKey||e.metaKey) && e.key==='Enter'){ sendBtn.click(); }
+});
+</script>
+</body>
+</html>
