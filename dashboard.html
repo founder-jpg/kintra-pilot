@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kintra — Dashboard (Mock)</title>
-<meta name="description" content="Kintra command dashboard mock: conversations, AI insights, and suggested replies.">
+<title>Kintra — Dashboard</title>
 <link rel="icon" href="data:,">
+<meta name="description" content="Kintra dashboard — inbox, leads, suggested replies.">
 <style>
   :root{
     --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
@@ -13,285 +13,349 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(1200px 600px at 70% -10%, #16315b 0%, #0b1220 55%);color:var(--fg);
-       font:14.5px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+       font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
   a{color:var(--accent);text-decoration:none}
-  .app{display:grid;grid-template-columns:240px 1fr 360px;min-height:100vh}
-  .side{background:var(--panel);border-right:1px solid var(--border);padding:16px}
-  .brand{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .brand{display:flex;align-items:center;gap:10px}
   .brand img{width:28px;height:28px}
-  .brand strong{letter-spacing:.2px}
-  .nav a{display:block;padding:10px 12px;border-radius:10px;color:var(--fg)}
-  .nav a:hover{background:#0e1a30}
-  .nav .active{background:#0e1f36;border:1px solid var(--border)}
-  .badge{font-size:12px;color:#d1eaff;background:#0a2238;border:1px solid #10375a;border-radius:999px;padding:2px 8px}
-
-  .center{display:grid;grid-template-rows:auto 1fr; border-right:1px solid var(--border); background:var(--panel)}
-  .topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border)}
-  .search{flex:1;display:flex;gap:8px;align-items:center}
-  .search input{flex:1;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:8px 10px;border-radius:10px;outline:none}
-  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
-
-  .main{display:grid;grid-template-columns:320px 1fr;min-height:0}
-  .list{border-right:1px solid var(--border);overflow:auto}
-  .conv{padding:12px 14px;border-bottom:1px solid #162238;cursor:pointer}
-  .conv:hover{background:#0e1a2d}
-  .conv.active{background:#0e1f36}
-  .conv .who{display:flex;align-items:center;justify-content:space-between}
-  .conv .who b{font-weight:700}
-  .conv small{color:var(--muted)}
-  .conv .snip{color:#c7cfda;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-  .chat{display:grid;grid-template-rows:1fr auto;min-height:0}
-  .msgs{padding:16px;overflow:auto}
-  .msg{max-width:70%;padding:10px 12px;border-radius:12px;margin:6px 0}
-  .in {background:#0b5;color:#fff;border-top-left-radius:4px}
+  .brand b{letter-spacing:.2px}
+  .lang{display:flex;gap:8px;align-items:center}
+  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer;user-select:none}
+  .pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
+  .kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
+  .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+  .muted{color:var(--muted)}
+  h1{font-size:24px;margin:0}
+  h2{font-size:18px;margin:0 0 8px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 18px}
+  .stat{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;padding:10px}
+  .stat b{display:block;font-size:18px}
+  .inbox{display:grid;grid-template-columns:320px 1fr;gap:10px}
+  .list{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;overflow:hidden}
+  .item{padding:10px;border-bottom:1px solid #22304b;cursor:pointer}
+  .item:hover{background:#0f1b33}
+  .item .name{font-weight:600}
+  .thread{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;padding:10px}
+  .bubble{max-width:75%;padding:10px 12px;border-radius:12px;margin:6px 0}
+  .in{background:#065f46;color:#fff;border-top-left-radius:4px}
   .out{background:#111827;color:#e5e7eb;border-top-right-radius:4px;margin-left:auto}
-  .meta{color:#8aa0bf;font-size:12px;margin:2px 0 10px}
-  .composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border);background:#0e1729}
-  .composer textarea{flex:1;resize:none;min-height:44px;max-height:120px;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:10px;border-radius:10px}
-  .btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
-  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
-
-  .right{background:var(--panel);display:grid;grid-template-rows:auto auto 1fr;border-left:1px solid var(--border)}
-  .section{padding:14px 16px;border-bottom:1px solid var(--border)}
-  .section h4{margin:0 0 8px;font-size:15px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px}
-  .kpi{display:flex;gap:8px;align-items:center;color:var(--muted)}
-  .kpi strong{color:#e7eefb}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{border:1px solid var(--border);padding:6px 8px;border-radius:999px;color:#c7cfda}
-  .replies{display:grid;gap:8px}
-  .reply{background:#0e1729;border:1px solid #2a3a57;color:#e5e7eb;border-radius:10px;padding:10px;cursor:pointer}
-  .reply:hover{background:#102036}
-  .scroll{overflow:auto}
-  @media (max-width:1200px){ .app{grid-template-columns:200px 1fr} .right{display:none} }
-  @media (max-width:900px){ .app{grid-template-columns:1fr} .side{display:none} }
+  .composer{display:flex;gap:8px;margin-top:8px}
+  textarea,input{width:100%;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:10px;border-radius:10px;outline:none}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #22304b;padding:8px;text-align:left}
+  th{color:#cfe4ff;font-weight:600}
+  .tag{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid #2a3a57;color:#c7cfda;font-size:12px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media (max-width:1050px){ .grid{grid-template-columns:1fr} .inbox{grid-template-columns:1fr} .stats{grid-template-columns:repeat(2,1fr)} }
 </style>
 </head>
 <body>
-<div class="app">
+<div class="wrap">
 
-  <!-- Sidebar -->
-  <aside class="side">
+  <!-- Top -->
+  <header>
     <div class="brand">
       <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'">
-      <strong>Kintra</strong>
+      <b>Kintra</b>
     </div>
-    <div class="nav">
-      <a class="active" href="#">Conversations <span class="badge">12</span></a>
-      <a href="#">Leads</a>
-      <a href="#">Calendar</a>
-      <a href="#">Templates</a>
-      <a href="#">Analytics</a>
-      <a href="#">Settings</a>
+    <div class="lang">
+      <span class="kbadge" id="badge">Pilot • IT + WhatsApp</span>
+      <div class="pill" id="langEN">EN</div>
+      <div class="pill" id="langIT">IT</div>
     </div>
-  </aside>
+  </header>
 
-  <!-- Center (search + list + chat) -->
-  <section class="center">
-    <div class="topbar">
-      <div class="search">
-        <input id="search" placeholder="Search: name, phone, message…">
-        <div class="pill">IT auto-detect</div>
-        <div class="pill">WhatsApp • Web</div>
-      </div>
-      <a class="pill" href="./index.html">← Back to site</a>
+  <!-- Title -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+    <h1 id="title">Dashboard</h1>
+    <a class="btn" href="./index.html" id="backToSite">Back to site</a>
+  </div>
+  <p class="muted" id="subtitle">Today’s picture at a glance.</p>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span id="s1t" class="muted">New leads</span>
+      <b id="s1v">7</b>
+      <span class="muted small" id="s1s">+2 vs. yesterday</span>
     </div>
+    <div class="stat">
+      <span id="s2t" class="muted">Median first response</span>
+      <b id="s2v">6m</b>
+      <span class="muted small" id="s2s">Goal: &lt;5m</span>
+    </div>
+    <div class="stat">
+      <span id="s3t" class="muted">Follow-ups due</span>
+      <b id="s3v">4</b>
+      <span class="muted small" id="s3s">2 overdue</span>
+    </div>
+    <div class="stat">
+      <span id="s4t" class="muted">Bookings today</span>
+      <b id="s4v">3</b>
+      <span class="muted small" id="s4s">+1 confirmed</span>
+    </div>
+  </div>
 
-    <div class="main">
-      <!-- Conversation list -->
-      <div class="list" id="convList"></div>
+  <div class="grid">
 
-      <!-- Chat pane -->
-      <div class="chat">
-        <div class="msgs" id="msgs"></div>
-        <div class="composer">
-          <textarea id="composer" placeholder="Scrivi una risposta… (Shift+Enter per nuova riga)"></textarea>
-          <button class="btn" id="sendBtn">Send</button>
-          <button class="btn ghost" id="suggestBtn">AI Suggest</button>
+    <!-- Inbox -->
+    <div class="card">
+      <h2 id="inboxTitle">Inbox</h2>
+      <div class="inbox">
+        <div class="list" id="leadList">
+          <div class="item">
+            <div class="name">Marco Bianchi <span class="tag">WhatsApp</span></div>
+            <div class="muted small" id="leadAprev">“Appartamento in Via Torino ancora disponibile?”</div>
+          </div>
+          <div class="item">
+            <div class="name">Sara Conti <span class="tag">Web</span></div>
+            <div class="muted small" id="leadBprev">“Bilocale zona Navigli per settimana prossima…”</div>
+          </div>
+          <div class="item">
+            <div class="name">Luca Greco <span class="tag">WhatsApp</span></div>
+            <div class="muted small" id="leadCprev">“Possibile visita sabato mattina?”</div>
+          </div>
+        </div>
+
+        <div class="thread">
+          <div class="bubble in" id="thIn1">
+            Buongiorno, l’appartamento in Via Torino è disponibile?
+          </div>
+          <div class="bubble out" id="thOut1">
+            Buongiorno! Sì, disponibile. Preferisce una visita oggi alle 17:00?
+          </div>
+          <div class="bubble in" id="thIn2">
+            Perfetto, 17:00 va bene. Grazie!
+          </div>
+
+          <div class="composer">
+            <textarea id="compose" placeholder="Scrivi una risposta…"></textarea>
+            <button class="btn" id="sendBtn">Send</button>
+          </div>
+          <p class="muted small" id="compHelp" style="margin-top:6px">
+            Suggested: “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”
+          </p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Right (AI insights) -->
-  <aside class="right">
-    <div class="section">
-      <h4>AI Insights</h4>
-      <div class="card" id="insights">
-        <div class="kpi"><span style="width:8px;height:8px;background:var(--good);border-radius:50%;display:inline-block"></span>
-          &nbsp;<strong>Lead status:</strong>&nbsp; Warm • wants 17:00 viewing
+    <!-- Leads & Suggestions -->
+    <div class="card">
+      <h2 id="leadsTitle">Leads</h2>
+      <div class="row">
+        <div class="card" style="padding:10px">
+          <h2 id="tableTitle">This week</h2>
+          <table>
+            <thead>
+              <tr>
+                <th id="thName">Name</th>
+                <th id="thChan">Channel</th>
+                <th id="thWhen">When</th>
+                <th id="thNext">Next step</th>
+              </tr>
+            </thead>
+            <tbody id="leadTable">
+              <tr>
+                <td>Marco Bianchi</td><td>WhatsApp</td><td>10:42</td><td>Confirm 17:00 visit</td>
+              </tr>
+              <tr>
+                <td>Sara Conti</td><td>Web</td><td>09:18</td><td>Send 2 options</td>
+              </tr>
+              <tr>
+                <td>Luca Greco</td><td>WhatsApp</td><td>Yesterday</td><td>Follow up</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div style="height:8px"></div>
-        <div><strong>Summary</strong></div>
-        <div class="muted" id="summary">Cliente chiede disponibilità per visita. Preferenza: oggi 17:00. Confermare indirizzo e contatto.</div>
-        <div style="height:8px"></div>
-        <div><strong>Next steps</strong></div>
-        <ul class="muted" id="next">
-          <li>Conferma orario 17:00 e indirizzo.</li>
-          <li>Invia PDF scheda immobile.</li>
-          <li>Aggiungi promemoria follow-up per domani 10:00.</li>
-        </ul>
+        <div class="card" style="padding:10px">
+          <h2 id="suggTitle">Suggested reply</h2>
+          <p class="muted" id="suggText">
+            “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”
+          </p>
+          <button class="btn" id="copyBtn">Copy</button>
+          <span class="small muted" id="copyNote" style="margin-left:8px"></span>
+        </div>
       </div>
     </div>
 
-    <div class="section">
-      <h4>Suggested replies</h4>
-      <div class="replies" id="suggestions"></div>
-    </div>
+  </div>
 
-    <div class="section scroll">
-      <h4>Lead details</h4>
-      <div class="card">
-        <div class="chips">
-          <span class="chip">#IT</span>
-          <span class="chip">WhatsApp</span>
-          <span class="chip">New lead</span>
-          <span class="chip">Milano</span>
-        </div>
-        <div style="height:10px"></div>
-        <div class="muted">Source: WhatsApp • Added: today 09:12</div>
-      </div>
-    </div>
-  </aside>
+  <p class="muted" style="margin-top:16px" id="footNote">
+    Mock data for preview. WhatsApp + lead sync will pull live threads during pilot.
+  </p>
 
 </div>
 
 <script>
-// ===== Config =====
-const API_BASE = 'https://kintra-api.founder-60b.workers.dev'.trim(); // your echo/mock worker
+  // ===== i18n dictionary =====
+  const dict = {
+    en: {
+      badge: 'Pilot • IT + WhatsApp',
+      title: 'Dashboard',
+      backToSite: 'Back to site',
+      subtitle: 'Today’s picture at a glance.',
+      s1t:'New leads', s1s:'+2 vs. yesterday',
+      s2t:'Median first response', s2s:'Goal: <5m',
+      s3t:'Follow-ups due', s3s:'2 overdue',
+      s4t:'Bookings today', s4s:'+1 confirmed',
+      inboxTitle:'Inbox',
+      leadAprev:'“Is the Via Torino apartment still available?”',
+      leadBprev:'“Two-room near Navigli for next week…”',
+      leadCprev:'“Possible viewing Saturday morning?”',
+      thIn1:'Good morning, is the apartment on Via Torino available?',
+      thOut1:'Good morning! Yes, available. Would you like a viewing today at 17:00?',
+      thIn2:'Perfect, 17:00 works. Thanks!',
+      composePH:'Type a reply…',
+      send:'Send',
+      compHelp:'Suggested: “I confirm the 17:00 viewing at Via Torino 12. Please bring ID. See you later!”',
+      leadsTitle:'Leads',
+      tableTitle:'This week',
+      thName:'Name', thChan:'Channel', thWhen:'When', thNext:'Next step',
+      tRow1Next:'Confirm 17:00 visit',
+      tRow2Next:'Send 2 options',
+      tRow3Next:'Follow up',
+      suggTitle:'Suggested reply',
+      suggText:'“I confirm the 17:00 viewing at Via Torino 12. Please bring ID. See you later!”',
+      copy:'Copy',
+      copied:'Copied!',
+      footNote:'Mock data for preview. WhatsApp + lead sync will pull live threads during pilot.'
+    },
+    it: {
+      badge: 'Pilot • IT + WhatsApp',
+      title: 'Dashboard',
+      backToSite: 'Torna al sito',
+      subtitle: 'La giornata a colpo d’occhio.',
+      s1t:'Nuovi lead', s1s:'+2 vs. ieri',
+      s2t:'Prima risposta mediana', s2s:'Obiettivo: <5m',
+      s3t:'Follow-up in scadenza', s3s:'2 in ritardo',
+      s4t:'Prenotazioni oggi', s4s:'+1 confermata',
+      inboxTitle:'Inbox',
+      leadAprev:'“Appartamento in Via Torino ancora disponibile?”',
+      leadBprev:'“Bilocale zona Navigli per settimana prossima…”',
+      leadCprev:'“Possibile visita sabato mattina?”',
+      thIn1:'Buongiorno, l’appartamento in Via Torino è disponibile?',
+      thOut1:'Buongiorno! Sì, disponibile. Preferisce una visita oggi alle 17:00?',
+      thIn2:'Perfetto, 17:00 va bene. Grazie!',
+      composePH:'Scrivi una risposta…',
+      send:'Invia',
+      compHelp:'Suggerito: “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”',
+      leadsTitle:'Lead',
+      tableTitle:'Questa settimana',
+      thName:'Nome', thChan:'Canale', thWhen:'Quando', thNext:'Prossimo passo',
+      tRow1Next:'Conferma visita 17:00',
+      tRow2Next:'Invia 2 opzioni',
+      tRow3Next:'Follow-up',
+      suggTitle:'Risposta suggerita',
+      suggText:'“Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”',
+      copy:'Copia',
+      copied:'Copiato!',
+      footNote:'Dati fittizi per anteprima. Durante il pilot sincronizzeremo thread e lead reali.'
+    }
+  };
 
-/** Mock conversations (static for now) **/
-const conversations = [
-  { id:'c1', name:'Giulia Bianchi', phone:'+39 333 123 4567', last:'Posso vedere l’appartamento oggi?', time:'09:11', unread:2,
-    msgs:[
-      {dir:'in',  text:'Buongiorno, l’appartamento in Via Torino è ancora disponibile?', ts:'09:05'},
-      {dir:'out', text:'Buongiorno Giulia! Sì, disponibile. Quando preferisce visitarlo?', ts:'09:07'},
-      {dir:'in',  text:'Oggi alle 17:00 è possibile?', ts:'09:11'}
-    ]
-  },
-  { id:'c2', name:'Marco Rossi', phone:'+39 320 987 2222', last:'Grazie, a domani', time:'08:58', unread:0,
-    msgs:[
-      {dir:'in',  text:'Serve posto auto in zona?', ts:'08:40'},
-      {dir:'out', text:'C’è parcheggio in strada; box opzionale a 120€/mese.', ts:'08:45'},
-      {dir:'in',  text:'Perfetto. Grazie, a domani', ts:'08:58'}
-    ]
-  },
-  { id:'c3', name:'Elena Conti', phone:'+39 345 765 9090', last:'Ok, invio documenti', time:'08:21', unread:1,
-    msgs:[
-      {dir:'in',  text:'Quali documenti servono per proposta?', ts:'08:11'},
-      {dir:'out', text:'Carta d’identità e ultime 2 buste paga vanno bene.', ts:'08:14'},
-      {dir:'in',  text:'Ok, invio documenti', ts:'08:21'}
-    ]
+  // ===== wire UI refs =====
+  const $ = id => document.getElementById(id);
+  const els = {
+    badge:$('badge'), title:$('title'), backToSite:$('backToSite'), subtitle:$('subtitle'),
+    s1t:$('s1t'), s1s:$('s1s'), s2t:$('s2t'), s2s:$('s2s'), s3t:$('s3t'), s3s:$('s3s'), s4t:$('s4t'), s4s:$('s4s'),
+    inboxTitle:$('inboxTitle'),
+    leadAprev:$('leadAprev'), leadBprev:$('leadBprev'), leadCprev:$('leadCprev'),
+    thIn1:$('thIn1'), thOut1:$('thOut1'), thIn2:$('thIn2'),
+    compose:$('compose'), sendBtn:$('sendBtn'), compHelp:$('compHelp'),
+    leadsTitle:$('leadsTitle'), tableTitle:$('tableTitle'),
+    thName:$('thName'), thChan:$('thChan'), thWhen:$('thWhen'), thNext:$('thNext'),
+    leadTable:$('leadTable'),
+    suggTitle:$('suggTitle'), suggText:$('suggText'), copyBtn:$('copyBtn'), copyNote:$('copyNote'),
+    footNote:$('footNote'),
+    langEN:$('langEN'), langIT:$('langIT')
+  };
+
+  // ===== apply language =====
+  function setLang(lang){
+    const d = dict[lang] || dict.en;
+    els.badge.textContent = d.badge;
+    els.title.textContent = d.title;
+    els.backToSite.textContent = d.backToSite;
+    els.subtitle.textContent = d.subtitle;
+
+    $('s1t').textContent=d.s1t; $('s1s').textContent=d.s1s;
+    $('s2t').textContent=d.s2t; $('s2s').textContent=d.s2s;
+    $('s3t').textContent=d.s3t; $('s3s').textContent=d.s3s;
+    $('s4t').textContent=d.s4t; $('s4s').textContent=d.s4s;
+
+    els.inboxTitle.textContent=d.inboxTitle;
+    els.leadAprev.textContent=d.leadAprev;
+    els.leadBprev.textContent=d.leadBprev;
+    els.leadCprev.textContent=d.leadCprev;
+
+    els.thIn1.textContent=d.thIn1;
+    els.thOut1.textContent=d.thOut1;
+    els.thIn2.textContent=d.thIn2;
+
+    els.compose.placeholder=d.composePH;
+    els.sendBtn.textContent=d.send;
+
+    els.compHelp.textContent=d.compHelp;
+
+    els.leadsTitle.textContent=d.leadsTitle;
+    els.tableTitle.textContent=d.tableTitle;
+    els.thName.textContent=d.thName;
+    els.thChan.textContent=d.thChan;
+    els.thWhen.textContent=d.thWhen;
+    els.thNext.textContent=d.thNext;
+
+    // Update the “next step” text in the sample table rows
+    const rows = els.leadTable.querySelectorAll('tr');
+    if (rows[0]) rows[0].children[3].textContent = d.tRow1Next;
+    if (rows[1]) rows[1].children[3].textContent = d.tRow2Next;
+    if (rows[2]) rows[2].children[3].textContent = d.tRow3Next;
+
+    els.suggTitle.textContent=d.suggTitle;
+    els.suggText.textContent=d.suggText;
+    els.copyBtn.textContent=d.copy;
+    els.footNote.textContent=d.footNote;
+
+    // Toggle pills
+    els.langEN.classList.toggle('active', lang==='en');
+    els.langIT.classList.toggle('active', lang==='it');
+
+    localStorage.setItem('kintra_lang', lang);
+    document.documentElement.lang = (lang==='it'?'it':'en');
   }
-];
 
-// ===== UI wiring =====
-const listEl = document.getElementById('convList');
-const msgsEl = document.getElementById('msgs');
-const suggEl = document.getElementById('suggestions');
-const summaryEl = document.getElementById('summary');
-const nextEl = document.getElementById('next');
-const composer = document.getElementById('composer');
-const sendBtn = document.getElementById('sendBtn');
-const suggestBtn = document.getElementById('suggestBtn');
+  const saved = localStorage.getItem('kintra_lang');
+  const browserPref = (navigator.language||'en').toLowerCase().startsWith('it') ? 'it' : 'en';
+  setLang(saved || browserPref || 'en');
 
-let active = conversations[0];
+  // toggle handlers
+  els.langEN.onclick = ()=>setLang('en');
+  els.langIT.onclick = ()=>setLang('it');
 
-function renderList(){
-  listEl.innerHTML = '';
-  conversations.forEach(c=>{
+  // copy helper
+  $('copyBtn').onclick = async ()=>{
+    try{
+      await navigator.clipboard.writeText( $('suggText').textContent.trim() );
+      $('copyNote').textContent = dict[document.documentElement.lang].copied;
+      setTimeout(()=> $('copyNote').textContent='', 1200);
+    }catch(e){
+      $('copyNote').textContent = '…';
+      setTimeout(()=> $('copyNote').textContent='', 800);
+    }
+  };
+
+  // fake send
+  $('sendBtn').onclick = ()=>{
+    const t = (els.compose.value||'').trim();
+    if(!t) return;
     const div = document.createElement('div');
-    div.className = 'conv' + (c.id===active.id?' active':'');
-    div.onclick = ()=>{ active=c; renderList(); renderChat(); renderSugg(); };
-    div.innerHTML = `
-      <div class="who"><b>${c.name}</b><small>${c.time}</small></div>
-      <small>${c.phone}</small>
-      <div class="snip">${c.last}</div>
-    `;
-    listEl.appendChild(div);
-  });
-}
-
-function renderChat(){
-  msgsEl.innerHTML = '';
-  active.msgs.forEach(m=>{
-    const b = document.createElement('div');
-    b.className = 'msg ' + (m.dir==='in'?'in':'out');
-    b.textContent = m.text;
-    msgsEl.appendChild(b);
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    meta.textContent = (m.dir==='in'?'Client • ':'You • ') + m.ts;
-    msgsEl.appendChild(meta);
-  });
-  msgsEl.scrollTop = msgsEl.scrollHeight;
-}
-
-function renderSugg(){
-  suggEl.innerHTML = '';
-  const suggs = [
-    'Confermo visita alle 17:00. Le invio posizione e dettagli tra poco.',
-    'Disponibile anche domani alle 10:30 se preferisce.',
-    'Desidera ricevere la scheda dell’immobile in PDF?'
-  ];
-  suggs.forEach(s=>{
-    const d=document.createElement('div');
-    d.className='reply';
-    d.textContent=s;
-    d.onclick = ()=>{ composer.value = s; composer.focus(); };
-    suggEl.appendChild(d);
-  });
-}
-
-// Initial render
-renderList(); renderChat(); renderSugg();
-
-// Mock send (local only)
-sendBtn.onclick = ()=>{
-  const txt = composer.value.trim();
-  if(!txt) return;
-  active.msgs.push({dir:'out', text:txt, ts:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})});
-  composer.value='';
-  renderChat();
-};
-
-// ===== AI Suggest (live call to your echo worker) =====
-suggestBtn.onclick = async ()=>{
-  // Grab the last inbound message as context
-  const lastInbound = [...active.msgs].reverse().find(m=>m.dir==='in')?.text || 'Ciao, vorrei informazioni';
-  suggestBtn.disabled = true; suggestBtn.textContent = 'Thinking…';
-  try {
-    const res = await fetch(API_BASE + '/api/prompt', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ text: lastInbound })
-    });
-    const j = await res.json();
-    // j.result may be a mock; build a friendly suggestion:
-    const itHint = j?.result?.italian_hint || 'Possiamo fissare una visita oggi alle 17:00?';
-    const suggested = `Grazie per il messaggio! ${itHint} Le invio posizione e dettagli tra poco.`;
-    composer.value = suggested;
-
-    // Update right panel lightly
-    summaryEl.textContent = 'Richiesta cliente: ' + lastInbound;
-    nextEl.innerHTML = `
-      <li>Conferma disponibilità e orario.</li>
-      <li>Condividi posizione e dettagli dell’immobile.</li>
-      <li>Imposta promemoria follow-up entro 24h.</li>
-    `;
-  } catch(e){
-    composer.value = 'Proposta: Posso aiutarla con una visita oggi alle 17:00?';
-  } finally {
-    suggestBtn.disabled = false; suggestBtn.textContent = 'AI Suggest';
-  }
-};
-
-// Shortcut: send on Ctrl/Cmd+Enter
-composer.addEventListener('keydown', (e)=>{
-  if((e.ctrlKey||e.metaKey) && e.key==='Enter'){ sendBtn.click(); }
-});
+    div.className = 'bubble out';
+    div.textContent = t;
+    document.querySelector('.thread').insertBefore(div, document.querySelector('.composer'));
+    els.compose.value='';
+  };
 </script>
 </body>
 </html>
