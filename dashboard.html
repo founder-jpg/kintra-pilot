@@ -1,361 +1,130 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kintra — Dashboard</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kintra — Pilot Dashboard (Preview)</title>
+<meta name="description" content="Preview dashboard for Kintra pilot.">
 <link rel="icon" href="data:,">
-<meta name="description" content="Kintra dashboard — inbox, leads, suggested replies.">
 <style>
-  :root{
-    --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
-    --fg:#f5f7fb; --muted:#9aa3b5; --accent:#0ea5e9; --good:#10b981; --warn:#f59e0b; --bad:#ef4444;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%, #16315b 0%, #0b1220 55%);color:var(--fg);
-       font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:1180px;margin:0 auto;padding:22px}
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-  .brand{display:flex;align-items:center;gap:10px}
-  .brand img{width:28px;height:28px}
-  .brand b{letter-spacing:.2px}
-  .lang{display:flex;gap:8px;align-items:center}
-  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer;user-select:none}
-  .pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
-  .kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
-  .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
-  .muted{color:var(--muted)}
-  h1{font-size:24px;margin:0}
-  h2{font-size:18px;margin:0 0 8px}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 18px}
-  .stat{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;padding:10px}
-  .stat b{display:block;font-size:18px}
-  .inbox{display:grid;grid-template-columns:320px 1fr;gap:10px}
-  .list{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;overflow:hidden}
-  .item{padding:10px;border-bottom:1px solid #22304b;cursor:pointer}
-  .item:hover{background:#0f1b33}
-  .item .name{font-weight:600}
-  .thread{background:#0e1729;border:1px solid #2a3a57;border-radius:10px;padding:10px}
-  .bubble{max-width:75%;padding:10px 12px;border-radius:12px;margin:6px 0}
-  .in{background:#065f46;color:#fff;border-top-left-radius:4px}
-  .out{background:#111827;color:#e5e7eb;border-top-right-radius:4px;margin-left:auto}
-  .composer{display:flex;gap:8px;margin-top:8px}
-  textarea,input{width:100%;background:#0e1729;border:1px solid #2a3a57;color:var(--fg);padding:10px;border-radius:10px;outline:none}
-  .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
-  table{width:100%;border-collapse:collapse}
-  th,td{border-bottom:1px solid #22304b;padding:8px;text-align:left}
-  th{color:#cfe4ff;font-weight:600}
-  .tag{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid #2a3a57;color:#c7cfda;font-size:12px}
-  .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  @media (max-width:1050px){ .grid{grid-template-columns:1fr} .inbox{grid-template-columns:1fr} .stats{grid-template-columns:repeat(2,1fr)} }
+:root{--bg:#0b1220;--panel:#0f172a;--card:#111a2c;--border:#22304b;--fg:#f5f7fb;--muted:#a8b3c7;--accent:#0ea5e9;--good:#10b981;--warn:#f59e0b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+a{color:var(--accent);text-decoration:none}.wrap{max-width:1100px;margin:0 auto;padding:22px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:28px;height:28px}
+.lang{display:flex;gap:8px;align-items:center}.pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer}
+.pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
+.kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
+.hero{border:1px solid var(--border);border-radius:14px;padding:20px;background:linear-gradient(180deg,#0f172a,#0b1220);margin-bottom:16px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}.lead{color:#cfe4ff;margin:0 0 8px}
+.btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:8px 12px;margin-right:8px;transition:.15s transform ease}
+.btn:hover{transform:translateY(-1px)}.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.subtle{color:var(--muted)}.step{font-weight:600;color:#9cc8ff;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.card{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:14px}
+.card h3{margin:0 0 8px}.micro{color:#93a3b9;font-size:13px;margin-top:4px}
+.stat{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding:8px 0}
+.kpi{font-size:26px;font-weight:700}.good{color:var(--good)}.warn{color:var(--warn)}.list{margin:8px 0 0;padding:0;list-style:none}
+.badge{font-size:12px;border:1px solid var(--border);padding:2px 6px;border-radius:999px;color:#c7cfda}
+.table{width:100%;border-collapse:separate;border-spacing:0 6px}
+tr td{background:#0c1424;border:1px solid var(--border);padding:8px;border-radius:10px}
+td:first-child{border-right:0;border-top-right-radius:0;border-bottom-right-radius:0}
+td:last-child{border-left:0;border-top-left-radius:0;border-bottom-left-radius:0}
+.foot{margin:18px 0 6px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <!-- Top -->
   <header>
-    <div class="brand">
-      <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'">
-      <b>Kintra</b>
-    </div>
+    <div class="brand"><img src="./img/logo.png.png" alt="" onerror="this.style.display='none'"><b>Kintra</b></div>
     <div class="lang">
-      <span class="kbadge" id="badge">Pilot • IT + WhatsApp</span>
-      <div class="pill" id="langEN">EN</div>
-      <div class="pill" id="langIT">IT</div>
+      <span class="kbadge" id="badge">Pilot Dashboard (preview)</span>
+      <div class="pill" id="langEN">EN</div><div class="pill" id="langIT">IT</div>
     </div>
   </header>
 
-  <!-- Title -->
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-    <h1 id="title">Dashboard</h1>
-    <a class="btn" href="./index.html" id="backToSite">Back to site</a>
-  </div>
-  <p class="muted" id="subtitle">Today’s picture at a glance.</p>
+  <section class="hero">
+    <h1 id="h_title">Pilot Dashboard — Preview</h1>
+    <p class="lead" id="h_sub">See the metrics agencies care about: response speed, follow-ups, and booked viewings.</p>
+    <a class="btn" href="./index.html" id="btn_back">Back to Landing</a>
+    <a class="btn ghost" href="./deck.html" id="btn_deck">Open Deck</a>
+    <div class="subtle" id="h_note">Read-only mock; real pilots will update these KPIs live.</div>
+  </section>
 
-  <!-- Stats -->
-  <div class="stats">
-    <div class="stat">
-      <span id="s1t" class="muted">New leads</span>
-      <b id="s1v">7</b>
-      <span class="muted small" id="s1s">+2 vs. yesterday</span>
-    </div>
-    <div class="stat">
-      <span id="s2t" class="muted">Median first response</span>
-      <b id="s2v">6m</b>
-      <span class="muted small" id="s2s">Goal: &lt;5m</span>
-    </div>
-    <div class="stat">
-      <span id="s3t" class="muted">Follow-ups due</span>
-      <b id="s3v">4</b>
-      <span class="muted small" id="s3s">2 overdue</span>
-    </div>
-    <div class="stat">
-      <span id="s4t" class="muted">Bookings today</span>
-      <b id="s4v">3</b>
-      <span class="muted small" id="s4s">+1 confirmed</span>
-    </div>
-  </div>
-
-  <div class="grid">
-
-    <!-- Inbox -->
+  <section class="grid">
     <div class="card">
-      <h2 id="inboxTitle">Inbox</h2>
-      <div class="inbox">
-        <div class="list" id="leadList">
-          <div class="item">
-            <div class="name">Marco Bianchi <span class="tag">WhatsApp</span></div>
-            <div class="muted small" id="leadAprev">“Appartamento in Via Torino ancora disponibile?”</div>
-          </div>
-          <div class="item">
-            <div class="name">Sara Conti <span class="tag">Web</span></div>
-            <div class="muted small" id="leadBprev">“Bilocale zona Navigli per settimana prossima…”</div>
-          </div>
-          <div class="item">
-            <div class="name">Luca Greco <span class="tag">WhatsApp</span></div>
-            <div class="muted small" id="leadCprev">“Possibile visita sabato mattina?”</div>
-          </div>
-        </div>
+      <div class="step" id="s1">🧭 Step 1 — Snapshot KPIs</div>
+      <h3 id="k_title">Today’s overview</h3>
 
-        <div class="thread">
-          <div class="bubble in" id="thIn1">
-            Buongiorno, l’appartamento in Via Torino è disponibile?
-          </div>
-          <div class="bubble out" id="thOut1">
-            Buongiorno! Sì, disponibile. Preferisce una visita oggi alle 17:00?
-          </div>
-          <div class="bubble in" id="thIn2">
-            Perfetto, 17:00 va bene. Grazie!
-          </div>
-
-          <div class="composer">
-            <textarea id="compose" placeholder="Scrivi una risposta…"></textarea>
-            <button class="btn" id="sendBtn">Send</button>
-          </div>
-          <p class="muted small" id="compHelp" style="margin-top:6px">
-            Suggested: “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”
-          </p>
-        </div>
-      </div>
+      <div class="stat"><span id="k1_label">Median reply time</span><span class="kpi good" id="k1_val">2m 14s</span></div>
+      <div class="stat"><span id="k2_label">Follow-ups sent</span><span class="kpi" id="k2_val">18</span></div>
+      <div class="stat"><span id="k3_label">Booked viewings</span><span class="kpi good" id="k3_val">7</span></div>
+      <div class="stat"><span id="k4_label">Convos needing action</span><span class="kpi warn" id="k4_val">3</span></div>
+      <div class="micro" id="k_hint">These are the numbers managers want daily: speed, consistency, conversion.</div>
     </div>
 
-    <!-- Leads & Suggestions -->
     <div class="card">
-      <h2 id="leadsTitle">Leads</h2>
-      <div class="row">
-        <div class="card" style="padding:10px">
-          <h2 id="tableTitle">This week</h2>
-          <table>
-            <thead>
-              <tr>
-                <th id="thName">Name</th>
-                <th id="thChan">Channel</th>
-                <th id="thWhen">When</th>
-                <th id="thNext">Next step</th>
-              </tr>
-            </thead>
-            <tbody id="leadTable">
-              <tr>
-                <td>Marco Bianchi</td><td>WhatsApp</td><td>10:42</td><td>Confirm 17:00 visit</td>
-              </tr>
-              <tr>
-                <td>Sara Conti</td><td>Web</td><td>09:18</td><td>Send 2 options</td>
-              </tr>
-              <tr>
-                <td>Luca Greco</td><td>WhatsApp</td><td>Yesterday</td><td>Follow up</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card" style="padding:10px">
-          <h2 id="suggTitle">Suggested reply</h2>
-          <p class="muted" id="suggText">
-            “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”
-          </p>
-          <button class="btn" id="copyBtn">Copy</button>
-          <span class="small muted" id="copyNote" style="margin-left:8px"></span>
-        </div>
-      </div>
+      <div class="step" id="s2">💬 Step 2 — Conversations (sample)</div>
+      <h3 id="c_title">WhatsApp threads (mock)</h3>
+      <table class="table">
+        <tr><td>Rossi — Via Garibaldi</td><td><span class="badge">needs reply</span></td><td><span id="c1">Last msg 12:10</span></td></tr>
+        <tr><td>Bianchi — Centro storico</td><td><span class="badge">follow-up sent</span></td><td><span id="c2">Last msg 11:58</span></td></tr>
+        <tr><td>Verdi — Attico</td><td><span class="badge">viewing booked</span></td><td><span id="c3">Last msg 11:22</span></td></tr>
+      </table>
+      <div class="micro" id="c_hint">Kintra drafts structured replies and next-steps so nothing slips.</div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <div class="step" id="s3">⚙️ Step 3 — Next actions</div>
+      <h3 id="n_title">Smart prompts (auto)</h3>
+      <ul class="list" id="n_list">
+        <li>• Send viewing reminder to Rossi (tomorrow 15:00)</li>
+        <li>• Ask Bianchi for budget + must-haves</li>
+        <li>• Summarize Verdi thread and log in CRM</li>
+      </ul>
+      <div class="micro" id="n_hint">Real pilots will surface these prompts live from your WhatsApp threads.</div>
     </div>
 
-  </div>
+    <div class="card">
+      <div class="step" id="s4">🚀 Step 4 — Ready to pilot?</div>
+      <h3 id="r_title">Start your 2–4 week pilot</h3>
+      <p class="subtle" id="r_text">Lightweight setup. Run with 3–5 live interactions. Measure minutes saved.</p>
+      <a class="btn" href="./index.html#pilotForm" id="r_btn">Request Pilot Access</a>
+      <a class="btn ghost" href="./deck.html" id="r_deck">View Live Deck</a>
+    </div>
+  </section>
 
-  <p class="muted" style="margin-top:16px" id="footNote">
-    Mock data for preview. WhatsApp + lead sync will pull live threads during pilot.
-  </p>
-
+  <div class="foot"><span>© 2025 Kintra.</span><span id="foot_contact">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
 </div>
 
 <script>
-  // ===== i18n dictionary =====
-  const dict = {
-    en: {
-      badge: 'Pilot • IT + WhatsApp',
-      title: 'Dashboard',
-      backToSite: 'Back to site',
-      subtitle: 'Today’s picture at a glance.',
-      s1t:'New leads', s1s:'+2 vs. yesterday',
-      s2t:'Median first response', s2s:'Goal: <5m',
-      s3t:'Follow-ups due', s3s:'2 overdue',
-      s4t:'Bookings today', s4s:'+1 confirmed',
-      inboxTitle:'Inbox',
-      leadAprev:'“Is the Via Torino apartment still available?”',
-      leadBprev:'“Two-room near Navigli for next week…”',
-      leadCprev:'“Possible viewing Saturday morning?”',
-      thIn1:'Good morning, is the apartment on Via Torino available?',
-      thOut1:'Good morning! Yes, available. Would you like a viewing today at 17:00?',
-      thIn2:'Perfect, 17:00 works. Thanks!',
-      composePH:'Type a reply…',
-      send:'Send',
-      compHelp:'Suggested: “I confirm the 17:00 viewing at Via Torino 12. Please bring ID. See you later!”',
-      leadsTitle:'Leads',
-      tableTitle:'This week',
-      thName:'Name', thChan:'Channel', thWhen:'When', thNext:'Next step',
-      tRow1Next:'Confirm 17:00 visit',
-      tRow2Next:'Send 2 options',
-      tRow3Next:'Follow up',
-      suggTitle:'Suggested reply',
-      suggText:'“I confirm the 17:00 viewing at Via Torino 12. Please bring ID. See you later!”',
-      copy:'Copy',
-      copied:'Copied!',
-      footNote:'Mock data for preview. WhatsApp + lead sync will pull live threads during pilot.'
-    },
-    it: {
-      badge: 'Pilot • IT + WhatsApp',
-      title: 'Dashboard',
-      backToSite: 'Torna al sito',
-      subtitle: 'La giornata a colpo d’occhio.',
-      s1t:'Nuovi lead', s1s:'+2 vs. ieri',
-      s2t:'Prima risposta mediana', s2s:'Obiettivo: <5m',
-      s3t:'Follow-up in scadenza', s3s:'2 in ritardo',
-      s4t:'Prenotazioni oggi', s4s:'+1 confermata',
-      inboxTitle:'Inbox',
-      leadAprev:'“Appartamento in Via Torino ancora disponibile?”',
-      leadBprev:'“Bilocale zona Navigli per settimana prossima…”',
-      leadCprev:'“Possibile visita sabato mattina?”',
-      thIn1:'Buongiorno, l’appartamento in Via Torino è disponibile?',
-      thOut1:'Buongiorno! Sì, disponibile. Preferisce una visita oggi alle 17:00?',
-      thIn2:'Perfetto, 17:00 va bene. Grazie!',
-      composePH:'Scrivi una risposta…',
-      send:'Invia',
-      compHelp:'Suggerito: “Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”',
-      leadsTitle:'Lead',
-      tableTitle:'Questa settimana',
-      thName:'Nome', thChan:'Canale', thWhen:'Quando', thNext:'Prossimo passo',
-      tRow1Next:'Conferma visita 17:00',
-      tRow2Next:'Invia 2 opzioni',
-      tRow3Next:'Follow-up',
-      suggTitle:'Risposta suggerita',
-      suggText:'“Confermo la visita alle 17:00 in Via Torino 12. Porta documento d’identità. A dopo!”',
-      copy:'Copia',
-      copied:'Copiato!',
-      footNote:'Dati fittizi per anteprima. Durante il pilot sincronizzeremo thread e lead reali.'
-    }
-  };
-
-  // ===== wire UI refs =====
-  const $ = id => document.getElementById(id);
-  const els = {
-    badge:$('badge'), title:$('title'), backToSite:$('backToSite'), subtitle:$('subtitle'),
-    s1t:$('s1t'), s1s:$('s1s'), s2t:$('s2t'), s2s:$('s2s'), s3t:$('s3t'), s3s:$('s3s'), s4t:$('s4t'), s4s:$('s4s'),
-    inboxTitle:$('inboxTitle'),
-    leadAprev:$('leadAprev'), leadBprev:$('leadBprev'), leadCprev:$('leadCprev'),
-    thIn1:$('thIn1'), thOut1:$('thOut1'), thIn2:$('thIn2'),
-    compose:$('compose'), sendBtn:$('sendBtn'), compHelp:$('compHelp'),
-    leadsTitle:$('leadsTitle'), tableTitle:$('tableTitle'),
-    thName:$('thName'), thChan:$('thChan'), thWhen:$('thWhen'), thNext:$('thNext'),
-    leadTable:$('leadTable'),
-    suggTitle:$('suggTitle'), suggText:$('suggText'), copyBtn:$('copyBtn'), copyNote:$('copyNote'),
-    footNote:$('footNote'),
-    langEN:$('langEN'), langIT:$('langIT')
-  };
-
-  // ===== apply language =====
-  function setLang(lang){
-    const d = dict[lang] || dict.en;
-    els.badge.textContent = d.badge;
-    els.title.textContent = d.title;
-    els.backToSite.textContent = d.backToSite;
-    els.subtitle.textContent = d.subtitle;
-
-    $('s1t').textContent=d.s1t; $('s1s').textContent=d.s1s;
-    $('s2t').textContent=d.s2t; $('s2s').textContent=d.s2s;
-    $('s3t').textContent=d.s3t; $('s3s').textContent=d.s3s;
-    $('s4t').textContent=d.s4t; $('s4s').textContent=d.s4s;
-
-    els.inboxTitle.textContent=d.inboxTitle;
-    els.leadAprev.textContent=d.leadAprev;
-    els.leadBprev.textContent=d.leadBprev;
-    els.leadCprev.textContent=d.leadCprev;
-
-    els.thIn1.textContent=d.thIn1;
-    els.thOut1.textContent=d.thOut1;
-    els.thIn2.textContent=d.thIn2;
-
-    els.compose.placeholder=d.composePH;
-    els.sendBtn.textContent=d.send;
-
-    els.compHelp.textContent=d.compHelp;
-
-    els.leadsTitle.textContent=d.leadsTitle;
-    els.tableTitle.textContent=d.tableTitle;
-    els.thName.textContent=d.thName;
-    els.thChan.textContent=d.thChan;
-    els.thWhen.textContent=d.thWhen;
-    els.thNext.textContent=d.thNext;
-
-    // Update the “next step” text in the sample table rows
-    const rows = els.leadTable.querySelectorAll('tr');
-    if (rows[0]) rows[0].children[3].textContent = d.tRow1Next;
-    if (rows[1]) rows[1].children[3].textContent = d.tRow2Next;
-    if (rows[2]) rows[2].children[3].textContent = d.tRow3Next;
-
-    els.suggTitle.textContent=d.suggTitle;
-    els.suggText.textContent=d.suggText;
-    els.copyBtn.textContent=d.copy;
-    els.footNote.textContent=d.footNote;
-
-    // Toggle pills
-    els.langEN.classList.toggle('active', lang==='en');
-    els.langIT.classList.toggle('active', lang==='it');
-
-    localStorage.setItem('kintra_lang', lang);
-    document.documentElement.lang = (lang==='it'?'it':'en');
-  }
-
-  const saved = localStorage.getItem('kintra_lang');
-  const browserPref = (navigator.language||'en').toLowerCase().startsWith('it') ? 'it' : 'en';
-  setLang(saved || browserPref || 'en');
-
-  // toggle handlers
-  els.langEN.onclick = ()=>setLang('en');
-  els.langIT.onclick = ()=>setLang('it');
-
-  // copy helper
-  $('copyBtn').onclick = async ()=>{
-    try{
-      await navigator.clipboard.writeText( $('suggText').textContent.trim() );
-      $('copyNote').textContent = dict[document.documentElement.lang].copied;
-      setTimeout(()=> $('copyNote').textContent='', 1200);
-    }catch(e){
-      $('copyNote').textContent = '…';
-      setTimeout(()=> $('copyNote').textContent='', 800);
-    }
-  };
-
-  // fake send
-  $('sendBtn').onclick = ()=>{
-    const t = (els.compose.value||'').trim();
-    if(!t) return;
-    const div = document.createElement('div');
-    div.className = 'bubble out';
-    div.textContent = t;
-    document.querySelector('.thread').insertBefore(div, document.querySelector('.composer'));
-    els.compose.value='';
-  };
+const $=id=>document.getElementById(id);
+const dict={
+  en:{badge:'Pilot Dashboard (preview)',h_title:'Pilot Dashboard — Preview',h_sub:'See the metrics agencies care about: response speed, follow-ups, and booked viewings.',h_note:'Read-only mock; real pilots will update these KPIs live.',btn_back:'Back to Landing',btn_deck:'Open Deck',
+      s1:'🧭 Step 1 — Snapshot KPIs',k_title:'Today’s overview',k1_label:'Median reply time',k2_label:'Follow-ups sent',k3_label:'Booked viewings',k4_label:'Convos needing action',k_hint:'These are the numbers managers want daily: speed, consistency, conversion.',
+      s2:'💬 Step 2 — Conversations (sample)',c_title:'WhatsApp threads (mock)',c1:'Last msg 12:10',c2:'Last msg 11:58',c3:'Last msg 11:22',c_hint:'Kintra drafts structured replies and next-steps so nothing slips.',
+      s3:'⚙️ Step 3 — Next actions',n_title:'Smart prompts (auto)',n_hint:'Real pilots will surface these prompts live from your WhatsApp threads.',
+      s4:'🚀 Step 4 — Ready to pilot?',r_title:'Start your 2–4 week pilot',r_text:'Lightweight setup. Run with 3–5 live interactions. Measure minutes saved.',r_btn:'Request Pilot Access',r_deck:'View Live Deck',
+      foot:'Pilot inquiries: '},
+  it:{badge:'Pilot Dashboard (anteprima)',h_title:'Dashboard Pilot — Anteprima',h_sub:'Le metriche che contano: velocità di risposta, follow-up e visite fissate.',h_note:'Solo lettura; nei pilot reali questi KPI si aggiornano live.',btn_back:'Torna alla Landing',btn_deck:'Apri Deck',
+      s1:'🧭 Passo 1 — KPI a colpo d’occhio',k_title:'Panoramica di oggi',k1_label:'Tempo medio di risposta',k2_label:'Follow-up inviati',k3_label:'Visite fissate',k4_label:'Conversazioni da gestire',k_hint:'I numeri che un manager vuole ogni giorno: velocità, costanza, conversione.',
+      s2:'💬 Passo 2 — Conversazioni (esempio)',c_title:'Thread WhatsApp (mock)',c1:'Ultimo msg 12:10',c2:'Ultimo msg 11:58',c3:'Ultimo msg 11:22',c_hint:'Kintra propone risposte strutturate e prossime azioni: non sfugge nulla.',
+      s3:'⚙️ Passo 3 — Prossime azioni',n_title:'Suggerimenti smart (auto)',n_hint:'Nei pilot reali questi suggerimenti arrivano live dai tuoi thread WhatsApp.',
+      s4:'🚀 Passo 4 — Pronto per il pilot?',r_title:'Avvia il pilot da 2–4 settimane',r_text:'Setup leggero. 3–5 interazioni reali. Minuti risparmiati misurabili.',r_btn:'Richiedi accesso al Pilot',r_deck:'Vedi il Deck',
+      foot:'Richieste pilot: '}
+};
+function applyLang(lang){
+  localStorage.setItem('kintra_lang',lang);
+  document.documentElement.lang=(lang==='it'?'it':'en');
+  const m=dict[lang];
+  for(const [k,v] of Object.entries(m)){const el=$(k);if(el) el.textContent=v}
+  $('foot_contact').innerHTML=(dict[lang].foot)+'<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
+  $('langEN').classList.toggle('active',lang==='en');$('langIT').classList.toggle('active',lang==='it');
+}
+const savedLang=()=>localStorage.getItem('kintra_lang')||((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en');
+applyLang(savedLang());
+$('langEN').onclick=()=>applyLang('en');$('langIT').onclick=()=>applyLang('it');
 </script>
 </body>
 </html>
