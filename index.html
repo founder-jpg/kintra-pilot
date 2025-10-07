@@ -7,31 +7,24 @@
 <meta name="description" content="Kintra helps real estate teams reply faster, structure conversations, and book more viewings — across WhatsApp and web.">
 <link rel="icon" href="data:,">
 <style>
-  :root{
-    --bg:#0b1220; --panel:#0f172a; --card:#111a2c; --border:#22304b;
-    --fg:#f5f7fb; --muted:#a8b3c7; --accent:#0ea5e9; --good:#10b981; --warn:#f59e0b; --bad:#ef4444;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  :root{--bg:#0b1220;--panel:#0f172a;--card:#111a2c;--border:#22304b;--fg:#f5f7fb;--muted:#a8b3c7;--accent:#0ea5e9;--good:#10b981;--bad:#ef4444}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
   a{color:var(--accent);text-decoration:none}
   .wrap{max-width:1100px;margin:0 auto;padding:22px}
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-  .brand{display:flex;align-items:center;gap:10px}
-  .brand img{width:28px;height:28px}
+  .brand{display:flex;align-items:center;gap:10px}.brand img{width:28px;height:28px}
   .lang{display:flex;gap:8px;align-items:center}
-  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer;user-select:none}
+  .pill{padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#c7cfda;cursor:pointer}
   .pill.active{border-color:var(--accent);color:#fff;background:rgba(14,165,233,.15)}
   .kbadge{display:inline-block;border:1px solid var(--border);padding:4px 8px;border-radius:999px;color:#c7cfda}
 
-  /* hero */
-  .hero{border:1px solid var(--border);border-radius:14px;padding:26px;background:linear-gradient(180deg,#0f172a, #0b1220)}
+  .hero{border:1px solid var(--border);border-radius:14px;padding:26px;background:linear-gradient(180deg,#0f172a,#0b1220)}
   h1{font-size:34px;line-height:1.2;margin:0 0 8px}
   p.lead{color:#cfe4ff;margin:0 0 14px}
   .btn{display:inline-block;background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 14px;margin-right:8px}
   .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
   .subtle{color:var(--muted);margin-top:6px}
 
-  /* grid sections */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
   .card{border:1px solid var(--border);background:var(--card);border-radius:14px;padding:16px}
   .card h3{margin:0 0 8px}
@@ -39,11 +32,8 @@
   input,textarea{width:100%;background:#0c1424;color:#e8eef9;border:1px solid var(--border);border-radius:10px;padding:10px}
   textarea{min-height:90px;resize:vertical}
   pre{background:#0c1424;border:1px solid var(--border);padding:10px;border-radius:10px;overflow:auto}
-  .ok{color:var(--good)}
-  .err{color:var(--bad)}
   .toast{position:fixed;right:16px;bottom:16px;background:#0f172a;border:1px solid var(--border);padding:10px 14px;border-radius:10px;display:none}
   .foot{margin:18px 0 6px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-
   @media (max-width:900px){ .grid{grid-template-columns:1fr} h1{font-size:28px} }
 </style>
 </head>
@@ -52,8 +42,7 @@
 
   <header>
     <div class="brand">
-      <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'">
-      <b>Kintra</b>
+      <img src="./img/logo.png.png" alt="" onerror="this.style.display='none'"><b>Kintra</b>
     </div>
     <div class="lang">
       <span class="kbadge" id="badge">Pilot • IT + WhatsApp</span>
@@ -62,7 +51,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <h1 id="h_title">From listing to leads, faster.</h1>
     <p class="lead" id="h_sub">Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.</p>
@@ -72,10 +60,8 @@
     <div class="subtle" id="h_note">Built for Italy • WhatsApp + Web • Lightweight pilot</div>
   </section>
 
-  <!-- GRID SECTIONS -->
   <section class="grid">
 
-    <!-- 10s DEMO -->
     <div class="card">
       <h3 id="d_title">Try a 10-second demo</h3>
       <p class="subtle" id="d_hint">Type any text; we normalize and show an Italian hint (mock) to prove the flow.</p>
@@ -85,7 +71,6 @@
       <pre id="demoOut">—</pre>
     </div>
 
-    <!-- WHATSAPP META DEMO -->
     <div class="card">
       <h3 id="w_title">Send via WhatsApp (Meta demo)</h3>
       <p class="subtle" id="w_hint">Uses Meta Cloud API (test number) to send a real message.</p>
@@ -99,7 +84,6 @@
 
   </section>
 
-  <!-- PILOT FORM -->
   <section class="grid" id="pilot">
     <div class="card">
       <h3 id="p_title">Request Pilot Access</h3>
@@ -114,7 +98,6 @@
       <pre id="p_out">—</pre>
     </div>
 
-    <!-- SOCIAL PROOF -->
     <div class="card">
       <h3 id="s_title">What early partners say</h3>
       <p class="subtle" id="s_1">“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.” — Early partner (pilot)</p>
@@ -132,142 +115,37 @@
 </div>
 
 <script>
-  // ---------- CONFIG ----------
-  const WORKER_META = 'https://kintra-wa-meta.founder-60b.workers.dev';
-  // (Your echo/prompt worker if still used)
-  const WORKER_API  = 'https://kintra-api.founder-60b.workers.dev';
+const WORKER_META='https://kintra-wa-meta.founder-60b.workers.dev';
+const $=id=>document.getElementById(id);
+function showToast(msg='✅ Sent',ms=2200){const t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',ms)}
+function setBtnBusy(btn,b){btn.disabled=!!b;btn.style.opacity=b?0.6:1}
 
-  // ---------- Helpers ----------
-  const $ = (id)=>document.getElementById(id);
-  function showToast(msg='✅ Sent', ms=2200){
-    const t = $('toast'); t.textContent = msg; t.style.display='block';
-    setTimeout(()=>{ t.style.display='none'; }, ms);
-  }
-  function setBtnBusy(btn, busy){
-    btn.disabled = !!busy;
-    btn.style.opacity = busy ? 0.6 : 1;
-  }
+$('demoBtn').onclick=async()=>{
+  const inp=$('demoInput').value.trim();$('demoOut').textContent='…';
+  const normalized=inp.toLowerCase();
+  const hint=normalized?('italiano: '+(normalized.includes('hello')?'ciao':normalized)):'—';
+  const meta={chars:inp.length,words:inp?inp.split(/\s+/).length:0};
+  $('demoOut').textContent=JSON.stringify({ok:true,result:{input:inp,normalized,italian_hint:hint,meta},ts:new Date().toISOString()},null,2);
+};
 
-  // ---------- 10s Demo ----------
-  $('demoBtn').onclick = async ()=>{
-    const inp = $('demoInput').value.trim();
-    $('demoOut').textContent = '…';
-    try{
-      // mock “normalize + italian_hint”
-      const normalized = inp.toLowerCase();
-      const hint = normalized ? 'italiano: ' + (normalized.includes('hello')?'ciao':normalized) : '—';
-      const meta = { chars: inp.length, words: inp ? inp.split(/\s+/).length : 0 };
-      $('demoOut').textContent = JSON.stringify({
-        ok:true, result:{ input:inp, normalized, italian_hint:hint, meta }, ts:new Date().toISOString()
-      }, null, 2);
-    }catch(e){
-      $('demoOut').textContent = 'Error: ' + e.message;
-    }
-  };
+$('waBtn').onclick=async()=>{
+  const phone=$('waPhone').value.trim();
+  const text=$('waMsg').value.trim()||'Ciao 👋 da Kintra — test rapido!';
+  const out=$('waOut'), btn=$('waBtn');
+  out.textContent='Sending…'; setBtnBusy(btn,true);
+  try{
+    const res=await fetch(WORKER_META+'/api/wa',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:phone,text})});
+    const raw=await res.text(); let json; try{json=JSON.parse(raw)}catch{json={raw}}
+    out.textContent=JSON.stringify(json,null,2);
+    if(res.ok && json.ok) showToast('✅ WhatsApp sent'); else showToast('⚠️ Check response',2400);
+  }catch(e){ out.textContent='Error: '+e.message; showToast('❌ Failed',2400) } finally{ setBtnBusy(btn,false) }
+};
 
-  // ---------- WhatsApp (Meta demo) ----------
-  $('waBtn').onclick = async ()=>{
-    const phone = $('waPhone').value.trim();
-    const text  = $('waMsg').value.trim() || 'Ciao 👋 da Kintra — test rapido!';
-    const out   = $('waOut');
-    const btn   = $('waBtn');
-    out.textContent = 'Sending…';
-    setBtnBusy(btn, true);
-    try{
-      const res = await fetch(WORKER_META + '/api/wa', {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json' },
-        body: JSON.stringify({ to: phone, text })
-      });
-      const raw = await res.text();
-      let json; try{ json = JSON.parse(raw); }catch{ json = { raw }; }
-      out.textContent = JSON.stringify(json, null, 2);
-      if (res.ok && json.ok) showToast('✅ WhatsApp sent');
-      else showToast('⚠️ Check response', 2400);
-    }catch(e){
-      out.textContent = 'Error: ' + e.message;
-      showToast('❌ Failed', 2400);
-    }finally{
-      setBtnBusy(btn, false);
-    }
-  };
-
-  // ---------- Pilot form (mock post) ----------
-  $('p_send').onclick = async ()=>{
-    const name = $('p_name').value.trim();
-    const email = $('p_email').value.trim();
-    const flow = $('p_flow').value.trim();
-    $('p_out').textContent = 'Thanks — we’ll be in touch within 24 hours.';
-  };
-
-  // ---------- i18n ----------
-  const dict = {
-    en:{
-      badge:'Pilot • IT + WhatsApp',
-      h_title:'From listing to leads, faster.',
-      h_sub:'Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.',
-      h_note:'Built for Italy • WhatsApp + Web • Lightweight pilot',
-      d_title:'Try a 10-second demo',
-      d_hint:'Type any text; we normalize and show an Italian hint (mock) to prove the flow.',
-      d_label:'Your text',
-      w_title:'Send via WhatsApp (Meta demo)',
-      w_hint:'Uses Meta Cloud API (test number) to send a real message.',
-      w_label_phone:'Recipient phone (E.164)',
-      w_label_msg:'Message',
-      p_title:'Request Pilot Access',
-      p_name_label:'Name',
-      p_email_label:'Work email',
-      p_flow_label:'What’s your current workflow? (optional)',
-      s_title:'What early partners say',
-      s_1:'“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.” — Early partner (pilot)',
-      s_2:'“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.” — Agency lead (pilot)',
-      foot:'Pilot inquiries: '
-    },
-    it:{
-      badge:'Pilot • IT + WhatsApp',
-      h_title:'Dall’annuncio ai contatti, più velocemente.',
-      h_sub:'Kintra aiuta i team immobiliari a rispondere più in fretta, strutturare le conversazioni e fissare più visite — su WhatsApp e web.',
-      h_note:'Creato per l’Italia • WhatsApp + Web • Pilot leggero',
-      d_title:'Prova da 10 secondi',
-      d_hint:'Scrivi un testo; normalizziamo e mostriamo un suggerimento in italiano (mock) per provare il flusso.',
-      d_label:'Il tuo testo',
-      w_title:'Invia via WhatsApp (demo Meta)',
-      w_hint:'Usa la Meta Cloud API (numero di test) per inviare un messaggio reale.',
-      w_label_phone:'Telefono destinatario (E.164)',
-      w_label_msg:'Messaggio',
-      p_title:'Richiedi accesso al Pilot',
-      p_name_label:'Nome',
-      p_email_label:'Email di lavoro',
-      p_flow_label:'Qual è il tuo flusso attuale? (opzionale)',
-      s_title:'Cosa dicono i partner',
-      s_1:'“Kintra ha fatto risparmiare tempo reale agli agenti. Le risposte sono più rapide e i follow-up non sfuggono.” — Partner (pilot)',
-      s_2:'“Setup facile. Abbiamo collegato WhatsApp + web e visto valore nella stessa settimana.” — Responsabile agenzia (pilot)',
-      foot:'Richieste pilot: '
-    }
-  };
-  const $t = (k)=> {
-    const lang = localStorage.getItem('kintra_lang') || (navigator.language||'en').toLowerCase().startsWith('it') ? 'it' : 'en';
-    return (dict[lang]||dict.en)[k] || (dict.en[k]||k);
-  };
-  const els = {
-    badge:'badge', h_title:'h_title', h_sub:'h_sub', h_note:'h_note',
-    d_title:'d_title', d_hint:'d_hint', d_label:'d_label',
-    w_title:'w_title', w_hint:'w_hint', w_label_phone:'w_label_phone', w_label_msg:'w_label_msg',
-    p_title:'p_title', p_name_label:'p_name_label', p_email_label:'p_email_label', p_flow_label:'p_flow_label',
-    s_title:'s_title', s_1:'s_1', s_2:'s_2'
-  };
-  function applyLang(lang){
-    localStorage.setItem('kintra_lang', lang);
-    document.documentElement.lang = (lang==='it'?'it':'en');
-    for (const k in els){ $(els[k]).textContent = dict[lang][k]; }
-    $('foot_contact').innerHTML = (dict[lang].foot) + '<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
-    $('langEN').classList.toggle('active', lang==='en');
-    $('langIT').classList.toggle('active', lang==='it');
-  }
-  const saved = localStorage.getItem('kintra_lang');
-  applyLang(saved || ((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en'));
-  $('langEN').onclick = ()=>applyLang('en');
-  $('langIT').onclick = ()=>applyLang('it');
+// i18n
+const dict={en:{badge:'Pilot • IT + WhatsApp',h_title:'From listing to leads, faster.',h_sub:'Kintra helps real estate teams respond faster, structure conversations, and book more viewings — across WhatsApp and web.',h_note:'Built for Italy • WhatsApp + Web • Lightweight pilot',d_title:'Try a 10-second demo',d_hint:'Type any text; we normalize and show an Italian hint (mock) to prove the flow.',d_label:'Your text',w_title:'Send via WhatsApp (Meta demo)',w_hint:'Uses Meta Cloud API (test number) to send a real message.',w_label_phone:'Recipient phone (E.164)',w_label_msg:'Message',p_title:'Request Pilot Access',p_name_label:'Name',p_email_label:'Work email',p_flow_label:'What’s your current workflow? (optional)',s_title:'What early partners say',s_1:'“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.” — Early partner (pilot)',s_2:'“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.” — Agency lead (pilot)',foot:'Pilot inquiries: '},it:{badge:'Pilot • IT + WhatsApp',h_title:'Dall’annuncio ai contatti, più velocemente.',h_sub:'Kintra aiuta i team immobiliari a rispondere più in fretta, strutturare le conversazioni e fissare più visite — su WhatsApp e web.',h_note:'Creato per l’Italia • WhatsApp + Web • Pilot leggero',d_title:'Prova da 10 secondi',d_hint:'Scrivi un testo; normalizziamo e mostriamo un suggerimento in italiano (mock) per provare il flusso.',d_label:'Il tuo testo',w_title:'Invia via WhatsApp (demo Meta)',w_hint:'Usa la Meta Cloud API (numero di test) per inviare un messaggio reale.',w_label_phone:'Telefono destinatario (E.164)',w_label_msg:'Messaggio',p_title:'Richiedi accesso al Pilot',p_name_label:'Nome',p_email_label:'Email di lavoro',p_flow_label:'Qual è il tuo flusso attuale? (opzionale)',s_title:'Cosa dicono i partner',s_1:'“Kintra ha fatto risparmiare tempo reale agli agenti. Le risposte sono più rapide e i follow-up non sfuggono.” — Partner (pilot)',s_2:'“Setup facile. Abbiamo collegato WhatsApp + web e visto valore nella stessa settimana.” — Responsabile agenzia (pilot)',foot:'Richieste pilot: '}};
+function applyLang(lang){localStorage.setItem('kintra_lang',lang);document.documentElement.lang=(lang==='it'?'it':'en');const m=dict[lang];$('badge').textContent=m.badge;$('h_title').textContent=m.h_title;$('h_sub').textContent=m.h_sub;$('h_note').textContent=m.h_note;$('d_title').textContent=m.d_title;$('d_hint').textContent=m.d_hint;$('d_label').textContent=m.d_label;$('w_title').textContent=m.w_title;$('w_hint').textContent=m.w_hint;$('w_label_phone').textContent=m.w_label_phone;$('w_label_msg').textContent=m.w_label_msg;$('p_title').textContent=m.p_title;$('p_name_label').textContent=m.p_name_label;$('p_email_label').textContent=m.p_email_label;$('p_flow_label').textContent=m.p_flow_label;$('s_title').textContent=m.s_title;$('s_1').textContent=m.s_1;$('s_2').textContent=m.s_2;$('foot_contact').innerHTML=(m.foot)+'<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';document.getElementById('langEN').classList.toggle('active',lang==='en');document.getElementById('langIT').classList.toggle('active',lang==='it')}
+const saved=localStorage.getItem('kintra_lang');applyLang(saved||((navigator.language||'en').toLowerCase().startsWith('it')?'it':'en'));
+document.getElementById('langEN').onclick=()=>applyLang('en');document.getElementById('langIT').onclick=()=>applyLang('it');
 </script>
 </body>
 </html>
