@@ -1,4 +1,4 @@
-<!doctype html> 1233444
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -34,7 +34,6 @@
     .lang{display:flex;gap:6px}
     .lang button{border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:10px;cursor:pointer}
     .lang button.active{background:#0e1726;color:#fff;border-color:#0e1726}
-    .demo-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
   </style>
 </head>
 <body>
@@ -63,19 +62,13 @@
 
     <section id="demo">
       <h2 data-i18n="demo_title">Try a 10-second demo</h2>
-      <p class="why" data-i18n="demo_note">Type a message and test the pilot. Kintra will draft a smart reply instantly.</p>
+      <p class="why" data-i18n="demo_note">Make sure the recipient first messages your Meta test number with “hello.”<br/>Then send any text below — Kintra will instantly reply.</p>
       <div class="demo-box">
         <label data-i18n="to_label">Recipient phone (E.164):</label>
         <input type="text" id="to" placeholder="+39..." />
         <label data-i18n="msg_label">Message:</label>
         <textarea id="text" rows="2" placeholder="Scrivi qui..."></textarea>
-
-        <div class="demo-actions">
-          <button id="sendBtn" data-i18n="send_btn">Send via WhatsApp (Meta demo)</button>
-          <button id="aiBtn" data-i18n="ai_btn">AI Suggested Reply</button>
-          <button id="sumBtn" data-i18n="sum_btn">Generate Summary</button>
-        </div>
-
+        <button id="sendBtn" data-i18n="send_btn">Send via WhatsApp (Meta demo)</button>
         <p id="result" style="font-size:14px;color:#5b6475;margin-top:10px;"></p>
       </div>
     </section>
@@ -94,31 +87,26 @@
   </div>
 
   <script>
+    // --- Lang dictionary
     const dict = {
-      en:{
-        preview_dash:"Preview Dashboard",view_deck:"View Live Deck",view_pdf:"View Deck PDF",
-        hero_title:"Build faster WhatsApp funnels — without extra hires.",
-        hero_sub:"Trusted by Italian agencies testing now. Time = Money. Let Kintra do the first reply.",
-        try_demo:"Try a 10-second demo",demo_title:"Try a 10-second demo",
-        demo_note:"Type a message and test the pilot. Kintra will draft a smart reply instantly.",
-        to_label:"Recipient phone (E.164):",msg_label:"Message:",
-        send_btn:"Send via WhatsApp (Meta demo)",ai_btn:"AI Suggested Reply",sum_btn:"Generate Summary",
-        why_title:"Why this matters",
-        why_copy:"Every minute an agent spends retyping “Hi, yes it’s available” is a minute lost to new leads. Kintra drafts instant WhatsApp replies so you focus on deals — not copy-pasting chats.",
-        footer:"Powered by Kintra AI — built for real estate teams."
-      },
-      it:{
-        preview_dash:"Anteprima Dashboard",view_deck:"Visualizza Deck Live",view_pdf:"Apri Deck PDF",
-        hero_title:"Costruisci funnel WhatsApp più veloci — senza assumere personale extra.",
-        hero_sub:"Già testato da agenzie italiane. Tempo = Denaro. Lascia che Kintra risponda per primo.",
-        try_demo:"Prova la demo di 10 secondi",demo_title:"Prova la demo di 10 secondi",
-        demo_note:"Scrivi un messaggio e testa il pilota. Kintra creerà subito una risposta intelligente.",
-        to_label:"Telefono destinatario (E.164):",msg_label:"Messaggio:",
-        send_btn:"Invia tramite WhatsApp (demo Meta)",ai_btn:"Risposta suggerita dall’AI",sum_btn:"Genera riepilogo",
-        why_title:"Perché è importante",
-        why_copy:"Ogni minuto speso a riscrivere 'Sì, è disponibile' è un minuto perso per nuovi lead. Kintra crea risposte WhatsApp istantanee così puoi concentrarti sulle vendite.",
-        footer:"Tecnologia Kintra AI — creata per i team immobiliari."
-      }
+      en:{preview_dash:"Preview Dashboard",view_deck:"View Live Deck",view_pdf:"View Deck PDF",
+          hero_title:"Build faster WhatsApp funnels — without extra hires.",
+          hero_sub:"Trusted by Italian agencies testing now. Time = Money. Let Kintra do the first reply.",
+          try_demo:"Try a 10-second demo",demo_title:"Try a 10-second demo",
+          demo_note:"Make sure the recipient first messages your Meta test number with “hello.” Then send any text below — Kintra will instantly reply.",
+          to_label:"Recipient phone (E.164):",msg_label:"Message:",send_btn:"Send via WhatsApp (Meta demo)",
+          why_title:"Why this matters",
+          why_copy:"Every minute an agent spends retyping “Hi, yes it’s available” is a minute lost to new leads. Kintra drafts instant WhatsApp replies so you focus on deals — not copy-pasting chats.",
+          footer:"Powered by Kintra AI — built for real estate teams."},
+      it:{preview_dash:"Anteprima Dashboard",view_deck:"Visualizza Deck Live",view_pdf:"Apri Deck PDF",
+          hero_title:"Costruisci funnel WhatsApp più veloci — senza assumere personale extra.",
+          hero_sub:"Già testato da agenzie italiane. Tempo = Denaro. Lascia che Kintra risponda per primo.",
+          try_demo:"Prova la demo di 10 secondi",demo_title:"Prova la demo di 10 secondi",
+          demo_note:"Assicurati che il destinatario scriva prima “hello” al tuo numero di test Meta. Poi invia un testo qui sotto — Kintra risponderà subito.",
+          to_label:"Telefono destinatario (E.164):",msg_label:"Messaggio:",send_btn:"Invia tramite WhatsApp (demo Meta)",
+          why_title:"Perché è importante",
+          why_copy:"Ogni minuto speso a riscrivere 'Sì, è disponibile' è un minuto perso per nuovi lead. Kintra crea risposte WhatsApp istantanee così puoi concentrarti sulle vendite.",
+          footer:"Tecnologia Kintra AI — creata per i team immobiliari."}
     };
 
     function setLang(lang){
@@ -144,6 +132,7 @@
     document.getElementById('btn-it').addEventListener('click',()=>setLang('it'));
     initLang();
 
+    // --- WhatsApp demo
     document.getElementById('sendBtn').addEventListener('click',async()=>{
       const to=document.getElementById('to').value.trim();
       const text=document.getElementById('text').value.trim();
@@ -160,15 +149,6 @@
         else{result.textContent='⚠️ Failed: '+(data.error||'Unknown error');}
       }catch(e){result.textContent='Error: '+e.message;}
     });
-
-    // Demo of AI and summary placeholders
-    document.getElementById('aiBtn').addEventListener('click',()=>{
-      document.getElementById('result').textContent="✨ Suggested reply: 'Hi! Yes, it’s available — want to schedule a viewing?'";
-    });
-    document.getElementById('sumBtn').addEventListener('click',()=>{
-      document.getElementById('result').textContent="📋 Summary: 3 inquiries today, 2 viewings scheduled.";
-    });
   </script>
 </body>
 </html>
-
