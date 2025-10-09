@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kintra — Connecting Italian Agencies to Global Buyers</title>
+  <meta name="description" content="An Italian initiative helping agencies attract international clients through intelligent workflows. See the 10‑minute demo." />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kintra — Connecting Italian Agencies to Global Buyers" />
+  <meta property="og:description" content="Competitors inform. Kintra performs. Book a 10‑minute demo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.jpg" />
+  <meta property="og:url" content="https://kintra.example" />
+  <!-- Tailwind for rapid pilot build -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass{backdrop-filter:saturate(180%) blur(12px); background:rgba(255,255,255,0.7)}
+    .gold{color:#C8A03E}
+    .gold-bg{background-color:#C8A03E}
+    .navy{background:#0B1320}
+    .mist{background:#F5F5F5}
+    .divider{height:1px;background:linear-gradient(90deg,transparent, #C8A03E, transparent)}
+  </style>
+</head>
+<body class="bg-white text-slate-900 selection:bg-amber-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 glass border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2" aria-label="Kintra home">
+        <span class="inline-block h-8 w-8 rounded-xl bg-slate-900"></span>
+        <span class="font-semibold tracking-tight">Kintra</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#demo" class="hover:text-slate-600 lang-en">Demo</a>
+        <a href="#demo" class="hover:text-slate-600 lang-it hidden">Demo</a>
+        <a href="#deck" class="hover:text-slate-600">Deck</a>
+        <a href="#join" class="hover:text-slate-600 lang-en">Join Pilot</a>
+        <a href="#join" class="hover:text-slate-600 lang-it hidden">Partecipa al Pilot</a>
+        <button id="langToggle" class="text-xs px-3 py-1 rounded-lg border hover:bg-white" aria-label="Switch language">🇮🇹/🇬🇧</button>
+      </nav>
+      <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-white" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+      </button>
+    </div>
+    <!-- Advisor Charter ribbon (generic by default) -->
+    <div class="bg-amber-50/80 border-t border-b border-amber-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 text-sm">
+        <p class="lang-en"><span class="gold font-semibold">Advisor Charter</span> — Guided by industry leaders.</p>
+        <p class="lang-it hidden"><span class="gold font-semibold">Advisor Charter</span> — Guidato da leader del settore.</p>
+      </div>
+    </div>
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-slate-200">
+      <div class="px-4 py-3 flex flex-col gap-3 text-sm">
+        <a href="#demo" class="hover:text-slate-600 lang-en">Demo</a>
+        <a href="#demo" class="hover:text-slate-600 lang-it hidden">Demo</a>
+        <a href="#deck" class="hover:text-slate-600">Deck</a>
+        <a href="#join" class="hover:text-slate-600 lang-en">Join Pilot</a>
+        <a href="#join" class="hover:text-slate-600 lang-it hidden">Partecipa al Pilot</a>
+        <button id="langToggleMobile" class="mt-2 text-xs px-3 py-2 rounded-lg border">🇮🇹/🇬🇧</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="h-24"></div>
+      <div class="divider"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight lang-en">Connecting Italian Real‑Estate Agencies with Global Buyers.</h1>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight lang-it hidden">Collega le agenzie immobiliari italiane con acquirenti internazionali.</h1>
+        <p class="mt-5 text-lg text-slate-600 lang-en">A new Italian initiative helping agencies attract international clients through streamlined digital workflows.</p>
+        <p class="mt-5 text-lg text-slate-600 lang-it hidden">Una nuova iniziativa italiana che aiuta le agenzie ad attrarre clienti internazionali con flussi di lavoro digitali semplificati.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#demo" class="inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-en">See the Demo</a>
+          <a href="#demo" class="inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-it hidden">Guarda la Demo</a>
+          <a href="#deck" class="inline-flex items-center rounded-xl border px-5 py-3 hover:bg-slate-50">📘 Deck</a>
+        </div>
+      </div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+        <div class="aspect-video mist rounded-xl flex items-center justify-center text-slate-400">Hero visual / OG image preview</div>
+        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+          <div class="p-4 rounded-xl mist border">
+            <div class="text-2xl font-bold">+37%</div>
+            <div class="text-xs text-slate-500 lang-en">Reply rate</div>
+            <div class="text-xs text-slate-500 lang-it hidden">Tasso di risposta</div>
+          </div>
+          <div class="p-4 rounded-xl mist border">
+            <div class="text-2xl font-bold">→ 2–3×</div>
+            <div class="text-xs text-slate-500 lang-en">Faster to pilot</div>
+            <div class="text-xs text-slate-500 lang-it hidden">Pilot più veloce</div>
+          </div>
+          <div class="p-4 rounded-xl mist border">
+            <div class="text-2xl font-bold">€2k</div>
+            <div class="text-xs text-slate-500 lang-en">Flat monthly</div>
+            <div class="text-xs text-slate-500 lang-it hidden">Canone mensile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built for Italy (wedge) -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold tracking-tight flex items-center gap-3"><img src="https://flagcdn.com/w20/it.png" alt="Italy flag" class="w-5 h-4 rounded-sm"/><span class="lang-en">Built for Italian Agencies, Ready for the World.</span><span class="lang-it hidden">Creato per le agenzie italiane, pronto per il mondo.</span></h2>
+      <p class="mt-2 text-slate-600 lang-en">Kintra speaks your language — literally and culturally. Designed for agencies working with foreign buyers, fully GDPR‑aware, and adapted to the rhythm of Italian real‑estate work.</p>
+      <p class="mt-2 text-slate-600 lang-it hidden">Kintra parla la tua lingua — letteralmente e culturalmente. Progettato per agenzie che lavorano con acquirenti esteri, conforme al GDPR e adattato al ritmo del lavoro immobiliare italiano.</p>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white border rounded-2xl p-6">
+          <h3 class="font-semibold lang-en">Multilingual outreach templates</h3>
+          <h3 class="font-semibold lang-it hidden">Template multilingue per l’outreach</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Italian/English tone built‑in; north↔south etiquette respected.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Tono IT/EN integrato; etichetta Nord↔Sud rispettata.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <h3 class="font-semibold lang-en">Automatic follow‑up via WhatsApp & email</h3>
+          <h3 class="font-semibold lang-it hidden">Follow‑up automatico via WhatsApp ed email</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Never miss a nudge; reminders that feel human.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Nessun sollecito perso; promemoria con tono umano.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <h3 class="font-semibold lang-en">Smart listing summary generator</h3>
+          <h3 class="font-semibold lang-it hidden">Generatore smart di schede annuncio</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">From raw data to polished descriptions for web/social.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Dai dati grezzi a descrizioni pronte per web/social.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <h3 class="font-semibold lang-en">Secure, compliant data handling</h3>
+          <h3 class="font-semibold lang-it hidden">Gestione dati sicura e conforme</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">GDPR‑minded sequences and opt‑out hygiene.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Sequenze orientate al GDPR e opt‑out puliti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-20 mist">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold tracking-tight lang-en">How it works</h2>
+      <h2 class="text-3xl font-bold tracking-tight lang-it hidden">Come funziona</h2>
+      <p class="mt-2 text-slate-600 lang-en">Every agency follows the same rhythm: find, respond, grow. Kintra automates the slow parts so you can focus on people.</p>
+      <p class="mt-2 text-slate-600 lang-it hidden">Ogni agenzia ha lo stesso ritmo: trovare, rispondere, crescere. Kintra automatizza le parti lente così puoi concentrarti sulle persone.</p>
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white border rounded-2xl p-6">
+          <div class="text-sm font-semibold text-slate-500">01</div>
+          <h3 class="mt-1 font-semibold lang-en">Calibrate</h3>
+          <h3 class="mt-1 font-semibold lang-it hidden">Calibra</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Define your listings’ story once; Kintra learns your tone.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Definisci una volta la storia degli immobili; Kintra apprende il tuo tono.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <div class="text-sm font-semibold text-slate-500">02</div>
+          <h3 class="mt-1 font-semibold lang-en">Outreach</h3>
+          <h3 class="mt-1 font-semibold lang-it hidden">Outreach</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Let the system handle first‑contact replies while you focus on live clients.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Lascia al sistema le prime risposte; tu concentrati sui clienti attivi.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <div class="text-sm font-semibold text-slate-500">03</div>
+          <h3 class="mt-1 font-semibold lang-en">Follow‑up</h3>
+          <h3 class="mt-1 font-semibold lang-it hidden">Follow‑up</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Every lead gets a personal, on‑time message — automatically.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Ogni lead riceve un messaggio personale e puntuale — in automatico.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6">
+          <div class="text-sm font-semibold text-slate-500">04</div>
+          <h3 class="mt-1 font-semibold lang-en">Scale</h3>
+          <h3 class="mt-1 font-semibold lang-it hidden">Scala</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Add capacity without adding staff.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Aumenti la capacità senza aumentare l’organico.</p>
+        </div>
+      </div>
+
+      <!-- Rotating feature carousel (3 cards) -->
+      <div class="mt-12 grid lg:grid-cols-3 gap-6" id="featureCarousel">
+        <div class="bg-white border rounded-2xl p-6 feature-card">
+          <h3 class="font-semibold lang-en">WhatsApp Smart Reply</h3>
+          <h3 class="font-semibold lang-it hidden">Risposta Smart su WhatsApp</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Suggested replies you approve in one click.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Risposte suggerite da approvare con un clic.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6 feature-card hidden">
+          <h3 class="font-semibold lang-en">Listing Summary Generator</h3>
+          <h3 class="font-semibold lang-it hidden">Generatore scheda annuncio</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Turn property data into polished descriptions for web/social.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Da dati immobile a descrizioni pronte per web/social.</p>
+        </div>
+        <div class="bg-white border rounded-2xl p-6 feature-card hidden">
+          <h3 class="font-semibold lang-en">Follow‑up Scheduler</h3>
+          <h3 class="font-semibold lang-it hidden">Scheduler dei solleciti</h3>
+          <p class="mt-2 text-sm text-slate-600 lang-en">Never miss a nudge; staggered reminders that feel human.</p>
+          <p class="mt-2 text-sm text-slate-600 lang-it hidden">Nessun sollecito perso; promemoria scaglionati “umani”.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo preview -->
+  <section id="demo" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold tracking-tight lang-en">See it in action</h2>
+      <h2 class="text-3xl font-bold tracking-tight lang-it hidden">Guarda in azione</h2>
+      <div class="mt-6 grid lg:grid-cols-2 gap-8 items-start">
+        <div class="bg-white border rounded-2xl p-6">
+          <p class="text-sm text-slate-600 lang-en">Example conversation:</p>
+          <p class="text-sm text-slate-600 lang-it hidden">Conversazione di esempio:</p>
+          <div class="mt-3 space-y-3">
+            <div class="p-3 rounded-xl mist"><span class="font-medium">Cliente:</span> <span class="lang-en">“Can we view the apartment Friday at 18:30?”</span><span class="lang-it hidden">“Possiamo visitare l’appartamento venerdì alle 18:30?”</span></div>
+            <div class="p-3 rounded-xl bg-slate-900 text-white"><span class="font-medium">Kintra:</span> <span class="lang-en">“Friday 18:30 works perfectly — I’ll share the location and parking info. Do you prefer WhatsApp or email for confirmation?”</span><span class="lang-it hidden">“Venerdì 18:30 perfetto — invio posizione e info parcheggio. Preferisci conferma su WhatsApp o email?”</span></div>
+          </div>
+          <a href="#join" class="mt-6 inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-en">Try the Demo</a>
+          <a href="#join" class="mt-6 inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-it hidden">Prova la Demo</a>
+        </div>
+        <div class="grid gap-6">
+          <img src="/screenshots/whatsapp-reply.png" alt="Preview: WhatsApp Smart Reply" class="w-full rounded-2xl border"/>
+          <img src="/screenshots/listing-summary.png" alt="Preview: Listing Summary Generator" class="w-full rounded-2xl border"/>
+          <img src="/screenshots/dashboard-mini.png" alt="Preview: Dashboard mini metrics" class="w-full rounded-2xl border"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & logos -->
+  <section class="py-20 border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold lang-en">Trusted by forward‑thinking agencies</h2>
+      <h2 class="text-2xl font-bold lang-it hidden">Scelto dalle agenzie più lungimiranti</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <figure class="border rounded-2xl p-6">
+          <blockquote class="text-sm text-slate-700 lang-en">“Booked pilots faster than any previous campaign.”</blockquote>
+          <blockquote class="text-sm text-slate-700 lang-it hidden">“Attivati pilot più velocemente di qualsiasi campagna precedente.”</blockquote>
+          <figcaption class="mt-3 text-xs text-slate-500">Pilot Agency — Milan</figcaption>
+        </figure>
+        <figure class="border rounded-2xl p-6">
+          <blockquote class="text-sm text-slate-700 lang-en">“Paid for itself in the first month.”</blockquote>
+          <blockquote class="text-sm text-slate-700 lang-it hidden">“Si è ripagato nel primo mese.”</blockquote>
+          <figcaption class="mt-3 text-xs text-slate-500">Boutique Brokerage</figcaption>
+        </figure>
+        <figure class="border rounded-2xl p-6">
+          <blockquote class="text-sm text-slate-700 lang-en">“Zero heavy lifting on our side. Clean.”</blockquote>
+          <blockquote class="text-sm text-slate-700 lang-it hidden">“Zero carico sul nostro team. Pulito.”</blockquote>
+          <figcaption class="mt-3 text-xs text-slate-500">Agency — Rome</figcaption>
+        </figure>
+      </div>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 opacity-60">
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+        <div class="h-9 bg-slate-100 rounded flex items-center justify-center text-[10px] text-slate-500">CONFIDENTIAL</div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500 lang-en">Full case studies launching Q1 2026.</p>
+      <p class="mt-4 text-xs text-slate-500 lang-it hidden">Casi studio completi in uscita Q1 2026.</p>
+    </div>
+  </section>
+
+  <!-- Objection killer -->
+  <section class="py-20 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold lang-en">“Couldn’t we just do this with ChatGPT?”</h2>
+      <h2 class="text-2xl font-bold lang-it hidden">“Non possiamo farlo internamente con ChatGPT?”</h2>
+      <div class="mt-4 grid md:grid-cols-3 gap-6">
+        <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+          <h3 class="font-semibold lang-en">Tools ≠ System</h3>
+          <h3 class="font-semibold lang-it hidden">Strumenti ≠ Sistema</h3>
+          <p class="mt-2 text-slate-300 text-sm lang-en">Access doesn’t equal adoption. Kintra provides ready‑to‑use, compliant <em>intelligent workflows</em>.</p>
+          <p class="mt-2 text-slate-300 text-sm lang-it hidden">L’accesso non è adozione. Kintra fornisce <em>workflow intelligenti</em> pronti all’uso e conformi.</p>
+        </div>
+        <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+          <h3 class="font-semibold lang-en">Speed & Consistency</h3>
+          <h3 class="font-semibold lang-it hidden">Velocità & Coerenza</h3>
+          <p class="mt-2 text-slate-300 text-sm lang-en">No stitching five tools. Outreach, follow‑ups, conversion — end‑to‑end.</p>
+          <p class="mt-2 text-slate-300 text-sm lang-it hidden">Niente collage di cinque strumenti. Outreach, follow‑up, conversione — end‑to‑end.</p>
+        </div>
+        <div class="bg-white/5 rounded-xl p-5 border border-white/10">
+          <h3 class="font-semibold lang-en">Cheaper than a hire</h3>
+          <h3 class="font-semibold lang-it hidden">Più economico di un’assunzione</h3>
+          <p class="mt-2 text-slate-300 text-sm lang-en">€2k/mo retainer <span aria-hidden="true">→</span> less than a junior, more output.</p>
+          <p class="mt-2 text-slate-300 text-sm lang-it hidden">€2k/mese <span aria-hidden="true">→</span> meno di un junior, più output.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section id="join" class="py-20 mist">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold lang-en">Italy is ready for its next leap in real‑estate communication.</h2>
+      <h2 class="text-3xl font-bold lang-it hidden">L’Italia è pronta al prossimo salto nella comunicazione immobiliare.</h2>
+      <p class="mt-2 text-slate-600 lang-en">See how Kintra helps agencies connect faster and sell smarter.</p>
+      <p class="mt-2 text-slate-600 lang-it hidden">Scopri come Kintra ti fa connettere più velocemente e vendere meglio.</p>
+      <div class="mt-6 flex justify-center gap-3">
+        <a href="#demo" class="inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-en">Book a 10‑minute demo</a>
+        <a href="#demo" class="inline-flex items-center rounded-xl bg-slate-900 text-white px-5 py-3 hover:bg-slate-800 lang-it hidden">Prenota una demo di 10 minuti</a>
+        <a href="#deck" id="deck" class="inline-flex items-center rounded-xl border px-5 py-3">📘 Deck</a>
+      </div>
+      <p class="mt-3 text-xs text-slate-500 lang-en">Prefer WhatsApp? +39 000 000 0000</p>
+      <p class="mt-3 text-xs text-slate-500 lang-it hidden">Preferisci WhatsApp? +39 000 000 0000</p>
+    </div>
+  </section>
+
+  <footer class="py-10 navy text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div>© <span id="year"></span> Kintra. All rights reserved.</div>
+      <nav class="flex items-center gap-4 text-sm">
+        <a href="#" class="hover:text-white lang-en">About</a>
+        <a href="#" class="hover:text-white lang-it hidden">Chi siamo</a>
+        <a href="#" class="hover:text-white">Privacy</a>
+        <a href="#" class="hover:text-white lang-en">Advisor Charter info</a>
+        <a href="#" class="hover:text-white lang-it hidden">Info Advisor Charter</a>
+      </nav>
+      <div class="text-xs">Powered by AI technology.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Language toggle (simple hide/show)
+    const toggleLang = () => {
+      document.querySelectorAll('.lang-en, .lang-it').forEach(el=>{
+        el.classList.toggle('hidden');
+      });
+    };
+    document.getElementById('langToggle')?.addEventListener('click', toggleLang);
+    document.getElementById('langToggleMobile')?.addEventListener('click', ()=>{toggleLang(); mobileNav.classList.add('hidden');});
+
+    // Mobile nav toggle
+    const btn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+
+    // Feature carousel (rotate cards every 6s)
+    const cards = Array.from(document.querySelectorAll('#featureCarousel .feature-card'));
+    let idx = 0; setInterval(()=>{
+      cards.forEach((c,i)=>c.classList.toggle('hidden', i!==idx));
+      idx = (idx+1)%cards.length;
+    }, 6000);
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
