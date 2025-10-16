@@ -1,267 +1,198 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Kintra — Pilot • Italy</title>
-  <meta name="color-scheme" content="light only"/>
-  <link rel="icon" href="./img/logo.png.png"/>
+  <meta name="theme-color" content="#0b2347" />
+  <link rel="icon" href="./img/logo.png.png" />
 
   <style>
     :root{
-      --bg:#ffffff; --ink:#0b1220; --muted:#525e72; --line:#e8ecf2;
-      --brand:#0b5fff; --gold:#c9a227; --card:#f7f9fc; --chip:#eef3ff;
-      --radius:14px; --max:1100px;
+      --navy:#0b2347; --gold:#c9a227; --ink:#0f172a; --muted:#6b7280;
+      --line:#e5e7eb; --bg:#ffffff; --radius:14px; --max:1100px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);
-      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
-    a{color:var(--brand);text-decoration:none}
+    html,body{margin:0;background:#fff;color:var(--ink);
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:var(--navy);text-decoration:none}
     a:hover{text-decoration:underline}
-    img{display:block;max-width:100%}
-    .wrap{max-width:var(--max);margin:0 auto;padding:26px 22px 60px}
-
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px;
+      justify-content:space-between;margin-bottom:12px}
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
-    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
-
-    .langbox{display:flex;align-items:center;gap:10px}
-    .langbox .label{font-size:14px;color:#6b7280}
-    .toggle{display:flex;gap:8px}
-    .toggle button{
-      display:inline-flex;align-items:center;gap:8px;
-      border:1px solid var(--line);background:#fff;border-radius:999px;
-      padding:6px 12px;cursor:pointer;font-weight:600
-    }
-    .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{display:inline-flex;width:18px;height:12px}
-    .flag svg{width:18px;height:12px;display:block}
-
-    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
-    h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px}
-    .lead{font-size:18px;color:#243044;margin:0 0 10px}
-    .sub{color:var(--muted);margin:0 0 14px}
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
-    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
-    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    .note{font-size:13px;color:#6b7280}
-    .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
-
-    .pricing{margin-top:10px;font-size:14px;color:#243044}
-    .pricing .muted{color:#6b7280}
-
-    .advisor{margin-top:18px;border:1px solid var(--gold);background:linear-gradient(0deg, rgba(201,162,39,.08), rgba(201,162,39,.08)), #fff;
-      border-radius:12px;padding:14px;margin-bottom:8px}
-    .advisor b{color:#1b2233}
-    .advisor small{color:#6b7280}
-
-    .section{margin-top:24px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
-    .card h3{margin:0 0 8px;font-size:18px}
-    .muted{color:var(--muted)}
-    .caption{margin-top:6px;font-size:12px;color:#7b879b}
-
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
-    .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
-    .metric .l{font-size:12px;color:#6b7280}
-
-    .divider{height:1px;background:var(--line);margin:18px 0}
-    .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .form textarea{grid-column:1/-1;min-height:84px}
-    input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
-    input::placeholder,textarea::placeholder{color:#9aa3b2}
-
-    footer{margin-top:24px;font-size:13px;color:#6b7280;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
+    .brand img{width:28px;height:28px;border-radius:8px;object-fit:contain}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;
+      color:var(--muted);font-size:13px}
+    .lang{display:flex;gap:6px;align-items:center}
+    .lang button{border:1px solid var(--line);background:#fff;
+      border-radius:10px;padding:6px 10px;cursor:pointer;font-size:13px}
+    .lang button.active{border-color:var(--gold);color:var(--navy);
+      background:rgba(201,162,39,0.08)}
+    .hero{display:grid;grid-template-columns:1.15fr 0.85fr;gap:28px;
+      align-items:center;margin:18px 0 10px}
+    h1{font-size:40px;line-height:1.1;margin:0 0 10px;color:var(--navy)}
+    .lead{font-size:18px;color:var(--ink);margin:0 0 8px}
+    .sub{color:var(--muted);margin:0 0 16px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 8px}
+    .btn{border:1px solid var(--navy);color:#fff;background:var(--navy);
+      padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.alt{background:#fff;color:var(--navy)}
+    .btn.ghost{background:#fff;color:var(--navy);border-color:var(--line)}
+    .note{font-size:13px;color:var(--muted)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0}
+    .card{border:1px solid var(--line);border-radius:var(--radius);
+      padding:16px;background:#fff}
+    .card h3{margin:0 0 8px;font-size:18px;color:var(--navy)}
+    .meta{font-size:14px;color:var(--muted)}
+    .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .shots img{width:100%;height:210px;object-fit:cover;border-radius:12px;
+      border:1px solid var(--line)}
+    .hr{height:1px;background:var(--line);margin:18px 0}
+    footer{margin:30px 0 10px;color:var(--muted);font-size:14px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .kicker{border-left:3px solid var(--gold);padding-left:12px;
+      background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);
+      border-radius:6px;margin-top:8px}
     @media (max-width:980px){
-      .hero,.grid-2{grid-template-columns:1fr}
+      .hero,.split{grid-template-columns:1fr}
+      .shots img{height:180px}
       h1{font-size:32px}
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-
     <header>
       <div class="brand">
-        <img src="./img/logo.png.png" alt="Kintra logo"/>
+        <img src="./img/logo.png.png" alt="Kintra logo" />
         <strong>Kintra</strong>
-        <span class="badge" id="badge">Pilot • Italy</span>
+        <span class="badge">Pilot • Italy</span>
       </div>
 
-      <div class="langbox">
-        <span class="label" id="lang-label">Language</span>
-        <div class="toggle">
-          <button id="lang-en" class="active">
-            <span class="flag" aria-hidden="true">
-              <svg viewBox="0 0 60 36">
-                <rect width="60" height="36" fill="#012169"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
-                <rect x="25" width="10" height="36" fill="#FFF"/>
-                <rect y="13" width="60" height="10" fill="#FFF"/>
-                <rect x="27" width="6" height="36" fill="#C8102E"/>
-                <rect y="15" width="60" height="6" fill="#C8102E"/>
-              </svg>
-            </span>EN
-          </button>
-          <button id="lang-it">
-            <span class="flag" aria-hidden="true">
-              <svg viewBox="0 0 60 36">
-                <rect width="60" height="36" fill="#fff"/>
-                <rect width="20" height="36" x="0" fill="#009246"/>
-                <rect width="20" height="36" x="40" fill="#CE2B37"/>
-              </svg>
-            </span>IT
-          </button>
-        </div>
+      <div class="lang">
+        <span id="lang-label">Language</span>
+        <button id="lang-en" class="active">EN</button>
+        <button id="lang-it">IT</button>
       </div>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
       <div>
-        <h1 id="h1">From listing to leads, faster</h1>
-        <p class="lead" id="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
-        <p class="sub" id="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
-
+        <h1>From listing to leads, faster</h1>
+        <p class="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
+        <p class="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
         <div class="cta-row">
-          <a class="btn primary" href="#pilot" id="btn-request">Request Pilot Access</a>
-          <a class="btn" href="./dashboard.html" id="btn-dash">Preview Dashboard</a>
-          <a class="btn" href="./deck.html" id="btn-deck">View Live Deck</a>
-          <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="btn-pdf">View Deck PDF</a>
+          <a class="btn" href="#pilot">Request Pilot Access</a>
+          <a class="btn alt" href="./dashboard.html">Preview Dashboard</a>
+          <a class="btn ghost" href="./deck.html">View Live Deck</a>
+          <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
         </div>
+        <div class="note">See the live preview, then start a 30-day pilot. No risk if it doesn’t save time.</div>
+        <div class="kicker">Trusted by Italian agents building faster funnels.</div>
+      </div>
 
-        <div class="pricing" id="price-line">
-          <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
-          <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
-        </div>
-
-        <div class="advisor" id="advisor">
-          <b>Advisor Charter (pilot):</b> a light, optional role during the 30-day pilot — review the live preview, sanity-check our focus, and (only if it makes sense) suggest 1–2 warm introductions. <b>Zero operational load; clear upside if the pilot performs.</b>
-          <br/><small>We list early advisors by permission only.</small>
-        </div>
-
-        <div class="kicker" id="trust-line">Trusted by Italian agents building faster funnels.</div>
+      <div class="card">
+        <h3>Why this matters (time → money)</h3>
+        <div class="meta">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</div>
+        <div class="hr"></div>
+        <div class="meta">Every minute saved here compounds by the hour.</div>
       </div>
     </section>
 
-    <section class="section">
-      <h3>See it in action</h3>
-      <div class="grid-2">
-        <figure class="card">
-          <h3 id="wa-prev">WhatsApp Smart Reply</h3>
-          <p class="muted" id="wa-desc">Kintra drafts structured replies and action prompts so nothing slips.</p>
-          <img alt="WhatsApp reply preview"
-               style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5f7fb"
-               src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'><rect width='100%' height='100%' fill='%23f5f7fb'/><rect x='40' y='40' rx='16' ry='16' width='520' height='60' fill='white' stroke='%23e3e8f1'/><text x='60' y='78' font-family='Arial' font-size='20' fill='%23333'>👋 Buongiorno! Siete disponibili per una visita domani?</text><rect x='240' y='120' rx='16' ry='16' width='520' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/><text x='260' y='158' font-family='Arial' font-size='20' fill='%23333'>Certo! Domani 15:00 o giovedì 10:30. Preferenze?</text><rect x='40' y='200' rx='16' ry='16' width='380' height='60' fill='white' stroke='%23e3e8f1'/><text x='60' y='238' font-family='Arial' font-size='20' fill='%23333'>Perfetto, domani alle 15:00. Grazie!</text><rect x='300' y='280' rx='16' ry='16' width='460' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/><text x='320' y='318' font-family='Arial' font-size='20' fill='%23333'>Confermato ✅ Promemoria 24h prima.</text><text x='40' y='380' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · draft + next step</text></svg>"/>
-          <figcaption class="caption">Auto-draft in Italian, with a suggested next step.</figcaption>
-        </figure>
-
-        <figure class="card">
-          <h3>Dashboard Mini (live preview)</h3>
-          <p class="muted">Managers get a daily pulse at a glance.</p>
-          <img src="./img/dashboard%20preview%20screen.PNG" alt="Dashboard mini preview"
-               style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
-          <figcaption class="caption">Real metrics from the pilot dashboard.</figcaption>
-        </figure>
+    <!-- SEE IT IN ACTION -->
+    <section class="split">
+      <div class="card">
+        <h3>WhatsApp Smart Reply</h3>
+        <div class="meta">Kintra drafts structured replies and action prompts so nothing slips.</div>
+        <img src="./img/whatsapp-reply.png" alt="WhatsApp reply preview" style="margin-top:8px;border-radius:12px;border:1px solid var(--line)">
       </div>
 
-      <div class="grid-2" style="margin-top:18px">
-        <figure id="ls-card" class="card" style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
-          <img src="./img/cta.jpg" alt="Listing photo"
-               style="width:140px;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
-          <div>
-            <h3>Listing Summary (composite preview)</h3>
-            <p class="muted">One glance: key details, tags, and next action — ready to send.</p>
-            <div style="margin-top:8px">
-              <div><b>€420,000 · Bilocale ristrutturato</b></div>
-              <div class="muted">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
-              <div style="display:flex;gap:8px;margin-top:8px">
-                <span class="badge" style="border-color:#dfe6ef;color:#3a465a">2BR</span>
-                <span class="badge" style="border-color:#dfe6ef;color:#3a465a">80 m²</span>
-                <span class="badge" style="border-color:#dfe6ef;color:#3a465a">Milano</span>
-                <span class="badge" style="border-color:#dfe6ef;color:#3a465a">Balcony</span>
-              </div>
-              <div style="margin-top:10px">
-                <a class="btn" href="#ls-card">View Listing Summary</a>
-              </div>
-            </div>
-            <figcaption class="caption">Composite card agents can drop into WhatsApp or email.</figcaption>
-          </div>
-        </figure>
-
-        <figure class="card">
-          <h3>Next-step queue</h3>
-          <p class="muted">Today’s follow-ups, with ready-to-send templates.</p>
-          <img alt="Next-step queue preview"
-               style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5f7fb"
-               src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'><rect width='100%' height='100%' fill='%23f5f7fb'/><text x='40' y='56' font-family='Arial' font-size='20' fill='%23333'>Next-step queue (Today)</text><rect x='40' y='80' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='110' r='10' fill='%230b5fff'/><text x='90' y='108' font-family='Arial' font-size='18' fill='%23333'>Invia conferma visita · Rossi · 15:00</text><text x='90' y='128' font-family='Arial' font-size='14' fill='%237b879b'>WhatsApp template · reminder 24h</text><rect x='40' y='152' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='182' r='10' fill='%23c9a227'/><text x='90' y='180' font-family='Arial' font-size='18' fill='%23333'>Richiedi planimetria · Bianchi</text><text x='90' y='200' font-family='Arial' font-size='14' fill='%237b879b'>Auto-draft pronto · 2 min fa</text><rect x='40' y='224' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='254' r='10' fill='%230b5fff'/><text x='90' y='252' font-family='Arial' font-size='18' fill='%23333'>Follow-up post-visita · Verdi</text><text x='90' y='272' font-family='Arial' font-size='14' fill='%237b879b'>Suggerisci 2 slot + scheda</text><text x='40' y='360' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · nothing slips</text></svg>"/>
-          <figcaption class="caption">Turns intentions into scheduled actions — pre-drafted and ready to send.</figcaption>
-        </figure>
+      <div class="card">
+        <h3>Dashboard Mini Preview</h3>
+        <div class="meta">A live dashboard view that managers can trust.</div>
+        <img src="./img/dashboard preview screen.PNG" alt="Dashboard mini" style="margin-top:8px;border-radius:12px;border:1px solid var(--line)">
       </div>
     </section>
 
-    <section id="pilot" class="section card">
-      <h3 id="start-pilot">Start your 30-day pilot</h3>
-      <p class="muted" id="pilot-sub">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
-      <div class="form" style="margin-top:10px">
-        <input id="name" placeholder="Name — es. Alex Rossi"/>
-        <input id="email" placeholder="Work email — es. alex.rossi@agency.it"/>
-        <textarea id="wf" placeholder="What’s your current workflow?"></textarea>
+    <section class="split">
+      <div class="card">
+        <h3>Listing Summary (composite preview)</h3>
+        <div class="meta">One glance: key details, tags, and next action — ready to send.</div>
+        <img src="./img/cta.jpg" alt="Listing summary" style="margin-top:8px;border-radius:12px;border:1px solid var(--line)">
+        <p style="font-size:13px;margin-top:4px;"><a href="./dashboard.html">View Listing Summary →</a></p>
       </div>
-      <div class="cta-row" style="margin-top:12px">
-        <button class="btn primary" id="pilot-submit">→ Start My Pilot</button>
-        <span class="note" id="pilot-note">No spam. Limited early access.</span>
+
+      <div class="card">
+        <h3>Next Step Queue</h3>
+        <div class="meta">Today’s follow-ups are ready to send. Sample below:</div>
+        <div style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:6px">
+          <p style="margin:0;font-size:14px"><strong>Lead:</strong> Rossi — 2BR Milano</p>
+          <p style="margin:4px 0 0;font-size:14px">Send confirmation + reminder 24 h before.</p>
+        </div>
       </div>
-      <pre id="pilot-result" class="card" style="margin-top:10px;display:none;background:#fff"></pre>
+    </section>
+
+    <!-- ADVISOR CHARTER -->
+    <section class="card" style="background:linear-gradient(90deg,#fff8e1,#fff);border-color:#f1cf6b">
+      <h3 style="color:var(--navy)">Advisor Charter (Pilot)</h3>
+      <p class="meta">A light, optional role during the 30-day pilot — review the two live previews, share 1–2 intros if relevant, and lend your perspective only if it helps. We list early advisors by permission only.</p>
     </section>
 
     <footer>
-      <div id="world">🌍 From Italy to the world — join the next wave.</div>
-      <div>© 2025 Kintra. <span id="foot-mail">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
+      <div>© 2025 Kintra.</div>
+      <div>Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></div>
     </footer>
   </div>
+
+  <!-- LANGUAGE TOGGLE FIX -->
   <script>
-/* --- Kintra language toggle fix --- */
-const dict = {
-  en: {
-    langLabel:"Language",
-    pilot_title:"Start your 30-day pilot",
-    name_ph:"Name (e.g. Alex Rossi)",
-    email_ph:"Work email (e.g. alex.rossi@agency.it)",
-    wf_ph:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
-  },
-  it: {
-    langLabel:"Lingua",
-    pilot_title:"Avvia il pilot di 30 giorni",
-    name_ph:"Nome (es. Alex Rossi)",
-    email_ph:"Email lavoro (es. alex.rossi@agency.it)",
-    wf_ph:"Qual è il tuo flusso attuale? (es. inbound su WhatsApp + email, risposte più rapide…)"
-  }
-};
-
-const setLang=(L)=>{
-  const d=dict[L];
-  document.documentElement.lang=L;
-  document.querySelector('[data-i18n="pilot_title"]').textContent=d.pilot_title;
-  document.querySelector('label[for="name"]')?.textContent=d.name;
-  document.querySelector('#langLabel').textContent=d.langLabel;
-  document.querySelector('#name')?.setAttribute('placeholder',d.name_ph);
-  document.querySelector('#email')?.setAttribute('placeholder',d.email_ph);
-  document.querySelector('#workflow')?.setAttribute('placeholder',d.wf_ph);
-  document.querySelectorAll('.lang button').forEach(b=>{
-    b.classList.toggle('active',b.dataset.lang===L);
-  });
-};
-
-document.querySelectorAll('.lang button').forEach(b=>{
-  b.addEventListener('click',()=>setLang(b.dataset.lang));
-});
-setLang('en');
-</script>
-
+  (function(){
+    const dict = {
+      en: {
+        langLabel:"Language",
+        pilotTitle:"Start your 30-day pilot",
+        namePH:"Name (e.g. Alex Rossi)",
+        emailPH:"Work email (e.g. alex.rossi@agency.it)",
+        wfPH:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
+      },
+      it: {
+        langLabel:"Lingua",
+        pilotTitle:"Avvia il pilot di 30 giorni",
+        namePH:"Nome (es. Alex Rossi)",
+        emailPH:"Email lavoro (es. alex.rossi@agency.it)",
+        wfPH:"Qual è il tuo flusso attuale? (es. inbound su WhatsApp + email, risposte più rapide…)"
+      }
+    };
+    const els = {
+      enBtn:document.getElementById('lang-en'),
+      itBtn:document.getElementById('lang-it'),
+      label:document.getElementById('lang-label'),
+      pilotTitle:document.getElementById('start-pilot'),
+      name:document.getElementById('name'),
+      email:document.getElementById('email'),
+      wf:document.getElementById('wf')
+    };
+    function setActive(btn,on){if(btn)btn.classList.toggle('active',on);}
+    function setLang(L){
+      const d=dict[L]||dict.en;
+      document.documentElement.lang=L;
+      if(els.label)els.label.textContent=d.langLabel;
+      if(els.pilotTitle)els.pilotTitle.textContent=d.pilotTitle;
+      if(els.name)els.name.placeholder=d.namePH;
+      if(els.email)els.email.placeholder=d.emailPH;
+      if(els.wf)els.wf.placeholder=d.wfPH;
+      setActive(els.enBtn,L==='en');
+      setActive(els.itBtn,L==='it');
+      try{localStorage.setItem('kintra_lang',L);}catch(e){}
+    }
+    if(els.enBtn)els.enBtn.onclick=()=>setLang('en');
+    if(els.itBtn)els.itBtn.onclick=()=>setLang('it');
+    const initial=(()=>{try{return localStorage.getItem('kintra_lang')||'en';}catch(e){return'en';}})();
+    setLang(initial);
+  })();
+  </script>
 </body>
 </html>
