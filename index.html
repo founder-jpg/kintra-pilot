@@ -2,120 +2,77 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Kintra — Pilot Deck</title>
+  <title>Kintra — Pilot • Italy</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="light only" />
+  <meta name="description" content="Intelligent workflows for Italian agencies. See the 10-minute demo." />
+  <meta property="og:title" content="Kintra — Pilot • Italy" />
+  <meta property="og:description" content="Intelligent workflows for Italian agencies. See the 10-minute demo." />
+  <meta property="og:image" content="./img/og.jpg" />
+  <meta name="theme-color" content="#0b2347" />
+  <link rel="icon" href="./img/logo.png.png" />
+  <!-- KINTRA_INDEX_V1_LOCK
+       Sections (order fixed):
+       1 Header
+       2 Advisor Charter ribbon
+       3 Hero (pricing visible)
+       4 Built-for-Italy wedge
+       5 Visual preview (3 images)
+       6 Pilot plan
+       7 Testimonials (+ NDA note)
+       8 Objection-killer
+       9 Final CTA / Contact
+       10 Footer
+       Tone: “intelligent workflows” (avoid “AI tools” in hero line)
+       Price: Pilot range €1.5–2k/mo · 30-day timebox · 2–3 KPIs
+  -->
   <style>
     :root{
-      --bg:#ffffff;
-      --fg:#0b1220;          /* deep navy text */
-      --muted:#5b6475;       /* muted copy */
-      --line:#e8ecf2;        /* separators */
-      --brand:#0b5fff;       /* kintra blue accent */
-      --gold:#c9a94b;        /* subtle gold accent */
-      --card:#f7f9fc;        /* light card bg */
-      --chip:#eef3ff;        /* blue chip bg */
+      --bg:#ffffff; --fg:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --brand:#0b5fff; --gold:#c9a94b; --card:#f7f9fc; --chip:#eef3ff; --ink:#0b2347;
+      --dark:#0d1b2a;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+    html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
     a{color:var(--brand);text-decoration:none}
-    .page{
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 48px 32px 64px;
-    }
-    header{
-      display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;
-      gap:16px;
-    }
+    .page{max-width:1000px;margin:0 auto;padding:48px 32px 64px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand img{width:28px;height:28px;object-fit:contain}
-    .brand .name{font-weight:700;letter-spacing:.2px}
-    .lang{
-      display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)
-    }
-    .lang button{
-      border:1px solid var(--line);background:#fff;padding:6px 10px;border-radius:999px;cursor:pointer
-    }
+    .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+    .brand .name{font-weight:800;letter-spacing:.2px}
+    .lang{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)}
+    .lang button{border:1px solid var(--line);background:#fff;padding:6px 10px;border-radius:999px;cursor:pointer}
     .lang button.active{border-color:var(--brand);color:var(--brand);background:var(--chip);font-weight:600}
-
-    h1{font-size:44px;line-height:1.1;margin:8px 0 10px;letter-spacing:-0.5px}
-    h2{font-size:28px;margin:0 0 12px}
-    h3{font-size:20px;margin:0 0 10px;color:var(--muted);font-weight:600}
-    p{margin:0 0 10px}
-    .muted{color:var(--muted)}
+    .ribbon{border:1px solid var(--line);background:#fff7ea;border-radius:10px;padding:8px 12px;color:#714d10;font-size:14px;display:flex;gap:8px;align-items:center;justify-content:center}
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;margin-top:14px}
+    h1{font-size:44px;line-height:1.08;margin:8px 0 10px;letter-spacing:-0.4px;color:var(--ink)}
     .lead{font-size:18px;color:var(--muted)}
-    .divider{height:1px;background:var(--line);margin:24px 0}
-
-    .hero{
-      display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center
-    }
+    .muted{color:var(--muted)}
     .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}
-    .btn{
-      border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;
-      transition:.15s box-shadow,.15s transform; font-weight:600
-    }
+    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;transition:.15s box-shadow,.15s transform;font-weight:600}
     .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
     .btn:hover{box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateY(-1px)}
-    .chip{display:inline-block;background:var(--chip);color:var(--brand);padding:6px 10px;border-radius:999px;font-weight:600;margin:10px 0}
-
-    /* CONTENT BLOCKS */
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .badge{display:inline-block;background:var(--chip);color:var(--brand);padding:6px 10px;border-radius:999px;font-weight:700;margin-top:8px}
+    .price{font-size:14px;color:var(--fg);margin-top:8px}
+    .divider{height:1px;background:var(--line);margin:16px 0}
     .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
-    .card.tight{padding:12px}
-    .bullets{margin:6px 0 0;padding:0 0 0 16px}
-    .bullets li{margin:6px 0}
-
-    /* VISUAL PLACEHOLDERS (no external images) */
-    .placeholder{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.02)}
-    .ph-header{padding:10px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
-    .ph-dot{width:8px;height:8px;border-radius:50%;background:#e5e9f1}
-    .ph-body{padding:14px}
-    .row{height:10px;background:#eef2f8;border-radius:6px;margin:8px 0}
-    .row.sm{height:8px;width:60%}
-    .row.md{height:10px;width:80%}
-    .row.lg{height:12px;width:95%}
-
-    /* WhatsApp-like chat mock */
-    .chat{padding:14px;display:flex;flex-direction:column;gap:10px}
-    .bubble{max-width:78%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:14px}
-    .bubble.me{align-self:flex-end;background:#e8f1ff;border:1px solid #d7e6ff}
-    .bubble.them{align-self:flex-start;background:#f5f7fb;border:1px solid var(--line)}
-    .stamp{font-size:12px;color:var(--muted);margin-top:4px}
-
-    /* Dashboard mini */
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
-    .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
-    .metric .l{font-size:12px;color:var(--muted)}
-
-    /* Testimonials logos */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fafafa}
+    .caption{font-size:12px;color:var(--muted);margin-top:6px}
     .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .logo-box{border:1px dashed var(--line);border-radius:12px;padding:20px;text-align:center;color:var(--muted);background:#fff}
-
-    /* Pilot form mini */
+    .logo-box{border:1px dashed var(--line);border-radius:12px;padding:20px;text-align:center;color:var(--muted);background:#fff;font-size:13px}
+    .objection{background:var(--dark);color:#fff;border-radius:14px;padding:18px}
     .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .form textarea{grid-column:1/-1;min-height:84px}
     input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
-    input::placeholder,textarea::placeholder{color:#9aa3b2}
-
     footer{margin-top:16px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
-    /* Print (PDF) */
-    @media print{
-      @page{size:A4 landscape;margin:10mm}
-      .page{padding:18px 22px}
-      .btn,.cta-row,.lang{display:none !important}
-      .divider{margin:14px 0}
-    }
-
-    /* Page breaks for PDF feel */
-    .break{height:48px}
+    @media (max-width:980px){.hero,.grid-2{grid-template-columns:1fr} h1{font-size:36px}}
   </style>
 </head>
 <body>
   <div class="page">
+    <!-- 1) HEADER -->
     <header>
       <div class="brand">
         <img src="./img/logo.png.png" alt="Kintra logo" />
@@ -128,159 +85,96 @@
       </div>
     </header>
 
-    <!-- COVER -->
+    <!-- 2) ADVISOR RIBBON -->
+    <!-- DO NOT REMOVE: Advisor Charter ribbon (Rino-ready) -->
+    <div class="ribbon">
+      <strong>Advisor Charter</strong> — Guided by industry leaders.
+    </div>
+
+    <!-- 3) HERO -->
     <section class="hero">
       <div>
         <h1 data-i18n="hero_title">From listing to leads, faster</h1>
         <p class="lead" data-i18n="hero_sub">
-          AI tools that help agents reply faster and book more viewings — inside WhatsApp.
+          Intelligent workflows that help agents reply faster and book more viewings — inside WhatsApp.
         </p>
         <p class="muted" data-i18n="hero_desc">
           Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.
         </p>
         <div class="cta-row">
-          <a class="btn primary" href="#pilot" data-i18n="cta_request">Request Pilot Access</a>
+          <a class="btn primary" href="#contact" data-i18n="cta_request">Request Pilot Access</a>
           <a class="btn" href="./dashboard.html" data-i18n="cta_dash">Preview Dashboard</a>
           <a class="btn" href="./deck.html" data-i18n="cta_live_deck">View Live Deck</a>
-          <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" data-i18n="cta_pdf">View Deck PDF</a>
+          <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" data-i18n="cta_pdf">View Deck PDF</a>
         </div>
-        <p class="muted" style="margin-top:8px" data-i18n="hero_note">
-          See the live preview, then start a 2–4 week pilot. No risk if it doesn’t save time.
-        </p>
-        <div class="chip" data-i18n="chip_trusted">Trusted by Italian agents building faster funnels.</div>
+        <div class="price" data-i18n="price">Pilot range: <strong>€1.5–2k/mo</strong> • 30-day timebox • 2–3 KPIs</div>
+        <div class="badge" data-i18n="chip_trusted">Trusted by Italian agents building faster funnels.</div>
       </div>
-      <div class="card placeholder">
-        <div class="ph-header">
-          <div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div>
-        </div>
-        <div class="ph-body">
-          <h3 data-i18n="why_title">Why this matters (time → money)</h3>
-          <p class="muted" data-i18n="why_copy">
-            If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.
-          </p>
-          <div class="divider"></div>
-          <p class="muted" style="font-weight:600" data-i18n="why_line2">
-            Every minute saved here compounds by the hour.
-          </p>
-          <div class="row lg"></div>
-          <div class="row md"></div>
-          <div class="row sm"></div>
-        </div>
+
+      <!-- right card (kept from your file) -->
+      <div class="card">
+        <h3 data-i18n="why_title">Why this matters (time → money)</h3>
+        <p class="muted" data-i18n="why_copy">
+          If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.
+        </p>
+        <div class="divider"></div>
+        <p class="muted" style="font-weight:600" data-i18n="why_line2">
+          Every minute saved here compounds by the hour.
+        </p>
       </div>
     </section>
 
-    <div class="break"></div>
-
-    <!-- PROBLEM -->
-    <section class="grid-2">
-      <div>
-        <h2 data-i18n="prob_title">The Problem</h2>
-        <p data-i18n="prob_p1">
-          Agents waste hours juggling WhatsApp, email, and notes. Threads fragment; follow-ups slip. Deals stall.
+    <!-- 4) BUILT-FOR-ITALY WEDGE -->
+    <section class="grid-2" style="margin-top:18px">
+      <div class="card">
+        <h2 data-i18n="wedge_title">Built for Italian agencies, ready for the world</h2>
+        <p class="muted" data-i18n="wedge_copy">
+          GDPR-aware, bilingual by default, and designed for teams working with international buyers.
         </p>
-        <ul class="bullets">
-          <li data-i18n="prob_b1">Slow replies → cold leads</li>
-          <li data-i18n="prob_b2">Context scattered across channels</li>
-          <li data-i18n="prob_b3">Managers can’t see a daily pulse</li>
+      </div>
+      <div class="card">
+        <ul class="muted" style="margin:0 0 0 16px">
+          <li data-i18n="w1">Multilingual templates for outreach & follow-up</li>
+          <li data-i18n="w2">WhatsApp + web flows with summaries & next steps</li>
+          <li data-i18n="w3">Daily manager snapshot you can trust</li>
         </ul>
       </div>
-      <!-- Listing summary placeholder -->
-      <div class="placeholder">
-        <div class="ph-header">
-          <div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--muted)">Listing summary (preview)</div>
+    </section>
+
+    <!-- 5) VISUAL PREVIEW (3 images) -->
+    <section style="margin-top:18px">
+      <h2 data-i18n="prev_title">See it in action</h2>
+      <div class="grid-3" style="margin-top:10px">
+        <div>
+          <img class="img" src="./img/whatsapp-reply.png" alt="WhatsApp Smart Reply — pilot example" loading="lazy" />
+          <div class="caption" data-i18n="c1">WhatsApp Smart Reply (pilot example)</div>
         </div>
-        <div class="ph-body">
-          <div class="row lg" style="width:60%"></div>
-          <div class="row sm"></div>
-          <div class="divider"></div>
-          <div class="row md"></div>
-          <div class="row md" style="width:70%"></div>
-          <div class="row sm" style="width:40%"></div>
-          <div class="divider"></div>
-          <div class="row lg" style="width:50%"></div>
-          <div class="row sm" style="width:35%"></div>
+        <div>
+          <img class="img" src="./img/listing-summary.png" alt="Listing Summary Generator — pilot example" loading="lazy" />
+          <div class="caption" data-i18n="c2">Listing Summary Generator</div>
+        </div>
+        <div>
+          <img class="img" src="./img/dashboard-mini.png" alt="Dashboard mini metrics — pilot example" loading="lazy" />
+          <div class="caption" data-i18n="c3">Dashboard mini metrics</div>
         </div>
       </div>
     </section>
 
-    <div class="break"></div>
-
-    <!-- SOLUTION -->
-    <section>
-      <h2 data-i18n="sol_title">The Solution</h2>
-      <p class="muted" data-i18n="sol_sub">
-        Kintra drafts structured replies and action prompts so nothing slips — across WhatsApp and web.
-      </p>
-      <div class="grid-2" style="margin-top:14px">
-        <!-- WhatsApp chat mock -->
-        <div class="placeholder">
-          <div class="ph-header">
-            <div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div>
-            <div style="margin-left:auto;font-size:12px;color:var(--muted)">WhatsApp preview</div>
-          </div>
-          <div class="chat">
-            <div class="bubble them" data-i18n="wa_them_1">👋 Buongiorno! Siete disponibili per una visita domani?</div>
-            <div class="bubble me" data-i18n="wa_me_1">Certo! Posso proporre domani alle 15:00 o giovedì alle 10:30. Preferenze?</div>
-            <div class="bubble them" data-i18n="wa_them_2">Perfetto, domani alle 15:00. Grazie!</div>
-            <div class="bubble me" data-i18n="wa_me_2">Confermato ✅ Mando promemoria 24h prima.</div>
-            <div class="stamp">Kintra · draft + next step</div>
-          </div>
-        </div>
-        <!-- Listing summary mini -->
-        <div class="placeholder">
-          <div class="ph-header">
-            <div class="ph-dot"></div><div class="ph-dot"></div><div class="ph-dot"></div>
-            <div style="margin-left:auto;font-size:12px;color:var(--muted)">Listing summary</div>
-          </div>
-          <div class="ph-body">
-            <div class="row md" style="width:45%"></div>
-            <div class="row sm" style="width:30%"></div>
-            <div class="divider"></div>
-            <div class="row md"></div>
-            <div class="row md" style="width:70%"></div>
-            <div class="row sm" style="width:35%"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dashboard mini metrics -->
-      <div class="card" style="margin-top:14px">
-        <h3 data-i18n="pulse_title">Daily pulse (manager view)</h3>
-        <div class="metrics" style="margin-top:10px">
-          <div class="metric">
-            <div class="k">7</div>
-            <div class="l" data-i18n="m_leads">New leads today</div>
-          </div>
-          <div class="metric">
-            <div class="k">11m</div>
-            <div class="l" data-i18n="m_reply">Avg reply time</div>
-          </div>
-          <div class="metric">
-            <div class="k">5</div>
-            <div class="l" data-i18n="m_visits">Visits booked</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="break"></div>
-
-    <!-- PILOT PLAN -->
-    <section id="pilot" class="grid-2">
+    <!-- 6) PILOT PLAN -->
+    <section id="pilot" class="grid-2" style="margin-top:18px">
       <div>
         <h2 data-i18n="plan_title">Pilot plan (2–4 weeks)</h2>
-        <ul class="bullets">
+        <ul class="muted" style="margin:6px 0 0 16px">
           <li data-i18n="plan_b1">Light setup tailored to your workflow</li>
           <li data-i18n="plan_b2">Test with 3–5 live client interactions</li>
           <li data-i18n="plan_b3">Auto-summaries + suggested next-steps</li>
           <li data-i18n="plan_b4">Decision at day 25 — continue or stop</li>
         </ul>
-        <div class="cta-row" style="margin-top:14px">
+        <div class="cta-row" style="margin-top:12px">
           <a class="btn primary" href="#contact" data-i18n="cta_start">Start your pilot</a>
         </div>
       </div>
-      <div class="card tight">
+      <div class="card">
         <h3 data-i18n="why2_title">Why this matters</h3>
         <p class="muted" data-i18n="why2_copy">
           If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day. That compounds to hours each week.
@@ -290,36 +184,35 @@
       </div>
     </section>
 
-    <div class="break"></div>
-
-    <!-- SOCIAL PROOF -->
-    <section>
+    <!-- 7) TESTIMONIALS + NDA LOGOS -->
+    <section style="margin-top:18px">
       <h2 data-i18n="proof_title">What partners say</h2>
       <div class="grid-2" style="margin-top:8px">
-        <div class="card">
-          “Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”<br>
-          <span class="muted">— Early partner (pilot)</span>
-        </div>
-        <div class="card">
-          “Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”<br>
-          <span class="muted">— Agency lead (pilot)</span>
-        </div>
+        <div class="card">“Kintra saved our agents real time. Replies are faster, and follow-ups don’t slip.”<br><span class="muted">— Early partner (pilot)</span></div>
+        <div class="card">“Setup was easy. We plugged in WhatsApp + web and started seeing value the same week.”<br><span class="muted">— Agency lead (pilot)</span></div>
       </div>
       <div class="logos" style="margin-top:12px">
-        <div class="logo-box" data-i18n="logo_conf">Client logo — confidential</div>
-        <div class="logo-box" data-i18n="logo_conf">Client logo — confidential</div>
-        <div class="logo-box" data-i18n="logo_conf">Client logo — confidential</div>
-        <div class="logo-box" data-i18n="logo_conf">Client logo — confidential</div>
+        <div class="logo-box" data-i18n="logo_conf">Client logo — CONFIDENTIAL · NDA</div>
+        <div class="logo-box" data-i18n="logo_conf">Client logo — CONFIDENTIAL · NDA</div>
+        <div class="logo-box" data-i18n="logo_conf">Client logo — CONFIDENTIAL · NDA</div>
+        <div class="logo-box" data-i18n="logo_conf">Client logo — CONFIDENTIAL · NDA</div>
       </div>
       <p class="muted" style="margin-top:8px" data-i18n="logo_note">
-        Placeholder logos shown until partner approvals are finalized.
+        Logos withheld at partner request (NDA) until public launch.
       </p>
     </section>
 
-    <div class="break"></div>
+    <!-- 8) OBJECTION-KILLER -->
+    <section style="margin-top:18px" class="objection">
+      <h2 style="margin:0 0 8px" data-i18n="obj_title">“Can’t we do this ourselves with ChatGPT?”</h2>
+      <div class="grid-2">
+        <p><strong data-i18n="obj_p1a">Tools ≠ System.</strong> <span data-i18n="obj_p1b">Kintra ships ready-to-use, GDPR-aware workflows for agents and managers.</span></p>
+        <p><strong data-i18n="obj_p2a">Speed & Consistency.</strong> <span data-i18n="obj_p2b">No duct-taping 5 tools: outreach → follow-up → booking in one flow.</span></p>
+      </div>
+    </section>
 
-    <!-- CTA / CONTACT -->
-    <section id="contact" class="grid-2">
+    <!-- 9) FINAL CTA / CONTACT -->
+    <section id="contact" class="grid-2" style="margin-top:18px">
       <div>
         <h2 data-i18n="cta2_title">Start your 2–4 week pilot</h2>
         <p class="muted" data-i18n="cta2_copy">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
@@ -341,6 +234,7 @@
       </div>
     </section>
 
+    <!-- 10) FOOTER -->
     <footer>
       <div>© 2025 Kintra.</div>
       <div>Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></div>
@@ -348,109 +242,96 @@
   </div>
 
   <script>
-    // Minimal EN/IT toggle (text dictionary)
+    // EN/IT dictionary (kept from your file, expanded)
     const dict = {
-      en: {
-        "hero_title":"From listing to leads, faster",
-        "hero_sub":"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
-        "hero_desc":"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
-        "cta_request":"Request Pilot Access",
-        "cta_dash":"Preview Dashboard",
-        "cta_live_deck":"View Live Deck",
-        "cta_pdf":"View Deck PDF",
-        "hero_note":"See the live preview, then start a 2–4 week pilot. No risk if it doesn’t save time.",
-        "chip_trusted":"Trusted by Italian agents building faster funnels.",
-        "why_title":"Why this matters (time → money)",
-        "why_copy":"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
-        "why_line2":"Every minute saved here compounds by the hour.",
-        "prob_title":"The Problem",
-        "prob_p1":"Agents waste hours juggling WhatsApp, email, and notes. Threads fragment; follow-ups slip. Deals stall.",
-        "prob_b1":"Slow replies → cold leads",
-        "prob_b2":"Context scattered across channels",
-        "prob_b3":"Managers can’t see a daily pulse",
-        "sol_title":"The Solution",
-        "sol_sub":"Kintra drafts structured replies and action prompts so nothing slips — across WhatsApp and web.",
-        "wa_them_1":"Hello! Are you available for a viewing tomorrow?",
-        "wa_me_1":"Sure! I can offer tomorrow 15:00 or Thursday 10:30. Preference?",
-        "wa_them_2":"Perfect, tomorrow at 15:00. Thanks!",
-        "wa_me_2":"Confirmed ✅ I’ll send a reminder 24h before.",
-        "pulse_title":"Daily pulse (manager view)",
-        "m_leads":"New leads today",
-        "m_reply":"Avg reply time",
-        "m_visits":"Visits booked",
-        "plan_title":"Pilot plan (2–4 weeks)",
-        "plan_b1":"Light setup tailored to your workflow",
-        "plan_b2":"Test with 3–5 live client interactions",
-        "plan_b3":"Auto-summaries + suggested next-steps",
-        "plan_b4":"Decision at day 25 — continue or stop",
-        "cta_start":"Start your pilot",
-        "proof_title":"What partners say",
-        "logo_conf":"Client logo — confidential",
-        "logo_note":"Placeholder logos shown until partner approvals are finalized.",
-        "cta2_title":"Start your 2–4 week pilot",
-        "cta2_copy":"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
-        "cta_send":"→ Start My Pilot",
-        "no_spam":"No spam. Limited early access."
+      en:{
+        hero_title:"From listing to leads, faster",
+        hero_sub:"Intelligent workflows that help agents reply faster and book more viewings — inside WhatsApp.",
+        hero_desc:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
+        cta_request:"Request Pilot Access", cta_dash:"Preview Dashboard", cta_live_deck:"View Live Deck", cta_pdf:"View Deck PDF",
+        chip_trusted:"Trusted by Italian agents building faster funnels.",
+        price:"Pilot range: <strong>€1.5–2k/mo</strong> • 30-day timebox • 2–3 KPIs",
+        why_title:"Why this matters (time → money)",
+        why_copy:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
+        why_line2:"Every minute saved here compounds by the hour.",
+        wedge_title:"Built for Italian agencies, ready for the world",
+        wedge_copy:"GDPR-aware, bilingual by default, and designed for teams working with international buyers.",
+        w1:"Multilingual templates for outreach & follow-up",
+        w2:"WhatsApp + web flows with summaries & next steps",
+        w3:"Daily manager snapshot you can trust",
+        prev_title:"See it in action",
+        c1:"WhatsApp Smart Reply (pilot example)",
+        c2:"Listing Summary Generator",
+        c3:"Dashboard mini metrics",
+        plan_title:"Pilot plan (2–4 weeks)",
+        plan_b1:"Light setup tailored to your workflow",
+        plan_b2:"Test with 3–5 live client interactions",
+        plan_b3:"Auto-summaries + suggested next-steps",
+        plan_b4:"Decision at day 25 — continue or stop",
+        why2_title:"Why this matters",
+        why2_copy:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day. That compounds to hours each week.",
+        proof_title:"What partners say",
+        logo_conf:"Client logo — CONFIDENTIAL · NDA",
+        logo_note:"Logos withheld at partner request (NDA) until public launch.",
+        obj_title:"“Can’t we do this ourselves with ChatGPT?”",
+        obj_p1a:"Tools ≠ System.", obj_p1b:"Kintra ships ready-to-use, GDPR-aware workflows for agents and managers.",
+        obj_p2a:"Speed & Consistency.", obj_p2b:"No duct-taping 5 tools: outreach → follow-up → booking in one flow.",
+        cta2_title:"Start your 2–4 week pilot",
+        cta2_copy:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
+        cta_send:"→ Start My Pilot",
+        no_spam:"No spam. Limited early access."
       },
-      it: {
-        "hero_title":"Dall’annuncio ai lead, più velocemente",
-        "hero_sub":"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
-        "hero_desc":"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, redige bozze e suggerisce le prossime azioni.",
-        "cta_request":"Richiedi il Pilot",
-        "cta_dash":"Anteprima Dashboard",
-        "cta_live_deck":"Vedi Deck Live",
-        "cta_pdf":"Scarica Deck PDF",
-        "hero_note":"Guarda l’anteprima live, poi avvia un pilot di 2–4 settimane. Nessun rischio se non fa risparmiare tempo.",
-        "chip_trusted":"Scelto da agenti italiani per funnel più veloci.",
-        "why_title":"Perché conta (tempo → denaro)",
-        "why_copy":"Se ogni risposta più rapida risparmia ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
-        "why_line2":"Ogni minuto risparmiato qui si somma ora dopo ora.",
-        "prob_title":"Il Problema",
-        "prob_p1":"Gli agenti perdono ore tra WhatsApp, email e note. I thread si frammentano; i follow-up si perdono. Le trattative si fermano.",
-        "prob_b1":"Risposte lente → lead freddi",
-        "prob_b2":"Contesto sparso tra i canali",
-        "prob_b3":"I manager non vedono il polso quotidiano",
-        "sol_title":"La Soluzione",
-        "sol_sub":"Kintra redige risposte strutturate e suggerisce le azioni successive — su WhatsApp e web.",
-        "wa_them_1":"👋 Buongiorno! Siete disponibili per una visita domani?",
-        "wa_me_1":"Certo! Posso proporre domani alle 15:00 o giovedì alle 10:30. Preferenze?",
-        "wa_them_2":"Perfetto, domani alle 15:00. Grazie!",
-        "wa_me_2":"Confermato ✅ Invio promemoria 24h prima.",
-        "pulse_title":"Polso giornaliero (vista manager)",
-        "m_leads":"Nuovi lead oggi",
-        "m_reply":"Tempo medio di risposta",
-        "m_visits":"Visite prenotate",
-        "plan_title":"Pilot (2–4 settimane)",
-        "plan_b1":"Setup leggero sul tuo flusso",
-        "plan_b2":"Test con 3–5 interazioni reali",
-        "plan_b3":"Auto-sintesi + prossime azioni suggerite",
-        "plan_b4":"Decisione al giorno 25 — continuare o fermare",
-        "cta_start":"Avvia il pilot",
-        "proof_title":"Cosa dicono i partner",
-        "logo_conf":"Logo cliente — confidenziale",
-        "logo_note":"Loghi segnaposto finché non arrivano le approvazioni.",
-        "cta2_title":"Avvia il pilot di 2–4 settimane",
-        "cta2_copy":"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — rischio zero.",
-        "cta_send":"→ Avvia il mio pilot",
-        "no_spam":"Niente spam. Accesso anticipato limitato."
+      it:{
+        hero_title:"Dall’annuncio ai lead, più velocemente",
+        hero_sub:"Workflow intelligenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
+        hero_desc:"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, prepara le risposte e suggerisce le prossime azioni.",
+        cta_request:"Richiedi il Pilot", cta_dash:"Anteprima Dashboard", cta_live_deck:"Vedi Deck Live", cta_pdf:"Scarica Deck PDF",
+        chip_trusted:"Scelto da agenti italiani che costruiscono funnel più veloci.",
+        price:"Fascia pilot: <strong>€1,5–2k/mese</strong> • 30 giorni • 2–3 KPI",
+        why_title:"Perché conta (tempo → denaro)",
+        why_copy:"Se ogni risposta più rapida risparmia ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
+        why_line2:"Ogni minuto risparmiato qui si somma ora dopo ora.",
+        wedge_title:"Pensato per le agenzie italiane, pronto per il mondo",
+        wedge_copy:"Conforme al GDPR, bilingue per natura, progettato per team che lavorano con acquirenti internazionali.",
+        w1:"Template multilingue per outreach e follow-up",
+        w2:"Flussi WhatsApp + web con riepiloghi e prossimi passi",
+        w3:"Istantanea giornaliera affidabile per i responsabili",
+        prev_title:"Guardalo in azione",
+        c1:"WhatsApp Smart Reply (esempio pilot)",
+        c2:"Generatore Scheda Annuncio",
+        c3:"Metriche dashboard mini",
+        plan_title:"Pilot (2–4 settimane)",
+        plan_b1:"Setup leggero sul tuo flusso",
+        plan_b2:"Test con 3–5 interazioni reali",
+        plan_b3:"Auto-sintesi + prossime azioni suggerite",
+        plan_b4:"Decisione al giorno 25 — continuare o fermare",
+        why2_title:"Perché conta",
+        why2_copy:"Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno. In una settimana diventano ore.",
+        proof_title:"Cosa dicono i partner",
+        logo_conf:"Logo cliente — CONFIDENZIALE · NDA",
+        logo_note:"Loghi non esposti (NDA) fino al lancio pubblico.",
+        obj_title:"“Non possiamo farlo internamente con ChatGPT?”",
+        obj_p1a:"Strumenti ≠ Sistema.", obj_p1b:"Kintra offre workflow pronti e conformi per agenti e manager.",
+        obj_p2a:"Velocità e Coerenza.", obj_p2b:"Niente collage di 5 tool: outreach → follow-up → booking in un unico flusso.",
+        cta2_title:"Avvia il pilot di 2–4 settimane",
+        cta2_copy:"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — zero rischi.",
+        cta_send:"→ Avvia il mio pilot",
+        no_spam:"Niente spam. Accesso anticipato limitato."
       }
     };
-    const $ = sel => document.querySelector(sel);
-    const setLang = (lang) => {
+    const $ = s => document.querySelector(s);
+    const setLang = lang => {
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const k = el.getAttribute("data-i18n");
-        if (dict[lang][k]) el.textContent = dict[lang][k];
+        if (dict[lang][k]) {
+          if (k==="price") el.innerHTML = dict[lang][k]; else el.textContent = dict[lang][k];
+        }
       });
-      document.querySelectorAll(".lang button").forEach(b=>{
-        b.classList.toggle("active", b.getAttribute("data-lang")===lang);
-      });
+      document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("active", b.getAttribute("data-lang")===lang));
       $("#langLabel").textContent = lang==="it" ? "Pilot • Italia" : "Pilot • Italy";
       document.documentElement.lang = lang;
     };
-    document.querySelectorAll(".lang button").forEach(b=>{
-      b.addEventListener("click", ()=>setLang(b.getAttribute("data-lang")));
-    });
-    // default EN
+    document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click", ()=>setLang(b.getAttribute("data-lang"))));
     setLang("en");
   </script>
 </body>
