@@ -64,7 +64,7 @@
       background:linear-gradient(90deg,rgba(201,162,39,0.08),transparent);
       border-radius:6px;margin-top:10px}
 
-    /* Right hero card (“Why this matters”) */
+    /* Right hero card */
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
     .hr{height:1px;background:var(--line);margin:14px 0}
     .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -96,6 +96,18 @@
     input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
     input::placeholder,textarea::placeholder{color:#9aa3b2}
 
+    /* WhatsApp Smart Reply (new mock) */
+    .wa-card{display:flex;flex-direction:column;gap:10px}
+    .togglebar{display:flex;gap:6px}
+    .pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .pill.active{background:var(--chip);border-color:var(--brand);color:var(--brand);font-weight:700}
+    .chat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;min-height:210px;display:flex;flex-direction:column;gap:10px}
+    .bubble{max-width:78%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:14px;border:1px solid var(--line);background:#fff}
+    .bubble.me{align-self:flex-end;background:#e8f1ff;border-color:#d7e6ff}
+    .stamp{font-size:12px;color:#7b879b;margin-top:2px}
+    .hintrow{display:flex;gap:8px;flex-wrap:wrap}
+    .hint{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
+
     /* Footer */
     footer{margin-top:24px;font-size:13px;color:#6b7280;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
@@ -121,7 +133,6 @@
       <div class="toggle">
         <button id="lang-en" class="active" aria-pressed="true">
           <span class="flag" aria-hidden="true">
-            <!-- UK flag (svg) -->
             <svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#012169"/>
               <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
               <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
@@ -133,7 +144,6 @@
         </button>
         <button id="lang-it" aria-pressed="false">
           <span class="flag" aria-hidden="true">
-            <!-- Italy flag (svg) -->
             <svg viewBox="0 0 60 36">
               <rect width="60" height="36" fill="#fff"/>
               <rect width="20" height="36" x="0" fill="#009246"/>
@@ -193,14 +203,38 @@
   <section class="section">
     <h3 id="seeTitle">See it in action</h3>
     <div class="grid-2" style="margin-top:8px">
-      <!-- WhatsApp Smart Reply -->
-      <figure class="card">
+
+      <!-- WhatsApp Smart Reply (NEW before/after mock) -->
+      <figure class="card wa-card">
         <h3 id="waPrev">WhatsApp Smart Reply</h3>
         <p class="sub" id="waDesc">Kintra drafts structured replies and next steps so nothing slips.</p>
-        <img class="shotimg"
-             src="./img/whatsapp-reply.png"
-             alt="WhatsApp reply preview"
-             onerror="if(!this.dataset.t){this.dataset.t=1;this.src='./images/whatsapp-reply.png';}else if(this.dataset.t==1){this.dataset.t=2;this.src='./img/solution.jpg';}else{this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22760%22 height=%22380%22><rect width=%22760%22 height=%22380%22 fill=%22%23f5f7fb%22/><text x=%2230%22 y=%22110%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%238a94a7%22>WhatsApp Smart Reply placeholder</text></svg>';}" />
+
+        <div class="togglebar">
+          <button class="pill" id="waBeforeBtn">Before</button>
+          <button class="pill active" id="waAfterBtn">After Kintra</button>
+        </div>
+
+        <div class="chat" id="waBefore" style="display:none">
+          <div class="bubble">hi can we view tomorrow? maybe after work 1830?</div>
+          <div class="bubble me">Hello.</div>
+          <div class="bubble me">Can you share your availability?</div>
+          <div class="stamp">Fragmented replies · no next step</div>
+        </div>
+
+        <div class="chat" id="waAfter">
+          <div class="bubble">👋 Buongiorno! Possiamo fare una visita domani dopo il lavoro, alle 18:30?</div>
+          <div class="bubble me"><b>✔ Draft by Kintra</b><br/>Certo! L’appartamento è disponibile. Posso proporre
+            <b>domani alle 18:30</b> oppure <b>mercoledì alle 10:30</b>. Preferisce una delle due?</div>
+          <div class="bubble">Domani alle 18:30 va bene 👍</div>
+          <div class="bubble me">Perfetto, confermato ✅ Invio un promemoria 24h prima. A domani!</div>
+          <div class="stamp">Auto-draft + next step · nothing slips</div>
+          <div class="hintrow">
+            <span class="hint">Italian phrasing</span>
+            <span class="hint">2 time options</span>
+            <span class="hint">Reminder 24h</span>
+          </div>
+        </div>
+
         <figcaption class="caption" id="waCap">Auto-draft in Italian, with a suggested next step.</figcaption>
       </figure>
 
@@ -319,7 +353,7 @@
   const TEST_NUMBER = "+39 3XX XXX XXXX"; // replace with your sandbox when ready
   const $ = (s)=>document.querySelector(s);
 
-  // EN/IT copy (includes refined Advisor Charter IT)
+  // EN/IT copy
   const dict = {
     en:{
       badge:"Pilot • Italy",
@@ -395,7 +429,7 @@
     $("#btn-deck").textContent = d.btnDeck;
     $("#btn-pdf").textContent = d.btnPDF;
 
-    // pricing & advisor (HTML)
+    // pricing & advisor
     $("#price-line").innerHTML = d.price_line_html;
     $("#advisor").innerHTML = d.advisor_html;
 
@@ -483,21 +517,40 @@
     }
   };
 
+  // reveal/copy test number
+  const dictByLang = ()=> dict[document.documentElement.lang];
   $("#revealTestNum").onclick = ()=>{
     $("#testNum").textContent = TEST_NUMBER;
     $("#testNumWrap").style.display = "inline";
     $("#revealTestNum").style.display = "none";
   };
-
   $("#copyTestNum").onclick = async ()=>{
-    try{
-      await navigator.clipboard.writeText(TEST_NUMBER);
-      $("#copyTestNum").textContent = dict[document.documentElement.lang].copied;
-    }catch{
-      $("#copyTestNum").textContent = dict[document.documentElement.lang].copyFail;
-    }
-    setTimeout(()=> $("#copyTestNum").textContent = dict[document.documentElement.lang].copy, 1500);
+    try{ await navigator.clipboard.writeText(TEST_NUMBER);
+         $("#copyTestNum").textContent = dictByLang().copied;
+    }catch{ $("#copyTestNum").textContent = dictByLang().copyFail; }
+    setTimeout(()=> $("#copyTestNum").textContent = dictByLang().copy, 1500);
   };
+
+  // WhatsApp BEFORE/AFTER toggle
+  const beforeBtn = $("#waBeforeBtn");
+  const afterBtn  = $("#waAfterBtn");
+  const beforeBox = $("#waBefore");
+  const afterBox  = $("#waAfter");
+  function showBefore(){
+    beforeBox.style.display = "flex";
+    afterBox.style.display  = "none";
+    beforeBtn.classList.add("active");
+    afterBtn.classList.remove("active");
+  }
+  function showAfter(){
+    beforeBox.style.display = "none";
+    afterBox.style.display  = "flex";
+    afterBtn.classList.add("active");
+    beforeBtn.classList.remove("active");
+  }
+  beforeBtn.onclick = showBefore;
+  afterBtn.onclick  = showAfter;
+  showAfter(); // default
 </script>
 </body>
 </html>
