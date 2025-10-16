@@ -26,7 +26,7 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px}
 
-    /* Language: only two buttons with flags */
+    /* Language toggle (flags always visible) */
     .lang{display:flex;align-items:center;gap:10px}
     .toggle{display:flex;gap:6px}
     .toggle button{
@@ -34,7 +34,8 @@
       font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px
     }
     .toggle button.active{border-color:var(--brand);color:var(--brand);background:var(--chip)}
-    .flag{font-size:14px;line-height:1}
+    .flag{font-size:16px;line-height:1}   /* visible on desktop & mobile */
+    .label{letter-spacing:.2px}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin:16px 0 6px}
@@ -66,11 +67,10 @@
     .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
     .gold p{margin:4px 0;color:#5a533b}
 
-    /* Image tiles + captions with graceful fallback */
+    /* Image tiles + captions with smart fallback */
     .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     figure.shot{position:relative;margin:0}
     .shot img{width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);display:block;background:#f5f7fb}
-    .fallback{position:absolute;inset:0;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#8a94a7;font-size:12px;background:#fff;pointer-events:none}
     .shot figcaption{font-size:12px;color:#6d778a;margin-top:6px}
 
     /* Listing Summary composite */
@@ -78,7 +78,7 @@
     .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
     .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
     .lm-body{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px}
-    .lm-photo{border:1px solid var(--line);border-radius:10px;height:92px;background:linear-gradient(135deg,#e5ebf6 0%,#f6f8fc 100%)}
+    .lm-photo-img{width:100%;height:92px;object-fit:cover;border:1px solid var(--line);border-radius:10px;display:block}
     .lm-meta{display:grid;gap:6px}
     .lm-title{font-weight:800}
     .lm-line{font-size:14px;color:var(--muted)}
@@ -113,8 +113,8 @@
       </div>
       <div class="lang">
         <div class="toggle">
-          <button id="lang-en" class="active"><span class="flag">🇬🇧</span> EN</button>
-          <button id="lang-it"><span class="flag">🇮🇹</span> IT</button>
+          <button id="lang-en" class="active"><span class="flag" aria-hidden="true">🇬🇧</span><span class="label">EN</span></button>
+          <button id="lang-it"><span class="flag" aria-hidden="true">🇮🇹</span><span class="label">IT</span></button>
         </div>
       </div>
     </header>
@@ -172,39 +172,58 @@
         <h3 id="waPrev">WhatsApp Smart Reply</h3>
         <div class="sub" id="waDesc">Kintra drafts structured replies and next steps so nothing slips.</div>
         <div class="shots" style="margin-top:10px">
+          <!-- WhatsApp reply (fallbacks to solution images) -->
           <figure class="shot">
-            <img src="./img/whatsapp-reply.png" alt="WhatsApp reply preview"
-                 onerror="this.style.visibility='hidden';this.nextElementSibling.style.display='flex'"/>
-            <div class="fallback" style="display:none">WhatsApp reply — preview</div>
-            <figcaption class="note">From pilot deck (placeholder)</figcaption>
+            <img
+              src="./img/whatsapp-reply.png"
+              alt="WhatsApp reply preview"
+              onerror="if(!this.dataset.try){this.dataset.try=1; this.src='./images/whatsapp-reply.png';}
+                       else if(this.dataset.try==1){this.dataset.try=2; this.src='./img/solution.jpg';}
+                       else { this.src='./img/problem.jpg'; }"
+            />
+            <figcaption class="note">WhatsApp Smart Reply — pilot placeholder</figcaption>
           </figure>
+
+          <!-- Dashboard mini (your exact filename with spaces) -->
           <figure class="shot">
-            <img src="./img/dashboard-mini.png" alt="Dashboard mini preview"
-                 onerror="this.style.visibility='hidden';this.nextElementSibling.style.display='flex'"/>
-            <div class="fallback" style="display:none">Dashboard mini — preview</div>
-            <figcaption class="note">From pilot deck (placeholder)</figcaption>
+            <img
+              src="./img/dashboard%20preview%20screen.PNG"
+              alt="Dashboard mini preview"
+              onerror="if(!this.dataset.try){this.dataset.try=1; this.src='./images/dashboard%20preview%20screen.PNG';}
+                       else if(this.dataset.try==1){this.dataset.try=2; this.src='./img/dashboard-mini.png';}
+                       else { this.src='./img/solution.jpg'; }"
+            />
+            <figcaption class="note">Dashboard mini — live preview screenshot</figcaption>
           </figure>
+
+          <!-- Auxiliary tile -->
           <figure class="shot">
-            <img src="./img/solution.jpg" alt="Auxiliary preview"
-                 onerror="this.style.visibility='hidden';this.nextElementSibling.style.display='flex'"/>
-            <div class="fallback" style="display:none">Preview — auxiliary</div>
+            <img
+              src="./img/solution.jpg"
+              alt="Auxiliary UI preview"
+              onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22260%22><rect width=%22400%22 height=%22260%22 fill=%22%23f5f7fb%22/><text x=%2250%22 y=%22140%22 fill=%22%238a94a7%22 font-size=%2216%22 font-family=%22Arial%22>Preview placeholder</text></svg>';"
+            />
             <figcaption class="note">Illustrative UI (placeholder)</figcaption>
           </figure>
         </div>
       </div>
 
+      <!-- Listing Summary composite -->
       <div class="card soft">
         <h3 id="lsTitle">Listing Summary (composite preview)</h3>
         <div class="sub" id="lsSub">One glance: key details, tags, and next action — ready to send.</div>
 
-        <!-- Composite card (works even without real images) -->
         <div class="listing-mock" style="margin-top:10px">
           <div class="lm-head">
             <div class="lm-dot"></div><div class="lm-dot"></div><div class="lm-dot"></div>
             <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="lsHeadRight">Preview</div>
           </div>
           <div class="lm-body">
-            <div class="lm-photo" aria-label="Property thumbnail"></div>
+            <img class="lm-photo-img"
+                 src="./img/cta.jpg"
+                 alt="Property thumbnail"
+                 onerror="if(!this.dataset.try){this.dataset.try=1; this.src='./images/cta.jpg';}
+                          else { this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%2292%22><rect width=%22120%22 height=%2292%22 fill=%22%23e5ebf6%22/></svg>'; }" />
             <div class="lm-meta">
               <div class="lm-title" id="lsTitle2">€420,000 · Bilocale ristrutturato</div>
               <div class="lm-line" id="lsAddr">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
@@ -262,7 +281,7 @@
           </div>
         </div>
 
-        <!-- Option A: Always-visible bilingual Reveal -->
+        <!-- Always-visible bilingual Reveal -->
         <div class="cta-row" style="margin-top:10px">
           <button class="btn alt" id="sendWA">Send WhatsApp</button>
           <span class="note" id="waTip">
@@ -306,7 +325,7 @@
     const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
     const TEST_NUMBER = "+39 3XX XXX XXXX"; // TODO: replace with real sandbox number
 
-    // EN/IT dictionary (plus reveal strings)
+    // EN/IT dictionary
     const dict = {
       en:{
         badge:"Pilot • Italy",
@@ -389,14 +408,12 @@
       pc1:'#pc1', pc2:'#pc2', pc3:'#pc3', pc4:'#pc4',
       goldH3:'#goldH3', goldP1:'#goldP1', goldP2:'#goldP2', goldP3:'#goldP3',
       why:'#why', math:'#math', compounds:'#compounds',
-      waPrev:'#waPrev', waDesc:'#waDesc',
       lsTitle:'#lsTitle', lsSub:'#lsSub', lsHeadRight:'#lsHeadRight',
       tag1:'#tag1', tag2:'#tag2', tag3:'#tag3', tag4:'#tag4', lsChip:'#lsChip',
       pulseTitle:'#pulseTitle', mLeads:'#mLeads', mReply:'#mReply', mVisits:'#mVisits',
       pilotTitle:'#pilotTitle', pilotSub:'#pilotSub', btnStart:'#btnStart', noSpam:'#noSpam',
       waSend:'#waSend', waSendSub:'#waSendSub', labPhone:'#labPhone', labMsg:'#labMsg',
-      tipText:'#tipText', revealBtn:'#revealTestNum', copyBtn:'#copyTestNum',
-      publicNote:'#publicNote', testiHead:'#testiHead'
+      testiHead:'#testiHead', tipText:'#tipText', publicNote:'#publicNote'
     };
 
     function setLang(L){
@@ -407,7 +424,6 @@
       document.documentElement.lang = L;
       localStorage.setItem('kintra_lang', L);
     }
-
     $('#lang-en').onclick = ()=> setLang('en');
     $('#lang-it').onclick = ()=> setLang('it');
     setLang(localStorage.getItem('kintra_lang') || 'en');
@@ -417,7 +433,6 @@
     const testWrap  = $('#testNumWrap');
     const testNumEl = $('#testNum');
     const copyBtn   = $('#copyTestNum');
-
     if (revealBtn){
       revealBtn.onclick = () => {
         testNumEl.textContent = TEST_NUMBER;
@@ -427,13 +442,14 @@
     }
     if (copyBtn){
       copyBtn.onclick = async () => {
-        try { await navigator.clipboard.writeText(TEST_NUMBER); copyBtn.textContent = dict[document.documentElement.lang].copied; }
-        catch { copyBtn.textContent = dict[document.documentElement.lang].copyFail; }
-        setTimeout(()=> copyBtn.textContent = dict[document.documentElement.lang].copyBtn, 1500);
+        try { await navigator.clipboard.writeText(TEST_NUMBER); copyBtn.textContent = (dict[document.documentElement.lang].copied); }
+        catch { copyBtn.textContent = (dict[document.documentElement.lang].copyFail); }
+        setTimeout(()=> copyBtn.textContent = (dict[document.documentElement.lang].copyBtn), 1500);
       };
     }
 
     // WhatsApp demo send (kept)
+    const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
     const waBtn = $('#sendWA'), waOut = $('#waResult');
     if(waBtn){
       waBtn.onclick = async ()=>{
