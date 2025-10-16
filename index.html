@@ -21,7 +21,6 @@
     img{display:block;max-width:100%}
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 22px 60px}
 
-    /* Header */
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
@@ -39,7 +38,6 @@
     .flag{display:inline-flex;width:18px;height:12px}
     .flag svg{width:18px;height:12px;display:block}
 
-    /* Hero */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
     h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px}
     .lead{font-size:18px;color:#243044;margin:0 0 10px}
@@ -50,17 +48,14 @@
     .note{font-size:13px;color:#6b7280}
     .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
 
-    /* Pricing strip */
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
 
-    /* Advisor Charter */
     .advisor{margin-top:18px;border:1px solid var(--gold);background:linear-gradient(0deg, rgba(201,162,39,.08), rgba(201,162,39,.08)), #fff;
-      border-radius:12px;padding:14px}
+      border-radius:12px;padding:14px;margin-bottom:8px}
     .advisor b{color:#1b2233}
     .advisor small{color:#6b7280}
 
-    /* Sections */
     .section{margin-top:24px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
@@ -74,14 +69,11 @@
     .metric .l{font-size:12px;color:#6b7280}
 
     .divider{height:1px;background:var(--line);margin:18px 0}
-
-    /* Form */
     .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .form textarea{grid-column:1/-1;min-height:84px}
     input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
     input::placeholder,textarea::placeholder{color:#9aa3b2}
 
-    /* Footer */
     footer{margin-top:24px;font-size:13px;color:#6b7280;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
     @media (max-width:980px){
@@ -93,7 +85,6 @@
 <body>
   <div class="wrap">
 
-    <!-- Header -->
     <header>
       <div class="brand">
         <img src="./img/logo.png.png" alt="Kintra logo"/>
@@ -106,7 +97,6 @@
         <div class="toggle">
           <button id="lang-en" class="active">
             <span class="flag" aria-hidden="true">
-              <!-- EN flag (simplified Union Jack) -->
               <svg viewBox="0 0 60 36">
                 <rect width="60" height="36" fill="#012169"/>
                 <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
@@ -116,25 +106,21 @@
                 <rect x="27" width="6" height="36" fill="#C8102E"/>
                 <rect y="15" width="60" height="6" fill="#C8102E"/>
               </svg>
-            </span>
-            EN
+            </span>EN
           </button>
           <button id="lang-it">
             <span class="flag" aria-hidden="true">
-              <!-- Italy flag -->
               <svg viewBox="0 0 60 36">
                 <rect width="60" height="36" fill="#fff"/>
                 <rect width="20" height="36" x="0" fill="#009246"/>
                 <rect width="20" height="36" x="40" fill="#CE2B37"/>
               </svg>
-            </span>
-            IT
+            </span>IT
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
       <div>
         <h1 id="h1">From listing to leads, faster</h1>
@@ -148,13 +134,11 @@
           <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="btn-pdf">View Deck PDF</a>
         </div>
 
-        <!-- Pricing & value framing -->
         <div class="pricing" id="price-line">
           <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
           <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
 
-        <!-- Advisor Charter (generic) -->
         <div class="advisor" id="advisor">
           <b>Advisor Charter (pilot):</b> a light, optional role during the 30-day pilot — review the live preview, sanity-check our focus, and (only if it makes sense) suggest 1–2 warm introductions. <b>Zero operational load; clear upside if the pilot performs.</b>
           <br/><small>We list early advisors by permission only.</small>
@@ -162,49 +146,20 @@
 
         <div class="kicker" id="trust-line">Trusted by Italian agents building faster funnels.</div>
       </div>
-
-      <!-- Why it matters card -->
-      <div class="card">
-        <h3 id="why">Why this matters (time → money)</h3>
-        <div class="muted" id="math">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</div>
-        <div class="divider"></div>
-        <div class="muted" id="compounds"><b>Every minute saved here compounds by the hour.</b></div>
-        <div class="divider"></div>
-        <div class="metrics" style="margin-top:6px">
-          <div class="metric"><div class="k">7</div><div class="l" id="m1">New leads today</div></div>
-          <div class="metric"><div class="k">11m</div><div class="l" id="m2">Avg reply time</div></div>
-          <div class="metric"><div class="k">5</div><div class="l" id="m3">Visits booked</div></div>
-        </div>
-      </div>
     </section>
 
-    <!-- Visuals: See it in action -->
     <section class="section">
       <h3>See it in action</h3>
       <div class="grid-2">
-        <!-- WhatsApp Smart Reply (inline SVG) -->
         <figure class="card">
           <h3 id="wa-prev">WhatsApp Smart Reply</h3>
           <p class="muted" id="wa-desc">Kintra drafts structured replies and action prompts so nothing slips.</p>
           <img alt="WhatsApp reply preview"
                style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5f7fb"
-               src="data:image/svg+xml;utf8,
-               <svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'>
-                 <rect width='100%' height='100%' fill='%23f5f7fb'/>
-                 <rect x='40' y='40' rx='16' ry='16' width='520' height='60' fill='white' stroke='%23e3e8f1'/>
-                 <text x='60' y='78' font-family='Arial' font-size='20' fill='%23333'>👋 Buongiorno! Siete disponibili per una visita domani?</text>
-                 <rect x='240' y='120' rx='16' ry='16' width='520' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/>
-                 <text x='260' y='158' font-family='Arial' font-size='20' fill='%23333'>Certo! Domani 15:00 o giovedì 10:30. Preferenze?</text>
-                 <rect x='40' y='200' rx='16' ry='16' width='380' height='60' fill='white' stroke='%23e3e8f1'/>
-                 <text x='60' y='238' font-family='Arial' font-size='20' fill='%23333'>Perfetto, domani alle 15:00. Grazie!</text>
-                 <rect x='300' y='280' rx='16' ry='16' width='460' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/>
-                 <text x='320' y='318' font-family='Arial' font-size='20' fill='%23333'>Confermato ✅ Promemoria 24h prima.</text>
-                 <text x='40' y='380' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · draft + next step</text>
-               </svg>"/>
+               src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'><rect width='100%' height='100%' fill='%23f5f7fb'/><rect x='40' y='40' rx='16' ry='16' width='520' height='60' fill='white' stroke='%23e3e8f1'/><text x='60' y='78' font-family='Arial' font-size='20' fill='%23333'>👋 Buongiorno! Siete disponibili per una visita domani?</text><rect x='240' y='120' rx='16' ry='16' width='520' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/><text x='260' y='158' font-family='Arial' font-size='20' fill='%23333'>Certo! Domani 15:00 o giovedì 10:30. Preferenze?</text><rect x='40' y='200' rx='16' ry='16' width='380' height='60' fill='white' stroke='%23e3e8f1'/><text x='60' y='238' font-family='Arial' font-size='20' fill='%23333'>Perfetto, domani alle 15:00. Grazie!</text><rect x='300' y='280' rx='16' ry='16' width='460' height='60' fill='%23e8f1ff' stroke='%23d7e6ff'/><text x='320' y='318' font-family='Arial' font-size='20' fill='%23333'>Confermato ✅ Promemoria 24h prima.</text><text x='40' y='380' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · draft + next step</text></svg>"/>
           <figcaption class="caption">Auto-draft in Italian, with a suggested next step.</figcaption>
         </figure>
 
-        <!-- Dashboard mini preview (your screenshot) -->
         <figure class="card">
           <h3>Dashboard Mini (live preview)</h3>
           <p class="muted">Managers get a daily pulse at a glance.</p>
@@ -215,8 +170,7 @@
       </div>
 
       <div class="grid-2" style="margin-top:18px">
-        <!-- Listing Summary (composite) -->
-        <figure class="card" style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
+        <figure id="ls-card" class="card" style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
           <img src="./img/cta.jpg" alt="Listing photo"
                style="width:140px;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
           <div>
@@ -232,83 +186,31 @@
                 <span class="badge" style="border-color:#dfe6ef;color:#3a465a">Balcony</span>
               </div>
               <div style="margin-top:10px">
-                <a class="btn" href="./dashboard.html#listing">View Listing Summary</a>
+                <a class="btn" href="#ls-card">View Listing Summary</a>
               </div>
             </div>
             <figcaption class="caption">Composite card agents can drop into WhatsApp or email.</figcaption>
           </div>
         </figure>
 
-        <!-- Next-step queue (nothing slips) -->
         <figure class="card">
           <h3>Next-step queue</h3>
           <p class="muted">Today’s follow-ups, with ready-to-send templates.</p>
           <img alt="Next-step queue preview"
                style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5f7fb"
-               src="data:image/svg+xml;utf8,
-               <svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'>
-                 <rect width='100%' height='100%' fill='%23f5f7fb'/>
-                 <text x='40' y='56' font-family='Arial' font-size='20' fill='%23333'>Next-step queue (Today)</text>
-                 <rect x='40' y='80' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/>
-                 <circle cx='70' cy='110' r='10' fill='%230b5fff'/>
-                 <text x='90' y='108' font-family='Arial' font-size='18' fill='%23333'>Invia conferma visita · Rossi · 15:00</text>
-                 <text x='90' y='128' font-family='Arial' font-size='14' fill='%237b879b'>WhatsApp template · reminder 24h</text>
-                 <rect x='40' y='152' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/>
-                 <circle cx='70' cy='182' r='10' fill='%23c9a227'/>
-                 <text x='90' y='180' font-family='Arial' font-size='18' fill='%23333'>Richiedi planimetria · Bianchi</text>
-                 <text x='90' y='200' font-family='Arial' font-size='14' fill='%237b879b'>Auto-draft pronto · 2 min fa</text>
-                 <rect x='40' y='224' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/>
-                 <circle cx='70' cy='254' r='10' fill='%230b5fff'/>
-                 <text x='90' y='252' font-family='Arial' font-size='18' fill='%23333'>Follow-up post-visita · Verdi</text>
-                 <text x='90' y='272' font-family='Arial' font-size='14' fill='%237b879b'>Suggerisci 2 slot + scheda</text>
-                 <text x='40' y='360' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · nothing slips</text>
-               </svg>"/>
-          <figcaption class="caption">Keeps the pipeline moving without manual chasing.</figcaption>
+               src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='420'><rect width='100%' height='100%' fill='%23f5f7fb'/><text x='40' y='56' font-family='Arial' font-size='20' fill='%23333'>Next-step queue (Today)</text><rect x='40' y='80' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='110' r='10' fill='%230b5fff'/><text x='90' y='108' font-family='Arial' font-size='18' fill='%23333'>Invia conferma visita · Rossi · 15:00</text><text x='90' y='128' font-family='Arial' font-size='14' fill='%237b879b'>WhatsApp template · reminder 24h</text><rect x='40' y='152' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='182' r='10' fill='%23c9a227'/><text x='90' y='180' font-family='Arial' font-size='18' fill='%23333'>Richiedi planimetria · Bianchi</text><text x='90' y='200' font-family='Arial' font-size='14' fill='%237b879b'>Auto-draft pronto · 2 min fa</text><rect x='40' y='224' width='720' height='60' rx='10' fill='white' stroke='%23e3e8f1'/><circle cx='70' cy='254' r='10' fill='%230b5fff'/><text x='90' y='252' font-family='Arial' font-size='18' fill='%23333'>Follow-up post-visita · Verdi</text><text x='90' y='272' font-family='Arial' font-size='14' fill='%237b879b'>Suggerisci 2 slot + scheda</text><text x='40' y='360' font-family='Arial' font-size='16' fill='%237b879b'>Kintra · nothing slips</text></svg>"/>
+          <figcaption class="caption">Turns intentions into scheduled actions — pre-drafted and ready to send.</figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- WhatsApp send (Meta demo) -->
-    <section class="section card">
-      <h3 id="wa-send">Send via WhatsApp (Meta demo)</h3>
-      <p class="muted" id="wa-send-sub">Uses Meta Cloud API (test number) to send a real message.</p>
-      <div class="grid-2" style="margin-top:8px">
-        <div>
-          <div class="form" style="grid-template-columns:1fr 1fr">
-            <div>
-              <label id="lab-phone">Recipient phone (E.164)</label>
-              <input id="phone" placeholder="+39…"/>
-            </div>
-            <div>
-              <label id="lab-msg">Message</label>
-              <input id="msg" placeholder="Ciao from the Kintra pilot!"/>
-            </div>
-          </div>
-          <div class="cta-row" style="margin-top:8px">
-            <button class="btn" id="send-wa">Send WhatsApp</button>
-            <button class="btn" id="reveal-wa">Reveal test number</button>
-            <span class="note" id="wa-tip">For demo sends, the recipient must first message “hello” to the test number.</span>
-          </div>
-          <div class="note" id="wa-num" style="margin-top:6px;display:none"><b>Test number:</b> <span id="wa-num-val">+39 3XX XXX XXXX</span> <span class="muted">(rotates; do not share publicly)</span></div>
-          <div class="divider"></div>
-          <div class="note">We rate-limit demo traffic to prevent abuse. Production uses your verified WABA.</div>
-        </div>
-        <div>
-          <img src="./img/cta.jpg" alt="Meta Cloud art"
-               style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
-        </div>
-      </div>
-      <pre id="wa-result" class="card" style="margin-top:10px;white-space:pre-wrap;background:#fff"></pre>
-    </section>
-
-    <!-- Pilot form -->
     <section id="pilot" class="section card">
-      <h3 id="start-pilot">Start your 2–4 week pilot</h3>
+      <h3 id="start-pilot">Start your 30-day pilot</h3>
       <p class="muted" id="pilot-sub">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
       <div class="form" style="margin-top:10px">
         <input id="name" placeholder="Name — es. Alex Rossi"/>
         <input id="email" placeholder="Work email — es. alex.rossi@agency.it"/>
-        <textarea id="wf" placeholder="What’s your current workflow? (es. inbound via WhatsApp + email, want faster replies…)"></textarea>
+        <textarea id="wf" placeholder="What’s your current workflow?"></textarea>
       </div>
       <div class="cta-row" style="margin-top:12px">
         <button class="btn primary" id="pilot-submit">→ Start My Pilot</button>
@@ -322,143 +224,5 @@
       <div>© 2025 Kintra. <span id="foot-mail">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
     </footer>
   </div>
-
-  <script>
-    // --- Copy dictionary EN/IT ---
-    const dict = {
-      en:{
-        badge:"Pilot • Italy",
-        h1:"From listing to leads, faster",
-        lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
-        sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
-        btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
-        price:"€1.5–2k pilot (30 days) · 1 niche · 2–3 KPIs.",
-        price_tail:"If it doesn’t save time in 30 days, don’t continue.",
-        advisor_head:"Advisor Charter (pilot):",
-        advisor_copy:"a light, optional role during the 30-day pilot — review the live preview, sanity-check our focus, and (only if it makes sense) suggest 1–2 warm introductions. Zero operational load; clear upside if the pilot performs.",
-        advisor_perm:"We list early advisors by permission only.",
-        trust:"Trusted by Italian agents building faster funnels.",
-        why:"Why this matters (time → money)",
-        math:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
-        compounds:"Every minute saved here compounds by the hour.",
-        waPrev:"WhatsApp Smart Reply",
-        waDesc:"Kintra drafts structured replies and action prompts so nothing slips.",
-        waSend:"Send via WhatsApp (Meta demo)",
-        waSendSub:"Uses Meta Cloud API (test number) to send a real message.",
-        labPhone:"Recipient phone (E.164)", labMsg:"Message",
-        waTip:'For demo sends, the recipient must first message “hello” to the test number.',
-        startPilot:"Start your 2–4 week pilot",
-        pilotSub:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
-        world:"🌍 From Italy to the world — join the next wave.",
-        langLabel:"Language",
-      },
-      it:{
-        badge:"Pilot • Italia",
-        h1:"Dall’annuncio ai lead, più velocemente",
-        lead:"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
-        sub:"Gli agenti perdono tempo passando da una scheda all’altra. Kintra riporta ogni lead in un unico thread, redige bozze e suggerisce i prossimi passi.",
-        btnRequest:"Richiedi l’accesso al pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
-        price:"Pilot €1,5–2k (30 giorni) · 1 nicchia · 2–3 KPI.",
-        price_tail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
-        advisor_head:"Advisor Charter (pilot):",
-        advisor_copy:"ruolo leggero e opzionale nei 30 giorni — rivedere l’anteprima live, validare il focus e (solo se ha senso) suggerire 1–2 warm intro. Zero carico operativo; upside chiaro se il pilot performa.",
-        advisor_perm:"Gli advisor iniziali sono elencati solo su autorizzazione.",
-        trust:"Scelto da agenti italiani che costruiscono funnel più veloci.",
-        why:"Perché conta (tempo → denaro)",
-        math:"Se ogni risposta più rapida risparmia ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
-        compounds:"Ogni minuto risparmiato qui si moltiplica nell’arco della giornata.",
-        waPrev:"Anteprima WhatsApp",
-        waDesc:"Kintra prepara risposte strutturate e prossime azioni: non sfugge nulla.",
-        waSend:"Invia via WhatsApp (demo Meta)",
-        waSendSub:"Usa Meta Cloud API (numero di test) per inviare un messaggio reale.",
-        labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio",
-        waTip:'Per le demo, il destinatario deve inviare “hello” al numero di test.',
-        startPilot:"Avvia il pilot di 2–4 settimane",
-        pilotSub:"Setup leggero. Valore rapido. Se funziona si continua; altrimenti si chiude — rischio zero.",
-        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
-        langLabel:"Lingua",
-      }
-    };
-
-    // --- Helpers ---
-    const $ = s => document.querySelector(s);
-
-    function setLang(lang){
-      const d = dict[lang];
-      $("#badge").textContent = d.badge;
-      $("#h1").textContent = d.h1;
-      $("#lead").textContent = d.lead;
-      $("#sub").textContent = d.sub;
-      $("#btn-request").textContent = d.btnRequest;
-      $("#btn-dash").textContent = d.btnDash;
-      $("#btn-deck").textContent = d.btnDeck;
-      $("#btn-pdf").textContent = d.btnPDF;
-      $("#price-line").innerHTML = `<strong>${d.price}</strong> <span class="muted">${d.price_tail}</span>`;
-      $("#advisor").innerHTML = `<b>${d.advisor_head}</b> ${d.advisor_copy} <br/><small>${d.advisor_perm}</small>`;
-      $("#trust-line").textContent = d.trust;
-      $("#why").textContent = d.why;
-      $("#math").textContent = d.math;
-      $("#compounds").textContent = d.compounds;
-      $("#wa-prev").textContent = d.waPrev;
-      $("#wa-desc").textContent = d.waDesc;
-      $("#wa-send").textContent = d.waSend;
-      $("#wa-send-sub").textContent = d.waSendSub;
-      $("#lab-phone").textContent = d.labPhone;
-      $("#lab-msg").textContent = d.labMsg;
-      $("#wa-tip").textContent = d.waTip;
-      $("#start-pilot").textContent = d.startPilot;
-      $("#pilot-sub").textContent = d.pilotSub;
-      $("#world").textContent = d.world;
-      $("#lang-label").textContent = d.langLabel;
-
-      document.documentElement.lang = lang;
-      $("#lang-en").classList.toggle("active", lang==="en");
-      $("#lang-it").classList.toggle("active", lang==="it");
-      localStorage.setItem("kintra_lang", lang);
-    }
-
-    // Bind toggles
-    $("#lang-en").onclick = ()=> setLang("en");
-    $("#lang-it").onclick = ()=> setLang("it");
-    setLang(localStorage.getItem("kintra_lang") || "en");
-
-    // Pilot form faux-save
-    $("#pilot-submit").onclick = ()=>{
-      const out = $("#pilot-result");
-      const name = ($("#name")?.value||"").trim();
-      const email= ($("#email")?.value||"").trim();
-      const wf   = ($("#wf")?.value||"").trim();
-      out.style.display = "block";
-      out.textContent = JSON.stringify({ ok:true, saved:true, name, email, workflow:wf, ts:new Date().toISOString() }, null, 2);
-    };
-
-    // WhatsApp demo stub (replace endpoint when ready)
-    const WA_WORKER = "https://kintra-wa-meta.founder-60b.workers.dev";
-    $("#send-wa").onclick = async ()=>{
-      const to = ($("#phone")?.value||"").trim();
-      const text = ($("#msg")?.value||"").trim() || "Ciao from the Kintra pilot!";
-      const out = $("#wa-result");
-      out.textContent = "Sending…";
-      try{
-        const res = await fetch(WA_WORKER + "/api/wa", {
-          method:"POST", headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({ to, text })
-        });
-        const txt = await res.text();
-        try{ out.textContent = JSON.stringify(JSON.parse(txt), null, 2); }
-        catch{ out.textContent = txt; }
-      }catch(e){
-        out.textContent = "Error: " + e.message;
-      }
-    };
-
-    // Reveal test number (admin note: keep rotated)
-    $("#reveal-wa").onclick = ()=>{
-      const el = $("#wa-num");
-      el.style.display = "block";
-      // If you have a real rotating number, set it here:
-      // $("#wa-num-val").textContent = "+39 3XX XXX XXXX";
-    };
-  </script>
 </body>
 </html>
