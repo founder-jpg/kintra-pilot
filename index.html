@@ -11,12 +11,11 @@
   <meta name="theme-color" content="#0b2347" />
   <link rel="icon" href="./img/logo.png.png" />
 
-  <!-- KINTRA_INDEX_V1_LOCK (minimal 🇮🇹) -->
-  <!-- Sections: Header (flag) → Hero (pricing) → Italy wedge → 3-image preview → Pilot plan → Testimonials + NDA → Final CTA → Footer -->
+  <!-- KINTRA_INDEX_MIN_ITA (inline SVG placeholders; no external images required) -->
   <style>
     :root{
       --bg:#ffffff; --ink:#0d1b2a; --muted:#5a6a7a; --line:#e9edf2;
-      --brand:#123b78; --accent:#d7b86f; --card:#f8fafc;
+      --brand:#123b78; --accent:#d7b86f; --card:#f8fafc; --dark:#0b2347;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial}
@@ -26,9 +25,9 @@
     header img.logo{width:30px;height:30px;border-radius:6px;border:1px solid var(--line);object-fit:contain}
     .brand{font-weight:800}
     .spacer{flex:1}
-    .lang{display:flex;gap:8px;align-items:center}
-    .chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:13px;color:var(--muted)}
+    .chip{border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
     .flag{font-size:18px;line-height:1}
+    .lang{display:flex;gap:8px;align-items:center}
     h1{font-size:40px;line-height:1.1;margin:8px 0 8px}
     .sub{color:var(--muted);font-size:17px;margin:0 0 8px}
     .hero{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
@@ -39,18 +38,19 @@
     .badge{display:inline-block;margin-top:6px;font-size:13px;color:var(--muted)}
     .cta-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
     .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
-    .btn.primary{background:#0b2347;color:#fff;border-color:#0b2347} /* toned, not bright blue */
+    .btn.primary{background:#0b2347;color:#fff;border-color:#0b2347} /* toned, premium */
     .section{margin-top:22px}
     .card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:16px}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
     .muted{color:var(--muted)}
     .caption{font-size:12px;color:var(--muted);margin-top:6px}
-    .img{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fafafa}
     .logos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
     .logo-box{border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);background:#fff;font-size:13px}
     footer{margin:26px 0 10px;color:var(--muted);font-size:14px}
     @media(max-width:920px){.hero-grid,.grid-2{grid-template-columns:1fr}}
+    /* make inline SVGs look like images */
+    .svgcard{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fafafa;display:block}
   </style>
 </head>
 <body>
@@ -113,25 +113,75 @@
       </div>
     </section>
 
-    <!-- 3-image preview (with graceful placeholders) -->
+    <!-- 3-preview section (INLINE SVG PLACEHOLDERS) -->
     <section class="section">
       <div style="font-weight:800;margin-bottom:8px" data-i18n="prev_title">See it in action</div>
       <div class="grid-3">
+
+        <!-- WhatsApp Smart Reply -->
         <div>
-          <img class="img" src="./img/whatsapp-reply.png" alt="WhatsApp Smart Reply — pilot example" loading="lazy"
-               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%24400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23f0f2f5%22/><text x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23889999%22>WhatsApp Smart Reply (placeholder)</text></svg>';" />
+          <svg viewBox="0 0 420 260" class="svgcard" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="WhatsApp Smart Reply preview">
+            <rect width="100%" height="100%" fill="#f5f7fb" stroke="#e5e9f1"/>
+            <g font-family="Inter, Arial" font-size="12">
+              <rect x="18" y="22" rx="12" ry="12" width="300" height="48" fill="#ffffff" stroke="#e5e9f1"/>
+              <text x="30" y="46" fill="#4b5563">👋 Buongiorno! Siete disponibili per una visita domani?</text>
+
+              <rect x="102" y="84" rx="12" ry="12" width="300" height="48" fill="#e8f1ff" stroke="#d7e6ff"/>
+              <text x="114" y="108" fill="#0b2347">Certo! 15:00 domani o giovedì 10:30?</text>
+
+              <rect x="18" y="146" rx="12" ry="12" width="260" height="40" fill="#ffffff" stroke="#e5e9f1"/>
+              <text x="30" y="170" fill="#4b5563">Perfetto, domani alle 15:00. Grazie!</text>
+
+              <rect x="142" y="198" rx="12" ry="12" width="260" height="40" fill="#e8f1ff" stroke="#d7e6ff"/>
+              <text x="154" y="222" fill="#0b2347">Confermato ✅ promemoria 24h prima.</text>
+            </g>
+          </svg>
           <div class="caption" data-i18n="c1">WhatsApp Smart Reply (pilot example)</div>
         </div>
+
+        <!-- Listing Summary -->
         <div>
-          <img class="img" src="./img/listing-summary.png" alt="Listing Summary Generator — pilot example" loading="lazy"
-               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%24400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23f0f2f5%22/><text x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23889999%22>Listing Summary (placeholder)</text></svg>';" />
+          <svg viewBox="0 0 420 260" class="svgcard" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Listing Summary preview">
+            <rect width="100%" height="100%" fill="#ffffff" stroke="#e5e9f1"/>
+            <rect x="18" y="18" width="384" height="26" rx="6" fill="#eef2f7"/>
+            <rect x="18" y="52" width="300" height="10" rx="4" fill="#eef2f7"/>
+            <rect x="18" y="70" width="240" height="10" rx="4" fill="#eef2f7"/>
+            <line x1="18" y1="98" x2="402" y2="98" stroke="#e5e9f1"/>
+            <rect x="18" y="112" width="360" height="10" rx="4" fill="#eef2f7"/>
+            <rect x="18" y="130" width="320" height="10" rx="4" fill="#eef2f7"/>
+            <rect x="18" y="148" width="280" height="10" rx="4" fill="#eef2f7"/>
+            <line x1="18" y1="174" x2="402" y2="174" stroke="#e5e9f1"/>
+            <rect x="18" y="188" width="240" height="10" rx="4" fill="#eef2f7"/>
+            <rect x="18" y="206" width="200" height="10" rx="4" fill="#eef2f7"/>
+          </svg>
           <div class="caption" data-i18n="c2">Listing Summary Generator</div>
         </div>
+
+        <!-- Dashboard mini metrics -->
         <div>
-          <img class="img" src="./img/dashboard-mini.png" alt="Dashboard mini metrics — pilot example" loading="lazy"
-               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22720%22 height=%24400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23f0f2f5%22/><text x=%2250%25%22 y=%2250%25%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23889999%22>Dashboard mini (placeholder)</text></svg>';" />
+          <svg viewBox="0 0 420 260" class="svgcard" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dashboard mini metrics preview">
+            <rect width="100%" height="100%" fill="#ffffff" stroke="#e5e9f1"/>
+            <g font-family="Inter, Arial" text-anchor="middle">
+              <rect x="24" y="24" width="116" height="96" rx="12" fill="#fafafa" stroke="#e5e9f1"/>
+              <text x="82" y="70" font-size="26" font-weight="800" fill="#123b78">7</text>
+              <text x="82" y="95" font-size="12" fill="#6b7280">New leads today</text>
+
+              <rect x="152" y="24" width="116" height="96" rx="12" fill="#fafafa" stroke="#e5e9f1"/>
+              <text x="210" y="70" font-size="26" font-weight="800" fill="#123b78">11m</text>
+              <text x="210" y="95" font-size="12" fill="#6b7280">Avg reply time</text>
+
+              <rect x="280" y="24" width="116" height="96" rx="12" fill="#fafafa" stroke="#e5e9f1"/>
+              <text x="338" y="70" font-size="26" font-weight="800" fill="#123b78">5</text>
+              <text x="338" y="95" font-size="12" fill="#6b7280">Visits booked</text>
+
+              <polyline points="30,190 80,170 130,180 180,160 230,172 280,150 330,158 380,140"
+                        fill="none" stroke="#123b78" stroke-width="2" opacity=".6"/>
+              <text x="210" y="214" font-size="12" fill="#6b7280">Daily pulse (trend)</text>
+            </g>
+          </svg>
           <div class="caption" data-i18n="c3">Dashboard mini metrics</div>
         </div>
+
       </div>
     </section>
 
@@ -277,9 +327,6 @@
         if(k==="pricing") el.innerHTML = v; else el.textContent = v;
       });
       $("#langLabel").textContent = (L==="it"?"IT":"EN");
-      $("#lang-en").classList.toggle("chip", L!=="en");
-      $("#lang-en").classList.toggle("chip", true);
-      $("#lang-it").classList.toggle("chip", true);
     }
     $("#lang-en").onclick = ()=>setLang("en");
     $("#lang-it").onclick = ()=>setLang("it");
