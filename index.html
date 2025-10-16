@@ -1,56 +1,230 @@
-<script>
-/* —— Minimal EN/IT toggle: text-only patch (no layout/CSS changes) —— */
-/* Assumes these IDs already exist in your current page:
-   #lang-en  #lang-it  #lang-label
-   #start-pilot  #name  #email  #wf
-*/
-(function(){
-  const dict = {
-    en: {
-      langLabel: "Language",
-      pilotTitle: "Start your 30-day pilot",
-      namePH: "Name (e.g. Alex Rossi)",
-      emailPH: "Work email (e.g. alex.rossi@agency.it)",
-      wfPH: "What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
-    },
-    it: {
-      langLabel: "Lingua",
-      pilotTitle: "Avvia il pilot di 30 giorni",
-      namePH: "Nome (es. Alex Rossi)",
-      emailPH: "Email lavoro (es. alex.rossi@agency.it)",
-      wfPH: "Qual è il tuo flusso attuale? (es. inbound su WhatsApp + email, risposte più rapide…)"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kintra — Pilot • Italy</title>
+  <meta name="theme-color" content="#0b2347" />
+  <link rel="icon" href="./img/logo.png.png" />
+
+  <style>
+    :root{
+      --navy:#0b2347; --gold:#c9a227; --ink:#0f172a; --muted:#6b7280;
+      --line:#e5e7eb; --bg:#ffffff; --radius:14px; --max:1100px;
     }
-  };
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#fff;color:var(--ink);
+      font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:var(--navy);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px;
+      justify-content:space-between;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:8px;object-fit:contain}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;
+      color:var(--muted);font-size:13px}
 
-  const els = {
-    enBtn: document.getElementById('lang-en'),
-    itBtn: document.getElementById('lang-it'),
-    label: document.getElementById('lang-label'),
-    pilotTitle: document.getElementById('start-pilot'),
-    name: document.getElementById('name'),
-    email: document.getElementById('email'),
-    wf: document.getElementById('wf')
-  };
+    /* language toggle */
+    .lang{display:flex;gap:6px;align-items:center}
+    .lang label{font-size:13px;color:var(--muted)}
+    .lang button{border:1px solid var(--line);background:#fff;
+      border-radius:10px;padding:6px 10px;cursor:pointer;font-size:13px}
+    .lang button.active{border-color:var(--gold);color:var(--navy);
+      background:rgba(201,162,39,0.08)}
 
-  function setActive(btn, on){ btn && btn.classList.toggle('active', on); }
+    .hero{display:grid;grid-template-columns:1.15fr 0.85fr;gap:28px;
+      align-items:center;margin:18px 0 10px}
+    h1{font-size:40px;line-height:1.1;margin:0 0 10px;color:var(--navy)}
+    .lead{font-size:18px;color:var(--ink);margin:0 0 8px}
+    .sub{color:var(--muted);margin:0 0 16px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 8px}
+    .btn{border:1px solid var(--navy);color:#fff;background:var(--navy);
+      padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.alt{background:#fff;color:var(--navy)}
+    .btn.ghost{background:#fff;color:var(--navy);border-color:var(--line)}
+    .note{font-size:13px;color:var(--muted)}
+    .kicker{border-left:3px solid var(--gold);padding-left:12px;
+      background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);
+      border-radius:6px;margin-top:8px}
 
-  function setLang(L){
-    const d = dict[L] || dict.en;
-    document.documentElement.lang = L;
-    if (els.label) els.label.textContent = d.langLabel;
-    if (els.pilotTitle) els.pilotTitle.textContent = d.pilotTitle;
-    if (els.name) els.name.placeholder = d.namePH;
-    if (els.email) els.email.placeholder = d.emailPH;
-    if (els.wf) els.wf.placeholder = d.wfPH;
-    setActive(els.enBtn, L === 'en');
-    setActive(els.itBtn, L === 'it');
-    try { localStorage.setItem('kintra_lang', L); } catch(e){}
-  }
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0}
+    .card{border:1px solid var(--line);border-radius:var(--radius);
+      padding:16px;background:#fff}
+    .card h3{margin:0 0 8px;font-size:18px;color:var(--navy)}
+    .meta{font-size:14px;color:var(--muted)}
+    .hr{height:1px;background:var(--line);margin:12px 0}
 
-  els.enBtn && (els.enBtn.onclick = () => setLang('en'));
-  els.itBtn && (els.itBtn.onclick = () => setLang('it'));
+    /* image sizing kept modest */
+    .preview-img{margin-top:8px;border-radius:12px;border:1px solid var(--line);
+      width:100%;height:220px;object-fit:cover}
+    .preview-img.tall{height:260px}
+    .preview-img.short{height:180px}
 
-  const initial = (()=>{ try { return localStorage.getItem('kintra_lang') || 'en'; } catch(e){ return 'en'; }})();
-  setLang(initial);
-})();
-</script>
+    footer{margin:30px 0 10px;color:var(--muted);font-size:14px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    @media (max-width:980px){
+      .hero,.split{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .preview-img{height:190px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo" />
+        <strong>Kintra</strong>
+        <span class="badge">Pilot • Italy</span>
+      </div>
+
+      <div class="lang">
+        <label id="lang-label">Language</label>
+        <button id="lang-en" class="active">EN</button>
+        <button id="lang-it">IT</button>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>From listing to leads, faster</h1>
+        <p class="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
+        <p class="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
+        <div class="cta-row">
+          <a class="btn" href="#pilot">Request Pilot Access</a>
+          <a class="btn alt" href="./dashboard.html">Preview Dashboard</a>
+          <a class="btn ghost" href="./deck.html">View Live Deck</a>
+          <a class="btn ghost" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
+        </div>
+        <div class="note">See the live preview, then start a 30-day pilot. No risk if it doesn’t save time.</div>
+        <div class="kicker">Trusted by Italian agents building faster funnels.</div>
+      </div>
+
+      <div class="card">
+        <h3>Why this matters (time → money)</h3>
+        <div class="meta">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</div>
+        <div class="hr"></div>
+        <div class="meta">Every minute saved here compounds by the hour.</div>
+      </div>
+    </section>
+
+    <!-- SEE IT IN ACTION -->
+    <section class="split">
+      <div class="card">
+        <h3>WhatsApp Smart Reply</h3>
+        <div class="meta">Kintra drafts structured replies and action prompts so nothing slips.</div>
+        <img class="preview-img" src="./img/whatsapp-reply.png" alt="WhatsApp reply preview">
+      </div>
+
+      <div class="card">
+        <h3>Dashboard Mini Preview</h3>
+        <div class="meta">A live dashboard view that managers can trust.</div>
+        <img class="preview-img tall" src="./img/dashboard preview screen.PNG" alt="Dashboard mini">
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="card">
+        <h3>Listing Summary (composite preview)</h3>
+        <div class="meta">One glance: key details, tags, and next action — ready to send.</div>
+        <img class="preview-img" src="./img/cta.jpg" alt="Listing summary">
+        <p style="font-size:13px;margin-top:6px;"><a href="./dashboard.html">View Listing Summary →</a></p>
+      </div>
+
+      <div class="card">
+        <h3>Next Step Queue</h3>
+        <div class="meta">Today’s follow-ups are ready to send. Sample below:</div>
+        <div style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px">
+          <p style="margin:0;font-size:14px"><strong>Lead:</strong> Rossi — 2BR Milano</p>
+          <p style="margin:4px 0 0;font-size:14px">Send confirmation + reminder 24 h before.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADVISOR CHARTER (gold) -->
+    <section class="card" style="background:linear-gradient(90deg,#fff8e1,#fff);border-color:#f1cf6b">
+      <h3 style="color:var(--navy)">Advisor Charter (Pilot)</h3>
+      <p class="meta">
+        A light, optional role during the 30-day pilot — review the two live previews, share 1–2 intros if relevant, and lend your perspective only if it helps.
+        We list early advisors by permission only.
+      </p>
+    </section>
+
+    <!-- PILOT FORM -->
+    <section id="pilot" class="card" style="margin-top:22px">
+      <h3 id="start-pilot">Start your 30-day pilot</h3>
+      <div class="hr"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <input id="name" placeholder="Name (e.g. Alex Rossi)" />
+        <input id="email" placeholder="Work email (e.g. alex.rossi@agency.it)" />
+        <textarea id="wf" placeholder="What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"></textarea>
+      </div>
+      <div class="cta-row" style="margin-top:12px">
+        <button class="btn">→ Start My Pilot</button>
+        <span class="note">No spam. Limited early access.</span>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2025 Kintra.</div>
+      <div>Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></div>
+    </footer>
+  </div>
+
+  <!-- Minimal, safe language toggle (text only; no layout changes) -->
+  <script>
+  (function(){
+    const dict = {
+      en: {
+        langLabel:"Language",
+        pilotTitle:"Start your 30-day pilot",
+        namePH:"Name (e.g. Alex Rossi)",
+        emailPH:"Work email (e.g. alex.rossi@agency.it)",
+        wfPH:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
+      },
+      it: {
+        langLabel:"Lingua",
+        pilotTitle:"Avvia il pilot di 30 giorni",
+        namePH:"Nome (es. Alex Rossi)",
+        emailPH:"Email lavoro (es. alex.rossi@agency.it)",
+        wfPH:"Qual è il tuo flusso attuale? (es. inbound su WhatsApp + email, risposte più rapide…)"
+      }
+    };
+
+    const els = {
+      enBtn:document.getElementById('lang-en'),
+      itBtn:document.getElementById('lang-it'),
+      label:document.getElementById('lang-label'),
+      pilotTitle:document.getElementById('start-pilot'),
+      name:document.getElementById('name'),
+      email:document.getElementById('email'),
+      wf:document.getElementById('wf')
+    };
+
+    function setActive(btn,on){ if(btn) btn.classList.toggle('active', on); }
+    function setLang(L){
+      const d = dict[L] || dict.en;
+      document.documentElement.lang = L;
+      if (els.label) els.label.textContent = d.langLabel;
+      if (els.pilotTitle) els.pilotTitle.textContent = d.pilotTitle;
+      if (els.name) els.name.placeholder = d.namePH;
+      if (els.email) els.email.placeholder = d.emailPH;
+      if (els.wf) els.wf.placeholder = d.wfPH;
+      setActive(els.enBtn, L==='en');
+      setActive(els.itBtn, L==='it');
+      try { localStorage.setItem('kintra_lang', L); } catch(e){}
+    }
+
+    els.enBtn && (els.enBtn.onclick = ()=> setLang('en'));
+    els.itBtn && (els.itBtn.onclick = ()=> setLang('it'));
+
+    const initial = (()=>{ try { return localStorage.getItem('kintra_lang') || 'en'; } catch(e){ return 'en'; }})();
+    setLang(initial);
+  })();
+  </script>
+</body>
+</html>
