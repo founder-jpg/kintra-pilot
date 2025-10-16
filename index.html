@@ -224,5 +224,44 @@
       <div>© 2025 Kintra. <span id="foot-mail">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
     </footer>
   </div>
+  <script>
+/* --- Kintra language toggle fix --- */
+const dict = {
+  en: {
+    langLabel:"Language",
+    pilot_title:"Start your 30-day pilot",
+    name_ph:"Name (e.g. Alex Rossi)",
+    email_ph:"Work email (e.g. alex.rossi@agency.it)",
+    wf_ph:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
+  },
+  it: {
+    langLabel:"Lingua",
+    pilot_title:"Avvia il pilot di 30 giorni",
+    name_ph:"Nome (es. Alex Rossi)",
+    email_ph:"Email lavoro (es. alex.rossi@agency.it)",
+    wf_ph:"Qual è il tuo flusso attuale? (es. inbound su WhatsApp + email, risposte più rapide…)"
+  }
+};
+
+const setLang=(L)=>{
+  const d=dict[L];
+  document.documentElement.lang=L;
+  document.querySelector('[data-i18n="pilot_title"]').textContent=d.pilot_title;
+  document.querySelector('label[for="name"]')?.textContent=d.name;
+  document.querySelector('#langLabel').textContent=d.langLabel;
+  document.querySelector('#name')?.setAttribute('placeholder',d.name_ph);
+  document.querySelector('#email')?.setAttribute('placeholder',d.email_ph);
+  document.querySelector('#workflow')?.setAttribute('placeholder',d.wf_ph);
+  document.querySelectorAll('.lang button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.lang===L);
+  });
+};
+
+document.querySelectorAll('.lang button').forEach(b=>{
+  b.addEventListener('click',()=>setLang(b.dataset.lang));
+});
+setLang('en');
+</script>
+
 </body>
 </html>
