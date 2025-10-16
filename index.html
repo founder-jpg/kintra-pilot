@@ -10,33 +10,27 @@
   <meta property="og:image" content="./img/og.jpg" />
   <meta name="theme-color" content="#0b2347" />
   <link rel="icon" href="./img/logo.png.png" />
-
-  <!-- KINTRA_INDEX_MIN_ITA v4 (localized Language/Lingua + robust Listing Summary SVG) -->
   <style>
     :root{
-      --bg:#ffffff;
-      --ink:#0d1b2a;      /* main text (near-black) */
-      --muted:#2a3440;    /* darker secondary for legibility */
-      --line:#e9edf2;
-      --brand:#123b78;
-      --accent:#d7b86f;
-      --card:#f8fafc;
-      --dark:#0b2347;
-      --seg-bg:#ffffff;
-      --seg-border:#cbd5e1;
-      --seg-active-bg:#0b2347;
-      --seg-active-ink:#ffffff;
-      --seg-inactive-ink:#0b2347;
+      --bg:#ffffff; --ink:#0d1b2a; --muted:#2a3440; --line:#e9edf2;
+      --brand:#123b78; --accent:#d7b86f; --card:#f8fafc; --dark:#0b2347;
+      --seg-bg:#ffffff; --seg-border:#cbd5e1; --seg-active-bg:#0b2347;
+      --seg-active-ink:#ffffff; --seg-inactive-ink:#0b2347;
+      --gold:#c9a2271a; --gold-line:#c9a22766;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial}
     a{color:var(--brand);text-decoration:none}
     .wrap{max-width:1024px;margin:0 auto;padding:28px 18px}
-
     header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
     header img.logo{width:30px;height:30px;border-radius:6px;border:1px solid var(--line);object-fit:contain}
     .brand{font-weight:800}
     .spacer{flex:1}
+    .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#516176;font-size:13px}
+
+    /* tiny Italy flag (inline SVG holder) */
+    .flag{width:16px;height:12px;display:inline-block;border:1px solid #d1d9e6;border-radius:2px;overflow:hidden}
+    .flag svg{display:block;width:16px;height:12px}
 
     /* Segmented language toggle */
     .lang{display:flex;align-items:center;gap:10px}
@@ -57,7 +51,7 @@
     .hero-copy{padding:22px}
     .hero-card{padding:16px;border-left:1px solid var(--line);background:var(--card);height:100%}
     .eyebrow{font-weight:800;color:#0b2347;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
-    .badge{display:inline-block;margin-top:6px;font-size:13px;color:var(--muted)}
+    .badge-note{display:inline-block;margin-top:6px;font-size:13px;color:var(--muted)}
 
     .cta-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
     .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;padding:10px 12px;border-radius:10px;font-weight:600}
@@ -74,11 +68,11 @@
     footer{margin:26px 0 10px;color:#4a586a;font-size:14px}
     @media(max-width:920px){.hero-grid,.grid-2{grid-template-columns:1fr}}
 
-    /* Ensure consistent SVG sizing across devices */
-    .svgcard{
-      display:block;width:100%;height:260px; /* fixed height for consistent render */
-      border:1px solid var(--line);border-radius:12px;background:#fafafa;
-    }
+    /* Consistent SVG sizing */
+    .svgcard{display:block;width:100%;height:260px;border:1px solid var(--line);border-radius:12px;background:#ffffff}
+    /* Advisor banner */
+    .advisor{border:1px solid var(--gold-line);background:linear-gradient(90deg,var(--gold),transparent);border-radius:12px;padding:12px 14px}
+    .advisor strong{color:#6b5400}
   </style>
 </head>
 <body>
@@ -87,10 +81,20 @@
     <header>
       <img src="./img/logo.png.png" alt="Kintra logo" class="logo" />
       <div class="brand">Kintra</div>
-      <span class="badge">Pilot • Italy 🇮🇹</span>
+      <span class="badge" id="pilot-badge">
+        <span>Pilot • Italy</span>
+        <span class="flag" aria-hidden="true">
+          <!-- Always-on Italy flag -->
+          <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Italy flag">
+            <rect width="1" height="2" x="0" y="0" fill="#009246"/>
+            <rect width="1" height="2" x="1" y="0" fill="#ffffff"/>
+            <rect width="1" height="2" x="2" y="0" fill="#ce2b37"/>
+          </svg>
+        </span>
+      </span>
       <div class="spacer"></div>
 
-      <!-- Localized segmented language switch -->
+      <!-- Language switch -->
       <div class="lang" role="group" aria-label="Language" id="lang-group">
         <span class="lang-label" id="lang-label">Language</span>
         <div class="seg" aria-label="Language switch">
@@ -117,7 +121,7 @@
             <a class="btn" href="./deck.html" data-i18n="cta2">View Live Deck</a>
             <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" data-i18n="cta3">Download Deck PDF</a>
           </div>
-          <div class="badge" data-i18n="pricing">Pilot range: <strong>€1.5–2k/mo</strong> • 30-day timebox • 2–3 KPIs</div>
+          <div class="badge-note" data-i18n="pricing">Pilot range: <strong>€1.5–2k/mo</strong> • 30-day timebox • 2–3 KPIs</div>
         </div>
         <aside class="hero-card">
           <div style="font-weight:800;margin-bottom:6px" data-i18n="why_title">Why this matters (time → money)</div>
@@ -127,6 +131,13 @@
           <hr style="border:0;border-top:1px solid var(--line);margin:12px 0" />
           <div class="muted" style="font-weight:700" data-i18n="why_line2">Every minute saved here compounds by the hour.</div>
         </aside>
+      </div>
+    </section>
+
+    <!-- Advisor Charter (gold banner) -->
+    <section class="section advisor" id="advisor">
+      <div data-i18n="advisor_copy">
+        <strong>Advisor Charter (pilot):</strong> a light advisory role during the 30-day pilot—review the preview, share 1–2 intros if useful, and lend your name (optional) as an informal advisor. Zero ops load; clear upside if the pilot performs.
       </div>
     </section>
 
@@ -167,7 +178,7 @@
           <div class="caption" data-i18n="c1">WhatsApp Smart Reply (pilot example)</div>
         </div>
 
-        <!-- Listing Summary (robust) -->
+        <!-- Listing Summary (high-contrast mini-mock) -->
         <div>
           <svg viewBox="0 0 420 300" preserveAspectRatio="xMidYMid meet" class="svgcard" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Listing Summary preview">
             <defs>
@@ -176,34 +187,39 @@
                 <stop offset="1" stop-color="#ffffff"/>
               </linearGradient>
             </defs>
-            <rect width="100%" height="100%" fill="url(#sh)" stroke="#d7dde6" stroke-width="1.4"/>
+            <rect width="100%" height="100%" fill="url(#sh)" stroke="#cfd7e2" stroke-width="1.6"/>
             <g font-family="Inter, Arial" fill="#0d1b2a">
-              <text x="18" y="28" font-size="13" font-weight="700">Listing summary</text>
+              <text x="18" y="30" font-size="13" font-weight="700">Listing summary</text>
             </g>
-            <!-- hero rows -->
-            <rect x="18" y="44" width="340" height="12" rx="4" fill="#dfe6f0"/>
-            <rect x="18" y="62" width="280" height="10" rx="4" fill="#e7edf5"/>
-            <line x1="18" y1="86" x2="402" y2="86" stroke="#cfd7e2" stroke-width="1.4"/>
+            <!-- main title + price -->
+            <rect x="18" y="46" width="240" height="14" rx="3" fill="#dfe6f0"/>
+            <rect x="270" y="46" width="120" height="14" rx="3" fill="#e8efe0"/>
+            <!-- key facts -->
+            <rect x="18" y="68" width="90" height="12" rx="3" fill="#eef2f7"/>
+            <rect x="114" y="68" width="90" height="12" rx="3" fill="#eef2f7"/>
+            <rect x="210" y="68" width="90" height="12" rx="3" fill="#eef2f7"/>
+
+            <line x1="18" y1="92" x2="402" y2="92" stroke="#cfd7e2" stroke-width="1.2"/>
 
             <!-- bullets -->
-            <rect x="24" y="102" width="10" height="10" rx="2" fill="#123b78" />
-            <rect x="40" y="102" width="320" height="10" rx="3" fill="#eef2f7"/>
-            <rect x="24" y="122" width="10" height="10" rx="2" fill="#123b78" />
-            <rect x="40" y="122" width="290" height="10" rx="3" fill="#eef2f7"/>
-            <rect x="24" y="142" width="10" height="10" rx="2" fill="#123b78" />
-            <rect x="40" y="142" width="300" height="10" rx="3" fill="#eef2f7"/>
+            <circle cx="24" cy="110" r="4" fill="#123b78"/>
+            <rect x="36" y="104" width="320" height="12" rx="3" fill="#eef2f7"/>
+            <circle cx="24" cy="132" r="4" fill="#123b78"/>
+            <rect x="36" y="126" width="290" height="12" rx="3" fill="#eef2f7"/>
+            <circle cx="24" cy="154" r="4" fill="#123b78"/>
+            <rect x="36" y="148" width="300" height="12" rx="3" fill="#eef2f7"/>
 
-            <line x1="18" y1="166" x2="402" y2="166" stroke="#cfd7e2" stroke-width="1.4"/>
+            <line x1="18" y1="172" x2="402" y2="172" stroke="#cfd7e2" stroke-width="1.2"/>
 
-            <!-- details -->
-            <rect x="18" y="182" width="240" height="10" rx="4" fill="#e7edf5"/>
-            <rect x="18" y="202" width="280" height="10" rx="4" fill="#e7edf5"/>
-            <rect x="18" y="222" width="200" height="10" rx="4" fill="#e7edf5"/>
+            <!-- description rows -->
+            <rect x="18" y="186" width="260" height="12" rx="3" fill="#e7edf5"/>
+            <rect x="18" y="206" width="300" height="12" rx="3" fill="#e7edf5"/>
+            <rect x="18" y="226" width="200" height="12" rx="3" fill="#e7edf5"/>
 
-            <!-- small gallery placeholders -->
-            <rect x="18" y="244" width="84" height="40" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
-            <rect x="108" y="244" width="84" height="40" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
-            <rect x="198" y="244" width="84" height="40" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
+            <!-- micro gallery -->
+            <rect x="18" y="248" width="84" height="36" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
+            <rect x="108" y="248" width="84" height="36" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
+            <rect x="198" y="248" width="84" height="36" rx="6" fill="#f3f6fb" stroke="#dde4ee" stroke-width="1.2"/>
           </svg>
           <div class="caption" data-i18n="c2">Listing Summary Generator</div>
         </div>
@@ -297,7 +313,7 @@
   </div>
 
   <script>
-    // EN / IT copy (now includes the Language/Lingua label)
+    // EN / IT copy (includes Language/Lingua & Advisor banner)
     const dict = {
       en:{
         langLabel:"Language",
@@ -332,7 +348,8 @@
         cta2_title:"Start your 2–4 week pilot",
         cta2_copy:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
         cta_send:"→ Start My Pilot",
-        cta_dash2:"Preview Dashboard"
+        cta_dash2:"Preview Dashboard",
+        advisor_copy:"Advisor Charter (pilot): a light advisory role during the 30-day pilot—review the preview, share 1–2 intros if useful, and lend your name (optional) as an informal advisor. Zero ops load; clear upside if the pilot performs."
       },
       it:{
         langLabel:"Lingua",
@@ -367,7 +384,8 @@
         cta2_title:"Avvia il pilot di 2–4 settimane",
         cta2_copy:"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — rischio zero.",
         cta_send:"→ Avvia il mio pilot",
-        cta_dash2:"Anteprima Dashboard"
+        cta_dash2:"Anteprima Dashboard",
+        advisor_copy:"Carta Advisor (pilot): ruolo leggero durante i 30 giorni—rivedi l’anteprima, condividi 1–2 contatti se utile e (opzionale) dai il tuo nome come advisor informale. Zero carico operativo; beneficio chiaro se il pilot performa."
       }
     };
 
