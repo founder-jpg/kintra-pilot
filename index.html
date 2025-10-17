@@ -28,13 +28,13 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
 
-    /* Language */
+    /* Language (flags visible desktop & mobile) */
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
     .toggle button{
       display:inline-flex;align-items:center;gap:8px;padding:6px 12px;cursor:pointer;
-      background:#fff;border:0;border-right:1px solid var(--line);font-weight:600
+      background:#fff;border:0;border-right:1px solid var(--line);font-weight:600;min-width:78px;justify-content:center
     }
     .toggle button:last-child{border-right:0}
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
@@ -50,13 +50,12 @@
     .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
     .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
 
-    .hr{height:1px;background:var(--line);margin:18px 0}
+    .divider{height:1px;background:var(--line);margin:18px 0}
 
     /* Cards & grids */
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
     .card.soft{background:var(--card)}
-    .divider{height:1px;background:var(--line);margin:18px 0}
 
     /* Pricing strip */
     .pricing{margin-top:10px;font-size:14px;color:#243044}
@@ -73,12 +72,12 @@
     /* “Trusted by” kicker */
     .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
 
-    /* WhatsApp Smart Reply specific */
-    .tabs{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-    .tab{padding:6px 10px;cursor:pointer;background:#fff;border-right:1px solid var(--line);font-weight:600}
-    .tab:last-child{border-right:0}
-    .tab.active{background:var(--chip);color:var(--brand);border-color:var(--brand)}
-    .meta-row{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#6b7280;margin-top:6px}
+    /* WhatsApp Smart Reply */
+    .switch{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+    .switch .chip{padding:6px 12px;cursor:pointer;background:#fff;border-right:1px solid var(--line);font-weight:700;min-width:92px;text-align:center}
+    .switch .chip:last-child{border-right:0}
+    .switch .chip.active{background:var(--chip);color:var(--brand);border-color:var(--brand)}
+    .meta-row{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#6b7280;margin-top:8px}
     .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 8px}
     .dot{width:8px;height:8px;border-radius:50%}
     .dot.client{background:#7c8799}
@@ -106,7 +105,7 @@
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
     .caption{margin-top:6px;font-size:12px;color:#7b879b}
 
-    /* Mini metrics (used twice) */
+    /* Mini metrics */
     .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
     .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
     .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
@@ -217,22 +216,22 @@
 
     <!-- SEE IT IN ACTION -->
     <section class="grid-2" style="margin-top:14px">
-      <!-- WhatsApp Smart Reply (improved) -->
+      <!-- WhatsApp Smart Reply (restored toggle + content) -->
       <section class="card soft" id="wa-card">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
           <h3 id="waPrev" style="margin:0">WhatsApp Smart Reply</h3>
-          <div class="tabs" role="tablist" aria-label="Before / After">
-            <button class="tab active" id="tab-before" role="tab" aria-selected="true">Before</button>
-            <button class="tab" id="tab-after" role="tab" aria-selected="false">After</button>
+          <div class="switch" role="tablist" aria-label="Before / After">
+            <button class="chip active" id="tab-before" role="tab" aria-selected="true">Before</button>
+            <button class="chip" id="tab-after" role="tab" aria-selected="false">After</button>
           </div>
         </div>
         <p class="sub" id="waDesc" style="margin-top:6px">Kintra drafts structured replies and next steps so nothing slips.</p>
 
         <!-- Legend -->
-        <div class="meta-row" style="margin-bottom:8px">
-          <span class="pill" title="Incoming customer message"><span class="dot client"></span><span id="legendClient">Client</span></span>
-          <span class="pill" title="AI auto-draft"><span class="dot ai"></span><span id="legendAI">Kintra (AI)</span></span>
-          <span class="pill" title="Agent approves & sends"><span class="dot agent"></span><span id="legendAgent">Agent</span></span>
+        <div class="meta-row" style="margin-bottom:6px">
+          <span class="pill"><span class="dot client"></span><span id="legendClient">Client</span></span>
+          <span class="pill"><span class="dot ai"></span><span id="legendAI">Kintra (AI)</span></span>
+          <span class="pill"><span class="dot agent"></span><span id="legendAgent">Agent</span></span>
         </div>
 
         <!-- Keys row -->
@@ -366,7 +365,7 @@
   </div>
 
   <script>
-    // --- Minimal EN/IT dictionary for page copy ---
+    /* ---------- i18n ---------- */
     const dict = {
       en:{
         badge:"Pilot • Italy",
@@ -396,7 +395,20 @@
         tipText:'Tip: The recipient must first say “hello” to the test number.',
         revealBtn:'Reveal test number', copyBtn:'Copy', copied:'Copied', copyFail:'Copy failed',
         publicNote:'For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.',
-        langLabel:"Language"
+        langLabel:"Language",
+        // WA i18n
+        before:"Before", after:"After",
+        key1:"Client → inbound message",
+        key2:"Kintra → detects intent & drafts reply",
+        key3:"Agent → approves & sends",
+        beforeTop:"Manual reply ~2–4 min",
+        afterTop:"Auto-draft ~10–20 sec",
+        clientMsg:"Hi — are you available for a viewing tomorrow after work around 18:30?",
+        agentLine1:"Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
+        agentLine2:"I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.",
+        manualTimingLabel:"Manual reply:",
+        autoTimingLabel:"Auto-draft:",
+        legendClient:"Client", legendAI:"Kintra (AI)", legendAgent:"Agent"
       },
       it:{
         badge:"Pilot • Italia",
@@ -426,7 +438,20 @@
         tipText:'Nota: il destinatario deve prima inviare “hello” al numero di test.',
         revealBtn:'Mostra numero di test', copyBtn:'Copia', copied:'Copiato', copyFail:'Copia non riuscita',
         publicNote:'Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.',
-        langLabel:"Lingua"
+        langLabel:"Lingua",
+        // WA i18n
+        before:"Prima", after:"Dopo",
+        key1:"Cliente → messaggio in arrivo",
+        key2:"Kintra → rileva l’intento e prepara la bozza",
+        key3:"Agente → approva e invia",
+        beforeTop:"Risposta manuale ~2–4 min",
+        afterTop:"Bozza automatica ~10–20 sec",
+        clientMsg:"Ciao — è possibile una visita domani dopo il lavoro verso le 18:30?",
+        agentLine1:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
+        agentLine2:"Posso inviare anche planimetria e indicazioni. Confermo e invio promemoria 24h prima.",
+        manualTimingLabel:"Risposta manuale:",
+        autoTimingLabel:"Bozza automatica:",
+        legendClient:"Cliente", legendAI:"Kintra (AI)", legendAgent:"Agente"
       }
     };
 
@@ -437,19 +462,12 @@
       $("#h1").textContent = d.h1;
       $("#lead").textContent = d.lead;
       $("#sub").textContent = d.sub;
-      $("#btn-request").textContent = (lang==='it'?dict.it.btnRequest:dict.en.btnRequest);
-      $("#btn-dash").textContent = (lang==='it'?dict.it.btnDash:dict.en.btnDash);
-      $("#btn-deck").textContent = (lang==='it'?dict.it.btnDeck:dict.en.btnDeck);
-      $("#btn-pdf").textContent = (lang==='it'?dict.it.btnPDF:dict.en.btnPDF);
       $("#price-tail").textContent = d.priceTail;
       $("#goldH3").textContent = d.goldH3;
       $("#goldP1").textContent = d.goldP1;
       $("#goldP2").textContent = d.goldP2;
       $("#goldP3").textContent = d.goldP3;
       $("#trust-line").textContent = d.trust;
-      $("#why").textContent = d.why;
-      $("#math").textContent = d.math;
-      $("#compounds").textContent = d.compounds;
       $("#lsTitle").textContent = d.lsTitle;
       $("#lsSub").textContent = d.lsSub;
       $("#lsHeadRight").textContent = d.lsHeadRight;
@@ -461,10 +479,20 @@
       $("#wa-send-sub").textContent = d.waSendSub;
       $("#lab-phone").textContent = d.labPhone;
       $("#lab-msg").textContent = d.labMsg;
-      $("#waTip").childNodes[0].textContent = (lang==='it'?dict.it.tipText:dict.en.tipText)+' ';
+      $("#waTip").childNodes[0].textContent = (d.tipText+' ');
       $("#revealTestNum").textContent = d.revealBtn;
       $("#publicNote").textContent = d.publicNote;
       $("#lang-label").textContent = d.langLabel;
+
+      // WA i18n
+      $("#tab-before").textContent = d.before;
+      $("#tab-after").textContent  = d.after;
+      $("#key1").textContent = d.key1;
+      $("#key2").textContent = d.key2;
+      $("#key3").textContent = d.key3;
+      $("#legendClient").textContent = d.legendClient;
+      $("#legendAI").textContent     = d.legendAI;
+      $("#legendAgent").textContent  = d.legendAgent;
 
       document.documentElement.lang = lang;
       $("#lang-en").classList.toggle("active", lang==="en");
@@ -473,106 +501,59 @@
       $("#lang-it").setAttribute("aria-pressed", lang==="it");
       localStorage.setItem("kintra_lang", lang);
 
-      // re-render WA block with correct language
+      // Re-render WA in current mode
       renderWA( $("#tab-before").classList.contains("active") ? "before" : "after" );
     }
     $("#lang-en").onclick = ()=> setLang("en");
     $("#lang-it").onclick = ()=> setLang("it");
     setLang(localStorage.getItem("kintra_lang") || "en");
 
-    // --- WhatsApp Smart Reply i18n + renderer (self-contained) ---
-    const waI18n = {
-      en:{
-        before:"Before", after:"After",
-        keys:["Client → inbound message","Kintra → detects intent & drafts reply","Agent → approves & sends"],
-        beforeTop:"Manual reply ~2–4 min",
-        afterTop:"Auto-draft ~10–20 sec",
-        clientMsg:"Hi — are you available for a viewing tomorrow after work around 18:30?",
-        agentLine1:"Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
-        agentLine2:"I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.",
-        manualTimingLabel:"Manual reply:",
-        autoTimingLabel:"Auto-draft:",
-        legendClient:"Client", legendAI:"Kintra (AI)", legendAgent:"Agent"
-      },
-      it:{
-        before:"Prima", after:"Dopo",
-        keys:["Cliente → messaggio in arrivo","Kintra → rileva l’intento e prepara la bozza","Agente → approva e invia"],
-        beforeTop:"Risposta manuale ~2–4 min",
-        afterTop:"Bozza automatica ~10–20 sec",
-        clientMsg:"Ciao — è possibile una visita domani dopo il lavoro verso le 18:30?",
-        agentLine1:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
-        agentLine2:"Posso inviare anche planimetria e indicazioni. Confermo e invio promemoria 24h prima.",
-        manualTimingLabel:"Risposta manuale:",
-        autoTimingLabel:"Bozza automatica:",
-        legendClient:"Cliente", legendAI:"Kintra (AI)", legendAgent:"Agente"
-      }
-    };
-    const $wa = s => document.querySelector(s);
-    const getLang = () => (document.documentElement.lang || 'en').startsWith('it') ? 'it' : 'en';
+    /* ---------- WhatsApp Smart Reply: renderer (restored logic) ---------- */
+    const getL = ()=> (document.documentElement.lang||'en').startsWith('it')?'it':'en';
+    function waText(key){ return dict[getL()][key]; }
 
     function renderWA(mode){
-      const L = getLang();
-      const t = waI18n[L];
+      // timing label
+      $("#waTopLabel").textContent = (mode==='before') ? waText('beforeTop') : waText('afterTop');
 
-      // Tabs labels
-      $wa('#tab-before').textContent = t.before;
-      $wa('#tab-after').textContent  = t.after;
-
-      // Legend + keys
-      $wa('#legendClient').textContent = t.legendClient;
-      $wa('#legendAI').textContent     = t.legendAI;
-      $wa('#legendAgent').textContent  = t.legendAgent;
-
-      const [k1,k2,k3] = t.keys;
-      $wa('#key1').textContent = k1;
-      $wa('#key2').textContent = k2;
-      $wa('#key3').textContent = k3;
-
-      // Timing label
-      $wa('#waTopLabel').textContent = (mode==='before') ? t.beforeTop : t.afterTop;
-
-      // Bubbles
-      const body = $wa('#waBody');
+      // bubbles
+      const body = $("#waBody");
       if(mode==='before'){
         body.innerHTML = `
-          <div class="bubble client"><span class="dot client" title="${t.legendClient}"></span> ${t.clientMsg}</div>
-          <div class="bubble agent"><span class="dot agent" title="${t.legendAgent}"></span> ${t.agentLine1}</div>
-          <div class="bubble agent"><span class="dot agent" title="${t.legendAgent}"></span> ${t.agentLine2}</div>
-          <div class="meta-row"><span class="pill"><b>${t.manualTimingLabel}</b> ~2–4 min</span></div>
+          <div class="bubble client"><span class="dot client" title="${waText('legendClient')}"></span> ${waText('clientMsg')}</div>
+          <div class="bubble agent"><span class="dot agent" title="${waText('legendAgent')}"></span> ${waText('agentLine1')}</div>
+          <div class="bubble agent"><span class="dot agent" title="${waText('legendAgent')}"></span> ${waText('agentLine2')}</div>
+          <div class="meta-row"><span class="pill"><b>${waText('manualTimingLabel')}</b>  ~2–4 min</span></div>
         `;
       } else {
         body.innerHTML = `
-          <div class="bubble client"><span class="dot client" title="${t.legendClient}"></span> ${t.clientMsg}</div>
-          <div class="bubble ai"><span class="dot ai" title="${t.legendAI}"></span> ${t.agentLine1}</div>
-          <div class="bubble ai"><span class="dot ai" title="${t.legendAI}"></span> ${t.agentLine2}</div>
-          <div class="meta-row"><span class="pill"><b>${t.autoTimingLabel}</b> ~10–20 sec</span></div>
+          <div class="bubble client"><span class="dot client" title="${waText('legendClient')}"></span> ${waText('clientMsg')}</div>
+          <div class="bubble ai"><span class="dot ai" title="${waText('legendAI')}"></span> ${waText('agentLine1')}</div>
+          <div class="bubble ai"><span class="dot ai" title="${waText('legendAI')}"></span> ${waText('agentLine2')}</div>
+          <div class="meta-row"><span class="pill"><b>${waText('autoTimingLabel')}</b>  ~10–20 sec</span></div>
         `;
       }
     }
 
-    const beforeBtn = $wa('#tab-before');
-    const afterBtn  = $wa('#tab-after');
-    function setActive(which){
-      const isBefore = (which==='before');
+    const beforeBtn = $("#tab-before");
+    const afterBtn  = $("#tab-after");
+    function setMode(which){
+      const isBefore = which==='before';
       beforeBtn.classList.toggle('active', isBefore);
       beforeBtn.setAttribute('aria-selected', String(isBefore));
       afterBtn.classList.toggle('active', !isBefore);
       afterBtn.setAttribute('aria-selected', String(!isBefore));
       renderWA(which);
     }
-    beforeBtn?.addEventListener('click', ()=> setActive('before'));
-    afterBtn ?.addEventListener('click', ()=> setActive('after'));
+    beforeBtn.addEventListener('click', ()=> setMode('before'));
+    afterBtn.addEventListener('click', ()=> setMode('after'));
+    setMode('before'); // initial
 
-    // Re-render when <html lang> changes
-    const langObserver = new MutationObserver(()=> {
-      setActive( beforeBtn.classList.contains('active') ? 'before' : 'after' );
-    });
-    langObserver.observe(document.documentElement, { attributes:true, attributeFilter:['lang'] });
+    // Re-render on lang attr change (just in case)
+    new MutationObserver(()=> setMode(beforeBtn.classList.contains('active')?'before':'after'))
+      .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 
-    // Initial render
-    setActive('before');
-
-    // --- WhatsApp demo send stub ---
+    /* ---------- WhatsApp demo (stub) ---------- */
     const TEST_NUMBER = "+39 3XX XXX XXXX";
     const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
     const waBtn = $('#sendWA'), waOut = $('#waResult');
@@ -583,9 +564,9 @@
 
     revealBtn.onclick = ()=>{ testNumEl.textContent = TEST_NUMBER; testWrap.style.display='inline'; revealBtn.style.display='none'; };
     copyBtn.onclick = async ()=>{
-      try{ await navigator.clipboard.writeText(TEST_NUMBER); copyBtn.textContent = (dict[getLang()].copied||"Copied"); }
-      catch{ copyBtn.textContent = (dict[getLang()].copyFail||"Copy failed"); }
-      setTimeout(()=> copyBtn.textContent = (dict[getLang()].copyBtn||"Copy"), 1500);
+      try{ await navigator.clipboard.writeText(TEST_NUMBER); copyBtn.textContent = (dict[getL()].copied||"Copied"); }
+      catch{ copyBtn.textContent = (dict[getL()].copyFail||"Copy failed"); }
+      setTimeout(()=> copyBtn.textContent = (dict[getL()].copyBtn||"Copy"), 1500);
     };
 
     waBtn.onclick = async ()=>{
@@ -605,6 +586,10 @@
         waOut.textContent = 'Error: ' + e.message;
       }
     };
+
+    /* ---------- Language toggle ---------- */
+    $("#lang-en").onclick = ()=> setLang("en");
+    $("#lang-it").onclick = ()=> setLang("it");
   </script>
 </body>
 </html>
