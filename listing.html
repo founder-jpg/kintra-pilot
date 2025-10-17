@@ -5,361 +5,60 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Kintra — Listing Summary</title>
   <meta name="color-scheme" content="light only"/>
-  <meta name="theme-color" content="#0b2347"/>
   <link rel="icon" href="./img/logo.png.png"/>
-
   <style>
-    :root{
-      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
-      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
-      --card:#f7f9fc; --chip:#eef3ff;
-      --radius:14px; --max:1100px;
-    }
+    :root{ --ink:#0b1220; --muted:#5e6a7a; --line:#e8ecf2; --brand:#0b5fff; --card:#f7f9fc; --radius:14px; --max:900px; }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    html,body{margin:0;background:#ffffff;color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
     a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    img{display:block;max-width:100%}
-    .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
-    .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
-    .brand .name{font-weight:800;letter-spacing:.2px}
-    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
-
-    /* Language toggle (flags SVG so they show on desktop/mobile) */
-    .langbox{display:flex;align-items:center;gap:10px}
-    .langbox .label{font-size:14px;color:#6b7280}
-    .toggle{display:flex;gap:8px}
-    .toggle button{
-      display:inline-flex;align-items:center;gap:8px;padding:6px 12px;
-      border:1px solid var(--line);background:#fff;border-radius:999px;
-      cursor:pointer;font-weight:600
-    }
-    .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{display:inline-flex;width:18px;height:12px}
-    .flag svg{width:18px;height:12px;display:block}
-
-    /* Breadcrumb */
-    .crumbs{font-size:13px;color:#6b7280;margin:6px 0 10px}
-    .crumbs a{color:#6b7280}
-    .crumbs .sep{margin:0 6px;color:#9aa3b2}
-
-    /* Title */
-    h1{font-size:28px;line-height:1.2;margin:0 0 10px;color:var(--navy)}
-    .sub{color:#6b7280}
-
-    /* Layout */
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px}
-    .soft{background:var(--card)}
-
-    .hero-photo{border-radius:12px;border:1px solid var(--line);overflow:hidden}
-    .hero-photo img{width:100%;height:360px;object-fit:cover;background:#f5f7fb}
-
-    .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .fact{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
-    .fact .k{font-size:12px;color:#6b7280}
-    .fact .v{font-weight:800;margin-top:2px}
-
-    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:26px 22px 56px}
+    header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+    header img{width:24px;height:24px;border-radius:6px}
+    h1{font-size:26px;margin:0 0 6px}
+    .sub{color:var(--muted)}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .grid{display:grid;grid-template-columns:220px 1fr;gap:16px}
+    .photo{width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
-
-    .hr{height:1px;background:var(--line);margin:12px 0}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;background:#fcfcfc;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:14px}
-
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px}
-    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
-    .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
-    .btn.alt{background:#fff;color:var(--navy);border-color:var(--navy)}
-    .note{font-size:13px;color:#6b7280}
-
-    footer{margin:26px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-
-    @media (max-width:980px){
-      .grid{grid-template-columns:1fr}
-      .hero-photo img{height:220px}
-    }
+    .btn{display:inline-block;border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:12px;padding:10px 14px;font-weight:700}
+    .btn.alt{background:#fff;color:var(--brand)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .note{font-size:13px;color:var(--muted)}
+    .hr{height:1px;background:var(--line);margin:16px 0}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Header -->
     <header>
-      <div class="brand">
-        <img src="./img/logo.png.png" alt="Kintra logo"/>
-        <div class="name">Kintra</div>
-        <span class="badge" id="badge">Pilot • Italy</span>
-      </div>
-      <div class="langbox">
-        <span class="label" id="lang-label">Language</span>
-        <div class="toggle">
-          <button id="lang-en" class="active">
-            <span class="flag" aria-hidden="true">
-              <!-- EN flag -->
-              <svg viewBox="0 0 60 36">
-                <rect width="60" height="36" fill="#012169"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
-                <rect x="25" width="10" height="36" fill="#FFF"/>
-                <rect y="13" width="60" height="10" fill="#FFF"/>
-                <rect x="27" width="6" height="36" fill="#C8102E"/>
-                <rect y="15" width="60" height="6" fill="#C8102E"/>
-              </svg>
-            </span>
-            EN
-          </button>
-          <button id="lang-it">
-            <span class="flag" aria-hidden="true">
-              <!-- IT flag -->
-              <svg viewBox="0 0 60 36">
-                <rect width="60" height="36" fill="#fff"/>
-                <rect width="20" height="36" x="0" fill="#009246"/>
-                <rect width="20" height="36" x="40" fill="#CE2B37"/>
-              </svg>
-            </span>
-            IT
-          </button>
-        </div>
-      </div>
+      <img src="./img/logo.png.png" alt="Kintra"/>
+      <strong>Kintra</strong>
+      <span class="note">/ Listing Summary</span>
     </header>
 
-    <!-- Breadcrumb -->
-    <div class="crumbs">
-      <a href="./index.html" id="bc-home">Home</a>
-      <span class="sep">›</span>
-      <span id="bc-here">Listing Summary</span>
+    <h1>€420,000 · Bilocale ristrutturato</h1>
+    <div class="sub">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
+
+    <div class="card" style="margin-top:12px">
+      <div class="grid">
+        <img src="./img/cta.jpg" class="photo" alt="Listing photo"/>
+        <div>
+          <div class="tags">
+            <span class="tag">2BR</span><span class="tag">80 m²</span><span class="tag">Milano</span><span class="tag">Balcony</span>
+          </div>
+          <div class="hr"></div>
+          <div class="row">
+            <a href="./index.html#pilot" class="btn">→ Book a viewing</a>
+            <a href="./index.html#pilot" class="btn alt">Ask a question</a>
+          </div>
+          <p class="note" style="margin-top:8px">This is a composite preview card your agents can drop into WhatsApp or email.</p>
+        </div>
+      </div>
     </div>
 
-    <!-- Title -->
-    <h1 id="title">€420,000 · Bilocale ristrutturato</h1>
-    <div class="sub" id="subtitle">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
-
-    <!-- Main grid -->
-    <section class="grid" style="margin-top:12px">
-      <!-- Left: hero + description + AI summary -->
-      <div style="display:grid;gap:12px">
-        <div class="hero-photo">
-          <img
-            src="./img/cta.jpg"
-            alt="Property photo"
-            onerror="if(!this.dataset.try){this.dataset.try=1; this.src='./images/cta.jpg';}
-                     else { this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22360%22><rect width=%22800%22 height=%22360%22 fill=%22%23f5f7fb%22/><text x=%22240%22 y=%22192%22 fill=%22%238a94a7%22 font-size=%2220%22 font-family=%22Arial%22>Photo placeholder</text></svg>'; }"/>
-        </div>
-
-        <div class="card soft">
-          <h3 id="about-head">About this listing</h3>
-          <div class="hr"></div>
-          <p id="about-copy">Appartamento ristrutturato in zona Navigli. Spazi ben distribuiti, balcone interno, condominio con ascensore. Ideale per giovane coppia o investimento a reddito.</p>
-          <div class="tags">
-            <span class="tag" id="tag-1">2BR</span>
-            <span class="tag" id="tag-2">80 m²</span>
-            <span class="tag" id="tag-3">Balcone</span>
-            <span class="tag" id="tag-4">Ascensore</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 id="ai-head">AI Summary (draft)</h3>
-          <div class="hr"></div>
-          <div id="ai-summary" class="mono">
-Bilocale ristrutturato in Navigli (Milano), 80 m², 2° piano con ascensore e balcone. Ideale per coppie o investimento. Prossimi passi suggeriti:
-• Proporre 2 slot visita (es. mar 17:00 o gio 10:30)
-• Offrire planimetria e video walk-through
-• Confermare appuntamento e inviare promemoria 24h prima
-          </div>
-          <div class="cta-row" style="margin-top:10px">
-            <button class="btn primary" id="share-wa">Share to WhatsApp</button>
-            <button class="btn" id="copy-summary">Copy summary</button>
-          </div>
-          <div class="note" id="share-note" style="margin-top:6px">Tip: You can paste the summary straight into WhatsApp.</div>
-        </div>
-      </div>
-
-      <!-- Right: facts + quick links -->
-      <div style="display:grid;gap:12px">
-        <div class="card">
-          <h3 id="facts-head">Key facts</h3>
-          <div class="hr"></div>
-          <div class="facts">
-            <div class="fact"><div class="k" id="f-price-k">Price</div><div class="v" id="f-price-v">€420,000</div></div>
-            <div class="fact"><div class="k" id="f-size-k">Area</div><div class="v" id="f-size-v">80 m²</div></div>
-            <div class="fact"><div class="k" id="f-floor-k">Floor</div><div class="v" id="f-floor-v">2°</div></div>
-            <div class="fact"><div class="k" id="f-rooms-k">Rooms</div><div class="v" id="f-rooms-v">2</div></div>
-          </div>
-          <div class="hr"></div>
-          <div class="facts">
-            <div class="fact"><div class="k" id="f-city-k">City</div><div class="v" id="f-city-v">Milano</div></div>
-            <div class="fact"><div class="k" id="f-district-k">District</div><div class="v" id="f-district-v">Navigli</div></div>
-            <div class="fact"><div class="k" id="f-elevator-k">Elevator</div><div class="v" id="f-elevator-v">Yes</div></div>
-            <div class="fact"><div class="k" id="f-balcony-k">Balcony</div><div class="v" id="f-balcony-v">Yes</div></div>
-          </div>
-        </div>
-
-        <div class="card soft">
-          <h3 id="quick-head">Quick links</h3>
-          <div class="hr"></div>
-          <div class="cta-row">
-            <a class="btn alt" href="./dashboard.html#listing" id="open-dash">Open in Dashboard</a>
-            <a class="btn" href="./index.html#ls" id="back-pilot">Back to Pilot</a>
-          </div>
-          <div class="note" id="quick-note" style="margin-top:6px">Use this page as a shareable composite in WhatsApp or email.</div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div id="world">🌍 From Italy to the world — join the next wave.</div>
-      <div>© 2025 Kintra — <span id="foot-mail">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
-    </footer>
+    <div class="row" style="margin-top:16px">
+      <a class="btn alt" href="./index.html">← Back to Pilot page</a>
+    </div>
   </div>
-
-  <script>
-    // --- EN/IT copy ---
-    const dict = {
-      en:{
-        badge:"Pilot • Italy",
-        "langLabel":"Language",
-        "bcHome":"Home",
-        "bcHere":"Listing Summary",
-        "title":"€420,000 · Renovated two-bed",
-        "subtitle":"Navigli, Milan — 80 m² · 2nd floor · Elevator",
-        "aboutHead":"About this listing",
-        "aboutCopy":"Renovated flat in the Navigli area. Well-proportioned spaces, internal balcony, elevator building. Ideal for a young couple or as a rental investment.",
-        "aiHead":"AI Summary (draft)",
-        "aiSummary":"Renovated 2-bed in Navigli (Milan), 80 m², 2nd floor with elevator and balcony. Ideal for couples or investment. Suggested next steps:\n• Offer 2 viewing slots (e.g., Tue 17:00 or Thu 10:30)\n• Offer floor plan and video walk-through\n• Confirm appointment and send 24h reminder",
-        "shareTip":"Tip: You can paste the summary straight into WhatsApp.",
-        "factsHead":"Key facts",
-        "fPriceK":"Price","fPriceV":"€420,000",
-        "fSizeK":"Area","fSizeV":"80 m²",
-        "fFloorK":"Floor","fFloorV":"2nd",
-        "fRoomsK":"Rooms","fRoomsV":"2",
-        "fCityK":"City","fCityV":"Milan",
-        "fDistrictK":"District","fDistrictV":"Navigli",
-        "fElevatorK":"Elevator","fElevatorV":"Yes",
-        "fBalconyK":"Balcony","fBalconyV":"Yes",
-        "quickHead":"Quick links",
-        "openDash":"Open in Dashboard",
-        "backPilot":"Back to Pilot",
-        "quickNote":"Use this page as a shareable composite in WhatsApp or email.",
-        "shareWA":"Share to WhatsApp",
-        "copySummary":"Copy summary",
-        "world":"🌍 From Italy to the world — join the next wave."
-      },
-      it:{
-        badge:"Pilot • Italia",
-        "langLabel":"Lingua",
-        "bcHome":"Home",
-        "bcHere":"Listing Summary",
-        "title":"€420.000 · Bilocale ristrutturato",
-        "subtitle":"Navigli, Milano — 80 m² · 2° piano · Ascensore",
-        "aboutHead":"Informazioni sull’immobile",
-        "aboutCopy":"Appartamento ristrutturato in zona Navigli. Spazi ben distribuiti, balcone interno, stabile con ascensore. Ideale per giovane coppia o investimento a reddito.",
-        "aiHead":"Riepilogo AI (bozza)",
-        "aiSummary":"Bilocale ristrutturato in Navigli (Milano), 80 m², 2° piano con ascensore e balcone. Ideale per coppie o investimento. Prossimi passi suggeriti:\n• Proporre 2 fasce visita (es. mar 17:00 o gio 10:30)\n• Offrire planimetria e video walk-through\n• Confermare appuntamento e inviare promemoria 24h prima",
-        "shareTip":"Suggerimento: incolla il riepilogo direttamente in WhatsApp.",
-        "factsHead":"Dati principali",
-        "fPriceK":"Prezzo","fPriceV":"€420.000",
-        "fSizeK":"Superficie","fSizeV":"80 m²",
-        "fFloorK":"Piano","fFloorV":"2°",
-        "fRoomsK":"Locali","fRoomsV":"2",
-        "fCityK":"Città","fCityV":"Milano",
-        "fDistrictK":"Zona","fDistrictV":"Navigli",
-        "fElevatorK":"Ascensore","fElevatorV":"Sì",
-        "fBalconyK":"Balcone","fBalconyV":"Sì",
-        "quickHead":"Link rapidi",
-        "openDash":"Apri in Dashboard",
-        "backPilot":"Torna al Pilot",
-        "quickNote":"Usa questa pagina come composito condivisibile su WhatsApp o email.",
-        "shareWA":"Condividi su WhatsApp",
-        "copySummary":"Copia riepilogo",
-        "world":"🌍 Dall’Italia al mondo — unisciti alla prossima ondata."
-      }
-    };
-
-    const $ = s => document.querySelector(s);
-    const els = {
-      badge:'#badge', label:'#lang-label',
-      bcHome:'#bc-home', bcHere:'#bc-here',
-      title:'#title', subtitle:'#subtitle',
-      aboutHead:'#about-head', aboutCopy:'#about-copy',
-      aiHead:'#ai-head', aiSummary:'#ai-summary', shareNote:'#share-note',
-      factsHead:'#facts-head',
-      fPriceK:'#f-price-k', fPriceV:'#f-price-v',
-      fSizeK:'#f-size-k',  fSizeV:'#f-size-v',
-      fFloorK:'#f-floor-k',fFloorV:'#f-floor-v',
-      fRoomsK:'#f-rooms-k',fRoomsV:'#f-rooms-v',
-      fCityK:'#f-city-k',  fCityV:'#f-city-v',
-      fDistrictK:'#f-district-k', fDistrictV:'#f-district-v',
-      fElevatorK:'#f-elevator-k', fElevatorV:'#f-elevator-v',
-      fBalconyK:'#f-balcony-k', fBalconyV:'#f-balcony-v',
-      quickHead:'#quick-head', openDash:'#open-dash', backPilot:'#back-pilot', quickNote:'#quick-note',
-      shareWA:'#share-wa', copySummary:'#copy-summary',
-      world:'#world'
-    };
-
-    function setLang(lang){
-      const d = dict[lang];
-      $("#badge").textContent = d.badge;
-      $("#lang-label").textContent = d.langLabel;
-      $("#bc-home").textContent = d.bcHome;
-      $("#bc-here").textContent = d.bcHere;
-      $("#title").textContent = d.title;
-      $("#subtitle").textContent = d.subtitle;
-      $("#about-head").textContent = d.aboutHead;
-      $("#about-copy").textContent = d.aboutCopy;
-      $("#ai-head").textContent = d.aiHead;
-      $("#ai-summary").textContent = d.aiSummary;
-      $("#share-note").textContent = d.shareTip;
-      $("#facts-head").textContent = d.factsHead;
-      $("#f-price-k").textContent = d.fPriceK; $("#f-price-v").textContent = d.fPriceV;
-      $("#f-size-k").textContent  = d.fSizeK;  $("#f-size-v").textContent  = d.fSizeV;
-      $("#f-floor-k").textContent = d.fFloorK; $("#f-floor-v").textContent = d.fFloorV;
-      $("#f-rooms-k").textContent = d.fRoomsK; $("#f-rooms-v").textContent = d.fRoomsV;
-      $("#f-city-k").textContent  = d.fCityK;  $("#f-city-v").textContent  = d.fCityV;
-      $("#f-district-k").textContent = d.fDistrictK; $("#f-district-v").textContent = d.fDistrictV;
-      $("#f-elevator-k").textContent = d.fElevatorK; $("#f-elevator-v").textContent = d.fElevatorV;
-      $("#f-balcony-k").textContent  = d.fBalconyK;  $("#f-balcony-v").textContent  = d.fBalconyV;
-      $("#quick-head").textContent = d.quickHead;
-      $("#open-dash").textContent = d.openDash;
-      $("#back-pilot").textContent = d.backPilot;
-      $("#quick-note").textContent = d.quickNote;
-      $("#share-wa").textContent = d.shareWA;
-      $("#copy-summary").textContent = d.copySummary;
-      $("#world").textContent = d.world;
-
-      document.documentElement.lang = lang;
-      $("#lang-en").classList.toggle("active", lang==="en");
-      $("#lang-it").classList.toggle("active", lang==="it");
-      localStorage.setItem("kintra_lang", lang);
-    }
-    $("#lang-en").onclick = ()=> setLang("en");
-    $("#lang-it").onclick = ()=> setLang("it");
-    setLang(localStorage.getItem("kintra_lang") || "en");
-
-    // Copy summary
-    $("#copy-summary").onclick = async ()=>{
-      try{
-        await navigator.clipboard.writeText($("#ai-summary").textContent.trim());
-        $("#copy-summary").textContent = (document.documentElement.lang==="it" ? "Copiato" : "Copied");
-        setTimeout(()=> $("#copy-summary").textContent = (document.documentElement.lang==="it" ? "Copia riepilogo" : "Copy summary"), 1200);
-      }catch(e){
-        $("#copy-summary").textContent = (document.documentElement.lang==="it" ? "Errore copia" : "Copy failed");
-        setTimeout(()=> $("#copy-summary").textContent = (document.documentElement.lang==="it" ? "Copia riepilogo" : "Copy summary"), 1200);
-      }
-    };
-
-    // Share to WhatsApp (opens wa.me with prefilled text)
-    $("#share-wa").onclick = ()=>{
-      const text = $("#ai-summary").textContent.trim() + "\n\n" +
-                   (document.documentElement.lang==="it"
-                    ? "Link scheda: " + location.href
-                    : "Listing link: " + location.href);
-      const url = "https://wa.me/?text=" + encodeURIComponent(text);
-      window.open(url, "_blank");
-    };
-  </script>
 </body>
 </html>
