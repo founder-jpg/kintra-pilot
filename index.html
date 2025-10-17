@@ -55,11 +55,9 @@
     .muted{color:var(--muted)}
     .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
 
-    /* Pricing line */
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
 
-    /* Gold plaque */
     .gold{
       margin:12px 0;background:linear-gradient(180deg, rgba(234,210,139,.35), rgba(234,210,139,.12));
       border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)
@@ -68,9 +66,18 @@
     .gold p{margin:4px 0;color:#5a533b}
 
     /* WhatsApp Smart Reply (improved) */
-    .wa-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .wa-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-    .wa-toggle button{border:0;background:#fff;padding:8px 14px;cursor:pointer;font-weight:700;white-space:nowrap}
+    .wa-head{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      flex-wrap:wrap; /* allow wrap on narrow screens */
+    }
+    .wa-toggle{
+      display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;
+      flex-shrink:0; /* <<< prevent squeezing that caused clipping */
+    }
+    .wa-toggle button{
+      border:0;background:#fff;padding:8px 16px;cursor:pointer;font-weight:700;white-space:nowrap;
+      min-width:92px; /* <<< ensures “After/Dopo” always fit */
+    }
     .wa-toggle button.on{background:var(--brand);color:#fff}
     .speed-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
     .chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);color:var(--brand);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;border:1px solid #dbe7ff}
@@ -89,9 +96,18 @@
     .caption{font-size:12px;color:#7b879b;margin-top:6px}
 
     /* Dashboard Mini before/after */
-    .dash-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .dash-toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-    .dash-toggle button{border:0;background:#fff;padding:8px 14px;cursor:pointer;font-weight:700;white-space:nowrap}
+    .dash-head{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      flex-wrap:wrap; /* allow wrap */
+    }
+    .dash-toggle{
+      display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;
+      flex-shrink:0; /* <<< prevent clipping */
+    }
+    .dash-toggle button{
+      border:0;background:#fff;padding:8px 16px;cursor:pointer;font-weight:700;white-space:nowrap;
+      min-width:92px; /* <<< fit Before/After/Prima/Dopo */
+    }
     .dash-toggle button.on{background:var(--brand);color:#fff}
     .dash-panel{border:1px solid var(--line);border-radius:12px;padding:12px;background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
     .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -206,7 +222,7 @@
       <h3 id="see">See it in action</h3>
       <div class="grid-2">
 
-        <!-- WhatsApp Smart Reply (improved) -->
+        <!-- WhatsApp Smart Reply -->
         <div class="card soft">
           <div class="wa-head">
             <div>
@@ -225,14 +241,12 @@
 
           <div class="chat-card" style="margin-top:8px">
             <div class="chat-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            <div class="chat-body" id="wa-chat">
-              <!-- bubbles injected by JS -->
-            </div>
+            <div class="chat-body" id="wa-chat"></div>
           </div>
           <div class="caption" id="wa-caption">Unstructured back-and-forth → slow replies, missed follow-ups.</div>
         </div>
 
-        <!-- Dashboard Mini (before/after) -->
+        <!-- Dashboard Mini -->
         <div class="card soft">
           <div class="dash-head">
             <div>
@@ -249,7 +263,6 @@
             </div>
           </div>
 
-          <!-- BEFORE -->
           <div id="dash-before-pane" class="dash-panel" style="margin-top:8px">
             <div class="muted" style="margin-bottom:8px" id="dashBeforeCaption">Scattered sheets, late updates, no single source of truth.</div>
             <div class="dash-grid">
@@ -259,7 +272,6 @@
             </div>
           </div>
 
-          <!-- AFTER -->
           <div id="dash-after-pane" class="dash-panel" style="display:none;margin-top:8px">
             <div class="muted" style="margin-bottom:8px" id="dashAfterCaption">Real-time pulse: leads today, reply time, visits booked.</div>
             <img src="./img/dashboard%20preview%20screen.PNG" alt="Dashboard mini preview"
@@ -271,7 +283,7 @@
       </div>
     </section>
 
-    <!-- LISTING SUMMARY (kept compact) -->
+    <!-- LISTING SUMMARY -->
     <section class="section card">
       <div class="listing">
         <img src="./img/cta.jpg" alt="Listing photo"
@@ -347,148 +359,85 @@
   </div>
 
   <script>
-    // --- Config ---
     const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
-    const TEST_NUMBER = "+39 3XX XXX XXXX"; // rotate as needed
+    const TEST_NUMBER = "+39 3XX XXX XXXX";
 
-    // Copy dictionary (includes localized Before/After labels + timing)
     const dict = {
-      en:{
-        badge:"Pilot • Italy",
-        h1:"From listing to leads, faster",
-        lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
+      en:{ badge:"Pilot • Italy", h1:"From listing to leads, faster", lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
         sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
         btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
         price_html:"<strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs. <span class='muted'>If it doesn’t save time in 30 days, don’t continue.</span>",
-        goldH3:"Advisor Charter (Pilot)",
-        goldP1:"We’re inviting a small circle of early advisors to preview Kintra before launch.",
+        goldH3:"Advisor Charter (Pilot)", goldP1:"We’re inviting a small circle of early advisors to preview Kintra before launch.",
         goldP2:"The role is light: review the live pilot, share quick impressions, and—only if it truly fits—open 1–2 trusted doors.",
         goldP3:"<b>Zero operational load.</b> Visible credit if the pilot performs. Listed by permission only.",
-        trust:"Trusted by Italian agents building faster funnels.",
-        why:"Why this matters (time → money)",
+        trust:"Trusted by Italian agents building faster funnels.", why:"Why this matters (time → money)",
         math:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
-        compounds:"Every minute saved here compounds by the hour.",
-        see:"See it in action",
-
-        // Labels & timing
-        beforeLbl:"Before", afterLbl:"After",
-        primaLbl:"Prima",  dopoLbl:"Dopo", // used only when lang=it
-        waTimeBefore:"Manual ≈ 2 min", waTimeAfter:"Kintra ≈ 10 sec",
+        compounds:"Every minute saved here compounds by the hour.", see:"See it in action",
+        beforeLbl:"Before", afterLbl:"After", waTimeBefore:"Manual ≈ 2 min", waTimeAfter:"Kintra ≈ 10 sec",
         dashTimeBefore:"Manual updates", dashTimeAfter:"Live pulse",
-
-        // WhatsApp Smart Reply
-        waPrev:"WhatsApp Smart Reply",
-        waDesc:"Kintra drafts structured replies and next steps so nothing slips.",
+        waPrev:"WhatsApp Smart Reply", waDesc:"Kintra drafts structured replies and next steps so nothing slips.",
         waBeforeCaption:"Unstructured back-and-forth → slow replies, missed follow-ups.",
         waAfterCaption:"Auto-drafted reply + next step → faster responses, nothing slips.",
-        wa_before:[
-          {who:"them", text:"Hi! Are you available for a viewing tomorrow?"},
-          {who:"them", text:"Maybe after work, around 18:30?"},
-          {who:"them", text:"Could you also send the floor plan?"}
-        ],
-        wa_after:[
-          {who:"me", text:"Sure! The apartment is available. I can offer tomorrow at 17:00 or Thursday at 10:30. Which works?"},
-          {who:"me", text:"I can attach the floor plan and directions now."},
-          {who:"me", text:"Once confirmed, I’ll set a reminder 24h before. ✅"}
-        ],
+        wa_before:[{who:"them", text:"Hi! Are you available for a viewing tomorrow?"},
+                   {who:"them", text:"Maybe after work, around 18:30?"},
+                   {who:"them", text:"Could you also send the floor plan?"}],
+        wa_after:[{who:"me", text:"Sure! The apartment is available. I can offer tomorrow at 17:00 or Thursday at 10:30. Which works?"},
+                  {who:"me", text:"I can attach the floor plan and directions now."},
+                  {who:"me", text:"Once confirmed, I’ll set a reminder 24h before. ✅"}],
         label_client:"Client", label_agent:"Agent · Kintra (draft)",
-
-        // Dashboard mini
-        dashHead:"Dashboard Mini",
-        dashSub:"Managers see a daily pulse at a glance.",
+        dashHead:"Dashboard Mini", dashSub:"Managers see a daily pulse at a glance.",
         dashBeforeCaption:"Scattered sheets, late updates, no single source of truth.",
         dashAfterCaption:"Real-time pulse: leads today, reply time, visits booked.",
         dashShotCap:"Live screenshot from the pilot dashboard.",
         db1:"Leads (unknown)", db2:"Reply time (n/a)", db3:"Visits (manual)",
-
-        // Listing
-        lsTitle:"Listing Summary (composite preview)",
-        lsSub:"One glance: key details, tags, and next action — ready to send.",
-        lsH:"€420,000 · Renovated 2-bed",
-        lsLine:"Navigli, Milan — 80 m² · 2nd floor · Elevator",
+        lsTitle:"Listing Summary (composite preview)", lsSub:"One glance: key details, tags, and next action — ready to send.",
+        lsH:"€420,000 · Renovated 2-bed", lsLine:"Navigli, Milan — 80 m² · 2nd floor · Elevator",
         tag1:"2BR", tag2:"80 m²", tag3:"Milano", tag4:"Balcony",
-        lsCTA:"View Listing Summary",
-        lsCap:"Composite card agents can drop into WhatsApp or email.",
-
-        // Pilot & WA demo
-        pilotTitle:"Start your 30-Day Pilot Charter",
-        pilotSub:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
+        lsCTA:"View Listing Summary", lsCap:"Composite card agents can drop into WhatsApp or email.",
+        pilotTitle:"Start your 30-Day Pilot Charter", pilotSub:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
         btnStart:"→ Start My Pilot", noSpam:"No spam. Limited early access.",
         waSend:"Send via WhatsApp (Meta demo)", waSendSub:"Uses Meta Cloud API (test number) to send a real message.",
-        labPhone:"Recipient phone (E.164)", labMsg:"Message",
-        revealBtn:"Reveal test number",
-        publicNote:"For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.",
-        world:"🌍 From Italy to the world — join the next wave.",
-        langLabel:"Language"
+        labPhone:"Recipient phone (E.164)", labMsg:"Message", publicNote:"For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.",
+        world:"🌍 From Italy to the world — join the next wave.", langLabel:"Language"
       },
-
-      it:{
-        badge:"Pilot • Italia",
-        h1:"Dall’annuncio ai lead, più velocemente",
+      it:{ badge:"Pilot • Italia", h1:"Dall’annuncio ai lead, più velocemente",
         lead:"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
         sub:"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, prepara le risposte e suggerisce i prossimi passi.",
         btnRequest:"Richiedi il Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
         price_html:"<strong>Pilot €1,5–2k (30 giorni)</strong> · 1 nicchia · 2–3 KPI. <span class='muted'>Se in 30 giorni non fa risparmiare tempo, non si continua.</span>",
-        goldH3:"Advisor Charter (Pilot)",
-        goldP1:"Invitiamo una cerchia ristretta di early advisor a vedere Kintra prima del lancio.",
+        goldH3:"Advisor Charter (Pilot)", goldP1:"Invitiamo una cerchia ristretta di early advisor a vedere Kintra prima del lancio.",
         goldP2:"Ruolo leggero: rivedere il pilot live, dare impressioni rapide e—solo se ha senso—aprire 1–2 porte fidate.",
         goldP3:"<b>Zero carico operativo.</b> Visibilità se il pilot performa. Elenco su autorizzazione.",
-        trust:"Scelto da agenti italiani che costruiscono funnel più veloci.",
-        why:"Perché conta (tempo → denaro)",
+        trust:"Scelto da agenti italiani che costruiscono funnel più veloci.", why:"Perché conta (tempo → denaro)",
         math:"Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
-        compounds:"Ogni minuto risparmiato qui si moltiplica nell’arco della giornata.",
-        see:"Guardalo in azione",
-
-        // Labels & timing
-        beforeLbl:"Prima", afterLbl:"Dopo",
-        primaLbl:"Prima",  dopoLbl:"Dopo",
-        waTimeBefore:"Manuale ≈ 2 min", waTimeAfter:"Kintra ≈ 10 sec",
+        compounds:"Ogni minuto risparmiato qui si moltiplica nell’arco della giornata.", see:"Guardalo in azione",
+        beforeLbl:"Prima", afterLbl:"Dopo", waTimeBefore:"Manuale ≈ 2 min", waTimeAfter:"Kintra ≈ 10 sec",
         dashTimeBefore:"Aggiornamenti manuali", dashTimeAfter:"Polso live",
-
-        // WhatsApp Smart Reply
-        waPrev:"Smart Reply su WhatsApp",
-        waDesc:"Kintra prepara risposte strutturate e prossimi passi: non sfugge nulla.",
+        waPrev:"Smart Reply su WhatsApp", waDesc:"Kintra prepara risposte strutturate e prossimi passi: non sfugge nulla.",
         waBeforeCaption:"Scambio non strutturato → risposte lente, follow-up mancati.",
         waAfterCaption:"Bozza automatica + prossimo passo → risposte più rapide, nulla sfugge.",
-        wa_before:[
-          {who:"them", text:"Ciao! Siete disponibili per una visita domani?"},
-          {who:"them", text:"Magari dopo il lavoro, verso le 18:30?"},
-          {who:"them", text:"Potete inviare anche la planimetria?"}
-        ],
-        wa_after:[
-          {who:"me", text:"Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Quale preferisce?"},
-          {who:"me", text:"Posso allegare subito planimetria e indicazioni."},
-          {who:"me", text:"Una volta confermato, imposto un promemoria 24h prima. ✅"}
-        ],
+        wa_before:[{who:"them", text:"Ciao! Siete disponibili per una visita domani?"},
+                   {who:"them", text:"Magari dopo il lavoro, verso le 18:30?"},
+                   {who:"them", text:"Potete inviare anche la planimetria?"}],
+        wa_after:[{who:"me", text:"Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Quale preferisce?"},
+                  {who:"me", text:"Posso allegare subito planimetria e indicazioni."},
+                  {who:"me", text:"Una volta confermato, imposto un promemoria 24h prima. ✅"}],
         label_client:"Cliente", label_agent:"Agente · Kintra (bozza)",
-
-        // Dashboard mini
-        dashHead:"Dashboard Mini",
-        dashSub:"I responsabili vedono il polso giornaliero a colpo d’occhio.",
+        dashHead:"Dashboard Mini", dashSub:"I responsabili vedono il polso giornaliero a colpo d’occhio.",
         dashBeforeCaption:"File sparsi, aggiornamenti tardivi, nessuna fonte unica.",
         dashAfterCaption:"Polso in tempo reale: lead di oggi, tempo di risposta, visite prenotate.",
         dashShotCap:"Screenshot live dalla dashboard del pilot.",
         db1:"Lead (sconosciuti)", db2:"Tempo risposta (n/d)", db3:"Visite (manuali)",
-
-        // Listing
-        lsTitle:"Listing Summary (anteprima composita)",
-        lsSub:"A colpo d’occhio: dati chiave, tag e prossima azione — pronti da inviare.",
-        lsH:"€420.000 · Bilocale ristrutturato",
-        lsLine:"Navigli, Milano — 80 m² · 2° piano · Ascensore",
+        lsTitle:"Listing Summary (anteprima composita)", lsSub:"A colpo d’occhio: dati chiave, tag e prossima azione — pronti da inviare.",
+        lsH:"€420.000 · Bilocale ristrutturato", lsLine:"Navigli, Milano — 80 m² · 2° piano · Ascensore",
         tag1:"2 locali", tag2:"80 m²", tag3:"Milano", tag4:"Balcone",
-        lsCTA:"Apri Listing Summary",
-        lsCap:"Scheda composita che l’agente può incollare su WhatsApp o email.",
-
-        // Pilot & WA demo
-        pilotTitle:"Avvia il tuo Pilot Charter (30 giorni)",
-        pilotSub:"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — rischio zero.",
+        lsCTA:"Apri Listing Summary", lsCap:"Scheda composita che l’agente può incollare su WhatsApp o email.",
+        pilotTitle:"Avvia il tuo Pilot Charter (30 giorni)", pilotSub:"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — rischio zero.",
         btnStart:"→ Avvia il mio Pilot", noSpam:"Niente spam. Accesso anticipato limitato.",
         waSend:"Invia via WhatsApp (demo Meta)", waSendSub:"Usa Meta Cloud API (numero di test) per inviare un messaggio reale.",
         labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio",
-        revealBtn:"Mostra numero di test",
         publicNote:"Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.",
-        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
-        langLabel:"Lingua"
+        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.", langLabel:"Lingua"
       }
     };
 
@@ -517,21 +466,19 @@
 
       $("#see").textContent = d.see;
 
-      // localized labels & timing
       $("#wa-before").textContent = d.beforeLbl;
       $("#wa-after").textContent  = d.afterLbl;
       $("#dash-before").textContent = d.beforeLbl;
       $("#dash-after").textContent  = d.afterLbl;
+
       $("#waTimeBefore").textContent = d.waTimeBefore;
       $("#waTimeAfter").textContent  = d.waTimeAfter;
       $("#dashTimeBefore").textContent = d.dashTimeBefore;
       $("#dashTimeAfter").textContent  = d.dashTimeAfter;
 
-      // Smart Reply headers/captions
       $("#waPrev").textContent = d.waPrev;
       $("#waDesc").textContent = d.waDesc;
 
-      // Dashboard headers/captions
       $("#dashHead").textContent = d.dashHead;
       $("#dashSub").textContent = d.dashSub;
       $("#dashBeforeCaption").textContent = d.dashBeforeCaption;
@@ -541,7 +488,6 @@
       $("#db2").textContent = d.db2;
       $("#db3").textContent = d.db3;
 
-      // Listing summary
       $("#lsTitle").textContent = d.lsTitle;
       $("#lsSub").textContent = d.lsSub;
       $("#lsH").textContent   = d.lsH;
@@ -553,7 +499,6 @@
       $("#lsCTA").textContent = d.lsCTA;
       $("#lsCap").textContent = d.lsCap;
 
-      // Pilot & WA demo
       $("#pilotTitle").textContent = d.pilotTitle;
       $("#pilotSub").textContent   = d.pilotSub;
       $("#btnStart").textContent   = d.btnStart;
@@ -569,7 +514,6 @@
       $("#lang-label").textContent = d.langLabel;
     }
 
-    // Render WhatsApp chat bubbles for before/after with role labels
     function renderWA(mode, lang){
       const d = dict[lang];
       const container = $("#wa-chat");
@@ -593,7 +537,6 @@
       $("#wa-after").classList.toggle("on",  mode==="after");
     }
 
-    // Toggle Dashboard before/after
     function setDash(mode){
       $("#dash-before-pane").style.display = (mode==="before")?"block":"none";
       $("#dash-after-pane").style.display  = (mode==="after") ?"block":"none";
@@ -601,7 +544,6 @@
       $("#dash-after").classList.toggle("on",  mode==="after");
     }
 
-    // Language + state
     function setLang(lang){
       const d = dict[lang];
       applyCopy(d);
@@ -614,19 +556,15 @@
       setDash(localStorage.getItem("dash_mode") || "before");
     }
 
-    // Bind top language toggles
     $("#lang-en").onclick = ()=> setLang("en");
     $("#lang-it").onclick = ()=> setLang("it");
 
-    // Bind WA toggles
     $("#wa-before").onclick = ()=>{ localStorage.setItem("wa_mode","before"); renderWA("before", document.documentElement.lang); };
     $("#wa-after").onclick  = ()=>{ localStorage.setItem("wa_mode","after");  renderWA("after",  document.documentElement.lang); };
 
-    // Bind Dash toggles
     $("#dash-before").onclick = ()=>{ localStorage.setItem("dash_mode","before"); setDash("before"); };
-    $("#dash-after").onclick  = ()=>{ localStorage.getItem("dash_mode","after"); setDash("after"); localStorage.setItem("dash_mode","after"); };
+    $("#dash-after").onclick  = ()=>{ localStorage.setItem("dash_mode","after");  setDash("after"); };
 
-    // WA demo send/reveal
     const waBtn = $("#sendWA"), waOut = $("#waResult");
     const revealBtn = $("#revealTestNum"), testWrap = $("#testNumWrap"), testNumEl = $("#testNum");
     revealBtn.onclick = () => { testNumEl.textContent = TEST_NUMBER; testWrap.style.display = "inline"; revealBtn.style.display="none"; };
@@ -649,7 +587,6 @@
       }
     };
 
-    // Init
     setLang(localStorage.getItem("kintra_lang") || "en");
     renderWA(localStorage.getItem("wa_mode") || "before", document.documentElement.lang);
     setDash(localStorage.getItem("dash_mode") || "before");
