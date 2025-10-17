@@ -30,7 +30,7 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
 
-    /* Language toggle */
+    /* Language toggle (SVG flags so they always render) */
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:flex;gap:8px}
@@ -40,6 +40,8 @@
       padding:6px 12px;cursor:pointer;font-weight:600;font-size:13px
     }
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
+    .flag{display:inline-flex;width:18px;height:12px}
+    .flag svg{width:18px;height:12px;display:block}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
@@ -149,8 +151,32 @@
       <div class="langbox">
         <span class="label" id="lang-label">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active">🇬🇧 EN</button>
-          <button id="lang-it">🇮🇹 IT</button>
+          <button id="lang-en" class="active">
+            <span class="flag" aria-hidden="true">
+              <!-- UK flag (Union Jack) -->
+              <svg viewBox="0 0 60 36">
+                <rect width="60" height="36" fill="#012169"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
+                <rect x="25" width="10" height="36" fill="#FFF"/>
+                <rect y="13" width="60" height="10" fill="#FFF"/>
+                <rect x="27" width="6" height="36" fill="#C8102E"/>
+                <rect y="15" width="60" height="6" fill="#C8102E"/>
+              </svg>
+            </span>
+            EN
+          </button>
+          <button id="lang-it">
+            <span class="flag" aria-hidden="true">
+              <!-- Italy flag -->
+              <svg viewBox="0 0 60 36">
+                <rect width="60" height="36" fill="#fff"/>
+                <rect width="20" height="36" x="0" fill="#009246"/>
+                <rect width="20" height="36" x="40" fill="#CE2B37"/>
+              </svg>
+            </span>
+            IT
+          </button>
         </div>
       </div>
     </header>
@@ -227,9 +253,9 @@
 
         <div id="waAfter" class="wa-wrap" style="display:none">
           <div class="chat">
-            <div class="bubble them" id="a-in-1">👋 Buongiorno! Siete disponibili per una visita domani verso le 18:30?</div>
-            <div class="bubble me" id="a-out-1">Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?</div>
-            <div class="bubble me" id="a-out-2">Posso inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.</div>
+            <div class="bubble them" id="a-in-1">Hi! Are you available for a viewing tomorrow around 18:30?</div>
+            <div class="bubble me" id="a-out-1">Sure — the apartment is available. I can offer tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?</div>
+            <div class="bubble me" id="a-out-2">I can also send the floor plan and directions. I’ll confirm and send a 24h reminder.</div>
             <div class="stamp">Kintra · auto-draft + suggested next step</div>
           </div>
           <div class="timers">
@@ -381,7 +407,7 @@
         b_in_1:"Hi! Are you available for a viewing tomorrow?",
         b_in_2:"After work is easiest — around 18:30.",
         t_manual:"~2 min",
-        a_in_1:"👋 Hi! Are you available for a viewing tomorrow around 18:30?",
+        a_in_1:"Hi! Are you available for a viewing tomorrow around 18:30?",
         a_out_1:"Sure — the apartment is available. I can offer tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
         a_out_2:"I can also send the floor plan and directions. I’ll confirm and send a 24h reminder.",
         t_kintra:"~12 s",
@@ -424,7 +450,7 @@
         b_in_1:"Ciao! Siete disponibili per una visita domani?",
         b_in_2:"Meglio dopo lavoro — verso le 18:30.",
         t_manual:"~2 min",
-        a_in_1:"👋 Buongiorno! Siete disponibili per una visita domani verso le 18:30?",
+        a_in_1:"Siete disponibili per una visita domani verso le 18:30?",
         a_out_1:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Quale preferisce?",
         a_out_2:"Posso inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.",
         t_kintra:"~12 s",
@@ -484,6 +510,7 @@
       $('#b-in-2').textContent = d.b_in_2;
       $('#t-manual').textContent = d.t_manual;
 
+      // AFTER (no emoji)
       $('#a-in-1').textContent = d.a_in_1;
       $('#a-out-1').textContent = d.a_out_1;
       $('#a-out-2').textContent = d.a_out_2;
@@ -522,7 +549,7 @@
       $('#lang-en').classList.toggle('active', lang==='en');
       $('#lang-it').classList.toggle('active', lang==='it');
       localStorage.setItem('kintra_lang', lang);
-      // Also localize the pulse badge
+      // Localize the pulse badge text
       $('#pulseBadge').textContent = (lang==='it' ? dict.it.after : dict.en.after);
     }
 
