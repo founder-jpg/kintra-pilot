@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Pilot Italy</title>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png.png"/>
+  <style>
+    :root{
+      --navy:#0b2347; --gold:#c9a227; --line:#e5e7eb; --muted:#5b6475;
+      --gray:#f8fafc; --radius:14px; --brand:#0b5fff;
+    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
+      color:#0b1220;background:#fff;line-height:1.55}
+    a{text-decoration:none;color:var(--brand)}
+    header{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
+    .brand .name{font-weight:800;color:var(--navy)}
+    .badge{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#6b7280}
+    .langbox{display:flex;align-items:center;gap:8px}
+    .toggle{display:flex;gap:6px}
+    .toggle button{
+      display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);
+      background:#fff;border-radius:999px;font-weight:600;cursor:pointer
+    }
+    .toggle button.active{border-color:var(--brand);background:#eef3ff;color:var(--brand)}
+    .flag{display:inline-flex;width:18px;height:12px}
+    .flag svg{width:18px;height:12px}
+    main{max-width:1100px;margin:0 auto;padding:26px 18px;display:grid;gap:36px}
+    h1{font-size:28px;margin:0;color:var(--navy)}
+    h2{font-size:22px;margin:0 0 6px;color:var(--navy)}
+    .section{display:grid;gap:12px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .soft{background:var(--gray)}
+    .gold{border:2px solid var(--gold);background:#fffbe9}
+    .btn{border:1px solid var(--navy);border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer;text-align:center}
+    .btn.primary{background:var(--navy);color:#fff}
+    .btn.alt{background:#fff;color:var(--navy)}
+    .whatsapp{background:#e9f9ef;border:1px solid #b9e2c7;border-radius:var(--radius);padding:14px;max-width:440px}
+    .msg{border-radius:12px;padding:8px 12px;margin:4px 0;max-width:85%;font-size:15px}
+    .msg.client{background:#fff;color:#000;border:1px solid #d1d5db;align-self:flex-start}
+    .msg.agent{background:#dcf8c6;color:#000;align-self:flex-end}
+    .chat{display:flex;flex-direction:column}
+    .toggleBox{display:flex;gap:8px;margin-bottom:6px}
+    .toggleBox button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 10px;font-weight:600;cursor:pointer}
+    .toggleBox button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .dash-mini img{width:100%;border-radius:10px;border:1px solid var(--line)}
+    .metrics{display:flex;gap:16px;margin-top:8px;font-size:14px;color:#6b7280}
+    footer{margin:24px 0;color:#6b7280;text-align:center;font-size:14px}
+    .listing-preview img{width:100%;border-radius:10px;border:1px solid var(--line)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="./img/logo.png.png" alt="Kintra logo"/>
+      <div class="name">Kintra</div>
+      <span class="badge" id="badge">Pilot • Italy</span>
+    </div>
+    <div class="langbox">
+      <div class="toggle">
+        <button id="lang-en" class="active">
+          <span class="flag"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#012169"/><path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/><path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="36" fill="#FFF"/><rect y="13" width="60" height="10" fill="#FFF"/><rect x="27" width="6" height="36" fill="#C8102E"/><rect y="15" width="60" height="6" fill="#C8102E"/></svg></span>EN
+        </button>
+        <button id="lang-it">
+          <span class="flag"><svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#fff"/><rect width="20" height="36" x="0" fill="#009246"/><rect width="20" height="36" x="40" fill="#CE2B37"/></svg></span>IT
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="section">
+      <h1 id="hero-line">Turn listings into ready-to-send WhatsApp replies</h1>
+      <p id="hero-sub" style="color:#5b6475">Every minute saved compounds by the hour. Pilot Kintra in one niche and see results in 30 days.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn primary" href="#pilot">Request Pilot Access</a>
+        <a class="btn alt" href="./dashboard.html">Preview Dashboard</a>
+      </div>
+    </section>
+
+    <!-- Pricing clarity -->
+    <section class="card soft">
+      <h2 id="pilot-range">€1.5–2K pilot · 30 days · 1 vertical · 2–3 measurable goals</h2>
+      <p id="pilot-clarity" style="margin:4px 0 0;color:#5b6475">Clear scope. One focus. We measure time saved and faster follow-ups—nothing vague.</p>
+    </section>
+
+    <!-- WhatsApp Smart Reply -->
+    <section class="section">
+      <h2>WhatsApp Smart Reply</h2>
+      <div class="toggleBox">
+        <button id="beforeBtn" class="active">Before</button>
+        <button id="afterBtn">After</button>
+      </div>
+      <div class="whatsapp" id="chatBox">
+        <div class="chat" id="chat-en">
+          <div class="msg client">Hi, is the apartment at Via Tortona still available? Could we view it tomorrow after work (around 18:30)?</div>
+          <div class="msg agent">Sure, it’s available. I can offer tomorrow at 17:00 or Thursday at 10:30. Would you like me to send the floor plan and directions?</div>
+          <div class="msg agent">I'll confirm the slot and send you a 24-hour reminder.</div>
+        </div>
+        <div class="chat" id="chat-it" style="display:none">
+          <div class="msg client">Ciao, l’appartamento in Via Tortona è ancora disponibile? Possiamo vederlo domani dopo il lavoro (intorno alle 18:30)?</div>
+          <div class="msg agent">Sì, è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Vuoi che ti invii la planimetria e le indicazioni?</div>
+          <div class="msg agent">Confermo lo slot e ti mando un promemoria 24 ore prima.</div>
+        </div>
+      </div>
+      <p style="color:#5b6475;font-size:14px;margin-top:8px">Kintra auto-drafts replies, adds context, and suggests next steps—ready to send instantly.</p>
+    </section>
+
+    <!-- Dashboard Mini -->
+    <section class="section dash-mini">
+      <h2>Dashboard Mini</h2>
+      <img src="./img/dashboard%20preview%20screen.PNG" alt="Dashboard preview"/>
+      <div class="metrics">
+        <div><strong>Reply Time:</strong> 65% faster</div>
+        <div><strong>Draft Accuracy:</strong> 92%</div>
+      </div>
+      <div style="margin-top:10px">
+        <a class="btn alt" href="./dashboard.html">Open Dashboard</a>
+      </div>
+    </section>
+
+    <!-- Listing Summary -->
+    <section class="section listing-preview">
+      <h2>Listing Summary (composite preview)</h2>
+      <img src="./img/cta.jpg" alt="Listing photo"/>
+      <p style="color:#5b6475;font-size:14px">One glance: key details, tags, and next action — ready to send.</p>
+      <p><strong>€420,000 · Bilocale ristrutturato</strong><br>Navigli, Milano — 80 m² · 2° piano · Ascensore</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <span class="btn" style="cursor:default">2BR</span>
+        <span class="btn" style="cursor:default">80 m²</span>
+        <span class="btn" style="cursor:default">Milano</span>
+        <span class="btn" style="cursor:default">Balcony</span>
+      </div>
+      <p style="margin-top:10px">
+        <a href="./listing.html" class="btn primary">View Listing Summary</a>
+      </p>
+    </section>
+
+    <!-- Advisory Charter -->
+    <section class="card gold">
+      <h2 id="advisor-title">Advisor Charter • Pilot Italy</h2>
+      <p id="advisor-body">A light optional role during the 30-day pilot. Review the live preview, offer 1–2 warm introductions, and observe how it performs—zero operational load.</p>
+      <p id="advisor-note" style="font-size:14px;color:#5b6475">We list early advisors by permission only.</p>
+    </section>
+
+    <footer>© 2025 Kintra — Pilot Italy Edition</footer>
+  </main>
+
+  <script>
+    const dict={
+      en:{
+        pilotRange:"€1.5–2K pilot · 30 days · 1 vertical · 2–3 measurable goals",
+        pilotClar:"Clear scope. One focus. We measure time saved and faster follow-ups—nothing vague.",
+        advisorTitle:"Advisor Charter • Pilot Italy",
+        advisorBody:"A light optional role during the 30-day pilot. Review the live preview, offer 1–2 warm introductions, and observe how it performs—zero operational load.",
+        advisorNote:"We list early advisors by permission only."
+      },
+      it:{
+        pilotRange:"€1.5–2K pilot · 30 giorni · 1 verticale · 2–3 obiettivi misurabili",
+        pilotClar:"Ambito chiaro. Un unico focus. Misuriamo il tempo risparmiato e la velocità di risposta, senza ambiguità.",
+        advisorTitle:"Charter degli Advisor • Pilot Italia",
+        advisorBody:"Ruolo leggero e opzionale durante il pilot di 30 giorni. Rivedi l’anteprima live, offri 1–2 presentazioni utili e osserva i risultati — nessun carico operativo.",
+        advisorNote:"Elenchiamo gli advisor iniziali solo su autorizzazione."
+      }
+    };
+    const langBtns=[document.getElementById("lang-en"),document.getElementById("lang-it")];
+    const chats={en:document.getElementById("chat-en"),it:document.getElementById("chat-it")};
+    let lang="en";
+    langBtns.forEach(btn=>btn.onclick=()=>{
+      langBtns.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      lang=btn.id==="lang-it"?"it":"en";
+      document.documentElement.lang=lang;
+      document.getElementById("pilot-range").textContent=dict[lang].pilotRange;
+      document.getElementById("pilot-clarity").textContent=dict[lang].pilotClar;
+      document.getElementById("advisor-title").textContent=dict[lang].advisorTitle;
+      document.getElementById("advisor-body").textContent=dict[lang].advisorBody;
+      document.getElementById("advisor-note").textContent=dict[lang].advisorNote;
+      Object.values(chats).forEach(c=>c.style.display="none");
+      chats[lang].style.display="flex";
+    });
+    const beforeBtn=document.getElementById("beforeBtn"),afterBtn=document.getElementById("afterBtn"),chatBox=document.getElementById("chatBox");
+    beforeBtn.onclick=()=>{beforeBtn.classList.add("active");afterBtn.classList.remove("active");chatBox.scrollTo(0,0);};
+    afterBtn.onclick=()=>{afterBtn.classList.add("active");beforeBtn.classList.remove("active");chatBox.scrollTo(0,chatBox.scrollHeight);};
+  </script>
+</body>
+</html>
