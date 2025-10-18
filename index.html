@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kintra — Pilot Charter • Italy</title>
+  <title>Kintra — Pilot • Italy</title>
   <meta name="color-scheme" content="light only"/>
   <meta name="theme-color" content="#0b2347"/>
   <link rel="icon" href="./img/logo.png.png"/>
@@ -17,7 +17,6 @@
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
     a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
     img{display:block;max-width:100%}
     .wrap{max-width:var(--max);margin:0 auto;padding:26px 22px 60px}
 
@@ -28,7 +27,7 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
 
-    /* Language (flags visible desktop & mobile) */
+    /* Language (static UI; no content switch in this file) */
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -61,20 +60,18 @@
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
 
-    /* Advisor Charter gold plaque */
-    .gold{
-      margin:10px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.35), rgba(234,210,139,.15));
-      border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)
-    }
-    .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
-    .gold p{margin:4px 0;color:#5a533b}
-
     /* “Trusted by” kicker */
     .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
 
+    /* Metrics */
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+    .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+    .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
+    .metric .l{font-size:12px;color:#6b7280}
+
     /* WhatsApp Smart Reply */
     .switch{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-    .switch .chip{padding:6px 12px;cursor:pointer;background:#fff;border-right:1px solid var(--line);font-weight:700;min-width:92px;text-align:center}
+    .switch .chip{padding:6px 14px;cursor:pointer;background:#fff;border-right:1px solid var(--line);font-weight:700;min-width:100px;text-align:center}
     .switch .chip:last-child{border-right:0}
     .switch .chip.active{background:var(--chip);color:var(--brand);border-color:var(--brand)}
     .meta-row{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:#6b7280;margin-top:8px}
@@ -105,12 +102,6 @@
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
     .caption{margin-top:6px;font-size:12px;color:#7b879b}
 
-    /* Mini metrics */
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
-    .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
-    .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
-    .metric .l{font-size:12px;color:#6b7280}
-
     /* Form */
     .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .form textarea{grid-column:1/-1;min-height:84px}
@@ -134,13 +125,13 @@
       <div class="brand">
         <img src="./img/logo.png.png" alt="Kintra logo"/>
         <div class="name">Kintra</div>
-        <span class="badge" id="badge">Pilot • Italy</span>
+        <span class="badge">Pilot • Italy</span>
       </div>
 
       <div class="langbox">
-        <span class="label" id="lang-label">Language</span>
+        <span class="label">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active" aria-pressed="true">
+          <button class="active" id="lang-en">
             <span class="flag" aria-hidden="true">
               <!-- UK flag -->
               <svg viewBox="0 0 60 36">
@@ -155,7 +146,7 @@
             </span>
             EN
           </button>
-          <button id="lang-it" aria-pressed="false">
+          <button id="lang-it">
             <span class="flag" aria-hidden="true">
               <!-- Italy flag -->
               <svg viewBox="0 0 60 36">
@@ -173,72 +164,65 @@
     <!-- HERO -->
     <section class="hero">
       <div>
-        <h1 id="h1">From listing to leads, faster</h1>
-        <p class="lead" id="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
-        <p class="sub" id="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
+        <h1>From listing to leads, faster</h1>
+        <p class="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
+        <p class="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
 
         <div class="cta-row">
-          <a class="btn primary" href="#pilot" id="btn-request">Request Pilot Access</a>
-          <a class="btn" href="./dashboard.html" id="btn-dash">Preview Dashboard</a>
-          <a class="btn" href="./deck.html" id="btn-deck">View Live Deck</a>
-          <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" id="btn-pdf" target="_blank">View Deck PDF</a>
+          <a class="btn primary" href="#pilot">Request Pilot Access</a>
+          <a class="btn" href="./dashboard.html">Preview Dashboard</a>
+          <a class="btn" href="./deck.html">View Live Deck</a>
+          <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank">View Deck PDF</a>
         </div>
 
-        <div class="pricing" id="price-line">
+        <div class="pricing">
           <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
-          <span class="muted" id="price-tail">Focus on one property type; agree 2–3 success metrics.</span>
+          <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
 
-        <div class="gold" style="margin-top:12px">
-          <h3 id="goldH3">Advisor Charter (Pilot)</h3>
-          <p id="goldP1">We’re inviting a select circle of early advisors to preview Kintra before launch.</p>
-          <p id="goldP2">The role is light but meaningful: look at the live preview, give a quick steer, and (only if it makes sense) open 1–2 trusted doors.</p>
-          <p id="goldP3"><b>Zero operational load; clear upside if the pilot performs.</b> We list early advisors by permission only.</p>
+        <div class="divider"></div>
+
+        <div class="sub">
+          <b>Advisor Charter (pilot):</b> optional, very light support during the 30-day pilot — review the live preview, give quick feedback, and (only if it makes sense) suggest 1–2 warm introductions. <b>Zero operational load; clear upside if the pilot performs.</b>
+          <br/><span class="muted">We list early advisors by permission only.</span>
         </div>
 
-        <div class="kicker" id="trust-line" style="margin-top:10px">Trusted by Italian agents building faster funnels.</div>
+        <div class="kicker" style="margin-top:10px">Trusted by Italian agents building faster funnels.</div>
       </div>
 
       <!-- Why it matters -->
       <div class="card">
-        <h3 id="why">Why this matters (time → money)</h3>
-        <div class="sub" id="math">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</div>
+        <h3>Why this matters (time → money)</h3>
+        <div class="sub">If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.</div>
         <div class="divider"></div>
-        <div class="sub" id="compounds"><b>Every minute saved here compounds by the hour.</b></div>
+        <div class="sub"><b>Every minute saved here compounds by the hour.</b></div>
         <div class="divider"></div>
         <div class="metrics">
-          <div class="metric"><div class="k">7</div><div class="l" id="m1">New leads today</div></div>
-          <div class="metric"><div class="k">11m</div><div class="l" id="m2">Avg reply time</div></div>
-          <div class="metric"><div class="k">5</div><div class="l" id="m3">Visits booked</div></div>
+          <div class="metric"><div class="k">7</div><div class="l">New leads today</div></div>
+          <div class="metric"><div class="k">11m</div><div class="l">Avg reply time</div></div>
+          <div class="metric"><div class="k">5</div><div class="l">Visits booked</div></div>
         </div>
       </div>
     </section>
 
     <!-- SEE IT IN ACTION -->
     <section class="grid-2" style="margin-top:14px">
-      <!-- WhatsApp Smart Reply (restored toggle + content) -->
+      <!-- WhatsApp Smart Reply -->
       <section class="card soft" id="wa-card">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <h3 id="waPrev" style="margin:0">WhatsApp Smart Reply</h3>
+          <h3 style="margin:0">WhatsApp Smart Reply</h3>
           <div class="switch" role="tablist" aria-label="Before / After">
             <button class="chip active" id="tab-before" role="tab" aria-selected="true">Before</button>
             <button class="chip" id="tab-after" role="tab" aria-selected="false">After</button>
           </div>
         </div>
-        <p class="sub" id="waDesc" style="margin-top:6px">Kintra drafts structured replies and next steps so nothing slips.</p>
+        <p class="sub" style="margin-top:6px">Kintra drafts structured replies and next steps so nothing slips.</p>
 
         <!-- Legend -->
         <div class="meta-row" style="margin-bottom:6px">
-          <span class="pill"><span class="dot client"></span><span id="legendClient">Client</span></span>
-          <span class="pill"><span class="dot ai"></span><span id="legendAI">Kintra (AI)</span></span>
-          <span class="pill"><span class="dot agent"></span><span id="legendAgent">Agent</span></span>
-        </div>
-
-        <!-- Keys row -->
-        <div class="meta-row" id="wa-keys" style="margin-bottom:8px">
-          <span class="pill"><span class="dot client"></span><span id="key1">Client → inbound message</span></span>
-          <span class="pill"><span class="dot ai"></span><span id="key2">Kintra → detects intent & drafts reply</span></span>
-          <span class="pill"><span class="dot agent"></span><span id="key3">Agent → approves & sends</span></span>
+          <span class="pill"><span class="dot client"></span>Client → inbound message</span>
+          <span class="pill"><span class="dot ai"></span>Kintra → detects intent & drafts reply</span>
+          <span class="pill"><span class="dot agent"></span>Agent → approves & sends</span>
         </div>
 
         <!-- WA shell -->
@@ -262,76 +246,77 @@
         </div>
         <img src="./img/dashboard%20preview%20screen.PNG" alt="Dashboard mini preview"
              style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-top:8px"/>
-        <div class="metrics">
-          <div class="metric"><div class="k">65%</div><div class="l">Reply within 1h</div></div>
-          <div class="metric"><div class="k">11m</div><div class="l">Avg reply time</div></div>
-          <div class="metric"><div class="k">5</div><div class="l">Visits booked</div></div>
-        </div>
         <figcaption class="caption">Real metrics from the pilot dashboard.</figcaption>
       </section>
     </section>
 
     <!-- Listing Summary -->
     <section class="card soft" style="margin-top:16px">
-      <h3 id="lsTitle">Listing Summary (composite preview)</h3>
-      <p class="sub" id="lsSub">One glance: key details, tags, and next action — ready to send.</p>
+      <h3>Listing Summary (composite preview)</h3>
+      <p class="sub">One glance: key details, tags, and next action — ready to send.</p>
+      <p class="muted" style="margin-top:4px">Auto-built from your CRM data — ready for WhatsApp, social, or brochure drop-ins.</p>
 
       <div class="listing-mock" style="margin-top:10px">
         <div class="lm-head">
           <div class="lm-dot"></div><div class="lm-dot"></div><div class="lm-dot"></div>
-          <div style="margin-left:auto;font-size:12px;color:var(--muted)" id="lsHeadRight">Preview</div>
+          <div style="margin-left:auto;font-size:12px;color:var(--muted)">Preview</div>
         </div>
         <div class="lm-body">
-          <img class="lm-photo-img"
-               src="./img/cta.jpg"
-               alt="Property thumbnail"
-               onerror="this.src='./images/cta.jpg'"/>
+          <img class="lm-photo-img" src="./img/cta.jpg" alt="Property thumbnail" onerror="this.src='./images/cta.jpg'"/>
           <div class="lm-meta">
-            <div class="lm-title" id="lsTitle2">€420,000 · Bilocale ristrutturato</div>
-            <div class="lm-line" id="lsAddr">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
+            <div class="lm-title">€420,000 · Bilocale ristrutturato</div>
+            <div class="lm-line">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
             <div class="tagrow">
-              <span class="tag" id="tag1">2BR</span>
-              <span class="tag" id="tag2">80 m²</span>
-              <span class="tag" id="tag3">Milano</span>
-              <span class="tag" id="tag4">Balcony</span>
+              <span class="tag">2BR</span>
+              <span class="tag">80 m²</span>
+              <span class="tag">Milano</span>
+              <span class="tag">Balcony</span>
             </div>
-            <div style="margin-top:8px">
-              <a class="btn" href="./listing.html" id="lsChip">View Listing Summary</a>
+            <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+              <a class="btn" href="./listing.html">View Listing Summary</a>
+              <button class="btn" id="copyCard">Copy Card to WhatsApp →</button>
             </div>
           </div>
         </div>
       </div>
-      <figcaption class="caption">Composite card agents can drop into WhatsApp or email.</figcaption>
     </section>
 
-    <!-- WhatsApp send (Meta demo) -->
+    <!-- Pilot form -->
+    <section id="pilot" class="card" style="margin-top:16px">
+      <h3>Start your 30-Day Pilot Charter</h3>
+      <p class="sub">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
+      <div class="form" style="margin-top:10px">
+        <input placeholder="Name — e.g. Alex Rossi"/>
+        <input placeholder="Work email — e.g. alex.rossi@agency.it"/>
+        <textarea placeholder="What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"></textarea>
+      </div>
+      <div class="cta-row" style="margin-top:12px">
+        <a class="btn primary" href="mailto:pilot@kintra.xyz">→ Start My Pilot</a>
+        <span class="muted" style="align-self:center">No spam. Limited early access.</span>
+      </div>
+    </section>
+
+    <!-- WhatsApp demo -->
     <section class="card" style="margin-top:16px">
-      <h3 id="wa-send">Send via WhatsApp (Meta demo)</h3>
-      <p class="sub" id="wa-send-sub">Uses Meta Cloud API (test number) to send a real message.</p>
+      <h3>Send via WhatsApp (Meta demo)</h3>
+      <p class="sub">Uses Meta Cloud API (test number) to send a real message.</p>
       <div class="grid-2" style="margin-top:8px">
         <div>
           <div class="form" style="grid-template-columns:1fr 1fr">
             <div>
-              <label id="lab-phone">Recipient phone (E.164)</label>
+              <label>Recipient phone (E.164)</label>
               <input id="phone" placeholder="+39…"/>
             </div>
             <div>
-              <label id="lab-msg">Message</label>
+              <label>Message</label>
               <input id="msg" placeholder="Ciao from the Kintra pilot!"/>
             </div>
           </div>
           <div class="cta-row" style="margin-top:8px">
             <button class="btn" id="sendWA">Send WhatsApp</button>
-            <span class="muted" id="waTip" style="align-self:center">
-              Tip: The recipient must first say “hello” to the test number.
-              <button id="revealTestNum" class="btn" style="margin-left:8px">Reveal test number</button>
-              <span id="testNumWrap" class="muted" style="display:none;margin-left:8px">
-                <strong id="testNum">+39 ••• •• ••••</strong>
-                <button id="copyTestNum" class="btn" style="margin-left:6px">Copy</button>
-              </span>
-            </span>
+            <button class="btn" id="revealTestNum">Reveal test number</button>
           </div>
-          <div class="muted" id="publicNote" style="margin-top:6px">
+          <div class="muted" style="margin-top:6px">
             For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.
           </div>
         </div>
@@ -340,256 +325,96 @@
                style="width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
         </div>
       </div>
-      <pre id="waResult" class="card" style="margin-top:10px;white-space:pre-wrap;background:#fff"></pre>
-    </section>
-
-    <!-- Pilot form -->
-    <section id="pilot" class="card" style="margin-top:16px">
-      <h3 id="pilotTitle">Start your 30-Day Pilot Charter</h3>
-      <p class="sub" id="pilotSub">Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.</p>
-      <div class="form" style="margin-top:10px">
-        <input id="name" placeholder="Name — e.g. Alex Rossi"/>
-        <input id="email" placeholder="Work email — e.g. alex.rossi@agency.it"/>
-        <textarea id="wf" placeholder="What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"></textarea>
-      </div>
-      <div class="cta-row" style="margin-top:12px">
-        <a class="btn primary" href="mailto:pilot@kintra.xyz" id="btnStart">→ Start My Pilot</a>
-        <span class="muted" id="noSpam" style="align-self:center">No spam. Limited early access.</span>
-      </div>
+      <pre id="waResult" class="card" style="margin-top:10px;white-space:pre-wrap;background:#fff">—</pre>
     </section>
 
     <footer>
-      <div id="world">🌍 From Italy to the world — join the next wave.</div>
-      <div>© 2025 Kintra. <span id="foot-mail">Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
+      <div>🌍 From Italy to the world — join the next wave.</div>
+      <div>© 2025 Kintra. <span>Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></span></div>
     </footer>
   </div>
 
   <script>
-    /* ---------- i18n ---------- */
-    const dict = {
-      en:{
-        badge:"Pilot • Italy",
-        h1:"From listing to leads, faster",
-        lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
-        sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
-        btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
-        priceTail:"Focus on one property type; agree 2–3 success metrics.",
-        goldH3:"Advisor Charter (Pilot)",
-        goldP1:"We’re inviting a select circle of early advisors to preview Kintra before launch.",
-        goldP2:"The role is light but meaningful: look at the live preview, give a quick steer, and (only if it makes sense) open 1–2 trusted doors.",
-        goldP3:"Zero operational load; clear upside if the pilot performs. We list early advisors by permission only.",
-        trust:"Trusted by Italian agents building faster funnels.",
-        why:"Why this matters (time → money)",
-        math:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
-        compounds:"Every minute saved here compounds by the hour.",
-        lsTitle:"Listing Summary (composite preview)",
-        lsSub:"One glance: key details, tags, and next action — ready to send.",
-        lsHeadRight:"Preview",
-        lsChip:"View Listing Summary",
-        pilotTitle:"Start your 30-Day Pilot Charter",
-        pilotSub:"Light setup. Quick value. If it works for you, continue; if not, stop — zero risk.",
-        noSpam:"No spam. Limited early access.",
-        waSend:"Send via WhatsApp (Meta demo)",
-        waSendSub:"Uses Meta Cloud API (test number) to send a real message.",
-        labPhone:"Recipient phone (E.164)", labMsg:"Message",
-        tipText:'Tip: The recipient must first say “hello” to the test number.',
-        revealBtn:'Reveal test number', copyBtn:'Copy', copied:'Copied', copyFail:'Copy failed',
-        publicNote:'For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.',
-        langLabel:"Language",
-        // WA i18n
-        before:"Before", after:"After",
-        key1:"Client → inbound message",
-        key2:"Kintra → detects intent & drafts reply",
-        key3:"Agent → approves & sends",
-        beforeTop:"Manual reply ~2–4 min",
-        afterTop:"Auto-draft ~10–20 sec",
-        clientMsg:"Hi — are you available for a viewing tomorrow after work around 18:30?",
-        agentLine1:"Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
-        agentLine2:"I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.",
-        manualTimingLabel:"Manual reply:",
-        autoTimingLabel:"Auto-draft:",
-        legendClient:"Client", legendAI:"Kintra (AI)", legendAgent:"Agent"
-      },
-      it:{
-        badge:"Pilot • Italia",
-        h1:"Dall’annuncio ai lead, più velocemente",
-        lead:"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
-        sub:"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, redige bozze e suggerisce i prossimi passi.",
-        btnRequest:"Richiedi l’accesso al Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
-        priceTail:"Focalizzati su una tipologia di immobile; concorda 2–3 metriche di successo.",
-        goldH3:"Advisor Charter (Pilot)",
-        goldP1:"Invitiamo una cerchia ristretta di early advisor a vedere Kintra prima del lancio.",
-        goldP2:"Ruolo leggero ma utile: guarda l’anteprima live, dai un rapido indirizzo e (solo se ha senso) apri 1–2 porte fidate.",
-        goldP3:"Zero carico operativo; upside chiaro se il pilot performa. Gli advisor sono elencati solo su autorizzazione.",
-        trust:"Scelto da agenti italiani che costruiscono funnel più veloci.",
-        why:"Perché conta (tempo → denaro)",
-        math:"Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
-        compounds:"Ogni minuto risparmiato qui si moltiplica nel corso della giornata.",
-        lsTitle:"Listing Summary (anteprima composita)",
-        lsSub:"A colpo d’occhio: dati chiave, tag e prossima azione — pronti da inviare.",
-        lsHeadRight:"Anteprima",
-        lsChip:"Apri Listing Summary",
-        pilotTitle:"Avvia il tuo Pilot Charter (30 giorni)",
-        pilotSub:"Setup leggero. Valore rapido. Se funziona, continui; altrimenti, stop — rischio zero.",
-        noSpam:"Niente spam. Accesso anticipato limitato.",
-        waSend:"Invia via WhatsApp (demo Meta)",
-        waSendSub:"Usa Meta Cloud API (numero di test) per inviare un messaggio reale.",
-        labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio",
-        tipText:'Nota: il destinatario deve prima inviare “hello” al numero di test.',
-        revealBtn:'Mostra numero di test', copyBtn:'Copia', copied:'Copiato', copyFail:'Copia non riuscita',
-        publicNote:'Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.',
-        langLabel:"Lingua",
-        // WA i18n
-        before:"Prima", after:"Dopo",
-        key1:"Cliente → messaggio in arrivo",
-        key2:"Kintra → rileva l’intento e prepara la bozza",
-        key3:"Agente → approva e invia",
-        beforeTop:"Risposta manuale ~2–4 min",
-        afterTop:"Bozza automatica ~10–20 sec",
-        clientMsg:"Ciao — è possibile una visita domani dopo il lavoro verso le 18:30?",
-        agentLine1:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
-        agentLine2:"Posso inviare anche planimetria e indicazioni. Confermo e invio promemoria 24h prima.",
-        manualTimingLabel:"Risposta manuale:",
-        autoTimingLabel:"Bozza automatica:",
-        legendClient:"Cliente", legendAI:"Kintra (AI)", legendAgent:"Agente"
-      }
+    /* -------- WhatsApp Smart Reply toggle (robust & minimal) -------- */
+    const beforeBtn = document.getElementById('tab-before');
+    const afterBtn  = document.getElementById('tab-after');
+    const waBody    = document.getElementById('waBody');
+    const waTop     = document.getElementById('waTopLabel');
+
+    const msg = {
+      client: "Hi, can we view tomorrow after work around 18:30?",
+      line1:  "Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
+      line2:  "I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder."
     };
 
-    const $ = s=>document.querySelector(s);
-    function setLang(lang){
-      const d = dict[lang];
-      $("#badge").textContent = d.badge;
-      $("#h1").textContent = d.h1;
-      $("#lead").textContent = d.lead;
-      $("#sub").textContent = d.sub;
-      $("#price-tail").textContent = d.priceTail;
-      $("#goldH3").textContent = d.goldH3;
-      $("#goldP1").textContent = d.goldP1;
-      $("#goldP2").textContent = d.goldP2;
-      $("#goldP3").textContent = d.goldP3;
-      $("#trust-line").textContent = d.trust;
-      $("#lsTitle").textContent = d.lsTitle;
-      $("#lsSub").textContent = d.lsSub;
-      $("#lsHeadRight").textContent = d.lsHeadRight;
-      $("#lsChip").textContent = d.lsChip;
-      $("#pilotTitle").textContent = d.pilotTitle;
-      $("#pilotSub").textContent = d.pilotSub;
-      $("#noSpam").textContent = d.noSpam;
-      $("#wa-send").textContent = d.waSend;
-      $("#wa-send-sub").textContent = d.waSendSub;
-      $("#lab-phone").textContent = d.labPhone;
-      $("#lab-msg").textContent = d.labMsg;
-      $("#waTip").childNodes[0].textContent = (d.tipText+' ');
-      $("#revealTestNum").textContent = d.revealBtn;
-      $("#publicNote").textContent = d.publicNote;
-      $("#lang-label").textContent = d.langLabel;
-
-      // WA i18n
-      $("#tab-before").textContent = d.before;
-      $("#tab-after").textContent  = d.after;
-      $("#key1").textContent = d.key1;
-      $("#key2").textContent = d.key2;
-      $("#key3").textContent = d.key3;
-      $("#legendClient").textContent = d.legendClient;
-      $("#legendAI").textContent     = d.legendAI;
-      $("#legendAgent").textContent  = d.legendAgent;
-
-      document.documentElement.lang = lang;
-      $("#lang-en").classList.toggle("active", lang==="en");
-      $("#lang-it").classList.toggle("active", lang==="it");
-      $("#lang-en").setAttribute("aria-pressed", lang==="en");
-      $("#lang-it").setAttribute("aria-pressed", lang==="it");
-      localStorage.setItem("kintra_lang", lang);
-
-      // Re-render WA in current mode
-      renderWA( $("#tab-before").classList.contains("active") ? "before" : "after" );
-    }
-    $("#lang-en").onclick = ()=> setLang("en");
-    $("#lang-it").onclick = ()=> setLang("it");
-    setLang(localStorage.getItem("kintra_lang") || "en");
-
-    /* ---------- WhatsApp Smart Reply: renderer (restored logic) ---------- */
-    const getL = ()=> (document.documentElement.lang||'en').startsWith('it')?'it':'en';
-    function waText(key){ return dict[getL()][key]; }
-
-    function renderWA(mode){
-      // timing label
-      $("#waTopLabel").textContent = (mode==='before') ? waText('beforeTop') : waText('afterTop');
-
-      // bubbles
-      const body = $("#waBody");
-      if(mode==='before'){
-        body.innerHTML = `
-          <div class="bubble client"><span class="dot client" title="${waText('legendClient')}"></span> ${waText('clientMsg')}</div>
-          <div class="bubble agent"><span class="dot agent" title="${waText('legendAgent')}"></span> ${waText('agentLine1')}</div>
-          <div class="bubble agent"><span class="dot agent" title="${waText('legendAgent')}"></span> ${waText('agentLine2')}</div>
-          <div class="meta-row"><span class="pill"><b>${waText('manualTimingLabel')}</b>  ~2–4 min</span></div>
+    function render(which){
+      if(which==='before'){
+        waTop.textContent = "Manual reply ~2–4 min";
+        waBody.innerHTML = `
+          <div class="bubble client">${msg.client}</div>
+          <div class="bubble agent">${msg.line1}</div>
+          <div class="bubble agent">${msg.line2}</div>
+          <div class="meta-row"><span class="pill"><b>Manual reply:</b> ~2–4 min</span></div>
         `;
-      } else {
-        body.innerHTML = `
-          <div class="bubble client"><span class="dot client" title="${waText('legendClient')}"></span> ${waText('clientMsg')}</div>
-          <div class="bubble ai"><span class="dot ai" title="${waText('legendAI')}"></span> ${waText('agentLine1')}</div>
-          <div class="bubble ai"><span class="dot ai" title="${waText('legendAI')}"></span> ${waText('agentLine2')}</div>
-          <div class="meta-row"><span class="pill"><b>${waText('autoTimingLabel')}</b>  ~10–20 sec</span></div>
+      }else{
+        waTop.textContent = "Auto-draft ~10–20 sec";
+        waBody.innerHTML = `
+          <div class="bubble client">${msg.client}</div>
+          <div class="bubble ai">${msg.line1}</div>
+          <div class="bubble ai">${msg.line2}</div>
+          <div class="meta-row"><span class="pill"><b>Auto-draft:</b> ~10–20 sec</span></div>
         `;
       }
     }
-
-    const beforeBtn = $("#tab-before");
-    const afterBtn  = $("#tab-after");
-    function setMode(which){
+    function setActive(which){
       const isBefore = which==='before';
       beforeBtn.classList.toggle('active', isBefore);
-      beforeBtn.setAttribute('aria-selected', String(isBefore));
       afterBtn.classList.toggle('active', !isBefore);
+      beforeBtn.setAttribute('aria-selected', String(isBefore));
       afterBtn.setAttribute('aria-selected', String(!isBefore));
-      renderWA(which);
+      render(which);
     }
-    beforeBtn.addEventListener('click', ()=> setMode('before'));
-    afterBtn.addEventListener('click', ()=> setMode('after'));
-    setMode('before'); // initial
+    beforeBtn.addEventListener('click', ()=> setActive('before'));
+    afterBtn.addEventListener('click',  ()=> setActive('after'));
+    setActive('before');
 
-    // Re-render on lang attr change (just in case)
-    new MutationObserver(()=> setMode(beforeBtn.classList.contains('active')?'before':'after'))
-      .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+    /* -------- Copy Card (Listing) – simple demo -------- */
+    document.getElementById('copyCard')?.addEventListener('click', async ()=>{
+      const text = [
+        "€420,000 · Bilocale ristrutturato",
+        "Navigli, Milano — 80 m² · 2° piano · Ascensore",
+        "Tags: 2BR, 80 m², Milano, Balcony",
+        "— shared from Kintra Listing Summary"
+      ].join("\n");
+      try{ await navigator.clipboard.writeText(text); alert("Copied listing card to clipboard."); }
+      catch{ alert("Copy failed; please copy manually."); }
+    });
 
-    /* ---------- WhatsApp demo (stub) ---------- */
+    /* -------- WhatsApp demo (stub) -------- */
     const TEST_NUMBER = "+39 3XX XXX XXXX";
-    const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
-    const waBtn = $('#sendWA'), waOut = $('#waResult');
-    const revealBtn = $('#revealTestNum');
-    const testWrap  = $('#testNumWrap');
-    const testNumEl = $('#testNum');
-    const copyBtn   = $('#copyTestNum');
+    const WA_WORKER   = "https://kintra-wa-meta.founder-60b.workers.dev";
+    const revealBtn   = document.getElementById('revealTestNum');
+    const waOut       = document.getElementById('waResult');
 
-    revealBtn.onclick = ()=>{ testNumEl.textContent = TEST_NUMBER; testWrap.style.display='inline'; revealBtn.style.display='none'; };
-    copyBtn.onclick = async ()=>{
-      try{ await navigator.clipboard.writeText(TEST_NUMBER); copyBtn.textContent = (dict[getL()].copied||"Copied"); }
-      catch{ copyBtn.textContent = (dict[getL()].copyFail||"Copy failed"); }
-      setTimeout(()=> copyBtn.textContent = (dict[getL()].copyBtn||"Copy"), 1500);
-    };
+    revealBtn.onclick = ()=>{ alert("Test number: " + TEST_NUMBER + "\n(kept hidden publicly to reduce spam)"); };
 
-    waBtn.onclick = async ()=>{
-      const to = ($('#phone').value||'').trim() || TEST_NUMBER.replace(/\s+/g,'');
-      const text = ($('#msg').value||'').trim() || 'Ciao from the Kintra pilot!';
-      waOut.textContent = 'Sending…';
+    document.getElementById('sendWA').onclick = async ()=>{
+      const to   = (document.getElementById('phone').value||"").trim() || TEST_NUMBER.replace(/\s+/g,'');
+      const text = (document.getElementById('msg').value||"").trim() || "Ciao from the Kintra pilot!";
+      waOut.textContent = "Sending…";
       try{
-        const res = await fetch(WA_WORKER + '/api/wa', {
-          method:'POST', headers:{'Content-Type':'application/json'},
+        const res = await fetch(WA_WORKER + "/api/wa", {
+          method:"POST", headers:{"Content-Type":"application/json"},
           body: JSON.stringify({ to, text })
         });
-        const txt = await res.text();
-        let json; try{ json = JSON.parse(txt); }catch{ json = { raw: txt }; }
-        if(!res.ok) throw new Error(json?.metaErr?.message || txt);
+        const raw = await res.text();
+        let json; try{ json = JSON.parse(raw); }catch{ json = { raw }; }
+        if(!res.ok) throw new Error(json?.metaErr?.message || raw);
         waOut.textContent = JSON.stringify(json, null, 2);
       }catch(e){
-        waOut.textContent = 'Error: ' + e.message;
+        waOut.textContent = "Error: " + e.message;
       }
     };
-
-    /* ---------- Language toggle ---------- */
-    $("#lang-en").onclick = ()=> setLang("en");
-    $("#lang-it").onclick = ()=> setLang("it");
   </script>
 </body>
 </html>
