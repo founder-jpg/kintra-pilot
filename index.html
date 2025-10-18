@@ -29,7 +29,7 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
 
-    /* Language toggle with flags */
+    /* Language toggle with inline SVG flags */
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:flex;gap:8px}
@@ -39,7 +39,8 @@
       padding:6px 12px;cursor:pointer;font-weight:600
     }
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{font-size:16px;line-height:1}
+    .flag{display:inline-flex;width:18px;height:12px}
+    .flag svg{width:18px;height:12px;display:block}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
@@ -70,7 +71,7 @@
     .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
     .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
     .metric .l{font-size:12px;color:#6b7280}
-    .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
+    .kicker{border-left:3px solid ;border-left-color:var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
 
     /* See it in action */
     .section{margin-top:24px}
@@ -129,8 +130,32 @@
       <div class="langbox">
         <span class="label" id="lang-label">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active"><span class="flag" aria-hidden="true">🇬🇧</span> EN</button>
-          <button id="lang-it"><span class="flag" aria-hidden="true">🇮🇹</span> IT</button>
+          <button id="lang-en" class="active" aria-pressed="true">
+            <span class="flag" aria-hidden="true">
+              <!-- Union Jack -->
+              <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+                <rect width="60" height="36" fill="#012169"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
+                <rect x="25" width="10" height="36" fill="#FFF"/>
+                <rect y="13" width="60" height="10" fill="#FFF"/>
+                <rect x="27" width="6" height="36" fill="#C8102E"/>
+                <rect y="15" width="60" height="6" fill="#C8102E"/>
+              </svg>
+            </span>
+            EN
+          </button>
+          <button id="lang-it" aria-pressed="false">
+            <span class="flag" aria-hidden="true">
+              <!-- Italy -->
+              <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+                <rect width="60" height="36" fill="#ffffff"/>
+                <rect width="20" height="36" x="0" fill="#009246"/>
+                <rect width="20" height="36" x="40" fill="#CE2B37"/>
+              </svg>
+            </span>
+            IT
+          </button>
         </div>
       </div>
     </header>
@@ -151,7 +176,7 @@
         <!-- Pricing & explainer -->
         <div class="pricing" id="price-line">
           <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
-          <span class="muted">In simple terms: focus on one property type; agree 2–3 success metrics. If it doesn’t save time in 30 days, don’t continue.</span>
+          <span class="muted" id="price-tail">In simple terms: focus on one property type; agree 2–3 success metrics. If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
 
         <!-- Advisor Charter gold plaque -->
@@ -419,7 +444,8 @@
       setText('#btn-deck', d.btnDeck);
       setText('#btn-pdf', d.btnPDF);
 
-      $('#price-line').innerHTML = `<strong>${d.price}</strong> <span class="muted">${d.price_tail}</span>`;
+      // pricing line + localized "plain English/Italian" explainer
+      $('#price-line').innerHTML = `<strong>${d.price}</strong> <span class="muted" id="price-tail">${d.price_tail}</span>`;
 
       setText('#goldH3', d.goldH3);
       setText('#goldP1', d.goldP1);
@@ -453,7 +479,7 @@
       setText('#dashTitle', d.dashTitle); setText('#dashSub', d.dashSub); setText('#dashNote', d.dashNote);
       setText('#dashInline', d.dashBtn);
 
-      // LISTING SUMMARY — fully localized (title, sub, explainer, button + copy)
+      // Listing Summary localization
       setText('#lsTitle', d.lsTitle);
       setText('#lsSub', d.lsSub);
       setText('#lsExplainer', d.lsExplainer);
@@ -474,6 +500,9 @@
       document.documentElement.lang = L;
       $('#lang-en').classList.toggle('active', L==='en');
       $('#lang-it').classList.toggle('active', L==='it');
+      $('#lang-en').setAttribute('aria-pressed', L==='en' ? 'true' : 'false');
+      $('#lang-it').setAttribute('aria-pressed', L==='it' ? 'true' : 'false');
+
       localStorage.setItem('kintra_lang', L);
     }
 
