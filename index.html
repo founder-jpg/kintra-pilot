@@ -50,8 +50,6 @@
     .pricing{margin-top:6px;font-size:14px;color:#243044;display:flex;flex-direction:column;gap:6px}
     .muted{color:var(--muted)}
     .tiny{font-size:12px;color:#7b879b}
-    .tooltip{display:inline-flex;align-items:center;gap:6px}
-    .tipdot{width:16px;height:16px;border-radius:50%;background:#eef3ff;border:1px solid #dbe7ff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;color:#0b5fff}
     .plain-line{font-size:13px;color:#6b7280}
 
     .gold{
@@ -96,6 +94,12 @@
     .listing{display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start}
     .listing img{width:140px;height:140px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#3a465a;background:#fff}
+
+    /* Value proof block */
+    .value{margin-top:10px}
+    .value ul{margin:8px 0 0 16px}
+    .value li{margin:6px 0}
+    .quote{font-size:13px;color:#243044;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
 
     footer{margin:28px 0 8px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
@@ -184,14 +188,16 @@
           <div class="metric"><div class="k">11m</div><div class="l" id="m2">Avg reply time</div></div>
           <div class="metric"><div class="k">5</div><div class="l" id="m3">Visits booked</div></div>
         </div>
-        <!-- Mini FAQ: Why pay for pilot? -->
-        <div class="divider"></div>
-        <div class="tiny" id="faq-why">
-          <b>Why pay for the pilot?</b> It proves value quickly with real leads. If it doesn’t save time, you stop — no sunk cost.
-        </div>
-        <!-- Testimonial -->
-        <div class="tiny" style="margin-top:6px" id="quote-1">
-          “Setup was simple. Reply times dropped and we booked more visits the same week.” — Agency lead, Milano
+
+        <!-- Value proof block (reinstated) -->
+        <div class="value">
+          <ul id="value-bullets">
+            <li id="vb1">About the cost of one junior hire — built to save time for every agent.</li>
+            <li id="vb2">Time-to-value measured in days, not months (live in ~72h).</li>
+            <li id="vb3">If it doesn’t save time in 30 days, don’t continue.</li>
+          </ul>
+          <div class="quote" id="vq1">“Cheaper than a junior, but it shortens every agent’s day.” — Early partner (pilot)</div>
+          <div class="quote" id="vq2">“We saw the impact the same week — faster replies, more visits.” — Agency lead, Milano</div>
         </div>
       </div>
     </section>
@@ -342,15 +348,12 @@
   </div>
 
   <script>
-    // --- Config ---
     const WA_WORKER = 'https://kintra-wa-meta.founder-60b.workers.dev';
     const TEST_NUMBER = "+39 3XX XXX XXXX";
 
-    // --- i18n dictionary ---
     const dict = {
       en:{
-        badge:"Pilot • Italy",
-        "lang-label":"Language",
+        badge:"Pilot • Italy","lang-label":"Language",
         h1:"From listing to leads, faster",
         lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
         sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
@@ -371,8 +374,13 @@
         math:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
         compounds:"Every minute saved here compounds by the hour.",
         m1:"New leads today", m2:"Avg reply time", m3:"Visits booked",
-        faqWhy:"Why pay for the pilot? It proves value quickly with real leads. If it doesn’t save time, you stop — no sunk cost.",
-        quote1:"“Setup was simple. Reply times dropped and we booked more visits the same week.” — Agency lead, Milano",
+
+        // Value proof
+        vb1:"About the cost of one junior hire — built to save time for every agent.",
+        vb2:"Time-to-value measured in days, not months (live in ~72h).",
+        vb3:"If it doesn’t save time in 30 days, don’t continue.",
+        vq1:"“Cheaper than a junior, but it shortens every agent’s day.” — Early partner (pilot)",
+        vq2:"“We saw the impact the same week — faster replies, more visits.” — Agency lead, Milano",
 
         waPrev:"WhatsApp Smart Reply",
         waDesc:"Kintra drafts structured replies and next steps so nothing slips.",
@@ -418,11 +426,10 @@
         world:"🌍 From Italy to the world — join the next wave."
       },
       it:{
-        badge:"Pilot • Italia",
-        "lang-label":"Lingua",
+        badge:"Pilot • Italia","lang-label":"Lingua",
         h1:"Dall’annuncio ai lead, più velocemente",
         lead:"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
-        sub:"Gli agenti perdono tempo passando da una scheda all’altra. Kintra riporta ogni lead in un unico thread, prepara le risposte e suggerisce i prossimi passi.",
+        sub:"Gli agenti perdono tempo passando da una scheda all’altra. Kintra riunisce tutti i lead in un unico thread, prepara le risposte e suggerisce i prossimi passi.",
         btnRequest:"Richiedi il Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
 
         price_line:"Pilot €1,5–2k (30 giorni) · 1 nicchia · 2–3 KPI.",
@@ -440,8 +447,13 @@
         math:"Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
         compounds:"Ogni minuto risparmiato qui si moltiplica nell’arco della giornata.",
         m1:"Nuovi lead oggi", m2:"Tempo medio di risposta", m3:"Visite prenotate",
-        faqWhy:"Perché il pilot è a pagamento? Dimostra valore rapidamente con lead reali. Se non fa risparmiare tempo, ti fermi — niente costi sommersi.",
-        quote1:"“Setup semplice. I tempi di risposta sono calati e abbiamo prenotato più visite nella stessa settimana.” — Agenzia, Milano",
+
+        // Value proof (IT)
+        vb1:"Costo simile a un junior — progettato per far risparmiare tempo a ogni agente.",
+        vb2:"Time-to-value in giorni, non mesi (live in ~72h).",
+        vb3:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
+        vq1:"“Costa meno di un junior, ma accorcia la giornata di tutti gli agenti.” — Partner early (pilot)",
+        vq2:"“Impatto nella stessa settimana: risposte più rapide, più visite.” — Agenzia, Milano",
 
         waPrev:"Smart Reply su WhatsApp",
         waDesc:"Kintra prepara risposte strutturate e prossimi passi: non sfugge nulla.",
@@ -492,6 +504,7 @@
 
     function setLang(lang){
       const d = dict[lang];
+
       // header & hero
       $("#badge").textContent = d.badge;
       $("#lang-label").textContent = d["lang-label"];
@@ -516,7 +529,10 @@
       // why it matters
       $("#why").textContent = d.why; $("#math").textContent = d.math; $("#compounds").textContent = d.compounds;
       $("#m1").textContent = d.m1; $("#m2").textContent = d.m2; $("#m3").textContent = d.m3;
-      $("#faq-why").textContent = d.faqWhy; $("#quote-1").textContent = d.quote1;
+
+      // value proof
+      $("#vb1").textContent = d.vb1; $("#vb2").textContent = d.vb2; $("#vb3").textContent = d.vb3;
+      $("#vq1").textContent = d.vq1; $("#vq2").textContent = d.vq2;
 
       // WhatsApp Smart Reply
       $("#waPrev").textContent = d.waPrev; $("#waDesc").textContent = d.waDesc;
@@ -560,12 +576,22 @@
       localStorage.setItem("kintra_lang", lang);
     }
 
+    // Build value bullets DOM once so i18n can swap text
+    (function seedValueDOM(){
+      const ul = document.querySelector('#value-bullets');
+      if(!ul.querySelector('#vb1')){
+        ['vb1','vb2','vb3'].forEach(id=>{
+          const li = document.createElement('li'); li.id=id; ul.appendChild(li);
+        });
+      }
+    })();
+
     // Toggle language
     $("#lang-en").onclick = ()=> setLang("en");
     $("#lang-it").onclick = ()=> setLang("it");
     setLang(localStorage.getItem("kintra_lang") || "en");
 
-    // WhatsApp tabs (ensure label not cut on mobile)
+    // WhatsApp tabs
     const beforeBtn = $("#tab-before"), afterBtn = $("#tab-after");
     const beforePane = $("#pane-before"), afterPane = $("#pane-after");
     beforeBtn.onclick = () => { beforeBtn.classList.add("active"); afterBtn.classList.remove("active"); beforePane.style.display="block"; afterPane.style.display="none"; };
