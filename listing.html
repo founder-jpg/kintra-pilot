@@ -42,11 +42,18 @@
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{width:26px;height:26px;object-fit:contain;border-radius:6px}
     .brand .name{font-weight:800;letter-spacing:.2px}
+
     .langbox{display:flex;align-items:center;gap:8px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:flex;gap:6px}
-    .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:600}
+    .toggle button{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--line);background:#fff;border-radius:999px;
+      padding:6px 10px;cursor:pointer;font-weight:600
+    }
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
+    .flag{display:inline-flex;width:18px;height:12px}
+    .flag svg{width:18px;height:12px;display:block}
 
     .grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px}
@@ -102,8 +109,32 @@
       <div class="langbox">
         <span class="label" id="langLabel">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active">🇬🇧 EN</button>
-          <button id="lang-it">🇮🇹 IT</button>
+          <button id="lang-en" class="active" aria-label="English">
+            <span class="flag" aria-hidden="true">
+              <!-- EN flag (Union Jack simplified) -->
+              <svg viewBox="0 0 60 36">
+                <rect width="60" height="36" fill="#012169"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
+                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
+                <rect x="25" width="10" height="36" fill="#FFF"/>
+                <rect y="13" width="60" height="10" fill="#FFF"/>
+                <rect x="27" width="6" height="36" fill="#C8102E"/>
+                <rect y="15" width="60" height="6" fill="#C8102E"/>
+              </svg>
+            </span>
+            EN
+          </button>
+          <button id="lang-it" aria-label="Italiano">
+            <span class="flag" aria-hidden="true">
+              <!-- IT flag -->
+              <svg viewBox="0 0 60 36">
+                <rect width="60" height="36" fill="#fff"/>
+                <rect width="20" height="36" x="0" fill="#009246"/>
+                <rect width="20" height="36" x="40" fill="#CE2B37"/>
+              </svg>
+            </span>
+            IT
+          </button>
         </div>
       </div>
     </header>
@@ -185,12 +216,12 @@
 
     <footer>
       <div id="footLeft">Built by Kintra — Pilot • Italy</div>
-      <div><a href="./index.html">← Back to pilot page</a></div>
+      <div><a id="backPilot" href="./index.html">← Back to pilot page</a></div>
     </footer>
   </div>
 
   <script>
-    // Minimal EN/IT dictionary for this page
+    // Minimal EN/IT dictionary for this page (with localized copy button & back link)
     const dict = {
       en:{
         langLabel:"Language",
@@ -207,6 +238,9 @@
         w3:"Consistent, on-brand phrasing from your CRM data.",
         ctaBook:"Book a viewing",
         ctaAsk:"Ask a question",
+        copyBtn:"Copy card to WhatsApp →",
+        copied:"Copied!",
+        copyFail:"Copy failed",
         shareHint:"1-tap: opens WhatsApp with a prefilled message you can tweak.",
         trustLine:"Adoption: used in pilots by agencies in Milano and Roma (logos under NDA).",
         gdprLine:"We only use your message to coordinate this viewing — no marketing without consent.",
@@ -217,6 +251,7 @@
         q2:"Where do the details come from?", a2:"From your CRM or listing page; Kintra keeps photo, price, and highlights in sync.",
         q3:"Does this work on mobile?", a3:"Yes—opens directly in WhatsApp on iOS/Android, or WhatsApp Web on desktop.",
         footLeft:"Built by Kintra — Pilot • Italy",
+        backPilot:"← Back to pilot page",
         waText:
 `Hi! I'd like to book a viewing for:
 €420,000 · Bilocale ristrutturato
@@ -240,6 +275,9 @@ I’m available tomorrow 15:00 or Thursday 10:30. Do either work?
         w3:"Testo coerente e in linea con il brand dai dati del tuo CRM.",
         ctaBook:"Prenota una visita",
         ctaAsk:"Fai una domanda",
+        copyBtn:"Copia scheda su WhatsApp →",
+        copied:"Copiato!",
+        copyFail:"Copia non riuscita",
         shareHint:"1-tap: apre WhatsApp con un messaggio precompilato modificabile.",
         trustLine:"Adozione: usato in pilot da agenzie a Milano e Roma (loghi in NDA).",
         gdprLine:"Usiamo il tuo messaggio solo per coordinare la visita — nessun marketing senza consenso.",
@@ -250,6 +288,7 @@ I’m available tomorrow 15:00 or Thursday 10:30. Do either work?
         q2:"Da dove arrivano i dettagli?", a2:"Dal tuo CRM o dalla pagina annuncio; Kintra mantiene foto, prezzo e punti chiave allineati.",
         q3:"Funziona su mobile?", a3:"Sì—si apre direttamente in WhatsApp su iOS/Android, o WhatsApp Web su desktop.",
         footLeft:"Creato da Kintra — Pilot • Italia",
+        backPilot:"← Torna alla pagina pilot",
         waText:
 `Ciao! Vorrei prenotare una visita per:
 €420.000 · Bilocale ristrutturato
@@ -283,7 +322,7 @@ Sono disponibile domani alle 15:00 o giovedì alle 10:30. Va bene uno dei due?
       $('#priceLine').textContent = d.priceLine;
       $('#addr').textContent = d.addr;
       $('#tag1').textContent = d.tag1;
-      '#tag2'; $('#tag2').textContent = d.tag2;
+      $('#tag2').textContent = d.tag2;
       $('#tag3').textContent = d.tag3;
       $('#tag4').textContent = d.tag4;
       $('#whyHead').textContent = d.whyHead;
@@ -292,6 +331,7 @@ Sono disponibile domani alle 15:00 o giovedì alle 10:30. Va bene uno dei due?
       $('#w3').textContent = d.w3;
       $('#ctaBookText').textContent = d.ctaBook;
       $('#ctaAskText').textContent = d.ctaAsk;
+      $('#copyCard').textContent = d.copyBtn;      // localized copy button
       $('#shareHint').textContent = d.shareHint;
       $('#trustLine').textContent = d.trustLine;
       $('#gdprLine').textContent = d.gdprLine;
@@ -302,6 +342,7 @@ Sono disponibile domani alle 15:00 o giovedì alle 10:30. Va bene uno dei due?
       $('#q2').textContent = d.q2; $('#a2').textContent = d.a2;
       $('#q3').textContent = d.q3; $('#a3').textContent = d.a3;
       $('#footLeft').textContent = d.footLeft;
+      $('#backPilot').textContent = d.backPilot;   // localized back link
 
       // active state on toggle
       $('#lang-en').classList.toggle('active', lang==='en');
@@ -329,17 +370,19 @@ Sono disponibile domani alle 15:00 o giovedì alle 10:30. Va bene uno dei due?
       toWA(text);
     };
 
-    // Copy card plain-text
+    // Copy card plain-text (localized messages)
     $('#copyCard').onclick = async ()=>{
+      const lang = document.documentElement.lang;
+      const d = dict[lang];
       const text =
 `${$('#priceLine').textContent}
 ${$('#addr').textContent}
 • ${$('#tag1').textContent} • ${$('#tag2').textContent} • ${$('#tag3').textContent} • ${$('#tag4').textContent}
 
 — Kintra Listing Summary`;
-      try{ await navigator.clipboard.writeText(text); $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copiato!':'Copied!'); }
-      catch{ $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copia non riuscita':'Copy failed'); }
-      setTimeout(()=> $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copia scheda su WhatsApp →':'Copy card to WhatsApp →'), 1500);
+      try{ await navigator.clipboard.writeText(text); $('#copyCard').textContent = d.copied; }
+      catch{ $('#copyCard').textContent = d.copyFail; }
+      setTimeout(()=> $('#copyCard').textContent = d.copyBtn, 1500);
     };
 
     // Language toggle
