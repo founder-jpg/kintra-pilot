@@ -3,69 +3,92 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kintra — Listing Summary</title>
+  <title>Listing Summary — Kintra</title>
   <meta name="color-scheme" content="light only"/>
-  <link rel="icon" href="./img/logo.png.png"/>
+  <meta name="theme-color" content="#0b2347"/>
 
+  <!-- OG / Share -->
+  <meta property="og:title" content="€420,000 · Bilocale ristrutturato — Navigli, Milano">
+  <meta property="og:description" content="Key facts in one card. Book a viewing or ask a question in one tap.">
+  <meta property="og:image" content="./img/cta.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"Bilocale ristrutturato — Navigli, Milano",
+    "image":"./img/cta.jpg",
+    "description":"Listing Summary: key facts + next step, ready for WhatsApp/email.",
+    "offers":{"@type":"Offer","price":"420000","priceCurrency":"EUR"}
+  }
+  </script>
+
+  <link rel="icon" href="./img/logo.png.png"/>
   <style>
     :root{
-      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
-      --brand:#0b5fff; --navy:#0b2347; --card:#f7f9fc; --chip:#eef3ff; --gold:#c9a227;
-      --radius:14px; --max:980px; --ok:#10b981;
+      --bg:#ffffff; --ink:#0b1220; --muted:#51607a; --line:#e8ecf2; --brand:#0b5fff; --navy:#0b2347;
+      --card:#f7f9fc; --chip:#eef3ff; --gold:#c9a227; --radius:14px; --max:1000px;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
     a{color:var(--brand);text-decoration:none}
     a:hover{text-decoration:underline}
     img{display:block;max-width:100%}
-    .wrap{max-width:var(--max);margin:0 auto;padding:26px 22px 60px}
 
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
     .brand{display:flex;align-items:center;gap:10px}
-    .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
-    .brand .name{font-weight:800}
-    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
-    .langbox{display:flex;align-items:center;gap:10px}
+    .brand img{width:26px;height:26px;object-fit:contain;border-radius:6px}
+    .brand .name{font-weight:800;letter-spacing:.2px}
+    .langbox{display:flex;align-items:center;gap:8px}
     .langbox .label{font-size:14px;color:#6b7280}
-    .toggle{display:flex;gap:8px}
-    .toggle button{
-      display:inline-flex;align-items:center;gap:8px;
-      border:1px solid var(--line);background:#fff;border-radius:999px;
-      padding:6px 12px;cursor:pointer;font-weight:600
-    }
+    .toggle{display:flex;gap:6px}
+    .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:600}
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{display:inline-flex;width:18px;height:12px}
-    .flag svg{width:18px;height:12px;display:block}
 
-    /* Layout */
-    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
-    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px}
     .soft{background:var(--card)}
-    h1{font-size:28px;margin:0 0 8px;color:var(--navy)}
-    .lead{color:#243044}
-    .muted{color:var(--muted)}
     .divider{height:1px;background:var(--line);margin:14px 0}
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px}
+
+    h1{font-size:26px;line-height:1.15;margin:0 0 6px;color:var(--navy)}
+    h2{font-size:18px;margin:0 0 6px}
+    .lead{color:var(--ink)}
+    .muted{color:var(--muted)}
+    .small{font-size:13px;color:var(--muted)}
+
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:#3a465a;font-size:12px}
+    .tagrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+
+    .cta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
     .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    .btn.ghost{background:#fff;border-color:var(--line);color:var(--navy)}
-    .badge-chip{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#3a465a;font-size:12px}
-    .meta{display:flex;gap:8px;flex-wrap:wrap}
+    .btn.ghost{background:#fff;color:var(--navy)}
+    .copy-out{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-    /* Right column blocks */
-    .kpi{display:flex;align-items:center;gap:8px;background:#f5fbf8;border:1px solid #d6f1e3;border-radius:10px;padding:10px}
-    .kpi .dot{width:8px;height:8px;border-radius:999px;background:var(--ok)}
-    .list{margin:0;padding-left:18px}
-    .list li{margin:6px 0}
+    .photo{width:100%;height:240px;object-fit:cover;border:1px solid var(--line);border-radius:12px}
+    .facts{display:grid;gap:6px;margin-top:8px}
+    .facts .price{font-weight:800}
+    .facts .addr{color:var(--muted)}
 
-    .help{font-size:13px;color:#6b7280}
-    .small{font-size:12px;color:#6b7280}
-    .copy-out{white-space:pre-wrap;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:10px;font-size:14px}
+    details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+    details+details{margin-top:8px}
+    summary{cursor:pointer;font-weight:600}
 
-    footer{margin-top:24px;font-size:13px;color:#6b7280;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    footer{margin:20px 0 6px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
-    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    /* Print / PDF */
+    @media print{
+      @page{size:A4 portrait;margin:12mm}
+      .langbox,.cta-row,.copy-out,footer{display:none!important}
+      .wrap{padding:12mm}
+    }
+    @media (max-width:900px){
+      .grid-2{grid-template-columns:1fr}
+      .photo{height:200px}
+    }
   </style>
 </head>
 <body>
@@ -75,253 +98,254 @@
       <div class="brand">
         <img src="./img/logo.png.png" alt="Kintra logo"/>
         <div class="name">Kintra</div>
-        <span class="badge" id="badge">Pilot • Italy</span>
       </div>
       <div class="langbox">
-        <span class="label" id="lang-label">Language</span>
+        <span class="label" id="langLabel">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active" aria-pressed="true">
-            <span class="flag" aria-hidden="true">
-              <!-- Union Jack -->
-              <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
-                <rect width="60" height="36" fill="#012169"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
-                <path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/>
-                <rect x="25" width="10" height="36" fill="#FFF"/>
-                <rect y="13" width="60" height="10" fill="#FFF"/>
-                <rect x="27" width="6" height="36" fill="#C8102E"/>
-                <rect y="15" width="60" height="6" fill="#C8102E"/>
-              </svg>
-            </span> EN
-          </button>
-          <button id="lang-it" aria-pressed="false">
-            <span class="flag" aria-hidden="true">
-              <!-- Italy -->
-              <svg viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
-                <rect width="60" height="36" fill="#ffffff"/>
-                <rect width="20" height="36" x="0" fill="#009246"/>
-                <rect width="20" height="36" x="40" fill="#CE2B37"/>
-              </svg>
-            </span> IT
-          </button>
+          <button id="lang-en" class="active">🇬🇧 EN</button>
+          <button id="lang-it">🇮🇹 IT</button>
         </div>
       </div>
     </header>
 
-    <!-- Title -->
-    <section class="card soft">
+    <!-- Title / Value -->
+    <section class="card soft" style="margin-bottom:10px">
       <h1 id="title">Listing Summary</h1>
-      <p class="lead" id="subtitle">A one-pager agents can paste into WhatsApp or email — key facts + a clear next step.</p>
-      <p class="small" id="plain">In simple terms: it reduces back-and-forth by answering the obvious questions first.</p>
+      <p class="lead" id="subtitle">One glance: key details, tags, and next step — ready to send.</p>
+      <p class="small" id="valueLine">Built automatically from your CRM. Shaves ~2 min per lead by answering common questions upfront.</p>
     </section>
 
     <!-- Main content -->
-    <section class="grid" style="margin-top:16px">
-      <!-- Left: property -->
+    <section class="grid-2">
+      <!-- Left: listing -->
       <div class="card">
-        <img src="./img/cta.jpg" alt="Property photo" style="width:100%;height:280px;object-fit:cover;border-radius:10px;border:1px solid var(--line)"/>
-        <div style="margin-top:12px">
-          <h2 id="priceLine" style="margin:0 0 6px">€420,000 · Bilocale ristrutturato</h2>
-          <div class="muted" id="addr">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
-          <div class="meta" style="margin-top:10px">
-            <span class="badge-chip" id="tag1">2BR</span>
-            <span class="badge-chip" id="tag2">80 m²</span>
-            <span class="badge-chip" id="tag3">Milano</span>
-            <span class="badge-chip" id="tag4">Balcony</span>
+        <img class="photo" src="./img/cta.jpg" alt="Property photo">
+        <div class="facts">
+          <div class="price" id="priceLine">€420,000 · Bilocale ristrutturato</div>
+          <div class="addr" id="addr">Navigli, Milano — 80 m² · 2° piano · Ascensore</div>
+          <div class="tagrow">
+            <span class="badge" id="tag1">2BR</span>
+            <span class="badge" id="tag2">80 m²</span>
+            <span class="badge" id="tag3">Milano</span>
+            <span class="badge" id="tag4">Balcony</span>
           </div>
-
-          <div class="cta-row" style="margin-top:12px">
-            <a class="btn primary" href="#" id="ctaBook">Book a viewing</a>
-            <a class="btn ghost" href="#" id="ctaAsk">Ask a question</a>
-          </div>
-
-          <div class="divider"></div>
-
-          <div>
-            <div class="kpi">
-              <span class="dot"></span>
-              <div id="kpiCopy"><b>Saves ~2 min per reply</b> by packaging the essentials and nudging the next step.</div>
-            </div>
-            <div class="small" style="margin-top:8px" id="usesCopy"><b>How agents use it:</b> paste into WhatsApp/email → confirm interest → propose two slots.</div>
-          </div>
+          <div class="small" id="fresh">Last updated: just now</div>
         </div>
-      </div>
-
-      <!-- Right: persuasion + tools -->
-      <div class="card">
-        <h3 id="whatHead" style="margin-top:0">What this is</h3>
-        <p class="muted" id="whatCopy">Auto-built summary from your CRM: photo, price, highlights, and a suggested next step. Designed for fast sharing.</p>
 
         <div class="divider"></div>
 
-        <h3 id="whyHead">Why it helps</h3>
-        <ul class="list">
-          <li id="why1">Cuts back-and-forth: common questions are answered up front.</li>
-          <li id="why2">Standardizes quality: every summary follows the same clear pattern.</li>
-          <li id="why3">Nudges action: “book a viewing” or “ask a question” is always visible.</li>
+        <h2 id="whyHead">Why it helps</h2>
+        <ul class="small" style="margin:6px 0 0 18px">
+          <li id="w1">Answers top questions (price, area, floor, amenities) before they ask.</li>
+          <li id="w2">Shareable as WhatsApp, email, or brochure snippet in one tap.</li>
+          <li id="w3">Consistent, on-brand phrasing from your CRM data.</li>
         </ul>
 
         <div class="divider"></div>
 
-        <h3 id="howHead">Use in 3 clicks</h3>
-        <ol class="list" style="margin-top:6px">
-          <li id="how1">Copy the card.</li>
-          <li id="how2">Paste into WhatsApp or email.</li>
-          <li id="how3">Offer two time slots — Kintra can draft this automatically.</li>
-        </ol>
+        <div class="cta-row">
+          <a id="ctaBook" class="btn primary" href="#">📅 <span id="ctaBookText">Book a viewing</span></a>
+          <a id="ctaAsk" class="btn" href="#">❓ <span id="ctaAskText">Ask a question</span></a>
+          <button id="copyCard" class="btn ghost">Copy card to WhatsApp →</button>
+        </div>
+
+        <div class="copy-out small" style="margin-top:8px">
+          <span id="shareHint">1-tap: opens WhatsApp with a prefilled message you can tweak.</span>
+        </div>
+
+        <div class="divider"></div>
+        <p class="small" id="trustLine"><b>Adoption:</b> used in pilots by agencies in Milano and Roma <span class="muted">(logos under NDA)</span>.</p>
+
+        <div class="divider"></div>
+        <p class="small" id="gdprLine">We only use your message to coordinate this viewing — no marketing without consent.</p>
+      </div>
+
+      <!-- Right: info / FAQ -->
+      <div class="card">
+        <h2 id="shareHead">Share / Embed</h2>
+        <p class="small" id="shareCopy">Drop this summary into WhatsApp, email, or social. Everything stays in sync with your CRM.</p>
 
         <div class="divider"></div>
 
-        <h3 id="shareHead">Share</h3>
-        <div class="cta-row" style="margin-top:8px">
-          <button class="btn" id="copyCard">Copy card</button>
-          <button class="btn" id="copyLink">Copy short link</button>
-          <button class="btn" id="copyWA">Copy WhatsApp text</button>
-        </div>
-
-        <pre class="copy-out" id="copyPreview" style="margin-top:10px">—</pre>
-
-        <p class="help" style="margin-top:8px" id="helpNote">Tip: on mobile, long-press in WhatsApp to paste the card.</p>
+        <h2 id="faqHead">FAQ</h2>
+        <details open>
+          <summary id="q1">Can I edit the text before sending?</summary>
+          <p class="small" id="a1">Yes—tap to paste, tweak anything, then send in WhatsApp or email.</p>
+        </details>
+        <details>
+          <summary id="q2">Where do the details come from?</summary>
+          <p class="small" id="a2">From your CRM or listing page; Kintra keeps photo, price, and highlights in sync.</p>
+        </details>
+        <details>
+          <summary id="q3">Does this work on mobile?</summary>
+          <p class="small" id="a3">Yes—opens directly in WhatsApp on iOS/Android, or WhatsApp Web on desktop.</p>
+        </details>
       </div>
     </section>
 
     <footer>
-      <div id="world">🌍 From Italy to the world — join the next wave.</div>
-      <div>© 2025 Kintra — <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a></div>
+      <div id="footLeft">Built by Kintra — Pilot • Italy</div>
+      <div><a href="./index.html">← Back to pilot page</a></div>
     </footer>
   </div>
 
   <script>
-    // i18n
+    // Minimal EN/IT dictionary for this page
     const dict = {
       en:{
-        badge:'Pilot • Italy', langLabel:'Language',
-        title:'Listing Summary',
-        subtitle:'A one-pager agents can paste into WhatsApp or email — key facts + a clear next step.',
-        plain:'In simple terms: it reduces back-and-forth by answering the obvious questions first.',
-        priceLine:'€420,000 · Bilocale ristrutturato',
-        addr:'Navigli, Milano — 80 m² · 2° piano · Ascensore',
-        tag1:'2BR', tag2:'80 m²', tag3:'Milano', tag4:'Balcony',
-        ctaBook:'Book a viewing', ctaAsk:'Ask a question',
-        kpiCopy:'Saves ~2 min per reply by packaging the essentials and nudging the next step.',
-        usesCopy:'How agents use it: paste into WhatsApp/email → confirm interest → propose two slots.',
-        whatHead:'What this is',
-        whatCopy:'Auto-built summary from your CRM: photo, price, highlights, and a suggested next step. Designed for fast sharing.',
-        whyHead:'Why it helps',
-        why1:'Cuts back-and-forth: common questions are answered up front.',
-        why2:'Standardizes quality: every summary follows the same clear pattern.',
-        why3:'Nudges action: “book a viewing” or “ask a question” is always visible.',
-        howHead:'Use in 3 clicks',
-        how1:'Copy the card.',
-        how2:'Paste into WhatsApp or email.',
-        how3:'Offer two time slots — Kintra can draft this automatically.',
-        shareHead:'Share',
-        copyCard:'Copy card',
-        copyLink:'Copy short link',
-        copyWA:'Copy WhatsApp text',
-        helpNote:'Tip: on mobile, long-press in WhatsApp to paste the card.',
-        world:'🌍 From Italy to the world — join the next wave.',
+        langLabel:"Language",
+        title:"Listing Summary",
+        subtitle:"One glance: key details, tags, and next step — ready to send.",
+        valueLine:"Built automatically from your CRM. Shaves ~2 min per lead by answering common questions upfront.",
+        priceLine:"€420,000 · Bilocale ristrutturato",
+        addr:"Navigli, Milano — 80 m² · 2° piano · Ascensore",
+        tag1:"2BR", tag2:"80 m²", tag3:"Milano", tag4:"Balcony",
+        freshPrefix:"Last updated:",
+        whyHead:"Why it helps",
+        w1:"Answers top questions (price, area, floor, amenities) before they ask.",
+        w2:"Shareable as WhatsApp, email, or brochure snippet in one tap.",
+        w3:"Consistent, on-brand phrasing from your CRM data.",
+        ctaBook:"Book a viewing",
+        ctaAsk:"Ask a question",
+        shareHint:"1-tap: opens WhatsApp with a prefilled message you can tweak.",
+        trustLine:"Adoption: used in pilots by agencies in Milano and Roma (logos under NDA).",
+        gdprLine:"We only use your message to coordinate this viewing — no marketing without consent.",
+        shareHead:"Share / Embed",
+        shareCopy:"Drop this summary into WhatsApp, email, or social. Everything stays in sync with your CRM.",
+        faqHead:"FAQ",
+        q1:"Can I edit the text before sending?", a1:"Yes—tap to paste, tweak anything, then send in WhatsApp or email.",
+        q2:"Where do the details come from?", a2:"From your CRM or listing page; Kintra keeps photo, price, and highlights in sync.",
+        q3:"Does this work on mobile?", a3:"Yes—opens directly in WhatsApp on iOS/Android, or WhatsApp Web on desktop.",
+        footLeft:"Built by Kintra — Pilot • Italy",
         waText:
-`📄 Listing Summary
+`Hi! I'd like to book a viewing for:
 €420,000 · Bilocale ristrutturato
 Navigli, Milano — 80 m² · 2° piano · Ascensore
-— Tags: 2BR • 80 m² • Milano • Balcony
-Would you like to book a viewing? I can propose tomorrow 17:00 or Thu 10:30.`
+
+I’m available tomorrow 15:00 or Thursday 10:30. Do either work?
+(From Kintra Listing Summary)`
       },
       it:{
-        badge:'Pilot • Italia', langLabel:'Lingua',
-        title:'Riepilogo annuncio',
-        subtitle:'Una pagina pronta da incollare su WhatsApp o email — dati chiave + prossima azione.',
-        plain:'In parole semplici: riduce i messaggi avanti-indietro rispondendo subito alle domande ovvie.',
-        priceLine:'€420.000 · Bilocale ristrutturato',
-        addr:'Navigli, Milano — 80 m² · 2° piano · Ascensore',
-        tag1:'2 locali', tag2:'80 m²', tag3:'Milano', tag4:'Balcone',
-        ctaBook:'Prenota una visita', ctaAsk:'Fai una domanda',
-        kpiCopy:'Risparmia ~2 min per risposta grazie a info essenziali + prossima azione.',
-        usesCopy:'Come si usa: incolla su WhatsApp/email → conferma interesse → proponi due orari.',
-        whatHead:'Cos’è',
-        whatCopy:'Riepilogo generato dal tuo CRM: foto, prezzo, punti chiave e prossima azione. Progettato per la condivisione rapida.',
-        whyHead:'Perché aiuta',
-        why1:'Riduce i ping-pong: le domande tipiche hanno già risposta.',
-        why2:'Uniforma la qualità: ogni riepilogo segue lo stesso schema chiaro.',
-        why3:'Spinge all’azione: “prenota visita” o “fai una domanda” è sempre visibile.',
-        howHead:'In 3 clic',
-        how1:'Copia la scheda.',
-        how2:'Incolla su WhatsApp o email.',
-        how3:'Proponi due orari — Kintra può redigere il testo in automatico.',
-        shareHead:'Condividi',
-        copyCard:'Copia scheda',
-        copyLink:'Copia link breve',
-        copyWA:'Copia testo WhatsApp',
-        helpNote:'Suggerimento: su mobile, pressione lunga in WhatsApp per incollare.',
-        world:'🌍 Dall’Italia al mondo — unisciti alla prossima ondata.',
+        langLabel:"Lingua",
+        title:"Listing Summary",
+        subtitle:"A colpo d’occhio: dati chiave, tag e prossima azione — pronti da inviare.",
+        valueLine:"Generato automaticamente dal tuo CRM. Risparmia ~2 min per lead rispondendo prima alle domande comuni.",
+        priceLine:"€420.000 · Bilocale ristrutturato",
+        addr:"Navigli, Milano — 80 m² · 2° piano · Ascensore",
+        tag1:"2 locali", tag2:"80 m²", tag3:"Milano", tag4:"Balcone",
+        freshPrefix:"Ultimo aggiornamento:",
+        whyHead:"Perché aiuta",
+        w1:"Risponde alle domande principali (prezzo, metratura, piano, comfort) prima che arrivino.",
+        w2:"Condivisibile su WhatsApp, email o brochure in un tap.",
+        w3:"Testo coerente e in linea con il brand dai dati del tuo CRM.",
+        ctaBook:"Prenota una visita",
+        ctaAsk:"Fai una domanda",
+        shareHint:"1-tap: apre WhatsApp con un messaggio precompilato modificabile.",
+        trustLine:"Adozione: usato in pilot da agenzie a Milano e Roma (loghi in NDA).",
+        gdprLine:"Usiamo il tuo messaggio solo per coordinare la visita — nessun marketing senza consenso.",
+        shareHead:"Condividi / Incorpora",
+        shareCopy:"Incolla questo riepilogo su WhatsApp, email o social. Tutto resta sincronizzato con il CRM.",
+        faqHead:"FAQ",
+        q1:"Posso modificare il testo prima di inviare?", a1:"Sì—tap per incollare, ritocchi ciò che vuoi e invii su WhatsApp o email.",
+        q2:"Da dove arrivano i dettagli?", a2:"Dal tuo CRM o dalla pagina annuncio; Kintra mantiene foto, prezzo e punti chiave allineati.",
+        q3:"Funziona su mobile?", a3:"Sì—si apre direttamente in WhatsApp su iOS/Android, o WhatsApp Web su desktop.",
+        footLeft:"Creato da Kintra — Pilot • Italia",
         waText:
-`📄 Riepilogo annuncio
+`Ciao! Vorrei prenotare una visita per:
 €420.000 · Bilocale ristrutturato
 Navigli, Milano — 80 m² · 2° piano · Ascensore
-— Tag: 2 locali • 80 m² • Milano • Balcone
-Vuoi prenotare una visita? Posso proporre domani alle 17:00 oppure gio 10:30.`
+
+Sono disponibile domani alle 15:00 o giovedì alle 10:30. Va bene uno dei due?
+(Da Kintra Listing Summary)`
       }
     };
 
     const $ = s => document.querySelector(s);
-    function setText(sel, v){ const el=$(sel); if(el) el.textContent=v; }
 
-    function setLang(L){
-      const d = dict[L];
-      document.documentElement.lang = L;
-      $('#lang-en').classList.toggle('active', L==='en');
-      $('#lang-it').classList.toggle('active', L==='it');
-      $('#lang-en').setAttribute('aria-pressed', L==='en'?'true':'false');
-      $('#lang-it').setAttribute('aria-pressed', L==='it'?'true':'false');
-
-      setText('#badge', d.badge); setText('#lang-label', d.langLabel);
-      setText('#title', d.title); setText('#subtitle', d.subtitle); setText('#plain', d.plain);
-      setText('#priceLine', d.priceLine); setText('#addr', d.addr);
-      setText('#tag1', d.tag1); setText('#tag2', d.tag2); setText('#tag3', d.tag3); setText('#tag4', d.tag4);
-      setText('#ctaBook', d.ctaBook); setText('#ctaAsk', d.ctaAsk);
-      setText('#kpiCopy', d.kpiCopy); setText('#usesCopy', d.usesCopy);
-      setText('#whatHead', d.whatHead); setText('#whatCopy', d.whatCopy);
-      setText('#whyHead', d.whyHead); setText('#why1', d.why1); setText('#why2', d.why2); setText('#why3', d.why3);
-      setText('#howHead', d.howHead); setText('#how1', d.how1); setText('#how2', d.how2); setText('#how3', d.how3);
-      setText('#shareHead', d.shareHead); setText('#copyCard', d.copyCard); setText('#copyLink', d.copyLink); setText('#copyWA', d.copyWA);
-      setText('#helpNote', d.helpNote); setText('#world', d.world);
-
-      localStorage.setItem('kintra_lang', L);
+    function setFresh(lang){
+      const pref = dict[lang].freshPrefix;
+      const now = new Date();
+      const stamp = (lang==='it')
+        ? now.toLocaleDateString('it-IT') + ' ' + now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'})
+        : now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+      $('#fresh').textContent = `${pref} ${stamp}`;
     }
 
-    // Bind language buttons
-    $('#lang-en').onclick = ()=> setLang('en');
-    $('#lang-it').onclick = ()=> setLang('it');
-    setLang(localStorage.getItem('kintra_lang') || 'en');
+    function bindLang(lang){
+      const d = dict[lang];
+      document.documentElement.lang = lang;
 
-    // Copy helpers
-    function preview(text){ $('#copyPreview').textContent = text; }
-    function currentCardText(){
-      return `${$('#priceLine').textContent}
-${$('#addr').textContent}
-— ${$('#tag1').textContent} • ${$('#tag2').textContent} • ${$('#tag3').textContent} • ${$('#tag4').textContent}`;
+      // labels/text
+      $('#langLabel').textContent = d.langLabel;
+      $('#title').textContent = d.title;
+      $('#subtitle').textContent = d.subtitle;
+      $('#valueLine').textContent = d.valueLine;
+      $('#priceLine').textContent = d.priceLine;
+      $('#addr').textContent = d.addr;
+      $('#tag1').textContent = d.tag1;
+      '#tag2'; $('#tag2').textContent = d.tag2;
+      $('#tag3').textContent = d.tag3;
+      $('#tag4').textContent = d.tag4;
+      $('#whyHead').textContent = d.whyHead;
+      $('#w1').textContent = d.w1;
+      $('#w2').textContent = d.w2;
+      $('#w3').textContent = d.w3;
+      $('#ctaBookText').textContent = d.ctaBook;
+      $('#ctaAskText').textContent = d.ctaAsk;
+      $('#shareHint').textContent = d.shareHint;
+      $('#trustLine').textContent = d.trustLine;
+      $('#gdprLine').textContent = d.gdprLine;
+      $('#shareHead').textContent = d.shareHead;
+      $('#shareCopy').textContent = d.shareCopy;
+      $('#faqHead').textContent = d.faqHead;
+      $('#q1').textContent = d.q1; $('#a1').textContent = d.a1;
+      $('#q2').textContent = d.q2; $('#a2').textContent = d.a2;
+      $('#q3').textContent = d.q3; $('#a3').textContent = d.a3;
+      $('#footLeft').textContent = d.footLeft;
+
+      // active state on toggle
+      $('#lang-en').classList.toggle('active', lang==='en');
+      $('#lang-it').classList.toggle('active', lang==='it');
+
+      // refresh timestamp
+      setFresh(lang);
+
+      // persist
+      localStorage.setItem('listing_lang', lang);
     }
+
+    function toWA(text){
+      const url = 'https://wa.me/?text=' + encodeURIComponent(text);
+      window.open(url, '_blank');
+    }
+
+    // Actions
+    $('#ctaBook').onclick = (e)=>{ e.preventDefault(); toWA(dict[document.documentElement.lang].waText); };
+    $('#ctaAsk').onclick = (e)=>{
+      e.preventDefault();
+      const lang = document.documentElement.lang;
+      const ask = (lang==='it') ? 'Ciao! Ho una domanda su questo annuncio:' : 'Hi! I have a question about this listing:';
+      const text = `${ask}\n\n${$('#priceLine').textContent}\n${$('#addr').textContent}`;
+      toWA(text);
+    };
+
+    // Copy card plain-text
     $('#copyCard').onclick = async ()=>{
-      const text = currentCardText();
-      preview(text);
-      try{ await navigator.clipboard.writeText(text); }catch{}
-    };
-    $('#copyLink').onclick = async ()=>{
-      const url = location.href;
-      preview(url);
-      try{ await navigator.clipboard.writeText(url); }catch{}
-    };
-    $('#copyWA').onclick = async ()=>{
-      const L = document.documentElement.lang || 'en';
-      const text = dict[L].waText;
-      preview(text);
-      try{ await navigator.clipboard.writeText(text); }catch{}
+      const text =
+`${$('#priceLine').textContent}
+${$('#addr').textContent}
+• ${$('#tag1').textContent} • ${$('#tag2').textContent} • ${$('#tag3').textContent} • ${$('#tag4').textContent}
+
+— Kintra Listing Summary`;
+      try{ await navigator.clipboard.writeText(text); $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copiato!':'Copied!'); }
+      catch{ $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copia non riuscita':'Copy failed'); }
+      setTimeout(()=> $('#copyCard').textContent = (document.documentElement.lang==='it'?'Copia scheda su WhatsApp →':'Copy card to WhatsApp →'), 1500);
     };
 
-    // CTA stubs
-    $('#ctaBook').onclick = (e)=>{ e.preventDefault(); alert((document.documentElement.lang==='it'?'Ti ricontattiamo per la visita (demo).':'We’ll follow up to book your viewing (demo).')); };
-    $('#ctaAsk').onclick  = (e)=>{ e.preventDefault(); alert((document.documentElement.lang==='it'?'Scrivi la tua domanda (demo).':'Tell us your question (demo).')); };
+    // Language toggle
+    $('#lang-en').onclick = ()=> bindLang('en');
+    $('#lang-it').onclick = ()=> bindLang('it');
+    bindLang(localStorage.getItem('listing_lang') || 'en');
   </script>
 </body>
 </html>
