@@ -27,7 +27,7 @@
     .brand .name{font-weight:800;letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
 
-    /* Language (static UI; no content switch in this file) */
+    /* Language (static UI) */
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -48,7 +48,7 @@
     .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
     .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
     .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-
+    .note{font-size:13px;color:#6b7280}
     .divider{height:1px;background:var(--line);margin:18px 0}
 
     /* Cards & grids */
@@ -56,12 +56,21 @@
     .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
     .card.soft{background:var(--card)}
 
-    /* Pricing strip */
+    /* Pricing strip + helper */
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
+    .pricing-help{font-size:12px;color:#6b7280;margin-top:6px}
 
     /* “Trusted by” kicker */
     .kicker{border-left:3px solid var(--gold);padding-left:12px;background:linear-gradient(90deg, rgba(201,162,39,0.08), transparent);border-radius:6px;margin-top:10px}
+
+    /* Gold plaque */
+    .gold{
+      margin:12px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.35), rgba(234,210,139,.15));
+      border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)
+    }
+    .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
+    .gold p{margin:4px 0;color:#5a533b}
 
     /* Metrics */
     .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
@@ -88,6 +97,7 @@
     .bubble.client{align-self:flex-start;background:#fff;border-color:#e6efe7;color:#2b3a2e}
     .bubble.agent{align-self:flex-end;background:#e8f1ff;border-color:#d7e6ff;color:#153a75}
     .bubble.ai{align-self:flex-end;background:#e9fbea;border-color:#cfe9d6;color:#1e3f2b}
+    .hint{font-size:12px;color:#6b7280}
 
     /* Listing composite */
     .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
@@ -179,12 +189,16 @@
           <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
           <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
+        <div class="pricing-help">
+          <b>Plain English:</b> focus on <i>one</i> property type/market (your niche) and agree <i>2–3 success metrics</i>
+          (e.g., average reply time, viewings booked, lead→visit rate). After 30 days: keep if it saves time, or stop.
+        </div>
 
-        <div class="divider"></div>
-
-        <div class="sub">
-          <b>Advisor Charter (pilot):</b> optional, very light support during the 30-day pilot — review the live preview, give quick feedback, and (only if it makes sense) suggest 1–2 warm introductions. <b>Zero operational load; clear upside if the pilot performs.</b>
-          <br/><span class="muted">We list early advisors by permission only.</span>
+        <!-- Gold Advisor Charter -->
+        <div class="gold">
+          <h3>Advisor Charter (pilot)</h3>
+          <p><b>Optional, very light support during the 30-day pilot</b> — review the live preview, give quick feedback, and (only if it makes sense) suggest 1–2 warm introductions.</p>
+          <p><b>Zero operational load; clear upside if the pilot performs.</b> <span class="note">We list early advisors by permission only.</span></p>
         </div>
 
         <div class="kicker" style="margin-top:10px">Trusted by Italian agents building faster funnels.</div>
@@ -221,7 +235,7 @@
         <!-- Legend -->
         <div class="meta-row" style="margin-bottom:6px">
           <span class="pill"><span class="dot client"></span>Client → inbound message</span>
-          <span class="pill"><span class="dot ai"></span>Kintra → detects intent & drafts reply</span>
+          <span class="pill"><span class="dot ai"></span>Kintra → drafts the reply</span>
           <span class="pill"><span class="dot agent"></span>Agent → approves & sends</span>
         </div>
 
@@ -233,6 +247,7 @@
           </div>
           <div class="wa-body" id="waBody"><!-- filled by JS --></div>
         </div>
+        <div class="hint" id="waHint" style="margin-top:6px">Toggle “After” to see Kintra’s auto-draft and one-tap approval.</div>
       </section>
 
       <!-- Dashboard mini -->
@@ -254,7 +269,7 @@
     <section class="card soft" style="margin-top:16px">
       <h3>Listing Summary (composite preview)</h3>
       <p class="sub">One glance: key details, tags, and next action — ready to send.</p>
-      <p class="muted" style="margin-top:4px">Auto-built from your CRM data — ready for WhatsApp, social, or brochure drop-ins.</p>
+      <p class="note" style="margin-top:4px">Auto-built from your CRM data — ready for WhatsApp, social, or brochure drop-ins.</p>
 
       <div class="listing-mock" style="margin-top:10px">
         <div class="lm-head">
@@ -292,7 +307,7 @@
       </div>
       <div class="cta-row" style="margin-top:12px">
         <a class="btn primary" href="mailto:pilot@kintra.xyz">→ Start My Pilot</a>
-        <span class="muted" style="align-self:center">No spam. Limited early access.</span>
+        <span class="note" style="align-self:center">No spam. Limited early access.</span>
       </div>
     </section>
 
@@ -316,7 +331,7 @@
             <button class="btn" id="sendWA">Send WhatsApp</button>
             <button class="btn" id="revealTestNum">Reveal test number</button>
           </div>
-          <div class="muted" style="margin-top:6px">
+          <div class="note" style="margin-top:6px">
             For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.
           </div>
         </div>
@@ -335,16 +350,17 @@
   </div>
 
   <script>
-    /* -------- WhatsApp Smart Reply toggle (robust & minimal) -------- */
+    /* -------- WhatsApp Smart Reply toggle (Before = client only; After = AI draft + agent confirm) -------- */
     const beforeBtn = document.getElementById('tab-before');
     const afterBtn  = document.getElementById('tab-after');
     const waBody    = document.getElementById('waBody');
     const waTop     = document.getElementById('waTopLabel');
+    const waHint    = document.getElementById('waHint');
 
     const msg = {
       client: "Hi, can we view tomorrow after work around 18:30?",
-      line1:  "Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
-      line2:  "I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder."
+      ai1:    "Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
+      ai2:    "I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder."
     };
 
     function render(which){
@@ -352,18 +368,19 @@
         waTop.textContent = "Manual reply ~2–4 min";
         waBody.innerHTML = `
           <div class="bubble client">${msg.client}</div>
-          <div class="bubble agent">${msg.line1}</div>
-          <div class="bubble agent">${msg.line2}</div>
-          <div class="meta-row"><span class="pill"><b>Manual reply:</b> ~2–4 min</span></div>
+          <div class="hint">Agent is drafting a reply…</div>
         `;
+        waHint.textContent = "Toggle “After” to see Kintra’s auto-draft and one-tap approval.";
       }else{
         waTop.textContent = "Auto-draft ~10–20 sec";
         waBody.innerHTML = `
           <div class="bubble client">${msg.client}</div>
-          <div class="bubble ai">${msg.line1}</div>
-          <div class="bubble ai">${msg.line2}</div>
+          <div class="bubble ai">${msg.ai1}</div>
+          <div class="bubble ai">${msg.ai2}</div>
+          <div class="bubble agent">Send ✅</div>
           <div class="meta-row"><span class="pill"><b>Auto-draft:</b> ~10–20 sec</span></div>
         `;
+        waHint.textContent = "Kintra drafts the reply; the agent taps Send. Nothing slips.";
       }
     }
     function setActive(which){
@@ -378,7 +395,7 @@
     afterBtn.addEventListener('click',  ()=> setActive('after'));
     setActive('before');
 
-    /* -------- Copy Card (Listing) – simple demo -------- */
+    /* -------- Copy Card (Listing) – simple clipboard helper -------- */
     document.getElementById('copyCard')?.addEventListener('click', async ()=>{
       const text = [
         "€420,000 · Bilocale ristrutturato",
