@@ -60,7 +60,8 @@
     .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
     .metric .l{font-size:12px;color:var(--muted)}
 
-    .tabhead{display:flex;gap:8px;align-items:center;margin-top:6px}
+    /* Before/After tabs */
+    .tabhead{display:flex;gap:8px;align-items:center;margin-top:6px;position:relative;z-index:2}
     .pill{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;user-select:none}
     .pill.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
     .wa-wrap{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin-top:10px}
@@ -127,10 +128,10 @@
       <div class="langbox">
         <span class="label" id="lang-label">Language</span>
         <div class="toggle">
-          <button id="lang-en" class="active"><span class="flag" aria-hidden="true">
+          <button id="lang-en" class="active" aria-pressed="true"><span class="flag" aria-hidden="true">
             <svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#012169"/><path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/><path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="36" fill="#FFF"/><rect y="13" width="60" height="10" fill="#FFF"/><rect x="27" width="6" height="36" fill="#C8102E"/><rect y="15" width="60" height="6" fill="#C8102E"/></svg>
           </span>EN</button>
-          <button id="lang-it"><span class="flag" aria-hidden="true">
+          <button id="lang-it" aria-pressed="false"><span class="flag" aria-hidden="true">
             <svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#fff"/><rect width="20" height="36" x="0" fill="#009246"/><rect width="20" height="36" x="40" fill="#CE2B37"/></svg>
           </span>IT</button>
         </div>
@@ -184,8 +185,8 @@
             </div>
           </div>
           <div class="one" id="roiNote">*Assumes 20–40 leads/month and 1–2 minutes saved per reply. Scale multiplies ROI across agents.</div>
-          <div class="foot"><button id="roiToggle">Show assumptions</button></div>
-          <div class="panel" id="roiMore">
+          <div class="foot"><button id="roiToggle" aria-expanded="false">Show assumptions</button></div>
+          <div class="panel" id="roiMore" aria-hidden="true">
             <ul>
               <li id="ra1">Leads: 20–40/month per agent (typical inbound volume for busy offices).</li>
               <li id="ra2">Time saved: 1–2 minutes per routine reply when Kintra drafts and suggests next steps.</li>
@@ -221,9 +222,9 @@
       <div class="card soft">
         <h3 id="waPrev">WhatsApp Smart Reply</h3>
         <p class="sub" id="waDesc">Kintra drafts structured replies and next steps so nothing slips.</p>
-        <div class="tabhead">
-          <span class="pill active" id="tab-before"><span id="label-before">Before</span></span>
-          <span class="pill" id="tab-after"><span id="label-after">After</span></span>
+        <div class="tabhead" role="tablist" aria-label="Before/After">
+          <button class="pill active" id="tab-before" role="tab" aria-selected="true" aria-controls="wa-before"><span id="label-before">Before</span></button>
+          <button class="pill" id="tab-after" role="tab" aria-selected="false" aria-controls="wa-after"><span id="label-after">After</span></button>
         </div>
         <div class="legend">
           <span><span class="dot d-client"></span><b id="lg-client">Client</b></span>
@@ -231,7 +232,7 @@
           <span><span class="dot d-agent"></span><b id="lg-agent">Agent (approve/send)</b></span>
         </div>
 
-        <div id="wa-before" class="wa-wrap">
+        <div id="wa-before" class="wa-wrap" role="tabpanel" aria-labelledby="tab-before">
           <div class="labelrow"><span id="lab-flow-before">Manual process</span><span class="timing" id="time-before">Typing time: ~2–4 min</span></div>
           <div class="chat">
             <div class="bubble client" id="c1">Hi, can we view tomorrow after work around 18:30?</div>
@@ -241,7 +242,7 @@
           </div>
         </div>
 
-        <div id="wa-after" class="wa-wrap" style="display:none">
+        <div id="wa-after" class="wa-wrap" role="tabpanel" aria-labelledby="tab-after" style="display:none">
           <div class="labelrow"><span id="lab-flow-after">Kintra detects intent → drafts → agent sends</span><span class="timing" id="time-after">Auto-draft: ~10–20 sec</span></div>
           <div class="chat">
             <div class="bubble client" id="c2">Hi, can we view tomorrow after work around 18:30?</div>
@@ -456,7 +457,6 @@
         waSend:"Invia via WhatsApp (demo Meta)", waSendSub:"Usa Meta Cloud API (numero di test) per inviare un messaggio reale.",
         labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio", publicNote:"Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.", revealBtn:"Mostra numero di test",
 
-        /* ROI */
         roi1:"€1,5–2k", roi1l:"Pilot (30 giorni)", roi2:"~12–20 h", roi2l:"Tempo risparmiato/mese per agente*", roi3:"< 30 giorni", roi3l:"Probabile break-even", roiNote:"*Ipotesi: 20–40 lead/mese e 1–2 minuti risparmiati per risposta. La scala moltiplica l’ROI tra gli agenti.",
         roiShow:"Mostra assunzioni", roiHide:"Nascondi assunzioni",
         ra1:"Lead: 20–40/mese per agente (volumi tipici per uffici attivi).",
@@ -476,91 +476,105 @@
     };
 
     const $ = s => document.querySelector(s);
-    function setLang(L){
-      const d = dict[L];
-      $("#badge").textContent=d.badge; $("#lang-label").textContent=d.langLabel;
-      $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; $("#sub").textContent=d.sub;
-      $("#btn-request").textContent=d.btnRequest; $("#btn-dash").textContent=d.btnDash; $("#btn-deck").textContent=d.btnDeck; $("#btn-pdf").textContent=d.btnPDF;
-      $("#price-line").innerHTML=`<strong>${d.priceLineA}</strong> · ${d.priceLineB} <span class="muted">${d.priceTail}</span>`;
-      $("#plain-explain").innerHTML=`<span id="plain-prefix">${d.plainPrefix}</span> <span id="plain-body">${d.plainBody}</span>`;
 
-      $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1; $("#goldP2").textContent=d.goldP2; $("#goldP3").textContent=d.goldP3;
+    document.addEventListener('DOMContentLoaded', () => {
+      function setLang(L){
+        const d = dict[L];
+        $("#badge").textContent=d.badge; $("#lang-label").textContent=d.langLabel;
+        $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; $("#sub").textContent=d.sub;
+        $("#btn-request").textContent=d.btnRequest; $("#btn-dash").textContent=d.btnDash; $("#btn-deck").textContent=d.btnDeck; $("#btn-pdf").textContent=d.btnPDF;
+        $("#price-line").innerHTML=`<strong>${d.priceLineA}</strong> · ${d.priceLineB} <span class="muted">${d.priceTail}</span>`;
+        $("#plain-explain").innerHTML=`<span id="plain-prefix">${d.plainPrefix}</span> <span id="plain-body">${d.plainBody}</span>`;
 
-      $("#trust-line").textContent=d.trust; $("#why").textContent=d.why; $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
-      $("#m1").textContent=d.m1; $("#m2").textContent=d.m2; $("#m3").textContent=d.m3;
+        $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1; $("#goldP2").textContent=d.goldP2; $("#goldP3").textContent=d.goldP3;
 
-      $("#waPrev").textContent=d.waPrev; $("#waDesc").textContent=d.waDesc;
-      $("#label-before").textContent=d.labelBefore; $("#label-after").textContent=d.labelAfter;
-      $("#lg-client").textContent=d.lgClient; $("#lg-kintra").textContent=d.lgKintra; $("#lg-agent").textContent=d.lgAgent;
-      $("#lab-flow-before").textContent=d.labFlowBefore; $("#time-before").textContent=d.timeBefore;
-      $("#lab-flow-after").textContent=d.labFlowAfter; $("#time-after").textContent=d.timeAfter; $("#ns-after").textContent=d.nsAfter;
-      $("#c1").textContent=d.c1; $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3;
-      $("#c2").textContent=d.c2; $("#a4").textContent=d.a4; $("#a5").textContent=d.a5;
+        $("#trust-line").textContent=d.trust; $("#why").textContent=d.why; $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
+        $("#m1").textContent=d.m1; $("#m2").textContent=d.m2; $("#m3").textContent=d.m3;
 
-      $("#dashTitle").textContent=d.dashTitle; $("#dashSub").textContent=d.dashSub; $("#dashCap").textContent=d.dashCap; $("#openDash").textContent=d.openDash;
+        $("#waPrev").textContent=d.waPrev; $("#waDesc").textContent=d.waDesc;
+        $("#label-before").textContent=d.labelBefore; $("#label-after").textContent=d.labelAfter;
+        $("#lg-client").textContent=d.lgClient; $("#lg-kintra").textContent=d.lgKintra; $("#lg-agent").textContent=d.lgAgent;
+        $("#lab-flow-before").textContent=d.labFlowBefore; $("#time-before").textContent=d.timeBefore;
+        $("#lab-flow-after").textContent=d.labFlowAfter; $("#time-after").textContent=d.timeAfter; $("#ns-after").textContent=d.nsAfter;
+        $("#c1").textContent=d.c1; $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3;
+        $("#c2").textContent=d.c2; $("#a4").textContent=d.a4; $("#a5").textContent=d.a5;
 
-      $("#lsTitle").textContent=d.lsTitle; $("#lsSub").textContent=d.lsSub; $("#lsCaption").textContent=d.lsCaption; $("#lsHeadRight").textContent=d.lsHeadRight;
-      $("#tag1").textContent=d.tag1; $("#tag2").textContent=d.tag2; $("#tag3").textContent=d.tag3; $("#tag4").textContent=d.tag4;
-      $("#lsView").textContent=d.lsView; $("#lsCopy").textContent=d.lsCopy;
+        $("#dashTitle").textContent=d.dashTitle; $("#dashSub").textContent=d.dashSub; $("#dashCap").textContent=d.dashCap; $("#openDash").textContent=d.openDash;
 
-      $("#pilotTitle").textContent=d.pilotTitle; $("#pilotSub").textContent=d.pilotSub; $("#btnStart").textContent=d.btnStart; $("#noSpam").textContent=d.noSpam;
+        $("#lsTitle").textContent=d.lsTitle; $("#lsSub").textContent=d.lsSub; $("#lsCaption").textContent=d.lsCaption; $("#lsHeadRight").textContent=d.lsHeadRight;
+        $("#tag1").textContent=d.tag1; $("#tag2").textContent=d.tag2; $("#tag3").textContent=d.tag3; $("#tag4").textContent=d.tag4;
+        $("#lsView").textContent=d.lsView; $("#lsCopy").textContent=d.lsCopy;
 
-      $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub; $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg; $("#publicNote").textContent=d.publicNote; $("#revealNum").textContent=d.revealBtn;
+        $("#pilotTitle").textContent=d.pilotTitle; $("#pilotSub").textContent=d.pilotSub; $("#btnStart").textContent=d.btnStart; $("#noSpam").textContent=d.noSpam;
 
-      /* ROI strip */
-      $("#roi1").textContent=d.roi1; $("#roi1l").textContent=d.roi1l;
-      $("#roi2").textContent=d.roi2; $("#roi2l").textContent=d.roi2l;
-      $("#roi3").textContent=d.roi3; $("#roi3l").textContent=d.roi3l;
-      $("#roiNote").textContent=d.roiNote;
-      $("#roiToggle").textContent = ($("#roiMore").style.display==="block") ? d.roiHide : d.roiShow;
-      $("#ra1").textContent=d.ra1; $("#ra2").textContent=d.ra2; $("#ra3").textContent=d.ra3; $("#ra4").textContent=d.ra4; $("#ra5").textContent=d.ra5;
+        $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub; $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg; $("#publicNote").textContent=d.publicNote; $("#revealNum").textContent=d.revealBtn;
 
-      /* FAQ */
-      $("#faqHead").textContent=d.faqHead;
-      $("#q1").textContent=d.q1; $("#a1").textContent=d.a1;
-      $("#q2").textContent=d.q2; $("#a2").textContent=d.a2;
-      $("#q3").textContent=d.q3; $("#a3").textContent=d.a3;
-      $("#q4").textContent=d.q4; $("#a4").textContent=d.a4;
+        // ROI
+        $("#roi1").textContent=d.roi1; $("#roi1l").textContent=d.roi1l;
+        $("#roi2").textContent=d.roi2; $("#roi2l").textContent=d.roi2l;
+        $("#roi3").textContent=d.roi3; $("#roi3l").textContent=d.roi3l;
+        $("#roiNote").textContent=d.roiNote;
+        $("#roiToggle").textContent = ($("#roiMore").style.display==="block") ? d.roiHide : d.roiShow;
 
-      $("#world").textContent=d.world;
+        // FAQ
+        $("#faqHead").textContent=d.faqHead;
+        $("#q1").textContent=d.q1; $("#a1").textContent=d.a1;
+        $("#q2").textContent=d.q2; $("#a2").textContent=d.a2;
+        $("#q3").textContent=d.q3; $("#a3").textContent=d.a3;
+        $("#q4").textContent=d.q4; $("#a4").textContent=d.a4;
 
-      document.documentElement.lang=L;
-      $("#lang-en").classList.toggle("active", L==="en");
-      $("#lang-it").classList.toggle("active", L==="it");
-      localStorage.setItem("kintra_lang", L);
-    }
-    $("#lang-en").onclick=()=>setLang("en");
-    $("#lang-it").onclick=()=>setLang("it");
-    setLang(localStorage.getItem("kintra_lang")||"en");
+        $("#world").textContent=d.world;
 
-    // Before/After tabs
-    const tabBefore=$("#tab-before"), tabAfter=$("#tab-after");
-    const waBefore=$("#wa-before"), waAfter=$("#wa-after");
-    function showBefore(){ tabBefore.classList.add("active"); tabAfter.classList.remove("active"); waBefore.style.display="block"; waAfter.style.display="none"; }
-    function showAfter(){ tabAfter.classList.add("active"); tabBefore.classList.remove("active"); waBefore.style.display="none"; waAfter.style.display="block"; }
-    tabBefore.onclick=showBefore; tabAfter.onclick=showAfter;
+        document.documentElement.lang=L;
+        $("#lang-en").classList.toggle("active", L==="en");
+        $("#lang-it").classList.toggle("active", L==="it");
+        $("#lang-en").setAttribute("aria-pressed", L==="en");
+        $("#lang-it").setAttribute("aria-pressed", L==="it");
+        localStorage.setItem("kintra_lang", L);
+      }
 
-    // ROI assumptions toggle
-    const roiBtn=$("#roiToggle"), roiMore=$("#roiMore");
-    roiBtn.onclick=()=>{
-      const open = roiMore.style.display==="block";
-      roiMore.style.display = open ? "none" : "block";
-      const L = document.documentElement.lang || "en";
-      roiBtn.textContent = open ? dict[L].roiShow : dict[L].roiHide;
-    };
+      const bindTap = (el, fn) => {
+        if(!el) return;
+        el.addEventListener('click', fn);
+        el.addEventListener('touchend', (e)=>{ e.preventDefault(); fn(e); }, {passive:false});
+      };
 
-    // WhatsApp demo
-    const WA_WORKER   = "https://kintra-wa-meta.founder-60b.workers.dev";
-    $("#sendWA").onclick=async ()=>{
-      const to=($("#phone").value||"").trim()||TEST_NUMBER.replace(/\s+/g,'');
-      const text=($("#msg").value||"").trim()||"Ciao from the Kintra pilot!";
-      const out=$("#waResult"); out.textContent="Sending…";
-      try{
-        const res=await fetch(WA_WORKER+"/api/wa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to,text})});
-        const txt=await res.text(); try{ out.textContent=JSON.stringify(JSON.parse(txt),null,2);}catch{ out.textContent=txt;}
-      }catch(e){ out.textContent="Error: "+e.message; }
-    };
-    $("#revealNum").onclick=()=>{ $("#revealed").style.display="block"; $("#numVal").textContent=TEST_NUMBER; };
+      // Language toggles
+      bindTap($("#lang-en"), ()=> setLang("en"));
+      bindTap($("#lang-it"), ()=> setLang("it"));
+      setLang(localStorage.getItem("kintra_lang")||"en");
+
+      // Before/After tabs
+      const tabBefore=$("#tab-before"), tabAfter=$("#tab-after");
+      const waBefore=$("#wa-before"), waAfter=$("#wa-after");
+      const showBefore=()=>{ tabBefore.classList.add("active"); tabAfter.classList.remove("active"); tabBefore.setAttribute("aria-selected","true"); tabAfter.setAttribute("aria-selected","false"); waBefore.style.display="block"; waAfter.style.display="none"; };
+      const showAfter =()=>{ tabAfter.classList.add("active"); tabBefore.classList.remove("active"); tabAfter.setAttribute("aria-selected","true"); tabBefore.setAttribute("aria-selected","false"); waBefore.style.display="none"; waAfter.style.display="block"; };
+      bindTap(tabBefore, showBefore);
+      bindTap(tabAfter, showAfter);
+
+      // ROI assumptions toggle
+      const roiBtn=$("#roiToggle"), roiMore=$("#roiMore");
+      bindTap(roiBtn, ()=>{
+        const open = roiMore.style.display==="block";
+        roiMore.style.display = open ? "none" : "block";
+        roiMore.setAttribute("aria-hidden", open ? "true" : "false");
+        const L = document.documentElement.lang || "en";
+        roiBtn.textContent = open ? dict[L].roiShow : dict[L].roiHide;
+        roiBtn.setAttribute("aria-expanded", (!open).toString());
+      });
+
+      // WhatsApp demo
+      bindTap($("#sendWA"), async ()=>{
+        const to=($("#phone").value||"").trim()||TEST_NUMBER.replace(/\s+/g,'');
+        const text=($("#msg").value||"").trim()||"Ciao from the Kintra pilot!";
+        const out=$("#waResult"); out.textContent="Sending…";
+        try{
+          const res=await fetch(WA_WORKER+"/api/wa",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to,text})});
+          const txt=await res.text(); try{ out.textContent=JSON.stringify(JSON.parse(txt),null,2);}catch{ out.textContent=txt;}
+        }catch(e){ out.textContent="Error: "+e.message; }
+      });
+      bindTap($("#revealNum"), ()=>{ $("#revealed").style.display="block"; $("#numVal").textContent=TEST_NUMBER; });
+    });
   </script>
 </body>
 </html>
