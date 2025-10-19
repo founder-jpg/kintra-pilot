@@ -187,9 +187,12 @@
           <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="btn-pdf">View Deck PDF</a>
         </div>
 
-        <div class="pricing" id="price-line">
+        <div class="pricing">
           <strong id="price">€1.5–2k pilot (30 days)</strong> · <span id="niche">1 niche</span> · <span id="kpis">2–3 KPIs</span>.
           <span class="muted" id="price-tail">If it doesn’t save time in 30 days, don’t continue.</span>
+        </div>
+        <div class="note" id="plainline" style="margin-top:4px">
+          <em id="plainhelp">In simple terms: focus on one property type; agree 2–3 success metrics (e.g., faster replies, more visits booked).</em>
         </div>
 
         <!-- Assumptions toggle -->
@@ -206,7 +209,7 @@
           </div>
         </div>
 
-        <!-- Advisor Charter -->
+        <!-- Advisor Charter (refined) -->
         <div class="gold" style="margin-top:10px">
           <h3 id="goldH3">Advisor Charter (pilot)</h3>
           <p id="goldP1">Optional, very light support during the 30-day pilot.</p>
@@ -410,6 +413,7 @@
         btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
         price:"€1.5–2k pilot (30 days)", niche:"1 niche", kpis:"2–3 KPIs",
         price_tail:"If it doesn’t save time in 30 days, don’t continue.",
+        plainhelp:"In simple terms: focus on one property type; agree 2–3 success metrics (e.g., faster replies, more visits booked).",
 
         showA:"Show assumptions", hideA:"Hide assumptions",
         assumpTitle:"Assumptions (conservative):",
@@ -484,6 +488,7 @@
         btnRequest:"Richiedi il Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
         price:"Pilot €1,5–2k (30 giorni)", niche:"1 nicchia", kpis:"2–3 KPI",
         price_tail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
+        plainhelp:"In parole semplici: concentriamoci su un solo tipo di immobile; concordiamo 2–3 metriche di successo (es. risposte più rapide, più visite fissate).",
 
         showA:"Mostra assunzioni", hideA:"Nascondi assunzioni",
         assumpTitle:"Assunzioni (prudenziali):",
@@ -543,7 +548,7 @@
         world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
         langLabel:"Lingua",
 
-        // Chat lines
+        // Chat lines (IT view mirrors EN prompt, draft localized)
         bClientEN:"Ciao, è possibile una visita domani verso le 18:30?",
         bAgentEN:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
         bAgentEN2:"Posso inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.",
@@ -574,6 +579,7 @@
 
       $("#price").textContent=d.price; $("#niche").textContent=d.niche; $("#kpis").textContent=d.kpis;
       $("#price-tail").textContent=d.price_tail;
+      $("#plainhelp").textContent=d.plainhelp;
 
       // assumptions
       $("#assumpBtn").textContent = $("#assumpBox").style.display==="none"||$("#assumpBox").style.display===""
@@ -583,7 +589,10 @@
 
       // advisor
       $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1;
-      $("#goldP2").textContent=d.goldP2; $("#goldP3").childNodes[0].textContent=d.goldP3+" ";
+      $("#goldP2").textContent=d.goldP2;
+      // keep bold intact then append rest
+      const g3=$("#goldP3");
+      g3.childNodes[0].textContent=d.goldP3+" ";
       $("#goldP4").textContent=d.goldP4;
 
       $("#trust-line").textContent=d.trust; $("#why").textContent=d.why;
@@ -599,7 +608,7 @@
       $("#insightCopy1").textContent=d.insight1; $("#insightCopy2").textContent=d.insight2;
       $("#chip1").textContent=d.chip1; $("#chip2").textContent=d.chip2; $("#chip3").textContent=d.chip3;
 
-      // Chat lines & badges and approved text
+      // Chat lines & labels
       $("#bClientEN").lastChild.nodeValue = " " + d.bClientEN;
       $("#bAgentEN").lastChild.nodeValue  = " " + d.bAgentEN;
       $("#bAgentEN2").lastChild.nodeValue = " " + d.bAgentEN2;
@@ -655,7 +664,7 @@
       const d = dict[L];
       const open = box.style.display==="block";
       box.style.display = open ? "none" : "block";
-      $("#assumpBtn").textContent = open ? d.showA : d.hideA;
+      $("#assumpBtn").textContent = open ? d.hideA : d.showA;
     };
 
     // Copy card (mock)
