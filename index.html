@@ -67,13 +67,18 @@
     .wa-wrap{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin-top:10px}
     .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#6b7280;margin-top:6px}
     .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
-    .d-client{background:#aab3c3} .d-kintra{background:#0b5fff} .d-agent{background:#25A244}
+    .d-client{background:#aab3c3} .d-kintra{background:#0b5fff} .d-agent{background:#25A244} .d-insight{background:var(--gold)}
     .chat{display:flex;flex-direction:column;gap:10px;margin-top:8px}
     .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.28;font-size:14px;border:1px solid var(--line)}
     .bubble.client{align-self:flex-start;background:var(--client-bubble)}
     .bubble.agent{align-self:flex-end;background:var(--wa-bubble);border-color:#cfe8da}
+    .bubble.kintra{align-self:flex-start;background:#eef3ff;border-color:#dbe7ff}
     .labelrow{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:12px;color:#6b7280}
     .timing{font-size:12px;color:#6b7280;margin-top:6px}
+
+    .insight{margin-top:8px;border:1px dashed #eadcaa;background:linear-gradient(180deg,#fffdf5,#fffbe8);padding:10px;border-radius:12px;font-size:14px;color:#594a18}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{border:1px solid #eadcaa;background:#fff7d6;border-radius:999px;padding:6px 10px;font-size:12px}
 
     .minihead{display:flex;justify-content:space-between;align-items:center;gap:10px}
     .minihead .smallbtn{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:#fff}
@@ -218,38 +223,46 @@
 
     <!-- SEE IT IN ACTION -->
     <section class="grid-2" style="margin-top:14px">
-      <!-- WhatsApp Smart Reply -->
+      <!-- WhatsApp Smart Reply (UPDATED BLOCK) -->
       <div class="card soft">
         <h3 id="waPrev">WhatsApp Smart Reply</h3>
         <p class="sub" id="waDesc">Kintra drafts structured replies and next steps so nothing slips.</p>
-        <div class="tabhead" role="tablist" aria-label="Before/After">
-          <button class="pill active" id="tab-before" role="tab" aria-selected="true" aria-controls="wa-before"><span id="label-before">Before</span></button>
-          <button class="pill" id="tab-after" role="tab" aria-selected="false" aria-controls="wa-after"><span id="label-after">After</span></button>
-        </div>
         <div class="legend">
           <span><span class="dot d-client"></span><b id="lg-client">Client</b></span>
           <span><span class="dot d-kintra"></span><b id="lg-kintra">Kintra (draft)</b></span>
           <span><span class="dot d-agent"></span><b id="lg-agent">Agent (approve/send)</b></span>
+          <span><span class="dot d-insight"></span><b id="lg-insight">Insight</b></span>
+        </div>
+        <div class="tabhead" role="tablist" aria-label="Before/After">
+          <button class="pill active" id="tab-before" role="tab" aria-selected="true" aria-controls="wa-before"><span id="label-before">Before</span></button>
+          <button class="pill" id="tab-after" role="tab" aria-selected="false" aria-controls="wa-after"><span id="label-after">After</span></button>
         </div>
 
+        <!-- BEFORE -->
         <div id="wa-before" class="wa-wrap" role="tabpanel" aria-labelledby="tab-before">
           <div class="labelrow"><span id="lab-flow-before">Manual process</span><span class="timing" id="time-before">Typing time: ~2–4 min</span></div>
           <div class="chat">
             <div class="bubble client" id="c1">Hi, can we view tomorrow after work around 18:30?</div>
-            <div class="bubble agent" id="a1">Sure — let me check availability and get back to you.</div>
-            <div class="bubble agent" id="a2">How about 17:00 tomorrow or 10:30 Thursday?</div>
-            <div class="bubble agent" id="a3">I can also send the floor plan and directions.</div>
           </div>
         </div>
 
+        <!-- AFTER -->
         <div id="wa-after" class="wa-wrap" role="tabpanel" aria-labelledby="tab-after" style="display:none">
           <div class="labelrow"><span id="lab-flow-after">Kintra detects intent → drafts → agent sends</span><span class="timing" id="time-after">Auto-draft: ~10–20 sec</span></div>
           <div class="chat">
             <div class="bubble client" id="c2">Hi, can we view tomorrow after work around 18:30?</div>
-            <div class="bubble agent" id="a4">Certainly! The apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30 — which do you prefer?</div>
-            <div class="bubble agent" id="a5">I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.</div>
+            <div class="bubble kintra" id="k1"><b>Kintra (draft)</b><br/>Draft ready: “Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?”</div>
+            <div class="bubble agent" id="a4"><b>Agent (approve &amp; send)</b><br/>Approved &amp; sent.</div>
           </div>
-          <div class="timing" id="ns-after">Suggested next step appears with each draft.</div>
+          <div class="timing">Auto-draft: ~10–20 sec · Suggested next step appears with each draft</div>
+          <div class="insight" id="insight">
+            <b>Insight — </b>Kintra detects intent (“book a viewing”), pulls listing details, and drafts a native-Italian reply with two slots + a next-step prompt.
+            <div class="chips">
+              <span class="chip">Offer two slots</span>
+              <span class="chip">Send floor plan</span>
+              <span class="chip">Confirm reminder</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -382,14 +395,6 @@
         compounds:"Every minute saved here compounds by the hour.",
         m1:"New leads today", m2:"Avg reply time", m3:"Visits booked",
 
-        waPrev:"WhatsApp Smart Reply", waDesc:"Kintra drafts structured replies and next steps so nothing slips.",
-        labelBefore:"Before", labelAfter:"After",
-        lgClient:"Client", lgKintra:"Kintra (draft)", lgAgent:"Agent (approve/send)",
-        labFlowBefore:"Manual process", timeBefore:"Typing time: ~2–4 min",
-        labFlowAfter:"Kintra detects intent → drafts → agent sends", timeAfter:"Auto-draft: ~10–20 sec", nsAfter:"Suggested next step appears with each draft.",
-        c1:"Hi, can we view tomorrow after work around 18:30?", a1:"Sure — let me check availability and get back to you.", a2:"How about 17:00 tomorrow or 10:30 Thursday?", a3:"I can also send the floor plan and directions.",
-        c2:"Hi, can we view tomorrow after work around 18:30?", a4:"Certainly! The apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30 — which do you prefer?", a5:"I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.",
-
         dashTitle:"Dashboard Mini (live preview)", dashSub:"Managers get a daily pulse at a glance.", dashCap:"Real metrics from the pilot dashboard.", openDash:"Open Dashboard",
 
         lsTitle:"Listing Summary (composite preview)", lsSub:"One glance: key details, tags, and next action — ready to send.", lsCaption:"Auto-built from your CRM data — ready for WhatsApp, social, or brochure drop-ins.", lsHeadRight:"Preview",
@@ -404,11 +409,6 @@
         /* ROI */
         roi1:"€1.5–2k", roi1l:"Pilot (30 days)", roi2:"~12–20 h", roi2l:"Agent time saved / month*", roi3:"< 30 days", roi3l:"Likely break-even", roiNote:"*Assumes 20–40 leads/month and 1–2 minutes saved per reply. Scale multiplies ROI across agents.",
         roiShow:"Show assumptions", roiHide:"Hide assumptions",
-        ra1:"Leads: 20–40/month per agent (typical inbound volume for busy offices).",
-        ra2:"Time saved: 1–2 minutes per routine reply when Kintra drafts and suggests next steps.",
-        ra3:"Break-even: 12–20 hours saved/month ≈ cost of pilot within 30 days (often sooner at team scale).",
-        ra4:"Scope: one niche (e.g., rentals in Navigli) and 2–3 KPIs agreed upfront for clarity.",
-        ra5:"Outcome: faster replies → more viewings booked → fewer dropped leads → visible on dashboard.",
 
         faqHead:"Questions we hear",
         q1:"Why not just use ChatGPT?", a1:"Generic chat tools don’t see your lead history, listing data, or WhatsApp thread context. Kintra sits in the flow: it detects intent in real messages, pulls listing facts, drafts compliant replies, suggests the next step, and logs outcomes to your dashboard—so managers see the daily pulse.",
@@ -438,14 +438,6 @@
         compounds:"Ogni minuto risparmiato qui si moltiplica nell’arco della giornata.",
         m1:"Nuovi lead oggi", m2:"Tempo medio di risposta", m3:"Visite prenotate",
 
-        waPrev:"Smart Reply su WhatsApp", waDesc:"Kintra prepara risposte strutturate e prossimi passi: non sfugge nulla.",
-        labelBefore:"Prima", labelAfter:"Dopo",
-        lgClient:"Cliente", lgKintra:"Kintra (bozza)", lgAgent:"Agente (approva/invia)",
-        labFlowBefore:"Processo manuale", timeBefore:"Tempo di digitazione: ~2–4 min",
-        labFlowAfter:"Kintra rileva l’intento → redige → l’agente invia", timeAfter:"Bozza automatica: ~10–20 sec", nsAfter:"Con ogni bozza appare la prossima azione suggerita.",
-        c1:"Ciao, possiamo fare una visita domani dopo il lavoro verso le 18:30?", a1:"Certo — verifico disponibilità e ti aggiorno.", a2:"Vanno bene domani alle 17:00 o giovedì alle 10:30?", a3:"Posso anche inviare planimetria e indicazioni.",
-        c2:"Ciao, possiamo fare una visita domani dopo il lavoro verso le 18:30?", a4:"Certo! L’appartamento è disponibile. Propongo domani alle 17:00 o giovedì alle 10:30 — preferenze?", a5:"Posso anche inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.",
-
         dashTitle:"Dashboard Mini (anteprima live)", dashSub:"I manager vedono il polso giornaliero a colpo d’occhio.", dashCap:"Metriche reali dalla dashboard del pilot.", openDash:"Apri Dashboard",
 
         lsTitle:"Listing Summary (anteprima composita)", lsSub:"A colpo d’occhio: dati chiave, tag e prossima azione — pronti da inviare.", lsCaption:"Generato dai dati del tuo CRM — pronto per WhatsApp, social o brochure.", lsHeadRight:"Anteprima",
@@ -459,11 +451,6 @@
 
         roi1:"€1,5–2k", roi1l:"Pilot (30 giorni)", roi2:"~12–20 h", roi2l:"Tempo risparmiato/mese per agente*", roi3:"< 30 giorni", roi3l:"Probabile break-even", roiNote:"*Ipotesi: 20–40 lead/mese e 1–2 minuti risparmiati per risposta. La scala moltiplica l’ROI tra gli agenti.",
         roiShow:"Mostra assunzioni", roiHide:"Nascondi assunzioni",
-        ra1:"Lead: 20–40/mese per agente (volumi tipici per uffici attivi).",
-        ra2:"Tempo risparmiato: 1–2 minuti per risposta di routine quando Kintra redige e propone la prossima azione.",
-        ra3:"Break-even: 12–20 ore/mese ≈ costo del pilot entro 30 giorni (spesso prima a livello di team).",
-        ra4:"Perimetro: una sola nicchia (es. affitti a Navigli) e 2–3 KPI concordati all’inizio.",
-        ra5:"Risultato: risposte più rapide → più visite fissate → meno lead persi → visibile in dashboard.",
 
         faqHead:"Domande frequenti",
         q1:"Perché non usare semplicemente ChatGPT?", a1:"Gli strumenti generici non vedono cronologia dei lead, dati dell’annuncio o contesto del thread WhatsApp. Kintra lavora nel flusso: rileva l’intento nei messaggi reali, pesca i dati dell’annuncio, redige risposte conformi, propone la prossima azione e registra gli esiti in dashboard—così i manager vedono il polso quotidiano.",
@@ -478,15 +465,11 @@
     const $ = s => document.querySelector(s);
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Unified press helper (fixes mobile toggle reliability)
+      // Unified press helper (mobile-safe)
       const onPress = (el, fn) => {
         if (!el) return;
-        if ('onpointerup' in window) {
-          el.addEventListener('pointerup', fn);
-        } else {
-          el.addEventListener('click', fn);
-          el.addEventListener('touchend', fn, { passive: true });
-        }
+        if ('onpointerup' in window) el.addEventListener('pointerup', fn);
+        else { el.addEventListener('click', fn); el.addEventListener('touchend', fn, { passive: true }); }
       };
 
       function setLang(L){
@@ -502,30 +485,13 @@
         $("#trust-line").textContent=d.trust; $("#why").textContent=d.why; $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
         $("#m1").textContent=d.m1; $("#m2").textContent=d.m2; $("#m3").textContent=d.m3;
 
-        $("#waPrev").textContent=d.waPrev; $("#waDesc").textContent=d.waDesc;
-        $("#label-before").textContent=d.labelBefore; $("#label-after").textContent=d.labelAfter;
-        $("#lg-client").textContent=d.lgClient; $("#lg-kintra").textContent=d.lgKintra; $("#lg-agent").textContent=d.lgAgent;
-        $("#lab-flow-before").textContent=d.labFlowBefore; $("#time-before").textContent=d.timeBefore;
-        $("#lab-flow-after").textContent=d.labFlowAfter; $("#time-after").textContent=d.timeAfter; $("#ns-after").textContent=d.nsAfter;
-        $("#c1").textContent=d.c1; $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3;
-        $("#c2").textContent=d.c2; $("#a4").textContent=d.a4; $("#a5").textContent=d.a5;
-
+        // Dashboard + Listing + Pilot + Demo
         $("#dashTitle").textContent=d.dashTitle; $("#dashSub").textContent=d.dashSub; $("#dashCap").textContent=d.dashCap; $("#openDash").textContent=d.openDash;
-
         $("#lsTitle").textContent=d.lsTitle; $("#lsSub").textContent=d.lsSub; $("#lsCaption").textContent=d.lsCaption; $("#lsHeadRight").textContent=d.lsHeadRight;
-        $("#tag1").textContent=d.tag1; $("#tag2").textContent=d.tag2; $("#tag3").textContent=d.tag3; $("#tag4").textContent=d.tag4;
+        $("#tag1").textContent=d.tag1; $("#tag2").textContent=d.tag2; "#tag3","#tag4"; $("#tag3").textContent=d.tag3; $("#tag4").textContent=d.tag4;
         $("#lsView").textContent=d.lsView; $("#lsCopy").textContent=d.lsCopy;
-
         $("#pilotTitle").textContent=d.pilotTitle; $("#pilotSub").textContent=d.pilotSub; $("#btnStart").textContent=d.btnStart; $("#noSpam").textContent=d.noSpam;
-
         $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub; $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg; $("#publicNote").textContent=d.publicNote; $("#revealNum").textContent=d.revealBtn;
-
-        // ROI
-        $("#roi1").textContent=d.roi1; $("#roi1l").textContent=d.roi1l;
-        $("#roi2").textContent=d.roi2; $("#roi2l").textContent=d.roi2l;
-        $("#roi3").textContent=d.roi3; $("#roi3l").textContent=d.roi3l;
-        $("#roiNote").textContent=d.roiNote;
-        $("#roiToggle").textContent = ($("#roiMore").style.display==="block") ? d.roiHide : d.roiShow;
 
         // FAQ
         $("#faqHead").textContent=d.faqHead;
@@ -549,14 +515,13 @@
       onPress($("#lang-it"), ()=> setLang("it"));
       setLang(localStorage.getItem("kintra_lang")||"en");
 
-      // Before/After tabs (robust on mobile)
+      // Before/After tabs
       const tabBefore=$("#tab-before"), tabAfter=$("#tab-after");
       const waBefore=$("#wa-before"), waAfter=$("#wa-after");
       const showBefore=()=>{ tabBefore.classList.add("active"); tabAfter.classList.remove("active"); tabBefore.setAttribute("aria-selected","true"); tabAfter.setAttribute("aria-selected","false"); waBefore.style.display="block"; waAfter.style.display="none"; };
       const showAfter =()=>{ tabAfter.classList.add("active"); tabBefore.classList.remove("active"); tabAfter.setAttribute("aria-selected","true"); tabBefore.setAttribute("aria-selected","false"); waBefore.style.display="none"; waAfter.style.display="block"; };
       onPress(tabBefore, showBefore);
       onPress(tabAfter, showAfter);
-      // Ensure default state on load
       showBefore();
 
       // ROI assumptions toggle
@@ -566,7 +531,7 @@
         roiMore.style.display = open ? "none" : "block";
         roiMore.setAttribute("aria-hidden", open ? "true" : "false");
         const L = document.documentElement.lang || "en";
-        roiBtn.textContent = open ? dict[L].roiShow : dict[L].roiHide;
+        roiBtn.textContent = open ? (L==="en"?"Show assumptions":"Mostra assunzioni") : (L==="en"?"Hide assumptions":"Nascondi assunzioni");
         roiBtn.setAttribute("aria-expanded", (!open).toString());
       });
 
