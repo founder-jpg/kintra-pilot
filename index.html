@@ -13,8 +13,7 @@
       --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
       --brand:#0b5fff; --navy:#0b2347; --gold:#c9a227; --card:#f7f9fc; --chip:#eef3ff;
       --radius:14px; --max:1100px;
-      --wa-green:#17a47a; --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff;
-      --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
@@ -63,9 +62,12 @@
     .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
     .metric .l{font-size:12px;color:#6b7280}
 
-    /* Pricing line */
+    /* Pricing + assumptions */
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
+    .assump{margin-top:8px}
+    .assump button{border:1px dashed var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+    .assump-box{margin-top:8px;display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px}
 
     /* Gold plaque */
     .gold{
@@ -100,8 +102,11 @@
     .bubble.agent{align-self:flex-end;background:var(--agent-green);border:1px solid var(--agent-green-b)}
     .stamp{font-size:12px;color:#6b7280;margin-top:6px}
 
-    .insight{border:1px dashed var(--line);background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60}
+    /* Consistent gold-accent insights */
+    .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;
+      box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9)}
     .insight b{color:#1b2233}
+
     .chips{display:flex;gap:8px;flex-wrap:wrap}
     .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
 
@@ -183,10 +188,25 @@
         </div>
 
         <div class="pricing" id="price-line">
-          <strong>€1.5–2k pilot (30 days)</strong> · <span id="niche">1 niche</span> · <span id="kpis">2–3 KPIs</span>.
+          <strong id="price">€1.5–2k pilot (30 days)</strong> · <span id="niche">1 niche</span> · <span id="kpis">2–3 KPIs</span>.
           <span class="muted" id="price-tail">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
 
+        <!-- Assumptions toggle -->
+        <div class="assump">
+          <button id="assumpBtn">Show assumptions</button>
+          <div id="assumpBox" class="assump-box">
+            <b id="assumpTitle">Assumptions (conservative):</b>
+            <ul id="assumpList" style="margin:8px 0 0 18px">
+              <li id="a1">1 agent saves ~40–60 min/day via faster replies + fewer tab switches.</li>
+              <li id="a2">At 20 working days, that’s 13–20 hours/month per agent.</li>
+              <li id="a3">Pilot cost ≈ a fraction of a junior hire — likely break-even within 2–4 weeks.</li>
+              <li id="a4">If it doesn’t save time, you don’t continue. Simple.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Advisor Charter -->
         <div class="gold" style="margin-top:10px">
           <h3 id="goldH3">Advisor Charter (pilot)</h3>
           <p id="goldP1">Optional, very light support during the 30-day pilot.</p>
@@ -390,11 +410,20 @@
         btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
         price:"€1.5–2k pilot (30 days)", niche:"1 niche", kpis:"2–3 KPIs",
         price_tail:"If it doesn’t save time in 30 days, don’t continue.",
+
+        showA:"Show assumptions", hideA:"Hide assumptions",
+        assumpTitle:"Assumptions (conservative):",
+        a1:"1 agent saves ~40–60 min/day via faster replies + fewer tab switches.",
+        a2:"At 20 working days, that’s 13–20 hours/month per agent.",
+        a3:"Pilot cost ≈ a fraction of a junior hire — likely break-even within 2–4 weeks.",
+        a4:"If it doesn’t save time, you don’t continue. Simple.",
+
         goldH3:"Advisor Charter (pilot)",
         goldP1:"Optional, very light support during the 30-day pilot.",
         goldP2:"Review the live preview and share quick impressions; if it makes sense, suggest 1–2 warm introductions.",
         goldP3:"Zero operational load; clear upside if the pilot performs.",
         goldP4:"We list early advisors by permission only.",
+
         trust:"Trusted by Italian agents building faster funnels.",
         why:"Why this matters (time → money)",
         math:"If each faster reply saves ~2 minutes, 20 leads = 40 minutes reclaimed — per agent, per day.",
@@ -415,6 +444,7 @@
         whoAgentManual:"Agent (manual)",
         whoKintraDraft:"Kintra (draft)",
         whoAgentApprove:"Agent (approve & send)",
+        agentApprovedText:"Approved & sent.",
 
         dashH:"Dashboard Mini (live preview)", dashSub:"Managers get a daily pulse at a glance.",
         openDash:"Open Dashboard", dashNote:"Real metrics from the pilot dashboard.",
@@ -454,11 +484,20 @@
         btnRequest:"Richiedi il Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
         price:"Pilot €1,5–2k (30 giorni)", niche:"1 nicchia", kpis:"2–3 KPI",
         price_tail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
+
+        showA:"Mostra assunzioni", hideA:"Nascondi assunzioni",
+        assumpTitle:"Assunzioni (prudenziali):",
+        a1:"1 agente risparmia ~40–60 min/giorno grazie a risposte più rapide e meno cambi di scheda.",
+        a2:"Su 20 giorni lavorativi sono 13–20 ore/mese per agente.",
+        a3:"Il costo del pilot è una frazione di un junior — probabile break-even in 2–4 settimane.",
+        a4:"Se non fa risparmiare tempo, non si continua. Semplice.",
+
         goldH3:"Advisor Charter (pilot)",
         goldP1:"Ruolo opzionale e leggero durante i 30 giorni di pilot.",
         goldP2:"Rivedi l’anteprima live e condividi impressioni rapide; se ha senso, suggerisci 1–2 warm intro.",
         goldP3:"Zero carico operativo; upside chiaro se il pilot performa.",
         goldP4:"Elencati solo su autorizzazione.",
+
         trust:"Scelto da agenti italiani che costruiscono funnel più veloci.",
         why:"Perché conta (tempo → denaro)",
         math:"Se ogni risposta più rapida fa risparmiare ~2 minuti, 20 lead = 40 minuti recuperati — per agente, al giorno.",
@@ -479,6 +518,7 @@
         whoAgentManual:"Agente (manuale)",
         whoKintraDraft:"Kintra (bozza)",
         whoAgentApprove:"Agente (approva e invia)",
+        agentApprovedText:"Approvato e inviato.",
 
         dashH:"Dashboard Mini (anteprima live)", dashSub:"I manager vedono il polso giornaliero a colpo d’occhio.",
         openDash:"Apri Dashboard", dashNote:"Metriche reali dalla dashboard del pilot.",
@@ -503,6 +543,7 @@
         world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
         langLabel:"Lingua",
 
+        // Chat lines
         bClientEN:"Ciao, è possibile una visita domani verso le 18:30?",
         bAgentEN:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
         bAgentEN2:"Posso inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.",
@@ -512,67 +553,63 @@
     };
 
     const $=s=>document.querySelector(s);
+
+    function setPlaceholders(d){
+      $("#name").setAttribute("placeholder", d===dict.en
+        ? "Name — e.g. Alex Rossi" : "Nome — es. Alex Rossi");
+      $("#email").setAttribute("placeholder", d===dict.en
+        ? "Work email — e.g. alex.rossi@agency.it" : "Email lavoro — es. alex.rossi@agency.it");
+      $("#wf").setAttribute("placeholder", d===dict.en
+        ? "What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)"
+        : "Qual è il tuo flusso attuale? (es. inbound via WhatsApp + email, vuoi risposte più rapide…)");
+    }
+
     function setLang(L){
       const d=dict[L];
 
       $("#badge").textContent=d.badge;
-      $("#h1").textContent=d.h1;
-      $("#lead").textContent=d.lead;
-      $("#sub").textContent=d.sub;
-      $("#btn-request").textContent=d.btnRequest;
-      $("#btn-dash").textContent=d.btnDash;
-      $("#btn-deck").textContent=d.btnDeck;
-      $("#btn-pdf").textContent=d.btnPDF;
+      $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; $("#sub").textContent=d.sub;
+      $("#btn-request").textContent=d.btnRequest; $("#btn-dash").textContent=d.btnDash;
+      $("#btn-deck").textContent=d.btnDeck; $("#btn-pdf").textContent=d.btnPDF;
 
-      $("#price-line").querySelector("strong").textContent=d.price;
-      $("#niche").textContent=d.niche;
-      $("#kpis").textContent=d.kpis;
+      $("#price").textContent=d.price; $("#niche").textContent=d.niche; $("#kpis").textContent=d.kpis;
       $("#price-tail").textContent=d.price_tail;
 
-      $("#goldH3").textContent=d.goldH3;
-      $("#goldP1").textContent=d.goldP1;
-      $("#goldP2").textContent=d.goldP2;
-      $("#goldP3").firstChild ? $("#goldP3").firstChild.textContent=d.goldP3+" " : ($("#goldP3").textContent=d.goldP3+" ");
+      // assumptions
+      $("#assumpBtn").textContent = $("#assumpBox").style.display==="none"||$("#assumpBox").style.display===""
+        ? d.showA : d.hideA;
+      $("#assumpTitle").textContent=d.assumpTitle;
+      $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3; $("#a4").textContent=d.a4;
+
+      // advisor
+      $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1;
+      $("#goldP2").textContent=d.goldP2; $("#goldP3").childNodes[0].textContent=d.goldP3+" ";
       $("#goldP4").textContent=d.goldP4;
 
-      $("#trust-line").textContent=d.trust;
-      $("#why").textContent=d.why;
-      $("#math").textContent=d.math;
-      $("#compounds").textContent=d.compounds;
-      $("#m1").textContent=d.m1;
-      $("#m2").textContent=d.m2;
-      $("#m3").textContent=d.m3;
+      $("#trust-line").textContent=d.trust; $("#why").textContent=d.why;
+      $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
+      $("#m1").textContent=d.m1; $("#m2").textContent=d.m2; $("#m3").textContent=d.m3;
 
-      // WhatsApp section
-      $("#waPrev").textContent=d.waPrev;
-      $("#waDesc").textContent=d.waDesc;
-      $("#keyClient").textContent=d.keyClient;
-      $("#keyKintra").textContent=d.keyKintra;
-      $("#keyAgent").textContent=d.keyAgent;
-      $("#keyInsight").textContent=d.keyInsight;
-      $("#tBefore").textContent=d.tBefore;
-      $("#tAfter").textContent=d.tAfter;
-      $("#manualTime").textContent=d.manualTime;
-      $("#autoTime").textContent=d.autoTime;
-      $("#insightCopy1").textContent=d.insight1;
-      $("#insightCopy2").textContent=d.insight2;
-      $("#chip1").textContent=d.chip1;
-      $("#chip2").textContent=d.chip2;
-      $("#chip3").textContent=d.chip3;
+      // WA section
+      $("#waPrev").textContent=d.waPrev; $("#waDesc").textContent=d.waDesc;
+      $("#keyClient").textContent=d.keyClient; $("#keyKintra").textContent=d.keyKintra;
+      $("#keyAgent").textContent=d.keyAgent; $("#keyInsight").textContent=d.keyInsight;
+      $("#tBefore").textContent=d.tBefore; $("#tAfter").textContent=d.tAfter;
+      $("#manualTime").textContent=d.manualTime; $("#autoTime").textContent=d.autoTime;
+      $("#insightCopy1").textContent=d.insight1; $("#insightCopy2").textContent=d.insight2;
+      $("#chip1").textContent=d.chip1; $("#chip2").textContent=d.chip2; $("#chip3").textContent=d.chip3;
 
-      // Chat lines & WHO badges
+      // Chat lines & badges and approved text
       $("#bClientEN").lastChild.nodeValue = " " + d.bClientEN;
       $("#bAgentEN").lastChild.nodeValue  = " " + d.bAgentEN;
       $("#bAgentEN2").lastChild.nodeValue = " " + d.bAgentEN2;
       $("#bClientIT").lastChild.nodeValue = " " + d.bClientIT;
       $("#bKintraIT").lastChild.nodeValue = " " + d.bKintraIT;
+      $("#bAgentIT").lastChild.nodeValue  = " " + d.agentApprovedText;
 
-      $("#whoC1").textContent=d.whoClient;
-      $("#whoA1").textContent=d.whoAgentManual;
-      $("#whoA2").textContent=d.whoAgentManual;
-      $("#whoC2").textContent=d.whoClient;
-      $("#whoK1").textContent=d.whoKintraDraft;
-      $("#whoA3").textContent=d.whoAgentApprove;
+      $("#whoC1").textContent=d.whoClient; $("#whoA1").textContent=d.whoAgentManual;
+      $("#whoA2").textContent=d.whoAgentManual; $("#whoC2").textContent=d.whoClient;
+      $("#whoK1").textContent=d.whoKintraDraft; $("#whoA3").textContent=d.whoAgentApprove;
 
       // Dashboard + listing
       $("#dashH").textContent=d.dashH; $("#dashSub").textContent=d.dashSub;
@@ -589,33 +626,37 @@
       $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub;
       $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg;
       $("#publicNote").textContent=" "+d.publicNote;
-      $("#world").textContent=d.world;
-      $("#lang-label").textContent=d.langLabel;
+      $("#world").textContent=d.world; $("#lang-label").textContent=d.langLabel;
 
+      setPlaceholders(d);
       document.documentElement.lang=L;
       $("#lang-en").classList.toggle("active", L==="en");
       $("#lang-it").classList.toggle("active", L==="it");
       localStorage.setItem("kintra_lang", L);
     }
 
-    // Toggle language
+    // Lang + tabs
     $("#lang-en").onclick=()=>setLang("en");
     $("#lang-it").onclick=()=>setLang("it");
-    setLang(localStorage.getItem("kintra_lang")||"en");
+    const stored = localStorage.getItem("kintra_lang") || "en";
+    setLang(stored);
 
-    // WhatsApp Before/After tabs
     const beforeBtn=$("#tabBefore"), afterBtn=$("#tabAfter");
     const beforePanel=$("#panelBefore"), afterPanel=$("#panelAfter");
-    function showBefore(){
-      beforeBtn.classList.add("active"); afterBtn.classList.remove("active");
-      beforePanel.style.display="flex"; afterPanel.style.display="none";
-    }
-    function showAfter(){
-      afterBtn.classList.add("active"); beforeBtn.classList.remove("active");
-      afterPanel.style.display="flex"; beforePanel.style.display="none";
-    }
+    function showBefore(){ beforeBtn.classList.add("active"); afterBtn.classList.remove("active"); beforePanel.style.display="flex"; afterPanel.style.display="none"; }
+    function showAfter(){  afterBtn.classList.add("active"); beforeBtn.classList.remove("active"); afterPanel.style.display="flex"; beforePanel.style.display="none"; }
     beforeBtn.addEventListener("click", showBefore);
     afterBtn.addEventListener("click", showAfter);
+
+    // Assumptions toggle
+    $("#assumpBtn").onclick = ()=>{
+      const box = $("#assumpBox");
+      const L = document.documentElement.lang;
+      const d = dict[L];
+      const open = box.style.display==="block";
+      box.style.display = open ? "none" : "block";
+      $("#assumpBtn").textContent = open ? d.showA : d.hideA;
+    };
 
     // Copy card (mock)
     $("#copyCard").onclick=(e)=>{ e.preventDefault(); alert("Copied Listing Summary card to clipboard (mock)."); };
