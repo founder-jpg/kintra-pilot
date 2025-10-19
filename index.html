@@ -69,6 +69,10 @@
     .assump button{border:1px dashed var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
     .assump-box{margin-top:8px;display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px}
 
+    /* Big blue price block */
+    .price-big{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:#eef3ff;padding:14px}
+    .price-big h3{margin:0 0 6px;color:#0b5fff}
+
     /* Gold plaque */
     .gold{
       margin:12px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.35), rgba(234,210,139,.15));
@@ -187,12 +191,13 @@
           <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="btn-pdf">View Deck PDF</a>
         </div>
 
+        <!-- PRICE (small line) -->
         <div class="pricing">
           <strong id="price">€1.5–2k pilot (30 days)</strong> · <span id="niche">1 niche</span> · <span id="kpis">2–3 KPIs</span>.
           <span class="muted" id="price-tail">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
-        <div class="note" id="plainline" style="margin-top:4px">
-          <em id="plainhelp">In simple terms: focus on one property type; agree 2–3 success metrics (e.g., faster replies, more visits booked).</em>
+        <div class="note" id="plainhelp" style="margin-top:4px">
+          <em>In simple terms: focus on one property type; agree 2–3 success metrics (e.g., faster replies, more visits booked).</em>
         </div>
 
         <!-- Assumptions toggle -->
@@ -200,7 +205,7 @@
           <button id="assumpBtn">Show assumptions</button>
           <div id="assumpBox" class="assump-box">
             <b id="assumpTitle">Assumptions (conservative):</b>
-            <ul id="assumpList" style="margin:8px 0 0 18px">
+            <ul style="margin:8px 0 0 18px">
               <li id="a1">1 agent saves ~40–60 min/day via faster replies + fewer tab switches.</li>
               <li id="a2">At 20 working days, that’s 13–20 hours/month per agent.</li>
               <li id="a3">Pilot cost ≈ a fraction of a junior hire — likely break-even within 2–4 weeks.</li>
@@ -209,16 +214,27 @@
           </div>
         </div>
 
-        <!-- Advisor Charter (refined) -->
+        <!-- Advisor Charter (gold) -->
         <div class="gold" style="margin-top:10px">
           <h3 id="goldH3">Advisor Charter (pilot)</h3>
           <p id="goldP1">Optional, very light support during the 30-day pilot.</p>
           <p id="goldP2">Review the live preview and share quick impressions; if it makes sense, suggest 1–2 warm introductions.</p>
-          <p id="goldP3"><b>Zero operational load; clear upside if the pilot performs.</b> <span class="muted" id="goldP4">We list early advisors by permission only.</span></p>
+          <p><b id="goldP3">Zero operational load; clear upside if the pilot performs.</b> <span class="muted" id="goldP4">We list early advisors by permission only.</span></p>
         </div>
 
         <div class="note" id="trust-line" style="margin-top:8px;border-left:3px solid var(--gold);padding-left:10px">
           Trusted by Italian agents building faster funnels.
+        </div>
+
+        <!-- PRICE (big blue) -->
+        <div class="price-big">
+          <h3 id="bigHead">Pilot • 30 days</h3>
+          <div id="bigLine"><b>Agent time saved / month → likely break-even within 2–4 weeks*</b></div>
+          <ul style="margin:8px 0 0 18px">
+            <li id="b1">* If each faster reply saves ~2 minutes, 20–40 leads ≈ 40–80 minutes/day per agent.</li>
+            <li id="b2">Compound effect: less chasing, more bookings.</li>
+            <li id="b3"><button class="btn ghost" id="assumpBtn2">Show assumptions</button></li>
+          </ul>
         </div>
       </div>
 
@@ -582,18 +598,14 @@
       $("#plainhelp").textContent=d.plainhelp;
 
       // assumptions
-      $("#assumpBtn").textContent = $("#assumpBox").style.display==="none"||$("#assumpBox").style.display===""
-        ? d.showA : d.hideA;
+      $("#assumpBtn").textContent = ($("#assumpBox").style.display==="block")
+        ? d.hideA : d.showA;
       $("#assumpTitle").textContent=d.assumpTitle;
       $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3; $("#a4").textContent=d.a4;
 
       // advisor
       $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1;
-      $("#goldP2").textContent=d.goldP2;
-      // keep bold intact then append rest
-      const g3=$("#goldP3");
-      g3.childNodes[0].textContent=d.goldP3+" ";
-      $("#goldP4").textContent=d.goldP4;
+      $("#goldP2").textContent=d.goldP2; $("#goldP3").textContent=d.goldP3; $("#goldP4").textContent=d.goldP4;
 
       $("#trust-line").textContent=d.trust; $("#why").textContent=d.why;
       $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
@@ -657,15 +669,19 @@
     beforeBtn.addEventListener("click", showBefore);
     afterBtn.addEventListener("click", showAfter);
 
-    // Assumptions toggle
-    $("#assumpBtn").onclick = ()=>{
-      const box = $("#assumpBox");
+    // Assumptions toggle(s)
+    const toggleAssump = ()=>{
       const L = document.documentElement.lang;
       const d = dict[L];
+      const box = $("#assumpBox");
       const open = box.style.display==="block";
       box.style.display = open ? "none" : "block";
-      $("#assumpBtn").textContent = open ? d.hideA : d.showA;
+      $("#assumpBtn").textContent = open ? d.showA : d.hideA;
+      const b2 = $("#assumpBtn2");
+      if (b2) b2.textContent = open ? d.showA : d.hideA;
     };
+    $("#assumpBtn").onclick = toggleAssump;
+    $("#assumpBtn2").onclick = toggleAssump;
 
     // Copy card (mock)
     $("#copyCard").onclick=(e)=>{ e.preventDefault(); alert("Copied Listing Summary card to clipboard (mock)."); };
