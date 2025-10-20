@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Kintra Pilot • vA15.2  —  vFreeze candidate
-       Changes vs vA15.1:
-       - Added localized placeholders for form + WhatsApp message
-       - setLang() now updates placeholder attributes on toggle
-       No structural edits.
+  <!-- Kintra Pilot • vA15.1  —  vFreeze candidate
+       Notes:
+       - Gentle desktop-only layout polish (smaller Smart Reply & Dashboard Mini)
+       - Mobile unchanged
+       - Do not remove this banner; helps track which file is live
   -->
   <meta charset="utf-8" />
   <title>Kintra — Pilot • Italy</title>
@@ -72,10 +72,12 @@
     .metric .l{font-size:12px;color:#6b7280}
     .divider{height:1px;background:var(--line);margin:18px 0}
 
+    /* See it in action — DESKTOP POLISH ONLY */
     .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .shot img{width:100%;height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#f5f7fb}
     .shot figcaption{font-size:12px;color:#6d778a;margin-top:6px}
 
+    /* WhatsApp mock */
     .wa-wrap{border:1px solid var(--line);border-radius:12px;overflow:hidden}
     .wa-head{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
     .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -95,8 +97,10 @@
     .i-insight{background:#f59e0b}
     .insight{font-size:13px;color:#6b7280;border-left:3px solid #f59e0b;padding-left:10px}
 
+    /* Dashboard mini tile — DESKTOP POLISH: narrower */
     .dash-tile img{height:210px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
 
+    /* Listing Summary composite */
     .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
     .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
     .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
@@ -107,12 +111,14 @@
     .tagrow{display:flex;gap:6px;flex-wrap:wrap}
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
 
+    /* “Blue price block” with three boxes */
     .price-block{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
     .pbox{border:1px solid var(--line);border-radius:12px;background:#f6f9ff;padding:12px}
     .pbox b{color:#0b2347}
 
     footer{margin-top:24px;font-size:13px;color:#6b7280;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
+    /* Desktop shrink only (<= this is the gentle polish) */
     @media (min-width: 981px){
       .wa-body{grid-template-columns:0.9fr 0.9fr}
       .dash-tile img{height:190px}
@@ -140,6 +146,7 @@
         <div class="toggle">
           <button id="lang-en" class="active">
             <span class="flag" aria-hidden="true">
+              <!-- EN flag -->
               <svg viewBox="0 0 60 36">
                 <rect width="60" height="36" fill="#012169"/>
                 <path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/>
@@ -153,6 +160,7 @@
           </button>
           <button id="lang-it">
             <span class="flag" aria-hidden="true">
+              <!-- IT flag -->
               <svg viewBox="0 0 60 36">
                 <rect width="60" height="36" fill="#fff"/>
                 <rect width="20" height="36" x="0" fill="#009246"/>
@@ -177,6 +185,7 @@
           <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" id="btn-pdf" target="_blank">View Deck PDF</a>
         </div>
 
+        <!-- (Keep) top line (no duplicate later) -->
         <div class="pricing-top" id="price-top">
           <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
           <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
@@ -189,6 +198,7 @@
           <p id="adv-3" style="margin-top:6px">We list early advisors by permission only.</p>
         </div>
 
+        <!-- Blue price block with 3 boxes -->
         <div class="price-block" id="price-block">
           <div class="pbox"><b id="pb1">Pilot: €1.5–2k · 30 days</b><br><span id="pb1t" class="muted">One niche · 2–3 success metrics</span></div>
           <div class="pbox"><b id="pb2">Agent time saved / month</b><br><span class="muted" id="pb2t">~12–20 hours (typical)</span></div>
@@ -235,8 +245,12 @@
             </div>
           </div>
           <div class="wa-body">
-            <div class="chat" id="wa-left"></div>
-            <div id="wa-insight" class="insight"></div>
+            <div class="chat" id="wa-left">
+              <!-- dynamic -->
+            </div>
+            <div id="wa-insight" class="insight">
+              <!-- dynamic -->
+            </div>
           </div>
         </div>
       </div>
@@ -291,7 +305,7 @@
         <div class="grid-2" style="gap:10px;margin-top:10px">
           <input id="name" placeholder="Name — e.g. Alex Rossi"/>
           <input id="email" placeholder="Work email — e.g. alex.rossi@agency.it"/>
-          <textarea id="wf" placeholder="What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)" style="grid-column:1/-1;min-height:90px"></textarea>
+          <textarea id="wf" placeholder="What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…) " style="grid-column:1/-1;min-height:90px"></textarea>
         </div>
         <div class="cta-row" style="margin-top:10px">
           <a class="btn primary" href="mailto:pilot@kintra.xyz" id="btnStart">→ Start My Pilot</a>
@@ -332,7 +346,7 @@
   </div>
 
   <script>
-    // ===== Language dictionary (EN/IT) with placeholders =====
+    // ===== Language dictionary (EN/IT) =====
     const dict = {
       en:{
         badge:"Pilot • Italy",
@@ -341,7 +355,8 @@
         lead:"AI tools that help agents reply faster and book more viewings — inside WhatsApp.",
         sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
         btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
-        priceTopStrong:"€1.5–2k pilot (30 days)", priceTopTail:"If it doesn’t save time in 30 days, don’t continue.",
+        priceTopStrong:"€1.5–2k pilot (30 days)",
+        priceTopTail:"If it doesn’t save time in 30 days, don’t continue.",
         advH:"Advisor Charter (pilot)",
         adv1:"Optional, very light support during the 30-day pilot — review the live preview, give quick feedback, and (only if it makes sense) suggest 1–2 warm introductions.",
         adv2:"Zero operational load; clear upside if the pilot performs.",
@@ -376,12 +391,7 @@
         labPhone:"Recipient phone (E.164)", labMsg:"Message",
         waTip:"For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.",
         openDash:"Open Dashboard",
-        world:"🌍 From Italy to the world — join the next wave.",
-        // Placeholders
-        namePH:"Name — e.g. Alex Rossi",
-        emailPH:"Work email — e.g. alex.rossi@agency.it",
-        wfPH:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)",
-        msgPH:"Ciao from the Kintra pilot!"
+        world:"🌍 From Italy to the world — join the next wave."
       },
       it:{
         badge:"Pilot • Italia",
@@ -390,7 +400,8 @@
         lead:"Strumenti che aiutano gli agenti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
         sub:"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, redige bozze e suggerisce i prossimi passi.",
         btnRequest:"Richiedi l’accesso al pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
-        priceTopStrong:"Pilot €1,5–2k (30 giorni)", priceTopTail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
+        priceTopStrong:"Pilot €1,5–2k (30 giorni)",
+        priceTopTail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
         advH:"Advisor Charter (pilot)",
         adv1:"Supporto leggero e opzionale nei 30 giorni — rivedi l’anteprima live, dai un feedback rapido e (solo se ha senso) suggerisci 1–2 warm intro.",
         adv2:"Zero carico operativo; upside chiaro se il pilot performa.",
@@ -425,42 +436,11 @@
         labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio",
         waTip:"Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.",
         openDash:"Apri Dashboard",
-        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
-        // Placeholders
-        namePH:"Nome — es. Alex Rossi",
-        emailPH:"Email di lavoro — es. alex.rossi@agency.it",
-        wfPH:"Qual è il tuo workflow attuale? (es. inbound via WhatsApp + email, vuoi risposte più rapide…)",
-        msgPH:"Ciao dal pilot di Kintra!"
+        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata."
       }
     };
 
     const $ = s => document.querySelector(s);
-
-    let currentMode = "before";
-
-    function bubble(txt, who){
-      const div = document.createElement("div");
-      div.className = "bubble " + (who==="client" ? "client" : "agent");
-      div.textContent = txt;
-      return div;
-    }
-
-    function renderWA(mode, L){
-      const d = dict[L];
-      const left = $("#wa-left"); const insight = $("#wa-insight");
-      left.innerHTML = ""; insight.textContent = "";
-      if(mode==="before"){
-        left.appendChild(bubble(d.beforeClient, "client"));
-        left.appendChild(bubble(d.beforeAgent, "agent"));
-        insight.textContent = d.beforeInsight;
-      }else{
-        left.appendChild(bubble(d.afterClient, "client"));
-        left.appendChild(bubble(d.afterKintra, "agent"));
-        left.appendChild(bubble(d.afterAgent, "agent"));
-        insight.textContent = d.afterInsight;
-      }
-    }
-
     function setLang(L){
       const d = dict[L];
       // header/hero
@@ -470,8 +450,8 @@
       $("#btn-request").textContent = d.btnRequest; $("#btn-dash").textContent = d.btnDash;
       $("#btn-deck").textContent = d.btnDeck; $("#btn-pdf").textContent = d.btnPDF;
 
-      // pricing + advisor
-      $("#price-top").innerHTML = `<strong>${d.priceTopStrong}</strong> · 1 niche · 2–3 KPIs. <span class="muted">${d.priceTopTail}</span>`;
+      // price + advisor
+      $("#price-top").innerHTML = `<strong>${d.priceTopStrong}</strong> · 1 niche · 2–3 KPIs. <span class="muted">${d.priceTopTail}</span>`; // keep English niche/KPI per your current file
       $("#adv-h").textContent = d.advH; $("#adv-1").textContent = d.adv1;
       $("#adv-2").innerHTML = `<b>${d.adv2}</b>`; $("#adv-3").textContent = d.adv3;
 
@@ -507,19 +487,38 @@
       // Footer
       $("#world").textContent = d.world;
 
-      // NEW: Localized placeholders
-      const nameEl = $("#name"), emailEl = $("#email"), wfEl = $("#wf"), msgEl = $("#msg");
-      if(nameEl) nameEl.placeholder = d.namePH;
-      if(emailEl) emailEl.placeholder = d.emailPH;
-      if(wfEl)    wfEl.placeholder   = d.wfPH;
-      if(msgEl)   msgEl.placeholder  = d.msgPH;
-
       document.documentElement.lang = L;
       $("#lang-en").classList.toggle("active", L==="en");
       $("#lang-it").classList.toggle("active", L==="it");
 
+      // refresh WA sample for language
       renderWA(currentMode, L);
       localStorage.setItem("kintra_lang", L);
+    }
+
+    // WhatsApp sample renderer
+    let currentMode = "before"; // or "after"
+    function bubble(txt, who){
+      const div = document.createElement("div");
+      div.className = "bubble " + (who==="client" ? "client" : "agent");
+      div.textContent = txt;
+      return div;
+    }
+    function renderWA(mode, L){
+      const d = dict[L];
+      const left = $("#wa-left"); const insight = $("#wa-insight");
+      left.innerHTML = ""; insight.textContent = "";
+      if(mode==="before"){
+        left.appendChild(bubble(d.beforeClient, "client"));
+        left.appendChild(bubble(d.beforeAgent, "agent"));
+        insight.textContent = d.beforeInsight;
+      }else{
+        left.appendChild(bubble(d.afterClient, "client"));
+        // show Kintra draft as agent bubble (visually) but text says it's the draft
+        left.appendChild(bubble(d.afterKintra, "agent"));
+        left.appendChild(bubble(d.afterAgent, "agent"));
+        insight.textContent = d.afterInsight;
+      }
     }
 
     // Bind language & WA toggles
@@ -530,6 +529,7 @@
 
     // Init
     setLang(localStorage.getItem("kintra_lang") || "en");
+    renderWA(currentMode, document.documentElement.lang);
 
     // Listing "copy" stub
     $("#lsCopy").onclick = ()=> alert("Copied card content — ready to paste into WhatsApp.");
