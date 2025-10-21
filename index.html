@@ -6,13 +6,14 @@
   <title>Kintra — Pilot • Italy</title>
   <meta name="color-scheme" content="light only"/>
   <meta name="theme-color" content="#0b2347"/>
-  <link rel="icon" href="./img/logo.png"/>
+  <!-- NOTE: per user assets, the logo really is png.png -->
+  <link rel="icon" href="./img/logo.png.png"/>
   <style>
     :root{
       --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
       --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
       --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
-      --wa-green:#25D366; --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
@@ -47,7 +48,11 @@
 
     .pricing{margin-top:10px;font-size:14px;color:#243044}
     .pricing .muted{color:#6b7280}
-    .explain{margin-top:6px;font-size:12px;color:#6b7280}
+
+    /* Assumptions */
+    .assump{margin-top:8px}
+    .assump button{border:1px dashed var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+    .assump-box{margin-top:8px;display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px}
 
     /* Gold plaque */
     .gold{margin:10px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.32), rgba(234,210,139,.12));border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)}
@@ -64,7 +69,7 @@
     .metric .k{font-size:22px;font-weight:800;color:var(--brand)}
     .metric .l{font-size:12px;color:var(--muted)}
 
-    /* WA section (from File2 with labels) */
+    /* WA section */
     .wa{display:flex;flex-direction:column;gap:10px}
     .keys{display:flex;gap:10px;flex-wrap:wrap}
     .key{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
@@ -100,22 +105,22 @@
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
     .caption{margin-top:6px;font-size:12px;color:#7b879b}
 
-    /* ROI strip (keep from File1) */
+    /* ROI strip */
     .roi{margin-top:12px}
     .roi .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .roi .cell{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;text-align:center}
-    .roi .cell .big{font-size:22px;font-weight:800;color:var(--brand)}
+    .roi .cell .big{font-size:22px;font-weight:800;color:#0b5fff}
     .roi .cell .small{font-size:12px;color:#6b7280}
     .roi .one{grid-column:1/-1;text-align:center;margin-top:8px;color:#243044}
     @media (max-width:980px){ .roi .row{grid-template-columns:1fr} }
 
-    /* FAQ (keep from File1) */
+    /* FAQ */
     .faq{margin-top:14px}
     .faq details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin-top:8px}
     .faq summary{font-weight:700;cursor:pointer}
     .faq p{margin:8px 0 0;color:#485264}
 
-    footer{margin:28px 0 8px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    footer{margin:28px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
     @media (max-width:980px){ .hero,.grid-2{grid-template-columns:1fr} h1{font-size:32px} .bubble{max-width:100%} }
   </style>
@@ -124,7 +129,7 @@
   <div class="wrap">
     <header>
       <div class="brand">
-        <img src="./img/logo.png" alt="Kintra logo"/>
+        <img src="./img/logo.png.png" alt="Kintra logo"/>
         <strong>Kintra</strong>
         <span class="badge" id="badge">Pilot • Italy</span>
       </div>
@@ -154,26 +159,36 @@
           <a class="btn" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="btn-pdf">View Deck PDF</a>
         </div>
 
-        <!-- Pricing line (from File1) -->
+        <!-- Pricing line kept; removed redundant plain-explain per user request -->
         <div class="pricing" id="price-line">
-          <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
+          <strong id="priceStrong">€1.5–2k pilot (30 days)</strong> · <span id="priceNiche">1 niche</span> · <span id="priceKPIs">2–3 KPIs</span>.
           <span class="muted" id="priceTail">If it doesn’t save time in 30 days, don’t continue.</span>
         </div>
-        <div class="explain" id="plain-explain">
-          <span id="plain-prefix">In plain terms:</span>
-          <span id="plain-body">focus on one property type/area; agree 2–3 success metrics (e.g., reply time, viewings booked).</span>
+
+        <!-- Assumptions toggle reinstated (from File2) -->
+        <div class="assump">
+          <button id="assumpBtn">Show assumptions</button>
+          <div id="assumpBox" class="assump-box">
+            <b id="assumpTitle">Assumptions (conservative):</b>
+            <ul id="assumpList" style="margin:8px 0 0 18px">
+              <li id="a1">1 agent saves ~40–60 min/day via faster replies + fewer tab switches.</li>
+              <li id="a2">At 20 working days, that’s 13–20 hours/month per agent.</li>
+              <li id="a3">Pilot cost ≈ a fraction of a junior hire — likely break-even within 2–4 weeks.</li>
+              <li id="a4">If it doesn’t save time, you don’t continue. Simple.</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Advisor Charter (from File1) -->
-        <div class="gold" style="margin-top:12px"><!-- from file1: gold plaque -->
+        <!-- Advisor Charter -->
+        <div class="gold" style="margin-top:12px">
           <h3 id="goldH3">Advisor Charter (pilot)</h3>
           <p id="goldP1">A light, optional role during the 30-day pilot: skim the live pilot, share quick notes, and—only if it truly fits—open 1–2 warm doors.</p>
           <p id="goldP2"><strong>Zero operational load; clear upside if the pilot performs.</strong></p>
           <p id="goldP3" class="muted">We list early advisors by permission only.</p>
         </div>
 
-        <!-- ROI strip (from File1) -->
-        <section class="card roi" id="roi"><!-- from file1: ROI strip -->
+        <!-- ROI strip -->
+        <section class="card roi" id="roi">
           <div class="row">
             <div class="cell"><div class="big" id="roi1">€1.5–2k</div><div class="small" id="roi1l">Pilot (30 days)</div></div>
             <div class="cell"><div class="big" id="roi2">~12–20 h</div><div class="small" id="roi2l">Agent time saved / month*</div></div>
@@ -204,7 +219,7 @@
     <!-- SEE IT IN ACTION -->
     <section class="grid-2" style="margin-top:14px">
       <!-- WhatsApp Smart Reply (from File2) -->
-      <div class="card soft"><!-- from file2: WA block with labels -->
+      <div class="card soft">
         <h3 id="waPrev">WhatsApp Smart Reply</h3>
         <p class="sub" id="waDesc">Kintra drafts structured replies and next steps so nothing slips.</p>
         <div class="keys" style="margin-top:6px">
@@ -244,7 +259,7 @@
         </div>
       </div>
 
-      <!-- Dashboard mini (keep from File1) -->
+      <!-- Dashboard mini -->
       <div class="card">
         <div class="minihead">
           <h3 id="dashTitle">Dashboard Mini (live preview)</h3>
@@ -256,7 +271,7 @@
       </div>
     </section>
 
-    <!-- LISTING SUMMARY (keep base from File1) -->
+    <!-- LISTING SUMMARY -->
     <section class="card soft" style="margin-top:14px">
       <h3 id="lsTitle">Listing Summary (composite preview)</h3>
       <p class="sub" id="lsSub">One glance: key details, tags, and next action — ready to send.</p>
@@ -283,7 +298,7 @@
       </div>
     </section>
 
-    <!-- PILOT + META DEMO (keep from File1) -->
+    <!-- PILOT + META DEMO -->
     <section class="grid-2" id="pilot" style="margin-top:16px">
       <div class="card">
         <h3 id="pilotTitle">Start your 30-Day Pilot Charter</h3>
@@ -317,7 +332,7 @@
       </div>
     </section>
 
-    <!-- FAQ / OBJECTIONS (from File1) -->
+    <!-- FAQ / OBJECTIONS -->
     <section class="faq">
       <h3 id="faqHead">Questions we hear</h3>
       <details>
@@ -348,11 +363,6 @@
     const TEST_NUMBER = "+39 3XX XXX XXXX";
     const WA_WORKER   = "https://kintra-wa-meta.founder-60b.workers.dev";
 
-    /*
-      DICTIONARY (superset of File1 + File2 keys)
-      - Keeps File1 FAQ/pricing/gold/ROI keys
-      - Adds File2 WA labels (who*, chips) so we can localize both
-    */
     const dict = {
       en:{
         badge:"Pilot • Italy", langLabel:"Language",
@@ -361,7 +371,14 @@
         sub:"Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.",
         btnRequest:"Request Pilot Access", btnDash:"Preview Dashboard", btnDeck:"View Live Deck", btnPDF:"View Deck PDF",
         priceLineA:"€1.5–2k pilot (30 days)", priceLineB:"1 niche · 2–3 KPIs.", priceTail:"If it doesn’t save time in 30 days, don’t continue.",
-        plainPrefix:"In plain terms:", plainBody:"focus on one property type/area; agree 2–3 success metrics (e.g., reply time, viewings booked).",
+
+        /* Assumptions */
+        showA:"Show assumptions", hideA:"Hide assumptions",
+        assumpTitle:"Assumptions (conservative):",
+        a1:"1 agent saves ~40–60 min/day via faster replies + fewer tab switches.",
+        a2:"At 20 working days, that’s 13–20 hours/month per agent.",
+        a3:"Pilot cost ≈ a fraction of a junior hire — likely break-even within 2–4 weeks.",
+        a4:"If it doesn’t save time, you don’t continue. Simple.",
 
         goldH3:"Advisor Charter (pilot)",
         goldP1:"A light, optional role during the 30-day pilot: skim the live pilot, share quick notes, and—only if it truly fits—open 1–2 warm doors.",
@@ -394,9 +411,6 @@
 
         waSend:"Send via WhatsApp (Meta demo)", waSendSub:"Uses Meta Cloud API (test number) to send a real message.", labPhone:"Recipient phone (E.164)", labMsg:"Message", publicNote:"For public visitors, we hide the number to reduce spam. Partners get a dedicated sandbox.", revealBtn:"Reveal test number",
 
-        /* ROI */
-        roi1:"€1.5–2k", roi1l:"Pilot (30 days)", roi2:"~12–20 h", roi2l:"Agent time saved / month*", roi3:"< 30 days", roi3l:"Likely break-even", roiNote:"*Assumes 20–40 leads/month and 1–2 minutes saved per reply. Scale multiplies ROI across agents.",
-
         /* FAQ */
         faqHead:"Questions we hear",
         q1:"Why not just use ChatGPT?", a1:"Generic chat tools don’t see your lead history, listing data, or WhatsApp thread context. Kintra sits in the flow: it detects intent in real messages, pulls listing facts, drafts compliant replies, suggests the next step, and logs outcomes to your dashboard—so managers see the daily pulse.",
@@ -404,14 +418,7 @@
         q3:"Will this replace agents?", a3:"No. It speeds up routine replies and keeps follow-ups from slipping. Agents approve and send; managers get clarity; clients get faster service.",
         q4:"WhatsApp compliance?", a4:"Production uses the official WhatsApp Business API (Meta Cloud). Pilots use a test number; we rate-limit demo sends to prevent abuse.",
 
-        world:"🌍 From Italy to the world — join the next wave.",
-
-        // Chat lines
-        bClientEN:"Hi, can we view tomorrow after work around 18:30?",
-        bAgentEN:"Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?",
-        bAgentEN2:"I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.",
-        bClientIT:"Hi, can we view tomorrow after work around 18:30?",
-        bKintraIT:'Draft ready: “Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?”'
+        world:"🌍 From Italy to the world — join the next wave."
       },
       it:{
         badge:"Pilot • Italia", langLabel:"Lingua",
@@ -420,7 +427,14 @@
         sub:"Gli agenti perdono ore cambiando scheda. Kintra riporta ogni lead in un unico thread, prepara le risposte e suggerisce i prossimi passi.",
         btnRequest:"Richiedi l’accesso al Pilot", btnDash:"Anteprima Dashboard", btnDeck:"Vedi Deck Live", btnPDF:"Scarica Deck PDF",
         priceLineA:"Pilot €1,5–2k (30 giorni)", priceLineB:"1 nicchia · 2–3 KPI.", priceTail:"Se in 30 giorni non fa risparmiare tempo, non si continua.",
-        plainPrefix:"In parole semplici:", plainBody:"focus su un solo tipo/zona di immobile; concordiamo 2–3 metriche di successo (es. tempo di risposta, visite fissate).",
+
+        /* Assunzioni */
+        showA:"Mostra assunzioni", hideA:"Nascondi assunzioni",
+        assumpTitle:"Assunzioni (prudenziali):",
+        a1:"1 agente risparmia ~40–60 min/giorno grazie a risposte più rapide e meno cambi di scheda.",
+        a2:"Su 20 giorni lavorativi sono 13–20 ore/mese per agente.",
+        a3:"Il costo del pilot è una frazione di un junior — probabile break-even in 2–4 settimane.",
+        a4:"Se non fa risparmiare tempo, non si continua. Semplice.",
 
         goldH3:"Advisor Charter (pilot)",
         goldP1:"Ruolo leggero e opzionale durante i 30 giorni: scorri il pilot live, lascia note rapide e—solo se davvero ha senso—apri 1–2 porte fidate.",
@@ -437,7 +451,7 @@
         keyClient:"Cliente", keyKintra:"Kintra", keyAgent:"Agente", keyInsight:"Insight",
         tBefore:"Prima", tAfter:"Dopo",
         manualTime:"Risposta manuale: ~2–4 min", autoTime:"Bozza automatica: ~10–20 sec · La prossima azione appare con ogni bozza",
-        insight1:"Gli strumenti generici non vedono cronologia dei lead o contesto annunci. L’agente riscrive le stesse offerte e dimentica il prossimo passo.",
+        insight1:"Gli strumenti generici non vedono cronologia dei lead o contesto. L’agente riscrive le stesse offerte e dimentica il prossimo passo.",
         insight2:"Kintra rileva l’intento (“prenotare visita”), aggancia i dettagli dell’annuncio e redige una risposta nativa con due slot + prompt per la prossima azione.",
         chip1:"Proponi due orari", chip2:"Invia planimetria", chip3:"Conferma promemoria",
         whoClient:"Cliente", whoAgentManual:"Agente (manuale)", whoKintraDraft:"Kintra (bozza)", whoAgentApprove:"Agente (approva/invia)",
@@ -453,23 +467,13 @@
 
         waSend:"Invia via WhatsApp (demo Meta)", waSendSub:"Usa Meta Cloud API (numero di test) per inviare un messaggio reale.", labPhone:"Telefono destinatario (E.164)", labMsg:"Messaggio", publicNote:"Per i visitatori pubblici nascondiamo il numero per ridurre lo spam. I partner hanno una sandbox dedicata.", revealBtn:"Mostra numero di test",
 
-        /* ROI */
-        roi1:"€1,5–2k", roi1l:"Pilot (30 giorni)", roi2:"~12–20 h", roi2l:"Tempo risparmiato/mese per agente*", roi3:"< 30 giorni", roi3l:"Probabile break-even", roiNote:"*Ipotesi: 20–40 lead/mese e 1–2 minuti risparmiati per risposta. La scala moltiplica l’ROI tra gli agenti.",
-
-        /* FAQ */
         faqHead:"Domande frequenti",
         q1:"Perché non usare semplicemente ChatGPT?", a1:"Gli strumenti generici non vedono cronologia lead, dati annuncio o contesto WhatsApp. Kintra lavora nel flusso: rileva l’intento nei messaggi reali, pesca i dati dell’annuncio, redige risposte conformi, propone la prossima azione e registra gli esiti in dashboard—così i manager vedono il polso quotidiano.",
         q2:"Il pilot è rischioso?", a2:"È a tempo (30 giorni), su una sola nicchia e misurato su 2–3 KPI. Se non fa risparmiare tempo, non si continua. Mantieni comunque asset e learning.",
         q3:"Sostituisce gli agenti?", a3:"No. Accelera le risposte di routine e impedisce che i follow‑up scivolino. L’agente approva e invia; il manager vede chiaro; il cliente riceve risposte più rapide.",
         q4:"Conformità WhatsApp?", a4:"In produzione usiamo l’API ufficiale WhatsApp Business (Meta Cloud). Le demo usano un numero di test; limitiamo il traffico per evitare abusi.",
 
-        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata.",
-
-        bClientEN:"Ciao, è possibile una visita domani verso le 18:30?",
-        bAgentEN:"Certo — l’appartamento è disponibile. Posso proporre domani alle 17:00 o giovedì alle 10:30. Quale preferisce?",
-        bAgentEN2:"Posso inviare planimetria e indicazioni. Confermo e mando promemoria 24h prima.",
-        bClientIT:"Ciao, è possibile una visita domani verso le 18:30?",
-        bKintraIT:'Bozza pronta: “Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?”'
+        world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata."
       }
     };
 
@@ -480,52 +484,56 @@
       $("#badge").textContent=d.badge; $("#lang-label").textContent=d.langLabel;
       $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; $("#sub").textContent=d.sub;
       $("#btn-request").textContent=d.btnRequest; $("#btn-dash").textContent=d.btnDash; $("#btn-deck").textContent=d.btnDeck; $("#btn-pdf").textContent=d.btnPDF;
-      $("#price-line").innerHTML=`<strong>${d.priceLineA}</strong> · ${d.priceLineB} <span class="muted" id="priceTail">${d.priceTail}</span>`;
-      $("#plain-explain").innerHTML=`<span id="plain-prefix">${d.plainPrefix}</span> <span id="plain-body">${d.plainBody}</span>`;
+
+      // Pricing
+      $("#priceStrong").textContent=d.priceLineA; $("#priceNiche").textContent=d.priceLineB.split(" · ")[0]||"1 niche"; $("#priceKPIs").textContent=(d.priceLineB.split(" · ")[1]||"2–3 KPIs.").replace(".",""); $("#priceTail").textContent=d.priceTail;
+
+      // Assumptions
+      const box = $("#assumpBox"); const open = box.style.display==="block"; 
+      $("#assumpBtn").textContent = open ? d.hideA : d.showA;
+      $("#assumpTitle").textContent=d.assumpTitle;
+      $("#a1").textContent=d.a1; $("#a2").textContent=d.a2; $("#a3").textContent=d.a3; $("#a4").textContent=d.a4;
 
       // Gold, trust, why, metrics
       $("#goldH3").textContent=d.goldH3; $("#goldP1").textContent=d.goldP1; $("#goldP2").textContent=d.goldP2; $("#goldP3").textContent=d.goldP3;
       $("#trust-line").textContent=d.trust; $("#why").textContent=d.why; $("#math").textContent=d.math; $("#compounds").textContent=d.compounds;
       $("#m1").textContent=d.m1; $("#m2").textContent=d.m2; $("#m3").textContent=d.m3;
 
-      // WA labels + lines
+      // WA labels
       $("#waPrev").textContent=d.waPrev; $("#waDesc").textContent=d.waDesc;
       $("#keyClient").textContent=d.keyClient; $("#keyKintra").textContent=d.keyKintra; $("#keyAgent").textContent=d.keyAgent; $("#keyInsight").textContent=d.keyInsight;
       $("#tBefore").textContent=d.tBefore; $("#tAfter").textContent=d.tAfter; $("#manualTime").textContent=d.manualTime; $("#autoTime").textContent=d.autoTime;
       $("#insightCopy1").textContent=d.insight1; $("#insightCopy2").textContent=d.insight2; $("#chip1").textContent=d.chip1; $("#chip2").textContent=d.chip2; $("#chip3").textContent=d.chip3;
-      $("#bClientEN").lastChild.nodeValue = " "+d.bClientEN; $("#bAgentEN").lastChild.nodeValue  = " "+d.bAgentEN; $("#bAgentEN2").lastChild.nodeValue = " "+d.bAgentEN2;
-      $("#bClientIT").lastChild.nodeValue = " "+d.bClientIT; $("#bKintraIT").lastChild.nodeValue = " "+d.bKintraIT; $("#bAgentIT").lastChild.nodeValue  = " "+d.agentApprovedText;
-      $("#whoC1").textContent=d.whoClient; $("#whoA1").textContent=d.whoAgentManual; $("#whoA2").textContent=d.whoAgentManual; $("#whoC2").textContent=d.whoClient; $("#whoK1").textContent=d.whoKintraDraft; $("#whoA3").textContent=d.whoAgentApprove;
 
       // Dashboard + listing
       $("#dashTitle").textContent=d.dashTitle; $("#dashSub").textContent=d.dashSub; $("#dashCap").textContent=d.dashCap; $("#openDash").textContent=d.openDash;
-      $("#lsTitle").textContent=d.lsTitle; $("#lsSub").textContent=d.lsSub; $("#lsCaption").textContent=d.lsCaption; $("#lsHeadRight").textContent=d.lsHeadRight;
-      $("#tag1").textContent=d.tag1; $("#tag2").textContent=d.tag2; $("#tag3").textContent=d.tag3; $("#tag4").textContent=d.tag4; $("#lsView").textContent=d.lsView; $("#lsCopy").textContent=d.lsCopy;
+      $("#lsTitle").textContent=d.lsTitle; $("#lsSub").textContent=d.lsSub; $("#lsCaption").textContent=d.lsCaption; $("#lsHeadRight").textContent=d.lsHeadRight; $("#lsView").textContent=d.lsView; $("#lsCopy").textContent=d.lsCopy;
 
-      // Pilot + WA demo + FAQ + world
+      // Pilot + demo + FAQ + world
       $("#pilotTitle").textContent=d.pilotTitle; $("#pilotSub").textContent=d.pilotSub; $("#btnStart").textContent=d.btnStart; $("#noSpam").textContent=d.noSpam;
       $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub; $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg; $("#publicNote").textContent=d.publicNote; $("#revealNum").textContent=d.revealBtn;
       $("#faqHead").textContent=d.faqHead; $("#q1").textContent=d.q1; $("#a1").textContent=d.a1; $("#q2").textContent=d.q2; $("#a2").textContent=d.a2; $("#q3").textContent=d.q3; $("#a3").textContent=d.a3; $("#q4").textContent=d.q4; $("#a4").textContent=d.a4;
       $("#world").textContent=d.world;
 
-      document.documentElement.lang=L;
-      $("#lang-en").classList.toggle("active", L==="en");
-      $("#lang-it").classList.toggle("active", L==="it");
-      localStorage.setItem("kintra_lang", L);
+      document.documentElement.lang=L; $("#lang-en").classList.toggle("active", L==="en"); $("#lang-it").classList.toggle("active", L==="it"); localStorage.setItem("kintra_lang", L);
     }
 
     // Lang init
-    $("#lang-en").onclick=()=>setLang("en");
-    $("#lang-it").onclick=()=>setLang("it");
-    setLang(localStorage.getItem("kintra_lang")||"en");
+    $("#lang-en").onclick=()=>setLang("en"); $("#lang-it").onclick=()=>setLang("it"); setLang(localStorage.getItem("kintra_lang")||"en");
 
-    // Tabs
-    const beforeBtn=$("#tabBefore"), afterBtn=$("#tabAfter");
-    const beforePanel=$("#panelBefore"), afterPanel=$("#panelAfter");
+    // WA tabs
+    const beforeBtn=$("#tabBefore"), afterBtn=$("#tabAfter"); const beforePanel=$("#panelBefore"), afterPanel=$("#panelAfter");
     function showBefore(){ beforeBtn.classList.add("active"); afterBtn.classList.remove("active"); beforePanel.style.display="flex"; afterPanel.style.display="none"; }
     function showAfter(){  afterBtn.classList.add("active"); beforeBtn.classList.remove("active"); afterPanel.style.display="flex"; beforePanel.style.display="none"; }
-    beforeBtn.addEventListener("click", showBefore);
-    afterBtn.addEventListener("click", showAfter);
+    beforeBtn.addEventListener("click", showBefore); afterBtn.addEventListener("click", showAfter);
+
+    // Assumptions toggle
+    $("#assumpBtn").onclick = ()=>{
+      const L = document.documentElement.lang; const d = dict[L];
+      const box = $("#assumpBox"); const open = box.style.display==="block";
+      box.style.display = open ? "none" : "block";
+      $("#assumpBtn").textContent = open ? d.showA : d.hideA;
+    };
 
     // WhatsApp demo
     $("#sendWA").onclick=async ()=>{
