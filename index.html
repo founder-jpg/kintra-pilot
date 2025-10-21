@@ -543,5 +543,147 @@
     };
     $("#revealNum").onclick=()=>{ $("#revealed").style.display="block"; $("#numVal").textContent=TEST_NUMBER; };
   </script>
+
+  <script>
+/* ---- Kintra Stability Patch (non-destructive) ---------------------------------
+   Purpose: restore lang toggle, flags, WA before/after, insight text,
+            and pilot placeholders — without changing layout.
+   Safe mode: skips any element with data-lock="1"
+------------------------------------------------------------------------------- */
+
+(function(){
+  const $ = s => document.querySelector(s);
+  const txt = (el, v)=>{ if(!el || el.dataset.lock==="1") return; el.textContent = v; };
+  const html= (el, v)=>{ if(!el || el.dataset.lock==="1") return; el.innerHTML   = v; };
+  const setPH= (el, v)=>{ if(!el || el.dataset.lock==="1") return; el.placeholder = v; };
+
+  // 0) Ensure flags exist (inline SVG). If flags already present, do nothing.
+  function ensureFlags(){
+    const enBtn = $("#lang-en"); const itBtn = $("#lang-it");
+    if(!enBtn || !itBtn) return;
+    const hasSVG = b => b.querySelector(".flag svg");
+    function mkEN(){
+      const span = enBtn.querySelector(".flag") || (function(){const s=document.createElement("span");s.className="flag";enBtn.insertBefore(s,enBtn.firstChild);return s;})();
+      if(!hasSVG(enBtn)) span.innerHTML = '<svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#012169"/><path d="M0,0 60,36 M60,0 0,36" stroke="#FFF" stroke-width="8"/><path d="M0,0 60,36 M60,0 0,36" stroke="#C8102E" stroke-width="4"/><rect x="25" width="10" height="36" fill="#FFF"/><rect y="13" width="60" height="10" fill="#FFF"/><rect x="27" width="6" height="36" fill="#C8102E"/><rect y="15" width="60" height="6" fill="#C8102E"/></svg>';
+    }
+    function mkIT(){
+      const span = itBtn.querySelector(".flag") || (function(){const s=document.createElement("span");s.className="flag";itBtn.insertBefore(s,itBtn.firstChild);return s;})();
+      if(!hasSVG(itBtn)) span.innerHTML = '<svg viewBox="0 0 60 36"><rect width="60" height="36" fill="#fff"/><rect width="20" height="36" x="0" fill="#009246"/><rect width="20" height="36" x="40" fill="#CE2B37"/></svg>';
+    }
+    mkEN(); mkIT();
+  }
+
+  // 1) Language dictionary (only strings this patch may need)
+  const dict = {
+    en:{
+      langLabel:"Language",
+      before:"Before", after:"After",
+      client:"Client", kintra:"Kintra", agent:"Agent",
+      insightBefore:"Manual reply ~2–4 min. Generic tools don’t detect intent or suggest next steps.",
+      insightAfter:"Auto-draft ~10–20 sec. Suggested next step appears with each draft.",
+      namePH:"Name — e.g. Alex Rossi",
+      emailPH:"Work email — e.g. alex.rossi@agency.it",
+      wfPH:"What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)",
+      showAssump:"Show assumptions", hideAssump:"Hide assumptions",
+      plainHint:"In plain English: pick one property type; agree 2–3 success metrics."
+    },
+    it:{
+      langLabel:"Lingua",
+      before:"Prima", after:"Dopo",
+      client:"Cliente", kintra:"Kintra", agent:"Agente",
+      insightBefore:"Risposta manuale ~2–4 min. I tool generici non rilevano l’intento né suggeriscono il prossimo passo.",
+      insightAfter:"Auto-bozza ~10–20 sec. Il prossimo passo suggerito appare insieme alla bozza.",
+      namePH:"Nome — es. Alex Rossi",
+      emailPH:"Email lavoro — es. alex.rossi@agenzia.it",
+      wfPH:"Qual è il tuo flusso attuale? (es. lead da WhatsApp + email, vuoi rispondere più in fretta…)",
+      showAssump:"Mostra ipotesi", hideAssump:"Nascondi ipotesi",
+      plainHint:"In parole semplici: scegli una tipologia d’immobile; definiamo 2–3 metriche di successo."
+    }
+  };
+
+  function lang(){ return (document.documentElement.lang === "it") ? "it" : "en"; }
+
+  // 2) Restore EN/IT labels (non-destructive; only if those IDs exist)
+  function applyLangLabels(){
+    const L = dict[lang()];
+    txt($("#lang-label"), L.langLabel);
+    txt($("#wa-before-label"), L.before);
+    txt($("#wa-after-label"),  L.after);
+    txt($("#lbl-client"), L.client);
+    txt($("#lbl-kintra"), L.kintra);
+    txt($("#lbl-agent"),  L.agent);
+    // insight lines
+    txt($("#wa-insight-before"), L.insightBefore);
+    txt($("#wa-insight-after"),  L.insightAfter);
+    // form placeholders
+    setPH($("#name"),  L.namePH);
+    setPH($("#email"), L.emailPH);
+    setPH($("#wf"),    L.wfPH);
+    // plain-English helper (only if present on this build)
+    if($("#plain-hint")) txt($("#plain-hint"), L.plainHint);
+    // assumptions button text (toggle-friendly)
+    const b = $("#btn-assump");
+    if(b && b.dataset.state!=="open") txt(b, L.showAssump);
+  }
+
+  // 3) Wire language buttons without replacing your existing handlers
+  function bindLang(){
+    const en = $("#lang-en"), it = $("#lang-it");
+    if(en) en.addEventListener("click", ()=>{ document.documentElement.lang="en"; setTimeout(()=>{ ensureFlags(); applyLangLabels(); },0); });
+    if(it) it.addEventListener("click", ()=>{ document.documentElement.lang="it"; setTimeout(()=>{ ensureFlags(); applyLangLabels(); },0); });
+  }
+
+  // 4) Restore WA Before/After toggle logic (IDs expected by all your versions)
+  function bindBeforeAfter(){
+    const beforeBtn=$("#wa-before"), afterBtn=$("#wa-after");
+    const paneB=$("#wa-pane-before"), paneA=$("#wa-pane-after");
+    if(!beforeBtn || !afterBtn || !paneB || !paneA) return;
+    function show(which){
+      const isBefore = which==="before";
+      beforeBtn.classList.toggle("active", isBefore);
+      beforeBtn.setAttribute("aria-selected", isBefore ? "true":"false");
+      afterBtn.classList.toggle("active", !isBefore);
+      afterBtn.setAttribute("aria-selected", !isBefore ? "true":"false");
+      paneB.style.display = isBefore ? "block":"none";
+      paneB.setAttribute("aria-hidden", isBefore ? "false":"true");
+      paneA.style.display = isBefore ? "none":"block";
+      paneA.setAttribute("aria-hidden", isBefore ? "true":"false");
+      // ensure insight for current lang/mode
+      applyLangLabels();
+    }
+    beforeBtn.addEventListener("click", ()=> show("before"));
+    afterBtn.addEventListener("click",  ()=> show("after"));
+    // first paint safe default
+    show( (afterBtn.classList.contains("active")) ? "after" : "before" );
+  }
+
+  // 5) Assumptions toggle (if present)
+  function bindAssumptions(){
+    const btn = $("#btn-assump"), box = $("#assump");
+    if(!btn || !box) return;
+    const L = dict[lang()];
+    btn.textContent = L.showAssump;
+    btn.dataset.state="closed";
+    btn.addEventListener("click", ()=>{
+      const open = btn.dataset.state==="open";
+      box.style.display = open ? "none":"block";
+      btn.dataset.state = open ? "closed":"open";
+      btn.textContent = dict[lang()][ open ? "showAssump":"hideAssump" ];
+    });
+  }
+
+  // 6) Init
+  ensureFlags();
+  applyLangLabels();
+  bindLang();
+  bindBeforeAfter();
+  bindAssumptions();
+
+  // 7) If some other script flips <html lang>, keep labels in sync.
+  const mo = new MutationObserver(()=> applyLangLabels());
+  mo.observe(document.documentElement, {attributes:true, attributeFilter:["lang"]});
+})();
+</script>
+
 </body>
 </html>
