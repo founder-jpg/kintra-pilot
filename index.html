@@ -90,7 +90,11 @@
     .wa-tab.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
 
     .chat{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
-    .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:15px;margin:6px 0}
+    .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:15px;margin:6px 0;position:relative}
+    .who{
+      position:absolute;top:-10px;left:10px;
+      font-size:11px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#475366
+    }
     .bubble.client{align-self:flex-start;background:var(--wa-gray);border:1px solid var(--line);color:#243044}
     .bubble.kintra{align-self:flex-end;background:var(--wa-blue);border:1px solid var(--wa-blue-b)}
     .bubble.agent{align-self:flex-end;background:var(--agent-green);border:1px solid var(--agent-green-b)}
@@ -234,9 +238,18 @@
         <!-- BEFORE -->
         <div id="panelBefore" class="wa" style="margin-top:10px">
           <div class="chat" aria-label="Manual workflow">
-            <div class="bubble client" id="bClientEN">Hi, can we view tomorrow after work around 18:30?</div>
-            <div class="bubble agent" id="bAgentEN">Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?</div>
-            <div class="bubble agent" id="bAgentEN2">I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.</div>
+            <div class="bubble client" id="bClientEN">
+              <span class="who" id="whoC1">Client</span>
+              Hi, can we view tomorrow after work around 18:30?
+            </div>
+            <div class="bubble agent" id="bAgentEN">
+              <span class="who" id="whoA1">Agent (manual)</span>
+              Sure — the apartment is available. I can propose tomorrow at 17:00 or Thursday at 10:30. Which do you prefer?
+            </div>
+            <div class="bubble agent" id="bAgentEN2">
+              <span class="who" id="whoA2">Agent (manual)</span>
+              I can also send the floor plan and directions. I’ll confirm and send a 24-hour reminder.
+            </div>
             <div class="stamp" id="manualTime">Manual reply: ~2–4 min</div>
           </div>
 
@@ -248,9 +261,18 @@
         <!-- AFTER -->
         <div id="panelAfter" class="wa" style="margin-top:10px;display:none">
           <div class="chat" aria-label="Kintra workflow">
-            <div class="bubble client" id="bClientIT">Hi, can we view tomorrow after work around 18:30?</div>
-            <div class="bubble kintra" id="bKintraIT">Draft ready: “Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?”</div>
-            <div class="bubble agent" id="bAgentIT">Approved & sent.</div>
+            <div class="bubble client" id="bClientIT">
+              <span class="who" id="whoC2">Client</span>
+              Hi, can we view tomorrow after work around 18:30?
+            </div>
+            <div class="bubble kintra" id="bKintraIT">
+              <span class="who" id="whoK1">Kintra (draft)</span>
+              Draft ready: “Certo! L’appartamento è disponibile. Posso proporre domani alle 17:00 oppure giovedì alle 10:30. Preferisce una delle due?”
+            </div>
+            <div class="bubble agent" id="bAgentIT">
+              <span class="who" id="whoA3">Agent (approve & send)</span>
+              Approved & sent.
+            </div>
             <div class="stamp" id="autoTime">Auto-draft: ~10–20 sec · Suggested next step appears with each draft</div>
           </div>
 
@@ -389,6 +411,11 @@
         insight2:"Kintra detects intent (“book a viewing”), pulls listing details, and drafts a native-Italian reply with two slots + a next-step prompt.",
         chip1:"Offer two slots", chip2:"Send floor plan", chip3:"Confirm reminder",
 
+        whoClient:"Client",
+        whoAgentManual:"Agent (manual)",
+        whoKintraDraft:"Kintra (draft)",
+        whoAgentApprove:"Agent (approve & send)",
+
         dashH:"Dashboard Mini (live preview)", dashSub:"Managers get a daily pulse at a glance.",
         openDash:"Open Dashboard", dashNote:"Real metrics from the pilot dashboard.",
 
@@ -447,6 +474,11 @@
         insight1:"Gli strumenti generici non vedono storico e contesto: l’agente riscrive le stesse offerte e dimentica la prossima azione.",
         insight2:"Kintra rileva l’intento (“prenotare visita”), aggancia i dettagli dell’annuncio e redige una risposta nativa con due slot + prompt per la prossima azione.",
         chip1:"Proponi due orari", chip2:"Invia planimetria", chip3:"Conferma promemoria",
+
+        whoClient:"Cliente",
+        whoAgentManual:"Agente (manuale)",
+        whoKintraDraft:"Kintra (bozza)",
+        whoAgentApprove:"Agente (approva e invia)",
 
         dashH:"Dashboard Mini (anteprima live)", dashSub:"I manager vedono il polso giornaliero a colpo d’occhio.",
         openDash:"Apri Dashboard", dashNote:"Metriche reali dalla dashboard del pilot.",
@@ -528,12 +560,19 @@
       $("#chip2").textContent=d.chip2;
       $("#chip3").textContent=d.chip3;
 
-      // Chat lines
-      $("#bClientEN").textContent=d.bClientEN;
-      $("#bAgentEN").textContent=d.bAgentEN;
-      $("#bAgentEN2").textContent=d.bAgentEN2;
-      $("#bClientIT").textContent=d.bClientIT;
-      $("#bKintraIT").textContent=d.bKintraIT;
+      // Chat lines & WHO badges
+      $("#bClientEN").lastChild.nodeValue = " " + d.bClientEN;
+      $("#bAgentEN").lastChild.nodeValue  = " " + d.bAgentEN;
+      $("#bAgentEN2").lastChild.nodeValue = " " + d.bAgentEN2;
+      $("#bClientIT").lastChild.nodeValue = " " + d.bClientIT;
+      $("#bKintraIT").lastChild.nodeValue = " " + d.bKintraIT;
+
+      $("#whoC1").textContent=d.whoClient;
+      $("#whoA1").textContent=d.whoAgentManual;
+      $("#whoA2").textContent=d.whoAgentManual;
+      $("#whoC2").textContent=d.whoClient;
+      $("#whoK1").textContent=d.whoKintraDraft;
+      $("#whoA3").textContent=d.whoAgentApprove;
 
       // Dashboard + listing
       $("#dashH").textContent=d.dashH; $("#dashSub").textContent=d.dashSub;
@@ -564,7 +603,7 @@
     $("#lang-it").onclick=()=>setLang("it");
     setLang(localStorage.getItem("kintra_lang")||"en");
 
-    // WhatsApp Before/After tabs (robust)
+    // WhatsApp Before/After tabs
     const beforeBtn=$("#tabBefore"), afterBtn=$("#tabAfter");
     const beforePanel=$("#panelBefore"), afterPanel=$("#panelAfter");
     function showBefore(){
