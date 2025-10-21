@@ -12,7 +12,6 @@
       --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
       --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
       --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
-      --wa-green:#25D366; --wa-bubble:#e7f9ee; --client-bubble:#f5f7fb;
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
@@ -24,21 +23,13 @@
     .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
     .brand strong{letter-spacing:.2px}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
-
-    .langbox{display:flex;align-items:center;gap:10px}
-    .langbox .label{font-size:14px;color:#6b7280}
-    .toggle{display:flex;gap:8px}
-    .toggle button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600}
-    .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{display:inline-flex;width:18px;height:12px} .flag svg{width:18px;height:12px;display:block}
-
-    h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px;color:var(--navy)}
+    h1{font-size:40px;line-height:1.08;margin:0 0 10px;color:var(--navy)}
     .lead{font-size:18px;color:#243044;margin:0 0 10px}
     .sub{color:var(--muted);margin:0 0 14px}
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
     .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
     .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
-    .divider{height:1px;background:var(--line);margin:18px 0}
+    .pricing{margin-top:10px;font-size:14px;color:#243044}
+    .muted{color:#6b7280}
   </style>
 </head>
 <body>
@@ -55,16 +46,33 @@
       <h1>From listing to leads, faster</h1>
       <p class="lead">AI tools that help agents reply faster and book more viewings — inside WhatsApp.</p>
       <p class="sub">Agents waste hours switching tabs. Kintra brings every lead back into one thread, drafts replies, and suggests next steps.</p>
-      <div class="cta-row">
+      <div style="margin:12px 0;display:flex;gap:10px;flex-wrap:wrap">
         <a class="btn primary" href="#pilot">Request Pilot Access</a>
         <a class="btn" href="./dashboard.html">Preview Dashboard</a>
       </div>
-
       <div class="pricing">
         <strong>€1.5–2k pilot (30 days)</strong> · 1 niche · 2–3 KPIs.
         <span class="muted">If it doesn’t save time in 30 days, don’t continue.</span>
       </div>
     </section>
+
+    <section style="margin-top:30px">
+      <h2>Advisor Charter (pilot)</h2>
+      <p>A light, optional role during the 30-day pilot: skim the live pilot, share quick notes, and—only if it truly fits—open 1–2 warm doors.</p>
+      <p><strong>Zero operational load; clear upside if the pilot performs.</strong></p>
+      <p class="muted">We list early advisors by permission only.</p>
+    </section>
+
+    <section style="margin-top:30px">
+      <h2>Questions we hear</h2>
+      <details><summary>Why not just use ChatGPT?</summary><p>Generic chat tools don’t see your lead history, listing data, or WhatsApp thread context. Kintra sits in the flow: it detects intent in real messages, pulls listing facts, drafts compliant replies, suggests the next step, and logs outcomes to your dashboard.</p></details>
+      <details><summary>Is the pilot risky?</summary><p>It’s time-boxed (30 days), scoped to one niche, and measured on 2–3 KPIs. If it doesn’t save time, don’t continue. You keep the learning and assets.</p></details>
+      <details><summary>Will this replace agents?</summary><p>No. It speeds up routine replies and keeps follow-ups from slipping. Agents approve and send; managers get clarity; clients get faster service.</p></details>
+    </section>
+
+    <footer style="margin-top:40px;font-size:14px;color:#6b7280">
+      © 2025 Kintra — <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
+    </footer>
   </div>
 </body>
 </html>
