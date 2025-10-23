@@ -340,6 +340,8 @@
     <!-- FAQ / OBJECTIONS -->
     <section class="faq">
       <h3 id="faqHead">Questions we hear</h3>
+
+      <!-- Keep your original 4 -->
       <details>
         <summary id="q1">Why not just use ChatGPT?</summary>
         <p id="a1">Generic chat tools don’t see your lead history, listing data, or WhatsApp thread context. Kintra sits in the flow: it detects intent in real messages, pulls listing facts, drafts compliant replies, suggests the next step, and logs outcomes to your dashboard—so managers see the daily pulse.</p>
@@ -355,6 +357,32 @@
       <details>
         <summary id="q4">WhatsApp compliance?</summary>
         <p id="a4">Production uses the official WhatsApp Business API (Meta Cloud). Pilots use a test number; we rate-limit demo sends to prevent abuse.</p>
+      </details>
+
+      <!-- New, non-duplicating questions -->
+      <details>
+        <summary id="q5">Isn’t this expensive?</summary>
+        <p id="a5">Most teams reclaim ~12–20 hours/agent/month. That’s typically cheaper than a junior hire and usually breaks even within the first 2–4 weeks of the pilot. If the time-savings don’t show up, you don’t continue.</p>
+      </details>
+      <details>
+        <summary id="q6">How quickly do we see value?</summary>
+        <p id="a6">Setup is light. Smart Reply and the Listing Summary card start saving time on day one; the Dashboard Mini shows a daily pulse immediately. We focus on one niche to concentrate results.</p>
+      </details>
+      <details>
+        <summary id="q7">Will this work with our current tools?</summary>
+        <p id="a7">Yes. Kintra drafts inside the WhatsApp flow and can pull core listing facts from your CRM or spreadsheet. You keep your existing systems; we reduce tab-switching and re-typing.</p>
+      </details>
+      <details>
+        <summary id="q8">What about data and privacy?</summary>
+        <p id="a8">Pilot traffic uses a test number and is rate-limited. Production uses the official WhatsApp Business API. We scope access to the minimum needed, and you can export or delete pilot data at any time.</p>
+      </details>
+      <details>
+        <summary id="q9">What happens after the 30-day pilot?</summary>
+        <p id="a9">If the KPIs move and your team is happy, you can continue on a paid plan and expand beyond the first niche. If not, you stop. You keep the learning and the assets we prepared.</p>
+      </details>
+      <details>
+        <summary id="q10">Will this disrupt agents’ workflow?</summary>
+        <p id="a10">No. Agents stay in WhatsApp. Kintra drafts replies with next steps; agents approve and send. Managers gain visibility without adding extra forms or tabs.</p>
       </details>
     </section>
 
@@ -421,6 +449,14 @@
         q3:"Will this replace agents?", a3:"No. It speeds up routine replies and keeps follow-ups from slipping. Agents approve and send; managers get clarity; clients get faster service.",
         q4:"WhatsApp compliance?", a4:"Production uses the official WhatsApp Business API (Meta Cloud). Pilots use a test number; we rate-limit demo sends to prevent abuse.",
 
+        /* New FAQ (EN) */
+        q5:"Isn’t this expensive?", a5:"Most teams reclaim ~12–20 hours/agent/month. That’s typically cheaper than a junior hire and usually breaks even within the first 2–4 weeks of the pilot. If the time-savings don’t show up, you don’t continue.",
+        q6:"How quickly do we see value?", a6:"Setup is light. Smart Reply and the Listing Summary card start saving time on day one; the Dashboard Mini shows a daily pulse immediately. We focus on one niche to concentrate results.",
+        q7:"Will this work with our current tools?", a7:"Yes. Kintra drafts inside the WhatsApp flow and can pull core listing facts from your CRM or spreadsheet. You keep your existing systems; we reduce tab-switching and re-typing.",
+        q8:"What about data and privacy?", a8:"Pilot traffic uses a test number and is rate-limited. Production uses the official WhatsApp Business API. We scope access to the minimum needed, and you can export or delete pilot data at any time.",
+        q9:"What happens after the 30-day pilot?", a9:"If the KPIs move and your team is happy, you can continue on a paid plan and expand beyond the first niche. If not, you stop. You keep the learning and the assets we prepared.",
+        q10:"Will this disrupt agents’ workflow?", a10:"No. Agents stay in WhatsApp. Kintra drafts replies with next steps; agents approve and send. Managers gain visibility without adding extra forms or tabs.",
+
         world:"🌍 From Italy to the world — join the next wave."
       },
       it:{
@@ -475,6 +511,14 @@
         q3:"Sostituisce gli agenti?", a3:"No. Accelera le risposte di routine e impedisce che i follow-up scivolino. L’agente approva e invia; il manager vede chiaro; il cliente riceve risposte più rapide.",
         q4:"Conformità WhatsApp?", a4:"In produzione usiamo l’API ufficiale WhatsApp Business (Meta Cloud). Le demo usano un numero di test; limitiamo il traffico per evitare abusi.",
 
+        /* New FAQ (IT) */
+        q5:"Non è troppo costoso?", a5:"Molti team recuperano ~12–20 ore/agente/mese. In genere costa meno di un junior e va in pareggio nelle prime 2–4 settimane di pilot. Se il risparmio tempo non c’è, non si continua.",
+        q6:"Quanto velocemente vediamo valore?", a6:"Setup leggero. Smart Reply e la scheda Listing Summary fanno risparmiare tempo dal primo giorno; la Dashboard Mini mostra subito il polso giornaliero. Ci concentriamo su una nicchia per focalizzare i risultati.",
+        q7:"Funziona con i nostri strumenti attuali?", a7:"Sì. Kintra redige dentro il flusso WhatsApp e può prendere i dati chiave dell’annuncio dal tuo CRM o foglio di calcolo. Tieni i sistemi attuali; riduciamo cambi scheda e riscritture.",
+        q8:"E i dati/privacy?", a8:"Nel pilot usiamo un numero di test con rate limit. In produzione usiamo l’API ufficiale WhatsApp Business. Accesso minimo indispensabile; puoi esportare o cancellare i dati del pilot in qualsiasi momento.",
+        q9:"Cosa succede dopo i 30 giorni?", a9:"Se i KPI si muovono e il team è soddisfatto, puoi continuare con un piano a pagamento ed espandere oltre la prima nicchia. Altrimenti, stop. Tieni learning e asset creati.",
+        q10:"Disturba il lavoro degli agenti?", a10:"No. Gli agenti restano in WhatsApp. Kintra redige le risposte con il prossimo passo; l’agente approva e invia. I manager vedono chiaro senza moduli extra o nuove schede.",
+
         world:"🌍 Dall’Italia al mondo — unisciti alla prossima ondata."
       }
     };
@@ -484,7 +528,7 @@
       const d = dict[L];
       // Header + hero
       $("#badge").textContent=d.badge; $("#lang-label").textContent=d.langLabel;
-      $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; $("#sub").textContent=d.sub;
+      $("#h1").textContent=d.h1; $("#lead").textContent=d.lead; "#sub" in window ? null:0; $("#sub").textContent=d.sub;
       $("#btn-request").textContent=d.btnRequest; $("#btn-dash").textContent=d.btnDash; $("#btn-deck").textContent=d.btnDeck; $("#btn-pdf").textContent=d.btnPDF;
 
       // Pricing (single line)
@@ -521,10 +565,16 @@
       // Pilot + demo + FAQ + world
       $("#pilotTitle").textContent=d.pilotTitle; $("#pilotSub").textContent=d.pilotSub; $("#btnStart").textContent=d.btnStart; $("#noSpam").textContent=d.noSpam;
       $("#waSend").textContent=d.waSend; $("#waSendSub").textContent=d.waSendSub; $("#labPhone").textContent=d.labPhone; $("#labMsg").textContent=d.labMsg; $("#publicNote").textContent=d.publicNote; $("#revealNum").textContent=d.revealBtn;
-      $("#faqHead").textContent=d.faqHead; $("#q1").textContent=d.q1; $("#a1").textContent=d.a1; $("#q2").textContent=d.q2; $("#a2").textContent=d.a2; $("#q3").textContent=d.q3; $("#a3").textContent=d.a3; $("#q4").textContent=d.q4; $("#a4").textContent=d.a4;
+
+      $("#faqHead").textContent=d.faqHead;
+      for(let i=1;i<=10;i++){
+        const qs=$("#q"+i), as=$("#a"+i);
+        if(qs) qs.textContent=d["q"+i];
+        if(as) as.textContent=d["a"+i];
+      }
       $("#world").textContent=d.world;
 
-      // Placeholders (added IDs so these translate too)
+      // Placeholders translate too
       $("#name").placeholder = d === dict.en ? "Name — e.g. Alex Rossi" : "Nome — es. Alex Rossi";
       $("#email").placeholder = d === dict.en ? "Work email — e.g. alex.rossi@agency.it" : "Email lavoro — es. alex.rossi@agenzia.it";
       $("#wf").placeholder = d === dict.en ? "What’s your current workflow? (e.g. inbound via WhatsApp + email, want faster replies…)" : "Qual è il tuo flusso attuale? (es. lead da WhatsApp + email, vuoi rispondere più in fretta…)";
