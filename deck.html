@@ -101,19 +101,33 @@
         break-after:page;
       }
 
-      /* Keep cover image smaller so it stays on same page as title */
+      /* Keep cover image on same page but not microscopic */
       #s-cover .cover-img{
-        width:30% !important;
-        max-height:40% !important;
+        width:40% !important;
+        max-height:55% !important;
         right:40px;
         bottom:40px;
       }
 
-      /* Prevent “super blown up” images on problem + solution */
-      #s-problem img,
-      #s-solution img{
+      /* Problem slide image: prevent giant zoom in PDF */
+      #s-problem img{
         max-height:260px !important;
         height:auto !important;
+      }
+
+      /* Solution slide: keep three images with loose uniformity (same height as HTML) */
+      #s-solution .shots img{
+        height:200px !important;
+        width:100% !important;
+        object-fit:cover !important;
+      }
+
+      /* Pilot slide: avoid overlap of the “Why this matters” box */
+      #s-pilot .panel{
+        position:static !important;
+        margin-top:18px !important;
+        max-width:420px;
+        margin-left:auto;
       }
     }
 
