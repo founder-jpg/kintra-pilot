@@ -86,13 +86,35 @@
     .field textarea{min-height:90px;resize:vertical}
     .note{font-size:13px;color:var(--muted)}
 
-    /* Print: one slide per page, landscape */
+    /* Print: one slide per page, landscape, with saner image sizes */
     @media print{
       @page{size: 16in 9in; margin:0}
       body{background:#fff}
       .bar{display:none}
       .deck{gap:0;padding:0}
-      .slide{border:0;border-radius:0;box-shadow:none;page-break-after:always;break-after:page}
+
+      .slide{
+        border:0;
+        border-radius:0;
+        box-shadow:none;
+        page-break-after:always;
+        break-after:page;
+      }
+
+      /* Keep cover image smaller so it stays on same page as title */
+      #s-cover .cover-img{
+        width:30% !important;
+        max-height:40% !important;
+        right:40px;
+        bottom:40px;
+      }
+
+      /* Prevent “super blown up” images on problem + solution */
+      #s-problem img,
+      #s-solution img{
+        max-height:260px !important;
+        height:auto !important;
+      }
     }
 
     @media (max-width:1360px){
@@ -444,7 +466,6 @@
       q('#lang-it').classList.toggle('active', lang==='it');
       localStorage.setItem('kintra_deck_lang', lang);
 
-      // placeholders
       q('#name').placeholder  = 'Alex Rossi';
       q('#email').placeholder = 'alex.rossi@agency.it';
       q('#wf').placeholder    = (lang==='it'
