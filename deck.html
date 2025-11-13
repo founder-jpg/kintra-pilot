@@ -9,7 +9,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Kintra — Pilot Deck • Rental Teams"/>
   <meta property="og:description" content="Replies in 60 seconds. Viewings in minutes — for rental teams on WhatsApp."/>
-  <meta property="og:image" content="./img/og.jpg"/>
+  <meta property="og:image" content="./img/cover.jpg"/>
 
   <link rel="icon" href="./img/logo.png.png"/>
 
@@ -144,7 +144,7 @@
           </ul>
         </div>
         <div class="panel">
-          <img src="./img/listing-summary.png" alt="Listing summary preview" style="width:100%;height:360px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
+          <img src="./img/problem.jpg" alt="Fragmented information across channels" style="width:100%;height:360px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
           <p class="muted" style="margin:8px 0 0" id="prob-cap">Fragmented info → slower replies → fewer viewings booked.</p>
         </div>
       </div>
@@ -164,9 +164,12 @@
         </div>
         <div class="panel">
           <div class="shots">
-            <img src="./img/whatsapp-reply.png" alt="WhatsApp reply"/>
-            <img src="./img/listing-summary.png" alt="Listing summary"/>
-            <img src="./img/dashboard-mini.png" alt="Dashboard mini"/>
+            <!-- Rental conversation / WhatsApp feel -->
+            <img src="./img/solution.jpg" alt="WhatsApp rental reply preview"/>
+            <!-- Listing-style visual -->
+            <img src="./img/cta.jpg" alt="Listing / CTA preview"/>
+            <!-- Dashboard metrics preview -->
+            <img src="./img/dashboard%20preview%20screen.PNG" alt="Dashboard mini preview"/>
           </div>
           <p class="muted" style="margin:8px 0 0" id="sol-cap">WhatsApp-native workflow, built for rental teams and managers.</p>
         </div>
@@ -408,32 +411,6 @@
       q('#cta-note').textContent  = d.cta_note;
       q('#cta-right-h').textContent = d.cta_right_h;
       q('#link-landing').textContent = d.link_landing;
-      q('#link-dash').textContent    = d.link_dash;
-      q('#link-pdf').textContent     = d.link_pdf;
-      q('#cta-foot').textContent     = d.cta_foot;
+      q('#link-dash').textContent    = d.link_d
 
-      q('#footer-note').innerHTML = d.footer_note + '<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
-
-      q('#lang-en').classList.toggle('active', lang==='en');
-      q('#lang-it').classList.toggle('active', lang==='it');
-      localStorage.setItem('kintra_deck_lang', lang);
-
-      // placeholders
-      q('#name').placeholder  = (lang==='it'?'Alex Rossi':'Alex Rossi');
-      q('#email').placeholder = (lang==='it'?'alex.rossi@agency.it':'alex.rossi@agency.it');
-      q('#wf').placeholder    = (lang==='it'
-                                  ? 'Gestiamo inbound affitti su WhatsApp + portali, vogliamo risposte più rapide…'
-                                  : 'We handle rental inbound on WhatsApp + portals, want faster replies…');
-    }
-
-    q('#lang-en').onclick = () => setLang('en');
-    q('#lang-it').onclick = () => setLang('it');
-    setLang(localStorage.getItem('kintra_deck_lang') || 'en');
-
-    // Fake form save (for demo)
-    q('#submit').onclick = () => {
-      alert('Thanks — we’ll be in touch within 24 hours.');
-    };
-  </script>
-</body>
-</html>
+::contentReference[oaicite:0]{index=0}
