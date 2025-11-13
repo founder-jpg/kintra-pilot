@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Kintra — Rental Pilot Deck</title>
+  <title>Kintra — Pilot Deck</title>
   <meta name="theme-color" content="#0b2347"/>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Kintra — Rental Pilot Deck"/>
+  <meta property="og:title" content="Kintra — Pilot Deck"/>
   <meta property="og:description" content="From rental inquiry to viewing, faster — inside WhatsApp."/>
   <meta property="og:image" content="./img/cover.jpg"/>
 
@@ -16,7 +16,7 @@
   <style>
     :root{
       --navy:#0b2347; --gold:#c9a227; --ink:#0f172a; --muted:#6b7280; --line:#e5e7eb; --bg:#ffffff;
-      --slide-w: 1280px;
+      --slide-w: 1280px;  /* 16:9 canvas */
       --slide-h: 720px;
       --radius: 18px;
     }
@@ -26,25 +26,21 @@
     a:hover{text-decoration:underline}
 
     /* Toolbar */
-    .bar{
-      position:sticky;top:0;z-index:10;
-      background:#fff;border-bottom:1px solid var(--line);
-      padding:10px 14px;display:flex;gap:10px;align-items:center;
-    }
+    .bar{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:10px;align-items:center;z-index:10}
     .brand{display:flex;align-items:center;gap:10px;margin-right:auto}
     .brand img{width:26px;height:26px;border-radius:8px;object-fit:contain}
     .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px}
-    .btn{border:1px solid var(--navy);background:var(--navy);color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:14px}
+    .btn{border:1px solid var(--navy);background:var(--navy);color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer}
     .btn.alt{background:#fff;color:var(--navy)}
     .lang button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:13px}
-    .lang button.active{border-color:var(--gold);color:var(--navy);font-weight:600}
+    .lang button.active{border-color:var(--gold);color:var(--navy)}
 
     /* Slides container */
     .deck{display:grid;gap:22px;justify-content:center;padding:18px}
     .slide{
-      width:var(--slide-w);height:var(--slide-h);
-      background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-      padding:40px;position:relative;overflow:hidden;
+      width:var(--slide-w); height:var(--slide-h);
+      background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+      padding:46px; position:relative; overflow:hidden;
       box-shadow:0 6px 24px rgba(0,0,0,.05);
     }
     .title{font-size:42px;line-height:1.1;color:var(--navy);margin:0 0 6px}
@@ -52,49 +48,45 @@
     .muted{color:var(--muted)}
     .hr{height:1px;background:var(--line);margin:18px 0}
 
-    /* Background images per slide */
-    .bg-cover{
-      position:absolute;right:32px;bottom:32px;width:40%;max-height:72%;
-      border-radius:16px;border:1px solid var(--line);object-fit:cover;
-      box-shadow:0 6px 20px rgba(0,0,0,.06);
+    /* Cover visuals */
+    .cover-bg{
+      position:absolute; inset:0; opacity:.22; background:#0b2347;
+      background-image: radial-gradient(600px 400px at 75% 20%, rgba(201,177,95,.25), transparent 60%),
+                       radial-gradient(800px 500px at -10% 100%, rgba(11,35,71,.65), transparent 70%);
+      pointer-events:none;
     }
-    .bg-strip{
-      position:absolute;right:34px;top:40px;width:40%;max-height:80%;
-      border-radius:16px;border:1px solid var(--line);object-fit:cover;
-      box-shadow:0 6px 20px rgba(0,0,0,.06);
+    .cover-img{
+      position:absolute; right:32px; bottom:32px; width:38%; max-height:70%;
+      border-radius:16px; border:1px solid var(--line); object-fit:cover; box-shadow:0 6px 20px rgba(0,0,0,.06);
     }
 
-    /* Layout helpers */
+    /* Two-column slide */
+    .cols{display:grid;grid-template-columns:1.15fr .85fr;gap:26px}
     h2{margin:0 0 10px;font-size:30px;color:var(--navy)}
     ul{margin:10px 0 0 20px}
     li{margin:6px 0}
-    .two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;height:100%}
     .panel{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
-    .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-    .kpi{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}
-    .kpi b{font-size:20px;color:var(--navy);display:block}
-    .kpi span{font-size:13px;color:var(--muted)}
+    .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+    .shots img{width:100%;height:200px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
 
-    /* Pilot bullets */
-    .ticks{display:grid;gap:10px;margin-top:8px;max-width:940px}
+    /* Pilot plan */
+    .ticks{display:grid;gap:10px}
     .tick{display:flex;gap:10px;align-items:flex-start}
     .tick b{color:var(--navy)}
 
     /* Testimonials */
-    .testis{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:10px}
+    .testis{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .t{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
     .by{color:var(--muted);font-size:13px;margin-top:8px}
 
     /* CTA slide */
-    .cta{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;margin-top:10px}
+    .cta{display:grid;grid-template-columns:1fr 1fr;gap:26px}
     .field{display:flex;flex-direction:column;gap:6px}
     .field input,.field textarea{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:15px}
     .field textarea{min-height:90px;resize:vertical}
     .note{font-size:13px;color:var(--muted)}
 
-    .footer-note{position:absolute;right:40px;bottom:28px;font-size:13px;color:var(--muted)}
-
-    /* Print */
+    /* Print: one slide per page, landscape */
     @media print{
       @page{size: 16in 9in; margin:0}
       body{background:#fff}
@@ -104,11 +96,8 @@
     }
 
     @media (max-width:1360px){
-      :root{--slide-w:100%;--slide-h:auto}
-      .slide{height:auto;padding:26px}
-      .bg-cover,.bg-strip{position:static;width:100%;max-height:none;margin-top:16px}
-      .two-col{grid-template-columns:1fr}
-      .cta{grid-template-columns:1fr}
+      :root{ --slide-w: 100%; --slide-h: auto; }
+      .slide{height:auto}
     }
   </style>
 </head>
@@ -122,6 +111,7 @@
     </div>
     <a class="btn alt" href="./index.html">← Back to landing</a>
     <button class="btn" onclick="window.print()">Download PDF</button>
+    <a class="btn alt" href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank">Open PDF file</a>
     <div class="lang" style="margin-left:6px">
       <button id="lang-en" class="active">EN</button>
       <button id="lang-it">IT</button>
@@ -130,70 +120,76 @@
 
   <!-- Slides -->
   <div class="deck">
+
     <!-- 1) COVER -->
     <section class="slide" id="s-cover">
-      <h1 class="title" id="cov-title">From rental inquiry to viewing, faster</h1>
-      <p class="lead" id="cov-lead">
-        AI tools that help your rental agents reply faster and book more viewings — inside WhatsApp.
-      </p>
+      <div class="cover-bg"></div>
+      <img class="cover-img" src="./img/cover.jpg" alt="Modern apartment cover"/>
+      <h1 class="title" id="cov-title">Rental inquiries to viewings, faster</h1>
+      <p class="lead" id="cov-lead">AI tools that help rental teams reply faster and book more viewings — inside WhatsApp.</p>
       <div class="hr"></div>
-      <p class="muted" id="cov-sub">
-        Rental pilot • Italy — 30 days. No risk if it doesn’t save time.
-      </p>
-      <img class="bg-cover" src="./img/cover.jpg" alt="Modern apartment living room"/>
+      <p class="muted" id="cov-sub">Rental pilot • Italy — 2–4 weeks. No risk if it doesn’t save time.</p>
     </section>
 
     <!-- 2) PROBLEM -->
     <section class="slide" id="s-problem">
-      <div class="two-col">
+      <div class="cols">
         <div>
-          <h2 id="prob-h2">The rental inbox problem</h2>
+          <h2 id="prob-h2">The Problem</h2>
           <p id="prob-p1">
-            Rental agents spend hours every day juggling WhatsApp, portals, and email. Threads fragment,
-            tenants chase updates, and managers can’t see what’s really happening.
+            Rental teams drown in WhatsApp, email, and portals. Threads fragment, follow-ups slip, and reply times creep up just as lead volume spikes.
           </p>
           <ul>
-            <li id="prob-li1">High-volume WhatsApp chats for rentals — no structure, no priorities.</li>
-            <li id="prob-li2">Agents re-type the same answers for availability, price, and documents.</li>
-            <li id="prob-li3">Slow replies = lost tenants and empty days in your calendar.</li>
+            <li id="prob-li1">Slow replies = lost, impatient tenants.</li>
+            <li id="prob-li2">No central thread = missed context.</li>
+            <li id="prob-li3">Managers can’t see today’s pulse in one view.</li>
           </ul>
         </div>
         <div class="panel">
-          <img src="./img/problem.jpg" alt="Busy rental living room" style="width:100%;height:340px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
-          <p class="muted" style="margin:8px 0 0" id="prob-cap">
-            High inquiry volume, low visibility → slower decisions and more manual work.
-          </p>
+          <img
+            src="./img/problem.jpg"
+            alt="Busy rental conversations across WhatsApp and email"
+            style="width:100%;height:360px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"
+          />
+          <p class="muted" style="margin:8px 0 0" id="prob-cap">Fragmented channels → slower decisions and more churn.</p>
         </div>
       </div>
     </section>
 
-    <!-- 3) SOLUTION (WHATSAPP + AI) -->
+    <!-- 3) SOLUTION / PREVIEW -->
     <section class="slide" id="s-solution">
-      <div class="two-col">
+      <div class="cols">
         <div>
           <h2 id="sol-h2">The Kintra rental solution</h2>
           <p id="sol-p1">
-            Kintra sits in the WhatsApp flow: drafts replies in Italian, adds next steps,
-            and logs outcomes so managers can see the rental pulse every day.
+            Every WhatsApp inquiry lands in one thread; Kintra drafts the reply in Italian and surfaces the next action — while managers see a live pulse of today’s leads.
           </p>
           <div class="ticks" style="margin-top:10px">
-            <div class="tick">
-              <b id="sol-b1">Faster replies</b>
-              <span id="sol-li1">Drafts in ~10–20 sec for common rental questions (availability, viewing times, documents).</span>
-            </div>
-            <div class="tick">
-              <b id="sol-b2">Nothing slips</b>
-              <span id="sol-li2">Each draft suggests the next action: propose two time slots, send brochure, confirm reminder.</span>
-            </div>
-            <div class="tick">
-              <b id="sol-b3">Manager view</b>
-              <span id="sol-li3">Daily view of new rental leads, reply times, and viewings booked — per agent or per branch.</span>
-            </div>
+            <div class="tick"><b>Faster replies:</b> <span id="sol-li1">Instant draft in Italian with two time slots ready to send.</span></div>
+            <div class="tick"><b>Nothing slips:</b> <span id="sol-li2">Suggestions like “send planimetria” or “confirm reminder” with each draft.</span></div>
+            <div class="tick"><b>Manager view:</b> <span id="sol-li3">Today’s WhatsApp leads, reply times, and bookings in one dashboard.</span></div>
           </div>
         </div>
         <div class="panel">
-          <img src="./img/whatsapp.png.png" alt="WhatsApp conversation with instant reply draft" style="width:100%;height:260px;object-fit:cover;border-radius:12px;border:1px solid var(--line)"/>
-          <img src="./img/dashboard%20preview%20screen.PNG" alt="Rental dashboard preview" style="width:100%;height:160px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-top:10px"/>
+          <div class="shots">
+            <!-- WhatsApp conversation -->
+            <img
+              src="./img/whatsapp.png.png"
+              alt="WhatsApp conversation with instant reply draft"
+              onerror="this.onerror=null;this.src='./img/whatsapp.png';"
+            />
+            <!-- Dashboard preview -->
+            <img
+              src="./img/dashboard%20preview%20screen.PNG"
+              alt="Rental dashboard preview with WhatsApp leads"
+              onerror="this.onerror=null;this.src='./img/dashboard.png.PNG';"
+            />
+            <!-- Extra lifestyle/property shot -->
+            <img
+              src="./img/solution.jpg"
+              alt="Bright modern rental apartment interior"
+            />
+          </div>
           <p class="muted" style="margin:8px 0 0" id="sol-cap">
             WhatsApp-native for agents, dashboard-ready for managers.
           </p>
@@ -201,77 +197,49 @@
       </div>
     </section>
 
-    <!-- 4) PILOT PLAN + ROI -->
+    <!-- 4) PILOT PLAN -->
     <section class="slide" id="s-pilot">
-      <h2 id="plan-h2" class="title" style="font-size:34px">30-day rental pilot (one city / team)</h2>
+      <h2 id="plan-h2" class="title" style="font-size:34px">Rental pilot plan (2–4 weeks)</h2>
       <div class="hr"></div>
-      <div class="ticks">
-        <div class="tick">
-          <b id="plan-b1">Week 1 — Connect</b>
-          <span id="plan-p1">We connect to your WhatsApp Business (Cloud API) + basic rental data. Agents start approving drafts.</span>
-        </div>
-        <div class="tick">
-          <b id="plan-b2">Week 2 — Run live</b>
-          <span id="plan-p2">Use Kintra with real tenants on a focused rental niche (e.g. city apartments / mid-term lets).</span>
-        </div>
-        <div class="tick">
-          <b id="plan-b3">Week 3 — Measure</b>
-          <span id="plan-p3">Track reply times, viewings booked, and minutes saved per agent per day.</span>
-        </div>
-        <div class="tick">
-          <b id="plan-b4">Week 4 — Decide</b>
-          <span id="plan-p4">If the pilot clearly saves time, continue. If not, you stop. No lock-in.</span>
+      <div class="ticks" style="margin-top:6px;max-width:920px">
+        <div class="tick"><b id="plan-b1">Week 1 — Connect:</b> <span id="plan-p1">WhatsApp Cloud + web inbox. Rental reply flow enabled for one team.</span></div>
+        <div class="tick"><b id="plan-b2">Week 2 — Run live:</b> <span id="plan-p2">Real tenant inquiries routed through Kintra, agents approve &amp; send.</span></div>
+        <div class="tick"><b id="plan-b3">Week 3 — Measure:</b> <span id="plan-p3">Minutes saved per agent; reply time vs baseline; bookings per 10 leads.</span></div>
+        <div class="tick"><b id="plan-b4">Week 4 — Decide:</b> <span id="plan-p4">Roll forward, expand to more agents, or stop. No lock-in.</span></div>
+      </div>
+      <div class="panel" style="position:absolute;right:46px;bottom:46px">
+        <b id="math-h">Why this matters</b>
+        <div class="muted" id="math-copy">
+          Saving ~2 min per reply × 20 rental leads ≈ 40 minutes/day/agent. Across a team, that’s hours of extra capacity each week.
         </div>
       </div>
-
-      <div class="kpi-row" style="margin-top:16px">
-        <div class="kpi">
-          <b id="kpi1-val">~12–20 h</b>
-          <span id="kpi1-label">Agent time saved / month*</span>
-        </div>
-        <div class="kpi">
-          <b id="kpi2-val">2m 12s</b>
-          <span id="kpi2-label">Typical reply time target</span>
-        </div>
-        <div class="kpi">
-          <b id="kpi3-val">30 days</b>
-          <span id="kpi3-label">Time-boxed pilot window</span>
-        </div>
-      </div>
-
-      <p class="muted" style="margin-top:10px" id="pilot-footnote">
-        *Example: 20–40 rental leads / month per agent, saving 1–2 minutes per reply and avoiding dropped threads.
-      </p>
     </section>
 
-    <!-- 5) PROOF / SOCIAL -->
+    <!-- 5) PROOF -->
     <section class="slide" id="s-proof">
-      <h2 id="proof-h2">What early rental partners say</h2>
+      <h2 id="proof-h2">What partners say</h2>
       <div class="hr"></div>
-      <div class="testis">
+      <div class="testis" style="margin-top:10px">
         <div class="t">
-          <div id="t1">
-            “We were already living inside WhatsApp. Kintra helped us answer faster and keep track of which tenants were waiting
-            for a reply. Viewings are easier to book.”
-          </div>
-          <div class="by" id="t1by">— Rental agency lead (pilot)</div>
+          <div id="t1">“Kintra cut our WhatsApp reply time and made it easier to keep track of who needs a viewing next.”</div>
+          <div class="by" id="t1by">— Early rental partner (pilot)</div>
         </div>
         <div class="t">
-          <div id="t2">
-            “Agents like that they still hit send. They keep control, but don’t waste time re-typing the same messages.”
-          </div>
-          <div class="by" id="t2by">— Branch manager (pilot)</div>
+          <div id="t2">“Setup was light. We connected WhatsApp + web and saw value in the first week.”</div>
+          <div class="by" id="t2by">— Agency lead (pilot)</div>
         </div>
       </div>
-      <div class="hr" style="margin-top:18px"></div>
-      <p class="muted" id="logos-note">Client names available under NDA for serious pilot discussions.</p>
+      <div class="hr" style="margin-top:16px"></div>
+      <div class="muted" id="logos-note" style="margin-top:8px">
+        Client logo (confidential) — additional logos available under NDA.
+      </div>
     </section>
 
     <!-- 6) CTA -->
     <section class="slide" id="s-cta">
-      <h2 id="cta-h2" class="title" style="font-size:34px">Start your 30-day rental pilot</h2>
+      <h2 id="cta-h2" class="title" style="font-size:34px">Start your 2–4 week rental pilot</h2>
       <div class="hr"></div>
-      <div class="cta">
+      <div class="cta" style="margin-top:10px">
         <div>
           <div class="field">
             <label id="lab-name">Name</label>
@@ -282,229 +250,216 @@
             <input id="email" placeholder="alex.rossi@agency.it"/>
           </div>
           <div class="field">
-            <label id="lab-wf">Rental workflow (optional)</label>
-            <textarea id="wf" placeholder="e.g. Inbound via WhatsApp + portals, want faster replies and fewer missed viewings…"></textarea>
+            <label id="lab-wf">What’s your current rental workflow? (optional)</label>
+            <textarea id="wf" placeholder="We handle rental inbound on WhatsApp + portals, want faster replies…"></textarea>
           </div>
           <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
-            <a class="btn" id="cta-btn" href="mailto:pilot@kintra.xyz?subject=Rental%20pilot%20interest">→ Start my rental pilot</a>
-            <span class="note" id="cta-note">No spam. Limited early access for Italian rental teams.</span>
+            <button class="btn" id="submit">→ Start My Pilot</button>
+            <span class="note" id="cta-note">No spam. Limited early access.</span>
           </div>
         </div>
         <div class="panel">
-          <b id="cta-right-h">What you get in the pilot</b>
+          <b id="cta-right-h">Also available</b>
           <ul>
-            <li id="cta-li1">Kintra drafting inside WhatsApp for rental inquiries (1 team / 1 city).</li>
-            <li id="cta-li2">Daily dashboard with new leads, reply times, and viewings booked.</li>
-            <li id="cta-li3">Weekly check-in: we tune the drafts to your tone and policy.</li>
+            <li><a href="./index.html" id="link-landing">Live landing (with demo + WhatsApp send)</a></li>
+            <li><a href="./dashboard.html" id="link-dash">Preview dashboard (PulseView)</a></li>
+            <li><a href="./deck/Kintra_PilotDeck_v1.pdf" target="_blank" id="link-pdf">PDF deck</a></li>
           </ul>
-          <div class="hr" style="margin-top:14px"></div>
-          <p class="muted" id="cta-foot">
-            Pricing matches the landing page: €1.5–2k pilot (30 days), 1 niche, 2–3 KPIs.  
-            If it doesn’t clearly save time, don’t continue.
-          </p>
+          <div class="hr"></div>
+          <div class="muted" id="cta-foot">Built on Meta Cloud infrastructure. Secure, scalable, pilot-ready.</div>
         </div>
       </div>
-      <div class="footer-note" id="footer-note">
+      <div class="muted" style="position:absolute;right:46px;bottom:34px" id="footer-note">
         © 2025 Kintra • Pilot inquiries: <a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>
       </div>
     </section>
+
   </div>
 
   <script>
+    // --- i18n copy ---
     const dict = {
-      en:{
+      en: {
         badge:"Pilot • Italy",
-        cov_title:"From rental inquiry to viewing, faster",
-        cov_lead:"AI tools that help your rental agents reply faster and book more viewings — inside WhatsApp.",
-        cov_sub:"Rental pilot • Italy — 30 days. No risk if it doesn’t save time.",
+        cov_title:"Rental inquiries to viewings, faster",
+        cov_lead:"AI tools that help rental teams reply faster and book more viewings — inside WhatsApp.",
+        cov_sub:"Rental pilot • Italy — 2–4 weeks. No risk if it doesn’t save time.",
 
-        prob_h2:"The rental inbox problem",
-        prob_p1:"Rental agents spend hours every day juggling WhatsApp, portals, and email. Threads fragment, tenants chase updates, and managers can’t see what’s really happening.",
-        prob_li1:"High-volume WhatsApp chats for rentals — no structure, no priorities.",
-        prob_li2:"Agents re-type the same answers for availability, price, and documents.",
-        prob_li3:"Slow replies = lost tenants and empty days in your calendar.",
-        prob_cap:"High inquiry volume, low visibility → slower decisions and more manual work.",
+        prob_h2:"The Problem",
+        prob_p1:"Rental teams drown in WhatsApp, email, and portals. Threads fragment, follow-ups slip, and reply times creep up just as lead volume spikes.",
+        prob_li1:"Slow replies = lost, impatient tenants.",
+        prob_li2:"No central thread = missed context.",
+        prob_li3:"Managers can’t see today’s pulse in one view.",
+        prob_cap:"Fragmented channels → slower decisions and more churn.",
 
         sol_h2:"The Kintra rental solution",
-        sol_p1:"Kintra sits in the WhatsApp flow: drafts replies in Italian, adds next steps, and logs outcomes so managers can see the rental pulse every day.",
-        sol_b1:"Faster replies",
-        sol_li1:"Drafts in ~10–20 sec for common rental questions (availability, viewing times, documents).",
-        sol_b2:"Nothing slips",
-        sol_li2:"Each draft suggests the next action: propose two time slots, send brochure, confirm reminder.",
-        sol_b3:"Manager view",
-        sol_li3:"Daily view of new rental leads, reply times, and viewings booked — per agent or per branch.",
+        sol_p1:"Every WhatsApp inquiry lands in one thread; Kintra drafts the reply in Italian and surfaces the next action — while managers see a live pulse of today’s leads.",
+        sol_li1:"Instant Italian draft with two time slots ready to send.",
+        sol_li2:"Suggestions like “send floor plan” or “confirm reminder” with each draft.",
+        sol_li3:"Today’s WhatsApp leads, reply times, and bookings in one dashboard.",
         sol_cap:"WhatsApp-native for agents, dashboard-ready for managers.",
 
-        plan_h2:"30-day rental pilot (one city / team)",
-        plan_b1:"Week 1 — Connect",
-        plan_p1:"We connect to your WhatsApp Business (Cloud API) + basic rental data. Agents start approving drafts.",
-        plan_b2:"Week 2 — Run live",
-        plan_p2:"Use Kintra with real tenants on a focused rental niche (e.g. city apartments / mid-term lets).",
-        plan_b3:"Week 3 — Measure",
-        plan_p3:"Track reply times, viewings booked, and minutes saved per agent per day.",
-        plan_b4:"Week 4 — Decide",
-        plan_p4:"If the pilot clearly saves time, continue. If not, you stop. No lock-in.",
-        kpi1_label:"Agent time saved / month*",
-        kpi2_label:"Typical reply time target",
-        kpi3_label:"Time-boxed pilot window",
-        pilot_footnote:"*Example: 20–40 rental leads / month per agent, saving 1–2 minutes per reply and avoiding dropped threads.",
+        plan_h2:"Rental pilot plan (2–4 weeks)",
+        plan_b1:"Week 1 — Connect:",
+        plan_p1:"WhatsApp Cloud + web inbox. Rental reply flow enabled for one team.",
+        plan_b2:"Week 2 — Run live:",
+        plan_p2:"Real tenant inquiries routed through Kintra, agents approve & send.",
+        plan_b3:"Week 3 — Measure:",
+        plan_p3:"Minutes saved per agent; reply time vs baseline; bookings per 10 leads.",
+        plan_b4:"Week 4 — Decide:",
+        plan_p4:"Roll forward, expand to more agents, or stop. No lock-in.",
+        math_h:"Why this matters",
+        math_copy:"Saving ~2 min per reply × 20 rental leads ≈ 40 minutes/day/agent. Across a team, that’s hours of extra capacity each week.",
 
-        proof_h2:"What early rental partners say",
-        t1:"“We were already living inside WhatsApp. Kintra helped us answer faster and keep track of which tenants were waiting for a reply. Viewings are easier to book.”",
-        t1by:"— Rental agency lead (pilot)",
-        t2:"“Agents like that they still hit send. They keep control, but don’t waste time re-typing the same messages.”",
-        t2by:"— Branch manager (pilot)",
-        logos_note:"Client names available under NDA for serious pilot discussions.",
+        proof_h2:"What partners say",
+        t1:"“Kintra cut our WhatsApp reply time and made it easier to keep track of who needs a viewing next.”",
+        t1by:"— Early rental partner (pilot)",
+        t2:"“Setup was light. We connected WhatsApp + web and saw value in the first week.”",
+        t2by:"— Agency lead (pilot)",
+        logos_note:"Client logo (confidential) — additional logos available under NDA.",
 
-        cta_h2:"Start your 30-day rental pilot",
+        cta_h2:"Start your 2–4 week rental pilot",
         lab_name:"Name",
         lab_email:"Work email",
-        lab_wf:"Rental workflow (optional)",
-        cta_btn:"→ Start my rental pilot",
-        cta_note:"No spam. Limited early access for Italian rental teams.",
-        cta_right_h:"What you get in the pilot",
-        cta_li1:"Kintra drafting inside WhatsApp for rental inquiries (1 team / 1 city).",
-        cta_li2:"Daily dashboard with new leads, reply times, and viewings booked.",
-        cta_li3:"Weekly check-in: we tune the drafts to your tone and policy.",
-        cta_foot:"Pricing matches the landing page: €1.5–2k pilot (30 days), 1 niche, 2–3 KPIs. If it doesn’t clearly save time, don’t continue.",
+        lab_wf:"What’s your current rental workflow? (optional)",
+        cta_note:"No spam. Limited early access.",
+        cta_right_h:"Also available",
+        link_landing:"Live landing (with demo + WhatsApp send)",
+        link_dash:"Preview dashboard (PulseView)",
+        link_pdf:"PDF deck",
+        cta_foot:"Built on Meta Cloud infrastructure. Secure, scalable, pilot-ready.",
         footer_note:"© 2025 Kintra • Pilot inquiries: "
       },
-      it:{
+      it: {
         badge:"Pilot • Italia",
-        cov_title:"Dalla richiesta visita alla visita, più velocemente",
-        cov_lead:"Strumenti che aiutano i tuoi agenti affitti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
-        cov_sub:"Pilot affitti • Italia — 30 giorni. Zero rischio se non fa risparmiare tempo.",
+        cov_title:"Dalle richieste di affitto alle visite, più velocemente",
+        cov_lead:"Strumenti che aiutano i team affitti a rispondere più in fretta e fissare più visite — dentro WhatsApp.",
+        cov_sub:"Pilot affitti • Italia — 2–4 settimane. Zero rischio se non fa risparmiare tempo.",
 
-        prob_h2:"Il problema dell’inbox affitti",
-        prob_p1:"Gli agenti affitti passano ore ogni giorno tra WhatsApp, portali e email. Le conversazioni si frammentano, gli inquilini inseguono aggiornamenti e i responsabili non vedono cosa succede davvero.",
-        prob_li1:"Chat WhatsApp ad alto volume per gli affitti — senza struttura né priorità.",
-        prob_li2:"Gli agenti riscrivono sempre le stesse risposte su disponibilità, prezzo e documenti.",
-        prob_li3:"Risposte lente = inquilini persi e giornate vuote in agenda.",
-        prob_cap:"Tante richieste, poca visibilità → decisioni più lente e più lavoro manuale.",
+        prob_h2:"Il Problema",
+        prob_p1:"I team affitti annaspano tra WhatsApp, email e portali. Le conversazioni si frammentano, i follow-up saltano e i tempi di risposta si allungano proprio quando aumentano i lead.",
+        prob_li1:"Risposte lente = inquilini persi e impazienti.",
+        prob_li2:"Nessun thread centrale = contesto perso.",
+        prob_li3:"I responsabili non vedono il polso della giornata in un’unica vista.",
+        prob_cap:"Canali frammentati → decisioni più lente e più churn.",
 
         sol_h2:"La soluzione affitti di Kintra",
-        sol_p1:"Kintra lavora nel flusso WhatsApp: prepara bozze in italiano, aggiunge i prossimi passi e registra gli esiti così i manager vedono il polso degli affitti ogni giorno.",
-        sol_b1:"Risposte più rapide",
-        sol_li1:"Bozze in ~10–20 sec per le domande frequenti (disponibilità, orari visite, documenti).",
-        sol_b2:"Nulla sfugge",
-        sol_li2:"Ogni bozza suggerisce la prossima azione: proponi due orari, invia brochure, conferma promemoria.",
-        sol_b3:"Vista manager",
-        sol_li3:"Vista giornaliera su nuovi lead affitti, tempi di risposta e visite prenotate — per agente o filiale.",
-        sol_cap:"Nativo WhatsApp per gli agenti, pronto-dashboard per i manager.",
+        sol_p1:"Ogni richiesta WhatsApp finisce in un unico thread; Kintra redige la risposta in italiano e suggerisce la prossima azione, mentre i manager vedono il flusso live dei lead.",
+        sol_li1:"Bozza immediata in italiano con due fasce orarie pronte da inviare.",
+        sol_li2:"Suggerimenti come “invia planimetria” o “conferma promemoria” con ogni bozza.",
+        sol_li3:"Lead WhatsApp di oggi, tempi di risposta e visite in una sola dashboard.",
+        sol_cap:"Nativo WhatsApp per gli agenti, chiaro in dashboard per i manager.",
 
-        plan_h2:"Pilot affitti di 30 giorni (una città / team)",
-        plan_b1:"Settimana 1 — Connessione",
-        plan_p1:"Colleghiamo WhatsApp Business (Cloud API) + dati base affitti. Gli agenti iniziano ad approvare le bozze.",
-        plan_b2:"Settimana 2 — Live",
-        plan_p2:"Usate Kintra con inquilini reali su una nicchia affitti mirata (es. appartamenti in città / mid-term).",
-        plan_b3:"Settimana 3 — Misura",
-        plan_p3:"Monitoriamo tempi di risposta, visite fissate e minuti risparmiati per agente al giorno.",
-        plan_b4:"Settimana 4 — Decisione",
-        plan_p4:"Se il pilot fa chiaramente risparmiare tempo, si continua. Se no, stop. Nessun vincolo.",
-        kpi1_label:"Tempo risparmiato per agente/mese*",
-        kpi2_label:"Target tempo medio di risposta",
-        kpi3_label:"Finestra pilot a tempo",
-        pilot_footnote:"*Esempio: 20–40 lead affitti/mese per agente, 1–2 minuti risparmiati per risposta ed evitando thread dimenticati.",
+        plan_h2:"Piano pilot affitti (2–4 settimane)",
+        plan_b1:"Settimana 1 — Connessione:",
+        plan_p1:"WhatsApp Cloud + inbox web. Flusso risposte affitti attivo per un team.",
+        plan_b2:"Settimana 2 — Live:",
+        plan_p2:"Richieste reali degli inquilini passano da Kintra, l’agente approva e invia.",
+        plan_b3:"Settimana 3 — Misura:",
+        plan_p3:"Minuti risparmiati per agente; tempi di risposta vs baseline; visite per 10 lead.",
+        plan_b4:"Settimana 4 — Decisione:",
+        plan_p4:"Proseguire, estendere ad altri agenti o chiudere. Nessun vincolo.",
+        math_h:"Perché conta",
+        math_copy:"~2 min risparmiati per risposta × 20 lead affitti ≈ 40 minuti/giorno/agente. Sul team sono ore di capacità in più ogni settimana.",
 
-        proof_h2:"Cosa dicono i primi partner affitti",
-        t1:"«Eravamo già dentro WhatsApp. Kintra ci ha aiutato a rispondere più velocemente e a tenere traccia di chi stava aspettando risposta. È più semplice fissare le visite.»",
-        t1by:"— Responsabile agenzia affitti (pilot)",
-        t2:"«Agli agenti piace che premano comunque loro “invio”. Mantengono il controllo ma non perdono tempo a riscrivere i messaggi.»",
-        t2by:"— Branch manager (pilot)",
-        logos_note:"Nomi clienti disponibili con NDA per discussioni seria sul pilot.",
+        proof_h2:"Cosa dicono i partner",
+        t1:"«Kintra ha ridotto i tempi di risposta su WhatsApp e reso più semplice seguire chi deve ancora fissare una visita.»",
+        t1by:"— Partner affitti iniziale (pilot)",
+        t2:"«Setup leggero. Abbiamo collegato WhatsApp + web e visto valore nella prima settimana.»",
+        t2by:"— Responsabile agenzia (pilot)",
+        logos_note:"Logo cliente (confidenziale) — altri loghi disponibili con NDA.",
 
-        cta_h2:"Avvia il tuo pilot affitti di 30 giorni",
+        cta_h2:"Avvia il pilot affitti di 2–4 settimane",
         lab_name:"Nome",
         lab_email:"Email di lavoro",
-        lab_wf:"Flusso affitti (opzionale)",
-        cta_btn:"→ Avvia il mio pilot affitti",
-        cta_note:"Niente spam. Accesso anticipato limitato per team affitti italiani.",
-        cta_right_h:"Cosa include il pilot",
-        cta_li1:"Bozze Kintra dentro WhatsApp per le richieste affitto (1 team / 1 città).",
-        cta_li2:"Dashboard giornaliera con nuovi lead, tempi di risposta e visite fissate.",
-        cta_li3:"Check-in settimanale: adattiamo le bozze al vostro tono e policy.",
-        cta_foot:"Il pricing segue la landing: €1,5–2k pilot (30 giorni), 1 nicchia, 2–3 KPI. Se non fa risparmiare tempo in modo chiaro, non si continua.",
+        lab_wf:"Qual è il tuo flusso affitti attuale? (opzionale)",
+        cta_note:"Niente spam. Accesso anticipato limitato.",
+        cta_right_h:"Anche disponibile",
+        link_landing:"Landing live (con demo + invio WhatsApp)",
+        link_dash:"Anteprima dashboard (PulseView)",
+        link_pdf:"Deck PDF",
+        cta_foot:"Basato su Meta Cloud. Sicuro, scalabile, pronto al pilot.",
         footer_note:"© 2025 Kintra • Contatti pilot: "
       }
     };
 
-    const $ = sel => document.querySelector(sel);
+    const q = sel => document.querySelector(sel);
 
     function setLang(lang){
       const d = dict[lang];
 
-      $('#badge').textContent      = d.badge;
-      $('#cov-title').textContent  = d.cov_title;
-      $('#cov-lead').textContent   = d.cov_lead;
-      $('#cov-sub').textContent    = d.cov_sub;
+      q('#badge').textContent = d.badge;
 
-      $('#prob-h2').textContent    = d.prob_h2;
-      $('#prob-p1').textContent    = d.prob_p1;
-      $('#prob-li1').textContent   = d.prob_li1;
-      $('#prob-li2').textContent   = d.prob_li2;
-      $('#prob-li3').textContent   = d.prob_li3;
-      $('#prob-cap').textContent   = d.prob_cap;
+      q('#cov-title').textContent = d.cov_title;
+      q('#cov-lead').textContent  = d.cov_lead;
+      q('#cov-sub').textContent   = d.cov_sub;
 
-      $('#sol-h2').textContent     = d.sol_h2;
-      $('#sol-p1').textContent     = d.sol_p1;
-      $('#sol-b1').textContent     = d.sol_b1;
-      $('#sol-li1').textContent    = d.sol_li1;
-      $('#sol-b2').textContent     = d.sol_b2;
-      $('#sol-li2').textContent    = d.sol_li2;
-      $('#sol-b3').textContent     = d.sol_b3;
-      $('#sol-li3').textContent    = d.sol_li3;
-      $('#sol-cap').textContent    = d.sol_cap;
+      q('#prob-h2').textContent   = d.prob_h2;
+      q('#prob-p1').textContent   = d.prob_p1;
+      q('#prob-li1').textContent  = d.prob_li1;
+      q('#prob-li2').textContent  = d.prob_li2;
+      q('#prob-li3').textContent  = d.prob_li3;
+      q('#prob-cap').textContent  = d.prob_cap;
 
-      $('#plan-h2').textContent    = d.plan_h2;
-      $('#plan-b1').textContent    = d.plan_b1;
-      $('#plan-p1').textContent    = d.plan_p1;
-      $('#plan-b2').textContent    = d.plan_b2;
-      $('#plan-p2').textContent    = d.plan_p2;
-      $('#plan-b3').textContent    = d.plan_b3;
-      $('#plan-p3').textContent    = d.plan_p3;
-      $('#plan-b4').textContent    = d.plan_b4;
-      $('#plan-p4').textContent    = d.plan_p4;
-      $('#kpi1-label').textContent = d.kpi1_label;
-      $('#kpi2-label').textContent = d.kpi2_label;
-      $('#kpi3-label').textContent = d.kpi3_label;
-      $('#pilot-footnote').textContent = d.pilot_footnote;
+      q('#sol-h2').textContent    = d.sol_h2;
+      q('#sol-p1').textContent    = d.sol_p1;
+      q('#sol-li1').textContent   = d.sol_li1;
+      q('#sol-li2').textContent   = d.sol_li2;
+      q('#sol-li3').textContent   = d.sol_li3;
+      q('#sol-cap').textContent   = d.sol_cap;
 
-      $('#proof-h2').textContent   = d.proof_h2;
-      $('#t1').textContent         = d.t1;
-      $('#t1by').textContent       = d.t1by;
-      $('#t2').textContent         = d.t2;
-      $('#t2by').textContent       = d.t2by;
-      $('#logos-note').textContent = d.logos_note;
+      q('#plan-h2').textContent   = d.plan_h2;
+      q('#plan-b1').textContent   = d.plan_b1;
+      q('#plan-p1').textContent   = d.plan_p1;
+      q('#plan-b2').textContent   = d.plan_b2;
+      q('#plan-p2').textContent   = d.plan_p2;
+      q('#plan-b3').textContent   = d.plan_b3;
+      q('#plan-p3').textContent   = d.plan_p3;
+      q('#plan-b4').textContent   = d.plan_b4;
+      q('#plan-p4').textContent   = d.plan_p4;
+      q('#math-h').textContent    = d.math_h;
+      q('#math-copy').textContent = d.math_copy;
 
-      $('#cta-h2').textContent     = d.cta_h2;
-      $('#lab-name').textContent   = d.lab_name;
-      $('#lab-email').textContent  = d.lab_email;
-      $('#lab-wf').textContent     = d.lab_wf;
-      $('#cta-btn').textContent    = d.cta_btn;
-      $('#cta-note').textContent   = d.cta_note;
-      $('#cta-right-h').textContent= d.cta_right_h;
-      $('#cta-li1').textContent    = d.cta_li1;
-      $('#cta-li2').textContent    = d.cta_li2;
-      $('#cta-li3').textContent    = d.cta_li3;
-      $('#cta-foot').textContent   = d.cta_foot;
-      $('#footer-note').innerHTML  = d.footer_note + '<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
+      q('#proof-h2').textContent  = d.proof_h2;
+      q('#t1').textContent        = d.t1;
+      q('#t1by').textContent      = d.t1by;
+      q('#t2').textContent        = d.t2;
+      q('#t2by').textContent      = d.t2by;
+      q('#logos-note').textContent= d.logos_note;
+
+      q('#cta-h2').textContent    = d.cta_h2;
+      q('#lab-name').textContent  = d.lab_name;
+      q('#lab-email').textContent = d.lab_email;
+      q('#lab-wf').textContent    = d.lab_wf;
+      q('#cta-note').textContent  = d.cta_note;
+      q('#cta-right-h').textContent = d.cta_right_h;
+      q('#link-landing').textContent = d.link_landing;
+      q('#link-dash').textContent    = d.link_dash;
+      q('#link-pdf').textContent     = d.link_pdf;
+      q('#cta-foot').textContent     = d.cta_foot;
+
+      q('#footer-note').innerHTML = d.footer_note + '<a href="mailto:pilot@kintra.xyz">pilot@kintra.xyz</a>';
+
+      q('#lang-en').classList.toggle('active', lang==='en');
+      q('#lang-it').classList.toggle('active', lang==='it');
+      localStorage.setItem('kintra_deck_lang', lang);
 
       // placeholders
-      $('#name').placeholder  = 'Alex Rossi';
-      $('#email').placeholder = 'alex.rossi@agency.it';
-      $('#wf').placeholder    = (lang==='it'
-        ? 'Es. Inbound da WhatsApp + portali, vogliamo risposte più rapide e meno visite perse…'
-        : 'e.g. Inbound via WhatsApp + portals, want faster replies and fewer missed viewings…');
-
-      document.documentElement.lang = lang;
-      $('#lang-en').classList.toggle('active', lang==='en');
-      $('#lang-it').classList.toggle('active', lang==='it');
-      localStorage.setItem('kintra_deck_lang', lang);
+      q('#name').placeholder  = 'Alex Rossi';
+      q('#email').placeholder = 'alex.rossi@agency.it';
+      q('#wf').placeholder    = (lang==='it'
+                                  ? 'Gestiamo inbound affitti su WhatsApp + portali, vogliamo risposte più rapide…'
+                                  : 'We handle rental inbound on WhatsApp + portals, want faster replies…');
     }
 
-    $('#lang-en').onclick = () => setLang('en');
-    $('#lang-it').onclick = () => setLang('it');
+    q('#lang-en').onclick = () => setLang('en');
+    q('#lang-it').onclick = () => setLang('it');
     setLang(localStorage.getItem('kintra_deck_lang') || 'en');
+
+    // Fake form save (for demo)
+    q('#submit').onclick = () => {
+      alert('Thanks — we’ll be in touch within 24 hours.');
+    };
   </script>
 </body>
 </html>
