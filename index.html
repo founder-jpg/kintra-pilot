@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Pilot • Italy</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png.png"/>
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
+    .brand strong{letter-spacing:.2px}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
+
+    .langbox{display:flex;align-items:center;gap:10px}
+    .langbox .label{font-size:14px;color:#6b7280}
+    .toggle{display:flex;gap:8px;flex-wrap:wrap}
+    .toggle button{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;white-space:nowrap}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
+    .flag{display:inline-flex;width:18px;height:12px} .flag svg{width:18px;height:12px;display:block}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
+    h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px;color:#0b2347}
+    .lead{font-size:18px;color:#243044;margin:0 0 10px}
+    .sub{color:#5b6475;margin:0 0 14px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600}
+    .btn.primary{background:#0b2347;border-color:#0b2347;color:#fff}
+    .btn.ghost{background:#fff;color:#0b2347;border-color:var(--line)}
+    .divider{height:1px;background:var(--line);margin:18px 0}
+
+    .pricing{margin-top:10px;font-size:14px;color:#243044}
+    .pricing .muted{color:#6b7280}
+
+    /* Assumptions */
+    .assump{margin-top:8px}
+    .assump button{border:1px dashed var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+    .assump-box{margin-top:8px;display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px}
+
+    /* Gold plaque */
+    .gold{margin:10px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.32), rgba(234,210,139,.12));border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)}
+    .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
+    .gold p{margin:4px 0;color:#5a533b}
+
+    /* Two-up cards */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+    .card.soft{background:var(--card)}
+    .muted{color:#5b6475}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .metric{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+    .metric .k{font-size:22px;font-weight:800;color:#0b5fff}
+    .metric .l{font-size:12px;color:#6b7280}
+
+    /* WA section */
+    .wa{display:flex;flex-direction:column;gap:10px}
+    .keys{display:flex;gap:10px;flex-wrap:wrap}
+    .key{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+    .dot{width:8px;height:8px;border-radius:50%}
+    .dot.client{background:#9aa3b2}
+    .dot.kintra{background:#0b5fff}
+    .dot.agent{background:#17a47a}
+    .dot.insight{background:#c9a227}
+    .wa-tabs{display:flex;gap:8px;margin-top:4px}
+    .wa-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .wa-tab.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
+    .chat{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;display:flex;flex-direction:column}
+    .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:15px;margin:6px 0;position:relative}
+    .who{position:absolute;top:-10px;left:10px;font-size:11px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#475366}
+    .bubble.client{align-self:flex-start;background:#f5f7fb;border:1px solid var(--line);color:#243044}
+    .bubble.kintra{align-self:flex-end;background:#e8f1ff;border:1px solid #d7e6ff}
+    .bubble.agent{align-self:flex-end;background:#e9f8f1;border:1px solid #cfeee0}
+    .stamp{font-size:12px;color:#6b7280;margin-top:6px}
+    .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9)}
+    .insight b{color:#1b2233}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+
+    /* Listing composite */
+    .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+    .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
+    .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
+    .lm-body{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px}
+    .lm-photo{width:100%;height:92px;object-fit:cover;border:1px solid var(--line);border-radius:10px}
+    .lm-title{font-weight:800}
+    .lm-line{font-size:14px;color:#6b7280}
+    .tagrow{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
+    .caption{margin-top:6px;font-size:12px;color:#7b879b}
+
+    /* ROI strip */
+    .roi{margin-top:12px}
+    .roi .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .roi .cell{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;text-align:center}
+    .roi .cell .big{font-size:22px;font-weight:800;color:#0b5fff}
+    .roi .cell .small{font-size:12px;color:#6b7280}
+    .roi .one{grid-column:1/-1;text-align:center;margin-top:8px;color:#243044}
+    @media (max-width:980px){ .roi .row{grid-template-columns:1fr} }
+
+    /* FAQ */
+    .faq{margin-top:14px}
+    .faq details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin-top:8px}
+    .faq summary{font-weight:700;cursor:pointer}
+    .faq p{margin:8px 0 0;color:#485264}
+
+    footer{margin:28px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    /* Dashboard Mini – give it a little more presence on desktop */
+    .dash-img{width:100%;height:260px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+    @media (max-width:980px){
+      .hero,.grid-2{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .bubble{max-width:100%}
+      .dash-img{height:200px}
+    }
+  </style>
+</head>
+
+<body class="lang-en-active">
+  <div class="wrap">
+
+    <!-- Header / brand / language bar (minimal stub so your existing CSS still works) -->
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo">
+        <strong>Kintra</strong>
+        <span class="badge">Pilot • Italy</span>
+      </div>
+      <div class="langbox">
+        <span class="label">Language</span>
+        <div class="toggle">
+          <button class="active">EN</button>
+          <button>IT</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <p class="badge">WhatsApp-native • Rentals & Sales</p>
+        <h1>Faster WhatsApp replies for Italian rental and sales teams</h1>
+        <p class="lead">
+          Protect more leads without changing how your agents work.
+        </p>
+        <p class="sub">
+          Built around Italy’s WhatsApp habits, bilingual EN/IT, and designed as a focused 30-day pilot – not another long contract.
+        </p>
+
+        <div class="cta-row">
+          <!-- Recreate your original CTAs here -->
+          <a class="btn primary" href="#pilot-offer">Request pilot access</a>
+          <a class="btn" href="./dashboard.html">Preview dashboard</a>
+          <a class="btn ghost" href="./KintraDeck.pdf" target="_blank">View deck PDF</a>
+        </div>
+      </div>
+      <div>
+        <!-- You can drop a small WA or dashboard visual here later if you want -->
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- MADE FOR ITALY -->
+    <section id="made-for-italy">
+      <h2>Made for Italy’s WhatsApp habits</h2>
+      <p>
+        In Italy, almost everything passes through WhatsApp – enquiries, viewings, updates to owners and referrals.
+        Kintra doesn’t ask agents to change tools. It simply helps them answer faster, with clearer next steps,
+        in Italian or English.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WHATSAPP SMART REPLY -->
+    <section class="wa" id="wa-demo">
+      <h2>WhatsApp Smart Reply</h2>
+      <p class="sub">
+        Before / After view of real conversations – with Client, Kintra, Agent, Insight and Next step.
+      </p>
+
+      <div class="keys">
+        <span class="key"><span class="dot client"></span>Client</span>
+        <span class="key"><span class="dot kintra"></span>Kintra draft</span>
+        <span class="key"><span class="dot agent"></span>Agent send</span>
+        <span class="key"><span class="dot insight"></span>Insight</span>
+      </div>
+
+      <div class="wa-tabs">
+        <button class="wa-tab active" data-tab="rental">Rental</button>
+        <button class="wa-tab" data-tab="sales">Sales</button>
+      </div>
+
+      <!-- RENTAL CHAT -->
+      <div class="chat" data-panel="rental">
+        <div class="bubble client">
+          <span class="who">Client</span>
+          «Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»
+        </div>
+
+        <div class="bubble agent">
+          <span class="who">Agent</span>
+          «Sì, è disponibile. Quando è libero?»
+          <div class="stamp">[reply sent hours later]</div>
+        </div>
+
+        <div class="insight">
+          <b>Insight:</b> Tenant does the work, no clear next step. Easy for the enquiry to drop.
+        </div>
+
+        <div class="bubble client">
+          <span class="who">Client</span>
+          «Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»
+        </div>
+
+        <div class="bubble kintra">
+          <span class="who">Kintra (draft)</span>
+          «Ciao [Nome], sì, l'appartamento è disponibile.<br><br>
+          · 2 camere, 1 bagno<br>
+          · Disponibile da [data]<br><br>
+          Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per la visita.<br><br>
+          Quale orario preferisci?»
+        </div>
+
+        <div class="bubble agent">
+          <span class="who">Agent (send)</span>
+          Agent reviews in seconds and taps send.
+        </div>
+
+        <div class="insight">
+          <b>Insight:</b> Clear options, fast reply.<br>
+          <b>Next step:</b> Viewing booked in the same conversation.
+        </div>
+      </div>
+
+      <!-- SALES CHAT -->
+      <div class="chat" data-panel="sales" style="display:none">
+        <div class="bubble client">
+          <span class="who">Client</span>
+          “Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”
+        </div>
+
+        <div class="bubble agent">
+          <span class="who">Agent</span>
+          “Yes, it's available. When are you free?”
+          <div class="stamp">[reply sent much later]</div>
+        </div>
+
+        <div class="insight">
+          <b>Insight:</b> No urgency, no options, easy for the lead to disappear.
+        </div>
+
+        <div class="bubble client">
+          <span class="who">Client</span>
+          “Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”
+        </div>
+
+        <div class="bubble kintra">
+          <span class="who">Kintra (draft)</span>
+          “Hi [Name], yes, it’s still available.<br><br>
+          · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
+          · Available from [Date]<br><br>
+          I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
+          Which works better for you?”
+        </div>
+
+        <div class="bubble agent">
+          <span class="who">Agent (send)</span>
+          Agent checks the draft and taps send. Viewing times are on the table in under 30 seconds.
+        </div>
+
+        <div class="insight">
+          <b>Insight:</b> Lead feels looked after, clear times offered, higher chance of booking.<br>
+          <b>Next step:</b> Viewing confirmed instead of “lead gone cold”.
+        </div>
+
+        <div class="stamp">
+          Each missed sales lead can mean €4,000–€12,000 in lost commission.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- DASHBOARD MINI -->
+    <section id="dashboard-mini">
+      <h2>Dashboard that follows WhatsApp, not the other way round</h2>
+      <p class="sub">
+        A light, focused view for managers; no extra steps for agents.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
+        </div>
+        <div>
+          <p>
+            See which enquiries are waiting, what went out, and where the next follow-up or viewing should happen.
+            No heavy CRM — just a small control panel around conversations your agents already have.
+          </p>
+          <div class="cta-row">
+            <a href="./dashboard.html" class="btn">Open live dashboard →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LISTING SUMMARY -->
+    <section id="listing-summary">
+      <h2>Listing summaries your agents don’t have to re-type</h2>
+      <p class="sub">
+        One tap to send a clean, consistent property card into WhatsApp.
+      </p>
+
+      <div class="listing-mock">
+        <div class="lm-head">
+          <span class="lm-dot"></span>
+          <span class="lm-dot"></span>
+          <span class="lm-dot"></span>
+          <span class="muted">Listing summary • WhatsApp preview</span>
+        </div>
+        <div class="lm-body">
+          <img src="./img/cta.jpg" alt="Listing thumbnail" class="lm-photo"/>
+          <div>
+            <div class="lm-title">2BR • 80 m² • Milano • Balcony</div>
+            <div class="lm-line">€1.750 / mese • 3° piano con ascensore • Via [Nome]</div>
+            <div class="tagrow">
+              <span class="tag">2BR</span>
+              <span class="tag">80 m²</span>
+              <span class="tag">Milano</span>
+              <span class="tag">Balcony</span>
+            </div>
+            <p class="caption">
+              A pre-filled card with key details that the agent can adjust in seconds instead of re-writing
+              the same information for every lead.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ADVISOR CHARTER -->
+    <section id="advisor-charter">
+      <div class="gold">
+        <h3>Advisor Charter (pilot)</h3>
+        <p>
+          A light, optional role for Italian professionals who help shape the pilot:
+          1–2 warm introductions, honest feedback, zero operational load.
+        </p>
+        <p>
+          You’re not responsible for results and don’t need to “sell” us internally.
+          Your name is only mentioned with permission.
+        </p>
+      </div>
+    </section>
+
+    <!-- PILOT OFFER -->
+    <section id="pilot-offer">
+      <h2>30-day pilot • €1.5–2k • 1 niche • 2–3 KPIs</h2>
+      <p>We run a focused test with one team:</p>
+      <ul>
+        <li><strong>Rentals:</strong> e.g. long-term apartments in one area</li>
+        <li><strong>Sales:</strong> e.g. resales, new builds or luxury in one niche</li>
+      </ul>
+      <p>
+        Together we define 2–3 simple KPIs (response time, viewings booked, follow-ups done).
+        If Kintra doesn’t clearly save time and protect more leads in 30 days, don’t continue.
+      </p>
+
+      <div class="assump">
+        <button type="button" onclick="
+          var box=document.querySelector('.assump-box');
+          if(box) box.style.display = box.style.display==='block' ? 'none' : 'block';
+        ">Show assumptions</button>
+        <div class="assump-box">
+          <ul>
+            <li>30 days of messages in one niche.</li>
+            <li>Base case: likely break-even around 30 days, depending on volume.</li>
+            <li>Cautious case: assume 20–40 days for clear payback.</li>
+            <li>Protecting even a handful of extra deals can cover the pilot several times over.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>Questions we hear</h2>
+
+      <div class="faq">
+
+        <!-- ENGLISH -->
+        <div class="faq-block lang-en">
+          <details>
+            <summary>Why not just use ChatGPT?</summary>
+            <p>
+              Most agents reply from memory. Generic tools don’t see your listing data or the conversation thread.
+              Kintra works in the flow: it detects intent in real WhatsApp messages, pulls property facts, drafts compliant
+              replies, suggests the next step, and logs outcomes—so managers see the daily pulse without agents switching tools.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is the pilot risky?</summary>
+            <p>
+              No. It’s a 30-day, time-boxed test in one niche with 2–3 simple KPIs. If it doesn’t clearly save time or protect
+              more leads, don’t continue. You keep the learning and assets either way.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will this replace agents?</summary>
+            <p>
+              No. Agents remain in full control. Kintra speeds up routine replies, keeps follow-ups from slipping, and structures
+              the next step. Agents approve and send; managers get clarity; clients get faster service.
+            </p>
+          </details>
+
+          <details>
+            <summary>WhatsApp compliance?</summary>
+            <p>
+              Production uses the official WhatsApp Business API (Meta Cloud). Pilots use a test number with rate-limited demo
+              sends to prevent abuse. No personal agent numbers required.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do I justify the pilot to finance?</summary>
+            <p>
+              Frame it as a 30-day efficiency audit: time saved per agent × number of agents × hourly cost. Typical pilots see
+              12–20 hours saved per agent per month via faster replies, fewer drop-offs and clearer follow-ups—usually breakeven
+              inside the first month.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if we already use a CRM?</summary>
+            <p>
+              Great—Kintra complements CRMs. Agents stay in WhatsApp; Kintra drafts the messages and logs outcomes. Your CRM
+              receives more complete data without adding tabs or admin work.
+            </p>
+          </details>
+
+          <details>
+            <summary>How much setup and operational effort is required?</summary>
+            <p>
+              Very light. We define one niche, connect basic property data, and begin drafting directly in WhatsApp. Agents
+              approve; we handle the heavy lifting.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can we stop after the pilot?</summary>
+            <p>
+              Yes—at any time. If Kintra doesn’t create obvious time savings or protect more leads, you stop. You keep the
+              templates, insights and improvements.
+            </p>
+          </details>
+
+          <details>
+            <summary>Data ownership & privacy?</summary>
+            <p>
+              You own your data. Pilot uses a sandbox/test number; production uses official APIs. We follow least-privilege
+              access and remove pilot data on request.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this work for sales as well?</summary>
+            <p>
+              Yes. Kintra drafts replies wherever your team handles leads. We start with rentals because volume is higher and
+              ROI shows faster; sales can be enabled during or after the pilot.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will this slow my agents down?</summary>
+            <p>
+              No. Kintra appears as drafts inside WhatsApp—no new tools to learn. Most agents become faster within the first few
+              days, especially in high-volume rental markets.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if our agents already reply quickly?</summary>
+            <p>
+              Kintra still helps: structured next steps, faster follow-ups, and consistent property summaries. Even small
+              improvements in speed can protect a meaningful number of leads in cities like Milano, Roma, Torino and Firenze.
+            </p>
+          </details>
+        </div>
+
+        <!-- ITALIAN -->
+        <div class="faq-block lang-it" style="display:none">
+          <details>
+            <summary>Perché non usare semplicemente ChatGPT?</summary>
+            <p>
+              La maggior parte degli agenti risponde a memoria. Gli strumenti generici non vedono i dati dell’immobile né il
+              contesto della conversazione. Kintra lavora nel flusso: rileva l’intento nei messaggi WhatsApp reali, recupera i
+              dati dell’immobile, crea bozze conformi, suggerisce il prossimo passo e registra gli esiti—così i manager vedono
+              l’andamento quotidiano senza cambiare strumenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Il pilot è rischioso?</summary>
+            <p>
+              No. È un test di 30 giorni, limitato a una nicchia, con 2–3 KPI semplici. Se non fa risparmiare tempo o non
+              protegge più contatti, non proseguite. In ogni caso mantenete apprendimenti e materiali.
+            </p>
+          </details>
+
+          <details>
+            <summary>Sostituirà gli agenti?</summary>
+            <p>
+              No. Gli agenti restano pienamente in controllo. Kintra velocizza le risposte ripetitive, evita che i follow-up
+              vengano dimenticati e struttura il prossimo passo. L’agente approva e invia; il manager ottiene chiarezza; il
+              cliente riceve un servizio più rapido.
+            </p>
+          </details>
+
+          <details>
+            <summary>Conformità WhatsApp?</summary>
+            <p>
+              La produzione usa l’API ufficiale WhatsApp Business (Meta Cloud). Il pilot utilizza un numero di test con invii
+              limitati per evitare abusi. Non richiediamo numeri personali degli agenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Come giustifico il pilot alla direzione finanziaria?</summary>
+            <p>
+              Consideratelo un audit di efficienza di 30 giorni: tempo risparmiato per agente × numero di agenti × costo orario.
+              I pilot tipici mostrano 12–20 ore risparmiate al mese per agente grazie a risposte più veloci, meno drop-off e
+              follow-up più chiari—di solito break-even entro il primo mese.
+            </p>
+          </details>
+
+          <details>
+            <summary>E se abbiamo già un CRM?</summary>
+            <p>
+              Perfetto—Kintra integra i CRM. Gli agenti restano in WhatsApp; Kintra redige i messaggi e registra gli esiti.
+              Il vostro CRM riceve dati più completi senza aggiungere lavoro amministrativo.
+            </p>
+          </details>
+
+          <details>
+            <summary>Quanto impegno serve per il setup?</summary>
+            <p>
+              Molto poco. Definiamo una nicchia, colleghiamo i dati essenziali dell’immobile e iniziamo a creare bozze direttamente
+              in WhatsApp. L’agente approva; noi gestiamo la parte pesante.
+            </p>
+          </details>
+
+          <details>
+            <summary>Possiamo interrompere dopo il pilot?</summary>
+            <p>
+              Sì—in qualsiasi momento. Se Kintra non genera un risparmio di tempo evidente o non protegge più contatti,
+              interrompete. Conservate comunque template, insight e miglioramenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Proprietà dei dati e privacy?</summary>
+            <p>
+              I dati sono vostri. Il pilot usa un numero di test; la produzione usa API ufficiali. Applichiamo accesso a minima
+              privilegio e rimuoviamo i dati del pilot su richiesta.
+            </p>
+          </details>
+
+          <details>
+            <summary>Funziona anche per le vendite?</summary>
+            <p>
+              Sì. Kintra redige risposte ovunque gestiate contatti. Iniziamo dagli affitti perché il volume è più alto e l’ROI
+              emerge più rapidamente; le vendite possono essere abilitate durante o dopo il pilot.
+            </p>
+          </details>
+
+          <details>
+            <summary>Rallenterà i miei agenti?</summary>
+            <p>
+              No. Kintra compare come bozza dentro WhatsApp—nessun nuovo strumento da imparare. La maggior parte degli agenti
+              diventa più veloce già nei primi giorni, soprattutto negli affitti ad alto volume.
+            </p>
+          </details>
+
+          <details>
+            <summary>E se i nostri agenti rispondono già velocemente?</summary>
+            <p>
+              Kintra aiuta comunque: prossimi passi strutturati, follow-up più rapidi e schede immobile coerenti. Anche piccoli
+              miglioramenti di velocità possono proteggere un numero significativo di contatti in città come Milano, Roma,
+              Torino e Firenze.
+            </p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <span>Kintra — Italy Pilot</span>
+      <span>WhatsApp-native support for rental and sales teams.</span>
+    </footer>
+
+  </div>
+
+  <!-- Minimal JS to toggle WA Rental/Sales and show/hide IT FAQ block.
+       If you already had JS for this, you can replace this with your original code. -->
+  <script>
+    // WA tabs
+    const waTabs = document.querySelectorAll('.wa-tab');
+    const waPanels = document.querySelectorAll('.chat[data-panel]');
+    waTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const t = tab.getAttribute('data-tab');
+        waTabs.forEach(b => b.classList.remove('active'));
+        tab.classList.add('active');
+        waPanels.forEach(p => {
+          p.style.display = p.getAttribute('data-panel') === t ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // Lang toggle (very light version)
+    const langButtons = document.querySelectorAll('.toggle button');
+    const faqEn = document.querySelector('.faq-block.lang-en');
+    const faqIt = document.querySelector('.faq-block.lang-it');
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const isEN = btn.textContent.trim().toUpperCase() === 'EN';
+        if (faqEn && faqIt) {
+          faqEn.style.display = isEN ? 'block' : 'none';
+          faqIt.style.display = isEN ? 'none' : 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
