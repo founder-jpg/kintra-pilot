@@ -21,7 +21,7 @@
     img{max-width:100%;display:block}
     .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
 
-    /* Simple language visibility helpers */
+    /* Language visibility helpers */
     .lang-en-only{display:none;}
     .lang-it-only{display:block;}
     body.lang-en-active .lang-en-only{display:block;}
@@ -40,8 +40,8 @@
     .langbox .label{font-size:14px;color:#6b7280}
     .toggle{display:flex;gap:8px;flex-wrap:wrap}
     .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;white-space:nowrap}
-    .toggle button.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .flag{display:inline-flex}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
+    .flag{display:inline-flex;font-size:16px}
 
     /* Hero */
     .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
@@ -71,18 +71,24 @@
     .dot.insight{background:#c9a227}
     .wa-tabs{display:flex;gap:8px;margin-top:4px}
     .wa-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;white-space:nowrap}
-    .wa-tab.active{background:var(--chip);border-color:var(--brand);color:var(--brand)}
-    .chat{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;display:flex;flex-direction:column;margin-top:8px}
-    .bubble{max-width:82%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:15px;margin:6px 0;position:relative}
-    .who{position:absolute;top:-10px;left:10px;font-size:11px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#475366}
-    .bubble.client{align-self:flex-start;background:#f5f7fb;border:1px solid var(--line);color:#243044}
-    .bubble.kintra{align-self:flex-end;background:#e8f1ff;border:1px solid #d7e6ff}
-    .bubble.agent{align-self:flex-end;background:#e9f8f1;border:1px solid #cfeee0}
+    .wa-tab.active{background:#eef3ff;border-color:#0b5fff;color:#0b2347}
+    .wa-panel{margin-top:10px;display:none}
+    .wa-panel.active{display:block}
+    .before-after{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+    .card h3{margin:0 0 8px;font-size:16px;color:#0b2347}
+    .wa-label{font-size:12px;color:#6b7280;margin-top:6px}
+    .meta{font-size:12px;color:#6b7280}
+    .bubble{max-width:100%;padding:10px 12px;border-radius:14px;line-height:1.25;font-size:15px;margin:6px 0;position:relative}
+    .bubble.client{background:#f5f7fb;border:1px solid var(--line);color:#243044}
+    .bubble.kintra{background:#e8f1ff;border:1px solid #d7e6ff}
+    .bubble.agent{background:#e9f8f1;border:1px solid #cfeee0}
     .stamp{font-size:12px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:6px}
     .insight b{color:#1b2233}
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+    .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
 
     /* Dashboard Mini */
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -108,7 +114,7 @@
     .roi .cell .big{font-size:22px;font-weight:800;color:#0b5fff}
     .roi .cell .small{font-size:12px;color:#6b7280}
     .roi .one{grid-column:1/-1;text-align:center;margin-top:8px;color:#243044}
-    @media (max-width:980px){ .roi .row{grid-template-columns:1fr} }
+    @media (max-width:980px){ .roi .row{grid-template-columns:1fr} .before-after{grid-template-columns:1fr} }
 
     /* FAQ */
     .faq{margin-top:14px}
@@ -121,7 +127,6 @@
     @media (max-width:980px){
       .hero,.grid-2{grid-template-columns:1fr}
       h1{font-size:32px}
-      .bubble{max-width:100%}
       .dash-img{height:200px}
     }
   </style>
@@ -140,11 +145,11 @@
       <div class="langbox">
         <span class="label">Language</span>
         <div class="toggle">
-          <button class="active">
-            <span class="flag">🇬🇧</span><span>EN</span>
+          <button class="active" data-lang="en">
+            <span class="flag" aria-hidden="true">🇬🇧</span><span>EN</span>
           </button>
-          <button>
-            <span class="flag">🇮🇹</span><span>IT</span>
+          <button data-lang="it">
+            <span class="flag" aria-hidden="true">🇮🇹</span><span>IT</span>
           </button>
         </div>
       </div>
@@ -201,144 +206,155 @@
         <button class="wa-tab" data-tab="sales">Sales</button>
       </div>
 
-      <!-- RENTAL CHAT -->
-      <div class="chat" data-panel="rental">
-        <!-- BEFORE -->
-        <div class="bubble client lang-it-only">
-          <span class="who">Client</span>
-          «Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»
-        </div>
-        <div class="bubble client lang-en-only">
-          <span class="who">Client</span>
-          “Hi, is the apartment on Via Roma still available? Can I see it this week?”
-        </div>
+      <!-- RENTAL PANEL -->
+      <div class="wa-panel active" data-panel="rental">
+        <div class="before-after">
 
-        <div class="bubble agent lang-it-only">
-          <span class="who">Agent</span>
-          «Sì, è disponibile. Quando è libero?»
-          <div class="stamp">[reply sent hours later]</div>
-        </div>
-        <div class="bubble agent lang-en-only">
-          <span class="who">Agent</span>
-          “Yes, it’s available. When are you free?”
-          <div class="stamp">[reply sent hours later]</div>
-        </div>
-        <div class="stamp">Manual reply: ~1–2 minutes plus lookup time.</div>
+          <!-- BEFORE -->
+          <div class="card">
+            <h3>Before – standard rental reply</h3>
 
-        <div class="insight">
-          <b>Insight:</b> Tenant does the work, no clear next step. Easy for the enquiry to drop.
-        </div>
+            <div class="wa-label">Client</div>
+            <div class="bubble client">
+              <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
+              <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
+            </div>
 
-        <!-- AFTER -->
-        <div class="bubble client lang-it-only">
-          <span class="who">Client</span>
-          «Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»
-        </div>
-        <div class="bubble client lang-en-only">
-          <span class="who">Client</span>
-          “Hi, is the apartment on Via Roma still available? Can I see it this week?”
-        </div>
+            <div class="wa-label">Agent</div>
+            <div class="bubble agent">
+              <span class="lang-it-only">
+                «Sì, è disponibile. Quando è libero?»
+              </span>
+              <span class="lang-en-only">
+                “Yes, it’s available. When are you free?”
+              </span>
+              <div class="stamp">[reply sent hours later]</div>
+            </div>
 
-        <div class="bubble kintra lang-it-only">
-          <span class="who">Kintra (draft)</span>
-          «Ciao [Nome], sì, l'appartamento è disponibile.<br><br>
-          · 2 camere, 1 bagno<br>
-          · Disponibile da [data]<br><br>
-          Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per la visita.<br><br>
-          Quale orario preferisci?»
-        </div>
-        <div class="bubble kintra lang-en-only">
-          <span class="who">Kintra (draft)</span>
-          “Hi [Name], yes, the apartment is available.<br><br>
-          · 2 bedrooms, 1 bathroom<br>
-          · Available from [date]<br><br>
-          I can offer Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
-          Which time works better for you?”
-        </div>
-        <div class="stamp">Kintra draft: ~10–20 seconds from message to ready-to-send reply.</div>
+            <div class="stamp">Manual reply: ~1–2 minutes plus lookup time.</div>
 
-        <div class="bubble agent">
-          <span class="who">Agent (send)</span>
-          Agent reviews in seconds and taps send.
-        </div>
+            <div class="insight">
+              <b>Insight:</b> Tenant does the work, no clear next step. Easy for the enquiry to drop.
+            </div>
+          </div>
 
-        <div class="insight">
-          <b>Insight:</b> Clear options, fast reply.<br>
-          <b>Next step:</b> Viewing booked in the same conversation.
-        </div>
-        <div class="chips">
-          <span class="chip">Offer two slots</span>
-          <span class="chip">Send floor plan</span>
-          <span class="chip">Confirm reminder</span>
+          <!-- AFTER -->
+          <div class="card">
+            <h3>After – Kintra-assisted rental reply</h3>
+
+            <div class="wa-label">Client</div>
+            <div class="bubble client">
+              <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
+              <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
+            </div>
+
+            <div class="wa-label">Kintra (draft)</div>
+            <div class="bubble kintra">
+              <span class="lang-it-only">
+                «Ciao [Nome], sì, l'appartamento è disponibile.<br><br>
+                · 2 camere, 1 bagno<br>
+                · Disponibile da [data]<br><br>
+                Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per la visita.<br><br>
+                Quale orario preferisci?»
+              </span>
+              <span class="lang-en-only">
+                “Hi [Name], yes, the apartment is available.<br><br>
+                · 2 bedrooms, 1 bathroom<br>
+                · Available from [date]<br><br>
+                I can offer Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
+                Which time works better for you?”
+              </span>
+              <div class="stamp">Kintra draft: ~10–20 seconds from message to ready-to-send reply.</div>
+            </div>
+
+            <div class="wa-label">Agent (send)</div>
+            <div class="bubble agent">
+              Agent reviews and taps send.
+            </div>
+
+            <div class="insight">
+              <b>Insight:</b> Clear options, fast reply.<br>
+              <b>Next step:</b> Viewing booked in the same conversation.
+            </div>
+            <div class="chips">
+              <span class="chip">Offer two slots</span>
+              <span class="chip">Send floor plan</span>
+              <span class="chip">Confirm reminder</span>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- SALES CHAT -->
-      <div class="chat" data-panel="sales" style="display:none">
-        <!-- BEFORE -->
-        <div class="bubble client lang-en-only">
-          <span class="who">Client</span>
-          “Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”
-        </div>
-        <div class="bubble client lang-it-only">
-          <span class="who">Client</span>
-          «Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»
-        </div>
+      <!-- SALES PANEL -->
+      <div class="wa-panel" data-panel="sales">
+        <div class="before-after">
 
-        <div class="bubble agent lang-en-only">
-          <span class="who">Agent</span>
-          “Yes, it’s available. When are you free?”
-          <div class="stamp">[reply sent much later]</div>
-        </div>
-        <div class="bubble agent lang-it-only">
-          <span class="who">Agent</span>
-          «Sì, è disponibile. Quando è libero?»
-          <div class="stamp">[reply sent much later]</div>
-        </div>
+          <!-- BEFORE -->
+          <div class="card">
+            <h3>Before – sales lead in WhatsApp</h3>
 
-        <div class="insight">
-          <b>Insight:</b> No urgency, no options, easy for the lead to disappear.
-        </div>
+            <div class="wa-label">Client</div>
+            <div class="bubble client">
+              <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
+              <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
+            </div>
 
-        <!-- AFTER -->
-        <div class="bubble client lang-en-only">
-          <span class="who">Client</span>
-          “Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”
-        </div>
-        <div class="bubble client lang-it-only">
-          <span class="who">Client</span>
-          «Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»
-        </div>
+            <div class="wa-label">Agent</div>
+            <div class="bubble agent">
+              <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
+              <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
+              <div class="stamp">[reply sent much later]</div>
+            </div>
 
-        <div class="bubble kintra lang-en-only">
-          <span class="who">Kintra (draft)</span>
-          “Hi [Name], yes, it’s still available.<br><br>
-          · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
-          · Available from [Date]<br><br>
-          I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
-          Which works better for you?”
-        </div>
-        <div class="bubble kintra lang-it-only">
-          <span class="who">Kintra (draft)</span>
-          «Ciao [Nome], sì, è ancora disponibile.<br><br>
-          · 2 camere, 1 bagno, 3° piano con ascensore<br>
-          · Disponibile da [data]<br><br>
-          Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
-          Quale orario preferisci?»
-        </div>
+            <div class="insight">
+              <b>Insight:</b> No urgency, no options, easy for the lead to disappear.
+            </div>
+          </div>
 
-        <div class="bubble agent">
-          <span class="who">Agent (send)</span>
-          Agent checks the draft and taps send. Viewing times are on the table in under 30 seconds.
-        </div>
+          <!-- AFTER -->
+          <div class="card">
+            <h3>After – Kintra-assisted sales reply</h3>
 
-        <div class="insight">
-          <b>Insight:</b> Lead feels looked after, clear times offered, higher chance of booking.<br>
-          <b>Next step:</b> Viewing confirmed instead of “lead gone cold”.
-        </div>
+            <div class="wa-label">Client</div>
+            <div class="bubble client">
+              <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
+              <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
+            </div>
 
-        <div class="stamp">
-          Each missed sales lead can mean €4,000–€12,000 in lost commission.
+            <div class="wa-label">Kintra (draft)</div>
+            <div class="bubble kintra">
+              <span class="lang-en-only">
+                “Hi [Name], yes, it’s still available.<br><br>
+                · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
+                · Available from [Date]<br><br>
+                I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
+                Which works better for you?”
+              </span>
+              <span class="lang-it-only">
+                «Ciao [Nome], sì, è ancora disponibile.<br><br>
+                · 2 camere, 1 bagno, 3° piano con ascensore<br>
+                · Disponibile da [data]<br><br>
+                Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
+                Quale orario preferisci?»
+              </span>
+            </div>
+
+            <div class="wa-label">Agent (send)</div>
+            <div class="bubble agent">
+              Agent checks the draft and taps send. Viewing times are on the table in under 30 seconds.
+            </div>
+
+            <div class="insight">
+              <b>Insight:</b> Lead feels looked after, clear times offered, higher chance of booking.<br>
+              <b>Next step:</b> Viewing confirmed instead of “lead gone cold”.
+            </div>
+
+            <div class="roi-line">
+              Each missed sales lead can mean €4,000–€12,000 in lost commission.
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -461,7 +477,7 @@
           var box=document.querySelector('.assump-box');
           if(box) box.style.display = box.style.display==='block' ? 'none' : 'block';
         ">Show assumptions</button>
-        <div class="assump-box">
+        <div class="assump-box" style="display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px;margin-top:8px;">
           <ul>
             <li>30 days of messages in one niche.</li>
             <li>Base case: likely break-even around 30 days, depending on volume.</li>
@@ -470,6 +486,16 @@
           </ul>
         </div>
       </div>
+
+      <div class="divider"></div>
+
+      <h3>How to book a pilot</h3>
+      <p>
+        Use the button below or email us with your city, niche (e.g. Milano rentals) and approximate team size.
+      </p>
+      <p>
+        <a href="mailto:YOUR_EMAIL_HERE?subject=Kintra%20Pilot%20Italy" class="btn ghost">Email to book a pilot</a>
+      </p>
 
       <div class="cta-row">
         <a class="btn primary" href="#hero">Request pilot access</a>
@@ -584,7 +610,7 @@
             <summary>What if our agents already reply quickly?</summary>
             <p>
               Kintra still helps: structured next steps, faster follow-ups, and consistent property summaries. Even small
-              improvements in speed can protect a meaningful number of leads in cities like Milano, Roma, Torino and Firenze.
+              improvements in speed can protect a meaningful number of leads in cities like Milano, Roma, Torino e Firenze.
             </p>
           </details>
         </div>
@@ -706,26 +732,26 @@
   <script>
     // WA tabs
     const waTabs = document.querySelectorAll('.wa-tab');
-    const waPanels = document.querySelectorAll('.chat[data-panel]');
+    const waPanels = document.querySelectorAll('.wa-panel');
     waTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         const t = tab.getAttribute('data-tab');
         waTabs.forEach(b => b.classList.remove('active'));
         tab.classList.add('active');
         waPanels.forEach(p => {
-          p.style.display = p.getAttribute('data-panel') === t ? 'flex' : 'none';
+          p.classList.toggle('active', p.getAttribute('data-panel') === t);
         });
       });
     });
 
-    // Language toggle: switches body class, FAQ, WA texts, etc.
+    // Language toggle: switches body class (affects WA + FAQ)
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         langButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        const text = btn.textContent.toUpperCase();
-        const isEN = text.includes('EN');
+        const lang = btn.getAttribute('data-lang');
+        const isEN = lang === 'en';
         document.body.classList.toggle('lang-en-active', isEN);
         document.body.classList.toggle('lang-it-active', !isEN);
       });
