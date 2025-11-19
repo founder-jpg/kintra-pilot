@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kintra — Listing Summary</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0e1726; --muted:#5b6475; --line:#e8ecf2;
+      --brand:#0b5fff; --gold:#c9a227;
+      --card:#ffffff; --radius:16px; --max:900px;
+      --wa:#25D366;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font:16px/1.5 system-ui,-apple-system,Roboto,Inter,Arial;background:var(--bg);color:var(--ink)}
+    img{max-width:100%;display:block;border-radius:12px}
+    a{text-decoration:none;color:var(--brand)}
+    .wrap{max-width:var(--max);margin:0 auto;padding:28px 20px 80px}
+
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:700}
+    .brand img{width:28px;height:28px;border-radius:6px}
+
+    .lang{display:flex;gap:8px}
+    .lang button{
+      background:#fff;border:1px solid var(--line);padding:6px 10px;border-radius:10px;
+      cursor:pointer;font-size:14px
+    }
+    .lang button.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+    h1{margin:0;font-size:30px;letter-spacing:-.3px;font-weight:800}
+    .lead{margin-top:6px;color:var(--muted);font-size:15px}
+
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      padding:18px;margin-top:26px;box-shadow:0 6px 18px rgba(0,0,0,0.04)
+    }
+
+    .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:20px;margin-top:14px}
+    @media(max-width:780px){.grid{grid-template-columns:1fr}}
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+    .tag{
+      padding:6px 10px;border:1px solid var(--line);border-radius:999px;
+      font-size:13px;background:#f7f9fc
+    }
+
+    .line{color:var(--muted);font-size:14px;margin-top:4px}
+
+    .cta-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+    .btn{
+      border:1px solid var(--line);background:#fff;color:var(--ink);
+      padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer
+    }
+    .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .btn.wa{background:var(--wa);color:#fff;border-color:var(--wa)}
+
+    footer{margin-top:40px;color:#7b879b;font-size:14px;text-align:right}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <!-- ===================================== -->
+  <!-- TOPBAR -->
+  <!-- ===================================== -->
+  <div class="topbar">
+    <div class="brand">
+      <img src="./img/logo.png.png" alt="Kintra logo">
+      <span data-i18n="title_small">Listing Summary</span>
+    </div>
+    <div class="lang">
+      <button id="btn-en" class="active">EN</button>
+      <button id="btn-it">IT</button>
+    </div>
+  </div>
+
+  <!-- ===================================== -->
+  <!-- HEADER -->
+  <!-- ===================================== -->
+  <h1 data-i18n="header_title">Listing Summary</h1>
+  <p class="lead" data-i18n="header_sub">
+    A clean, pre-filled card your agents can send in one tap.
+  </p>
+
+  <!-- ===================================== -->
+  <!-- PROPERTY CARD -->
+  <!-- ===================================== -->
+  <div class="card">
+
+    <div class="grid">
+      <div>
+        <img src="./img/cta.jpg" alt="Listing photo">
+      </div>
+
+      <div>
+        <h2>2BR • 80 m² • Milano •
+          <span class="lang-en-only">Balcony</span>
+          <span class="lang-it-only" style="display:none">Balcone</span>
+        </h2>
+
+        <p class="line" data-i18n="prop_desc">
+          Quick, consistent property summary — editable in seconds before sending.
+        </p>
+
+        <div class="tags">
+          <span class="tag">2BR</span>
+          <span class="tag">80 m²</span>
+          <span class="tag">Milano</span>
+          <span class="tag lang-en-only">Balcony</span>
+          <span class="tag lang-it-only" style="display:none">Balcone</span>
+        </div>
+
+        <p class="line">
+          <b data-i18n="avail">Available from</b>: <span data-i18n="date">15 December</span>
+        </p>
+        <p class="line"><b data-i18n="floor">Floor</b>: 3</p>
+        <p class="line"><b data-i18n="amen">Amenities</b>: Lift, AC, Balcony</p>
+
+        <div class="cta-row">
+          <button class="btn wa" id="send-wa">
+            <span class="lang-en-only">Copy card to WhatsApp</span>
+            <span class="lang-it-only" style="display:none">Copia scheda su WhatsApp</span>
+          </button>
+
+          <a href="./index.html#listing-summary" class="btn">
+            <span class="lang-en-only">← Back</span>
+            <span class="lang-it-only" style="display:none">← Indietro</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================================== -->
+  <!-- FOOTER -->
+  <!-- ===================================== -->
+  <footer>
+    <span data-i18n="footer">Powered by Kintra AI — built for real estate teams.</span>
+  </footer>
+
+</div>
+
+<script>
+  // ================================
+  // DICTIONARY
+  // ================================
+  const dict = {
+    en:{
+      title_small:"Listing Summary",
+      header_title:"Listing Summary",
+      header_sub:"A clean, pre-filled card your agents can send in one tap.",
+      prop_desc:"Quick, consistent property summary — editable in seconds before sending.",
+      avail:"Available from",
+      floor:"Floor",
+      amen:"Amenities",
+      date:"15 December",
+      footer:"Powered by Kintra AI — built for real estate teams."
+    },
+    it:{
+      title_small:"Scheda Immobile",
+      header_title:"Scheda Immobile",
+      header_sub:"Una scheda precompilata che gli agenti possono inviare in un tap.",
+      prop_desc:"Scheda immobile chiara e coerente — modificabile in pochi secondi.",
+      avail:"Disponibile da",
+      floor:"Piano",
+      amen:"Dotazioni",
+      date:"15 Dicembre",
+      footer:"Tecnologia Kintra AI — creata per i team immobiliari."
+    }
+  };
+
+  function setLang(lang){
+    const map = dict[lang];
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      el.textContent = map[el.getAttribute("data-i18n")];
+    });
+
+    document.querySelectorAll(".lang-en-only").forEach(el=> el.style.display = (lang==="en"?"inline":"none"));
+    document.querySelectorAll(".lang-it-only").forEach(el=> el.style.display = (lang==="it"?"inline":"none"));
+
+    document.getElementById("btn-en").classList.toggle("active", lang==="en");
+    document.getElementById("btn-it").classList.toggle("active", lang==="it");
+  }
+
+  document.getElementById("btn-en").onclick = ()=>setLang("en");
+  document.getElementById("btn-it").onclick = ()=>setLang("it");
+  setLang("en");
+
+  // ======================
+  // Copy-to-WhatsApp demo
+  // ======================
+  document.getElementById("send-wa").onclick = ()=>{
+    alert("Copied to clipboard (demo). Paste directly into WhatsApp.");
+  };
+</script>
+
+</body>
+</html>
