@@ -79,7 +79,7 @@
 
     .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 
-    /* New: phone-style chat shell */
+    /* Phone-style chat shell */
     .phone-shell{
       margin-top:10px;
       border-radius:22px;
@@ -146,6 +146,22 @@
       color:#111827;
       border-bottom-right-radius:4px;
     }
+
+    /* NEW: time + ticks under bubbles */
+    .msg-meta{
+      font-size:11px;
+      color:#6b7280;
+      margin-top:2px;
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+    .msg-meta.left{justify-content:flex-start;}
+    .msg-meta.right{justify-content:flex-end;}
+    .checks{display:inline-flex;gap:1px;}
+    .tick{font-size:11px;line-height:1;}
+    .tick.grey{color:#9ca3af;}
+    .tick.blue{color:#0b5fff;}
 
     .stamp{font-size:12px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
@@ -300,10 +316,10 @@
       </h2>
       <p class="sub">
         <span class="lang-en-only">
-          Before / After view of real conversations – with Client, Agent, Insight and Next step.
+          Before / After view of real conversations – with Client, Kintra, Agent, Insight and Next step.
         </span>
         <span class="lang-it-only">
-          Vista Prima / Dopo di conversazioni reali – con Cliente, Agente, Insight e Prossimo passo.
+          Vista Prima / Dopo di conversazioni reali – con Cliente, Kintra, Agente, Insight e Prossimo passo.
         </span>
       </p>
 
@@ -370,11 +386,22 @@
                       <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
                     </div>
                   </div>
+                  <div class="msg-meta left">
+                    <span>09:14</span>
+                  </div>
+
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
                     </div>
+                  </div>
+                  <div class="msg-meta right">
+                    <span>09:19</span>
+                    <span class="checks">
+                      <span class="tick grey">✓</span>
+                      <span class="tick grey">✓</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -425,6 +452,10 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
+                  <div class="msg-meta left">
+                    <span>09:14</span>
+                  </div>
+
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
@@ -437,11 +468,15 @@
                         «Ciao [Nome], sì, è disponibile.<br><br>
                         · 2 camere, 1 bagno<br>
                         · Disponibile da [data]<br><br>
-                        Mer 18:30 o Gio 17:00 – quale preferisci?»
-
-
-                      </span>
+                        Mer 18:30 o Gio 17:00 – quale preferisci?»</span>
                     </div>
+                  </div>
+                  <div class="msg-meta right">
+                    <span>09:15</span>
+                    <span class="checks">
+                      <span class="tick blue">✓</span>
+                      <span class="tick blue">✓</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -521,11 +556,22 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
+                  <div class="msg-meta left">
+                    <span>09:14</span>
+                  </div>
+
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
                     </div>
+                  </div>
+                  <div class="msg-meta right">
+                    <span>09:20</span>
+                    <span class="checks">
+                      <span class="tick grey">✓</span>
+                      <span class="tick grey">✓</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -576,6 +622,10 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
+                  <div class="msg-meta left">
+                    <span>09:14</span>
+                  </div>
+
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
@@ -590,11 +640,15 @@
                         · 2 camere, 1 bagno, 3° piano con ascensore<br>
                         · Disponibile da [data]<br><br>
                         Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
-                        Quale orario preferisci?»
-
-
-                      </span>
+                        Quale orario preferisci?»</span>
                     </div>
+                  </div>
+                  <div class="msg-meta right">
+                    <span>09:15</span>
+                    <span class="checks">
+                      <span class="tick blue">✓</span>
+                      <span class="tick blue">✓</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1223,7 +1277,7 @@
       });
     });
 
-    // Language toggle: switches body class (affects all lang-* blocks)
+    // Language toggle
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
