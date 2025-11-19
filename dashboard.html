@@ -1,423 +1,556 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Kintra — PulseView Dashboard</title>
-  <meta name="description" content="Today’s WhatsApp leads — live view." />
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png.png"/>
+
   <style>
     :root{
-      --bg:#ffffff; --fg:#0e1726; --muted:#5b6475; --line:#e8ecf1;
-      --brand:#0ea5a6; --brand-2:#5dd1c1; --good:#10b981; --warn:#f59e0b; --info:#3b82f6;
-      --card:#ffffff; --shadow:0 8px 24px rgba(16,23,40,.06); --radius:18px;
+      --bg:#f3f4f8; --ink:#0b1220; --muted:#5b6475; --line:#e3e7f0;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#ffffff; --chip:#eef3ff; --radius:14px; --max:1100px;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px 64px}
-
-    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
-    .brand img{width:26px;height:26px;object-fit:contain;border-radius:6px}
-    .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-    .btn{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
-    .btn.primary{border:none;background:var(--fg);color:#fff}
-    .btn.small{padding:8px 12px;font-size:14px}
-
-    .hero{
-      position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
-      background:
-        radial-gradient(1200px 300px at -10% -20%, rgba(14,165,166,.15), transparent 60%),
-        radial-gradient(900px 250px at 110% -30%, rgba(93,209,193,.18), transparent 55%),
-        #ffffff;
+    html,body{
+      margin:0;
+      background:radial-gradient(circle at top,#e5ecff,#f6f7fb 45%,#eef2f7 100%);
+      color:var(--ink);
+      font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
     }
-    .hero::before{
-      content:"";position:absolute;inset:-2px;
-      background:linear-gradient(90deg, rgba(14,165,166,.18), rgba(93,209,193,.10), rgba(59,130,246,.12));
-      filter:blur(28px);opacity:.6;animation:glide 8s linear infinite;pointer-events:none;
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 40px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:26px;height:26px;border-radius:6px;object-fit:contain}
+    .brand strong{letter-spacing:.2px;font-size:16px}
+    .badge{padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:12px;background:#fff}
+    .crumbs{font-size:13px;color:#6b7280}
+
+    h1{margin:2px 0 4px;font-size:26px;color:#0b2347;letter-spacing:-.2px}
+    .subhead{margin:0 0 10px;font-size:14px;color:#4b5563}
+    .divider{height:1px;background:var(--line);margin:16px 0 18px}
+
+    /* PULSE SHELL – main “pop” container */
+    .pulse-shell{
+      border-radius:22px;
+      padding:10px;
+      background:linear-gradient(145deg,#111827,#020617);
+      box-shadow:0 16px 40px rgba(15,23,42,.45);
     }
-    @keyframes glide{0%{transform:translateX(-30%)}100%{transform:translateX(30%)}}
-    .hero-inner{position:relative;padding:22px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .h-title{font-size:22px;font-weight:750;letter-spacing:.2px}
-    .h-sub{color:var(--muted);font-size:14px;margin-top:4px}
-
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px 14px 18px}
-    .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;
-      box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .kpi .label{color:var(--muted);font-size:13px}
-    .kpi .value{font-size:22px;font-weight:800;letter-spacing:.2px}
-    .kpi .delta{font-size:12px;border-radius:999px;padding:6px 8px}
-    .delta.up{background:rgba(16,185,129,.12);color:var(--good);border:1px solid rgba(16,185,129,.3)}
-    .delta.flat{background:rgba(59,130,246,.10);color:var(--info);border:1px solid rgba(59,130,246,.25)}
-    .delta.down{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.3)}
-
-    .lead-grid{display:grid;grid-template-columns:1fr;gap:14px;padding:8px 2px;margin-top:6px}
-    @media (min-width:641px){.lead-grid{grid-template-columns:1fr}}
-    @media (min-width:981px){.lead-grid{grid-template-columns:1fr 1fr 1fr}} /* desktop: 3 per row */
-
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;
-      box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-height:150px;
-      transform:translateZ(0);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(16,23,40,.08);border-color:#dfe6ee}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .id{font-weight:700}
-    .badge{font-size:12px;padding:6px 8px;border-radius:10px;border:1px solid}
-    .b-new{color:var(--good);background:rgba(16,185,129,.10);border-color:rgba(16,185,129,.25)}
-    .b-wait{color:var(--warn);background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.25)}
-    .b-sent{color:var(--info);background:rgba(59,130,246,.10);border-color:rgba(59,130,246,.25)}
-    .snippet{color:var(--muted);font-size:14px;border-left:3px solid #e6eef7;padding-left:10px}
-    .meta{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px}
-    .cta{display:flex;gap:8px;margin-top:auto}
-    .cta .btn{border-radius:10px}
-
-    .roi{margin:22px 2px 8px;color:var(--muted);font-size:14px}
-    footer{margin-top:18px;color:#8b94a6;font-size:12px;display:flex;justify-content:flex-end}
-
-    .pulse{animation:pulse 1.8s ease-in-out 1}
-    @keyframes pulse{
-      0%{box-shadow:var(--shadow)}
-      50%{box-shadow:0 14px 36px rgba(14,165,166,.18)}
-      100%{box-shadow:var(--shadow)}
+    .pulse-card{
+      border-radius:18px;
+      background:radial-gradient(circle at top left,#fafdff,#f4f5fb 48%,#edf0f7 100%);
+      border:1px solid rgba(148,163,184,.35);
+      padding:16px 16px 18px;
     }
 
-    .wa{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:6px;background:#25D366;color:#fff;font-size:12px}
-    .lang{display:flex;gap:6px}
-    .lang button{border:1px solid var(--line);background:#fff;padding:8px 10px;border-radius:10px;cursor:pointer}
-    .lang button.active{background:#0e1726;color:#fff;border-color:#0e1726}
+    /* Layout inside PulseView */
+    .pv-top-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:10px;
+    }
+    .pv-title-block h2{
+      margin:0;
+      font-size:18px;
+      color:#0b2347;
+    }
+    .pv-title-block p{
+      margin:4px 0 0;
+      font-size:13px;
+      color:#6b7280;
+    }
+    .pv-tag{
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid #d1d5e4;
+      background:#fff;
+      font-size:11px;
+      color:#4b5563;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .pv-tag-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#22c55e;
+    }
+
+    .pv-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      margin-top:8px;
+    }
+
+    /* HERO KPIs row */
+    .kpi-row{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .kpi{
+      border-radius:12px;
+      background:#ffffff;
+      border:1px solid #dde3f0;
+      padding:9px 10px;
+      box-shadow:0 2px 5px rgba(15,23,42,.06);
+    }
+    .kpi-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      color:#6b7280;
+      margin-bottom:2px;
+    }
+    .kpi-main{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:4px;
+    }
+    .kpi-value{
+      font-size:20px;
+      font-weight:800;
+      color:#0b2347;
+    }
+    .kpi-pill{
+      font-size:11px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:#ecfdf3;
+      color:#15803d;
+      border:1px solid #bbf7d0;
+      white-space:nowrap;
+    }
+    .kpi-sub{
+      margin-top:3px;
+      font-size:11px;
+      color:#6b7280;
+    }
+
+    /* LEFT column – lead list */
+    .lead-card{
+      border-radius:14px;
+      background:#ffffff;
+      border:1px solid #dde3f0;
+      padding:10px;
+      box-shadow:0 3px 9px rgba(15,23,42,.06);
+    }
+    .lead-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+    }
+    .lead-head h3{
+      margin:0;
+      font-size:13px;
+      color:#111827;
+    }
+    .lead-filter{
+      font-size:11px;
+      color:#6b7280;
+    }
+    .lead-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      max-height:220px;
+      overflow:auto;
+    }
+    .lead-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      padding:7px 0;
+      border-bottom:1px dashed #e5e7f0;
+      font-size:12px;
+    }
+    .lead-main{
+      max-width:68%;
+    }
+    .lead-name{font-weight:600;color:#111827}
+    .lead-line{color:#6b7280;font-size:11px}
+    .lead-tag{
+      margin-top:2px;
+      font-size:10px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:#eef3ff;
+      border:1px solid #d4e0ff;
+      color:#1f2937;
+    }
+    .lead-meta{
+      text-align:right;
+      font-size:11px;
+      color:#6b7280;
+      white-space:nowrap;
+    }
+    .lead-meta strong{display:block;color:#0b2347;font-size:11px}
+
+    /* RIGHT column – today viewings & follow-ups */
+    .rhs-stack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .panel{
+      border-radius:14px;
+      background:#ffffff;
+      border:1px solid #dde3f0;
+      padding:10px 10px 9px;
+      box-shadow:0 3px 9px rgba(15,23,42,.06);
+    }
+    .panel-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:4px;
+    }
+    .panel-head h3{
+      margin:0;
+      font-size:13px;
+      color:#111827;
+    }
+    .panel-head span{
+      font-size:11px;
+      color:#6b7280;
+    }
+    .pill{
+      font-size:11px;
+      padding:2px 6px;
+      border-radius:999px;
+      background:#ecfeff;
+      border:1px solid #bae6fd;
+      color:#0369a1;
+    }
+    .panel-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      font-size:12px;
+    }
+    .panel-item{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      padding:6px 0;
+      border-bottom:1px dashed #e5e7f0;
+    }
+    .panel-main{max-width:70%}
+    .panel-main strong{display:block;font-size:12px;color:#111827}
+    .panel-main span{font-size:11px;color:#6b7280}
+    .panel-meta{text-align:right;font-size:11px;color:#6b7280;white-space:nowrap}
+
+    .panel-foot{
+      margin-top:6px;
+      font-size:11px;
+      color:#6b7280;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    /* Bottom strip inside PulseView */
+    .pv-foot-strip{
+      margin-top:10px;
+      padding-top:8px;
+      border-top:1px dashed #d4d7e5;
+      font-size:11px;
+      color:#6b7280;
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pv-foot-strip strong{color:#0b2347}
+
+    /* Outside helper text */
+    .hint-row{
+      margin-top:10px;
+      font-size:12px;
+      color:#6b7280;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:900px){
+      .pv-grid{grid-template-columns:1fr}
+      .kpi-row{grid-template-columns:1fr}
+      .lead-card{max-height:none}
+      .lead-list{max-height:none}
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="topbar">
+
+    <!-- Header -->
+    <header>
       <div class="brand">
-        <img src="./img/logo.png.png" alt="Kintra logo" />
-        <span>Kintra — <span data-i18n="dash_title_small">PulseView</span></span>
+        <img src="./img/logo.png.png" alt="Kintra logo">
+        <strong>Kintra</strong>
+        <span class="badge">Pilot • Italy</span>
       </div>
-      <div class="actions">
-        <a class="btn small" href="./index.html" data-i18n="back_landing">← Back to landing</a>
-        <a class="btn small" href="./index.html#pilot-offer" data-i18n="request_pilot">Request Pilot</a>
-        <div class="lang">
-          <button id="btn-en" class="active">EN</button>
-          <button id="btn-it">IT</button>
-        </div>
+      <div class="crumbs">
+        Dashboard · <strong>PulseView</strong>
       </div>
-    </div>
+    </header>
 
-    <div class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="h-title" data-i18n="hero_title">Today’s WhatsApp Leads</div>
-          <div class="h-sub"><span id="live-sub" data-i18n="hero_sub">Live rental activity — updated as your team replies.</span></div>
-        </div>
-        <div class="actions">
-          <a class="btn primary" href="#" id="btn-refresh" data-i18n="refresh_fake">Refresh (demo)</a>
-        </div>
-      </div>
+    <h1>PulseView — daily WhatsApp pipeline</h1>
+    <p class="subhead">
+      Three numbers tell you if you’re winning the day. The details show you where to nudge: reply time, viewings, follow-ups.
+    </p>
 
-      <div class="kpis">
-        <div class="kpi" id="kpi-card-leads">
-          <div>
-            <div class="label" data-i18n="kpi_new_leads">New rental leads today</div>
-            <div class="value" id="kpi-leads">8</div>
+    <div class="divider"></div>
+
+    <!-- PULSEVIEW SHELL -->
+    <div class="pulse-shell">
+      <div class="pulse-card">
+
+        <div class="pv-top-row">
+          <div class="pv-title-block">
+            <h2>Hero KPIs — “Are we winning today?”</h2>
+            <p>Live snapshot of one rental / sales team. Numbers here are demo data for the pilot.</p>
           </div>
-          <div class="delta up" id="delta-leads">+12%</div>
-        </div>
-        <div class="kpi" id="kpi-card-reply">
-          <div>
-            <div class="label" data-i18n="kpi_avg_reply">Avg reply time (WhatsApp)</div>
-            <div class="value" id="kpi-reply">2m 12s</div>
+          <div class="pv-tag">
+            <span class="pv-tag-dot"></span>
+            <span>Today · Milano rentals</span>
           </div>
-          <div class="delta flat" id="delta-reply" data-i18n="flat_vs_yday">stable vs. yesterday</div>
         </div>
-        <div class="kpi" id="kpi-card-closed">
-          <div>
-            <div class="label" data-i18n="kpi_closed">Viewings/Closes today</div>
-            <div class="value" id="kpi-closed">3</div>
+
+        <!-- KPI ROW -->
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">New rental leads today</div>
+            <div class="kpi-main">
+              <span class="kpi-value">9</span>
+              <span class="kpi-pill">On track (target 10–12)</span>
+            </div>
+            <div class="kpi-sub">Last 7-day average: 11 leads/day</div>
           </div>
-          <div class="delta up" id="delta-closed">+1</div>
+
+          <div class="kpi">
+            <div class="kpi-label">Average reply time</div>
+            <div class="kpi-main">
+              <span class="kpi-value">7m</span>
+              <span class="kpi-pill">Improved vs. 18m</span>
+            </div>
+            <div class="kpi-sub">Past week: 12–20 minutes per first reply</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label">Viewings / closes today</div>
+            <div class="kpi-main">
+              <span class="kpi-value">4</span>
+              <span class="kpi-pill">2 more booked at 17:00</span>
+            </div>
+            <div class="kpi-sub">Includes today’s viewings + signed contracts</div>
+          </div>
         </div>
+
+        <!-- MAIN GRID -->
+        <div class="pv-grid">
+
+          <!-- LEFT: leads waiting / moving -->
+          <div class="lead-card">
+            <div class="lead-head">
+              <h3>Leads in WhatsApp — today</h3>
+              <span class="lead-filter">Sorted by reply status</span>
+            </div>
+
+            <ul class="lead-list">
+              <li class="lead-item">
+                <div class="lead-main">
+                  <span class="lead-name">Anna R. · 2BR Via Roma</span>
+                  <div class="lead-line">Asked for viewing “this week, after 18:00”.</div>
+                  <span class="lead-tag">Reply sent · viewing offered</span>
+                </div>
+                <div class="lead-meta">
+                  <strong>08:42</strong>
+                  <span>First reply: 3m</span>
+                </div>
+              </li>
+
+              <li class="lead-item">
+                <div class="lead-main">
+                  <span class="lead-name">Marco · 1BR Navigli</span>
+                  <div class="lead-line">Checking if pets are allowed + parking.</div>
+                  <span class="lead-tag">Needs follow-up</span>
+                </div>
+                <div class="lead-meta">
+                  <strong>09:11</strong>
+                  <span>Waiting 14m</span>
+                </div>
+              </li>
+
+              <li class="lead-item">
+                <div class="lead-main">
+                  <span class="lead-name">Chiara · 2BR Porta Romana</span>
+                  <div class="lead-line">“Can we visit Saturday morning?”</div>
+                  <span class="lead-tag">Viewing confirmed</span>
+                </div>
+                <div class="lead-meta">
+                  <strong>10:05</strong>
+                  <span>Reply in 5m</span>
+                </div>
+              </li>
+
+              <li class="lead-item">
+                <div class="lead-main">
+                  <span class="lead-name">Luca · Studio Duomo</span>
+                  <div class="lead-line">Sent docs, waiting for owner approval.</div>
+                  <span class="lead-tag">Owner update needed</span>
+                </div>
+                <div class="lead-meta">
+                  <strong>10:39</strong>
+                  <span>Last touch 28m</span>
+                </div>
+              </li>
+
+              <li class="lead-item">
+                <div class="lead-main">
+                  <span class="lead-name">Elena · 3BR Città Studi</span>
+                  <div class="lead-line">Requested video tour instead of visit.</div>
+                  <span class="lead-tag">Agent preparing reply</span>
+                </div>
+                <div class="lead-meta">
+                  <strong>11:02</strong>
+                  <span>Draft ready</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- RIGHT: today’s viewings & follow-ups -->
+          <div class="rhs-stack">
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Today’s viewings</h3>
+                <span class="pill">4 booked</span>
+              </div>
+              <ul class="panel-list">
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>2BR • Via Roma</strong>
+                    <span>18:30 — Anna + partner</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>Reminder sent</span>
+                    <span>Today 10:00</span>
+                  </div>
+                </li>
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>1BR • Navigli</strong>
+                    <span>17:00 — Marco</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>Needs confirm</span>
+                    <span>WhatsApp ping due</span>
+                  </div>
+                </li>
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>Studio • Duomo</strong>
+                    <span>Virtual video tour</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>Link sent</span>
+                    <span>Yesterday</span>
+                  </div>
+                </li>
+              </ul>
+              <div class="panel-foot">
+                <span>Kintra keeps viewing times and reminders in one simple strip.</span>
+                <span>Manager sees if today is “light” or “full” at a glance.</span>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Follow-ups that matter</h3>
+                <span>Last 24 hours</span>
+              </div>
+              <ul class="panel-list">
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>Owners waiting update</strong>
+                    <span>3 owners need viewing feedback today.</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>0 / 3 sent</span>
+                  </div>
+                </li>
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>Leads without reply</strong>
+                    <span>2 new enquiries waiting &gt; 20 min.</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>Tap to draft replies</span>
+                  </div>
+                </li>
+                <li class="panel-item">
+                  <div class="panel-main">
+                    <strong>Expiring opportunities</strong>
+                    <span>1 tenant hesitating, needs gentle nudge.</span>
+                  </div>
+                  <div class="panel-meta">
+                    <span>Follow-up suggested</span>
+                  </div>
+                </li>
+              </ul>
+              <div class="panel-foot">
+                <span>Small nudges here prevent “warm but forgotten” leads.</span>
+                <span>Kintra suggests the next message; agent approves and sends.</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FOOT STRIP INSIDE PULSEVIEW -->
+        <div class="pv-foot-strip">
+          <span>
+            <strong>For agents:</strong> no extra logins — everything happens in WhatsApp.
+          </span>
+          <span>
+            <strong>For managers:</strong> one view of today’s leads, viewings and follow-ups without chasing the team.
+          </span>
+        </div>
+
       </div>
     </div>
 
-    <div class="lead-grid" id="lead-grid">
-      <div class="card" data-mins="180">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 347 221 88 32</div>
-          <span class="badge b-new" data-i18n="st_new">New</span>
-        </div>
-        <div class="snippet" data-i18n="lead_1">“Interested in the 3-room apartment near Navigli. Available this weekend?”</div>
-        <div class="row meta"><span class="ago">3h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Luca</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
-
-      <div class="card" data-mins="47">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 320 991 44 07</div>
-          <span class="badge b-wait" data-i18n="st_wait">Awaiting reply</span>
-        </div>
-        <div class="snippet" data-i18n="lead_2">“Additional photos of the two-room flat on Via Roma? Budget €1,200/month.”</div>
-        <div class="row meta"><span class="ago">47m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Silvia</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
-
-      <div class="card" data-mins="60">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 335 770 12 66</div>
-          <span class="badge b-sent" data-i18n="st_sent">Follow-up sent</span>
-        </div>
-        <div class="snippet" data-i18n="lead_3">“Thanks! Viewing confirmed for Tuesday at 18:00.”</div>
-        <div class="row meta"><span class="ago">1h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Marta</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
-
-      <div class="card" data-mins="12">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 338 991 55 02</div>
-          <span class="badge b-new" data-i18n="st_new">New</span>
-        </div>
-        <div class="snippet" data-i18n="lead_4">“Possible to view the penthouse Thursday? We are two.”</div>
-        <div class="row meta"><span class="ago">12m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Paolo</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
-
-      <div class="card" data-mins="9">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 329 800 77 61</div>
-          <span class="badge b-wait" data-i18n="st_wait">Awaiting reply</span>
-        </div>
-        <div class="snippet" data-i18n="lead_5">“6-month transitional contract? City centre area.”</div>
-        <div class="row meta"><span class="ago">9m ago</span><span>•</span><span data-i18n="agent">Agent</span>: Giulia</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
-
-      <div class="card" data-mins="120">
-        <div class="row">
-          <div class="id"><span class="wa">w</span> +39 331 221 44 09</div>
-          <span class="badge b-sent" data-i18n="st_sent">Follow-up sent</span>
-        </div>
-        <div class="snippet" data-i18n="lead_6">“Sent property sheet and floor plan.”</div>
-        <div class="row meta"><span class="ago">2h ago</span><span>•</span><span data-i18n="agent">Agent</span>: Elisa</div>
-        <div class="cta">
-          <a class="btn small" href="#" data-i18n="open_thread">Open thread</a>
-          <a class="btn small" href="./index.html#wa-demo" data-i18n="draft_reply">Instant reply draft</a>
-        </div>
-      </div>
+    <!-- OUTSIDE HINT TEXT -->
+    <div class="hint-row">
+      <span>
+        This PulseView is a demo layout for the pilot — the real version would sit on top of live WhatsApp conversations.
+      </span>
+      <span>
+        From here, Rino can see in 10 seconds whether today is “under control” or “needs attention”.
+      </span>
     </div>
 
-    <div class="roi" data-i18n="roi">
-      Every Kintra reply draft saves ~2.5 minutes. That’s ~1 hour reclaimed daily — per agent.
-    </div>
-
-    <footer>
-      <div data-i18n="seal">Powered by Kintra AI — built for real estate teams.</div>
-    </footer>
   </div>
-
-  <script>
-    // --- EN/IT dictionary
-    const dict = {
-      en:{
-        dash_title_small:"PulseView",
-        back_landing:"← Back to landing",
-        request_pilot:"Request Pilot",
-        hero_title:"Today’s WhatsApp Leads",
-        hero_sub:"Live rental activity — updated as your team replies.",
-        refresh_fake:"Refresh (demo)",
-        kpi_new_leads:"New rental leads today",
-        kpi_avg_reply:"Avg reply time (WhatsApp)",
-        kpi_closed:"Viewings/Closes today",
-        flat_vs_yday:"stable vs. yesterday",
-        st_new:"New",
-        st_wait:"Awaiting reply",
-        st_sent:"Follow-up sent",
-        agent:"Agent",
-        open_thread:"Open thread",
-        draft_reply:"Instant reply draft",
-        roi:"Every Kintra reply draft saves ~2.5 minutes. That’s ~1 hour reclaimed daily — per agent.",
-        seal:"Powered by Kintra AI — built for real estate teams.",
-        lead_1:"“Interested in the 3-room apartment near Navigli. Available this weekend?”",
-        lead_2:"“Additional photos of the two-room flat on Via Roma? Budget €1,200/month.”",
-        lead_3:"“Thanks! Viewing confirmed for Tuesday at 18:00.”",
-        lead_4:"“Possible to view the penthouse Thursday? We are two.”",
-        lead_5:"“6-month transitional contract? City centre area.”",
-        lead_6:"“Sent property sheet and floor plan.”"
-      },
-      it:{
-        dash_title_small:"PulseView",
-        back_landing:"← Torna alla pagina",
-        request_pilot:"Richiedi Pilot",
-        hero_title:"Lead WhatsApp di oggi",
-        hero_sub:"Attività affitti in tempo reale — si aggiorna mentre il team risponde.",
-        refresh_fake:"Aggiorna (demo)",
-        kpi_new_leads:"Nuovi lead affitti oggi",
-        kpi_avg_reply:"Tempo medio di risposta (WhatsApp)",
-        kpi_closed:"Visite/Chiusure di oggi",
-        flat_vs_yday:"stabile vs. ieri",
-        st_new:"Nuovo",
-        st_wait:"In attesa",
-        st_sent:"Follow-up inviato",
-        agent:"Agente",
-        open_thread:"Apri conversazione",
-        draft_reply:"Bozza risposta istantanea",
-        roi:"Ogni bozza Kintra fa risparmiare ~2,5 minuti. ~1 ora recuperata al giorno — per agente.",
-        seal:"Tecnologia Kintra AI — creata per i team immobiliari.",
-        lead_1:"“Buongiorno, interessato al trilocale zona Navigli. È disponibile nel weekend?”",
-        lead_2:"“Foto ulteriori del bilocale in via Roma? Budget 1.200€/mese.”",
-        lead_3:"“Grazie! Appuntamento fissato per martedì ore 18.”",
-        lead_4:"“È possibile vedere l’attico giovedì? Siamo in due.”",
-        lead_5:"“Contratto transitorio 6 mesi? Zona centro.”",
-        lead_6:"“Inviata scheda immobile e planimetria.”"
-      }
-    };
-
-    // simple state for lang (used later if needed)
-    let currentLang = 'en';
-
-    function setLang(lang){
-      const map = dict[lang] || dict.en;
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const k = el.getAttribute('data-i18n');
-        if(map[k]) el.textContent = map[k];
-      });
-      document.getElementById('btn-en').classList.toggle('active', lang==='en');
-      document.getElementById('btn-it').classList.toggle('active', lang==='it');
-      document.documentElement.lang = lang;
-      currentLang = lang;
-      try{ localStorage.setItem('kintra_lang', lang); }catch(e){}
-    }
-
-    function initLang(){
-      let saved;
-      try{ saved = localStorage.getItem('kintra_lang'); }catch(e){}
-      if(saved){ setLang(saved); return; }
-      const nav = (navigator.language || '').toLowerCase();
-      if(nav.startsWith('it')) setLang('it'); else setLang('en');
-    }
-
-    document.getElementById('btn-en').addEventListener('click', ()=>setLang('en'));
-    document.getElementById('btn-it').addEventListener('click', ()=>setLang('it'));
-    initLang();
-
-    // --- Motion patterns for cards
-    const motionPatterns = [
-      card => { card.style.transform = "translateY(-3px)"; },
-      card => { card.style.transform = "scale(1.01)"; },
-      card => { card.style.boxShadow = "0 14px 32px rgba(14,165,166,.15)"; },
-      card => { card.style.borderColor = "#c3f1ea"; }
-    ];
-
-    // --- Fake-live timer: tick card timestamps each 60s, bump KPI occasionally
-    const cards = [...document.querySelectorAll('.card')];
-
-    function renderAgo(el, mins){
-      if(mins < 60) el.textContent = `${mins}m ago`;
-      else el.textContent = `${Math.floor(mins/60)}h ago`;
-    }
-
-    // initialize mins from data-mins attr
-    cards.forEach(c=>{
-      const mins = parseInt(c.getAttribute('data-mins')||'0',10);
-      const ago = c.querySelector('.ago');
-      if(ago) renderAgo(ago, mins);
-    });
-
-    // increment minutes every 60s
-    setInterval(()=>{
-      cards.forEach(c=>{
-        const cur = parseInt(c.getAttribute('data-mins')||'0',10) + 1;
-        c.setAttribute('data-mins', String(cur));
-        const ago = c.querySelector('.ago');
-        if(ago) renderAgo(ago, cur);
-      });
-    }, 60000);
-
-    // bump KPI + pulse one random card every ~2–3 mins
-    function pulseOne(){
-      const pool = cards.length ? cards : [];
-      if(pool.length){
-        const pick = pool[Math.floor(Math.random()*pool.length)];
-
-        // reset style
-        pick.style.transform = "";
-        pick.style.boxShadow = "";
-        pick.style.borderColor = "";
-
-        // apply random motion pattern
-        const fx = motionPatterns[Math.floor(Math.random()*motionPatterns.length)];
-        fx(pick);
-
-        // reset back after 900ms
-        setTimeout(()=>{
-          pick.style.transform = "";
-          pick.style.boxShadow = "";
-          pick.style.borderColor = "";
-        }, 900);
-      }
-
-      // New leads up
-      const leadsEl = document.getElementById('kpi-leads');
-      const n = parseInt(leadsEl.textContent,10) || 8;
-      leadsEl.textContent = n + 1;
-      const kpiLeadsCard = document.getElementById('kpi-card-leads');
-      kpiLeadsCard.classList.remove('pulse');
-      void kpiLeadsCard.offsetWidth;
-      kpiLeadsCard.classList.add('pulse');
-
-      // Avg reply time jiggle
-      const replyEl = document.getElementById('kpi-reply');
-      let base = replyEl.textContent.trim(); // e.g. "2m 12s"
-      let parts = base.split(' ');
-      let mins = parseInt(parts[0].replace('m','')) || 2;
-      let secs = parseInt((parts[1] || '0').replace('s','')) || 12;
-      secs += (Math.random() > 0.5 ? 5 : -4);
-      if(secs < 0){ secs = 54; mins--; }
-      if(secs > 59){ secs = 12; mins++; }
-      if(mins < 0) mins = 0;
-      replyEl.textContent = `${mins}m ${secs}s`;
-
-      const kpiReplyCard = document.getElementById('kpi-card-reply');
-      kpiReplyCard.classList.remove('pulse');
-      void kpiReplyCard.offsetWidth;
-      kpiReplyCard.classList.add('pulse');
-
-      // Closed today tick (occasionally)
-      const closedEl = document.getElementById('kpi-closed');
-      let closedVal = parseInt(closedEl.textContent,10) || 3;
-      if(Math.random() > 0.7){ closedVal += 1; }
-      closedEl.textContent = closedVal;
-
-      const kpiClosedCard = document.getElementById('kpi-card-closed');
-      kpiClosedCard.classList.remove('pulse');
-      void kpiClosedCard.offsetWidth;
-      kpiClosedCard.classList.add('pulse');
-
-      // Hero sub: we no longer increment numbers here (text is non-numeric by design)
-    }
-
-    setInterval(pulseOne, 140000); // 140s
-
-    // Refresh (demo) button triggers immediate pulse
-    document.getElementById('btn-refresh').addEventListener('click', (e)=>{
-      e.preventDefault();
-      pulseOne();
-    });
-  </script>
 </body>
 </html>
