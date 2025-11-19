@@ -300,10 +300,10 @@
       </h2>
       <p class="sub">
         <span class="lang-en-only">
-          Before / After view of real conversations – with Client, Kintra, Agent, Insight and Next step.
+          Before / After view of real conversations – with Client, Agent, Insight and Next step.
         </span>
         <span class="lang-it-only">
-          Vista Prima / Dopo di conversazioni reali – con Cliente, Kintra, Agente, Insight e Prossimo passo.
+          Vista Prima / Dopo di conversazioni reali – con Cliente, Agente, Insight e Prossimo passo.
         </span>
       </p>
 
@@ -312,11 +312,6 @@
           <span class="dot client"></span>
           <span class="lang-en-only">Client</span>
           <span class="lang-it-only">Cliente</span>
-        </span>
-        <span class="key">
-          <span class="dot kintra"></span>
-          <span class="lang-en-only">Kintra draft</span>
-          <span class="lang-it-only">Bozza Kintra</span>
         </span>
         <span class="key">
           <span class="dot agent"></span>
@@ -443,6 +438,8 @@
                         · 2 camere, 1 bagno<br>
                         · Disponibile da [data]<br><br>
                         Mer 18:30 o Gio 17:00 – quale preferisci?»
+
+
                       </span>
                     </div>
                   </div>
@@ -594,6 +591,8 @@
                         · Disponibile da [data]<br><br>
                         Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
                         Quale orario preferisci?»
+
+
                       </span>
                     </div>
                   </div>
@@ -1219,7 +1218,7 @@
         waTabs.forEach(b => b.classList.remove('active'));
         tab.classList.add('active');
         waPanels.forEach(p => {
-          p.setAttribute('class', 'wa-panel' + (p.getAttribute('data-panel') === t ? ' active' : ''));
+          p.classList.toggle('active', p.getAttribute('data-panel') === t);
         });
       });
     });
