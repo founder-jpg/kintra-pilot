@@ -729,7 +729,7 @@
               </span>
             </p>
             <div class="listing-cta-row">
-              <a href="./dashboard.html#listing" class="btn">
+              <a href="./listing-summary.html" class="btn">
                 <span class="lang-en-only">View listing summary →</span>
                 <span class="lang-it-only">Vedi la scheda immobile →</span>
               </a>
@@ -1219,7 +1219,7 @@
         waTabs.forEach(b => b.classList.remove('active'));
         tab.classList.add('active');
         waPanels.forEach(p => {
-          p.classList.toggle('active', p.getAttribute('data-panel') === t);
+          p.setAttribute('class', 'wa-panel' + (p.getAttribute('data-panel') === t ? ' active' : ''));
         });
       });
     });
