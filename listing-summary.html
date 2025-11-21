@@ -132,6 +132,40 @@
     .in-card-title{font-weight:700;font-size:14px}
     .in-card-line{font-size:13px;color:#4b5563}
 
+    /* In-chat suggestion row */
+    .suggest-row{
+      margin-top:6px;
+      padding:5px 7px 6px;
+      background:rgba(0,0,0,.02);
+      border-top:1px solid rgba(0,0,0,.04);
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .suggest-label{
+      font-size:11px;
+      color:#6b7280;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .suggest-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .suggest-pill{
+      border:none;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      cursor:default;
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 1px 1px rgba(0,0,0,.04);
+      white-space:nowrap;
+    }
+
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
     .chip{border-radius:999px;border:1px solid var(--line);padding:5px 9px;font-size:12px;background:#fff;color:#374151}
 
@@ -292,6 +326,32 @@
                       Disponibile dal 15 febbraio
                     </span>
                   </div>
+                </div>
+              </div>
+
+              <!-- Kintra suggestions under the card -->
+              <div class="suggest-row">
+                <div class="suggest-label">
+                  <span class="lang-en-only">Kintra suggests</span>
+                  <span class="lang-it-only">Suggerimenti Kintra</span>
+                </div>
+                <div class="suggest-pills">
+                  <span class="suggest-pill">
+                    <span class="lang-en-only">Attach living room</span>
+                    <span class="lang-it-only">Allega soggiorno</span>
+                  </span>
+                  <span class="suggest-pill">
+                    <span class="lang-en-only">Attach kitchen</span>
+                    <span class="lang-it-only">Allega cucina</span>
+                  </span>
+                  <span class="suggest-pill">
+                    <span class="lang-en-only">Attach balcony view</span>
+                    <span class="lang-it-only">Allega balcone</span>
+                  </span>
+                  <span class="suggest-pill">
+                    <span class="lang-en-only">Attach floor plan (PDF)</span>
+                    <span class="lang-it-only">Allega planimetria (PDF)</span>
+                  </span>
                 </div>
               </div>
 
