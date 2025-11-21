@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Listing Summary Demo</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:900px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:22px 18px 40px}
+
+    .lang-en-only{display:none}
+    .lang-it-only{display:block}
+    body.lang-en-active .lang-en-only{display:block}
+    body.lang-en-active .lang-it-only{display:none}
+    body.lang-it-active .lang-en-only{display:none}
+    body.lang-it-active .lang-it-only{display:block}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .brand{display:flex;align-items:center;gap:8px}
+    .brand img{width:26px;height:26px;border-radius:6px;object-fit:contain}
+    .badge{padding:3px 9px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:12px}
+    .toggle{display:flex;gap:6px}
+    .toggle button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 10px;cursor:pointer;font-size:13px;font-weight:600}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
+    .flag{font-size:14px}
+
+    h1{font-size:26px;margin:8px 0 4px;color:#0b2347}
+    p.sub{margin:0 0 10px;color:#5b6475;font-size:14px}
+    .crumbs{font-size:13px;color:#6b7280;margin-top:4px}
+
+    .divider{height:1px;background:var(--line);margin:16px 0}
+
+    .two-col{display:grid;grid-template-columns:1fr 1.1fr;gap:18px;align-items:flex-start}
+    @media (max-width:820px){
+      .two-col{grid-template-columns:1fr}
+    }
+
+    .card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px}
+    h2{font-size:18px;margin:0 0 6px;color:#0b2347}
+    .stamp{font-size:13px;color:#6b7280;margin-bottom:6px}
+
+    .manual-box{border-radius:10px;border:1px dashed var(--line);padding:10px;background:#f9fafb;font-size:14px;color:#374151}
+    .manual-box code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#eef2ff;padding:2px 4px;border-radius:4px}
+
+    /* Phone shell */
+    .phone-shell{
+      margin-top:4px;
+      border-radius:22px;
+      padding:8px 7px 10px;
+      background:linear-gradient(145deg,#121b22,#05090c);
+      box-shadow:0 10px 26px rgba(5,9,12,.35);
+      max-width:360px;
+    }
+    .chat-inner{
+      border-radius:18px;
+      overflow:hidden;
+      background:#ece5dd;
+      position:relative;
+    }
+    .chat-header{
+      height:40px;
+      background:#075e54;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      color:#fff;
+      font-size:13px;
+      font-weight:500;
+    }
+    .chat-avatar{
+      width:22px;height:22px;border-radius:999px;
+      background:#0b5fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;
+      color:#fff;
+    }
+    .chat-meta{display:flex;flex-direction:column;line-height:1.1}
+    .chat-meta small{font-size:11px;opacity:.9}
+    .chat-screen{padding:8px 6px 10px;background:#ece5dd}
+    .msg-row{display:flex;margin:4px 0}
+    .msg-row.me{justify-content:flex-end}
+    .bubble{
+      max-width:78%;
+      padding:7px 9px;
+      border-radius:14px;
+      line-height:1.25;
+      font-size:14px;
+      position:relative;
+      box-shadow:0 1px 1px rgba(0,0,0,.08);
+      word-wrap:break-word;
+    }
+    .bubble.kintra{
+      background:#dcf8c6;
+      border:1px solid rgba(0,0,0,.04);
+      color:#111827;
+      border-bottom-right-radius:4px;
+    }
+    .msg-meta{
+      display:flex;
+      justify-content:flex-end;
+      font-size:11px;
+      color:#6b7280;
+      margin-top:2px;
+      gap:4px;
+      align-items:center;
+    }
+    .ticks{font-size:12px;}
+
+    .in-card{
+      margin-top:6px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.08);
+      overflow:hidden;
+      background:#ffffff;
+    }
+    .in-card img{
+      width:100%;height:110px;object-fit:cover;
+    }
+    .in-card-body{padding:8px 9px}
+    .in-card-title{font-weight:700;font-size:14px}
+    .in-card-line{font-size:13px;color:#4b5563}
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{border-radius:999px;border:1px solid var(--line);padding:5px 9px;font-size:12px;background:#fff;color:#374151}
+
+    .gallery{margin-top:10px}
+    .gallery h3{font-size:14px;margin:0 0 6px;color:#111827}
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+    .gallery-grid img{
+      width:100%;
+      height:68px;
+      object-fit:cover;
+      border-radius:9px;
+      border:1px solid var(--line);
+    }
+    .gallery-caption{font-size:12px;color:#6b7280;margin-top:6px}
+
+    .insight{margin-top:10px;font-size:13px;border-radius:10px;border:1px solid #e6d59a;background:linear-gradient(180deg,rgba(234,210,139,.16),rgba(234,210,139,.08));padding:8px 10px;color:#4b4b3a}
+    .insight b{color:#1f2933}
+
+    footer{margin-top:22px;font-size:12px;color:#6b7280;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  </style>
+</head>
+<body class="lang-en-active">
+  <div class="wrap">
+
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo">
+        <strong>Kintra</strong>
+        <span class="badge">Listing summary demo</span>
+      </div>
+      <div class="toggle">
+        <button class="active" data-lang="en"><span class="flag">🇬🇧</span> EN</button>
+        <button data-lang="it"><span class="flag">🇮🇹</span> IT</button>
+      </div>
+    </header>
+
+    <div class="crumbs">
+      <span class="lang-en-only">← Back to <a href="./index.html">landing page</a></span>
+      <span class="lang-it-only">← Torna alla <a href="./index.html">pagina principale</a></span>
+    </div>
+
+    <h1>
+      <span class="lang-en-only">Listing summary — Before / After</span>
+      <span class="lang-it-only">Scheda immobile — Prima / Dopo</span>
+    </h1>
+    <p class="sub">
+      <span class="lang-en-only">
+        How Kintra turns “wall of text” replies into one clean card your agents can send in seconds.
+      </span>
+      <span class="lang-it-only">
+        Come Kintra trasforma risposte lunghe in un’unica scheda chiara che l’agente invia in pochi secondi.
+      </span>
+    </p>
+
+    <div class="divider"></div>
+
+    <section class="two-col">
+      <!-- BEFORE -->
+      <div class="card">
+        <h2>
+          <span class="lang-en-only">Before — manual summary every time</span>
+          <span class="lang-it-only">Prima — riepilogo manuale ogni volta</span>
+        </h2>
+        <p class="stamp">
+          <span class="lang-en-only">Agent types the same details again and again.</span>
+          <span class="lang-it-only">L’agente digita ogni volta sempre gli stessi dati.</span>
+        </p>
+
+        <div class="manual-box">
+          <p class="lang-en-only">
+            Typical WhatsApp reply when a tenant asks “Can you send me the details?”:
+          </p>
+          <p class="lang-it-only">
+            Risposta tipica su WhatsApp quando l’inquilino chiede “Mi può mandare i dettagli?”:
+          </p>
+
+          <p>
+            <code class="lang-en-only">
+              Hi Sara, here are the details:<br>
+              • 2 bedrooms, 1 bathroom, 80 m², 3rd floor with lift<br>
+              • Via Monte Rosa, Milano<br>
+              • €1,750 / month + utilities<br>
+              • Available from 15 Feb<br><br>
+              We can view it on Wed 18:30 or Thu 17:00, let me know.
+            </code>
+            <code class="lang-it-only">
+              Ciao Sara, ecco i dettagli:<br>
+              • 2 camere, 1 bagno, 80 m², 3° piano con ascensore<br>
+              • Via Monte Rosa, Milano<br>
+              • €1.750 / mese + spese<br>
+              • Disponibile dal 15 febbraio<br><br>
+              Possiamo vederlo mercoledì alle 18:30 o giovedì alle 17:00, fammi sapere.
+            </code>
+          </p>
+
+          <p class="lang-en-only">
+            Every agent re-types or copy–pastes this block for each new lead.
+          </p>
+          <p class="lang-it-only">
+            Ogni agente riscrive o copia–incolla questo blocco per ogni nuovo contatto.
+          </p>
+        </div>
+      </div>
+
+      <!-- AFTER -->
+      <div class="card">
+        <h2>
+          <span class="lang-en-only">After — Kintra listing card in WhatsApp</span>
+          <span class="lang-it-only">Dopo — scheda Kintra direttamente in WhatsApp</span>
+        </h2>
+        <p class="stamp">
+          <span class="lang-en-only">Kintra builds the card; the agent taps send.</span>
+          <span class="lang-it-only">Kintra prepara la scheda; l’agente preme invio.</span>
+        </p>
+
+        <div class="phone-shell">
+          <div class="chat-inner">
+            <div class="chat-header">
+              <div class="chat-avatar">K</div>
+              <div class="chat-meta">
+                <span>Kintra</span>
+                <small class="lang-en-only">Listing card ready in WhatsApp</small>
+                <small class="lang-it-only">Scheda pronta in WhatsApp</small>
+              </div>
+            </div>
+            <div class="chat-screen">
+              <div class="msg-row me">
+                <div class="bubble kintra">
+                  <span class="lang-en-only">
+                    “Here’s the full summary for Via Monte Rosa 👇”
+                  </span>
+                  <span class="lang-it-only">
+                    «Ecco il riepilogo completo per Via Monte Rosa 👇»
+                  </span>
+                </div>
+              </div>
+              <div class="msg-meta">
+                <span>10:22</span>
+                <span class="ticks">✓✓</span>
+              </div>
+
+              <!-- In-chat card -->
+              <div class="in-card">
+                <img src="./img/cta.jpg" alt="Balcony apartment in Milano">
+                <div class="in-card-body">
+                  <div class="in-card-title">2BR • 80 m² • Milano • Balcony</div>
+                  <div class="in-card-line">
+                    <span class="lang-en-only">
+                      €1,750 / month • 3rd floor with lift • Via Monte Rosa<br>
+                      Available from 15 Feb
+                    </span>
+                    <span class="lang-it-only">
+                      €1.750 / mese • 3° piano con ascensore • Via Monte Rosa<br>
+                      Disponibile dal 15 febbraio
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span class="chip">
+            <span class="lang-en-only">One tap to insert</span>
+            <span class="lang-it-only">Si inserisce con un tocco</span>
+          </span>
+          <span class="chip">
+            <span class="lang-en-only">Same format for every agent</span>
+            <span class="lang-it-only">Stesso formato per tutti gli agenti</span>
+          </span>
+          <span class="chip">
+            <span class="lang-en-only">Easy to scan on mobile</span>
+            <span class="lang-it-only">Facile da leggere sul telefono</span>
+          </span>
+        </div>
+
+        <div class="gallery">
+          <h3>
+            <span class="lang-en-only">Attachments you can add with the card</span>
+            <span class="lang-it-only">Allegati che puoi aggiungere alla scheda</span>
+          </h3>
+          <div class="gallery-grid">
+            <img src="./img/milano-livingroom-1.png" alt="Living room">
+            <img src="./img/milano-kitchen-1.png" alt="Kitchen 1">
+            <img src="./img/milano-kitchen-2.png" alt="Kitchen 2">
+            <img src="./img/milano-kitchen-3.png" alt="Additional kitchen view">
+          </div>
+          <p class="gallery-caption">
+            <span class="lang-en-only">
+              Living room, kitchen and balcony photos (plus floor plan PDFs) stay consistent — the card carries the facts;
+              photos tell the story.
+            </span>
+            <span class="lang-it-only">
+              Foto di soggiorno, cucina e balcone (più le planimetrie in PDF) restano coerenti — la scheda porta i dati,
+              le foto raccontano la storia.
+            </span>
+          </p>
+        </div>
+
+        <div class="insight">
+          <b class="lang-en-only">Why this matters:</b>
+          <b class="lang-it-only">Perché è importante:</b>
+          <span class="lang-en-only">
+            &nbsp;every time agents send a listing card instead of a wall of text, replies are faster, follow-ups are easier,
+            and you can track which units actually got shown.
+          </span>
+          <span class="lang-it-only">
+            &nbsp;ogni volta che gli agenti inviano una scheda invece di un blocco di testo, le risposte sono più rapide,
+            i follow-up più semplici e puoi tracciare quali immobili sono stati effettivamente mostrati.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span class="lang-en-only">
+        Kintra — Listing summary demo for Italian rentals &amp; sales teams.
+      </span>
+      <span class="lang-it-only">
+        Kintra — Demo scheda immobile per team affitti e vendite in Italia.
+      </span>
+      <span>
+        <a href="./index.html">
+          <span class="lang-en-only">Back to main page →</span>
+          <span class="lang-it-only">Torna alla pagina principale →</span>
+        </a>
+      </span>
+    </footer>
+
+  </div>
+
+  <script>
+    const langBtns = document.querySelectorAll('.toggle button');
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lang = btn.getAttribute('data-lang');
+        const isEN = lang === 'en';
+        document.body.classList.toggle('lang-en-active', isEN);
+        document.body.classList.toggle('lang-it-active', !isEN);
+      });
+    });
+  </script>
+</body>
+</html>
