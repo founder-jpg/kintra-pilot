@@ -150,7 +150,7 @@
       border-bottom-right-radius:4px;
     }
 
-    /* NEW: time + ticks row inside bubbles */
+    /* time + ticks row inside bubbles */
     .meta-row{
       margin-top:4px;
       display:flex;
@@ -173,7 +173,15 @@
 
     /* Dashboard Mini */
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .dash-img{width:100%;height:260px;object-fit:cover;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(15,23,42,.18);background:#020617}
+    .dash-img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      border-radius:12px;
+      border:1px solid var(--line);
+      box-shadow:0 8px 24px rgba(15,23,42,.18);
+      background:#020617;
+    }
 
     /* Listing composite */
     .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
@@ -187,6 +195,31 @@
     .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
     .caption{margin-top:6px;font-size:12px;color:#7b879b}
     .listing-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+    /* New: listing attachment thumbs on index */
+    .thumbs{margin-top:8px;}
+    .thumb-label{
+      margin:0 0 4px;
+      font-size:12px;
+      color:#4b5563;
+    }
+    .thumb-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:6px;
+    }
+    .thumb-row img{
+      width:100%;
+      height:54px;
+      object-fit:cover;
+      border-radius:8px;
+      border:1px solid var(--line);
+    }
+    .thumb-caption{
+      margin-top:4px;
+      font-size:11px;
+      color:#6b7280;
+    }
 
     /* WhatsApp test section */
     #wa-test{margin-top:4px}
@@ -216,6 +249,7 @@
       .hero,.grid-2,.before-after{grid-template-columns:1fr}
       h1{font-size:32px}
       .dash-img{height:200px}
+      .lm-body{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -635,7 +669,7 @@
                       </span>
                       <span class="lang-it-only">
                         «Ciao Luca, sì, è ancora disponibile.<br><br>
-                        · 2 camere, 1 bagno, 3° piano con ascensore<br>
+                        · 2 camere, 1 bagno, 3° piano con ascensore<br><br>
                         · Disponibile dal 15/03<br><br>
                         Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
                         Quale orario preferisci?»
@@ -707,8 +741,8 @@
 
       <div class="grid-2">
         <div>
-          <!-- NEW PulseView screenshot; make sure ./img/pulseview-dashboard.png exists -->
-          <img src="./img/pulseview-dashboard.png" alt="Kintra PulseView dashboard preview" class="dash-img"/>
+          <!-- Back to original screenshot so it doesn’t render as black -->
+          <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
         </div>
         <div>
           <p>
@@ -778,6 +812,29 @@
                 invece di riscrivere ogni volta le stesse informazioni.
               </span>
             </p>
+
+            <!-- New: attachment thumbs to show the “photos in seconds” power -->
+            <div class="thumbs">
+              <p class="thumb-label">
+                <span class="lang-en-only">Attachments you can add in seconds:</span>
+                <span class="lang-it-only">Allegati che puoi aggiungere in pochi secondi:</span>
+              </p>
+              <div class="thumb-row">
+                <img src="./img/milano-livingroom-1.png" alt="Living room photo">
+                <img src="./img/milano-kitchen-1.png" alt="Kitchen photo 1">
+                <img src="./img/milano-kitchen-2.png" alt="Kitchen photo 2">
+                <img src="./img/milano-kitchen-3.png" alt="Kitchen photo 3">
+              </div>
+              <p class="thumb-caption">
+                <span class="lang-en-only">
+                  Agents choose which photos or floor plans to attach — Kintra keeps the text and structure consistent.
+                </span>
+                <span class="lang-it-only">
+                  Gli agenti scelgono quali foto o planimetrie allegare — Kintra mantiene testo e struttura coerenti.
+                </span>
+              </p>
+            </div>
+
             <div class="listing-cta-row">
               <a href="./listing-summary.html" class="btn">
                 <span class="lang-en-only">View listing summary →</span>
@@ -836,7 +893,6 @@
 
           <p>
             <code>+39 3XX XXX XXXX</code>
-            <!-- replace with your real test number when ready -->
           </p>
 
           <p>
@@ -1274,7 +1330,7 @@
       });
     });
 
-    // Language toggle: switches body class (affects all lang-* blocks)
+    // Language toggle
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
