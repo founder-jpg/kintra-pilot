@@ -38,7 +38,7 @@
 
     .langbox{display:flex;align-items:center;gap:10px}
     .langbox .label{font-size:14px;color:#6b7280}
-    .toggle{display:flex;gap:8px;flex-wrap:wrap}
+    .toggle{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
     .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;white-space:nowrap}
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
     .flag{display:inline-flex;font-size:16px}
@@ -157,6 +157,40 @@
       align-items:center;
     }
     .ticks{font-size:12px;}
+
+    /* In-chat suggestion row (ghost engine feel) */
+    .suggest-row{
+      margin-top:6px;
+      padding:5px 7px 6px;
+      background:rgba(0,0,0,.02);
+      border-top:1px solid rgba(0,0,0,.04);
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .suggest-label{
+      font-size:11px;
+      color:#6b7280;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .suggest-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .suggest-pill{
+      border:none;
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      cursor:default;
+      background:#fff;
+      color:#111827;
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 1px 1px rgba(0,0,0,.04);
+      white-space:nowrap;
+    }
 
     .stamp{font-size:13px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
@@ -496,13 +530,36 @@
                     <span>09:42</span>
                     <span class="ticks">✓✓</span>
                   </div>
+
+                  <!-- Kintra ghost suggestions inside WhatsApp -->
+                  <div class="suggest-row">
+                    <div class="suggest-label">
+                      <span class="lang-en-only">Kintra suggests</span>
+                      <span class="lang-it-only">Suggerimenti Kintra</span>
+                    </div>
+                    <div class="suggest-pills">
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Offer two slots</span>
+                        <span class="lang-it-only">Offri due orari</span>
+                      </span>
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Send floor plan</span>
+                        <span class="lang-it-only">Invia planimetria</span>
+                      </span>
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Confirm reminder</span>
+                        <span class="lang-it-only">Conferma promemoria</span>
+                      </span>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
 
             <div class="stamp">
-              <span class="lang-en-only">Agent reviews the draft and taps send in WhatsApp.</span>
-              <span class="lang-it-only">L’agente rivede la bozza e invia da WhatsApp.</span>
+              <span class="lang-en-only">Agent reviews the draft, taps one of the suggestions, and sends.</span>
+              <span class="lang-it-only">L’agente rivede la bozza, tocca un suggerimento e invia.</span>
             </div>
 
             <div class="insight">
@@ -655,16 +712,39 @@
                     <span>10:04</span>
                     <span class="ticks">✓✓</span>
                   </div>
+
+                  <!-- Kintra ghost suggestions for sales -->
+                  <div class="suggest-row">
+                    <div class="suggest-label">
+                      <span class="lang-en-only">Kintra suggests</span>
+                      <span class="lang-it-only">Suggerimenti Kintra</span>
+                    </div>
+                    <div class="suggest-pills">
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Offer viewing times</span>
+                        <span class="lang-it-only">Proponi orari visita</span>
+                      </span>
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Send brochure/link</span>
+                        <span class="lang-it-only">Invia brochure/link</span>
+                      </span>
+                      <span class="suggest-pill">
+                        <span class="lang-en-only">Mark as hot lead</span>
+                        <span class="lang-it-only">Segna come lead caldo</span>
+                      </span>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
 
             <div class="stamp">
               <span class="lang-en-only">
-                Agent checks the draft and taps send. Viewing times are on the table in under 30 seconds.
+                Agent checks the draft, taps the right suggestion, and sends. Viewing times are on the table in under 30 seconds.
               </span>
               <span class="lang-it-only">
-                L’agente controlla la bozza e invia. Gli orari della visita sono sul tavolo in meno di 30 secondi.
+                L’agente controlla la bozza, tocca il suggerimento giusto e invia. Gli orari della visita sono sul tavolo in meno di 30 secondi.
               </span>
             </div>
 
@@ -839,6 +919,32 @@
                       €1,750 / month • 3rd floor with lift • Via Monte Rosa<br>
                       Available from 15 Feb
                     </div>
+                  </div>
+                </div>
+
+                <!-- Kintra suggestions for listing card -->
+                <div class="suggest-row">
+                  <div class="suggest-label">
+                    <span class="lang-en-only">Kintra suggests</span>
+                    <span class="lang-it-only">Suggerimenti Kintra</span>
+                  </div>
+                  <div class="suggest-pills">
+                    <span class="suggest-pill">
+                      <span class="lang-en-only">Attach living room</span>
+                      <span class="lang-it-only">Allega soggiorno</span>
+                    </span>
+                    <span class="suggest-pill">
+                      <span class="lang-en-only">Attach kitchen</span>
+                      <span class="lang-it-only">Allega cucina</span>
+                    </span>
+                    <span class="suggest-pill">
+                      <span class="lang-en-only">Attach balcony view</span>
+                      <span class="lang-it-only">Allega balcone</span>
+                    </span>
+                    <span class="suggest-pill">
+                      <span class="lang-en-only">Attach floor plan (PDF)</span>
+                      <span class="lang-it-only">Allega planimetria (PDF)</span>
+                    </span>
                   </div>
                 </div>
 
