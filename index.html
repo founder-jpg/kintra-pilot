@@ -66,10 +66,10 @@
     .keys{display:flex;gap:10px;flex-wrap:wrap}
     .key{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
     .dot{width:8px;height:8px;border-radius:50%}
-    .dot.client{background:#9aa3b2}
-    .dot.kintra{background:#0b5fff}
-    .dot.agent{background:#17a47a}
-    .dot.insight{background:#c9a227}
+    .dot.client{background:#9aa3b2;}   /* grey = client */
+    .dot.kintra{background:#0b5fff;}   /* blue = Kintra draft */
+    .dot.agent{background:#17a47a;}    /* green */
+    .dot.insight{background:#c9a227;}  /* gold */
     .wa-tabs{display:flex;gap:8px;margin-top:4px}
     .wa-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;white-space:nowrap}
     .wa-tab.active{background:#eef3ff;border-color:#0b5fff;color:#0b2347}
@@ -147,72 +147,71 @@
       border-bottom-right-radius:4px;
     }
 
-    .stamp{font-size:12px;color:#6b7280;margin-top:4px}
+    .msg-meta{
+      display:flex;
+      justify-content:flex-end;
+      font-size:11px;
+      color:#6b7280;
+      margin-top:2px;
+      gap:4px;
+      align-items:center;
+    }
+    .ticks{font-size:12px;}
+
+    .stamp{font-size:13px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
     .insight b{color:#1b2233}
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
     .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
 
-    /* Timestamps + ticks */
-    .tickline{
-      margin-top:4px;
-      font-size:11px;
-      color:#6b7280;
-      display:flex;
-      justify-content:flex-end;
-      align-items:center;
-      gap:4px;
-    }
-    .ticks-grey{color:#9ca3af;}
-    .ticks-blue{color:#0b5fff;}
-
-    /* Listing card inside bubble */
-    .lcard{
-      margin-top:4px;
-      border-radius:11px;
-      border:1px solid rgba(15,23,42,.08);
-      background:#ffffff;
-      display:grid;
-      grid-template-columns:64px 1fr;
-      gap:8px;
-      padding:8px;
-    }
-    .lcard-photo{
-      width:64px;
-      height:64px;
-      border-radius:8px;
-      background:linear-gradient(145deg,#e5e7eb,#cbd5f5);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:11px;
-      color:#4b5563;
-    }
-    .lcard-title{font-size:13px;font-weight:700;color:#111827;margin-bottom:2px}
-    .lcard-line{font-size:12px;color:#4b5563}
-
     /* Dashboard Mini */
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .dash-img{width:100%;height:260px;object-fit:cover;display:block}
-    .screen-shell{
-      margin-top:6px;
-      border-radius:18px;
-      padding:10px 10px 12px;
-      background:linear-gradient(145deg,#020617,#111827);
-      box-shadow:0 12px 28px rgba(15,23,42,.45);
-      max-width:480px;
-    }
-    .screen-inner{
-      border-radius:14px;
-      overflow:hidden;
-      background:#020617;
-      border:1px solid rgba(148,163,184,.7);
+    .dash-img{
+      width:100%;height:260px;object-fit:cover;border-radius:14px;
+      border:1px solid var(--line);
+      box-shadow:0 10px 26px rgba(11,35,71,.16);
     }
 
-    /* Listing composite (now unified phone view) */
-    .listing-caption{margin-top:8px;font-size:13px;color:#6b7280}
+    /* Listing composite */
+    .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+    .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
+    .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
+    .lm-body{display:grid;grid-template-columns:120px 1.1fr;gap:12px;padding:12px}
+    .lm-photo{width:100%;height:92px;object-fit:cover;border:1px solid var(--line);border-radius:10px}
+    .lm-title{font-weight:800}
+    .lm-line{font-size:14px;color:#6b7280}
+    .tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+    .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
+    .caption{margin-top:6px;font-size:12px;color:#7b879b}
     .listing-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+    /* Listing card phone preview on index */
+    .listing-phone-row{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      margin-top:14px;
+      align-items:flex-start;
+    }
+    .mini-gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:6px;
+    }
+    .mini-gallery img{
+      width:100%;
+      height:70px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid var(--line);
+    }
+    .mini-gallery-caption{
+      font-size:12px;
+      color:#6b7280;
+      margin-top:6px;
+    }
 
     /* WhatsApp test section */
     #wa-test{margin-top:4px}
@@ -239,10 +238,9 @@
     footer{margin:28px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
     @media (max-width:980px){
-      .hero,.grid-2,.before-after{grid-template-columns:1fr}
+      .hero,.grid-2,.before-after,.listing-phone-row{grid-template-columns:1fr}
       h1{font-size:32px}
       .dash-img{height:200px}
-      .screen-shell{max-width:100%;}
     }
   </style>
 </head>
@@ -417,15 +415,17 @@
                     <div class="bubble client">
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
                       <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
-                      <div class="tickline"><span>10:21</span><span class="ticks-grey">✓✓</span></div>
                     </div>
                   </div>
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
-                      <div class="tickline"><span>10:33</span><span class="ticks-grey">✓✓</span></div>
                     </div>
+                  </div>
+                  <div class="msg-meta">
+                    <span>09:41</span>
+                    <span class="ticks">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -474,25 +474,27 @@
                     <div class="bubble client">
                       <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
-                      <div class="tickline"><span>10:21</span><span class="ticks-grey">✓✓</span></div>
                     </div>
                   </div>
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
-                        “Ciao Marco, yes it’s available.<br><br>
+                        “Ciao Sara, yes it’s available.<br><br>
                         · 2 bedrooms, 1 bathroom<br>
-                        · Available from 15 Jan<br><br>
+                        · Available from 15 Feb<br><br>
                         Wed 18:30 or Thu 17:00 — which works best?”
                       </span>
                       <span class="lang-it-only">
-                        «Ciao Marco, sì, è disponibile.<br><br>
+                        «Ciao Sara, sì, è disponibile.<br><br>
                         · 2 camere, 1 bagno<br>
-                        · Disponibile dal 15 gennaio<br><br>
+                        · Disponibile dal 15 febbraio<br><br>
                         Mer 18:30 o Gio 17:00 – quale preferisci?»
                       </span>
-                      <div class="tickline"><span>10:23</span><span class="ticks-blue">✓✓</span></div>
                     </div>
+                  </div>
+                  <div class="msg-meta">
+                    <span>09:42</span>
+                    <span class="ticks">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -570,15 +572,17 @@
                     <div class="bubble client">
                       <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
-                      <div class="tickline"><span>11:04</span><span class="ticks-grey">✓✓</span></div>
                     </div>
                   </div>
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
-                      <div class="tickline"><span>11:16</span><span class="ticks-grey">✓✓</span></div>
                     </div>
+                  </div>
+                  <div class="msg-meta">
+                    <span>10:03</span>
+                    <span class="ticks">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -627,27 +631,29 @@
                     <div class="bubble client">
                       <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
-                      <div class="tickline"><span>11:04</span><span class="ticks-grey">✓✓</span></div>
                     </div>
                   </div>
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
-                        “Hi Marco, yes, it’s still available.<br><br>
+                        “Hi Sara, yes, it’s still available.<br><br>
                         · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
-                        · Available from 01 Feb<br><br>
+                        · Available from 15 Feb<br><br>
                         I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
                         Which works better for you?”
                       </span>
                       <span class="lang-it-only">
-                        «Ciao Marco, sì, è ancora disponibile.<br><br>
+                        «Ciao Sara, sì, è ancora disponibile.<br><br>
                         · 2 camere, 1 bagno, 3° piano con ascensore<br>
-                        · Disponibile dal 1° febbraio<br><br>
+                        · Disponibile dal 15 febbraio<br><br>
                         Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
                         Quale orario preferisci?»
                       </span>
-                      <div class="tickline"><span>11:06</span><span class="ticks-blue">✓✓</span></div>
                     </div>
+                  </div>
+                  <div class="msg-meta">
+                    <span>10:04</span>
+                    <span class="ticks">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -710,11 +716,7 @@
 
       <div class="grid-2">
         <div>
-          <div class="screen-shell">
-            <div class="screen-inner">
-              <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
-            </div>
-          </div>
+          <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
         </div>
         <div>
           <p>
@@ -739,7 +741,7 @@
 
     <div class="divider"></div>
 
-    <!-- LISTING SUMMARY (unified phone layout) -->
+    <!-- LISTING SUMMARY -->
     <section id="listing-summary">
       <h2>
         <span class="lang-en-only">Listing summaries your agents don’t have to re-type</span>
@@ -750,70 +752,115 @@
         <span class="lang-it-only">Un tocco per inviare in WhatsApp una scheda immobile chiara e coerente.</span>
       </p>
 
-      <div class="phone-shell">
-        <div class="chat-inner">
-          <div class="chat-header">
-            <div class="chat-avatar">K</div>
-            <div class="chat-meta">
-              <span>Kintra</span>
-              <small>
-                <span class="lang-en-only">Listing card ready</span>
-                <span class="lang-it-only">Scheda immobile pronta</span>
-              </small>
-            </div>
+      <div class="listing-phone-row">
+        <!-- Left: composite web card -->
+        <div class="listing-mock">
+          <div class="lm-head">
+            <span class="lm-dot"></span>
+            <span class="lm-dot"></span>
+            <span class="lm-dot"></span>
+            <span class="muted">
+              <span class="lang-en-only">Listing summary • Web preview</span>
+              <span class="lang-it-only">Scheda immobile • Anteprima web</span>
+            </span>
           </div>
-          <div class="chat-screen">
-            <div class="msg-row me">
-              <div class="bubble kintra">
-                <span class="lang-en-only">Here’s the summary for Via Monte Rosa:</span>
-                <span class="lang-it-only">Ecco il riepilogo per Via Monte Rosa:</span>
-
-                <div class="lcard">
-                  <div class="lcard-photo">
-                    <span class="lang-en-only">Photo</span>
-                    <span class="lang-it-only">Foto</span>
-                  </div>
-                  <div>
-                    <div class="lcard-title">
-                      <span class="lang-en-only">2BR • 80 m² • Milano • Balcony</span>
-                      <span class="lang-it-only">2 locali • 80 m² • Milano • Balcone</span>
-                    </div>
-                    <div class="lcard-line">
-                      <span class="lang-en-only">€1,750 / month • 3rd floor with lift • Via Monte Rosa</span>
-                      <span class="lang-it-only">€1.750 / mese • 3° piano con ascensore • Via Monte Rosa</span>
-                    </div>
-                    <div class="lcard-line">
-                      <span class="lang-en-only">Available from 15 Jan</span>
-                      <span class="lang-it-only">Disponibile dal 15 gennaio</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tickline"><span>15:42</span><span class="ticks-blue">✓✓</span></div>
+          <div class="lm-body">
+            <img src="./img/cta.jpg" alt="Listing thumbnail" class="lm-photo"/>
+            <div>
+              <div class="lm-title">2BR • 80 m² • Milano • Balcony</div>
+              <div class="lm-line">
+                <span class="lang-en-only">€1,750 / month • 3rd floor with lift • Via Monte Rosa</span>
+                <span class="lang-it-only">€1.750 / mese • 3° piano con ascensore • Via Monte Rosa</span>
+              </div>
+              <div class="tagrow">
+                <span class="tag">2BR</span>
+                <span class="tag">80 m²</span>
+                <span class="tag">Milano</span>
+                <span class="tag">Balcony</span>
+              </div>
+              <p class="caption">
+                <span class="lang-en-only">
+                  A pre-filled card with key details that the agent can adjust in seconds instead of re-writing
+                  the same information for every lead.
+                </span>
+                <span class="lang-it-only">
+                  Una scheda precompilata con i dati principali che l’agente può adattare in pochi secondi
+                  invece di riscrivere ogni volta le stesse informazioni.
+                </span>
+              </p>
+              <div class="listing-cta-row">
+                <a href="./listing-summary.html" class="btn">
+                  <span class="lang-en-only">View listing summary →</span>
+                  <span class="lang-it-only">Vedi la scheda immobile →</span>
+                </a>
+                <button class="btn ghost" type="button" id="copy-card-btn">
+                  <span class="lang-en-only">Copy card to WhatsApp</span>
+                  <span class="lang-it-only">Copia scheda in WhatsApp</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <p class="listing-caption">
-        <span class="lang-en-only">
-          A Kintra Listing Card is a one-tap, standardised summary formatted for WhatsApp, so any agent can send perfect details in seconds.
-        </span>
-        <span class="lang-it-only">
-          Una Listing Card Kintra è un riepilogo standard in un tocco, formattato per WhatsApp, così ogni agente può inviare i dati giusti in pochi secondi.
-        </span>
-      </p>
+        <!-- Right: phone preview + mini gallery -->
+        <div>
+          <div class="phone-shell">
+            <div class="chat-inner">
+              <div class="chat-header">
+                <div class="chat-avatar">K</div>
+                <div class="chat-meta">
+                  <span>Kintra</span>
+                  <small class="lang-en-only">Listing card ready in WhatsApp</small>
+                  <small class="lang-it-only">Scheda pronta in WhatsApp</small>
+                </div>
+              </div>
+              <div class="chat-screen">
+                <div class="msg-row me">
+                  <div class="bubble kintra">
+                    <span class="lang-en-only">
+                      “Here’s the full summary for Via Monte Rosa 👇”
+                    </span>
+                    <span class="lang-it-only">
+                      «Ecco il riepilogo completo per Via Monte Rosa 👇»
+                    </span>
+                  </div>
+                </div>
+                <div class="msg-meta">
+                  <span>10:16</span>
+                  <span class="ticks">✓✓</span>
+                </div>
 
-      <div class="listing-cta-row">
-        <a href="./listing-summary.html" class="btn">
-          <span class="lang-en-only">View listing summary →</span>
-          <span class="lang-it-only">Vedi la scheda immobile →</span>
-        </a>
-        <button class="btn ghost" type="button" id="copy-card-btn">
-          <span class="lang-en-only">Copy card to WhatsApp</span>
-          <span class="lang-it-only">Copia scheda in WhatsApp</span>
-        </button>
+                <!-- In-chat card preview -->
+                <div style="margin-top:6px;border-radius:12px;border:1px solid rgba(0,0,0,.08);overflow:hidden;background:#ffffff;">
+                  <img src="./img/cta.jpg" alt="Balcony apartment in Milano" style="width:100%;height:92px;object-fit:cover;">
+                  <div style="padding:8px 9px;">
+                    <div style="font-weight:700;font-size:14px;">2BR • 80 m² • Milano • Balcony</div>
+                    <div style="font-size:13px;color:#4b5563;">
+                      €1,750 / month • 3rd floor with lift • Via Monte Rosa<br>
+                      Available from 15 Feb
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="mini-gallery">
+            <img src="./img/milano-livingroom-1.png" alt="Living room preview">
+            <img src="./img/milano-kitchen-1.png" alt="Kitchen preview 1">
+            <img src="./img/milano-kitchen-2.png" alt="Kitchen preview 2">
+            <img src="./img/milano-kitchen-3.png" alt="Additional kitchen view">
+          </div>
+          <div class="mini-gallery-caption">
+            <span class="lang-en-only">
+              Agents can attach living room, kitchen and balcony photos in seconds — without re-typing the core details.
+            </span>
+            <span class="lang-it-only">
+              Gli agenti possono allegare foto di soggiorno, cucina e balcone in pochi secondi — senza riscrivere i dati principali.
+            </span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1298,7 +1345,7 @@
       });
     });
 
-    // Language toggle: switches body class (affects all lang-* blocks)
+    // Language toggle
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1324,18 +1371,15 @@
     const copyBtn = document.getElementById('copy-card-btn');
     if (copyBtn && navigator.clipboard) {
       copyBtn.addEventListener('click', async () => {
-        const textEN = "2BR • 80 m² • Milano • Balcony\n€1,750 / month • 3rd floor with lift • Via Monte Rosa\nAvailable from 15 Jan";
-        const textIT = "2 locali • 80 m² • Milano • Balcone\n€1.750 / mese • 3° piano con ascensore • Via Monte Rosa\nDisponibile dal 15 gennaio";
+        const textEN = "2BR • 80 m² • Milano • Balcony\n€1,750 / month • 3rd floor with lift • Via Monte Rosa\nAvailable from 15 Feb";
+        const textIT = "2BR • 80 m² • Milano • Balcony\n€1.750 / mese • 3° piano con ascensore • Via Monte Rosa\nDisponibile dal 15 febbraio";
         const useEN = document.body.classList.contains('lang-en-active');
         const text = useEN ? textEN : textIT;
         try {
           await navigator.clipboard.writeText(text);
-          const originalEN = "Copy card to WhatsApp";
-          const originalIT = "Copia scheda in WhatsApp";
+          const original = copyBtn.textContent;
           copyBtn.textContent = useEN ? "Copied" : "Copiato";
-          setTimeout(() => {
-            copyBtn.textContent = useEN ? originalEN : originalIT;
-          }, 1500);
+          setTimeout(() => { copyBtn.textContent = original; }, 1500);
         } catch (e) {
           alert("Could not copy. Please copy manually.");
         }
