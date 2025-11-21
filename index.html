@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Pilot • Italy</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png.png"/>
+
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
+
+    /* Language visibility helpers */
+    .lang-en-only{display:none;}
+    .lang-it-only{display:block;}
+    body.lang-en-active .lang-en-only{display:block;}
+    body.lang-en-active .lang-it-only{display:none;}
+    body.lang-it-active .lang-en-only{display:none;}
+    body.lang-it-active .lang-it-only{display:block;}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
+    .brand strong{letter-spacing:.2px}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
+
+    .langbox{display:flex;align-items:center;gap:10px}
+    .langbox .label{font-size:14px;color:#6b7280}
+    .toggle{display:flex;gap:8px;flex-wrap:wrap}
+    .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;white-space:nowrap}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
+    .flag{display:inline-flex;font-size:16px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
+    h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px;color:#0b2347}
+    h2{margin:0 0 10px;color:#0b2347}
+    h3{margin:0 0 8px;color:#0b2347}
+    .lead{font-size:18px;color:#243044;margin:0 0 10px}
+    .sub{color:#5b6475;margin:0 0 14px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;display:inline-block}
+    .btn.primary{background:#0b2347;border-color:#0b2347;color:#fff}
+    .btn.ghost{background:#fff;color:#0b2347;border-color:var(--line)}
+    .divider{height:1px;background:var(--line);margin:18px 0}
+
+    /* Gold plaque */
+    .gold{margin:10px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.32), rgba(234,210,139,.12));border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)}
+    .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
+    .gold p{margin:4px 0;color:#5a533b}
+
+    /* WA section */
+    .wa{display:flex;flex-direction:column;gap:10px}
+    .keys{display:flex;gap:10px;flex-wrap:wrap}
+    .key{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+    .dot{width:8px;height:8px;border-radius:50%}
+    .dot.client{background:#9aa3b2}
+    .dot.kintra{background:#0b5fff}
+    .dot.agent{background:#17a47a}
+    .dot.insight{background:#c9a227}
+    .wa-tabs{display:flex;gap:8px;margin-top:4px}
+    .wa-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .wa-tab.active{background:#eef3ff;border-color:#0b5fff;color:#0b2347}
+    .wa-panel{margin-top:10px;display:none}
+    .wa-panel.active{display:block}
+    .before-after{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+
+    /* Phone-style chat shell (WhatsApp Smart Reply) */
+    .phone-shell{
+      margin-top:10px;
+      border-radius:22px;
+      padding:8px 7px 10px;
+      background:linear-gradient(145deg,#121b22,#05090c);
+      box-shadow:0 10px 26px rgba(5,9,12,.35);
+      max-width:340px;
+    }
+    .chat-inner{
+      border-radius:18px;
+      overflow:hidden;
+      background:#ece5dd;
+      position:relative;
+    }
+    .chat-header{
+      height:40px;
+      background:#075e54;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      color:#fff;
+      font-size:13px;
+      font-weight:500;
+    }
+    .chat-avatar{
+      width:22px;height:22px;border-radius:999px;
+      background:#0b5fff;
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;
+      color:#fff;
+    }
+    .chat-meta{display:flex;flex-direction:column;line-height:1.1}
+    .chat-meta small{font-size:11px;opacity:.9}
+
+    .chat-screen{
+      padding:8px 6px 10px;
+      background:#ece5dd;
+    }
+    .msg-row{display:flex;margin:4px 0}
+    .msg-row.them{justify-content:flex-start}
+    .msg-row.me{justify-content:flex-end}
+
+    .bubble{
+      max-width:78%;
+      padding:7px 9px;
+      border-radius:14px;
+      line-height:1.25;
+      font-size:14px;
+      position:relative;
+      box-shadow:0 1px 1px rgba(0,0,0,.08);
+      word-wrap:break-word;
+    }
+    .bubble.client{
+      background:#ffffff;
+      border:1px solid rgba(0,0,0,.04);
+      color:#111827;
+      border-bottom-left-radius:4px;
+    }
+    .bubble.kintra,
+    .bubble.agent{
+      background:#dcf8c6;
+      border:1px solid rgba(0,0,0,.04);
+      color:#111827;
+      border-bottom-right-radius:4px;
+    }
+
+    .msg-meta{
+      margin-top:3px;
+      font-size:11px;
+      color:#6b7280;
+      display:flex;
+      justify-content:flex-end;
+      gap:4px;
+      align-items:center;
+    }
+    .msg-meta .time{letter-spacing:.02em}
+    .msg-meta .ticks.grey{color:#9ca3af}
+    .msg-meta .ticks.blue{color:#0b5fff}
+
+    .stamp{font-size:12px;color:#6b7280;margin-top:6px}
+    .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
+    .insight b{color:#1b2233}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+    .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
+
+    /* Dashboard Mini */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .dash-img{width:100%;height:260px;object-fit:cover;display:block}
+    .screen-shell{
+      margin-top:6px;
+      border-radius:20px;
+      padding:7px 7px 10px;
+      background:linear-gradient(145deg,#0b1220,#111827);
+      box-shadow:0 10px 26px rgba(15,23,42,.32);
+      max-width:460px;
+    }
+    .screen-inner{
+      border-radius:14px;
+      overflow:hidden;
+      background:#020617;
+      border:1px solid rgba(15,23,42,.9);
+    }
+
+    /* Listing composite + phone shell */
+    .listing-mock{border-radius:0;overflow:hidden;background:#fff}
+    .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa);font-size:13px;color:#4b5563}
+    .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
+    .lm-body{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px}
+    .lm-photo{width:100%;height:92px;object-fit:cover;border:1px solid var(--line);border-radius:10px}
+    .lm-title{font-weight:800}
+    .lm-line{font-size:14px;color:#6b7280}
+    .tagrow{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{font-size:12px;color:#234;background:#eef3ff;border:1px solid #dbe7ff;border-radius:999px;padding:4px 8px}
+    .caption{margin-top:6px;font-size:12px;color:#7b879b}
+    .listing-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+    .phone-shell-listing{
+      margin-top:4px;
+      border-radius:22px;
+      padding:8px 7px 10px;
+      background:linear-gradient(145deg,#111827,#020617);
+      box-shadow:0 10px 26px rgba(15,23,42,.32);
+      max-width:360px;
+    }
+    .phone-shell-listing-inner{
+      border-radius:18px;
+      overflow:hidden;
+      background:#f9fafb;
+      border:1px solid #e5e7eb;
+    }
+
+    /* WhatsApp test section */
+    #wa-test{margin-top:4px}
+    #wa-test .test-card{border:1px dashed var(--line);border-radius:12px;padding:12px;background:#fff}
+    #wa-test small{color:#6b7280}
+    #wa-test .test-reveal{margin-top:8px}
+    #wa-test .test-box{margin-top:8px;border-radius:10px;border:1px solid var(--line);padding:10px;background:#f7f9fc;font-size:14px}
+    #wa-test .test-box code{font-family:Menlo,Consolas,monospace;font-size:13px;background:#eef3ff;padding:2px 4px;border-radius:4px}
+
+    /* ROI strip */
+    .roi{margin-top:12px;margin-bottom:28px}
+    .roi .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .roi .cell{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;text-align:center}
+    .roi .cell .big{font-size:22px;font-weight:800;color:#0b5fff}
+    .roi .cell .small{font-size:12px;color:#6b7280}
+    .roi .one{grid-column:1/-1;text-align:center;margin-top:8px;color:#243044}
+
+    /* FAQ */
+    .faq{margin-top:14px}
+    .faq details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin-top:8px}
+    .faq summary{font-weight:700;cursor:pointer}
+    .faq p{margin:8px 0 0;color:#485264}
+
+    footer{margin:28px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    @media (max-width:980px){
+      .hero,.grid-2,.before-after{grid-template-columns:1fr}
+      h1{font-size:32px}
+      .dash-img{height:200px}
+    }
+  </style>
+</head>
+
+<body class="lang-en-active">
+  <div class="wrap">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo">
+        <strong>Kintra</strong>
+        <span class="badge">Pilot • Italy</span>
+      </div>
+      <div class="langbox">
+        <span class="label">Language</span>
+        <div class="toggle">
+          <button class="active" data-lang="en">
+            <span class="flag">🇬🇧</span>
+            <span>EN</span>
+          </button>
+          <button data-lang="it">
+            <span class="flag">🇮🇹</span>
+            <span>IT</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div>
+        <p class="badge">
+          <span class="lang-en-only">WhatsApp-native • Rentals &amp; Sales</span>
+          <span class="lang-it-only">WhatsApp-nativo • Affitti &amp; Vendite</span>
+        </p>
+
+        <h1>
+          <span class="lang-en-only">Faster WhatsApp replies for Italian rental and sales teams</span>
+          <span class="lang-it-only">Risposte WhatsApp più veloci per i team affitti e vendite in Italia</span>
+        </h1>
+
+        <p class="lead">
+          <span class="lang-en-only">
+            Protect more leads without changing how your agents work.
+          </span>
+          <span class="lang-it-only">
+            Proteggi più contatti senza cambiare il modo in cui lavorano i tuoi agenti.
+          </span>
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#pilot-offer">
+            <span class="lang-en-only">Request pilot access</span>
+            <span class="lang-it-only">Richiedi un pilot</span>
+          </a>
+          <a class="btn" href="./dashboard.html">
+            <span class="lang-en-only">Preview dashboard</span>
+            <span class="lang-it-only">Anteprima dashboard</span>
+          </a>
+          <a class="btn ghost" href="./KintraDeck.pdf" target="_blank">
+            <span class="lang-en-only">View deck PDF</span>
+            <span class="lang-it-only">Vedi la presentazione (PDF)</span>
+          </a>
+        </div>
+      </div>
+      <div></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- MADE FOR ITALY -->
+    <section id="made-for-italy">
+      <h2>
+        <span class="lang-en-only">Made for Italy’s WhatsApp habits</span>
+        <span class="lang-it-only">Pensato per il modo italiano di usare WhatsApp</span>
+      </h2>
+      <p>
+        <span class="lang-en-only">
+          In Italy, almost everything passes through WhatsApp – enquiries, viewings, updates to owners and referrals.
+          Kintra doesn’t ask agents to change tools. It simply helps them answer faster, with clearer next steps,
+          in Italian or English.
+        </span>
+        <span class="lang-it-only">
+          In Italia quasi tutto passa da WhatsApp: richieste, visite, aggiornamenti ai proprietari e passaparola.
+          Kintra non chiede agli agenti di cambiare strumenti: li aiuta a rispondere più velocemente, con prossimi
+          passi più chiari, in italiano o in inglese.
+        </span>
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WHATSAPP SMART REPLY -->
+    <section class="wa" id="wa-demo">
+      <h2>
+        <span class="lang-en-only">WhatsApp Smart Reply</span>
+        <span class="lang-it-only">Risposte intelligenti su WhatsApp</span>
+      </h2>
+      <p class="sub">
+        <span class="lang-en-only">
+          Before / After view of real conversations – with Client, Kintra, Agent, Insight and Next step.
+        </span>
+        <span class="lang-it-only">
+          Vista Prima / Dopo di conversazioni reali – con Cliente, Kintra, Agente, Insight e Prossimo passo.
+        </span>
+      </p>
+
+      <div class="keys">
+        <span class="key">
+          <span class="dot client"></span>
+          <span class="lang-en-only">Client</span>
+          <span class="lang-it-only">Cliente</span>
+        </span>
+        <span class="key">
+          <span class="dot kintra"></span>
+          <span class="lang-en-only">Kintra draft</span>
+          <span class="lang-it-only">Bozza Kintra</span>
+        </span>
+        <span class="key">
+          <span class="dot agent"></span>
+          <span class="lang-en-only">Agent send</span>
+          <span class="lang-it-only">Invio agente</span>
+        </span>
+        <span class="key">
+          <span class="dot insight"></span>
+          <span class="lang-en-only">Insight</span>
+          <span class="lang-it-only">Insight</span>
+        </span>
+      </div>
+
+      <div class="wa-tabs">
+        <button class="wa-tab active" data-tab="rental">
+          <span class="lang-en-only">Rental</span>
+          <span class="lang-it-only">Affitti</span>
+        </button>
+        <button class="wa-tab" data-tab="sales">
+          <span class="lang-en-only">Sales</span>
+          <span class="lang-it-only">Vendite</span>
+        </button>
+      </div>
+
+      <!-- RENTAL PANEL -->
+      <div class="wa-panel active" data-panel="rental">
+        <div class="before-after">
+
+          <!-- BEFORE -->
+          <div class="card">
+            <h3>
+              <span class="lang-en-only">Before – standard rental reply</span>
+              <span class="lang-it-only">Prima – risposta affitti standard</span>
+            </h3>
+            <div class="stamp">
+              <span class="lang-en-only">Manual reply: ~1–2 minutes plus lookup time.</span>
+              <span class="lang-it-only">Risposta manuale: ~1–2 minuti più tempo di ricerca.</span>
+            </div>
+
+            <div class="phone-shell">
+              <div class="chat-inner">
+                <div class="chat-header">
+                  <div class="chat-avatar">C</div>
+                  <div class="chat-meta">
+                    <span>Cliente</span>
+                    <small>
+                      <span class="lang-en-only">Last seen recently</span>
+                      <span class="lang-it-only">Ultimo accesso di recente</span>
+                    </small>
+                  </div>
+                </div>
+                <div class="chat-screen">
+                  <div class="msg-row them">
+                    <div class="bubble client">
+                      <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
+                      <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
+                      <div class="msg-meta">
+                        <span class="time">09:41</span>
+                        <span class="ticks grey">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="msg-row me">
+                    <div class="bubble agent">
+                      <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
+                      <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
+                      <div class="msg-meta">
+                        <span class="time">09:49</span>
+                        <span class="ticks grey">✓</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="insight">
+              <b>
+                <span class="lang-en-only">Insight:</span>
+                <span class="lang-it-only">Insight:</span>
+              </b>
+              <span class="lang-en-only">
+                Tenant does the work, no clear next step. Easy for the enquiry to drop.
+              </span>
+              <span class="lang-it-only">
+                L’inquilino fa il lavoro, nessun prossimo passo chiaro. È facile perdere la richiesta.
+              </span>
+            </div>
+          </div>
+
+          <!-- AFTER -->
+          <div class="card">
+            <h3>
+              <span class="lang-en-only">After – Kintra-assisted rental reply</span>
+              <span class="lang-it-only">Dopo – risposta affitti assistita da Kintra</span>
+            </h3>
+
+            <div class="stamp">
+              <span class="lang-en-only">Kintra draft: ~10–20 seconds from message to ready-to-send reply.</span>
+              <span class="lang-it-only">Bozza Kintra: ~10–20 secondi dal messaggio alla risposta pronta all’invio.</span>
+            </div>
+
+            <div class="phone-shell">
+              <div class="chat-inner">
+                <div class="chat-header">
+                  <div class="chat-avatar">K</div>
+                  <div class="chat-meta">
+                    <span>Kintra</span>
+                    <small>
+                      <span class="lang-en-only">Draft ready in WhatsApp</span>
+                      <span class="lang-it-only">Bozza pronta in WhatsApp</span>
+                    </small>
+                  </div>
+                </div>
+                <div class="chat-screen">
+                  <div class="msg-row them">
+                    <div class="bubble client">
+                      <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
+                      <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
+                      <div class="msg-meta">
+                        <span class="time">09:41</span>
+                        <span class="ticks grey">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="msg-row me">
+                    <div class="bubble kintra">
+                      <span class="lang-en-only">
+                        “Ciao [Name], yes it’s available.<br><br>
+                        · 2 bedrooms, 1 bathroom<br>
+                        · Available from [Date]<br><br>
+                        Wed 18:30 or Thu 17:00 — which works best?”
+                      </span>
+                      <span class="lang-it-only">
+                        «Ciao [Nome], sì, è disponibile.<br><br>
+                        · 2 camere, 1 bagno<br>
+                        · Disponibile da [data]<br><br>
+                        Mer 18:30 o Gio 17:00 – quale preferisci?»
+                      </span>
+                      <div class="msg-meta">
+                        <span class="time">09:42</span>
+                        <span class="ticks blue">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="stamp">
+              <span class="lang-en-only">Agent reviews the draft and taps send in WhatsApp.</span>
+              <span class="lang-it-only">L’agente rivede la bozza e invia da WhatsApp.</span>
+            </div>
+
+            <div class="insight">
+              <b>
+                <span class="lang-en-only">Insight:</span>
+                <span class="lang-it-only">Insight:</span>
+              </b>
+              <span class="lang-en-only">Clear options, fast reply.<br></span>
+              <span class="lang-it-only">Opzioni chiare, risposta veloce.<br></span>
+
+              <b>
+                <span class="lang-en-only">Next step:</span>
+                <span class="lang-it-only">Prossimo passo:</span>
+              </b>
+              <span class="lang-en-only">Viewing booked in the same conversation.</span>
+              <span class="lang-it-only">Visita fissata nella stessa conversazione.</span>
+            </div>
+
+            <div class="chips">
+              <span class="chip">
+                <span class="lang-en-only">Offer two slots</span>
+                <span class="lang-it-only">Offri due orari</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en-only">Send floor plan</span>
+                <span class="lang-it-only">Invia planimetria</span>
+              </span>
+              <span class="chip">
+                <span class="lang-en-only">Confirm reminder</span>
+                <span class="lang-it-only">Conferma promemoria</span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SALES PANEL -->
+      <div class="wa-panel" data-panel="sales">
+        <div class="before-after">
+
+          <!-- BEFORE -->
+          <div class="card">
+            <h3>
+              <span class="lang-en-only">Before – sales lead in WhatsApp</span>
+              <span class="lang-it-only">Prima – contatto vendite su WhatsApp</span>
+            </h3>
+            <div class="stamp">
+              <span class="lang-en-only">Manual reply: ~1–2 minutes plus lookup time.</span>
+              <span class="lang-it-only">Risposta manuale: ~1–2 minuti più tempo di ricerca.</span>
+            </div>
+
+            <div class="phone-shell">
+              <div class="chat-inner">
+                <div class="chat-header">
+                  <div class="chat-avatar">C</div>
+                  <div class="chat-meta">
+                    <span>Cliente</span>
+                    <small>
+                      <span class="lang-en-only">Last seen recently</span>
+                      <span class="lang-it-only">Ultimo accesso di recente</span>
+                    </small>
+                  </div>
+                </div>
+                <div class="chat-screen">
+                  <div class="msg-row them">
+                    <div class="bubble client">
+                      <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
+                      <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
+                      <div class="msg-meta">
+                        <span class="time">10:12</span>
+                        <span class="ticks grey">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="msg-row me">
+                    <div class="bubble agent">
+                      <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
+                      <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
+                      <div class="msg-meta">
+                        <span class="time">10:21</span>
+                        <span class="ticks grey">✓</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="insight">
+              <b>
+                <span class="lang-en-only">Insight:</span>
+                <span class="lang-it-only">Insight:</span>
+              </b>
+              <span class="lang-en-only">
+                No urgency, no options, easy for the lead to disappear.
+              </span>
+              <span class="lang-it-only">
+                Nessun senso di urgenza, nessuna opzione: il contatto può sparire facilmente.
+              </span>
+            </div>
+          </div>
+
+          <!-- AFTER -->
+          <div class="card">
+            <h3>
+              <span class="lang-en-only">After – Kintra-assisted sales reply</span>
+              <span class="lang-it-only">Dopo – risposta vendite assistita da Kintra</span>
+            </h3>
+
+            <div class="stamp">
+              <span class="lang-en-only">Kintra draft: ~10–20 seconds from message to ready-to-send reply.</span>
+              <span class="lang-it-only">Bozza Kintra: ~10–20 secondi dal messaggio alla risposta pronta all’invio.</span>
+            </div>
+
+            <div class="phone-shell">
+              <div class="chat-inner">
+                <div class="chat-header">
+                  <div class="chat-avatar">K</div>
+                  <div class="chat-meta">
+                    <span>Kintra</span>
+                    <small>
+                      <span class="lang-en-only">Draft ready in WhatsApp</span>
+                      <span class="lang-it-only">Bozza pronta in WhatsApp</span>
+                    </small>
+                  </div>
+                </div>
+                <div class="chat-screen">
+                  <div class="msg-row them">
+                    <div class="bubble client">
+                      <span class="lang-en-only">“Hi, is the apartment on Via Garibaldi still available? Can I see it this week?”</span>
+                      <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
+                      <div class="msg-meta">
+                        <span class="time">10:12</span>
+                        <span class="ticks grey">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="msg-row me">
+                    <div class="bubble kintra">
+                      <span class="lang-en-only">
+                        “Hi [Name], yes, it’s still available.<br><br>
+                        · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
+                        · Available from [Date]<br><br>
+                        I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
+                        Which works better for you?”
+                      </span>
+                      <span class="lang-it-only">
+                        «Ciao [Nome], sì, è ancora disponibile.<br><br>
+                        · 2 camere, 1 bagno, 3° piano con ascensore<br>
+                        · Disponibile da [data]<br><br>
+                        Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
+                        Quale orario preferisci?»
+                      </span>
+                      <div class="msg-meta">
+                        <span class="time">10:13</span>
+                        <span class="ticks blue">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="stamp">
+              <span class="lang-en-only">
+                Agent checks the draft and taps send. Viewing times are on the table in under 60 seconds.
+              </span>
+              <span class="lang-it-only">
+                L’agente controlla la bozza e invia. Gli orari della visita sono sul tavolo in meno di 60 secondi.
+              </span>
+            </div>
+
+            <div class="insight">
+              <b>
+                <span class="lang-en-only">Insight:</span>
+                <span class="lang-it-only">Insight:</span>
+              </b>
+              <span class="lang-en-only">
+                Lead feels looked after, clear times offered, higher chance of booking.<br>
+              </span>
+              <span class="lang-it-only">
+                Il contatto si sente seguito, con orari chiari e una maggiore probabilità di fissare la visita.<br>
+              </span>
+              <b>
+                <span class="lang-en-only">Next step:</span>
+                <span class="lang-it-only">Prossimo passo:</span>
+              </b>
+              <span class="lang-en-only"> Viewing confirmed instead of “lead gone cold”.</span>
+              <span class="lang-it-only"> Visita confermata invece di “contatto freddo”.</span>
+            </div>
+
+            <div class="roi-line">
+              <span class="lang-en-only">
+                Each missed sales lead can mean €4,000–€12,000 in lost commission.
+              </span>
+              <span class="lang-it-only">
+                Ogni contatto vendite perso può significare €4.000–€12.000 di provvigioni mancate.
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- DASHBOARD MINI -->
+    <section id="dashboard-mini">
+      <h2>
+        <span class="lang-en-only">Dashboard that follows WhatsApp, not the other way round</span>
+        <span class="lang-it-only">Una dashboard che segue WhatsApp, non il contrario</span>
+      </h2>
+      <p class="sub">
+        <span class="lang-en-only">A light, focused view for managers; no extra steps for agents.</span>
+        <span class="lang-it-only">Una vista leggera e mirata per i manager, senza passaggi extra per gli agenti.</span>
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <div class="screen-shell">
+            <div class="screen-inner">
+              <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p>
+            <span class="lang-en-only">
+              See which enquiries are waiting, what went out, and where the next follow-up or viewing should happen.
+              No heavy CRM — just a small control panel around conversations your agents already have.
+            </span>
+            <span class="lang-it-only">
+              Vedi quali richieste sono in attesa, cosa è stato inviato e dove serve il prossimo follow-up o la prossima visita.
+              Niente CRM pesanti — solo un piccolo pannello di controllo intorno alle conversazioni che i tuoi agenti hanno già.
+            </span>
+          </p>
+          <div class="cta-row">
+            <a href="./dashboard.html" class="btn">
+              <span class="lang-en-only">Open live dashboard →</span>
+              <span class="lang-it-only">Apri la dashboard →</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LISTING SUMMARY -->
+    <section id="listing-summary">
+      <h2>
+        <span class="lang-en-only">Listing summaries your agents don’t have to re-type</span>
+        <span class="lang-it-only">Schede immobile che gli agenti non devono riscrivere</span>
+      </h2>
+      <p class="sub">
+        <span class="lang-en-only">One tap to send a clean, consistent property card into WhatsApp.</span>
+        <span class="lang-it-only">Un tocco per inviare in WhatsApp una scheda immobile chiara e coerente.</span>
+      </p>
+
+      <div class="phone-shell-listing">
+        <div class="phone-shell-listing-inner">
+          <div class="listing-mock">
+            <div class="lm-head">
+              <span class="lm-dot"></span>
+              <span class="lm-dot"></span>
+              <span class="lm-dot"></span>
+              <span class="muted">
+                <span class="lang-en-only">Listing summary • WhatsApp preview</span>
+                <span class="lang-it-only">Scheda immobile • Anteprima WhatsApp</span>
+              </span>
+            </div>
+            <div class="lm-body">
+              <img src="./img/cta.jpg" alt="Listing thumbnail" class="lm-photo"/>
+              <div>
+                <div class="lm-title">2BR • 80 m² • Milano • Balcony</div>
+                <div class="lm-line">
+                  <span class="lang-en-only">€1,750 / month • 3rd floor with lift • Via [Name]</span>
+                  <span class="lang-it-only">€1.750 / mese • 3° piano con ascensore • Via [Nome]</span>
+                </div>
+                <div class="tagrow">
+                  <span class="tag">2BR</span>
+                  <span class="tag">80 m²</span>
+                  <span class="tag">Milano</span>
+                  <span class="tag">Balcony</span>
+                </div>
+                <p class="caption">
+                  <span class="lang-en-only">
+                    A pre-filled card with key details that the agent can adjust in seconds instead of re-writing
+                    the same information for every lead.
+                  </span>
+                  <span class="lang-it-only">
+                    Una scheda precompilata con i dati principali che l’agente può adattare in pochi secondi
+                    invece di riscrivere ogni volta le stesse informazioni.
+                  </span>
+                </p>
+                <div class="listing-cta-row">
+                  <a href="./listing-summary.html" class="btn">
+                    <span class="lang-en-only">View listing summary →</span>
+                    <span class="lang-it-only">Vedi la scheda immobile →</span>
+                  </a>
+                  <button class="btn ghost" type="button" id="copy-card-btn">
+                    <span class="lang-en-only">Copy card to WhatsApp</span>
+                    <span class="lang-it-only">Copia scheda in WhatsApp</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- WHATSAPP TEST / META DEMO -->
+    <section id="wa-test">
+      <h2>
+        <span class="lang-en-only">Try a live WhatsApp demo</span>
+        <span class="lang-it-only">Prova una demo WhatsApp in tempo reale</span>
+      </h2>
+
+      <p class="sub">
+        <span class="lang-en-only">
+          Send a simple test message and see what a Kintra-style reply feels like in your own WhatsApp.
+        </span>
+        <span class="lang-it-only">
+          Invia un messaggio di prova e vedi come appare una risposta in stile Kintra direttamente nel tuo WhatsApp.
+        </span>
+      </p>
+
+      <div class="test-card">
+        <small class="lang-en-only">
+          This is a test number used only for pilots and demos. We look at patterns, not personal details, and you can stop at any time.
+        </small>
+        <small class="lang-it-only">
+          Questo è un numero di test usato solo per pilot e demo. Guardiamo i pattern, non i dettagli personali, e puoi interrompere in qualsiasi momento.
+        </small>
+
+        <div class="test-reveal">
+          <button class="btn ghost" type="button" id="reveal-test-number">
+            <span class="lang-en-only">Reveal test number</span>
+            <span class="lang-it-only">Mostra numero di test</span>
+          </button>
+        </div>
+
+        <div class="test-box" id="test-number-box" style="display:none;">
+          <p>
+            <strong class="lang-en-only">Step 1.</strong>
+            <strong class="lang-it-only">Passo 1.</strong>
+            <span class="lang-en-only">Save this number in your phone:</span>
+            <span class="lang-it-only">Salva questo numero nel tuo telefono:</span>
+          </p>
+
+          <p>
+            <code>+39 3XX XXX XXXX</code>
+            <!-- replace with your real test number when ready -->
+          </p>
+
+          <p>
+            <strong class="lang-en-only">Step 2.</strong>
+            <strong class="lang-it-only">Passo 2.</strong>
+            <span class="lang-en-only">Send a short message such as:</span>
+            <span class="lang-it-only">Invia un breve messaggio come:</span>
+          </p>
+
+          <p>
+            <code class="lang-en-only">"Hi, this is a test for Kintra."</code>
+            <code class="lang-it-only">"Ciao, questo è un test per Kintra."</code>
+          </p>
+
+          <p>
+            <strong class="lang-en-only">Step 3.</strong>
+            <strong class="lang-it-only">Passo 3.</strong>
+            <span class="lang-en-only">
+              We’ll reply with a short, pilot-style example so you can see how a drafted reply and next step look in practice.
+            </span>
+            <span class="lang-it-only">
+              Ti risponderemo con un breve esempio in stile pilot, così puoi vedere nella pratica una bozza di risposta e il prossimo passo.
+            </span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ADVISOR CHARTER -->
+    <section id="advisor-charter">
+      <div class="gold">
+        <h3>
+          <span class="lang-en-only">Advisor Charter (pilot)</span>
+          <span class="lang-it-only">Advisor Charter (pilot)</span>
+        </h3>
+        <p>
+          <span class="lang-en-only">
+            A light, optional role for Italian professionals who help shape the pilot:
+            1–2 warm introductions, honest feedback, zero operational load.
+          </span>
+          <span class="lang-it-only">
+            Un ruolo leggero e opzionale per i professionisti italiani che aiutano a modellare il pilot:
+            1–2 presentazioni calde, feedback sincero, nessun carico operativo.
+          </span>
+        </p>
+        <p>
+          <span class="lang-en-only">
+            You’re not responsible for results and don’t need to “sell” us internally.
+            Your name is only mentioned with permission.
+          </span>
+          <span class="lang-it-only">
+            Non sei responsabile dei risultati e non devi “venderci” internamente.
+            Il tuo nome viene menzionato solo con il tuo consenso.
+          </span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ROI STRIP -->
+    <section class="roi">
+      <div class="row">
+        <div class="cell">
+          <div class="big">40</div>
+          <div class="small">
+            <span class="lang-en-only">leads/month in one niche</span>
+            <span class="lang-it-only">lead/mese in una sola nicchia</span>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="big">12–20h</div>
+          <div class="small">
+            <span class="lang-en-only">time saved per agent/month</span>
+            <span class="lang-it-only">tempo risparmiato per agente/mese</span>
+          </div>
+        </div>
+      </div>
+      <div class="one">
+        <span class="lang-en-only">
+          Assume ~40 leads/month in one segment and typical reply patterns.<br>
+          Small gains in speed and follow-up can pay back the pilot in &lt; 30 days.
+        </span>
+        <span class="lang-it-only">
+          Supponiamo ~40 lead/mese in un segmento e schemi di risposta tipici.<br>
+          Piccoli miglioramenti in velocità e follow-up possono ripagare il pilot in meno di 30 giorni.
+        </span>
+      </div>
+    </section>
+
+    <!-- PILOT OFFER -->
+    <section id="pilot-offer">
+      <h2>
+        <span class="lang-en-only">30-day pilot • €1.5–2k • 1 niche • 2–3 KPIs</span>
+        <span class="lang-it-only">Pilot di 30 giorni • €1,5–2k • 1 nicchia • 2–3 KPI</span>
+      </h2>
+      <p>
+        <span class="lang-en-only">We run a focused test with one team:</span>
+        <span class="lang-it-only">Facciamo un test mirato con un solo team:</span>
+      </p>
+      <ul>
+        <li>
+          <span class="lang-en-only"><strong>Rentals:</strong> e.g. long-term apartments in one area</span>
+          <span class="lang-it-only"><strong>Affitti:</strong> es. appartamenti a lungo termine in una zona</span>
+        </li>
+        <li>
+          <span class="lang-en-only"><strong>Sales:</strong> e.g. resales, new builds or luxury in one niche</span>
+          <span class="lang-it-only"><strong>Vendite:</strong> es. rivendite, nuove costruzioni o lusso in una nicchia</span>
+        </li>
+      </ul>
+      <p>
+        <span class="lang-en-only">
+          Together we define 2–3 simple KPIs (response time, viewings booked, follow-ups done).
+          If Kintra doesn’t clearly save time and protect more leads in 30 days, don’t continue.
+        </span>
+        <span class="lang-it-only">
+          Definiamo insieme 2–3 KPI semplici (tempo di risposta, visite fissate, follow-up effettuati).
+          Se in 30 giorni Kintra non fa risparmiare tempo in modo evidente e non protegge più contatti, non proseguite.
+        </span>
+      </p>
+
+      <div class="assump">
+        <button type="button" onclick="
+          var box=document.querySelector('.assump-box');
+          if(box) box.style.display = box.style.display==='block' ? 'none' : 'block';
+        ">
+          <span class="lang-en-only">Show assumptions</span>
+          <span class="lang-it-only">Mostra le ipotesi</span>
+        </button>
+        <div class="assump-box" style="display:none;border:1px solid #e6d59a;border-radius:12px;background:linear-gradient(180deg, rgba(234,210,139,.16), rgba(234,210,139,.08));padding:12px;margin-top:8px;">
+          <ul>
+            <li>
+              <span class="lang-en-only">30 days of messages in one niche.</span>
+              <span class="lang-it-only">30 giorni di messaggi in una sola nicchia.</span>
+            </li>
+            <li>
+              <span class="lang-en-only">Base case: likely break-even around 30 days, depending on volume.</span>
+              <span class="lang-it-only">Caso base: probabile break-even intorno ai 30 giorni, a seconda del volume.</span>
+            </li>
+            <li>
+              <span class="lang-en-only">Cautious case: assume 20–40 days for clear payback.</span>
+              <span class="lang-it-only">Caso prudente: considera 20–40 giorni per un rientro chiaro.</span>
+            </li>
+            <li>
+              <span class="lang-en-only">Protecting even a handful of extra deals can cover the pilot several times over.</span>
+              <span class="lang-it-only">Proteggere anche solo pochi affari in più può coprire il costo del pilot più volte.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3>
+        <span class="lang-en-only">How to book a pilot</span>
+        <span class="lang-it-only">Come prenotare un pilot</span>
+      </h3>
+      <p>
+        <span class="lang-en-only">
+          Use the button below or email us with your city, niche (e.g. Milano rentals) and approximate team size.
+        </span>
+        <span class="lang-it-only">
+          Usa il pulsante qui sotto o scrivici indicando città, nicchia (es. affitti a Milano) e dimensione del team.
+        </span>
+      </p>
+      <p>
+        <a href="mailto:YOUR_EMAIL_HERE?subject=Kintra%20Pilot%20Italy" class="btn ghost">
+          <span class="lang-en-only">Email to book a pilot</span>
+          <span class="lang-it-only">Email per prenotare un pilot</span>
+        </a>
+      </p>
+
+      <div class="cta-row">
+        <a class="btn primary" href="#hero">
+          <span class="lang-en-only">Request pilot access</span>
+          <span class="lang-it-only">Richiedi un pilot</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>
+        <span class="lang-en-only">Questions we hear</span>
+        <span class="lang-it-only">Domande che sentiamo spesso</span>
+      </h2>
+      <p class="sub">
+        <span class="lang-en-only">
+          For agents: faster replies, fewer copy-paste replies, less admin.<br>
+          For managers: clearer follow-ups, fewer lost leads, visible daily activity.
+        </span>
+        <span class="lang-it-only">
+          Per gli agenti: risposte più rapide, meno copia-incolla, meno burocrazia.<br>
+          Per i manager: follow-up più chiari, meno contatti persi, attività quotidiana visibile.
+        </span>
+      </p>
+
+      <div class="faq">
+
+        <!-- ENGLISH -->
+        <div class="faq-block lang-en-only">
+          <details>
+            <summary>Why not just use ChatGPT?</summary>
+            <p>
+              Most agents reply from memory. Generic tools don’t see your listing data or the conversation thread.
+              Kintra works in the flow: it detects intent in real WhatsApp messages, pulls property facts, drafts compliant
+              replies, suggests the next step, and logs outcomes—so managers see the daily pulse without agents switching tools.
+            </p>
+          </details>
+
+          <details>
+            <summary>Is the pilot risky?</summary>
+            <p>
+              No. It’s a 30-day, time-boxed test in one niche with 2–3 simple KPIs. If it doesn’t clearly save time or protect
+              more leads, don’t continue. You keep the learning and assets either way.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will this replace agents?</summary>
+            <p>
+              No. Agents remain in full control. Kintra speeds up routine replies, keeps follow-ups from slipping, and structures
+              the next step. Agents approve and send; managers get clarity; clients get faster service.
+            </p>
+          </details>
+
+          <details>
+            <summary>WhatsApp compliance?</summary>
+            <p>
+              Production uses the official WhatsApp Business API (Meta Cloud). Pilots use a test number with rate-limited demo
+              sends to prevent abuse. No personal agent numbers required.
+            </p>
+          </details>
+
+          <details>
+            <summary>How do I justify the pilot to finance?</summary>
+            <p>
+              Frame it as a 30-day efficiency audit: time saved per agent × number of agents × hourly cost. Typical pilots see
+              12–20 hours saved per agent per month via faster replies, fewer drop-offs and clearer follow-ups—usually breakeven
+              inside the first month.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if we already use a CRM?</summary>
+            <p>
+              Great—Kintra complements CRMs. Agents stay in WhatsApp; Kintra drafts the messages and logs outcomes. Your CRM
+              receives more complete data without adding tabs or admin work.
+            </p>
+          </details>
+
+          <details>
+            <summary>How much setup and operational effort is required?</summary>
+            <p>
+              Very light. We define one niche, connect basic property data, and begin drafting directly in WhatsApp. Agents
+              approve; we handle the heavy lifting.
+            </p>
+          </details>
+
+          <details>
+            <summary>Can we stop after the pilot?</summary>
+            <p>
+              Yes—at any time. If Kintra doesn’t create obvious time savings or protect more leads, you stop. You keep the
+              templates, insights and improvements.
+            </p>
+          </details>
+
+          <details>
+            <summary>Data ownership & privacy?</summary>
+            <p>
+              You own your data. Pilot uses a sandbox/test number; production uses official APIs. We follow least-privilege
+              access and remove pilot data on request.
+            </p>
+          </details>
+
+          <details>
+            <summary>Does this work for sales as well?</summary>
+            <p>
+              Yes. Kintra drafts replies wherever your team handles leads. We start with rentals because volume is higher and
+              ROI shows faster; sales can be enabled during or after the pilot.
+            </p>
+          </details>
+
+          <details>
+            <summary>Will this slow my agents down?</summary>
+            <p>
+              No. Kintra appears as drafts inside WhatsApp—no new tools to learn. Most agents become faster within the first few
+              days, especially in high-volume rental markets.
+            </p>
+          </details>
+
+          <details>
+            <summary>What if our agents already reply quickly?</summary>
+            <p>
+              Kintra still helps: structured next steps, faster follow-ups, and consistent property summaries. Even small
+              improvements in speed can protect a meaningful number of leads in cities like Milano, Roma, Torino e Firenze.
+            </p>
+          </details>
+        </div>
+
+        <!-- ITALIAN -->
+        <div class="faq-block lang-it-only">
+          <details>
+            <summary>Perché non usare semplicemente ChatGPT?</summary>
+            <p>
+              La maggior parte degli agenti risponde a memoria. Gli strumenti generici non vedono i dati dell’immobile né il
+              contesto della conversazione. Kintra lavora nel flusso: rileva l’intento nei messaggi WhatsApp reali, recupera i
+              dati dell’immobile, crea bozze conformi, suggerisce il prossimo passo e registra gli esiti—così i manager vedono
+              l’andamento quotidiano senza cambiare strumenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Il pilot è rischioso?</summary>
+            <p>
+              No. È un test di 30 giorni, limitato a una nicchia, con 2–3 KPI semplici. Se non fa risparmiare tempo o non
+              protegge più contatti, non proseguite. In ogni caso mantenete apprendimenti e materiali.
+            </p>
+          </details>
+
+          <details>
+            <summary>Sostituirà gli agenti?</summary>
+            <p>
+              No. Gli agenti restano pienamente in controllo. Kintra velocizza le risposte ripetitive, evita che i follow-up
+              vengano dimenticati e struttura il prossimo passo. L’agente approva e invia; il manager ottiene chiarezza; il
+              cliente riceve un servizio più rapido.
+            </p>
+          </details>
+
+          <details>
+            <summary>Conformità WhatsApp?</summary>
+            <p>
+              La produzione usa l’API ufficiale WhatsApp Business (Meta Cloud). Il pilot utilizza un numero di test con invii
+              limitati per evitare abusi. Non richiediamo numeri personali degli agenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Come giustifico il pilot alla direzione finanziaria?</summary>
+            <p>
+              Consideratelo un audit di efficienza di 30 giorni: tempo risparmiato per agente × numero di agenti × costo orario.
+              I pilot tipici mostrano 12–20 ore risparmiate al mese per agente grazie a risposte più veloci, meno drop-off e
+              follow-up più chiari—di solito break-even entro il primo mese.
+            </p>
+          </details>
+
+          <details>
+            <summary>E se abbiamo già un CRM?</summary>
+            <p>
+              Perfetto—Kintra integra i CRM. Gli agenti restano in WhatsApp; Kintra redige i messaggi e registra gli esiti.
+              Il vostro CRM riceve dati più completi senza aggiungere lavoro amministrativo.
+            </p>
+          </details>
+
+          <details>
+            <summary>Quanto impegno serve per il setup?</summary>
+            <p>
+              Molto poco. Definiamo una nicchia, colleghiamo i dati essenziali dell’immobile e iniziamo a creare bozze direttamente
+              in WhatsApp. L’agente approva; noi gestiamo la parte pesante.
+            </p>
+          </details>
+
+          <details>
+            <summary>Possiamo interrompere dopo il pilot?</summary>
+            <p>
+              Sì—in qualsiasi momento. Se Kintra non genera un risparmio di tempo evidente o non protegge più contatti,
+              interrompete. Conservate comunque template, insight e miglioramenti.
+            </p>
+          </details>
+
+          <details>
+            <summary>Proprietà dei dati e privacy?</summary>
+            <p>
+              I dati sono vostri. Il pilot usa un numero di test; la produzione usa API ufficiali. Applichiamo accesso a minima
+              privilegio e rimuoviamo i dati del pilot su richiesta.
+            </p>
+          </details>
+
+          <details>
+            <summary>Funziona anche per le vendite?</summary>
+            <p>
+              Sì. Kintra redige risposte ovunque gestiate contatti. Iniziamo dagli affitti perché il volume è più alto e l’ROI
+              emerge più rapidamente; le vendite possono essere abilitate durante o dopo il pilot.
+            </p>
+          </details>
+
+          <details>
+            <summary>Rallenterà i miei agenti?</summary>
+            <p>
+              No. Kintra compare come bozza dentro WhatsApp—nessun nuovo strumento da imparare. La maggior parte degli agenti
+              diventa più veloce già nei primi giorni, soprattutto negli affitti ad alto volume.
+            </p>
+          </details>
+
+          <details>
+            <summary>E se i nostri agenti rispondono già velocemente?</summary>
+            <p>
+              Kintra aiuta comunque: prossimi passi strutturati, follow-up più rapidi e schede immobile coerenti. Anche piccoli
+              miglioramenti di velocità possono proteggere un numero significativo di contatti in città come Milano, Roma,
+              Torino e Firenze.
+            </p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <span>
+        <span class="lang-en-only">Kintra — Italy Pilot</span>
+        <span class="lang-it-only">Kintra — Pilot Italia</span>
+      </span>
+      <span>
+        <span class="lang-en-only">WhatsApp-native support for rental and sales teams.</span>
+        <span class="lang-it-only">Supporto WhatsApp-nativo per i team affitti e vendite.</span>
+      </span>
+    </footer>
+
+  </div>
+
+  <script>
+    // WA tabs
+    const waTabs = document.querySelectorAll('.wa-tab');
+    const waPanels = document.querySelectorAll('.wa-panel');
+    waTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const t = tab.getAttribute('data-tab');
+        waTabs.forEach(b => b.classList.remove('active'));
+        tab.classList.add('active');
+        waPanels.forEach(p => {
+          p.classList.toggle('active', p.getAttribute('data-panel') === t);
+        });
+      });
+    });
+
+    // Language toggle: switches body class (affects all lang-* blocks)
+    const langButtons = document.querySelectorAll('.toggle button');
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const lang = btn.getAttribute('data-lang');
+        const isEN = lang === 'en';
+        document.body.classList.toggle('lang-en-active', isEN);
+        document.body.classList.toggle('lang-it-active', !isEN);
+      });
+    });
+
+    // Reveal WhatsApp test number
+    const revealBtn = document.getElementById('reveal-test-number');
+    const testBox = document.getElementById('test-number-box');
+    if (revealBtn && testBox) {
+      revealBtn.addEventListener('click', () => {
+        testBox.style.display = testBox.style.display === 'none' ? 'block' : 'none';
+      });
+    }
+
+    // Copy listing card to clipboard
+    const copyBtn = document.getElementById('copy-card-btn');
+    if (copyBtn && navigator.clipboard) {
+      copyBtn.addEventListener('click', async () => {
+        const textEN = "2BR • 80 m² • Milano • Balcony\n€1,750 / month • 3rd floor with lift • Via [Name]";
+        const textIT = "2BR • 80 m² • Milano • Balcony\n€1.750 / mese • 3° piano con ascensore • Via [Nome]";
+        const useEN = document.body.classList.contains('lang-en-active');
+        const text = useEN ? textEN : textIT;
+        try {
+          await navigator.clipboard.writeText(text);
+          const original = copyBtn.textContent;
+          copyBtn.textContent = useEN ? "Copied" : "Copiato";
+          setTimeout(() => { copyBtn.textContent = original; }, 1500);
+        } catch (e) {
+          alert(useEN ? "Could not copy. Please copy manually." : "Copia non riuscita. Copia manualmente.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
