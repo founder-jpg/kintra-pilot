@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Kintra Listing Card Phone Mock</title>
+  <style>
+    body{
+      margin:0;
+      padding:40px;
+      background:#0b1220;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .phone-frame{
+      width:320px;
+      border-radius:32px;
+      padding:10px;
+      background:radial-gradient(circle at 10% 0%, #4b5563 0, #020617 55%);
+      box-shadow:0 18px 40px rgba(0,0,0,.55);
+      position:relative;
+    }
+
+    /* Top notch hint */
+    .phone-frame::before{
+      content:"";
+      position:absolute;
+      top:10px;
+      left:50%;
+      transform:translateX(-50%);
+      width:90px;
+      height:16px;
+      border-radius:999px;
+      background:rgba(0,0,0,.9);
+    }
+
+    .screen{
+      margin-top:18px;
+      background:#f7f9fc;
+      border-radius:24px;
+      padding:14px 12px 10px;
+      box-shadow:0 0 0 1px rgba(15,23,42,.08);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .status-row{
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      color:#6b7280;
+      padding:0 2px 2px;
+    }
+
+    .status-left{display:flex;gap:6px;align-items:center}
+    .status-dot{width:6px;height:6px;border-radius:50%;background:#22c55e}
+
+    .chat-label{
+      font-size:12px;
+      color:#4b5563;
+      padding:4px 6px;
+      border-radius:999px;
+      background:#e5e7eb;
+      align-self:flex-start;
+    }
+
+    .listing-card{
+      margin-top:2px;
+      border-radius:18px;
+      border:1px solid #e2e8f0;
+      background:#ffffff;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(15,23,42,.06);
+      font-size:13px;
+      color:#111827;
+    }
+
+    .listing-head{
+      padding:8px 10px 6px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(180deg,#f9fafb,#eef2ff);
+    }
+    .listing-head-title{
+      font-weight:600;
+      font-size:12px;
+      color:#111827;
+    }
+    .listing-head-pill{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:#0369a1;
+    }
+
+    .listing-body{
+      display:grid;
+      grid-template-columns:100px 1fr;
+      gap:10px;
+      padding:10px;
+      align-items:flex-start;
+    }
+    .listing-photo{
+      width:100%;
+      height:84px;
+      border-radius:10px;
+      object-fit:cover;
+      border:1px solid #e5e7eb;
+      background:#cbd5f5;
+    }
+    .listing-main-title{
+      font-weight:700;
+      font-size:13px;
+      margin-bottom:3px;
+    }
+    .listing-line{
+      font-size:12px;
+      color:#4b5563;
+      margin-bottom:4px;
+    }
+    .listing-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+      margin-top:4px;
+    }
+    .tag{
+      font-size:11px;
+      padding:3px 7px;
+      border-radius:999px;
+      background:#eef3ff;
+      border:1px solid #d4d9ff;
+      color:#1f2937;
+    }
+
+    .timestamp-row{
+      margin-top:4px;
+      font-size:11px;
+      color:#6b7280;
+      display:flex;
+      justify-content:flex-end;
+      gap:4px;
+      align-items:center;
+      padding:0 2px 2px 0;
+    }
+    .ticks{
+      font-size:13px;
+      letter-spacing:-1px;
+    }
+    .ticks.gray{color:#9ca3af;}
+    .ticks.blue{color:#2563eb;}
+
+    .cta-row{
+      margin-top:6px;
+      padding-top:6px;
+      border-top:1px dashed #e5e7eb;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:12px;
+      color:#4b5563;
+    }
+    .tap-btn{
+      padding:6px 10px;
+      border-radius:999px;
+      background:#0b5fff;
+      color:#fff;
+      font-size:12px;
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      box-shadow:0 4px 10px rgba(37,99,235,.35);
+      white-space:nowrap;
+    }
+    .tap-btn span{margin-left:4px;}
+  </style>
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="screen">
+      <div class="status-row">
+        <div class="status-left">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </div>
+        <span>10:32</span>
+      </div>
+
+      <div class="chat-label">Listing card drafted by Kintra</div>
+
+      <div class="listing-card">
+        <div class="listing-head">
+          <div class="listing-head-title">Via [Name], Milano</div>
+          <div class="listing-head-pill">For rent</div>
+        </div>
+        <div class="listing-body">
+          <!-- Replace src with your real thumbnail when ready -->
+          <img src="./img/cta.jpg" alt="Listing thumbnail" class="listing-photo"/>
+
+          <div>
+            <div class="listing-main-title">2BR • 80 m² • Milano • Balcony</div>
+            <div class="listing-line">€1,750 / month • 3rd floor with lift</div>
+            <div class="listing-line">Available from [Date]</div>
+            <div class="listing-tags">
+              <span class="tag">2BR</span>
+              <span class="tag">80 m²</span>
+              <span class="tag">Balcony</span>
+              <span class="tag">Long-term</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timestamp-row">
+          <span>10:32</span>
+          <span class="ticks blue">✓✓</span>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <span>Preview before sending to client.</span>
+        <button class="tap-btn" type="button">
+          Tap to share<span>→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
