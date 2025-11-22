@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra Simulation v0.1 — Prototype A</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b1722;
+      --bg-soft: #111c29;
+      --accent: #19c37d;
+      --accent-soft: #13352a;
+      --accent-strong: #14a368;
+      --text-main: #f5f7fb;
+      --text-muted: #9ca8c1;
+      --bubble-client: #ffffff;
+      --bubble-kintra: #13352a;
+      --bubble-agent: #1f2937;
+      --border-subtle: #1c2737;
+      --danger: #f97373;
+      --whatsapp-header: #075e54;
+      --whatsapp-bg: #0a131a;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .app-shell {
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.95fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 880px) {
+      .app-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .panel {
+      background: rgba(8, 15, 26, 0.94);
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      box-shadow: 0 22px 60px rgba(15, 23, 42, 0.9);
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(22px);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(25, 195, 125, 0.08);
+      border: 1px solid rgba(25, 195, 125, 0.32);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-label-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(25, 195, 125, 0.75);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .panel-subtitle {
+      margin: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      padding: 2px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      gap: 2px;
+      font-size: 11px;
+    }
+
+    .lang-btn {
+      border: none;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .lang-btn span.flag {
+      font-size: 13px;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #020617;
+    }
+
+    .lang-btn.active span.flag {
+      filter: grayscale(0);
+    }
+
+    .lang-btn:not(.active) span.flag {
+      filter: grayscale(0.4);
+      opacity: 0.8;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin: 6px 0 4px;
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 6px 10px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.9);
+      cursor: pointer;
+      transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+      max-width: 100%;
+    }
+
+    .chip strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .chip span.bullet {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .chip:hover {
+      background: rgba(30, 64, 175, 0.25);
+      border-color: rgba(129, 140, 248, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .chip.active {
+      background: rgba(37, 99, 235, 0.25);
+      border-color: rgba(129, 140, 248, 1);
+      color: #e5e7eb;
+    }
+
+    .chip-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 260px;
+    }
+
+    @media (max-width: 880px) {
+      .chip-text {
+        max-width: 190px;
+      }
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .hint-bullet {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      align-items: center;
+    }
+
+    button.primary,
+    button.secondary {
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #020617;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+    }
+
+    button.primary:disabled {
+      opacity: 0.5;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    button.secondary {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+    }
+
+    button.secondary:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    .mini-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .metric-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 4px 8px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .metric-pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.85);
+    }
+
+    .metric-pill span.dot.red {
+      background: rgba(248, 113, 113, 0.9);
+    }
+
+    /* Phone simulation */
+
+    .phone-shell {
+      background: #000;
+      border-radius: 26px;
+      padding: 7px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow:
+        0 14px 45px rgba(15, 23, 42, 1),
+        0 0 0 1px rgba(15, 23, 42, 0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-inner {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      height: 560px;
+      max-height: 75vh;
+    }
+
+    @media (max-width: 880px) {
+      .phone-inner {
+        height: 520px;
+      }
+    }
+
+    .phone-notch {
+      height: 20px;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 3px 10px 0;
+      box-sizing: border-box;
+    }
+
+    .notch-bar {
+      width: 96px;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .notch-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--whatsapp-header), #0d433d);
+      color: #e5e7eb;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #22c55e, #166534);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ecfdf3;
+      border: 1px solid rgba(187, 247, 208, 0.4);
+    }
+
+    .chat-header-main {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .chat-title {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .chat-subtitle {
+      font-size: 11px;
+      color: #a5f3fc;
+    }
+
+    .chat-header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      opacity: 0.9;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .chat-body {
+      flex: 1;
+      background: radial-gradient(circle at top, #020617 0, #020617 30%, #020617 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-bg-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+      background-image:
+        radial-gradient(circle at 10% 20%, #22c55e 0, transparent 40%),
+        radial-gradient(circle at 90% 80%, #3b82f6 0, transparent 52%),
+        radial-gradient(circle at 50% 0%, #f97316 0, transparent 40%);
+    }
+
+    .chat-scroll {
+      position: relative;
+      flex: 1;
+      padding: 10px 8px 8px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(148, 163, 184, 0.6) transparent;
+    }
+
+    .chat-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(148, 163, 184, 0.6);
+      border-radius: 999px;
+    }
+
+    .day-divider {
+      align-self: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.8);
+      margin: 4px 0 2px;
+    }
+
+    .bubble-row {
+      display: flex;
+      gap: 4px;
+      max-width: 100%;
+    }
+
+    .bubble-row.client {
+      justify-content: flex-start;
+    }
+
+    .bubble-row.kintra,
+    .bubble-row.agent {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      border-radius: 16px;
+      padding: 6px 8px 4px;
+      font-size: 12px;
+      line-height: 1.3;
+      position: relative;
+      max-width: 78%;
+      word-wrap: break-word;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.8);
+    }
+
+    .bubble.client {
+      background: var(--bubble-client);
+      color: #020617;
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.kintra {
+      background: var(--bubble-kintra);
+      color: #ecfdf3;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(74, 222, 128, 0.45);
+    }
+
+    .bubble.agent {
+      background: var(--bubble-agent);
+      color: #e5e7eb;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .bubble-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      opacity: 0.75;
+      margin-bottom: 2px;
+    }
+
+    .bubble-label.kintra-label {
+      color: #6ee7b7;
+    }
+
+    .bubble-label.agent-label {
+      color: #93c5fd;
+    }
+
+    .bubble-text {
+      margin-bottom: 2px;
+    }
+
+    .bubble-meta {
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      opacity: 0.8;
+    }
+
+    .ticks {
+      font-size: 11px;
+    }
+
+    .ticks.read {
+      color: #22c55e;
+    }
+
+    .typing-row {
+      justify-content: flex-start;
+    }
+
+    .typing-bubble {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 14px;
+      padding: 6px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .typing-bubble-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a5f3fc;
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .typing-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      opacity: 0.6;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 80%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+      40% {
+        transform: translateY(-2px);
+        opacity: 1;
+      }
+    }
+
+    .chat-footer {
+      padding: 6px 8px 8px;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+      border-top: 1px solid rgba(30, 64, 175, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-input {
+      flex: 1;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      padding: 7px 10px;
+      font-size: 12px;
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-input span {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .footer-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #020617;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.45);
+    }
+
+    .footer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .footer-meta span strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .footer-meta span.highlight {
+      color: #a5b4fc;
+    }
+
+    /* Listing card bubble */
+
+    .listing-card {
+      margin-top: 4px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .listing-img {
+      position: relative;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .listing-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .listing-tag {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.92);
+      font-size: 9px;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .listing-body {
+      padding: 7px 8px 7px;
+      font-size: 11px;
+    }
+
+    .listing-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+      align-items: baseline;
+    }
+
+    .listing-title {
+      font-weight: 600;
+      color: #e5e7eb;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 130px;
+    }
+
+    .listing-price {
+      color: #bbf7d0;
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    .listing-meta-row {
+      margin-top: 2px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+
+    .listing-meta-row span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .listing-meta-row span.dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .listing-footer {
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .listing-footer-left {
+      font-size: 10px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .listing-cta {
+      border-radius: 999px;
+      border: none;
+      font-size: 10px;
+      padding: 4px 8px;
+      background: rgba(34, 197, 94, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .listing-cta-icon {
+      font-size: 11px;
+    }
+
+    .notice {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- LEFT: Scenario & trainer controls -->
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="pill-label">
+            <span class="pill-label-dot"></span>
+            <span data-i18n="label_prototype">Prototype A · Real-time sim</span>
+          </div>
+          <h1 data-i18n="title_main">Kintra WhatsApp Engine — Simulation</h1>
+          <p class="panel-subtitle" data-i18n="subtitle_main">
+            Pick a client inquiry, tap “Reply with Kintra”, watch the flow from draft → send.
+          </p>
+        </div>
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" data-lang="en">
+            <span class="flag">🇬🇧</span><span>EN</span>
+          </button>
+          <button class="lang-btn" data-lang="it">
+            <span class="flag">🇮🇹</span><span>IT</span>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-title" data-i18n="section_inquiries">Client inquiries (samples)</div>
+        <div class="chips-row" id="inquiry-chips"></div>
+      </div>
+
+      <div class="hint">
+        <span class="hint-bullet">⟶</span>
+        <span data-i18n="hint_flow">
+          1) Tap a client inquiry · 2) Hit “Reply with Kintra” · 3) Hit “Send to client”.
+        </span>
+      </div>
+
+      <div class="controls-row">
+        <button class="primary" id="btn-draft">
+          <span class="btn-icon">⚡</span>
+          <span data-i18n="btn_draft">Reply with Kintra</span>
+        </button>
+        <button class="secondary" id="btn-send">
+          <span class="btn-icon">📨</span>
+          <span data-i18n="btn_send">Send to client</span>
+        </button>
+        <button class="secondary" id="btn-reset">
+          <span class="btn-icon">🔁</span>
+          <span data-i18n="btn_reset">Reset flow</span>
+        </button>
+      </div>
+
+      <div class="mini-metrics">
+        <div class="metric-pill">
+          <span class="dot"></span>
+          <span data-i18n="metric_speed">Replies drafted in &lt; 5 seconds</span>
+        </div>
+        <div class="metric-pill">
+          <span class="dot"></span>
+          <span data-i18n="metric_cards">Listing card injected automatically</span>
+        </div>
+        <div class="metric-pill">
+          <span class="dot red"></span>
+          <span data-i18n="metric_fake">All data is simulated — prototype only</span>
+        </div>
+      </div>
+
+      <p class="notice" data-i18n="notice_bottom">
+        This prototype runs fully offline in your browser. No messages are sent to real clients.
+      </p>
+    </section>
+
+    <!-- RIGHT: Phone / WhatsApp simulation -->
+    <section class="panel">
+      <div class="phone-shell">
+        <div class="phone-inner">
+          <div class="phone-notch">
+            <div class="notch-bar"></div>
+            <div class="notch-dot"></div>
+          </div>
+
+          <div class="chat-header">
+            <div class="avatar">MI</div>
+            <div class="chat-header-main">
+              <div class="chat-title" data-i18n="header_title">Milan Rentals · Kintra Pilot</div>
+              <div class="chat-subtitle" id="header-subtitle">
+                <span data-i18n="header_subtitle">Kintra connected · replies in under 60 seconds</span>
+              </div>
+            </div>
+            <div class="chat-header-right">
+              <span class="status-dot"></span>
+              <span data-i18n="header_status">LIVE</span>
+            </div>
+          </div>
+
+          <div class="chat-body">
+            <div class="chat-bg-layer"></div>
+            <div class="chat-scroll" id="chat-scroll">
+              <!-- Messages injected via JS -->
+            </div>
+          </div>
+
+          <div class="chat-footer">
+            <div class="footer-row">
+              <div class="footer-input">
+                <span>➤</span>
+                <span id="footer-placeholder" data-i18n="footer_placeholder">
+                  Kintra prepares your next reply…
+                </span>
+              </div>
+              <button class="footer-icon-btn" id="mic-btn" aria-label="Voice">
+                🎙
+              </button>
+            </div>
+            <div class="footer-meta">
+              <span data-i18n="footer_hint">
+                Drafted by <strong>Kintra</strong>, checked by agent.
+              </span>
+              <span class="highlight" data-i18n="footer_speed">
+                Typical reply: &lt; 60s · with Kintra
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // --- Text dictionary for EN / IT ---
+    const i18n = {
+      en: {
+        label_prototype: "Prototype A · Real-time sim",
+        title_main: "Kintra WhatsApp Engine — Simulation",
+        subtitle_main: "Pick a client inquiry, tap “Reply with Kintra”, watch the flow from draft → send.",
+        section_inquiries: "Client inquiries (samples)",
+        hint_flow: "1) Tap a client inquiry · 2) Hit “Reply with Kintra” · 3) Hit “Send to client”.",
+        btn_draft: "Reply with Kintra",
+        btn_send: "Send to client",
+        btn_reset: "Reset flow",
+        metric_speed: "Replies drafted in < 5 seconds",
+        metric_cards: "Listing card injected automatically",
+        metric_fake: "All data is simulated — prototype only",
+        notice_bottom: "This prototype runs fully offline in your browser. No messages are sent to real clients.",
+        header_title: "Milan Rentals · Kintra Pilot",
+        header_subtitle: "Kintra connected · replies in under 60 seconds",
+        header_status: "LIVE",
+        footer_placeholder: "Kintra prepares your next reply…",
+        footer_hint: "Drafted by <strong>Kintra</strong>, checked by agent.",
+        footer_speed: "Typical reply: < 60s · with Kintra",
+        typing_label: "KINTRA TYPING",
+        day_today: "TODAY",
+        chip_1_label: "Family, needs lift · 2–3 BR",
+        chip_2_label: "Remote worker · quiet, long stay",
+        chip_3_label: "Wants balcony · near metro",
+        chip_4_label: "Corporate client · fast move-in",
+        chip_5_label: "Budget-conscious student",
+        chip_6_label: "Couple, flexible dates",
+        chip_1_text: "Hi, we’re moving to Milan in October with two kids. Do you have anything 2–3 bedrooms with a lift? Budget around €2,500.",
+        chip_2_text: "I work remotely and need a very quiet one-bedroom for at least 12 months. Prefer something modern with good desk space.",
+        chip_3_text: "Ciao! I’m looking for a bright apartment with balcony near a metro line, max 25 minutes to Duomo. 1–2 bedrooms.",
+        chip_4_text: "We’re a company relocating a manager to Milan in 3 weeks. We need something ready, fully furnished, long term.",
+        chip_5_text: "Hi, I’m a student coming to Politecnico. Budget is tight, but I’d love my own space or a small studio if possible.",
+        chip_6_text: "We’re a couple coming from London, flexible on dates but we’d like something with character, not just a white box.",
+        kintra_1: "Thanks for your message and welcome to Milan. I’ll pull 2–3 options with lift access and family-friendly layout in your budget, then we can refine together. Does Porta Romana / Città Studi work for you, or do you already have an area in mind?",
+        kintra_2: "Got it, thank you. I’ll prioritise quiet buildings with good natural light and a proper workspace. Would you prefer to stay closer to the centre, or is a calmer residential area okay if the apartment is better value?",
+        kintra_3: "Perfect, balcony + metro within 25 minutes to Duomo is clear. I’ll prepare a short list of 1–2 bedroom options near the yellow and red lines so we can compare commute + light. When are you hoping to move in?",
+        kintra_4: "Understood, corporate relocation in 3 weeks with a fully furnished, ready-to-move option. I’ll shortlist a few properties that are used to company contracts and can move quickly on paperwork. Does the company need a regular invoice in the company name?",
+        kintra_5: "Thanks for the context. I’ll look for good-value studios and compact apartments close to Politecnico and also check if there are one-bed options with slightly better privacy than a classic student room. When do you arrive in Milan?",
+        kintra_6: "Love that brief. I’ll keep an eye out for apartments with some character—good light, nice details, not just white walls. Is being in a lively neighbourhood like Navigli / Isola important, or are you open to quieter areas if the space feels right?",
+        kintra_listing_intro: "Here’s one of the closest matches I’d pull first, so we can see if we’re aligned:",
+        kintra_sent_label: "Agent",
+        kintra_label: "Kintra",
+        client_label: "Client",
+        listing_tag: "Kintra suggestion",
+        listing_cta: "Open listing summary",
+        listing_footer: "Prepared by Kintra · ready to share",
+        listing_meta_lift: "Lift",
+        listing_meta_floor: "Floor",
+        listing_meta_size: "m²",
+        listing_meta_beds: "BR",
+        listing_available_from: "Available from",
+        listing_price_suffix: "/month",
+        metric_summary: "Draft + card ready · tap “Send to client” in under 20 seconds."
+      },
+      it: {
+        label_prototype: "Prototype A · Simulazione live",
+        title_main: "Motore WhatsApp Kintra — Simulazione",
+        subtitle_main: "Seleziona una richiesta, tocca “Rispondi con Kintra” e segui il flusso fino all’invio.",
+        section_inquiries: "Richieste clienti (esempi)",
+        hint_flow: "1) Tocca una richiesta · 2) Premi “Rispondi con Kintra” · 3) Premi “Invia al cliente”.",
+        btn_draft: "Rispondi con Kintra",
+        btn_send: "Invia al cliente",
+        btn_reset: "Azzera flusso",
+        metric_speed: "Bozze pronte in < 5 secondi",
+        metric_cards: "Scheda annuncio inserita automaticamente",
+        metric_fake: "Tutti i dati sono simulati · solo prototipo",
+        notice_bottom: "Questo prototipo gira solo nel tuo browser. Nessun messaggio viene inviato a clienti reali.",
+        header_title: "Affitti Milano · Pilota Kintra",
+        header_subtitle: "Kintra connesso · risposte in meno di 60 secondi",
+        header_status: "ATTIVO",
+        footer_placeholder: "Kintra prepara la prossima risposta…",
+        footer_hint: "Bozza creata da <strong>Kintra</strong>, controllata dall’agente.",
+        footer_speed: "Risposta tipica: < 60s · con Kintra",
+        typing_label: "KINTRA STA SCRIVENDO",
+        day_today: "OGGI",
+        chip_1_label: "Famiglia, serve ascensore · 2–3 locali",
+        chip_2_label: "Remote worker · silenzio, lungo periodo",
+        chip_3_label: "Vuole balcone · vicino metro",
+        chip_4_label: "Cliente aziendale · ingresso rapido",
+        chip_5_label: "Studente con budget limitato",
+        chip_6_label: "Coppia, date flessibili",
+        chip_1_text: "Ciao, ci trasferiamo a Milano a ottobre con due bambini. Avete qualcosa con 2–3 camere e ascensore? Budget circa €2.500.",
+        chip_2_text: "Lavoro da remoto e mi serve un bilocale molto silenzioso per almeno 12 mesi. Preferisco qualcosa di moderno con una buona zona scrivania.",
+        chip_3_text: "Ciao! Cerco un appartamento luminoso con balcone vicino a una linea metro, massimo 25 minuti dal Duomo. 1–2 camere.",
+        chip_4_text: "Siamo un’azienda che deve trasferire un manager a Milano tra 3 settimane. Ci serve qualcosa pronto, arredato, per lungo periodo.",
+        chip_5_text: "Ciao, sono uno studente in arrivo al Politecnico. Il budget è stretto, ma mi piacerebbe avere un monolocale o il mio spazio se possibile.",
+        chip_6_text: "Siamo una coppia in arrivo da Londra, flessibili sulle date ma vorremmo qualcosa con un po’ di carattere, non solo una scatola bianca.",
+        kintra_1: "Grazie per il messaggio e benvenuti a Milano. Preparo 2–3 opzioni con ascensore e taglio adatto a una famiglia nel vostro budget, così poi le affiniamo insieme. Vanno bene zone tipo Porta Romana / Città Studi o avete già un quartiere in mente?",
+        kintra_2: "Perfetto, grazie. Darò priorità a stabili tranquilli con buona luce naturale e uno spazio lavoro serio. Preferite stare più vicini al centro o va bene una zona residenziale più calma se l’appartamento è migliore come qualità/prezzo?",
+        kintra_3: "Chiarissimo: balcone + metro entro 25 minuti dal Duomo. Preparo una short list di 1–2 locali vicino alle linee gialla e rossa così confrontiamo traietto + luce. Per quando vi servirebbe l’ingresso?",
+        kintra_4: "Capito, relocation aziendale in 3 settimane con soluzione pronta e completamente arredata. Seleziono alcune proprietà abituate a contratti con aziende e veloci sulla documentazione. L’azienda ha bisogno di fattura regolare intestata alla società?",
+        kintra_5: "Grazie per il contesto. Cercherò monolocali e piccoli appartamenti ben posizionati vicino al Politecnico e controllerò anche se ci sono bilocali con un minimo di privacy in più rispetto alla classica stanza studentesca. Quando arrivi a Milano?",
+        kintra_6: "Brief bellissimo. Terrò d’occhio appartamenti con carattere—buona luce, dettagli curati, non solo muri bianchi. È importante stare in una zona viva tipo Navigli / Isola o siete aperti anche a quartieri più tranquilli se lo spazio è quello giusto?",
+        kintra_listing_intro: "Questo è uno dei primi allineamenti che tirerei fuori, così vediamo se siamo sulla stessa lunghezza d’onda:",
+        kintra_sent_label: "Agente",
+        kintra_label: "Kintra",
+        client_label: "Cliente",
+        listing_tag: "Suggerimento Kintra",
+        listing_cta: "Apri scheda annuncio",
+        listing_footer: "Preparato da Kintra · pronto da condividere",
+        listing_meta_lift: "Ascensore",
+        listing_meta_floor: "Piano",
+        listing_meta_size: "m²",
+        listing_meta_beds: "Locali",
+        listing_available_from: "Disponibile da",
+        listing_price_suffix: "/mese",
+        metric_summary: "Bozza + scheda pronte · premi “Invia al cliente” in meno di 20 secondi."
+      }
+    };
+
+    // --- Sample listings (4) ---
+
+    const listings = [
+      {
+        id: "listing1",
+        image: "https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=900&q=80",
+        title: {
+          en: "3BR Family · Porta Romana",
+          it: "Trilocale famigliare · Porta Romana"
+        },
+        price: "€2,450",
+        beds: 3,
+        size: 105,
+        floor: 4,
+        lift: true,
+        available: "01 Oct",
+        available_it: "01 ottobre"
+      },
+      {
+        id: "listing2",
+        image: "https://images.unsplash.com/photo-1600585154340-0ef3c08c0632?auto=format&fit=crop&w=900&q=80",
+        title: {
+          en: "Quiet 1BR · Desk · Città Studi",
+          it: "Bilocale silenzioso · Città Studi"
+        },
+        price: "€1,350",
+        beds: 1,
+        size: 60,
+        floor: 3,
+        lift: true,
+        available: "15 Sep",
+        available_it: "15 settembre"
+      },
+      {
+        id: "listing3",
+        image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=900&q=80",
+        title: {
+          en: "Balcony & Metro · Loreto",
+          it: "Balcone e metro · Loreto"
+        },
+        price: "€1,650",
+        beds: 2,
+        size: 75,
+        floor: 5,
+        lift: true,
+        available: "01 Nov",
+        available_it: "01 novembre"
+      },
+      {
+        id: "listing4",
+        image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80",
+        title: {
+          en: "Compact Studio · Politecnico",
+          it: "Monolocale compatto · Politecnico"
+        },
+        price: "€980",
+        beds: 1,
+        size: 32,
+        floor: 2,
+        lift: true,
+        available: "10 Sep",
+        available_it: "10 settembre"
+      }
+    ];
+
+    // --- Sample inquiries (6) ---
+
+    const inquiries = [
+      { id: 1, key: "inquiry1", listingId: "listing1" },
+      { id: 2, key: "inquiry2", listingId: "listing2" },
+      { id: 3, key: "inquiry3", listingId: "listing3" },
+      { id: 4, key: "inquiry4", listingId: "listing1" },
+      { id: 5, key: "inquiry5", listingId: "listing4" },
+      { id: 6, key: "inquiry6", listingId: "listing3" }
+    ];
+
+    let currentLang = "en";
+    let currentInquiryId = 1;
+    let hasDraft = false;
+    let hasSent = false;
+    let typingTimeout = null;
+
+    const chatScrollEl = document.getElementById("chat-scroll");
+    const inquiryChipsContainer = document.getElementById("inquiry-chips");
+    const btnDraft = document.getElementById("btn-draft");
+    const btnSend = document.getElementById("btn-send");
+    const btnReset = document.getElementById("btn-reset");
+    const micBtn = document.getElementById("mic-btn");
+    const langButtons = document.querySelectorAll(".lang-btn");
+
+    function applyI18n() {
+      const dict = i18n[currentLang];
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (!dict[key]) return;
+        if (el.tagName.toLowerCase() === "span" && el.innerHTML.includes("<strong")) {
+          // Footer hint with <strong>
+          el.innerHTML = dict[key];
+        } else {
+          el.textContent = dict[key];
+        }
+      });
+
+      // Update chips
+      renderInquiryChips();
+
+      // Rebuild chat for current inquiry and state
+      rebuildChatFlow();
+    }
+
+    function renderInquiryChips() {
+      const dict = i18n[currentLang];
+      inquiryChipsContainer.innerHTML = "";
+
+      inquiries.forEach(item => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (item.id === currentInquiryId ? " active" : "");
+        chip.dataset.id = item.id;
+
+        const bullet = document.createElement("span");
+        bullet.className = "bullet";
+        bullet.textContent = "●";
+
+        const text = document.createElement("span");
+        text.className = "chip-text";
+
+        switch (item.id) {
+          case 1:
+            text.textContent = dict.chip_1_label;
+            break;
+          case 2:
+            text.textContent = dict.chip_2_label;
+            break;
+          case 3:
+            text.textContent = dict.chip_3_label;
+            break;
+          case 4:
+            text.textContent = dict.chip_4_label;
+            break;
+          case 5:
+            text.textContent = dict.chip_5_label;
+            break;
+          case 6:
+            text.textContent = dict.chip_6_label;
+            break;
+        }
+
+        chip.appendChild(bullet);
+        chip.appendChild(text);
+
+        chip.addEventListener("click", () => {
+          currentInquiryId = item.id;
+          hasDraft = false;
+          hasSent = false;
+          clearTyping();
+          renderInquiryChips();
+          rebuildChatFlow();
+        });
+
+        inquiryChipsContainer.appendChild(chip);
+      });
+    }
+
+    function formatTime(date = new Date()) {
+      const h = date.getHours().toString().padStart(2, "0");
+      const m = date.getMinutes().toString().padStart(2, "0");
+      return `${h}:${m}`;
+    }
+
+    function clearChat() {
+      chatScrollEl.innerHTML = "";
+    }
+
+    function appendDayDivider() {
+      const dict = i18n[currentLang];
+      const div = document.createElement("div");
+      div.className = "day-divider";
+      div.textContent = dict.day_today;
+      chatScrollEl.appendChild(div);
+    }
+
+    function appendBubble({ role, text, time, ticksType = "single", withLabel = true }) {
+      const dict = i18n[currentLang];
+
+      const row = document.createElement("div");
+      row.className = "bubble-row " + role;
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble " + role;
+
+      if (withLabel) {
+        const label = document.createElement("div");
+        label.className = "bubble-label";
+
+        if (role === "kintra") {
+          label.classList.add("kintra-label");
+          label.textContent = dict.kintra_label;
+        } else if (role === "agent") {
+          label.classList.add("agent-label");
+          label.textContent = dict.kintra_sent_label;
+        } else {
+          label.textContent = dict.client_label;
+        }
+        bubble.appendChild(label);
+      }
+
+      const textDiv = document.createElement("div");
+      textDiv.className = "bubble-text";
+      textDiv.textContent = text;
+      bubble.appendChild(textDiv);
+
+      const meta = document.createElement("div");
+      meta.className = "bubble-meta";
+
+      const timeSpan = document.createElement("span");
+      timeSpan.textContent = time;
+      meta.appendChild(timeSpan);
+
+      const ticks = document.createElement("span");
+      ticks.className = "ticks";
+      if (ticksType === "double") {
+        ticks.textContent = "✓✓";
+        ticks.classList.add("read");
+      } else {
+        ticks.textContent = "✓";
+      }
+      meta.appendChild(ticks);
+
+      bubble.appendChild(meta);
+      row.appendChild(bubble);
+      chatScrollEl.appendChild(row);
+
+      chatScrollEl.scrollTop = chatScrollEl.scrollHeight;
+      return bubble;
+    }
+
+    function appendListingCard(listingId) {
+      const dict = i18n[currentLang];
+      const listing = listings.find(l => l.id === listingId) || listings[0];
+
+      const row = document.createElement("div");
+      row.className = "bubble-row kintra";
+
+      const bubble = document.createElement("div");
+      bubble.className = "bubble kintra";
+
+      const label = document.createElement("div");
+      label.className = "bubble-label kintra-label";
+      label.textContent = dict.kintra_label;
+      bubble.appendChild(label);
+
+      const intro = document.createElement("div");
+      intro.className = "bubble-text";
+      intro.textContent = dict.kintra_listing_intro;
+      bubble.appendChild(intro);
+
+      const card = document.createElement("div");
+      card.className = "listing-card";
+
+      const imgWrap = document.createElement("div");
+      imgWrap.className = "listing-img";
+      const img = document.createElement("img");
+      img.src = listing.image;
+      img.alt = listing.title[currentLang];
+      imgWrap.appendChild(img);
+
+      const tag = document.createElement("div");
+      tag.className = "listing-tag";
+      tag.innerHTML = "✨ " + dict.listing_tag;
+      imgWrap.appendChild(tag);
+
+      card.appendChild(imgWrap);
+
+      const body = document.createElement("div");
+      body.className = "listing-body";
+
+      const titleRow = document.createElement("div");
+      titleRow.className = "listing-title-row";
+
+      const titleEl = document.createElement("div");
+      titleEl.className = "listing-title";
+      titleEl.textContent = listing.title[currentLang];
+      const priceEl = document.createElement("div");
+      priceEl.className = "listing-price";
+      priceEl.textContent = listing.price + " " + dict.listing_price_suffix;
+
+      titleRow.appendChild(titleEl);
+      titleRow.appendChild(priceEl);
+      body.appendChild(titleRow);
+
+      const metaRow = document.createElement("div");
+      metaRow.className = "listing-meta-row";
+
+      const bedsSpan = document.createElement("span");
+      bedsSpan.innerHTML = `${listing.beds} ${dict.listing_meta_beds}`;
+      metaRow.appendChild(bedsSpan);
+
+      const dot1 = document.createElement("span");
+      dot1.className = "dot";
+      metaRow.appendChild(dot1);
+
+      const sizeSpan = document.createElement("span");
+      sizeSpan.innerHTML = `${listing.size} ${dict.listing_meta_size}`;
+      metaRow.appendChild(sizeSpan);
+
+      const dot2 = document.createElement("span");
+      dot2.className = "dot";
+      metaRow.appendChild(dot2);
+
+      const floorSpan = document.createElement("span");
+      floorSpan.innerHTML = `${dict.listing_meta_floor} ${listing.floor}`;
+      metaRow.appendChild(floorSpan);
+
+      const dot3 = document.createElement("span");
+      dot3.className = "dot";
+      metaRow.appendChild(dot3);
+
+      const liftSpan = document.createElement("span");
+      liftSpan.textContent = listing.lift ? dict.listing_meta_lift : "—";
+      metaRow.appendChild(liftSpan);
+
+      body.appendChild(metaRow);
+
+      const footerRow = document.createElement("div");
+      footerRow.className = "listing-footer";
+
+      const left = document.createElement("div");
+      left.className = "listing-footer-left";
+      const calendarIcon = document.createElement("span");
+      calendarIcon.textContent = "📅";
+      const available = document.createElement("span");
+      available.textContent =
+        dict.listing_available_from +
+        " " +
+        (currentLang === "en" ? listing.available : listing.available_it);
+      left.appendChild(calendarIcon);
+      left.appendChild(available);
+
+      const cta = document.createElement("button");
+      cta.type = "button";
+      cta.className = "listing-cta";
+      cta.innerHTML = `<span class="listing-cta-icon">↗</span><span>${dict.listing_cta}</span>`;
+      cta.addEventListener("click", () => {
+        alert("In the full pilot, this would open the live listing summary.");
+      });
+
+      footerRow.appendChild(left);
+      footerRow.appendChild(cta);
+      body.appendChild(footerRow);
+
+      const footerNote = document.createElement("div");
+      footerNote.className = "listing-footer-left";
+      footerNote.style.marginTop = "3px";
+      footerNote.style.fontSize = "9px";
+      footerNote.textContent = dict.listing_footer;
+      body.appendChild(footerNote);
+
+      card.appendChild(body);
+      bubble.appendChild(card);
+      row.appendChild(bubble);
+      chatScrollEl.appendChild(row);
+
+      chatScrollEl.scrollTop = chatScrollEl.scrollHeight;
+    }
+
+    function appendTyping() {
+      clearTyping();
+      const dict = i18n[currentLang];
+
+      const row = document.createElement("div");
+      row.className = "bubble-row typing-row";
+      row.id = "kintra-typing-row";
+
+      const bubble = document.createElement("div");
+      bubble.className = "typing-bubble";
+
+      const label = document.createElement("span");
+      label.className = "typing-bubble-label";
+      label.textContent = dict.typing_label;
+
+      const dots = document.createElement("span");
+      dots.className = "typing-dots";
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement("span");
+        dot.className = "typing-dot";
+        dots.appendChild(dot);
+      }
+
+      bubble.appendChild(label);
+      bubble.appendChild(dots);
+      row.appendChild(bubble);
+      chatScrollEl.appendChild(row);
+
+      chatScrollEl.scrollTop = chatScrollEl.scrollHeight;
+    }
+
+    function clearTyping() {
+      const existing = document.getElementById("kintra-typing-row");
+      if (existing) existing.remove();
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+        typingTimeout = null;
+      }
+    }
+
+    function getInquiryText(id) {
+      const dict = i18n[currentLang];
+      switch (id) {
+        case 1: return dict.chip_1_text;
+        case 2: return dict.chip_2_text;
+        case 3: return dict.chip_3_text;
+        case 4: return dict.chip_4_text;
+        case 5: return dict.chip_5_text;
+        case 6: return dict.chip_6_text;
+        default: return dict.chip_1_text;
+      }
+    }
+
+    function getKintraDraft(id) {
+      const dict = i18n[currentLang];
+      switch (id) {
+        case 1: return dict.kintra_1;
+        case 2: return dict.kintra_2;
+        case 3: return dict.kintra_3;
+        case 4: return dict.kintra_4;
+        case 5: return dict.kintra_5;
+        case 6: return dict.kintra_6;
+        default: return dict.kintra_1;
+      }
+    }
+
+    function rebuildChatFlow() {
+      const dict = i18n[currentLang];
+      clearChat();
+      appendDayDivider();
+
+      // Seed a simple welcome line from agent so it looks like an active chat
+      appendBubble({
+        role: "agent",
+        text: currentLang === "en"
+          ? "Hi, this is Milan Rentals. Kintra is connected in the background so we can reply quickly and clearly."
+          : "Ciao, qui Milano Affitti. Kintra è connesso in background così possiamo rispondere in modo rapido e chiaro.",
+        time: formatTime(),
+        ticksType: "double",
+        withLabel: true
+      });
+
+      // Client inquiry
+      appendBubble({
+        role: "client",
+        text: getInquiryText(currentInquiryId),
+        time: formatTime(),
+        ticksType: "single",
+        withLabel: true
+      });
+
+      if (hasDraft || hasSent) {
+        appendBubble({
+          role: "kintra",
+          text: getKintraDraft(currentInquiryId),
+          time: formatTime(),
+          ticksType: "double",
+          withLabel: true
+        });
+
+        const inquiry = inquiries.find(i => i.id === currentInquiryId) || inquiries[0];
+        appendListingCard(inquiry.listingId);
+
+        if (hasSent) {
+          appendBubble({
+            role: "agent",
+            text: getKintraDraft(currentInquiryId),
+            time: formatTime(),
+            ticksType: "double",
+            withLabel: true
+          });
+        }
+      }
+
+      chatScrollEl.scrollTop = chatScrollEl.scrollHeight;
+
+      btnSend.disabled = !hasDraft;
+      btnDraft.disabled = hasDraft;
+    }
+
+    // --- Event bindings ---
+
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.lang;
+        if (lang === currentLang) return;
+        currentLang = lang;
+        langButtons.forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+        applyI18n();
+      });
+    });
+
+    btnDraft.addEventListener("click", () => {
+      if (hasDraft) return;
+      hasDraft = false;
+      hasSent = false;
+      btnDraft.disabled = true;
+      btnSend.disabled = true;
+
+      appendTyping();
+      typingTimeout = setTimeout(() => {
+        clearTyping();
+
+        appendBubble({
+          role: "kintra",
+          text: getKintraDraft(currentInquiryId),
+          time: formatTime(),
+          ticksType: "double",
+          withLabel: true
+        });
+
+        const inquiry = inquiries.find(i => i.id === currentInquiryId) || inquiries[0];
+        appendListingCard(inquiry.listingId);
+
+        hasDraft = true;
+        btnSend.disabled = false;
+
+        // Add subtle micro-metric line in footer placeholder
+        const dict = i18n[currentLang];
+        const footerPlaceholder = document.getElementById("footer-placeholder");
+        footerPlaceholder.textContent = dict.metric_summary;
+      }, 750);
+    });
+
+    btnSend.addEventListener("click", () => {
+      if (!hasDraft || hasSent) return;
+      hasSent = true;
+      btnSend.disabled = true;
+
+      appendBubble({
+        role: "agent",
+        text: getKintraDraft(currentInquiryId),
+        time: formatTime(),
+        ticksType: "double",
+        withLabel: true
+      });
+
+      // Footer hint becomes confirmation
+      const footerPlaceholder = document.getElementById("footer-placeholder");
+      footerPlaceholder.textContent =
+        currentLang === "en"
+          ? "Reply sent. Kintra is ready for the next client."
+          : "Risposta inviata. Kintra è pronto per il prossimo cliente.";
+    });
+
+    btnReset.addEventListener("click", () => {
+      hasDraft = false;
+      hasSent = false;
+      clearTyping();
+      const footerPlaceholder = document.getElementById("footer-placeholder");
+      footerPlaceholder.textContent = i18n[currentLang].footer_placeholder;
+      btnDraft.disabled = false;
+      btnSend.disabled = true;
+      rebuildChatFlow();
+    });
+
+    micBtn.addEventListener("click", () => {
+      alert(
+        currentLang === "en"
+          ? "In a live pilot, this would start a quick voice note that Kintra converts into a reply draft."
+          : "Nel pilota reale questo avvierebbe un vocale che Kintra trasformerebbe in una bozza di risposta."
+      );
+    });
+
+    // Initial render
+    renderInquiryChips();
+    rebuildChatFlow();
+    applyI18n();
+    btnSend.disabled = true;
+  </script>
+</body>
+</html>
