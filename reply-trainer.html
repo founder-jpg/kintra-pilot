@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra Reply Trainer — Prototype B</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #050816;
+      --card: #050816;
+      --border-soft: rgba(148, 163, 184, 0.4);
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.14);
+      --accent-strong: #16a34a;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --bubble-client: #ffffff;
+      --bubble-kintra: #13352a;
+      --bubble-you: #111827;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app-shell {
+      max-width: 1180px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .panel {
+      background: rgba(5, 8, 22, 0.96);
+      border-radius: 18px;
+      border: 1px solid var(--border-soft);
+      padding: 14px 16px 16px;
+      box-shadow:
+        0 22px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(22px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.85);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .panel-subtitle {
+      margin: 3px 0 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 360px;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      padding: 2px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: #020617;
+      gap: 2px;
+      font-size: 11px;
+    }
+
+    .lang-btn {
+      border: none;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .lang-btn span.flag {
+      font-size: 13px;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #020617;
+    }
+
+    .lang-btn.active span.flag {
+      filter: grayscale(0);
+    }
+
+    .lang-btn:not(.active) span.flag {
+      filter: grayscale(0.4);
+      opacity: 0.8;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #9ca3af;
+      margin: 4px 0;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+    }
+
+    .hint-icon {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    button.primary,
+    button.secondary,
+    button.ghost {
+      border-radius: 999px;
+      border: none;
+      font-size: 12px;
+      padding: 8px 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+      color: #020617;
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.45);
+    }
+
+    button.primary:disabled {
+      opacity: 0.5;
+      cursor: default;
+      box-shadow: none;
+    }
+
+    button.secondary {
+      background: rgba(15, 23, 42, 0.96);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    button.secondary:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px dashed rgba(148, 163, 184, 0.45);
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    @media (max-width: 900px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .metric-card {
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at top, #020617 0, #020617 55%, #020617 100%);
+      padding: 7px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #9ca3af;
+    }
+
+    .metric-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .metric-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .metric-highlight {
+      color: #a5b4fc;
+    }
+
+    .status-strip {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+      max-width: 100%;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+    }
+
+    .status-label-strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    /* Right side */
+
+    .trainer-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+
+    .trainer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .trainer-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .trainer-caption {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tag-strip {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 3px 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tag-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .trainer-main {
+      flex: 1;
+      border-radius: 16px;
+      background: radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 10px;
+      min-height: 320px;
+    }
+
+    @media (max-width: 900px) {
+      .trainer-main {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
+      }
+    }
+
+    .chat-column {
+      border-radius: 14px;
+      background: #020617;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 7px 8px;
+      background: linear-gradient(135deg, #075e54, #0b3b35);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #22c55e, #166534);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(187, 247, 208, 0.45);
+    }
+
+    .chat-header-main {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .chat-title {
+      font-weight: 600;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-subtitle {
+      font-size: 10px;
+      color: #a5f3fc;
+    }
+
+    .chat-header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 8px 7px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      overflow-y: auto;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(148, 163, 184, 0.6) transparent;
+    }
+
+    .chat-body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-body::-webkit-scrollbar-thumb {
+      background-color: rgba(148, 163, 184, 0.6);
+      border-radius: 999px;
+    }
+
+    .chat-bg-layer {
+      position: absolute;
+      inset: 0;
+      opacity: 0.11;
+      background-image:
+        radial-gradient(circle at 8% 20%, #22c55e 0, transparent 40%),
+        radial-gradient(circle at 90% 80%, #3b82f6 0, transparent 52%);
+      pointer-events: none;
+    }
+
+    .chat-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .day-divider {
+      align-self: center;
+      font-size: 9px;
+      color: var(--text-muted);
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      margin: 2px 0;
+    }
+
+    .bubble-row {
+      display: flex;
+      gap: 4px;
+      max-width: 100%;
+    }
+
+    .bubble-row.client {
+      justify-content: flex-start;
+    }
+
+    .bubble-row.you,
+    .bubble-row.kintra {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      border-radius: 16px;
+      padding: 6px 8px 4px;
+      font-size: 12px;
+      line-height: 1.3;
+      max-width: 80%;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.85);
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .bubble.client {
+      background: var(--bubble-client);
+      color: #020617;
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.you {
+      background: var(--bubble-you);
+      color: #e5e7eb;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+    }
+
+    .bubble.kintra {
+      background: var(--bubble-kintra);
+      color: #ecfdf3;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(74, 222, 128, 0.5);
+    }
+
+    .bubble-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.8;
+      margin-bottom: 2px;
+    }
+
+    .bubble-label.client-label {
+      color: #6b7280;
+    }
+
+    .bubble-label.you-label {
+      color: #bfdbfe;
+    }
+
+    .bubble-label.kintra-label {
+      color: #6ee7b7;
+    }
+
+    .bubble-text {
+      margin-bottom: 2px;
+    }
+
+    .bubble-meta {
+      font-size: 9px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 4px;
+      opacity: 0.8;
+    }
+
+    .ticks {
+      font-size: 11px;
+    }
+
+    .ticks.read {
+      color: #22c55e;
+    }
+
+    .chat-footer {
+      padding: 6px 7px 7px;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .chat-footer-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .chat-input {
+      flex: 1;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 4px 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .chat-input-icon {
+      font-size: 13px;
+      margin-top: 2px;
+      color: var(--text-muted);
+    }
+
+    textarea {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      resize: none;
+      font-size: 12px;
+      color: #e5e7eb;
+      max-height: 66px;
+      min-height: 34px;
+    }
+
+    textarea::placeholder {
+      color: #6b7280;
+    }
+
+    .chat-footer-cta {
+      border-radius: 999px;
+      border: none;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      background: var(--accent);
+      color: #020617;
+      box-shadow: 0 10px 26px rgba(34, 197, 94, 0.42);
+    }
+
+    .chat-footer-meta {
+      font-size: 9px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .chat-footer-meta strong {
+      color: #e5e7eb;
+    }
+
+    /* Comparison column */
+
+    .comparison-column {
+      border-radius: 14px;
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 8px 8px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comparison-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .comparison-title {
+      font-weight: 600;
+    }
+
+    .badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 2px 8px;
+      font-size: 10px;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .comparison-card {
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 6px 7px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .comparison-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .comparison-text {
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .insights-card {
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 6px 7px;
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .insights-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #9ca3af;
+    }
+
+    .insights-main {
+      color: #e5e7eb;
+    }
+
+    .insights-sub {
+      font-size: 10px;
+    }
+
+    .insights-sub strong {
+      color: #e5e7eb;
+    }
+
+    .insights-footer {
+      font-size: 10px;
+      color: #a5b4fc;
+    }
+
+    .muted {
+      opacity: 0.6;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- LEFT PANEL -->
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <div class="pill-label">
+            <span class="pill-dot"></span>
+            <span data-i18n="label_prototype">Prototype B · Live Reply Trainer</span>
+          </div>
+          <h1 data-i18n="title_main">Train your Kintra reply instincts</h1>
+          <p class="panel-subtitle" data-i18n="subtitle_main">
+            One inquiry at a time. You reply first, then reveal Kintra’s version and see where it goes further.
+          </p>
+        </div>
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" data-lang="en">
+            <span class="flag">🇬🇧</span><span>EN</span>
+          </button>
+          <button class="lang-btn" data-lang="it">
+            <span class="flag">🇮🇹</span><span>IT</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="section-title" data-i18n="section_how">Drill flow</div>
+      <div class="hint">
+        <span class="hint-icon">➤</span>
+        <span data-i18n="hint_flow">
+          1) Start session · 2) Read the client inquiry · 3) Type the reply you would send ·
+          4) Reveal Kintra’s version · 5) Compare clarity, tone and next steps.
+        </span>
+      </div>
+
+      <div class="controls-row">
+        <button class="primary" id="btn-next">
+          <span class="btn-icon">▶</span>
+          <span data-i18n="btn_next">Start / Next inquiry</span>
+        </button>
+        <button class="secondary" id="btn-show" disabled>
+          <span class="btn-icon">✨</span>
+          <span data-i18n="btn_show">Show Kintra version</span>
+        </button>
+        <button class="ghost" id="btn-reset">
+          <span class="btn-icon">🔁</span>
+          <span data-i18n="btn_reset">Reset session</span>
+        </button>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_time_label">Reply time</div>
+          <div class="metric-value" id="metric-time">—</div>
+          <div class="metric-sub" id="metric-time-sub" data-i18n="metric_time_sub">
+            Target: under 60 seconds with clear next step.
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_quality_label">Quality</div>
+          <div class="metric-value" id="metric-quality">—</div>
+          <div class="metric-sub" id="metric-quality-sub">
+            <span class="metric-highlight" data-i18n="metric_quality_hint">
+              Reveals after you show Kintra’s reply.
+            </span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label" data-i18n="metric_saved_label">Time saved</div>
+          <div class="metric-value" id="metric-saved">—</div>
+          <div class="metric-sub" id="metric-saved-sub" data-i18n="metric_saved_sub">
+            Compared to a 3–4 minute manual reply.
+          </div>
+        </div>
+      </div>
+
+      <div class="status-strip" id="status-strip">
+        <span class="status-dot"></span>
+        <span class="status-label-strong" id="status-main" data-i18n="status_idle_main">Trainer idle</span>
+        <span>·</span>
+        <span id="status-sub" data-i18n="status_idle_sub">
+          Press “Start / Next inquiry” to begin the session.
+        </span>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="panel">
+      <div class="trainer-shell">
+        <div class="trainer-header">
+          <div>
+            <div class="trainer-title" data-i18n="trainer_title">Live WhatsApp-style drill</div>
+            <div class="trainer-caption" data-i18n="trainer_caption">
+              This is how a real client message will feel inside your Kintra-powered WhatsApp.
+            </div>
+          </div>
+          <div class="tag-strip">
+            <div class="tag" id="tag-topic">
+              <span class="tag-dot"></span>
+              <span data-i18n="tag_topic_label">Topic</span> · <span id="tag-topic-value">—</span>
+            </div>
+            <div class="tag" id="tag-difficulty">
+              <span class="tag-dot"></span>
+              <span data-i18n="tag_difficulty_label">Difficulty</span> · <span id="tag-difficulty-value">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trainer-main">
+          <!-- Chat column -->
+          <div class="chat-column">
+            <div class="chat-header">
+              <div class="avatar">CL</div>
+              <div class="chat-header-main">
+                <div class="chat-title" id="chat-header-title">
+                  Milan Rentals · Kintra Trainer
+                </div>
+                <div class="chat-subtitle" id="chat-header-subtitle">
+                  Sample client · practice only
+                </div>
+              </div>
+              <div class="chat-header-right">
+                <span style="width:7px;height:7px;border-radius:999px;background:#22c55e;box-shadow:0 0 10px rgba(34,197,94,0.8);"></span>
+                <span data-i18n="chat_status">DRILL</span>
+              </div>
+            </div>
+            <div class="chat-body">
+              <div class="chat-bg-layer"></div>
+              <div class="chat-content" id="chat-content">
+                <!-- dynamically injected -->
+              </div>
+            </div>
+            <div class="chat-footer">
+              <div class="chat-footer-row">
+                <div class="chat-input">
+                  <div class="chat-input-icon">✏️</div>
+                  <textarea
+                    id="your-reply"
+                    rows="2"
+                    placeholder="Type the reply you would send…"
+                  ></textarea>
+                </div>
+                <button class="chat-footer-cta" id="btn-mark-done" title="Mark reply typed">
+                  ✅
+                </button>
+              </div>
+              <div class="chat-footer-meta">
+                <span id="footer-left" data-i18n="footer_left">
+                  Your reply is private here · in real life this goes to the client.
+                </span>
+                <span id="footer-right" data-i18n="footer_right">
+                  Timer starts when a new inquiry appears.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparison / Insights column -->
+          <div class="comparison-column">
+            <div class="comparison-header">
+              <div class="comparison-title" data-i18n="comp_title">Before / after comparison</div>
+              <div class="badge">
+                <span class="badge-dot"></span>
+                <span id="badge-text" data-i18n="comp_badge">
+                  Reveal Kintra’s version to unlock insights.
+                </span>
+              </div>
+            </div>
+
+            <div class="comparison-grid">
+              <div class="comparison-card">
+                <div class="comparison-label" data-i18n="comp_you_label">Your reply</div>
+                <div class="comparison-text muted" id="comp-you">
+                  —
+                </div>
+              </div>
+              <div class="comparison-card">
+                <div class="comparison-label" data-i18n="comp_kintra_label">Kintra-style reply</div>
+                <div class="comparison-text muted" id="comp-kintra">
+                  —
+                </div>
+              </div>
+            </div>
+
+            <div class="insights-card">
+              <div class="insights-label" data-i18n="insights_label">If this was a real agent…</div>
+              <div class="insights-main" id="insights-main">
+                <span data-i18n="insights_idle">
+                  Insights will appear here once you reveal Kintra’s version.
+                </span>
+              </div>
+              <div class="insights-sub" id="insights-sub">
+                —
+              </div>
+              <div class="insights-footer" id="insights-footer">
+                —
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // --- UI text dictionary (EN / IT) ---
+    const i18n = {
+      en: {
+        label_prototype: "Prototype B · Live Reply Trainer",
+        title_main: "Train your Kintra reply instincts",
+        subtitle_main: "One inquiry at a time. You reply first, then reveal Kintra’s version and see where it goes further.",
+        section_how: "Drill flow",
+        hint_flow: "1) Start session · 2) Read the client inquiry · 3) Type the reply you would send · 4) Reveal Kintra’s version · 5) Compare clarity, tone and next steps.",
+        btn_next: "Start / Next inquiry",
+        btn_show: "Show Kintra version",
+        btn_reset: "Reset session",
+        metric_time_label: "Reply time",
+        metric_time_sub: "Target: under 60 seconds with clear next step.",
+        metric_quality_label: "Quality",
+        metric_quality_hint: "Reveals after you show Kintra’s reply.",
+        metric_saved_label: "Time saved",
+        metric_saved_sub: "Compared to a 3–4 minute manual reply.",
+        status_idle_main: "Trainer idle",
+        status_idle_sub: "Press “Start / Next inquiry” to begin the session.",
+        status_running_main: "Drill in progress",
+        status_running_sub: "Reply in your own style, then reveal Kintra’s version.",
+        status_revealed_main: "Insight unlocked",
+        status_revealed_sub: "You’ve seen both replies · check the notes on the right.",
+        trainer_title: "Live WhatsApp-style drill",
+        trainer_caption: "This is how a real client message will feel inside your Kintra-powered WhatsApp.",
+        tag_topic_label: "Topic",
+        tag_difficulty_label: "Difficulty",
+        chat_status: "DRILL",
+        footer_left: "Your reply is private here · in real life this goes to the client.",
+        footer_right: "Timer starts when a new inquiry appears.",
+        comp_title: "Before / after comparison",
+        comp_badge: "Reveal Kintra’s version to unlock insights.",
+        comp_you_label: "Your reply",
+        comp_kintra_label: "Kintra-style reply",
+        insights_label: "If this was a real agent…",
+        insights_idle: "Insights will appear here once you reveal Kintra’s version.",
+        dif_easy: "Easy",
+        dif_medium: "Medium",
+        dif_hard: "Tricky"
+      },
+      it: {
+        label_prototype: "Prototype B · Trainer risposte live",
+        title_main: "Allena l’istinto Kintra nelle risposte",
+        subtitle_main: "Una richiesta alla volta. Tu rispondi per primo, poi vedi la versione Kintra e dove arriva in più.",
+        section_how: "Flusso dell’esercizio",
+        hint_flow: "1) Avvia la sessione · 2) Leggi la richiesta · 3) Scrivi la risposta che manderesti · 4) Mostra la versione Kintra · 5) Confronta chiarezza, tono e prossimi passi.",
+        btn_next: "Avvia / Prossima richiesta",
+        btn_show: "Mostra versione Kintra",
+        btn_reset: "Azzera sessione",
+        metric_time_label: "Tempo risposta",
+        metric_time_sub: "Obiettivo: sotto i 60 secondi con prossimo passo chiaro.",
+        metric_quality_label: "Qualità",
+        metric_quality_hint: "Si sblocca dopo aver mostrato la risposta di Kintra.",
+        metric_saved_label: "Tempo risparmiato",
+        metric_saved_sub: "Rispetto a una risposta manuale da 3–4 minuti.",
+        status_idle_main: "Trainer in pausa",
+        status_idle_sub: "Premi “Avvia / Prossima richiesta” per iniziare l’esercizio.",
+        status_running_main: "Esercizio in corso",
+        status_running_sub: "Rispondi con il tuo stile, poi mostra la versione Kintra.",
+        status_revealed_main: "Insight sbloccato",
+        status_revealed_sub: "Hai visto entrambe le risposte · guarda le note a destra.",
+        trainer_title: "Esercizio live in stile WhatsApp",
+        trainer_caption: "È così che sentirai il messaggio di un cliente dentro il tuo WhatsApp con Kintra.",
+        tag_topic_label: "Tema",
+        tag_difficulty_label: "Difficoltà",
+        chat_status: "ESERCIZIO",
+        footer_left: "La tua risposta qui è privata · nella realtà andrebbe al cliente.",
+        footer_right: "Il timer parte quando appare una nuova richiesta.",
+        comp_title: "Confronto prima / dopo",
+        comp_badge: "Mostra la versione Kintra per sbloccare gli insight.",
+        comp_you_label: "Tua risposta",
+        comp_kintra_label: "Risposta stile Kintra",
+        insights_label: "Se fosse un agente reale…",
+        insights_idle: "Gli insight appariranno qui dopo aver mostrato la risposta di Kintra.",
+        dif_easy: "Facile",
+        dif_medium: "Media",
+        dif_hard: "Impegnativa"
+      }
+    };
+
+    // --- Trainer inquiries (15) ---
+    const inquiries = [
+      {
+        id: 1,
+        topic_en: "Family · 2–3 BR · lift",
+        topic_it: "Famiglia · 2–3 locali · ascensore",
+        difficulty: "medium",
+        client_en: "Hi, we’re moving to Milan in October with two kids. Do you have anything 2–3 bedrooms with a lift? Budget around €2,500.",
+        client_it: "Ciao, ci trasferiamo a Milano a ottobre con due bambini. Avete qualcosa con 2–3 camere e ascensore? Budget circa €2.500.",
+        kintra_en: "Thanks for your message and welcome to Milan. I’ll pull 2–3 options with lift access and a family-friendly layout in your budget so we can refine together. Are you open to areas like Porta Romana / Città Studi, or do you already have a neighbourhood in mind?",
+        kintra_it: "Grazie per il messaggio e benvenuti a Milano. Preparo 2–3 opzioni con ascensore e taglio adatto a una famiglia nel vostro budget, così le affiniamo insieme. Siete aperti a zone come Porta Romana / Città Studi o avete già un quartiere in mente?",
+        insight_en: "Kintra acknowledges the family context, confirms budget + key filter (lift), then immediately offers a few options and asks a simple area question so the client answers quickly.",
+        insight_it: "Kintra riconosce il contesto famigliare, conferma budget + filtro chiave (ascensore), poi propone subito qualche opzione e fa una domanda semplice sulla zona così il cliente risponde al volo."
+      },
+      {
+        id: 2,
+        topic_en: "Remote worker · quiet 1BR",
+        topic_it: "Remote worker · bilocale silenzioso",
+        difficulty: "medium",
+        client_en: "I work remotely and need a very quiet one-bedroom for at least 12 months. Prefer something modern with a good desk space.",
+        client_it: "Lavoro da remoto e mi serve un bilocale molto silenzioso per almeno 12 mesi. Preferisco qualcosa di moderno con una buona zona scrivania.",
+        kintra_en: "Got it, thank you. I’ll prioritise quiet buildings with good natural light and a proper workspace for 12+ months. Would you rather stay closer to the centre, or is a calmer residential area fine if the apartment is better value?",
+        kintra_it: "Perfetto, grazie. Darò priorità a stabili tranquilli con buona luce naturale e una vera zona lavoro per 12+ mesi. Preferisci stare più vicino al centro o va bene una zona residenziale più calma se l’appartamento è migliore come qualità/prezzo?",
+        insight_en: "Notice how Kintra repeats the key needs (quiet, light, workspace, 12+ months) to show it understood, then offers a simple either/or choice to keep the reply short but precise.",
+        insight_it: "Nota come Kintra ripete i bisogni chiave (silenzio, luce, zona lavoro, 12+ mesi) per mostrare che ha capito, poi offre una scelta semplice A/B per restare breve ma preciso."
+      },
+      {
+        id: 3,
+        topic_en: "Balcony · near metro",
+        topic_it: "Balcone · vicino metro",
+        difficulty: "medium",
+        client_en: "Hi! I’m looking for something bright with a balcony near a metro line, max 25 minutes to Duomo. 1–2 bedrooms.",
+        client_it: "Ciao! Cerco un appartamento luminoso con balcone vicino a una linea metro, massimo 25 minuti dal Duomo. 1–2 camere.",
+        kintra_en: "Great brief, thank you. Balcony + bright + metro within 25 minutes to Duomo is clear. I’ll shortlist 1–2 bedroom options near the red and yellow lines so we can compare commute and light. When are you hoping to move in?",
+        kintra_it: "Brief chiarissimo, grazie. Balcone + luminoso + metro entro 25 minuti dal Duomo è chiaro. Preparo una short list di 1–2 locali vicino alle linee rossa e gialla così confrontiamo traﬀico e luce. Per quando ti servirebbe l’ingresso?",
+        insight_en: "Kintra mirrors the three priorities and adds one clear next question (move-in date) instead of a long explanation about areas.",
+        insight_it: "Kintra rispecchia le tre priorità e aggiunge una sola domanda chiara (data ingresso) invece di spiegazioni lunghe sulle zone."
+      },
+      {
+        id: 4,
+        topic_en: "Corporate relocation",
+        topic_it: "Relocation aziendale",
+        difficulty: "hard",
+        client_en: "We’re relocating a manager to Milan in about 3 weeks. We need a fully furnished place, long-term, and we can move quickly if it’s the right one.",
+        client_it: "Stiamo trasferendo un manager a Milano tra circa 3 settimane. Ci serve un appartamento arredato, per lungo periodo, e possiamo muoverci velocemente se è quello giusto.",
+        kintra_en: "Understood, thank you. Corporate relocation in 3 weeks with a fully furnished, long-term option. I’ll focus on properties already used to company contracts and fast paperwork. Does the lease need to be in the company name, and do you have a preferred budget range?",
+        kintra_it: "Capito, grazie. Relocation aziendale in 3 settimane con soluzione arredata e di lungo periodo. Mi concentro su immobili abituati a contratti con aziende e pratiche rapide. Il contratto deve essere intestato alla società? Avete già un range di budget?",
+        insight_en: "Kintra reframes the brief as a checklist (timing, furnished, long-term) and immediately surfaces two key legal/financial questions that usually come later but save time.",
+        insight_it: "Kintra riformula il brief come check-list (tempi, arredato, lungo periodo) e tira fuori subito due domande legali/di budget che di solito arrivano dopo ma fanno risparmiare tempo."
+      },
+      {
+        id: 5,
+        topic_en: "Student · tight budget",
+        topic_it: "Studente · budget stretto",
+        difficulty: "medium",
+        client_en: "Hi, I’m a student coming to Politecnico. Budget is tight, but I’d love my own space or a small studio if possible.",
+        client_it: "Ciao, sono uno studente in arrivo al Politecnico. Ho il budget stretto, ma mi piacerebbe avere uno spazio mio o un piccolo monolocale se possibile.",
+        kintra_en: "Thanks for the context and welcome to Milan. I’ll look for good-value studios and compact flats close to Politecnico, and I’ll also check if there are small one-beds with a bit more privacy than a typical student room. When do you arrive and for how long do you plan to stay?",
+        kintra_it: "Grazie per il contesto e benvenuto a Milano. Cercherò monolocali e piccoli appartamenti con buon rapporto qualità/prezzo vicino al Politecnico e controllerò anche se ci sono bilocali piccoli con un po’ più privacy della classica stanza studentesca. Quando arrivi e per quanto pensi di fermarti?",
+        insight_en: "Kintra doesn’t dismiss the budget issue. It accepts it, suggests a realistic search band, and asks two practical timing questions that matter for landlords.",
+        insight_it: "Kintra non ignora il problema del budget. Lo accetta, propone una fascia di ricerca realistica e fa due domande sui tempi che contano per i proprietari."
+      },
+      {
+        id: 6,
+        topic_en: "Couple · character & vibe",
+        topic_it: "Coppia · carattere & atmosfera",
+        difficulty: "medium",
+        client_en: "We’re a couple moving from London. Dates are flexible, but we’d really like somewhere with character, not just a white box.",
+        client_it: "Siamo una coppia in arrivo da Londra. Siamo flessibili sulle date, ma vorremmo qualcosa con un po’ di carattere, non solo una scatola bianca.",
+        kintra_en: "Love that brief. I’ll focus on apartments with good light and some character—nice details, not just white walls. Is it important to be in a lively neighbourhood like Navigli / Isola, or are you open to quieter areas if the apartment itself feels right?",
+        kintra_it: "Brief bellissimo. Mi concentro su appartamenti con buona luce e un po’ di carattere—dettagli curati, non solo muri bianchi. È importante stare in una zona viva tipo Navigli / Isola o siete aperti anche a quartieri più tranquilli se lo spazio è quello giusto?",
+        insight_en: "Kintra validates the emotional side (“love that brief”) and then translates “character” into concrete filters plus one lifestyle choice question.",
+        insight_it: "Kintra valorizza la parte emotiva (“brief bellissimo”) e traduce “carattere” in filtri concreti più una domanda sul tipo di quartiere."
+      },
+      {
+        id: 7,
+        topic_en: "Viewing request · tomorrow",
+        topic_it: "Richiesta visita · domani",
+        difficulty: "easy",
+        client_en: "Hi, can I see the apartment on Via Torino tomorrow evening after work?",
+        client_it: "Ciao, posso vedere l’appartamento in via Torino domani sera dopo il lavoro?",
+        kintra_en: "Thanks for your message. Tomorrow evening could work depending on the owner’s schedule. What time roughly suits you, and are you available at all on the following day in case tomorrow is already booked?",
+        kintra_it: "Grazie per il messaggio. Domani sera può andare bene in base alla disponibilità del proprietario. A che ora indicativa ti andrebbe bene e sei disponibile anche il giorno dopo nel caso domani fosse già occupato?",
+        insight_en: "Kintra doesn’t promise a slot it doesn’t control. It keeps the door open and adds a backup option in one short sentence.",
+        insight_it: "Kintra non promette un orario che non gestisce. Tiene aperta la porta e propone un piano B in una frase corta."
+      },
+      {
+        id: 8,
+        topic_en: "Pet-friendly · small dog",
+        topic_it: "Animali ammessi · cane piccolo",
+        difficulty: "hard",
+        client_en: "Do you have anything pet-friendly? We have a small dog, very calm, but I know some buildings don’t allow pets.",
+        client_it: "Avete qualcosa dove sono ammessi gli animali? Abbiamo un cagnolino molto tranquillo, ma so che alcuni condomìni non li accettano.",
+        kintra_en: "Good question, thanks for flagging it early. I’ll filter for buildings where small pets are clearly allowed in the rules. Could you tell me roughly the dog’s size and whether you work from home or outside during the day? That helps me understand which type of building fits best.",
+        kintra_it: "Ottima domanda, grazie per averlo segnalato subito. Filtrerò gli stabili dove i piccoli animali sono chiaramente ammessi nel regolamento. Mi dici indicativamente la taglia del cane e se lavori da casa o fuori durante il giorno? Così capisco che tipo di condominio si adatta meglio.",
+        insight_en: "Kintra doesn’t apologise for the dog; it normalises the request, adds a clear filter, and asks two context questions that pre-empt future objections.",
+        insight_it: "Kintra non si scusa per il cane; normalizza la richiesta, aggiunge un filtro chiaro e fa due domande di contesto che anticipano le obiezioni future."
+      },
+      {
+        id: 9,
+        topic_en: "Price negotiation",
+        topic_it: "Negoziazione prezzo",
+        difficulty: "hard",
+        client_en: "We like the apartment a lot but €2,000 feels a bit high. Would the owner consider €1,800 if we take it for 2 years?",
+        client_it: "L’appartamento ci piace molto ma €2.000 ci sembrano un po’ alti. Il proprietario prenderebbe in considerazione €1.800 se lo prendiamo per 2 anni?",
+        kintra_en: "Glad to hear you like it. I can certainly present an offer at €1,800 with a 2-year commitment and explain the value of having a stable tenant. Before I go back to the owner, would you be ready to move forward quickly if they say yes or meet you halfway?",
+        kintra_it: "Sono contento che vi piaccia. Posso sicuramente presentare una proposta a €1.800 con impegno di 2 anni e sottolineare il valore di un inquilino stabile. Prima di tornare dal proprietario, sareste pronti a muovervi velocemente se accetta o vi viene incontro a metà strada?",
+        insight_en: "Kintra confirms it will negotiate, frames the discount as stability for the owner, and quietly checks commitment before spending political capital.",
+        insight_it: "Kintra conferma che può negoziare, presenta lo sconto come stabilità per il proprietario e verifica la reale intenzione prima di spendere ‘credito’ con lui."
+      },
+      {
+        id: 10,
+        topic_en: "Short-term stay · 3 months",
+        topic_it: "Soggiorno breve · 3 mesi",
+        difficulty: "medium",
+        client_en: "I’m looking for something for just 3 months while I test the city. Is that even possible or do owners only want long-term?",
+        client_it: "Cerco qualcosa solo per 3 mesi mentre testo la città. È possibile o i proprietari vogliono solo lungo periodo?",
+        kintra_en: "Good that you ask it directly. Most private owners prefer longer contracts, but there are some options for 3-month stays. I’ll filter for flexible owners and buildings set up for shorter stays. Which month would you start, and do you need it fully furnished?",
+        kintra_it: "Hai fatto bene a chiederlo subito. Molti proprietari privati preferiscono contratti più lunghi, ma ci sono alcune soluzioni per 3 mesi. Filtrerò i proprietari flessibili e stabili abituati ai soggiorni brevi. Da che mese partiresti e ti serve completamente arredato?",
+        insight_en: "Kintra is honest about constraints but doesn’t close the door; it narrows to a subset and adds two precise qualifiers (start month, furnished).",
+        insight_it: "Kintra è sincero sui limiti ma non chiude la porta; restringe il campo e aggiunge due qualifiche precise (mese di inizio, arredato)."
+      },
+      {
+        id: 11,
+        topic_en: "Urgent · move this week",
+        topic_it: "Urgenza · ingresso questa settimana",
+        difficulty: "hard",
+        client_en: "I just found out I need to move to Milan this week for work. Is there any chance to find something decent so last minute?",
+        client_it: "Ho appena saputo che devo trasferirmi a Milano questa settimana per lavoro. C’è qualche possibilità di trovare qualcosa di decente così all’ultimo?",
+        kintra_en: "That’s a big last-minute change—thanks for reaching out quickly. I’ll focus on apartments that are already vacant and used to fast contracts. What’s your absolute latest move-in day, and do you have any non-negotiables (budget ceiling, area, must-have features)?",
+        kintra_it: "Capisco, è un cambiamento all’ultimo—hai fatto bene a contattarci subito. Mi concentro su appartamenti già liberi e abituati a contratti veloci. Qual è il tuo ultimo giorno utile per entrare e hai dei non negoziabili (tetto di budget, zona, elementi indispensabili)?",
+        insight_en: "Kintra acknowledges the stress, then goes straight to two levers: latest date and non-negotiables. That keeps the reply calm but decisive.",
+        insight_it: "Kintra riconosce lo stress, poi va dritto a due leve: ultima data e non negoziabili. Così la risposta resta calma ma concreta."
+      },
+      {
+        id: 12,
+        topic_en: "Owner update · post-viewing",
+        topic_it: "Aggiornamento proprietario · dopo visita",
+        difficulty: "easy",
+        client_en: "We saw the flat yesterday and liked it. What are the next steps if we want to apply?",
+        client_it: "Abbiamo visto l’appartamento ieri e ci è piaciuto. Quali sono i prossimi passi se vogliamo procedere?",
+        kintra_en: "Great to hear you liked it. Next step is very simple: I’ll send you a short list of documents (ID, proof of income, a few reference details) and then I can present your profile to the owner. If you send everything today or tomorrow, we can move fast before other offers arrive.",
+        kintra_it: "Sono felice che vi sia piaciuto. Il prossimo passo è semplice: ti mando una lista breve di documenti (documento, prove di reddito, qualche riferimento) e poi presento il vostro profilo al proprietario. Se riuscite a inviarli oggi o domani possiamo muoverci rapidamente prima di eventuali altre proposte.",
+        insight_en: "Kintra keeps it reassuring and practical: clear steps, short list, and a gentle time signal about other offers.",
+        insight_it: "Kintra è rassicurante e pratico: passi chiari, lista corta e un cenno delicato sulle tempistiche e le altre offerte."
+      },
+      {
+        id: 13,
+        topic_en: "Parking · car + motorbike",
+        topic_it: "Parcheggio · auto + moto",
+        difficulty: "medium",
+        client_en: "We have one car and one motorbike. Do you have anything with at least one secure parking space or garage nearby?",
+        client_it: "Abbiamo un’auto e una moto. Avete qualcosa con almeno un posto auto sicuro o un box nelle vicinanze?",
+        kintra_en: "Good to know about the car and motorbike. I’ll filter for apartments with at least one covered space or a nearby garage solution. Is it more important for you to have it in the same building, or would a secure garage within 5–10 minutes walking distance also work?",
+        kintra_it: "Grazie per l’informazione su auto e moto. Filtrerò gli appartamenti con almeno un posto coperto o un box/garage vicino. Per voi è fondamentale averlo nello stesso stabile o va bene anche un garage sicuro a 5–10 minuti a piedi?",
+        insight_en: "Kintra logs the assets (car + bike) and translates them into a filter, then checks flexibility on distance instead of promising a perfect box under the house.",
+        insight_it: "Kintra registra il tema (auto + moto) e lo trasforma in filtro, poi verifica la flessibilità sulla distanza invece di promettere il box perfetto sotto casa."
+      },
+      {
+        id: 14,
+        topic_en: "Sharing with friend",
+        topic_it: "Condivisione con amico",
+        difficulty: "medium",
+        client_en: "I might share with a friend but we’re not 100% sure yet. Is it a problem if the contract starts with just my name?",
+        client_it: "Potrei condividere con un amico ma non siamo ancora al 100%. È un problema se il contratto parte solo a mio nome?",
+        kintra_en: "Thanks for mentioning it now. In many cases the contract can start in one name and then we can add a second tenant later with the owner’s approval. I’ll double-check the rules for each apartment I propose. Roughly when do you think you’d know if your friend is joining?",
+        kintra_it: "Grazie per averlo detto subito. In molti casi il contratto può iniziare con un solo nominativo e poi aggiungiamo un secondo inquilino più avanti con l’ok del proprietario. Verificherò le regole caso per caso sugli appartamenti che ti propongo. Indicativamente quando pensi di sapere se il tuo amico si unisce?",
+        insight_en: "Kintra keeps the door open instead of over-promising; it explains the usual pattern and asks for a rough decision timeline.",
+        insight_it: "Kintra tiene aperta la porta invece di promettere troppo; spiega lo schema tipico e chiede una tempistica indicativa per la decisione."
+      },
+      {
+        id: 15,
+        topic_en: "Unclear message · vague brief",
+        topic_it: "Messaggio poco chiaro · brief vago",
+        difficulty: "hard",
+        client_en: "Hi, I’m looking for something nice in a good area, not too expensive but also not too small. Can you help?",
+        client_it: "Ciao, cerco qualcosa di carino in una buona zona, non troppo caro ma nemmeno troppo piccolo. Potete aiutarmi?",
+        kintra_en: "Happy to help, thanks for reaching out. To avoid sending you random listings, could you share three quick things: 1) your monthly budget range, 2) whether you prefer 1 or 2 bedrooms, and 3) roughly which area you’d feel most at home in? With that I can send options that actually fit.",
+        kintra_it: "Volentieri, grazie per il messaggio. Per evitare di mandarti annunci a caso, mi dai tre indicazioni veloci: 1) il range di budget mensile, 2) se preferisci 1 o 2 locali e 3) in quale zona/profilo di quartiere ti vedresti meglio? Così ti mando soluzioni che hanno davvero senso.",
+        insight_en: "Kintra doesn’t complain about the vague brief; it respectfully asks for three simple inputs and frames them as the gateway to relevant options.",
+        insight_it: "Kintra non ‘rimprovera’ il brief vago; chiede con rispetto tre indicazioni semplici e le presenta come chiave per mandare proposte sensate."
+      }
+    ];
+
+    let currentLang = "en";
+    let currentIndex = -1;
+    let timerStart = null;
+    let timerInterval = null;
+    let revealed = false;
+    let repliedMarked = false;
+
+    const btnNext = document.getElementById("btn-next");
+    const btnShow = document.getElementById("btn-show");
+    const btnReset = document.getElementById("btn-reset");
+    const btnMarkDone = document.getElementById("btn-mark-done");
+    const langButtons = document.querySelectorAll(".lang-btn");
+
+    const metricTime = document.getElementById("metric-time");
+    const metricTimeSub = document.getElementById("metric-time-sub");
+    const metricQuality = document.getElementById("metric-quality");
+    const metricQualitySub = document.getElementById("metric-quality-sub");
+    const metricSaved = document.getElementById("metric-saved");
+    const metricSavedSub = document.getElementById("metric-saved-sub");
+
+    const statusMain = document.getElementById("status-main");
+    const statusSub = document.getElementById("status-sub");
+
+    const tagTopicValue = document.getElementById("tag-topic-value");
+    const tagDifficultyValue = document.getElementById("tag-difficulty-value");
+
+    const chatContent = document.getElementById("chat-content");
+    const yourReplyEl = document.getElementById("your-reply");
+
+    const compYou = document.getElementById("comp-you");
+    const compKintra = document.getElementById("comp-kintra");
+
+    const insightsMain = document.getElementById("insights-main");
+    const insightsSub = document.getElementById("insights-sub");
+    const insightsFooter = document.getElementById("insights-footer");
+
+    const badgeText = document.getElementById("badge-text");
+    const footerLeft = document.getElementById("footer-left");
+    const footerRight = document.getElementById("footer-right");
+
+    function applyLanguage() {
+      const dict = i18n[currentLang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (!dict[key]) return;
+        el.textContent = dict[key];
+      });
+
+      // Update dynamic texts
+      updateStatusText();
+      updateTagDifficulty();
+      updateFooterText();
+      if (currentIndex >= 0) {
+        renderChat();
+        renderComparison();
+        renderInsights();
+      }
+    }
+
+    function updateStatusText() {
+      const dict = i18n[currentLang];
+      if (currentIndex === -1) {
+        statusMain.textContent = dict.status_idle_main;
+        statusSub.textContent = dict.status_idle_sub;
+      } else if (!revealed) {
+        statusMain.textContent = dict.status_running_main;
+        statusSub.textContent = dict.status_running_sub;
+      } else {
+        statusMain.textContent = dict.status_revealed_main;
+        statusSub.textContent = dict.status_revealed_sub;
+      }
+    }
+
+    function updateTagDifficulty() {
+      if (currentIndex === -1) {
+        tagDifficultyValue.textContent = "—";
+        return;
+      }
+      const dict = i18n[currentLang];
+      const item = inquiries[currentIndex];
+      let label = "";
+      if (item.difficulty === "easy") label = dict.dif_easy;
+      else if (item.difficulty === "medium") label = dict.dif_medium;
+      else label = dict.dif_hard;
+      tagDifficultyValue.textContent = label;
+    }
+
+    function updateFooterText() {
+      footerLeft.textContent = i18n[currentLang].footer_left;
+      footerRight.textContent = i18n[currentLang].footer_right;
+    }
+
+    function startTimer() {
+      timerStart = Date.now();
+      clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimerDisplay, 200);
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerStart = null;
+      metricTime.textContent = "—";
+      metricTimeSub.textContent = i18n[currentLang].metric_time_sub;
+    }
+
+    function updateTimerDisplay() {
+      if (!timerStart) return;
+      const diffMs = Date.now() - timerStart;
+      const seconds = Math.floor(diffMs / 1000);
+      const ms = diffMs % 1000;
+      metricTime.textContent = `${seconds}s`;
+      const dict = i18n[currentLang];
+
+      if (seconds <= 60) {
+        metricTimeSub.textContent =
+          dict.metric_time_sub;
+      } else if (seconds <= 120) {
+        metricTimeSub.textContent =
+          (currentLang === "en"
+            ? "Still okay, but clients start to feel the wait after a minute."
+            : "Ancora accettabile, ma dopo un minuto il cliente sente l’attesa.");
+      } else {
+        metricTimeSub.textContent =
+          (currentLang === "en"
+            ? "This is where Kintra’s 30–60s replies really stand out."
+            : "Qui è dove le risposte a 30–60s di Kintra fanno davvero la differenza.");
+      }
+    }
+
+    function computeQualityAndSaved() {
+      if (!timerStart) return;
+      const diffSec = Math.round((Date.now() - timerStart) / 1000);
+      const dict = i18n[currentLang];
+
+      // Quality: rough based on whether user wrote anything
+      const text = yourReplyEl.value.trim();
+      if (!text) {
+        metricQuality.textContent = currentLang === "en" ? "N/A" : "N/D";
+        metricQualitySub.textContent =
+          currentLang === "en"
+            ? "Type a reply next time to feel the comparison properly."
+            : "La prossima volta scrivi una risposta per sentire meglio il confronto.";
+      } else if (text.length < 80) {
+        metricQuality.textContent = "⭐⭐";
+        metricQualitySub.textContent =
+          currentLang === "en"
+            ? "Short reply: try adding one clarifying question or next step."
+            : "Risposta breve: prova ad aggiungere una domanda o un prossimo passo.";
+      } else if (text.length < 220) {
+        metricQuality.textContent = "⭐⭐⭐";
+        metricQualitySub.textContent =
+          currentLang === "en"
+            ? "Solid reply. Compare tone, structure and questions with Kintra’s version."
+            : "Risposta solida. Confronta tono, struttura e domande con la versione Kintra.";
+      } else {
+        metricQuality.textContent = "⭐⭐⭐⭐";
+        metricQualitySub.textContent =
+          currentLang === "en"
+            ? "Rich reply. See if Kintra keeps it slightly tighter while staying human."
+            : "Risposta ricca. Vedi se Kintra riesce a tenerla un filo più sintetica restando umana.";
+      }
+
+      // Time saved: assume classic manual drafting ~3 minutes (180s)
+      const baseline = 180;
+      const savedSec = Math.max(0, baseline - diffSec);
+      const savedMin = (savedSec / 60).toFixed(1);
+      if (savedSec <= 0) {
+        metricSaved.textContent = "0 min";
+        metricSavedSub.textContent =
+          currentLang === "en"
+            ? "On this one, drafting took similar time to a manual reply."
+            : "Per questa richiesta il tempo è simile a una risposta manuale.";
+      } else {
+        metricSaved.textContent = `${savedMin} min`;
+        metricSavedSub.textContent =
+          currentLang === "en"
+            ? "If this pattern repeats across a day, the agent gets back hours."
+            : "Se questo schema si ripete durante la giornata, l’agente recupera ore.";
+      }
+    }
+
+    function renderChat() {
+      chatContent.innerHTML = "";
+      const dict = i18n[currentLang];
+      const item = inquiries[currentIndex];
+
+      const day = document.createElement("div");
+      day.className = "day-divider";
+      day.textContent = currentLang === "en" ? "TODAY" : "OGGI";
+      chatContent.appendChild(day);
+
+      // Client bubble
+      const rowClient = document.createElement("div");
+      rowClient.className = "bubble-row client";
+      const bubbleClient = document.createElement("div");
+      bubbleClient.className = "bubble client";
+
+      const labelClient = document.createElement("div");
+      labelClient.className = "bubble-label client-label";
+      labelClient.textContent =
+        currentLang === "en" ? "Client" : "Cliente";
+      bubbleClient.appendChild(labelClient);
+
+      const textClient = document.createElement("div");
+      textClient.className = "bubble-text";
+      textClient.textContent = currentLang === "en" ? item.client_en : item.client_it;
+      bubbleClient.appendChild(textClient);
+
+      const metaClient = document.createElement("div");
+      metaClient.className = "bubble-meta";
+      const timeSpanClient = document.createElement("span");
+      timeSpanClient.textContent = "09:14";
+      const ticksClient = document.createElement("span");
+      ticksClient.className = "ticks";
+      ticksClient.textContent = "✓";
+      metaClient.appendChild(timeSpanClient);
+      metaClient.appendChild(ticksClient);
+      bubbleClient.appendChild(metaClient);
+
+      rowClient.appendChild(bubbleClient);
+      chatContent.appendChild(rowClient);
+
+      // Your reply bubble (if any + if marked)
+      const text = yourReplyEl.value.trim();
+      if (text && repliedMarked) {
+        const rowYou = document.createElement("div");
+        rowYou.className = "bubble-row you";
+        const bubbleYou = document.createElement("div");
+        bubbleYou.className = "bubble you";
+
+        const labelYou = document.createElement("div");
+        labelYou.className = "bubble-label you-label";
+        labelYou.textContent =
+          currentLang === "en" ? "You (agent)" : "Tu (agente)";
+        bubbleYou.appendChild(labelYou);
+
+        const textYou = document.createElement("div");
+        textYou.className = "bubble-text";
+        textYou.textContent = text;
+        bubbleYou.appendChild(textYou);
+
+        const metaYou = document.createElement("div");
+        metaYou.className = "bubble-meta";
+        const timeSpanYou = document.createElement("span");
+        timeSpanYou.textContent = "09:16";
+        const ticksYou = document.createElement("span");
+        ticksYou.className = "ticks read";
+        ticksYou.textContent = "✓✓";
+        metaYou.appendChild(timeSpanYou);
+        metaYou.appendChild(ticksYou);
+        bubbleYou.appendChild(metaYou);
+
+        rowYou.appendChild(bubbleYou);
+        chatContent.appendChild(rowYou);
+      }
+
+      // Kintra bubble (only after reveal)
+      if (revealed) {
+        const rowKintra = document.createElement("div");
+        rowKintra.className = "bubble-row kintra";
+        const bubbleKintra = document.createElement("div");
+        bubbleKintra.className = "bubble kintra";
+
+        const labelKintra = document.createElement("div");
+        labelKintra.className = "bubble-label kintra-label";
+        labelKintra.textContent = "Kintra";
+        bubbleKintra.appendChild(labelKintra);
+
+        const textKintra = document.createElement("div");
+        textKintra.className = "bubble-text";
+        textKintra.textContent = currentLang === "en" ? item.kintra_en : item.kintra_it;
+        bubbleKintra.appendChild(textKintra);
+
+        const metaKintra = document.createElement("div");
+        metaKintra.className = "bubble-meta";
+        const timeSpanKintra = document.createElement("span");
+        timeSpanKintra.textContent = "09:14";
+        const ticksKintra = document.createElement("span");
+        ticksKintra.className = "ticks read";
+        ticksKintra.textContent = "✓✓";
+        metaKintra.appendChild(timeSpanKintra);
+        metaKintra.appendChild(ticksKintra);
+        bubbleKintra.appendChild(metaKintra);
+
+        rowKintra.appendChild(bubbleKintra);
+        chatContent.appendChild(rowKintra);
+      }
+
+      // Scroll to bottom
+      const body = document.querySelector(".chat-body");
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function renderComparison() {
+      const text = yourReplyEl.value.trim();
+      if (!text) {
+        compYou.textContent =
+          currentLang === "en"
+            ? "Type a reply and hit the checkmark to capture it here."
+            : "Scrivi una risposta e premi la spunta per salvarla qui.";
+        compYou.classList.add("muted");
+      } else if (!repliedMarked) {
+        compYou.textContent =
+          currentLang === "en"
+            ? "Press the checkmark below the input to lock your reply for this drill."
+            : "Premi la spunta sotto l’input per fissare la tua risposta per questo esercizio.";
+        compYou.classList.add("muted");
+      } else {
+        compYou.textContent = text;
+        compYou.classList.remove("muted");
+      }
+
+      if (!revealed) {
+        compKintra.textContent =
+          currentLang === "en"
+            ? "Kintra’s version will appear here once you press “Show Kintra version”."
+            : "La versione Kintra apparirà qui dopo che premi “Mostra versione Kintra”.";
+        compKintra.classList.add("muted");
+        badgeText.textContent = i18n[currentLang].comp_badge;
+      } else {
+        const item = inquiries[currentIndex];
+        compKintra.textContent =
+          currentLang === "en" ? item.kintra_en : item.kintra_it;
+        compKintra.classList.remove("muted");
+        badgeText.textContent =
+          currentLang === "en"
+            ? "You’ve unlocked the insight for this inquiry."
+            : "Hai sbloccato l’insight per questa richiesta.";
+      }
+    }
+
+    function renderInsights() {
+      const dict = i18n[currentLang];
+      if (!revealed) {
+        insightsMain.textContent = dict.insights_idle;
+        insightsSub.textContent = "—";
+        insightsFooter.textContent = "—";
+        return;
+      }
+      const item = inquiries[currentIndex];
+      insightsMain.textContent =
+        currentLang === "en" ? item.insight_en : item.insight_it;
+
+      const text = yourReplyEl.value.trim();
+      if (!text) {
+        insightsSub.textContent =
+          currentLang === "en"
+            ? "Next time, write even a short draft before revealing Kintra—your brain learns faster when it can compare your own words."
+            : "La prossima volta scrivi anche solo una bozza prima di mostrare Kintra—il cervello impara più in fretta quando può confrontare le proprie parole.";
+      } else {
+        insightsSub.textContent =
+          currentLang === "en"
+            ? "Notice the structure: warm opening → confirm their key filters → one or two precise questions → clear next step."
+            : "Guarda la struttura: apertura empatica → conferma dei filtri chiave → una/due domande mirate → prossimo passo chiaro.";
+      }
+
+      insightsFooter.textContent =
+        currentLang === "en"
+          ? "If this was a real agent, Kintra would quietly sit behind the chat, drafting this kind of reply in ~5 seconds."
+          : "Se fosse un agente reale, Kintra starebbe dietro la chat a preparare questo tipo di risposta in ~5 secondi.";
+    }
+
+    function loadNextInquiry() {
+      currentIndex = (currentIndex + 1) % inquiries.length;
+      const item = inquiries[currentIndex];
+      revealed = false;
+      repliedMarked = false;
+      yourReplyEl.value = "";
+      yourReplyEl.focus();
+
+      const dict = i18n[currentLang];
+      tagTopicValue.textContent =
+        currentLang === "en" ? item.topic_en : item.topic_it;
+      updateTagDifficulty();
+
+      metricQuality.textContent = "—";
+      metricQualitySub.textContent = dict.metric_quality_hint;
+      metricSaved.textContent = "—";
+      metricSavedSub.textContent = dict.metric_saved_sub;
+
+      renderChat();
+      renderComparison();
+      renderInsights();
+      updateStatusText();
+      resetTimer();
+      startTimer();
+
+      btnShow.disabled = false;
+    }
+
+    // --- Event listeners ---
+
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const lang = btn.dataset.lang;
+        if (lang === currentLang) return;
+        currentLang = lang;
+        langButtons.forEach(b => {
+          b.classList.toggle("active", b.dataset.lang === lang);
+        });
+        applyLanguage();
+      });
+    });
+
+    btnNext.addEventListener("click", () => {
+      loadNextInquiry();
+    });
+
+    btnShow.addEventListener("click", () => {
+      if (currentIndex === -1 || revealed) return;
+      revealed = true;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      computeQualityAndSaved();
+      renderChat();
+      renderComparison();
+      renderInsights();
+      updateStatusText();
+    });
+
+    btnReset.addEventListener("click", () => {
+      currentIndex = -1;
+      revealed = false;
+      repliedMarked = false;
+      yourReplyEl.value = "";
+      chatContent.innerHTML = "";
+      tagTopicValue.textContent = "—";
+      tagDifficultyValue.textContent = "—";
+      metricTime.textContent = "—";
+      metricQuality.textContent = "—";
+      metricSaved.textContent = "—";
+      metricTimeSub.textContent = i18n[currentLang].metric_time_sub;
+      metricQualitySub.textContent = i18n[currentLang].metric_quality_hint;
+      metricSavedSub.textContent = i18n[currentLang].metric_saved_sub;
+      resetTimer();
+      renderComparison();
+      renderInsights();
+      updateStatusText();
+      btnShow.disabled = true;
+    });
+
+    btnMarkDone.addEventListener("click", () => {
+      if (currentIndex === -1) return;
+      repliedMarked = true;
+      renderChat();
+      renderComparison();
+    });
+
+    yourReplyEl.addEventListener("input", () => {
+      if (currentIndex === -1) return;
+      renderComparison();
+    });
+
+    // Initial language setup
+    applyLanguage();
+  </script>
+</body>
+</html>
