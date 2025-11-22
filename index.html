@@ -145,8 +145,17 @@
     .stamp{font-size:12px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
     .insight b{color:#1b2233}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-    .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
+
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+    .chip{
+      border:1px solid #d1d5db;
+      background:var(--wa-gray);
+      border-radius:999px;
+      padding:4px 9px;
+      font-size:12px;
+      line-height:1.2;
+      white-space:nowrap;
+    }
     .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
 
     .meta-row{
@@ -164,9 +173,9 @@
     .ticks-grey{color:#6b7280;}
 
     .kintra-suggest-label{
-      font-size:13px;
-      color:#4b5563;
-      margin:6px 0 2px;
+      font-size:12px;
+      color:#6b7280;
+      margin:6px 2px 2px;
     }
 
     /* Dashboard Mini */
@@ -494,10 +503,8 @@
                   </div>
 
                   <!-- Kintra suggests INSIDE bezel -->
-                  <p class="kintra-suggest-label">
-                    <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
-                    <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
-                  </p>
+                  <p class="kintra-suggest-label lang-en-only">Kintra suggests:</p>
+                  <p class="kintra-suggest-label lang-it-only">Kintra suggerisce:</p>
                   <div class="chips">
                     <span class="chip">
                       <span class="lang-en-only">Offer two slots</span>
@@ -883,10 +890,8 @@
                 </div>
 
                 <!-- Kintra suggests INSIDE bezel -->
-                <p class="kintra-suggest-label">
-                  <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
-                  <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
-                </p>
+                <p class="kintra-suggest-label lang-en-only">Kintra suggests:</p>
+                <p class="kintra-suggest-label lang-it-only">Kintra suggerisce:</p>
                 <div class="chips">
                   <span class="chip">
                     <span class="lang-en-only">Attach living room photo</span>
