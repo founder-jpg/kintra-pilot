@@ -97,13 +97,9 @@
     .chat-header{
       height:40px;
       background:#075e54;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      display:flex;align-items:center;gap:8px;
       padding:6px 10px;
-      color:#fff;
-      font-size:13px;
-      font-weight:500;
+      color:#fff;font-size:13px;font-weight:500;
     }
     .chat-avatar{
       width:22px;height:22px;border-radius:999px;
@@ -149,11 +145,10 @@
     .stamp{font-size:12px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
     .insight b{color:#1b2233}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
     .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
 
-    /* Time + ticks inside bubbles */
     .meta-row{
       display:flex;
       justify-content:flex-end;
@@ -171,7 +166,7 @@
     .kintra-suggest-label{
       font-size:13px;
       color:#4b5563;
-      margin:10px 0 4px;
+      margin:6px 0 2px;
     }
 
     /* Dashboard Mini */
@@ -497,27 +492,29 @@
                       </div>
                     </div>
                   </div>
+
+                  <!-- Kintra suggests INSIDE bezel -->
+                  <p class="kintra-suggest-label">
+                    <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
+                    <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
+                  </p>
+                  <div class="chips">
+                    <span class="chip">
+                      <span class="lang-en-only">Offer two slots</span>
+                      <span class="lang-it-only">Offri due orari</span>
+                    </span>
+                    <span class="chip">
+                      <span class="lang-en-only">Send floor plan</span>
+                      <span class="lang-it-only">Invia planimetria</span>
+                    </span>
+                    <span class="chip">
+                      <span class="lang-en-only">Confirm reminder</span>
+                      <span class="lang-it-only">Conferma promemoria</span>
+                    </span>
+                  </div>
+
                 </div>
               </div>
-            </div>
-
-            <p class="kintra-suggest-label">
-              <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
-              <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
-            </p>
-            <div class="chips">
-              <span class="chip">
-                <span class="lang-en-only">Offer two slots</span>
-                <span class="lang-it-only">Offri due orari</span>
-              </span>
-              <span class="chip">
-                <span class="lang-en-only">Send floor plan</span>
-                <span class="lang-it-only">Invia planimetria</span>
-              </span>
-              <span class="chip">
-                <span class="lang-en-only">Confirm reminder</span>
-                <span class="lang-it-only">Conferma promemoria</span>
-              </span>
             </div>
 
             <div class="stamp">
@@ -731,7 +728,6 @@
         <div>
           <div class="device-shell">
             <div class="device-screen">
-              <!-- Use your latest PulseView screenshot here -->
               <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
             </div>
           </div>
@@ -886,34 +882,35 @@
                   </div>
                 </div>
 
+                <!-- Kintra suggests INSIDE bezel -->
+                <p class="kintra-suggest-label">
+                  <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
+                  <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
+                </p>
+                <div class="chips">
+                  <span class="chip">
+                    <span class="lang-en-only">Attach living room photo</span>
+                    <span class="lang-it-only">Allega foto soggiorno</span>
+                  </span>
+                  <span class="chip">
+                    <span class="lang-en-only">Attach kitchen photo</span>
+                    <span class="lang-it-only">Allega foto cucina</span>
+                  </span>
+                  <span class="chip">
+                    <span class="lang-en-only">Attach balcony view</span>
+                    <span class="lang-it-only">Allega vista balcone</span>
+                  </span>
+                  <span class="chip">
+                    <span class="lang-en-only">Attach floor plan</span>
+                    <span class="lang-it-only">Allega planimetria</span>
+                  </span>
+                </div>
+
               </div>
             </div>
           </div>
 
-          <p class="kintra-suggest-label">
-            <span class="lang-en-only"><strong>Kintra suggests:</strong></span>
-            <span class="lang-it-only"><strong>Kintra suggerisce:</strong></span>
-          </p>
-          <div class="chips">
-            <span class="chip">
-              <span class="lang-en-only">Attach living room photo</span>
-              <span class="lang-it-only">Allega foto soggiorno</span>
-            </span>
-            <span class="chip">
-              <span class="lang-en-only">Attach kitchen photo</span>
-              <span class="lang-it-only">Allega foto cucina</span>
-            </span>
-            <span class="chip">
-              <span class="lang-en-only">Attach balcony view</span>
-              <span class="lang-it-only">Allega vista balcone</span>
-            </span>
-            <span class="chip">
-              <span class="lang-en-only">Attach floor plan</span>
-              <span class="lang-it-only">Allega planimetria</span>
-            </span>
-          </div>
-
-          <!-- ATTACHMENT PHOTOS UNDER THE BUTTONS -->
+          <!-- ATTACHMENT PHOTOS UNDER THE PHONE -->
           <p class="caption" style="margin-top:10px;">
             <span class="lang-en-only"><strong>Suggested attachments:</strong> living room, kitchen, balcony view, floor plan.</span>
             <span class="lang-it-only"><strong>Allegati suggeriti:</strong> soggiorno, cucina, vista balcone, planimetria.</span>
@@ -981,7 +978,6 @@
 
           <p>
             <code>+39 3XX XXX XXXX</code>
-            <!-- replace with your real test number when ready -->
           </p>
 
           <p>
@@ -1419,7 +1415,7 @@
       });
     });
 
-    // Language toggle: switches body class (affects all lang-* blocks)
+    // Language toggle
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
