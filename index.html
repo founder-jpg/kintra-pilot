@@ -50,7 +50,6 @@
     h3{margin:0 0 8px;color:#0b2347}
     .lead{font-size:18px;color:#243044;margin:0 0 10px}
     .sub{color:#5b6475;margin:0 0 14px}
-    .sub-small{color:#6b7280;font-size:13px;margin:4px 0 0}
     .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
     .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;display:inline-block}
     .btn.primary{background:#0b2347;border-color:#0b2347;color:#fff}
@@ -80,7 +79,7 @@
 
     .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
 
-    /* Phone-style chat shell */
+    /* Phone-style chat shell (used in WA + listing card preview) */
     .phone-shell{
       margin-top:10px;
       border-radius:22px;
@@ -108,12 +107,11 @@
     }
     .chat-avatar{
       width:22px;height:22px;border-radius:999px;
+      background:#0b5fff;
       display:flex;align-items:center;justify-content:center;
       font-size:11px;
       color:#fff;
     }
-    .chat-avatar.client{background:#9aa3b2;}
-    .chat-avatar.kintra{background:#0b5fff;}
     .chat-meta{display:flex;flex-direction:column;line-height:1.1}
     .chat-meta small{font-size:11px;opacity:.9}
 
@@ -148,18 +146,6 @@
       color:#111827;
       border-bottom-right-radius:4px;
     }
-    .msg-meta{
-      font-size:11px;
-      color:#6b7280;
-      margin-top:2px;
-      text-align:right;
-      display:flex;
-      justify-content:flex-end;
-      gap:4px;
-      align-items:center;
-    }
-    .ticks-grey{opacity:.7;}
-    .ticks-blue{color:#0b5fff;}
 
     .stamp{font-size:12px;color:#6b7280;margin-top:4px}
     .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
@@ -167,14 +153,35 @@
     .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
     .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;font-size:13px}
     .roi-line{margin-top:8px;font-size:13px;color:#6b7280}
-    .cta-small{margin-top:6px;font-size:12px;color:#6b7280}
 
     /* Dashboard Mini */
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .dash-img{width:100%;height:260px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+    .dash-shell{
+      margin-top:4px;
+      border-radius:18px;
+      padding:8px;
+      background:linear-gradient(135deg,#020617,#0b1220);
+      box-shadow:0 10px 26px rgba(15,23,42,.35);
+      max-width:460px;
+    }
+    .dash-inner{
+      border-radius:14px;
+      overflow:hidden;
+      background:#0b1220;
+      border:1px solid #1f2937;
+    }
+    .dash-img{width:100%;height:260px;object-fit:cover;display:block}
 
-    /* Listing composite (card preview) */
-    .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-top:8px}
+    /* Listing composite & listing card preview */
+    .ls-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:flex-start;
+      margin-top:10px;
+    }
+    .ls-caption{font-size:13px;color:#6b7280;margin-top:6px}
+    .listing-mock{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
     .lm-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafbfd,#f4f6fa)}
     .lm-dot{width:8px;height:8px;border-radius:50%;background:#e0e5ef}
     .lm-body{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px}
@@ -186,11 +193,32 @@
     .caption{margin-top:6px;font-size:12px;color:#7b879b}
     .listing-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 
-    /* Listing visuals row */
-    .listing-visuals{margin-top:10px}
-    .thumb-row{display:flex;gap:8px;flex-wrap:wrap}
-    .thumb{width:90px;height:70px;border-radius:10px;border:1px solid var(--line);object-fit:cover}
-    .thumb-caption{margin-top:6px;font-size:12px;color:#6b7280}
+    /* Listing card bubble (inside phone) */
+    .lc-card{
+      background:#ffffff;
+      border-radius:10px;
+      padding:8px;
+      border:1px solid rgba(0,0,0,.05);
+      display:grid;
+      grid-template-columns:56px 1fr;
+      gap:8px;
+      font-size:12px;
+    }
+    .lc-photo{width:56px;height:56px;object-fit:cover;border-radius:8px;border:1px solid #e5e7eb}
+    .lc-title{font-weight:700;font-size:12px;margin-bottom:2px}
+    .lc-line{font-size:12px;color:#4b5563;margin-bottom:3px}
+    .lc-tags{display:flex;flex-wrap:wrap;gap:4px}
+    .lc-tag{font-size:11px;border-radius:999px;padding:2px 6px;background:#eef3ff;border:1px solid #dbe7ff;color:#1f2933}
+    .lc-meta{margin-top:4px;font-size:11px;color:#6b7280;display:flex;justify-content:space-between;align-items:center}
+    .lc-meta span{display:inline-flex;align-items:center;gap:4px}
+
+    /* WhatsApp-style ticks */
+    .ticks{font-size:11px;display:inline-flex;align-items:center;gap:2px}
+    .tick{font-size:13px}
+    .tick.grey{color:#9ca3af}
+    .tick.blue{color:#22c55e}
+
+    .ls-phone-label{font-size:13px;color:#6b7280;margin-top:6px}
 
     /* WhatsApp test section */
     #wa-test{margin-top:4px}
@@ -217,10 +245,9 @@
     footer{margin:28px 0 8px;color:#6b7280;font-size:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
     @media (max-width:980px){
-      .hero,.grid-2,.before-after{grid-template-columns:1fr}
+      .hero,.grid-2,.before-after,.ls-grid{grid-template-columns:1fr}
       h1{font-size:32px}
       .dash-img{height:200px}
-      .lm-body{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -310,14 +337,6 @@
           passi più chiari, in italiano o in inglese.
         </span>
       </p>
-      <p class="sub-small">
-        <span class="lang-en-only">
-          About Kintra: currently in private pilot with selected Italian agencies, with 2026 rollout planned for Spain, Portugal and Brazil. An enterprise edition for markets like Dubai is planned from 2027–28.
-        </span>
-        <span class="lang-it-only">
-          Su Kintra: al momento in pilot privato con alcune agenzie italiane, con estensione 2026 prevista per Spagna, Portogallo e Brasile. Una versione enterprise per mercati come Dubai è prevista dal 2027–28.
-        </span>
-      </p>
     </section>
 
     <div class="divider"></div>
@@ -375,7 +394,7 @@
       <div class="wa-panel active" data-panel="rental">
         <div class="before-after">
 
-          <!-- BEFORE RENTAL -->
+          <!-- BEFORE -->
           <div class="card">
             <h3>
               <span class="lang-en-only">Before – standard rental reply</span>
@@ -389,12 +408,15 @@
             <div class="phone-shell">
               <div class="chat-inner">
                 <div class="chat-header">
-                  <div class="chat-avatar client">C</div>
+                  <div class="chat-avatar">C</div>
                   <div class="chat-meta">
-                    <span>Cliente</span>
+                    <span>
+                      <span class="lang-en-only">Client</span>
+                      <span class="lang-it-only">Cliente</span>
+                    </span>
                     <small>
-                      <span class="lang-en-only">Last seen recently</span>
-                      <span class="lang-it-only">Ultimo accesso di recente</span>
+                      <span class="lang-en-only">last seen recently</span>
+                      <span class="lang-it-only">ultimo accesso di recente</span>
                     </small>
                   </div>
                 </div>
@@ -405,17 +427,11 @@
                       <span class="lang-en-only">“Hi, is the apartment on Via Roma still available? Can I see it this week?”</span>
                     </div>
                   </div>
-                  <div class="msg-meta">
-                    <span>10:14</span><span class="ticks-grey">✓✓</span>
-                  </div>
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
                     </div>
-                  </div>
-                  <div class="msg-meta">
-                    <span>10:17</span><span class="ticks-grey">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -435,7 +451,7 @@
             </div>
           </div>
 
-          <!-- AFTER RENTAL -->
+          <!-- AFTER -->
           <div class="card">
             <h3>
               <span class="lang-en-only">After – Kintra-assisted rental reply</span>
@@ -450,7 +466,7 @@
             <div class="phone-shell">
               <div class="chat-inner">
                 <div class="chat-header">
-                  <div class="chat-avatar kintra">K</div>
+                  <div class="chat-avatar">K</div>
                   <div class="chat-meta">
                     <span>Kintra</span>
                     <small>
@@ -466,27 +482,21 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Roma è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
-                  <div class="msg-meta">
-                    <span>10:14</span><span class="ticks-grey">✓✓</span>
-                  </div>
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
-                        “Ciao Luca, yes it’s available.<br><br>
+                        “Ciao Cecilia, yes it’s available.<br><br>
                         · 2 bedrooms, 1 bathroom<br>
-                        · Available from 15 Feb<br><br>
+                        · Available from 1 March<br><br>
                         Wed 18:30 or Thu 17:00 — which works best?”
                       </span>
                       <span class="lang-it-only">
-                        «Ciao Luca, sì, è disponibile.<br><br>
+                        «Ciao Cecilia, sì, è disponibile.<br><br>
                         · 2 camere, 1 bagno<br>
-                        · Disponibile dal 15 febbraio<br><br>
+                        · Disponibile dal 1 marzo<br><br>
                         Mer 18:30 o Gio 17:00 – quale preferisci?»
                       </span>
                     </div>
-                  </div>
-                  <div class="msg-meta">
-                    <span>10:15</span><span class="ticks-blue">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -527,10 +537,6 @@
                 <span class="lang-it-only">Conferma promemoria</span>
               </span>
             </div>
-            <div class="cta-small">
-              <span class="lang-en-only">Kintra suggests options — agent taps one and sends.</span>
-              <span class="lang-it-only">Kintra propone le opzioni — l’agente ne sceglie una e invia.</span>
-            </div>
           </div>
 
         </div>
@@ -540,7 +546,7 @@
       <div class="wa-panel" data-panel="sales">
         <div class="before-after">
 
-          <!-- BEFORE SALES -->
+          <!-- BEFORE -->
           <div class="card">
             <h3>
               <span class="lang-en-only">Before – sales lead in WhatsApp</span>
@@ -554,12 +560,15 @@
             <div class="phone-shell">
               <div class="chat-inner">
                 <div class="chat-header">
-                  <div class="chat-avatar client">C</div>
+                  <div class="chat-avatar">C</div>
                   <div class="chat-meta">
-                    <span>Cliente</span>
+                    <span>
+                      <span class="lang-en-only">Client</span>
+                      <span class="lang-it-only">Cliente</span>
+                    </span>
                     <small>
-                      <span class="lang-en-only">Last seen recently</span>
-                      <span class="lang-it-only">Ultimo accesso di recente</span>
+                      <span class="lang-en-only">last seen recently</span>
+                      <span class="lang-it-only">ultimo accesso di recente</span>
                     </small>
                   </div>
                 </div>
@@ -570,17 +579,11 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
-                  <div class="msg-meta">
-                    <span>11:02</span><span class="ticks-grey">✓✓</span>
-                  </div>
                   <div class="msg-row me">
                     <div class="bubble agent">
                       <span class="lang-en-only">“Yes, it’s available. When are you free?”</span>
                       <span class="lang-it-only">«Sì, è disponibile. Quando è libero?»</span>
                     </div>
-                  </div>
-                  <div class="msg-meta">
-                    <span>11:06</span><span class="ticks-grey">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -600,7 +603,7 @@
             </div>
           </div>
 
-          <!-- AFTER SALES -->
+          <!-- AFTER -->
           <div class="card">
             <h3>
               <span class="lang-en-only">After – Kintra-assisted sales reply</span>
@@ -615,7 +618,7 @@
             <div class="phone-shell">
               <div class="chat-inner">
                 <div class="chat-header">
-                  <div class="chat-avatar kintra">K</div>
+                  <div class="chat-avatar">K</div>
                   <div class="chat-meta">
                     <span>Kintra</span>
                     <small>
@@ -631,29 +634,23 @@
                       <span class="lang-it-only">«Buongiorno, l'appartamento in Via Garibaldi è ancora disponibile? Posso vederlo questa settimana?»</span>
                     </div>
                   </div>
-                  <div class="msg-meta">
-                    <span>11:02</span><span class="ticks-grey">✓✓</span>
-                  </div>
                   <div class="msg-row me">
                     <div class="bubble kintra">
                       <span class="lang-en-only">
-                        “Hi Sara, yes, it’s still available.<br><br>
+                        “Hi Cecilia, yes, it’s still available.<br><br>
                         · 2 bedrooms, 1 bathroom, 3rd floor with lift<br>
-                        · Asking €430,000<br><br>
+                        · Available from 1 March<br><br>
                         I have Wednesday at 18:30 or Thursday at 17:00 for a viewing.<br><br>
                         Which works better for you?”
                       </span>
                       <span class="lang-it-only">
-                        «Ciao Sara, sì, è ancora disponibile.<br><br>
+                        «Ciao Cecilia, sì, è ancora disponibile.<br><br>
                         · 2 camere, 1 bagno, 3° piano con ascensore<br>
-                        · Richiesta €430.000<br><br>
+                        · Disponibile dal 1 marzo<br><br>
                         Posso offrirti mercoledì alle 18:30 oppure giovedì alle 17:00 per una visita.<br><br>
                         Quale orario preferisci?»
                       </span>
                     </div>
-                  </div>
-                  <div class="msg-meta">
-                    <span>11:03</span><span class="ticks-blue">✓✓</span>
                   </div>
                 </div>
               </div>
@@ -661,10 +658,10 @@
 
             <div class="stamp">
               <span class="lang-en-only">
-                Agent checks the draft and taps send. Viewing times are on the table in under 60 seconds.
+                Agent checks the draft and taps send. Viewing times are on the table in under 30 seconds.
               </span>
               <span class="lang-it-only">
-                L’agente controlla la bozza e invia. Gli orari della visita sono sul tavolo in meno di 60 secondi.
+                L’agente controlla la bozza e invia. Gli orari della visita sono sul tavolo in meno di 30 secondi.
               </span>
             </div>
 
@@ -685,25 +682,6 @@
               </b>
               <span class="lang-en-only"> Viewing confirmed instead of “lead gone cold”.</span>
               <span class="lang-it-only"> Visita confermata invece di “contatto freddo”.</span>
-            </div>
-
-            <div class="chips">
-              <span class="chip">
-                <span class="lang-en-only">Offer two viewing slots</span>
-                <span class="lang-it-only">Offri due orari visita</span>
-              </span>
-              <span class="chip">
-                <span class="lang-en-only">Mention key features</span>
-                <span class="lang-it-only">Evidenzia le caratteristiche</span>
-              </span>
-              <span class="chip">
-                <span class="lang-en-only">Confirm follow-up</span>
-                <span class="lang-it-only">Conferma il follow-up</span>
-              </span>
-            </div>
-            <div class="cta-small">
-              <span class="lang-en-only">Kintra suggests options — agent taps one and sends.</span>
-              <span class="lang-it-only">Kintra propone le opzioni — l’agente ne sceglie una e invia.</span>
             </div>
 
             <div class="roi-line">
@@ -735,8 +713,11 @@
 
       <div class="grid-2">
         <div>
-          <!-- keep the same path; you can swap the underlying PNG with the new PulseView screenshot -->
-          <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
+          <div class="dash-shell">
+            <div class="dash-inner">
+              <img src="./img/dashboard%20preview%20screen.PNG" alt="Kintra dashboard preview" class="dash-img"/>
+            </div>
+          </div>
         </div>
         <div>
           <p>
@@ -772,7 +753,68 @@
         <span class="lang-it-only">Un tocco per inviare in WhatsApp una scheda immobile chiara e coerente.</span>
       </p>
 
-      <div class="grid-2">
+      <div class="ls-grid">
+        <!-- LEFT: Phone preview -->
+        <div>
+          <div class="phone-shell">
+            <div class="chat-inner">
+              <div class="chat-header">
+                <div class="chat-avatar">C</div>
+                <div class="chat-meta">
+                  <span>
+                    <span class="lang-en-only">Client</span>
+                    <span class="lang-it-only">Cliente</span>
+                  </span>
+                  <small>oggi alle 10:12</small>
+                </div>
+              </div>
+              <div class="chat-screen">
+                <div class="msg-row them">
+                  <div class="bubble client">
+                    <span class="lang-en-only">“Can you send me all the details for the apartment on Via Monte Rosa?”</span>
+                    <span class="lang-it-only">«Puoi mandarmi tutti i dettagli dell’appartamento in Via Monte Rosa?»</span>
+                  </div>
+                </div>
+                <div class="msg-row me">
+                  <div class="bubble kintra">
+                    <div class="lc-card">
+                      <img src="./img/cta.jpg" alt="Via Monte Rosa preview" class="lc-photo"/>
+                      <div>
+                        <div class="lc-title">2BR • 80 m² • Milano • Balcony</div>
+                        <div class="lc-line">
+                          <span class="lang-en-only">€1,750 / month • 3rd floor with lift • Via Monte Rosa</span>
+                          <span class="lang-it-only">€1.750 / mese • 3° piano con ascensore • Via Monte Rosa</span>
+                        </div>
+                        <div class="lc-tags">
+                          <span class="lc-tag">2BR</span>
+                          <span class="lc-tag">80 m²</span>
+                          <span class="lc-tag">Balcony</span>
+                          <span class="lc-tag">Milano</span>
+                        </div>
+                        <div class="lc-meta">
+                          <span>
+                            <span class="lang-en-only">Available from 1 March</span>
+                            <span class="lang-it-only">Disponibile dal 1 marzo</span>
+                          </span>
+                          <span class="ticks">
+                            <span>10:13</span>
+                            <span class="tick blue">✓✓</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="ls-phone-label">
+            <span class="lang-en-only">Preview of the Kintra listing card inside WhatsApp before the agent taps send.</span>
+            <span class="lang-it-only">Anteprima della scheda immobile Kintra in WhatsApp prima che l’agente invii.</span>
+          </p>
+        </div>
+
+        <!-- RIGHT: Raw card sample (different listing) -->
         <div>
           <div class="listing-mock">
             <div class="lm-head">
@@ -780,38 +822,36 @@
               <span class="lm-dot"></span>
               <span class="lm-dot"></span>
               <span class="muted">
-                <span class="lang-en-only">Listing summary • WhatsApp preview</span>
-                <span class="lang-it-only">Scheda immobile • Anteprima WhatsApp</span>
+                <span class="lang-en-only">Listing summary • Raw card</span>
+                <span class="lang-it-only">Scheda immobile • Card pronta</span>
               </span>
             </div>
             <div class="lm-body">
-              <img src="./img/milano-balcony.jpg" alt="Listing thumbnail" class="lm-photo"/>
+              <img src="./img/listing2.jpg" alt="Torino apartment thumbnail" class="lm-photo"/>
               <div>
-                <div class="lm-title">2BR • 80 m² • Milano • Balcony</div>
+                <div class="lm-title">1BR • 55 m² • Torino • Terrace</div>
                 <div class="lm-line">
-                  <span class="lang-en-only">€1,750 / month • 3rd floor with lift • Via Monte Rosa</span>
-                  <span class="lang-it-only">€1.750 / mese • 3° piano con ascensore • Via Monte Rosa</span>
+                  <span class="lang-en-only">€980 / month • 4th floor with lift • Via Po</span>
+                  <span class="lang-it-only">€980 / mese • 4° piano con ascensore • Via Po</span>
                 </div>
                 <div class="tagrow">
-                  <span class="tag">2BR</span>
-                  <span class="tag">80 m²</span>
-                  <span class="tag">Milano</span>
-                  <span class="tag">Balcony</span>
+                  <span class="tag">1BR</span>
+                  <span class="tag">55 m²</span>
+                  <span class="tag">Torino</span>
+                  <span class="tag">Terrace</span>
                 </div>
                 <p class="caption">
                   <span class="lang-en-only">
-                    A pre-filled card with key details that the agent can adjust in seconds instead of re-writing
-                    the same information for every lead.
+                    The same structure works for any listing: Kintra fills the frame with the right city, size, price and tags.
                   </span>
                   <span class="lang-it-only">
-                    Una scheda precompilata con i dati principali che l’agente può adattare in pochi secondi
-                    invece di riscrivere ogni volta le stesse informazioni.
+                    La stessa struttura funziona per ogni immobile: Kintra compila il riquadro con città, metratura, prezzo e tag corretti.
                   </span>
                 </p>
                 <div class="listing-cta-row">
                   <a href="./listing-summary.html" class="btn">
-                    <span class="lang-en-only">View listing summary →</span>
-                    <span class="lang-it-only">Vedi la scheda immobile →</span>
+                    <span class="lang-en-only">View listing summary demo →</span>
+                    <span class="lang-it-only">Vedi la demo della scheda →</span>
                   </a>
                   <button class="btn ghost" type="button" id="copy-card-btn">
                     <span class="lang-en-only">Copy card to WhatsApp</span>
@@ -821,65 +861,14 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <div>
-          <div class="phone-shell">
-            <div class="chat-inner">
-              <div class="chat-header">
-                <div class="chat-avatar kintra">K</div>
-                <div class="chat-meta">
-                  <span>Kintra</span>
-                  <small>
-                    <span class="lang-en-only">Listing card ready</span>
-                    <span class="lang-it-only">Scheda immobile pronta</span>
-                  </small>
-                </div>
-              </div>
-              <div class="chat-screen">
-                <div class="msg-row me">
-                  <div class="bubble kintra">
-                    <span class="lang-en-only">
-                      “Here’s the summary for Via Monte Rosa:<br><br>
-                      · 2BR • 80 m² • Balcony<br>
-                      · €1,750 / month • 3rd floor with lift<br>
-                      · Available from 15 Feb”
-                    </span>
-                    <span class="lang-it-only">
-                      «Ecco il riepilogo per Via Monte Rosa:<br><br>
-                      · 2 camere • 80 m² • Balcone<br>
-                      · €1.750 / mese • 3° piano con ascensore<br>
-                      · Disponibile dal 15 febbraio»
-                    </span>
-                  </div>
-                </div>
-                <div class="msg-meta">
-                  <span>09:48</span><span class="ticks-blue">✓✓</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="cta-small">
-            <span class="lang-en-only">Kintra suggests attachments — agent taps to include photos or floor plan.</span>
-            <span class="lang-it-only">Kintra suggerisce gli allegati — l’agente tocca per includere foto o planimetria.</span>
-          </div>
-
-          <div class="listing-visuals">
-            <div class="thumb-row">
-              <img src="./img/milano-livingroom-1.png" alt="Living room" class="thumb">
-              <img src="./img/milano-kitchen-1.png" alt="Kitchen" class="thumb">
-              <img src="./img/milano-kitchen-2.png" alt="Kitchen detail" class="thumb">
-              <img src="./img/milano-kitchen-3.png" alt="Balcony / view" class="thumb">
-            </div>
-            <div class="thumb-caption">
-              <span class="lang-en-only">
-                Agents can attach living room, kitchen and balcony photos in seconds without retyping core details.
-              </span>
-              <span class="lang-it-only">
-                Gli agenti possono allegare in pochi secondi foto di soggiorno, cucina e balcone senza riscrivere i dati principali.
-              </span>
-            </div>
-          </div>
+          <p class="ls-caption">
+            <span class="lang-en-only">
+              Agents start from a ready-made card instead of re-typing the same details 10–20 times per week.
+            </span>
+            <span class="lang-it-only">
+              Gli agenti partono da una scheda già pronta invece di riscrivere gli stessi dati 10–20 volte a settimana.
+            </span>
+          </p>
         </div>
       </div>
     </section>
@@ -1364,7 +1353,7 @@
       });
     });
 
-    // Language toggle: switches body class (affects all lang-* blocks)
+    // Language toggle: switches body class
     const langButtons = document.querySelectorAll('.toggle button');
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1386,24 +1375,21 @@
       });
     }
 
-    // Copy listing card to clipboard
+    // Copy listing card to clipboard (Torino example)
     const copyBtn = document.getElementById('copy-card-btn');
     if (copyBtn && navigator.clipboard) {
       copyBtn.addEventListener('click', async () => {
-        const textEN = "2BR • 80 m² • Milano • Balcony\n€1,750 / month • 3rd floor with lift • Via Monte Rosa\nAvailable from 15 Feb";
-        const textIT = "2 camere • 80 m² • Balcone\n€1.750 / mese • 3° piano con ascensore • Via Monte Rosa\nDisponibile dal 15 febbraio";
+        const textEN = "1BR • 55 m² • Torino • Terrace\n€980 / month • 4th floor with lift • Via Po";
+        const textIT = "1BR • 55 m² • Torino • Terrazzo\n€980 / mese • 4° piano con ascensore • Via Po";
         const useEN = document.body.classList.contains('lang-en-active');
         const text = useEN ? textEN : textIT;
         try {
           await navigator.clipboard.writeText(text);
-          const originalEN = "Copy card to WhatsApp";
-          const originalIT = "Copia scheda in WhatsApp";
+          const original = copyBtn.textContent;
           copyBtn.textContent = useEN ? "Copied" : "Copiato";
-          setTimeout(() => {
-            copyBtn.textContent = useEN ? originalEN : originalIT;
-          }, 1500);
+          setTimeout(() => { copyBtn.textContent = original; }, 1500);
         } catch (e) {
-          alert("Could not copy. Please copy manually.");
+          alert(useEN ? "Could not copy. Please copy manually." : "Copia non riuscita. Copia manualmente.");
         }
       });
     }
