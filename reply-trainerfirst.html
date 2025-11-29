@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra Reply Trainer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .shell {
+      width: 960px;
+      max-width: 100%;
+      background: #020617;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+      border: 1px solid #1e293b;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 12px;
+      opacity: 0.75;
+    }
+    .pill {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #22c55e22;
+      color: #bbf7d0;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 14px;
+    }
+    .panel {
+      background: #020617;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #1e293b;
+    }
+    .panel-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .client-msg {
+      font-size: 13px;
+      padding: 8px;
+      border-radius: 10px;
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      margin-bottom: 8px;
+      white-space: pre-wrap;
+    }
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+    textarea {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #1e293b;
+      padding: 8px;
+      font-size: 13px;
+      background: #020617;
+      color: #e5e7eb;
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+    }
+    .buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #22c55e;
+      color: #064e3b;
+      font-weight: 600;
+    }
+    .btn-secondary {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #1e293b;
+    }
+    .timer {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    .compare-box {
+      padding: 8px;
+      border-radius: 10px;
+      background: #020617;
+      border: 1px dashed #1e293b;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-top: 6px;
+      opacity: 0.8;
+    }
+    .trainer-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 11px;
+      margin-top: 6px;
+      opacity: 0.8;
+    }
+    .bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      display: inline-block;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div>
+        <div class="title">Kintra Live Reply Trainer</div>
+        <div class="subtitle">Sharpen reply speed, tone and clarity before talking to real agents.</div>
+      </div>
+      <div class="pill">Founder Training Mode</div>
+    </div>
+
+    <div class="layout">
+      <!-- Left: client + your draft -->
+      <div class="panel">
+        <div class="panel-title">Incoming client inquiry</div>
+        <div id="client-msg" class="client-msg"></div>
+
+        <div class="section-label">Your reply (freehand)</div>
+        <textarea id="founder-reply" placeholder="Type what you would send as the agent…"></textarea>
+
+        <div class="buttons">
+          <button class="btn btn-secondary" id="new-inquiry">🎲 New inquiry</button>
+          <button class="btn btn-primary" id="check-with-kintra">Tap to reply with Kintra</button>
+          <span class="timer" id="timer">Time: 0.0s</span>
+        </div>
+
+        <div class="trainer-stats" id="trainer-stats">
+          <span><span class="bullet"></span> Sessions: <span id="sessions-count">0</span></span>
+          <span>Avg time: <span id="avg-time">0.0s</span></span>
+        </div>
+      </div>
+
+      <!-- Right: Kintra suggestion + comparison -->
+      <div class="panel">
+        <div class="panel-title">Kintra assist + comparison</div>
+
+        <div class="section-label">Kintra suggested reply</div>
+        <div class="compare-box" id="kintra-suggest"></div>
+
+        <div class="section-label" style="margin-top:8px;">Comparison</div>
+        <div class="compare-box" id="comparison-box">
+Write your reply on the left, then tap “Tap to reply with Kintra” to compare:
+- tone
+- clarity
+- structure
+- call to action
+        </div>
+
+        <div class="meta-row">
+          <span>Trainer insight:</span>
+          <span id="insight-label">Waiting for your first attempt…</span>
+        </div>
+
+        <div class="section-label" style="margin-top:8px;">If this were a real agent…</div>
+        <div class="compare-box" id="real-agent-notes">
+You’d be:
+- saving 30–90 seconds per reply
+- speaking in consistent, professional tone
+- nudging the client toward concrete next steps
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inquiries = [
+      "Hi, is the 2-bedroom near Porta Romana still available? We have a small dog, is that a problem?",
+      "Ciao, possiamo vedere l’appartamento questo weekend? Lavoriamo fino alle 18:30.",
+      "We’re two remote workers looking for a long-term rental (12+ months) in Milan. Do you have anything quiet with a good desk setup?",
+      "Buongiorno, quanto sono le spese condominiali per il trilocale in via Torino? Il riscaldamento è centralizzato?",
+      "Hi, can you send a quick summary of the flat we saw today (kitchen size, floor, balcony, price)? My partner couldn’t attend.",
+      "Ciao, accettate studenti con garanzia dei genitori? Cerchiamo un bilocale zona Città Studi."
+    ];
+
+    const cannedKintraReplies = [
+      reply => `Thanks for your message! Yes, the 2-bedroom near Porta Romana is still available.\n\nSmall dogs are accepted in this building, as long as they are well-behaved and declared in the contract.\n\nIf you like, I can send you a short summary + a couple of viewing slots for this week.`,
+      reply => `Certo, grazie per il messaggio. Possiamo organizzare una visita nel weekend.\n\nDimmi se preferisci:\n• Sabato tra le 11:00 e le 13:00\n• Domenica tra le 15:00 e le 17:00\n\nTi confermo l’orario e ti mando il punto d’incontro.`,
+      reply => `Thanks for reaching out — this sounds like a good fit.\n\nWe do have a few quiet options suitable for remote workers (good light + space for two desks).\n\nIf you tell me your ideal budget and move-in date, I can shortlist 2–3 best matches and send you summary cards.`,
+      reply => `Buongiorno, grazie per la domanda.\n\nPer il trilocale in via Torino le spese condominiali sono circa 180€/mese e includono riscaldamento centralizzato.\n\nSe vuoi, posso mandarti una scheda riassuntiva con tutti i costi fissi e le condizioni principali.`,
+      reply => `Of course — here is a quick recap of the flat you saw today:\n\n• Floor: 4th with lift\n• Kitchen: separate, full-size\n• Outside: small balcony facing the courtyard\n• Price: 1,450€/month + approx. 160€ expenses\n\nIf your partner wants, I can also send a short video or arrange a second viewing.`,
+      reply => `Ciao, sì, il proprietario valuta anche studenti con garanzia dei genitori.\n\nCerchiamo in genere:\n• durata minima 12 mesi\n• documenti dei garanti\n\nSe mi scrivi il vostro budget e la data di ingresso, posso proporti subito 2–3 bilocali zona Città Studi adatti.`
+    ];
+
+    const clientMsgEl = document.getElementById('client-msg');
+    const founderReplyEl = document.getElementById('founder-reply');
+    const kintraSuggestEl = document.getElementById('kintra-suggest');
+    const comparisonBoxEl = document.getElementById('comparison-box');
+    const insightLabelEl = document.getElementById('insight-label');
+    const newInquiryBtn = document.getElementById('new-inquiry');
+    const checkWithKintraBtn = document.getElementById('check-with-kintra');
+    const timerEl = document.getElementById('timer');
+    const sessionsCountEl = document.getElementById('sessions-count');
+    const avgTimeEl = document.getElementById('avg-time');
+
+    let currentIndex = 0;
+    let startTime = null;
+    let sessions = 0;
+    let totalTime = 0;
+
+    function loadRandomInquiry() {
+      currentIndex = Math.floor(Math.random() * inquiries.length);
+      clientMsgEl.textContent = inquiries[currentIndex];
+      founderReplyEl.value = '';
+      timerEl.textContent = 'Time: 0.0s';
+      startTime = performance.now();
+      comparisonBoxEl.textContent = `Write your reply on the left, then tap “Tap to reply with Kintra” to compare:\n- tone\n- clarity\n- structure\n- call to action`;
+      insightLabelEl.textContent = 'Timer running… speak like a real agent.';
+      kintraSuggestEl.textContent = '';
+    }
+
+    function formatSeconds(ms) {
+      return (ms / 1000).toFixed(1) + 's';
+    }
+
+    newInquiryBtn.addEventListener('click', () => {
+      loadRandomInquiry();
+    });
+
+    checkWithKintraBtn.addEventListener('click', () => {
+      if (!startTime) return;
+      const endTime = performance.now();
+      const elapsed = endTime - startTime;
+      sessions++;
+      totalTime += elapsed;
+      sessionsCountEl.textContent = sessions;
+      avgTimeEl.textContent = formatSeconds(totalTime / sessions);
+
+      const userText = founderReplyEl.value.trim();
+      const kintraText = cannedKintraReplies[currentIndex](userText);
+      kintraSuggestEl.textContent = kintraText;
+
+      if (!userText) {
+        comparisonBoxEl.textContent = `You didn’t type anything this round.\n\nNotice how Kintra:\n- opens politely\n- gives structure\n- ends with a next step.\n\nTry writing your own version, then compare again.`;
+        insightLabelEl.textContent = 'Next round: try to get closer to Kintra’s structure.';
+      } else {
+        comparisonBoxEl.textContent = `Your reply:\n${userText}\n\nKintra reply:\n${kintraText}\n\nLook for:\n- Where is Kintra clearer?\n- Where is your tone more human?\n- How can you merge both?`;
+        insightLabelEl.textContent = 'This is how your founder voice sharpens — one inquiry at a time.';
+      }
+    });
+
+    // start on load
+    loadRandomInquiry();
+  </script>
+</body>
+</html>
