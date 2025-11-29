@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra Pilot Day Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #020617, #020617);
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .shell {
+      width: 1120px;
+      max-width: 100%;
+      background: #020617;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+      border: 1px solid #1e293b;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+    .title { font-size: 18px; font-weight: 600; }
+    .subtitle { font-size: 12px; opacity: 0.75; }
+    .pill { font-size: 11px; border-radius: 999px; padding: 4px 10px; background:#22c55e22; color:#bbf7d0; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+    .panel {
+      background: #020617;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #1e293b;
+    }
+    .panel-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+
+    .timeline {
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 4px;
+      font-size: 12px;
+    }
+    .event {
+      border-left: 2px solid #1f2937;
+      padding-left: 8px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .event::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      position: absolute;
+      left: -5px;
+      top: 2px;
+    }
+    .event-time { font-size: 10px; opacity: 0.75; margin-bottom: 2px; }
+    .event-type { font-size: 10px; opacity: 0.8; margin-bottom: 2px; }
+    .event-body { white-space: pre-wrap; }
+
+    .badge-type {
+      border-radius: 999px;
+      padding: 2px 6px;
+      font-size: 10px;
+      background: #0b1120;
+      border: 1px solid #1f2937;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 11px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-primary { background:#22c55e; color:#064e3b; font-weight:600; }
+    .btn-secondary { background:#020617; color:#e5e7eb; border:1px solid #1e293b; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .stat-card {
+      border-radius: 10px;
+      background:#020617;
+      border:1px solid #1e293b;
+      padding: 8px;
+      font-size: 12px;
+    }
+    .stat-label { font-size: 11px; opacity: 0.8; margin-bottom: 2px; }
+    .stat-value { font-size: 16px; font-weight: 600; }
+    .stat-note { font-size: 10px; opacity: 0.75; margin-top: 2px; }
+
+    .comparison {
+      font-size: 11px;
+      margin-top: 8px;
+      border-radius: 10px;
+      border:1px dashed #1e293b;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div>
+        <div class="title">Kintra Pilot Day Simulation — Milan Agent</div>
+        <div class="subtitle">Step through one full day and watch the numbers move.</div>
+      </div>
+      <div class="pill">Prototype D</div>
+    </div>
+
+    <div class="layout">
+      <!-- Left: timeline -->
+      <div class="panel">
+        <div class="controls">
+          <span>Day: “Thursday — New inquiries + viewings + follow-ups”</span>
+          <div>
+            <button class="btn btn-secondary" id="reset-day">Reset day</button>
+            <button class="btn btn-primary" id="next-event">Next event →</button>
+          </div>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+      <!-- Right: metrics -->
+      <div class="panel">
+        <div class="panel-title">Daily metrics</div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Messages handled</div>
+            <div class="stat-value" id="stat-msg">0</div>
+            <div class="stat-note" id="stat-msg-note">0 client inquiries / 0 landlord / 0 follow-ups</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Time saved with Kintra</div>
+            <div class="stat-value" id="stat-time">0 min</div>
+            <div class="stat-note" id="stat-time-note">Assuming 45–90 sec saved per drafted reply</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg. reply time</div>
+            <div class="stat-value" id="stat-reply">2 min → 35 sec</div>
+            <div class="stat-note">Manual vs with Kintra drafting</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Conversion movement</div>
+            <div class="stat-value" id="stat-conv">0 / 4</div>
+            <div class="stat-note">Viewings booked / “hot” leads progressed</div>
+          </div>
+        </div>
+
+        <div class="comparison" id="comparison">
+Without Kintra:
+- replies written one by one
+- high cognitive load
+- many “I’ll do it later” moments
+
+With Kintra:
+- replies drafted in batches
+- agent only tweaks details
+- no client waits more than a few minutes
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const events = [
+      {
+        time: "09:10",
+        type: "Client WhatsApp",
+        subtype: "client",
+        summary: "Morning inquiry — 2BR near Porta Romana",
+        details: "“Hi, we’re a couple moving from Rome. Is the 2-bedroom in Porta Romana still available? We’d like to move mid-Feb.”",
+        kintra: "Kintra drafts a structured reply with availability + 2 suggested viewing slots.",
+        messages: { client: 1, landlord: 0, follow: 0 },
+        timeSaved: 1
+      },
+      {
+        time: "09:35",
+        type: "Client WhatsApp",
+        subtype: "client",
+        summary: "Remote worker asking about desk space + Wi-Fi",
+        details: "“I work from home and need good Wi-Fi + space for a desk. Does the living room have enough space?”",
+        kintra: "Kintra proposes a reply with reassurance, plus offer to send a quick video of the living area.",
+        messages: { client: 1, landlord: 0, follow: 0 },
+        timeSaved: 1
+      },
+      {
+        time: "10:05",
+        type: "Landlord reply",
+        subtype: "landlord",
+        summary: "Landlord confirms small dog is okay",
+        details: "Landlord replies in short fragments about conditions for pets.",
+        kintra: "Kintra turns it into a clear, friendly message the tenant can understand.",
+        messages: { client: 0, landlord: 1, follow: 0 },
+        timeSaved: 0.5
+      },
+      {
+        time: "11:20",
+        type: "Client WhatsApp",
+        subtype: "client",
+        summary: "Student asking about guarantors",
+        details: "“Ciao, siamo due studenti, i nostri genitori fanno da garanti, va bene per il proprietario?”",
+        kintra: "Kintra drafts an Italian reply explaining conditions + asks for basic docs, keeping tone reassuring.",
+        messages: { client: 1, landlord: 0, follow: 0 },
+        timeSaved: 1
+      },
+      {
+        time: "13:15",
+        type: "Viewing request",
+        subtype: "client",
+        summary: "Afternoon — turning interest into a viewing",
+        details: "Client who asked about desk space is ready to book a viewing.",
+        kintra: "Kintra proposes 2 time slots, includes building entrance instructions and parking tip.",
+        messages: { client: 1, landlord: 0, follow: 0 },
+        timeSaved: 1
+      },
+      {
+        time: "15:40",
+        type: "Follow-up",
+        subtype: "follow",
+        summary: "Post-viewing follow-up message",
+        details: "Agent wants to send a quick recap after a viewing but is busy in the car.",
+        kintra: "Kintra drafts a ready-to-send recap: price, floor, key features, next step (docs / offer).",
+        messages: { client: 1, landlord: 0, follow: 1 },
+        timeSaved: 1
+      },
+      {
+        time: "17:05",
+        type: "Negotiation step",
+        subtype: "follow",
+        summary: "Soft negotiation — tenant asking if price is flexible",
+        details: "“We love the flat but €1,500 is a bit high, would the owner accept €1,400?”",
+        kintra: "Kintra helps the agent phrase a balanced message to landlord + a professional reply to tenant.",
+        messages: { client: 1, landlord: 1, follow: 1 },
+        timeSaved: 1.5
+      },
+      {
+        time: "18:30",
+        type: "Summary request",
+        subtype: "follow",
+        summary: "End-of-day summary for one hot lead",
+        details: "Agent wants a quick overview of where things stand with the Porta Romana couple.",
+        kintra: "Kintra builds a mini summary: inquiry → viewing → feedback → current negotiation.",
+        messages: { client: 0, landlord: 0, follow: 1 },
+        timeSaved: 0.5
+      }
+    ];
+
+    const timelineEl = document.getElementById('timeline');
+    const nextBtn = document.getElementById('next-event');
+    const resetBtn = document.getElementById('reset-day');
+
+    const statMsgEl = document.getElementById('stat-msg');
+    const statMsgNoteEl = document.getElementById('stat-msg-note');
+    const statTimeEl = document.getElementById('stat-time');
+    const statTimeNoteEl = document.getElementById('stat-time-note');
+    const statConvEl = document.getElementById('stat-conv');
+    const comparisonEl = document.getElementById('comparison');
+
+    let currentIndex = 0;
+    let totalClient = 0;
+    let totalLandlord = 0;
+    let totalFollow = 0;
+    let totalTimeSaved = 0; // in minutes approx
+    let viewingsBooked = 0;
+
+    function renderEvent(ev) {
+      const div = document.createElement('div');
+      div.className = 'event';
+      div.innerHTML = `
+        <div class="event-time">${ev.time}</div>
+        <div class="event-type">${ev.type}</div>
+        <div class="badge-type">${ev.subtype === 'client' ? 'Client' : ev.subtype === 'landlord' ? 'Landlord' : 'Follow-up'}</div>
+        <div class="event-body">
+${ev.details}
+
+→ <strong>With Kintra:</strong> ${ev.kintra}
+        </div>
+      `;
+      timelineEl.appendChild(div);
+      timelineEl.scrollTop = timelineEl.scrollHeight;
+    }
+
+    function updateStats() {
+      const total = totalClient + totalLandlord + totalFollow;
+      statMsgEl.textContent = total;
+      statMsgNoteEl.textContent = `${totalClient} client inquiries / ${totalLandlord} landlord / ${totalFollow} follow-ups`;
+
+      statTimeEl.textContent = `${totalTimeSaved.toFixed(1)} min`;
+      statTimeNoteEl.textContent = "Assuming 45–90 sec saved per drafted reply";
+
+      // simple heuristic: 4 “conversion-relevant” steps across the day
+      if (totalClient >= 3 && totalFollow >= 2) {
+        viewingsBooked = 3;
+      } else if (totalClient >= 2) {
+        viewingsBooked = 2;
+      } else {
+        viewingsBooked = 1;
+      }
+      statConvEl.textContent = `${viewingsBooked} / 4`;
+
+      if (total > 0) {
+        comparisonEl.textContent =
+`Without Kintra:
+- Agent types ${total} replies from scratch
+- More time lost switching context
+- Easy to postpone follow-ups
+
+With Kintra:
+- ~${totalTimeSaved.toFixed(1)} minutes saved in one day
+- Replies have consistent structure
+- Follow-ups and summaries no longer “forgotten”`;
+      } else {
+        comparisonEl.textContent =
+`Without Kintra:
+- replies written one by one
+- high cognitive load
+- many “I’ll do it later” moments
+
+With Kintra:
+- replies drafted in batches
+- agent only tweaks details
+- no client waits more than a few minutes`;
+      }
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex >= events.length) return;
+      const ev = events[currentIndex];
+      renderEvent(ev);
+      totalClient += ev.messages.client;
+      totalLandlord += ev.messages.landlord;
+      totalFollow += ev.messages.follow;
+      totalTimeSaved += ev.timeSaved;
+      currentIndex++;
+      updateStats();
+
+      if (currentIndex >= events.length) {
+        nextBtn.textContent = "Day complete ✓";
+        nextBtn.disabled = true;
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      currentIndex = 0;
+      totalClient = 0;
+      totalLandlord = 0;
+      totalFollow = 0;
+      totalTimeSaved = 0;
+      viewingsBooked = 0;
+      timelineEl.innerHTML = "";
+      nextBtn.textContent = "Next event →";
+      nextBtn.disabled = false;
+      updateStats();
+    });
+
+    // init stats
+    updateStats();
+  </script>
+</body>
+</html>
