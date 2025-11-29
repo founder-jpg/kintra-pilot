@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kintra Listing Card Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #020617, #020617);
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .shell {
+      width: 1040px;
+      max-width: 100%;
+      background: #020617;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      border: 1px solid #1e293b;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+    }
+    .title { font-size: 18px; font-weight: 600; }
+    .subtitle { font-size: 12px; opacity: 0.75; }
+    .pill { font-size: 11px; border-radius: 999px; padding: 4px 10px; background:#22c55e22; color:#bbf7d0; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 16px;
+    }
+    .panel {
+      background: #020617;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #1e293b;
+    }
+    .panel-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 12px;
+    }
+    label { opacity: 0.8; }
+    input, select {
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      padding: 6px 8px;
+      font-size: 12px;
+      background: #020617;
+      color: #e5e7eb;
+      outline: none;
+    }
+    .field-full { grid-column: 1 / -1; }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-secondary { background:#020617; color:#e5e7eb; border:1px solid #1e293b; }
+    .btn-primary { background:#22c55e; color:#064e3b; font-weight:600; }
+
+    /* phone/card preview */
+    .phone-frame {
+      width: 360px;
+      max-width: 100%;
+      margin: 0 auto;
+      background: #020617;
+      border-radius: 28px;
+      padding: 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+      border: 1px solid #111827;
+    }
+    .phone-inner {
+      background: #020617;
+      border-radius: 22px;
+      overflow: hidden;
+      padding: 10px;
+      border: 1px solid #1e293b;
+    }
+    .card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #020617;
+      border: 1px solid #1e293b;
+      color: #e5e7eb;
+      font-size: 12px;
+    }
+    .card-image {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    .badge-top {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .card-body {
+      padding: 8px 10px 10px;
+    }
+    .price-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .price-main {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .price-note {
+      font-size: 10px; opacity: 0.8;
+    }
+    .address-line {
+      font-size: 12px;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #0b1120;
+      border: 1px solid #1e293b;
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      opacity: 0.8;
+    }
+    .lang-toggle {
+      font-size: 11px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .span-flag { font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <div>
+        <div class="title">Kintra Listing Card Lab</div>
+        <div class="subtitle">Build perfect iPhone-style listing cards in seconds.</div>
+      </div>
+      <div class="pill">Prototype C</div>
+    </div>
+
+    <div class="layout">
+      <!-- Left: form -->
+      <div class="panel">
+        <div class="panel-title">Listing inputs</div>
+
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="photo-url">Photo URL (placeholder if empty)</label>
+            <input id="photo-url" placeholder="Paste image URL or leave blank…" />
+          </div>
+
+          <div class="field">
+            <label for="bedrooms">Bedrooms</label>
+            <input id="bedrooms" type="number" min="0" value="2" />
+          </div>
+
+          <div class="field">
+            <label for="size">Size (m²)</label>
+            <input id="size" type="number" min="0" value="80" />
+          </div>
+
+          <div class="field field-full">
+            <label for="address">Address / Area</label>
+            <input id="address" value="Porta Romana, Milano" />
+          </div>
+
+          <div class="field">
+            <label for="price">Price €/month</label>
+            <input id="price" type="number" min="0" value="1450" />
+          </div>
+
+          <div class="field">
+            <label for="condo">Condo fees €/month</label>
+            <input id="condo" type="number" min="0" value="160" />
+          </div>
+
+          <div class="field">
+            <label for="floor">Floor</label>
+            <input id="floor" value="4th (with lift)" />
+          </div>
+
+          <div class="field">
+            <label for="available">Available from</label>
+            <input id="available" value="Feb 2026" />
+          </div>
+
+          <div class="field">
+            <label for="has-lift">Lift</label>
+            <select id="has-lift">
+              <option value="yes" selected>Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="balcony">Balcony</label>
+            <select id="balcony">
+              <option value="small" selected>Small balcony</option>
+              <option value="none">No balcony</option>
+              <option value="large">Large balcony</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <div class="lang-toggle">
+            Language:
+            <label><input type="radio" name="lang" value="en" checked /> <span class="span-flag">🇬🇧</span> EN</label>
+            <label><input type="radio" name="lang" value="it" /> <span class="span-flag">🇮🇹</span> IT</label>
+          </div>
+          <div>
+            <button class="btn btn-secondary" id="reset-btn">Reset</button>
+            <button class="btn btn-primary" id="copy-btn">Copy summary text</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: phone preview -->
+      <div class="panel">
+        <div class="panel-title">iPhone-style preview</div>
+
+        <div class="phone-frame">
+          <div class="phone-inner">
+            <div class="card">
+              <div class="card-image" id="card-image">
+                <div class="badge-top" id="badge-top">New • Long-term</div>
+              </div>
+              <div class="card-body">
+                <div class="price-line">
+                  <div class="price-main" id="price-main"></div>
+                  <div class="price-note" id="price-note"></div>
+                </div>
+                <div class="address-line" id="address-line"></div>
+                <div class="tags" id="tags"></div>
+                <div class="meta-row">
+                  <span id="meta-left"></span>
+                  <span id="meta-right"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:8px;">Listing summary text</div>
+        <div class="panel" style="margin-top:4px; font-size:12px; padding:8px;" id="summary-text">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const photoUrlEl = document.getElementById('photo-url');
+    const bedroomsEl = document.getElementById('bedrooms');
+    const sizeEl = document.getElementById('size');
+    const addressEl = document.getElementById('address');
+    const priceEl = document.getElementById('price');
+    const condoEl = document.getElementById('condo');
+    const floorEl = document.getElementById('floor');
+    const availableEl = document.getElementById('available');
+    const liftEl = document.getElementById('has-lift');
+    const balconyEl = document.getElementById('balcony');
+    const langRadios = document.querySelectorAll('input[name="lang"]');
+
+    const cardImage = document.getElementById('card-image');
+    const priceMain = document.getElementById('price-main');
+    const priceNote = document.getElementById('price-note');
+    const addressLine = document.getElementById('address-line');
+    const tagsEl = document.getElementById('tags');
+    const metaLeft = document.getElementById('meta-left');
+    const metaRight = document.getElementById('meta-right');
+    const summaryText = document.getElementById('summary-text');
+
+    const resetBtn = document.getElementById('reset-btn');
+    const copyBtn = document.getElementById('copy-btn');
+
+    function currentLang() {
+      const selected = Array.from(langRadios).find(r => r.checked);
+      return selected ? selected.value : 'en';
+    }
+
+    function updateCard() {
+      const photo = photoUrlEl.value.trim();
+      const beds = bedroomsEl.value || 2;
+      const size = sizeEl.value || 80;
+      const addr = addressEl.value || 'Milan';
+      const price = priceEl.value || 1450;
+      const condo = condoEl.value || 160;
+      const floor = floorEl.value || '4th (with lift)';
+      const available = availableEl.value || 'Soon';
+      const lift = liftEl.value;
+      const balcony = balconyEl.value;
+      const lang = currentLang();
+
+      const defaultImage = "https://images.pexels.com/photos/259580/pexels-photo-259580.jpeg?auto=compress&cs=tinysrgb&w=800";
+      cardImage.style.backgroundImage = `url('${photo || defaultImage}')`;
+
+      if (lang === 'en') {
+        priceMain.textContent = `€${price}/month`;
+        priceNote.textContent = `+ approx. €${condo} expenses`;
+        addressLine.textContent = `${beds}BR • ${size} m² • ${addr}`;
+      } else {
+        priceMain.textContent = `€${price}/mese`;
+        priceNote.textContent = `+ circa €${condo} spese`;
+        addressLine.textContent = `${beds} locali • ${size} m² • ${addr}`;
+      }
+
+      tagsEl.innerHTML = '';
+      const tagData = [];
+      if (lang === 'en') {
+        tagData.push(`${beds}BR`, `${size} m²`, balcony === 'none' ? 'No balcony' : 'Balcony', lift === 'yes' ? 'Lift' : 'No lift');
+      } else {
+        tagData.push(`${beds} locali`, `${size} m²`, balcony === 'none' ? 'Senza balcone' : 'Balcone', lift === 'yes' ? 'Ascensore' : 'No ascensore');
+      }
+
+      tagData.forEach(t => {
+        const span = document.createElement('span');
+        span.className = 'tag';
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+
+      if (lang === 'en') {
+        metaLeft.textContent = `Floor: ${floor}`;
+        metaRight.textContent = `Available: ${available}`;
+      } else {
+        metaLeft.textContent = `Piano: ${floor}`;
+        metaRight.textContent = `Disponibile: ${available}`;
+      }
+
+      // Summary text
+      if (lang === 'en') {
+        summaryText.textContent =
+`${beds} bedroom apartment, ${size} m² in ${addr}.
+
+Rent: €${price}/month + approx. €${condo} expenses.
+Floor: ${floor}. ${lift === 'yes' ? 'Building has a lift.' : 'No lift in the building.'}
+${balcony === 'none' ? 'No balcony.' : balcony === 'small' ? 'Small balcony.' : 'Large balcony.'}
+Available from ${available}.`;
+      } else {
+        summaryText.textContent =
+`Appartamento di ${beds} locali, ${size} m² in zona ${addr}.
+
+Canone: €${price}/mese + circa €${condo} spese.
+Piano: ${floor}. ${lift === 'yes' ? "Stabile con ascensore." : "Stabile senza ascensore."}
+${balcony === 'none' ? 'Senza balcone.' : balcony === 'small' ? 'Balcone piccolo.' : 'Balcone ampio.'}
+Disponibile da ${available}.`;
+      }
+    }
+
+    [photoUrlEl, bedroomsEl, sizeEl, addressEl, priceEl, condoEl, floorEl, availableEl, liftEl, balconyEl].forEach(el => {
+      el.addEventListener('input', updateCard);
+    });
+    langRadios.forEach(r => r.addEventListener('change', updateCard));
+
+    resetBtn.addEventListener('click', () => {
+      photoUrlEl.value = '';
+      bedroomsEl.value = 2;
+      sizeEl.value = 80;
+      addressEl.value = "Porta Romana, Milano";
+      priceEl.value = 1450;
+      condoEl.value = 160;
+      floorEl.value = "4th (with lift)";
+      availableEl.value = "Feb 2026";
+      liftEl.value = "yes";
+      balconyEl.value = "small";
+      updateCard();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      const text = summaryText.textContent;
+      navigator.clipboard?.writeText(text).then(() => {
+        copyBtn.textContent = "Copied ✓";
+        setTimeout(() => copyBtn.textContent = "Copy summary text", 1200);
+      }).catch(() => {});
+    });
+
+    // init
+    updateCard();
+  </script>
+</body>
+</html>
