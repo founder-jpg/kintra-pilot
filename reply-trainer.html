@@ -14,16 +14,19 @@
     :root {
       --bg-body: #020617;
       --bg-shell: #020617;
-      --bg-panel: #020617;
       --border-soft: #1f2937;
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
-      --accent-blue: #3478f6;
       --accent-green: #22c55e;
-      --accent-gold: #c6a55a;
+      --accent-blue: #3478f6;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
     body {
       min-height: 100vh;
@@ -39,9 +42,9 @@
       width: 960px;
       max-width: 100%;
       background: var(--bg-shell);
-      border-radius: 24px;
-      padding: 18px 18px 16px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.7);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
       border: 1px solid var(--border-soft);
     }
 
@@ -49,36 +52,26 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .title {
       font-size: 18px;
       font-weight: 600;
-      letter-spacing: 0.01em;
     }
 
     .subtitle {
       font-size: 12px;
       color: var(--text-muted);
-      margin-top: 2px;
     }
 
     .pill {
       font-size: 11px;
       border-radius: 999px;
       padding: 4px 10px;
-      background: rgba(34, 197, 94, 0.13);
+      background: rgba(34,197,94,0.12);
       color: #bbf7d0;
-      border: 1px solid rgba(34, 197, 94, 0.6);
-    }
-
-    .accent-line {
-      height: 2px;
-      width: 100%;
-      border-radius: 999px;
-      background: linear-gradient(to right, rgba(198, 165, 90, 0.7), transparent);
-      margin-bottom: 12px;
+      border: 1px solid rgba(34,197,94,0.5);
     }
 
     .layout {
@@ -88,10 +81,10 @@
     }
 
     .panel {
-      background: var(--bg-panel);
-      border-radius: 16px;
+      background: #020617;
+      border-radius: 14px;
       padding: 12px;
-      border: 1px solid var(--border-soft);
+      border: 1px solid #1e293b;
     }
 
     .panel-title {
@@ -114,7 +107,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--text-muted);
+      opacity: 0.7;
       margin-bottom: 4px;
     }
 
@@ -137,7 +130,6 @@
       margin-top: 8px;
       align-items: center;
       justify-content: flex-start;
-      flex-wrap: wrap;
     }
 
     .btn {
@@ -146,30 +138,26 @@
       padding: 6px 12px;
       font-size: 12px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
       white-space: nowrap;
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
     .btn-primary {
       background: var(--accent-blue);
       color: #f9fafb;
       font-weight: 600;
-      box-shadow: 0 8px 16px rgba(52, 120, 246, 0.35);
-      border: 1px solid rgba(52, 120, 246, 0.8);
+      border: 1px solid rgba(52,120,246,0.9);
+      box-shadow: 0 8px 16px rgba(52,120,246,0.35);
     }
 
     .btn-primary:hover {
       background: #2e6bdc;
-      transform: translateY(-0.5px);
-      box-shadow: 0 10px 20px rgba(46, 107, 220, 0.4);
+      box-shadow: 0 10px 20px rgba(46,107,220,0.4);
     }
 
     .btn-secondary {
       background: #020617;
-      color: #e5e7eb;
+      color: var(--text-main);
       border: 1px solid #1e293b;
     }
 
@@ -189,7 +177,6 @@
       border: 1px dashed #1e293b;
       font-size: 12px;
       white-space: pre-wrap;
-      line-height: 1.5;
     }
 
     .meta-row {
@@ -198,8 +185,6 @@
       font-size: 11px;
       margin-top: 6px;
       color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 4px;
     }
 
     .trainer-stats {
@@ -208,7 +193,6 @@
       font-size: 11px;
       margin-top: 6px;
       color: var(--text-muted);
-      flex-wrap: wrap;
     }
 
     .bullet {
@@ -218,12 +202,6 @@
       background: var(--accent-green);
       display: inline-block;
       margin-right: 4px;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -236,7 +214,6 @@
       </div>
       <div class="pill">Founder Training Mode</div>
     </div>
-    <div class="accent-line"></div>
 
     <div class="layout">
       <!-- Left: client + your draft -->
@@ -332,7 +309,12 @@ You’d be:
       founderReplyEl.value = '';
       timerEl.textContent = 'Time: 0.0s';
       startTime = performance.now();
-      comparisonBoxEl.textContent = `Write your reply on the left, then tap “Tap to reply with Kintra” to compare:\n- tone\n- clarity\n- structure\n- call to action`;
+      comparisonBoxEl.textContent =
+`Write your reply on the left, then tap “Tap to reply with Kintra” to compare:
+- tone
+- clarity
+- structure
+- call to action`;
       insightLabelEl.textContent = 'Timer running… speak like a real agent.';
       kintraSuggestEl.textContent = '';
     }
@@ -359,10 +341,28 @@ You’d be:
       kintraSuggestEl.textContent = kintraText;
 
       if (!userText) {
-        comparisonBoxEl.textContent = `You didn’t type anything this round.\n\nNotice how Kintra:\n- opens politely\n- gives structure\n- ends with a next step.\n\nTry writing your own version, then compare again.`;
+        comparisonBoxEl.textContent =
+`You didn’t type anything this round.
+
+Notice how Kintra:
+- opens politely
+- gives structure
+- ends with a next step.
+
+Try writing your own version, then compare again.`;
         insightLabelEl.textContent = 'Next round: try to get closer to Kintra’s structure.';
       } else {
-        comparisonBoxEl.textContent = `Your reply:\n${userText}\n\nKintra reply:\n${kintraText}\n\nLook for:\n- Where is Kintra clearer?\n- Where is your tone more human?\n- How can you merge both?`;
+        comparisonBoxEl.textContent =
+`Your reply:
+${userText}
+
+Kintra reply:
+${kintraText}
+
+Look for:
+- Where is Kintra clearer?
+- Where is your tone more human?
+- How can you merge both?`;
         insightLabelEl.textContent = 'This is how your founder voice sharpens — one inquiry at a time.';
       }
     });
