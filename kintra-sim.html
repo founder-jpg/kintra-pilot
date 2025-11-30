@@ -47,7 +47,8 @@
       padding: 12px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.7);
       border: 1px solid var(--border-soft);
-      position: relative;
+      position: relative; /* so Kintra overlay anchors to the phone */
+      overflow: hidden;
     }
 
     .phone-inner {
@@ -113,9 +114,8 @@
       flex: 1;
       padding: 10px;
       overflow-y: auto;
-      background: url("https://i.imgur.com/fH0pK8Z.png");
-      background-size: cover;
-      background-position: center;
+      /* simple neutral background instead of external image */
+      background: radial-gradient(circle at top, #1e293b, #020617);
       position: relative;
     }
 
@@ -206,14 +206,8 @@
       white-space: nowrap;
     }
 
-    .btn-mini-primary {
-      background: var(--accent-blue);
-      color: #f9fafb;
-      border-color: rgba(52, 120, 246, 0.9);
-    }
-
-    .btn-mini-primary:hover {
-      background: #2e6bdc;
+    .btn-mini:hover {
+      background: #020617;
     }
 
     .send-icon {
@@ -222,16 +216,16 @@
       cursor: pointer;
     }
 
-    /* Kintra side panel (modal) */
+    /* Kintra overlay lives INSIDE the phone shell */
     .kintra-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.7);
+      position: absolute;
+      inset: 14px;
+      background: rgba(15, 23, 42, 0.65);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 40;
-      padding: 16px;
+      z-index: 10;
+      padding: 12px;
     }
 
     .kintra-backdrop.active {
@@ -239,14 +233,14 @@
     }
 
     .kintra-panel {
-      width: 360px;
-      max-width: 100%;
+      width: 100%;
+      max-width: 320px;
       background: #020617;
-      border-radius: 20px;
+      border-radius: 18px;
       border: 1px solid #1f2937;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.8);
-      padding: 14px;
-      transform: translateY(8px);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.85);
+      padding: 12px;
+      transform: translateY(6px);
       opacity: 0;
       transition: opacity 0.15s ease, transform 0.15s ease;
     }
@@ -260,11 +254,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .kintra-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
     }
 
@@ -312,7 +306,7 @@
     }
 
     .kintra-preview {
-      margin-top: 6px;
+      margin-top: 4px;
       font-size: 12px;
       border-radius: 10px;
       border: 1px dashed #1e293b;
@@ -338,7 +332,7 @@
       font-size: 12px;
       cursor: pointer;
       white-space: nowrap;
-      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
     }
 
     .btn-secondary {
@@ -348,7 +342,6 @@
     }
 
     .btn-secondary:hover {
-      background: #020617;
       border-color: #334155;
     }
 
@@ -408,38 +401,38 @@
         <div id="wa-send-btn" class="send-icon">➤</div>
       </div>
     </div>
-  </div>
 
-  <!-- Kintra modal -->
-  <div class="kintra-backdrop" id="kintra-backdrop">
-    <div class="kintra-panel" id="kintra-panel">
-      <div class="kintra-header">
-        <div class="kintra-title">Kintra time-slot reply</div>
-        <div class="kintra-close" id="kintra-close">×</div>
-      </div>
-      <div class="kintra-subtitle">
-        Choose two viewing slots — Kintra drafts a clean WhatsApp reply for you.
-      </div>
-
-      <div class="field-row">
-        <div class="field">
-          <label for="time1">Slot 1</label>
-          <input id="time1" type="time" value="18:00" />
+    <!-- Kintra overlay INSIDE the phone shell -->
+    <div class="kintra-backdrop" id="kintra-backdrop">
+      <div class="kintra-panel" id="kintra-panel">
+        <div class="kintra-header">
+          <div class="kintra-title">Kintra time-slot reply</div>
+          <div class="kintra-close" id="kintra-close">×</div>
         </div>
-        <div class="field">
-          <label for="time2">Slot 2</label>
-          <input id="time2" type="time" value="19:00" />
+        <div class="kintra-subtitle">
+          Choose two viewing slots — Kintra drafts a clean WhatsApp reply for you.
         </div>
-      </div>
 
-      <div class="kintra-preview" id="kintra-draft-preview"></div>
+        <div class="field-row">
+          <div class="field">
+            <label for="time1">Slot 1</label>
+            <input id="time1" type="time" value="18:00" />
+          </div>
+          <div class="field">
+            <label for="time2">Slot 2</label>
+            <input id="time2" type="time" value="19:00" />
+          </div>
+        </div>
 
-      <div class="kintra-buttons">
-        <button class="btn btn-secondary" id="kintra-close-2">Cancel</button>
-        <button class="btn btn-primary" id="kintra-send">Insert into reply</button>
-      </div>
-      <div class="kintra-note">
-        Simulation only — this shows how Kintra prepares the message inside WhatsApp.
+        <div class="kintra-preview" id="kintra-draft-preview"></div>
+
+        <div class="kintra-buttons">
+          <button class="btn btn-secondary" id="kintra-close-2">Cancel</button>
+          <button class="btn btn-primary" id="kintra-send">Insert into reply</button>
+        </div>
+        <div class="kintra-note">
+          Simulation only — this shows how Kintra overlays WhatsApp and prepares the message inside the chat.
+        </div>
       </div>
     </div>
   </div>
@@ -471,8 +464,7 @@
 
     function formatTime(value, fallback) {
       if (!value) return fallback;
-      // simple HH:MM → HH:MM format (already fine)
-      return value;
+      return value; // HH:MM is fine for the sim
     }
 
     function updateDraft() {
