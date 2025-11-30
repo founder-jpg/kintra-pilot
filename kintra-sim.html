@@ -291,4 +291,232 @@
     .field {
       flex: 1;
       display: flex;
-      flex-dire
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    input[type="text"],
+    input[type="time"] {
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      padding: 6px 8px;
+      font-size: 12px;
+      background: #020617;
+      color: #e5e7eb;
+      outline: none;
+    }
+
+    .kintra-preview {
+      margin-top: 6px;
+      font-size: 12px;
+      border-radius: 10px;
+      border: 1px dashed #1e293b;
+      background: #020617;
+      padding: 8px;
+      white-space: pre-wrap;
+      color: #e5e7eb;
+    }
+
+    .kintra-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-secondary {
+      background: #020617;
+      color: var(--text-main);
+      border: 1px solid #1f2937;
+    }
+
+    .btn-secondary:hover {
+      background: #020617;
+      border-color: #334155;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #f9fafb;
+      font-weight: 600;
+      border: 1px solid rgba(52, 120, 246, 0.9);
+      box-shadow: 0 8px 16px rgba(52,120,246,0.35);
+    }
+
+    .btn-primary:hover {
+      background: #2e6bdc;
+      box-shadow: 0 10px 20px rgba(46,107,220,0.4);
+    }
+
+    .kintra-note {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="phone-inner">
+      <div class="status-bar">
+        <span>19:42</span>
+        <span>🔋 82%</span>
+      </div>
+
+      <div class="header">
+        <div class="avatar">K</div>
+        <div class="header-main">
+          <div class="header-name">Porta Romana Lead</div>
+          <div class="header-status">online • WhatsApp</div>
+        </div>
+      </div>
+
+      <div class="chat-window">
+        <div id="chat-window-inner" class="chat-window-inner">
+          <div class="bubble client">
+            Hi, we’d like to see the 2-bedroom near Porta Romana. Do you have any time on Thursday evening?
+            <div class="chat-meta">
+              <span>19:40</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-bar">
+        <div class="input-field">
+          <span class="input-placeholder-icon">💬</span>
+          <input id="wa-input" placeholder="Type a message…" />
+        </div>
+        <button class="btn-mini" id="kintra-trigger">Use Kintra</button>
+        <div id="wa-send-btn" class="send-icon">➤</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kintra modal -->
+  <div class="kintra-backdrop" id="kintra-backdrop">
+    <div class="kintra-panel" id="kintra-panel">
+      <div class="kintra-header">
+        <div class="kintra-title">Kintra time-slot reply</div>
+        <div class="kintra-close" id="kintra-close">×</div>
+      </div>
+      <div class="kintra-subtitle">
+        Choose two viewing slots — Kintra drafts a clean WhatsApp reply for you.
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="time1">Slot 1</label>
+          <input id="time1" type="time" value="18:00" />
+        </div>
+        <div class="field">
+          <label for="time2">Slot 2</label>
+          <input id="time2" type="time" value="19:00" />
+        </div>
+      </div>
+
+      <div class="kintra-preview" id="kintra-draft-preview"></div>
+
+      <div class="kintra-buttons">
+        <button class="btn btn-secondary" id="kintra-close-2">Cancel</button>
+        <button class="btn btn-primary" id="kintra-send">Insert into reply</button>
+      </div>
+      <div class="kintra-note">
+        Simulation only — this shows how Kintra prepares the message inside WhatsApp.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const kintraTrigger = document.getElementById('kintra-trigger');
+    const kintraBackdrop = document.getElementById('kintra-backdrop');
+    const kintraPanel = document.getElementById('kintra-panel');
+    const kintraClose = document.getElementById('kintra-close');
+    const kintraClose2 = document.getElementById('kintra-close-2');
+    const kintraSend = document.getElementById('kintra-send');
+    const draftPreview = document.getElementById('kintra-draft-preview');
+    const time1Input = document.getElementById('time1');
+    const time2Input = document.getElementById('time2');
+    const waInput = document.getElementById('wa-input');
+    const waSendBtn = document.getElementById('wa-send-btn');
+    const chatWindowInner = document.getElementById('chat-window-inner');
+
+    function openKintra() {
+      kintraBackdrop.classList.add('active');
+      kintraPanel.classList.add('active');
+      updateDraft();
+    }
+
+    function closeKintra() {
+      kintraBackdrop.classList.remove('active');
+      kintraPanel.classList.remove('active');
+    }
+
+    function formatTime(value, fallback) {
+      if (!value) return fallback;
+      // simple HH:MM → HH:MM format (already fine)
+      return value;
+    }
+
+    function updateDraft() {
+      const t1 = formatTime(time1Input.value, '18:00');
+      const t2 = formatTime(time2Input.value, '19:00');
+
+      const text = `Sure, I can offer two options this Thursday:\n\n• ${t1}\n• ${t2}\n\nLet me know which works best for you 🙂`;
+      draftPreview.textContent = text;
+      return text;
+    }
+
+    kintraTrigger.addEventListener('click', openKintra);
+    kintraClose.addEventListener('click', closeKintra);
+    kintraClose2.addEventListener('click', closeKintra);
+
+    time1Input.addEventListener('input', updateDraft);
+    time2Input.addEventListener('input', updateDraft);
+
+    kintraSend.addEventListener('click', () => {
+      const text = updateDraft();
+      waInput.value = text;
+      closeKintra();
+      waInput.focus();
+    });
+
+    waSendBtn.addEventListener('click', () => {
+      const msg = waInput.value.trim();
+      if (!msg) return;
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble agent';
+      bubble.innerHTML = `
+        ${msg.replace(/\n/g, '<br>')}
+        <div class="chat-meta">
+          <span>19:42</span>
+          <span class="ticks">✔✔</span>
+        </div>
+      `;
+      chatWindowInner.appendChild(bubble);
+      waInput.value = '';
+      chatWindowInner.scrollTop = chatWindowInner.scrollHeight;
+    });
+
+    // Initialise draft text
+    updateDraft();
+  </script>
+</body>
+</html>
