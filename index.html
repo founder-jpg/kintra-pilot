@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Pilot • Italy & Thailand</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png"/>
+
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+      --line-green: #06C755;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
+
+    /* Multi-Language Logic */
+    .lang-en-only, .lang-th-only, .lang-it-only { display: none; }
+    body.lang-en-active .lang-en-only { display: block; }
+    body.lang-it-active .lang-it-only { display: block; }
+    body.lang-th-active .lang-th-only { display: block; }
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
+    .toggle button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
+
+    /* VEO 3.1 CINEMATIC HERO (ALICE PIVOT) */
+    .hero-cinematic {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 24px;
+    }
+    .hero-cinematic video { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+    .hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 40px;
+      background: linear-gradient(transparent, rgba(11, 35, 71, 0.95));
+    }
+    .hero-overlay h1 { color: #fff; font-size: 38px; margin: 0 0 10px; }
+    .hero-overlay p { color: rgba(255,255,255,0.8); max-width: 550px; margin-bottom: 20px; }
+
+    /* CTA Buttons */
+    .btn { border:1px solid var(--line); background:#fff; border-radius:10px; padding:12px 20px; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; gap:8px; }
+    .btn.primary { background:var(--navy); color:#fff; border:none; }
+    .btn.line { background:var(--line-green); color:#fff; border:none; }
+
+    /* Protected Italian Demo Styles */
+    .card { border:1px solid var(--line); border-radius:12px; padding:15px; background:#fff; margin-bottom: 20px; }
+    .phone-shell { background:#121b22; border-radius:22px; padding:8px; max-width:320px; }
+    .chat-inner { background:#ece5dd; border-radius:18px; overflow:hidden; padding:10px; display:flex; flex-direction:column; }
+    .bubble { max-width:85%; padding:8px 12px; border-radius:12px; margin:4px 0; font-size:14px; }
+    .bubble.client { background:#fff; align-self: flex-start; }
+    .bubble.kintra { background:#dcf8c6; align-self: flex-end; }
+    .divider { height:1px; background:var(--line); margin:40px 0; }
+  </style>
+</head>
+
+<body class="lang-en-active">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png" alt="Kintra">
+        <strong>Kintra</strong>
+        <span class="badge lang-en-only">Pilot • Italy & Thailand</span>
+        <span class="badge lang-it-only">Pilot • Italia</span>
+        <span class="badge lang-th-only">โครงการนำร่อง • ไทย</span>
+      </div>
+      <div class="toggle">
+        <button class="active" data-lang="en">🇬🇧 EN</button>
+        <button data-lang="it">🇮🇹 IT</button>
+        <button data-lang="th">🇹🇭 TH</button>
+      </div>
+    </header>
+
+    <section class="hero-cinematic">
+      <video autoplay muted loop playsinline poster="./img/fallback.jpg">
+        <source src="http://googleusercontent.com/generated_video_content/16372426716536784306" type="video/mp4">
+      </video>
+      <div class="hero-overlay">
+        <h1 class="lang-en-only">Cross-Border Luxury Tech</h1>
+        <h1 class="lang-it-only">Tecnologia di Lusso Transfrontaliera</h1>
+        <h1 class="lang-th-only">เทคโนโลยีความหรูหราข้ามพรมแดน</h1>
+        
+        <p class="lang-en-only">Instant messaging automation for high-end agents in Thailand and Italy. Protect your leads, close faster.</p>
+        <p class="lang-it-only">Automazione della messaggistica istantanea per agenti di alto livello in Italia e Thailandia.</p>
+        
+        <div style="display: flex; gap: 12px;">
+          <a href="mailto:founder@kintra.tech" class="btn primary">Request Pilot Access</a>
+          <a href="https://line.me/ti/p/@kintra_th" class="btn line">
+             <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="18">
+             <span>Line Alice</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="demo-comparison">
+      <h2 class="lang-en-only">WhatsApp Smart Reply Demo</h2>
+      <h2 class="lang-it-only">Demo Risposta Intelligente WhatsApp</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <div class="card">
+          <h3 class="lang-en-only">Before (Manual)</h3>
+          <div class="phone-shell">
+            <div class="chat-inner">
+              <div class="bubble client">Is the Via Roma apt available?</div>
+              <div class="bubble kintra" style="background:#fff">Yes, when can you see it?</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="lang-en-only">After (Kintra Assisted)</h3>
+          <div class="phone-shell">
+            <div class="chat-inner">
+              <div class="bubble client">Is the Via Roma apt available?</div>
+              <div class="bubble kintra">Hi Luca! Yes, it is. 2BR, 1BTH. Available Feb 15. We have Wed 18:30 or Thu 17:00?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="text-align:center; margin-top:50px; color:var(--muted); font-size:13px;">
+      <p>&copy; 2026 Kintra Tech • Verified Post-December Security Audit</p>
+    </footer>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.toggle button');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.body.className = `lang-${btn.getAttribute('data-lang')}-active`;
+      });
+    });
+  </script>
+</body>
+</html>
