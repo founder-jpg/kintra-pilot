@@ -17,17 +17,18 @@
       --line-green: #06C755;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
     a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
     img{max-width:100%;display:block}
     .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
 
-    /* Language logic */
+    /* Multi-Language Logic */
     .lang-en-only, .lang-th-only, .lang-it-only { display: none; }
     body.lang-en-active .lang-en-only { display: block; }
     body.lang-it-active .lang-it-only { display: block; }
     body.lang-th-active .lang-th-only { display: block; }
 
+    /* Header */
     header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
     .brand{display:flex;align-items:center;gap:10px}
     .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
@@ -35,7 +36,7 @@
     .toggle button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;margin-left:4px}
     .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
 
-    /* CINEMATIC HERO */
+    /* VEO 3.1 HERO STYLING */
     .hero-cinematic {
       position: relative; width: 100%; height: 500px;
       border-radius: var(--radius); overflow: hidden; background: #0b2347;
@@ -49,18 +50,28 @@
     .hero-overlay h1 { color: #fff; font-size: 38px; margin: 0 0 10px; }
     .hero-overlay p { color: rgba(255,255,255,0.8); max-width: 550px; margin-bottom: 20px; }
 
-    .btn { border:1px solid var(--line); background:#fff; border-radius:10px; padding:12px 20px; cursor:pointer; font-weight:600; display:inline-flex; align-items:center; gap:8px; }
-    .btn.primary { background:var(--navy); color:#fff; border:none; }
-    .btn.line { background:var(--line-green); color:#fff; border:none; }
+    /* Button variants */
+    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 18px;cursor:pointer;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+    .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+    .btn.line { background: var(--line-green); color: #fff; border: none; }
+    .btn.ghost{background:#fff;color:#0b2347;border-color:var(--line)}
 
-    /* ORIGINAL CONTENT STYLES (RESTORED) */
-    .card { border:1px solid var(--line); border-radius:12px; padding:20px; background:#fff; margin-bottom: 20px; }
-    .phone-shell { background:#121b22; border-radius:22px; padding:8px; max-width:340px; margin-top: 10px; }
-    .chat-inner { background:#ece5dd; border-radius:18px; overflow:hidden; padding:12px; display:flex; flex-direction:column; min-height: 160px;}
-    .bubble { max-width:85%; padding:8px 12px; border-radius:12px; margin:4px 0; font-size:14px; }
-    .bubble.client { background:#fff; align-self: flex-start; border-bottom-left-radius: 4px; }
-    .bubble.kintra { background:#dcf8c6; align-self: flex-end; border-bottom-right-radius: 4px; }
-    .divider { height:1px; background:var(--line); margin:40px 0; }
+    /* Original Italian Pilot Styles (Verified) */
+    .divider{height:1px;background:var(--line);margin:18px 0}
+    .wa-panel{margin-top:10px;display:none}
+    .wa-panel.active{display:block}
+    .before-after{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+    .phone-shell{margin-top:10px;border-radius:22px;padding:8px;background:#121b22;max-width:340px}
+    .chat-inner{border-radius:18px;overflow:hidden;background:#ece5dd;position:relative}
+    .bubble{max-width:78%;padding:7px 9px;border-radius:14px;font-size:14px;line-height:1.25}
+    .bubble.client{background:#ffffff;border-bottom-left-radius:4px}
+    .bubble.kintra{background:#dcf8c6;border-bottom-right-radius:4px}
+    .roi .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .roi .cell{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;text-align:center}
+    .roi .cell .big{font-size:22px;font-weight:800;color:#0b5fff}
+    
+    @media (max-width:980px){ .before-after,.roi .row{grid-template-columns:1fr} .hero-cinematic{height:400px} }
   </style>
 </head>
 
@@ -70,90 +81,4 @@
       <div class="brand">
         <img src="./img/logo.png.png" alt="Kintra">
         <strong>Kintra</strong>
-        <span class="badge lang-en-only">Pilot • Italy & Thailand</span>
-        <span class="badge lang-it-only">Pilot • Italia</span>
-        <span class="badge lang-th-only">โครงการนำร่อง • ไทย</span>
-      </div>
-      <div class="toggle">
-        <button class="active" onclick="changeLang('en')">🇬🇧 EN</button>
-        <button onclick="changeLang('it')">🇮🇹 IT</button>
-        <button onclick="changeLang('th')">🇹🇭 TH</button>
-      </div>
-    </header>
-
-    <section class="hero-cinematic">
-      <video autoplay muted loop playsinline>
-        <source src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/Veo_Tropical_Villa_Video_Generation.mp4" type="video/mp4">
-      </video>
-      <div class="hero-overlay">
-        <h1 class="lang-en-only">Cross-Border Luxury Tech</h1>
-        <h1 class="lang-it-only">Tecnologia di Lusso Transfrontaliera</h1>
-        <h1 class="lang-th-only">เทคโนโลยีความหรูหราข้ามพรมแดน</h1>
-        <p class="lang-en-only">Automation for high-end agents in Thailand and Italy.</p>
-        <div style="display: flex; gap: 12px;">
-          <a href="mailto:founder@kintra.tech" class="btn primary">Request Pilot Access</a>
-          <a href="https://line.me/ti/p/@kintra_th" class="btn line">
-             <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="18">
-             <span>Line Alice</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-    
-    <section id="italy-content">
-      <h2 class="lang-en-only">WhatsApp Smart Reply</h2>
-      <h2 class="lang-it-only">Risposte intelligenti su WhatsApp</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-        <div class="card">
-          <h3>Before / Prima</h3>
-          <div class="phone-shell">
-            <div class="chat-inner">
-              <div class="bubble client">Is the Via Roma apt available?</div>
-              <div class="bubble kintra" style="background:#fff">Yes, when can you see it?</div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <h3>After / Dopo</h3>
-          <div class="phone-shell">
-            <div class="chat-inner">
-              <div class="bubble client">Is the Via Roma apt available?</div>
-              <div class="bubble kintra">Hi Luca! Yes, it's available. 2BR, 1BTH. Available Feb 15. We have Wed 18:30 or Thu 17:00?</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section id="thailand-demo">
-      <h2 class="lang-th-only">สำหรับอลิซ (Thailand Demo)</h2>
-      <div class="lang-th-only">
-        <div class="card">
-          <div class="phone-shell">
-            <div class="chat-inner">
-              <div class="bubble client">วิลล่าในภูเก็ตยังว่างอยู่ไหมคะ?</div>
-              <div class="bubble kintra">สวัสดีครับอลิซ! ยังว่างครับ ฿45M วิวทะเล สะดวกวันพุธ 18:30 ไหมครับ?</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer style="text-align:center; margin-top:50px; color:var(--muted); font-size:13px; border-top: 1px solid var(--line); padding-top: 20px;">
-      <p>&copy; 2026 Kintra Tech • Verified Master Audit</p>
-    </footer>
-  </div>
-
-  <script>
-    function changeLang(lang) {
-      document.body.className = 'lang-' + lang + '-active';
-      document.querySelectorAll('.toggle button').forEach(b => b.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-    }
-  </script>
-</body>
-</html>
+        <span class="
