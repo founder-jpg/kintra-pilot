@@ -1,24 +1,134 @@
-<section class="hero" id="hero">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kintra — Pilot • Europe</title>
+  <meta name="color-scheme" content="light only"/>
+  <meta name="theme-color" content="#0b2347"/>
+  <link rel="icon" href="./img/logo.png.png"/>
+
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --gold:#c9a227;
+      --card:#f7f9fc; --chip:#eef3ff; --radius:14px; --max:1100px;
+      --wa-gray:#f5f7fb; --wa-blue:#e8f1ff; --wa-blue-b:#d7e6ff; --agent-green:#e9f8f1; --agent-green-b:#cfeee0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial}
+    a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:24px 22px 60px}
+
+    /* Language visibility helpers */
+    .lang-en-only{display:none;}
+    .lang-it-only{display:block;}
+    body.lang-en-active .lang-en-only{display:block;}
+    body.lang-en-active .lang-it-only{display:none;}
+    body.lang-it-active .lang-en-only{display:none;}
+    body.lang-it-active .lang-it-only{display:block;}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand img{width:28px;height:28px;border-radius:6px;object-fit:contain}
+    .brand strong{letter-spacing:.2px}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
+
+    .langbox{display:flex;align-items:center;gap:10px}
+    .langbox .label{font-size:14px;color:#6b7280}
+    .toggle{display:flex;gap:8px;flex-wrap:wrap}
+    .toggle button{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-weight:600;white-space:nowrap}
+    .toggle button.active{background:var(--chip);border-color:var(--brand);color:#0b2347}
+    .flag{display:inline-flex;font-size:16px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;margin-top:8px}
+    h1{font-size:40px;line-height:1.08;margin:0 0 10px;letter-spacing:-.2px;color:#0b2347}
+    h2{margin:0 0 10px;color:#0b2347}
+    h3{margin:0 0 8px;color:#0b2347}
+    .lead{font-size:18px;color:#243044;margin:0 0 10px}
+    .sub{color:#5b6475;margin:0 0 14px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 6px}
+    .btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:600;display:inline-block}
+    .btn.primary{background:#0b2347;border-color:#0b2347;color:#fff}
+    .btn.ghost{background:#fff;color:#0b2347;border-color:var(--line)}
+    .divider{height:1px;background:var(--line);margin:18px 0}
+
+    /* Gold plaque */
+    .gold{margin:10px 0 0;background:linear-gradient(180deg, rgba(234,210,139,.32), rgba(234,210,139,.12));border:1px solid #e6d59a;border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(201,162,39,.12)}
+    .gold h3{margin:0 0 6px;color:#5e4a12;font-size:18px;letter-spacing:.2px}
+    .gold p{margin:4px 0;color:#5a533b}
+
+    /* WhatsApp section */
+    .wa{display:flex;flex-direction:column;gap:10px}
+    .wa-tabs{display:flex;gap:8px;margin-top:4px}
+    .wa-tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer;white-space:nowrap}
+    .wa-tab.active{background:#eef3ff;border-color:#0b5fff;color:#0b2347}
+    .wa-panel{margin-top:10px;display:none}
+    .wa-panel.active{display:block}
+    .before-after{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff}
+
+    /* Chat UI */
+    .phone-shell{margin-top:10px;border-radius:22px;padding:8px 7px 10px;background:linear-gradient(145deg,#121b22,#05090c);max-width:340px}
+    .chat-inner{border-radius:18px;overflow:hidden;background:#ece5dd;position:relative}
+    .chat-header{height:40px;background:#075e54;display:flex;align-items:center;gap:8px;padding:6px 10px;color:#fff;font-size:13px;font-weight:500}
+    .chat-avatar{width:22px;height:22px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;background:#0b5fff}
+    .chat-screen{padding:8px 6px 10px;background:#ece5dd}
+    .msg-row{display:flex;margin:4px 0}
+    .msg-row.me{justify-content:flex-end}
+    .bubble{max-width:78%;padding:7px 9px;border-radius:14px;line-height:1.25;font-size:14px;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.08);word-wrap:break-word}
+    .bubble.client{background:#ffffff;color:#111827;border-bottom-left-radius:4px}
+    .bubble.kintra{background:#dcf8c6;color:#111827;border-bottom-right-radius:4px}
+    .insight{border:1px solid #e6d59a;background:#fff;border-radius:10px;padding:10px 12px;font-size:14px;color:#414b60;box-shadow:inset 3px 0 0 0 rgba(201,162,39,.9);margin-top:10px}
+
+    /* FAQ */
+    .faq details{border:1px solid var(--line);border-radius:12px;background:#fff;padding:12px;margin-top:8px}
+    .faq summary{font-weight:700;cursor:pointer}
+    .faq p{margin:8px 0 0;color:#485264}
+
+    footer{margin:28px 0 8px;color:#6b7280;font-size:14px}
+
+    @media (max-width:980px){
+      .hero,.before-after{grid-template-columns:1fr}
+      h1{font-size:32px}
+    }
+  </style>
+</head>
+
+<body class="lang-en-active">
+  <div class="wrap">
+
+    <header>
+      <div class="brand">
+        <img src="./img/logo.png.png" alt="Kintra logo">
+        <strong>Kintra</strong>
+        <span class="badge">Pilot • Europe</span>
+      </div>
+      <div class="langbox">
+        <div class="toggle">
+          <button class="active" data-lang="en">🇬🇧 EN</button>
+          <button data-lang="it">🇮🇹 IT</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
       <div>
         <p class="badge">
           <span class="lang-en-only">WhatsApp-native • High-Performance Teams</span>
           <span class="lang-it-only">WhatsApp-nativo • Team ad Alte Prestazioni</span>
         </p>
-
         <h1>
           <span class="lang-en-only">Faster WhatsApp replies for high-stakes sales & service teams</span>
           <span class="lang-it-only">Risposte WhatsApp più veloci per i team di vendita e assistenza</span>
         </h1>
-
         <p class="lead">
-          <span class="lang-en-only">
-            Convert more leads and protect your time without changing how you work.
-          </span>
-          <span class="lang-it-only">
-            Converti più contatti e proteggi il tuo tempo senza cambiare il tuo modo di lavorare.
-          </span>
+          <span class="lang-en-only">Convert more leads and protect your time without changing how you work.</span>
+          <span class="lang-it-only">Converti più contatti e proteggi il tuo tempo senza cambiare il tuo modo di lavorare.</span>
         </p>
-
         <div class="cta-row">
           <a class="btn primary" href="mailto:founder@kintra.tech?subject=Kintra%2014-Day%20Pilot">
             <span class="lang-en-only">Request 14-day pilot</span>
@@ -29,33 +139,3 @@
             <span class="lang-it-only">Anteprima dashboard</span>
           </a>
         </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="gold">
-      <div class="lang-en-only">
-        <h3>14-Day Performance Pilot</h3>
-        <p>• 14 days of intelligent message drafting in your specific niche.</p>
-        <p>• ROI typically visible within the first 7 days of launch.</p>
-        <p>• Custom KPI tracking (Response speed, lead protection, conversions).</p>
-      </div>
-      <div class="lang-it-only">
-        <h3>Pilot di Performance (14 giorni)</h3>
-        <p>• 14 giorni di bozze messaggi intelligenti nella tua nicchia specifica.</p>
-        <p>• ROI tipicamente visibile entro i primi 7 giorni dal lancio.</p>
-        <p>• Monitoraggio KPI personalizzato (Velocità, protezione contatti, conversioni).</p>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <p class="sub">
-      <span class="lang-en-only">
-        Together we define 2–3 simple KPIs. If Kintra doesn’t clearly save time and protect more business in 14 days, we don’t continue.
-      </span>
-      <span class="lang-it-only">
-        Definiamo insieme 2–3 KPI semplici. Se in 14 giorni Kintra non fa risparmiare tempo in modo evidente e non protegge più business, non proseguite.
-      </span>
-    </p>
