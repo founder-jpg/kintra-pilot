@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Indigo Real Estate x Kintra Pilot</title>
+  <style>
+    :root{
+      --bg:#ffffff; --ink:#0b1220; --muted:#5b6475; --line:#e8ecf2;
+      --navy:#0b2347; --brand:#0b5fff; --radius:14px; --line-green: #06C755; --gold:#c9a227;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,blinkmacsystemfont,sans-serif}
+    .wrap{max-width:420px;margin:0 auto;padding:16px 16px 120px;position:relative}
+
+    /* Mobile Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .brand-col{display:flex;flex-direction:column}
+    .brand-col strong{font-size:18px;letter-spacing:-0.2px;color:var(--navy)}
+    .brand-col span{font-size:13px;color:var(--muted)}
+    .badge{padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:#6b7280;font-size:13px}
+
+    /* CINEMATIC HERO */
+    .hero-cinematic {
+      position: relative; width: 100%; height: 350px;
+      border-radius: var(--radius); overflow: hidden; background: #0b2347;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .hero-cinematic video { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; }
+    .hero-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 24px;
+      background: linear-gradient(transparent, rgba(11, 35, 71, 0.95)); color: #fff;
+    }
+    .hero-overlay h1 { color: #fff; font-size: 28px; margin: 0 0 8px; letter-spacing: -0.5px; }
+
+    /* REFINED LISTING SUMMARY */
+    .wa { margin-top: 30px; }
+    .wa h2 { font-size: 18px; margin-bottom: 12px; color: var(--navy); }
+    .card-wa { display: flex; gap: 12px; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .card-wa-photo img { width: 110px; height: 110px; object-fit: cover; }
+    .card-wa-body { padding: 12px 12px 12px 0; flex:1 }
+    .card-wa-title { font-weight: 700; font-size: 15px; margin-bottom: 2px; }
+    .card-wa-price { color: var(--gold); font-weight: 800; font-size: 17px; margin-top: 4px; }
+    .tagrow { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tag { font-size: 11px; font-weight: 600; color: var(--navy); background: #eef3ff; border: 1px solid #dbe7ff; border-radius: 999px; padding: 4px 10px; }
+
+    /* Thumb-Sticky LINE Button */
+    .line-sticky {
+      position: fixed; bottom: 24px; left: 20px; right: 20px;
+      z-index: 100; background: var(--line-green); border-radius: 16px;
+      padding: 18px; color: #fff; display: flex; align-items: center;
+      justify-content: center; gap: 12px; font-weight: 700; text-decoration: none;
+      box-shadow: 0 10px 25px rgba(6, 199, 85, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand-col">
+        <strong>Indigo Real Estate</strong>
+        <span>Kintra Tech Pilot</span>
+      </div>
+      <div class="badge">🇬🇧 TH (Demo)</div>
+    </header>
+
+    <section class="hero-cinematic">
+      <video autoplay muted loop playsinline>
+        <source src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/Veo_Tropical_Villa_Teaser.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay">
+        <h1>Anchan Indigo</h1>
+      </div>
+    </section>
+
+    <section class="wa">
+      <h2>Indigo Featured Listing</h2>
+      <div class="card-wa">
+        <div class="card-wa-photo">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=300" alt="Anchan Indigo">
+        </div>
+        <div class="card-wa-body">
+          <div class="card-wa-title">Anchan Indigo • Layan Luxury</div>
+          <div class="card-wa-price">฿38,500,000</div>
+          <div class="tagrow">
+            <span class="tag">4 Bed</span>
+            <span class="tag">Private Pool</span>
+            <span class="tag">High Yield</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <footer style="margin-top: 40px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.6;">
+      <p><b>Powered by Kintra AI:</b><br>
+      Auto-qualifying Facebook Marketplace leads<br>via Line 24/7.</p>
+    </footer>
+
+    <a href="https://line.me/ti/p/@kintra_th" class="line-sticky">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="24" alt="Line">
+      <span>Request Info on LINE</span>
+    </a>
+
+  </div>
+</body>
+</html>
