@@ -7,26 +7,35 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kintra.tech/alice-indigo">
     <meta property="og:title" content="💎 Indigo Exclusive: 15.9M Pool Villa (Hang Dong)">
-    <meta property="og:description" content="4BR Modern Family Home. 2 Mins to Kad Farang & SBS School. ฿15.9M.">
+    <meta property="og:description" content="4BR Modern Villa near Kad Farang. 2 Mins to SBS School. Private Gym.">
     <meta property="og:image" content="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/villa-poster.png">
+    <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica; margin: 0; padding: 0; background: #fff; color: #2d3436; -webkit-font-smoothing: antialiased; }
         .kintra-hero { position: relative; height: 70vh; overflow: hidden; display: flex; align-items: flex-end; color: white; background: #000; }
-        .video-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; z-index: 1; object-fit: cover; }
+        .video-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; object-fit: cover; }
         .hero-overlay { position: relative; z-index: 2; background: linear-gradient(transparent, rgba(0,0,0,0.9)); width: 100%; padding: 40px 20px; box-sizing: border-box; }
         .badge { background: #ff4757; padding: 6px 14px; border-radius: 4px; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
         .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; padding: 20px; background: #f8f9fa; border-bottom: 1px solid #eee; }
-        .stats-bar strong { font-size: 16px; display: block; }
+        .stats-bar strong { font-size: 16px; display: block; color: #2d3436; }
         .stats-bar small { color: #636e72; font-size: 10px; text-transform: uppercase; }
-        .content { padding: 30px 20px; box-sizing: border-box; }
-        .price-tag { font-size: 32px; font-weight: 800; color: #2d3436; margin: 0; }
-        .thai-title { color: #636e72; font-size: 18px; margin-top: 5px; font-weight: 400; }
-        .perks { margin: 25px 0; padding: 0; list-style: none; }
-        .perks li { margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; line-height: 1.4; }
-        .perks b { display: block; color: #2d3436; font-size: 16px; }
-        .perks span { color: #636e72; font-size: 14px; }
-        .cta-line { background-color: #06C755; color: white; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 18px; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 30px; font-size: 18px; box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3); }
+        .content { padding: 30px 20px; }
+        .price-tag { font-size: 32px; font-weight: 800; color: #2d3436; }
+        .thai-title { color: #636e72; font-size: 18px; margin: 10px 0 20px; font-weight: 400; }
+        details { background: #f8f9fa; border: 1px solid #eee; border-radius: 8px; margin: 20px 0; }
+        summary { padding: 15px; cursor: pointer; color: #2d3436; font-weight: bold; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::after { content: '+'; font-size: 20px; }
+        details[open] summary::after { content: '-'; }
+        .specs-list { padding: 0 15px 15px; font-size: 14px; color: #636e72; line-height: 1.8; }
+        .gallery-label { color: #2d3436; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 30px 0 12px; }
+        .gallery-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; margin: 0 -20px; padding: 0 20px 16px; }
+        .gallery-track::-webkit-scrollbar { display: none; }
+        .gallery-track img { flex-shrink: 0; width: 78vw; max-width: 320px; height: 220px; object-fit: cover; border-radius: 12px; scroll-snap-align: start; box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+        .gallery-dots { display: flex; gap: 6px; justify-content: center; margin: 4px 0 24px; }
+        .gallery-dots span { width: 6px; height: 6px; border-radius: 50%; background: #dfe6e9; display: block; transition: background 0.2s; }
+        .gallery-dots span.active { background: #ff4757; }
+        .cta-line { background-color: #06C755; color: white; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 18px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; box-shadow: 0 4px 15px rgba(6, 199, 85, 0.3); margin-top: 10px; }
         .footer-ref { text-align: center; color: #b2bec3; font-size: 12px; margin-top: 30px; padding-bottom: 40px; }
     </style>
 </head>
@@ -37,28 +46,53 @@
         </video>
         <div class="hero-overlay">
             <span class="badge">INDIGO EXCLUSIVE</span>
-            <h1 style="margin:10px 0 5px 0; font-size: 28px;">Modern 4BR Pool Villa</h1>
-            <p style="margin:0; opacity: 0.8; font-size: 14px;">📍 800m from Kad Farang, Hang Dong</p>
+            <h1 style="margin:10px 0 5px 0;">Modern 4BR Pool Villa</h1>
+            <p style="margin:0; opacity:0.8;">📍 800m from Kad Farang, Hang Dong</p>
         </div>
     </div>
     <div class="stats-bar">
         <div><strong>4</strong><small>Beds</small></div>
         <div><strong>5</strong><small>Baths</small></div>
         <div><strong>GYM</strong><small>Private</small></div>
-        <div><strong>99</strong><small>Sq.W</small></div>
+        <div><strong>2 Min</strong><small>to School</small></div>
     </div>
     <div class="content">
         <div class="price-tag">฿15,900,000</div>
-        <div class="thai-title">บ้านสวยทำเลทอง หางดง — 15.9 ล้านบาท!</div>
-        <ul class="perks">
-            <li><div style="font-size: 22px;">🏫</div><div><b>Elite Education Hub</b><span>3 mins to SBS International School. ใกล้โรงเรียนนานาชาติ SBS เพียง 3 นาที</span></div></li>
-            <li><div style="font-size: 22px;">⚡</div><div><b>Eco-Smart Living</b><span>Equipped with EV Charging & Solar Savings. พร้อมระบบชาร์จรถไฟฟ้าและโซล่าร์เซลล์</span></div></li>
-            <li><div style="font-size: 22px;">🛡️</div><div><b>Architect QC</b><span>University professor controlled construction. ควบคุมงานก่อสร้างโดยสถาปนิกมืออาชีพ</span></div></li>
-        </ul>
+        <div class="thai-title">บ้านสวยสไตล์โมเดิร์น หางดง — ทำเลทองใกล้กาดฝรั่ง</div>
+        <details>
+            <summary>Property Highlights</summary>
+            <div class="specs-list">
+                • Ultra-Private L-Shaped Salt Water Pool<br>
+                • Dedicated Glass-Walled Gym Pavilion<br>
+                • 2 Minutes to SBS International School<br>
+                • 800m to Kad Farang Village & Rimping<br>
+                • Premium Teak Wood & Natural Sandstone<br>
+                • Fully Furnished — Move-In Ready
+            </div>
+        </details>
+        <div class="gallery-label">Property Gallery</div>
+        <div class="gallery-track" id="gallery-hd">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/hang-dong-1.jpg" alt="Exterior">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/hang-dong-2.jpg" alt="Kitchen">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/hang-dong-3.jpg" alt="Bedroom">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/hang-dong-4.jpg" alt="Living">
+        </div>
+        <div class="gallery-dots" id="dots-hd">
+            <span class="active"></span><span></span><span></span><span></span>
+        </div>
         <a href="https://line.me/ti/p/~0832000431" class="cta-line">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="24">
             Inquire via LINE | สนใจสอบถาม
         </a>
+        <div class="footer-ref">Indigo Real Estate • Property Ref: 4320</div>
     </div>
+    <script>
+        const track = document.getElementById('gallery-hd');
+        const dots = document.querySelectorAll('#dots-hd span');
+        track.addEventListener('scroll', () => {
+            const index = Math.round(track.scrollLeft / (track.clientWidth * 0.78));
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        });
+    </script>
 </body>
 </html>
