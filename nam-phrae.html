@@ -41,4 +41,70 @@
 <body>
     <div class="kintra-hero">
         <video autoplay muted loop playsinline class="video-bg">
-            <source src="
+            <source src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-villa.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay">
+            <span class="badge">INDIGO PRESTIGE COLLECTION</span>
+            <h1 style="margin:15px 0 5px 0;">Nam Phrae Mountain Estate</h1>
+            <p style="margin:0; opacity:0.7; font-size:14px;">📍 Panoramic Doi Suthep Views, Hang Dong</p>
+        </div>
+    </div>
+    <div class="stats-bar">
+        <div><strong>4</strong><small>Beds</small></div>
+        <div><strong>5</strong><small>Baths</small></div>
+        <div><strong>10kW</strong><small>Solar</small></div>
+        <div><strong>150m²</strong><small>Terrace</small></div>
+    </div>
+    <div class="content">
+        <div class="price-tag">฿25,900,000</div>
+        <div class="thai-title">คฤหาสน์หรูสไตล์โมเดิร์น น้ำแพร่ — วิวดอยพาโนรามา</div>
+        <details>
+            <summary>Technical Architecture & Features</summary>
+            <div class="specs-list">
+                • 10 kW Solar Cell System — saves ~฿3,000/mo electricity
+                • 150sqm Private Rooftop Terrace with Mountain Views
+                • Salt Water Infinity Pool (3×9m)
+                • QC by Architect Professor, Faculty of Architecture CMU
+                • Automatic Garden Irrigation System
+                • 3-Phase Electricity — EV Charging Ready
+                • Italian Automatic Gate
+                • Samsung WindFree A/C in Every Bedroom
+            </div>
+        </details>
+        <div class="gallery-label">Property Gallery</div>
+        <div class="gallery-track" id="gallery-np">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-1.jpg" alt="Exterior">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-2.jpg" alt="Context">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-3.jpg" alt="Kitchen">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-4.jpg" alt="Terrace">
+        </div>
+        <div class="gallery-dots" id="dots-np">
+            <span class="active"></span><span></span><span></span><span></span>
+        </div>
+        <a href="https://line.me/ti/p/~kintra_realestate" class="cta-line">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" width="24" alt="Line"> Request Private Viewing | นัดชมบ้าน
+        </a>
+        <div class="footer-ref">Indigo Real Estate • Ref: NAM-PHRAE-LUXE</div>
+    </div>
+    <script>
+        const track = document.getElementById('gallery-np');
+        const dots = document.querySelectorAll('#dots-np span');
+        track.addEventListener('scroll', () => {
+            const index = Math.round(track.scrollLeft / (track.clientWidth * 0.78));
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        });
+    </script>
+    <script type="text/javascript">
+        if (!window.location.search.includes('qwest=true')) {
+            var sc_project=13208538; 
+            var sc_invisible=1; 
+            var sc_security="745ffb39"; 
+            var sc_script = document.createElement('script');
+            sc_script.type = 'text/javascript';
+            sc_script.async = true;
+            sc_script.src = 'https://www.statcounter.com/counter/counter.js';
+            document.getElementsByTagName('body')[0].appendChild(sc_script);
+        }
+    </script>
+</body>
+</html>
