@@ -52,9 +52,7 @@ body{
     padding:20px;
 }
 
-.hero-content{
-    max-width:900px;
-}
+.hero-content{ max-width:900px; }
 
 .hero-collection{
     display:inline-block;
@@ -73,16 +71,8 @@ body{
     margin:22px 0;
 }
 
-.hero-sub{
-    opacity:0.75;
-    font-size:15px;
-}
-
-.hero-price{
-    margin-top:16px;
-    font-size:22px;
-    font-weight:300;
-}
+.hero-sub{ opacity:0.75; font-size:15px; }
+.hero-price{ margin-top:16px; font-size:22px; font-weight:300; }
 
 /* STATS BAR */
 
@@ -111,9 +101,7 @@ body{
 
 /* GALLERY */
 
-.gallery{
-    padding:70px 8%;
-}
+.gallery{ padding:70px 8%; }
 
 .gallery-title{
     color:#d4af37;
@@ -124,9 +112,7 @@ body{
     margin-bottom:20px;
 }
 
-.gallery-wrapper{
-    position:relative;
-}
+.gallery-wrapper{ position:relative; }
 
 .gallery-wrapper::before,
 .gallery-wrapper::after{
@@ -157,9 +143,7 @@ body{
     -webkit-overflow-scrolling:touch;
 }
 
-.gallery-track::-webkit-scrollbar{
-    display:none;
-}
+.gallery-track::-webkit-scrollbar{ display:none; }
 
 .gallery-track img{
     flex:0 0 78vw;
@@ -171,8 +155,6 @@ body{
     transition:transform 0.3s ease;
 }
 
-/* Desktop grid */
-
 @media(min-width:900px){
 
     .gallery-track{
@@ -183,39 +165,44 @@ body{
     }
 
     .gallery-wrapper::before,
-    .gallery-wrapper::after{
-        display:none;
-    }
+    .gallery-wrapper::after{ display:none; }
 
     .gallery-track img{
         width:100%;
         height:260px;
     }
 
-    .gallery-track img:hover{
-        transform:scale(1.02);
-    }
+    .gallery-track img:hover{ transform:scale(1.02); }
 }
 
-/* Dots */
+/* ARCHITECTURE SECTION */
 
-.gallery-dots{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    margin-top:18px;
+.architecture{
+    padding:60px 8%;
+    max-width:1000px;
+    margin:auto;
 }
 
-.gallery-dots span{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#333;
-    transition:all 0.3s ease;
+details{
+    background:#111;
+    border:1px solid #1c1c1c;
+    border-radius:12px;
 }
 
-.gallery-dots span.active{
-    background:#d4af37;
+summary{
+    padding:20px;
+    cursor:pointer;
+    color:#d4af37;
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.specs-content{
+    padding:0 20px 25px;
+    line-height:1.9;
+    font-weight:300;
+    color:#ccc;
 }
 
 /* CTA */
@@ -282,29 +269,42 @@ footer{
 
 <section class="gallery">
     <div class="gallery-title">Property Gallery</div>
-
     <div class="gallery-wrapper">
-        <div class="gallery-track" id="gallery">
+        <div class="gallery-track">
             <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-1.jpg">
             <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-2.jpg">
             <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-3.jpg">
             <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-4.jpg">
         </div>
     </div>
+</section>
 
-    <div class="gallery-dots" id="dots">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+<section class="architecture">
+<details>
+<summary>Technical Architecture & Features | โครงสร้างและระบบวิศวกรรม</summary>
+<div class="specs-content">
+• 10 kW Solar Energy System<br>
+• 150 sqm Rooftop Terrace with Mountain Views<br>
+• 3×9m Salt Water Infinity Pool<br>
+• Architect QC Supervision (Chiang Mai University)<br>
+• 3-Phase Electricity – EV Charging Ready<br>
+• Italian Automatic Entrance Gate<br>
+• Samsung WindFree Air Conditioning<br>
+• Automated Irrigation System<br><br>
+
+<strong>รายละเอียดภาษาไทย:</strong><br>
+• ระบบโซลาร์เซลล์ 10kW<br>
+• สระว่ายน้ำระบบเกลือ<br>
+• รองรับการชาร์จรถยนต์ไฟฟ้า EV<br>
+• ตรวจสอบคุณภาพโดยอาจารย์คณะสถาปัตย์ มช.
+</div>
+</details>
 </section>
 
 <section class="cta-section">
     <a href="https://line.me/ti/p/~kintra_realestate" class="cta-line">
         Request Private Viewing | นัดชมบ้าน
     </a>
-
     <a href="mailto:founder@kintra.tech" class="cta-agent">
         Contact Agent Directly
     </a>
@@ -313,15 +313,6 @@ footer{
 <footer>
 Indigo Real Estate • Ref: NAM-PHRAE-LUXE
 </footer>
-
-<script>
-const track=document.getElementById('gallery');
-const dots=document.querySelectorAll('#dots span');
-track.addEventListener('scroll',()=>{
-    const index=Math.round(track.scrollLeft/(track.clientWidth*0.78));
-    dots.forEach((d,i)=>d.classList.toggle('active',i===index));
-});
-</script>
 
 <!-- StatCounter -->
 <script>
