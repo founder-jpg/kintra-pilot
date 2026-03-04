@@ -19,34 +19,32 @@ gtag('config', 'G-YPHQ44CX3S');
 
 <style>
 
-body {
+body{
     margin:0;
     font-family:'Inter', sans-serif;
-    background:#0c0c0c;
+    background:#0b0b0b;
     color:#f5f5f5;
 }
 
 /* HERO */
 
-.hero {
+.hero{
     position:relative;
     height:100vh;
     overflow:hidden;
 }
 
-.hero video {
+.hero video{
     position:absolute;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.hero-overlay {
+.hero-overlay{
     position:absolute;
     inset:0;
-    background:linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.85));
+    background:linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.9));
     display:flex;
     align-items:center;
     justify-content:center;
@@ -54,69 +52,186 @@ body {
     padding:20px;
 }
 
-.hero-content {
+.hero-content{
     max-width:900px;
 }
 
-.hero-collection {
+.hero-collection{
     display:inline-block;
     font-size:11px;
     letter-spacing:3px;
     text-transform:uppercase;
     color:#d4af37;
-    padding:6px 14px;
-    border:1px solid rgba(212,175,55,0.6);
-    background:rgba(0,0,0,0.5);
+    padding:7px 16px;
+    border:1px solid rgba(212,175,55,0.5);
+    background:rgba(0,0,0,0.45);
     backdrop-filter:blur(6px);
 }
 
-.hero-title {
+.hero-title{
     font-family:'Playfair Display', serif;
-    font-size:clamp(36px, 5vw, 54px);
-    .gallery-track {
+    font-size:clamp(36px,5vw,54px);
+    margin:22px 0;
+}
+
+.hero-sub{
+    opacity:0.75;
+    font-size:15px;
+}
+
+.hero-price{
+    margin-top:16px;
+    font-size:22px;
+    font-weight:300;
+}
+
+/* GALLERY */
+
+.gallery{
+    padding:70px 8%;
+}
+
+.gallery-title{
+    color:#d4af37;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+/* Scroll container */
+.gallery-wrapper{
+    position:relative;
+}
+
+/* Edge fade */
+.gallery-wrapper::before,
+.gallery-wrapper::after{
+    content:'';
+    position:absolute;
+    top:0;
+    width:60px;
+    height:100%;
+    pointer-events:none;
+    z-index:2;
+}
+
+.gallery-wrapper::before{
+    left:0;
+    background:linear-gradient(to right, #0b0b0b, transparent);
+}
+
+.gallery-wrapper::after{
+    right:0;
+    background:linear-gradient(to left, #0b0b0b, transparent);
+}
+
+.gallery-track{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
+}
+
+.gallery-track::-webkit-scrollbar{
+    display:none;
+}
+
+.gallery-track img{
+    flex:0 0 78vw;
+    height:200px;
+    object-fit:cover;
+    border-radius:16px;
+    scroll-snap-align:start;
+    border:1px solid #1c1c1c;
+    transition:transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Desktop grid */
+
+@media(min-width:900px){
+
+    .gallery-track{
         display:grid;
         grid-template-columns:repeat(4,1fr);
+        gap:24px;
         overflow:visible;
     }
-    .gallery-track img {
-        width:100%;
-        height:260px;
+
+    .gallery-wrapper::before,
+    .gallery-wrapper::after{
+        display:none;
     }
+
+    .gallery-track img{
+        width:100%;
+        height:280px;
+    }
+
+    .gallery-track img:hover{
+        transform:scale(1.04);
+        box-shadow:0 20px 40px rgba(0,0,0,0.6);
+    }
+}
+
+/* Dots */
+
+.gallery-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:18px;
+}
+
+.gallery-dots span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#333;
+    transition:all 0.3s ease;
+}
+
+.gallery-dots span.active{
+    background:#d4af37;
+    transform:scale(1.3);
 }
 
 /* DETAILS */
 
-.details {
-    padding:60px 8%;
+.details{
+    padding:70px 8%;
     max-width:1000px;
     margin:auto;
 }
 
-details {
+details{
     background:#111;
-    border:1px solid #222;
-    border-radius:10px;
+    border:1px solid #1e1e1e;
+    border-radius:12px;
 }
 
-summary {
+summary{
     padding:18px;
     cursor:pointer;
     color:#d4af37;
     font-weight:500;
 }
 
-.specs-list {
-    padding:0 18px 20px;
+.specs-list{
+    padding:0 20px 24px;
     line-height:1.8;
     font-weight:300;
     color:#ccc;
 }
 
-footer {
+footer{
     text-align:center;
-    padding:40px;
+    padding:50px;
     font-size:12px;
-    opacity:0.5;
+    opacity:0.4;
     letter-spacing:1px;
 }
 
@@ -141,35 +256,41 @@ footer {
 
 <section class="gallery">
     <div class="gallery-title">Property Gallery</div>
-    <div class="gallery-track">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-1.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-2.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-3.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-4.jpg">
+
+    <div class="gallery-wrapper">
+        <div class="gallery-track" id="gallery">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-1.jpg">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-2.jpg">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-3.jpg">
+            <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-4.jpg">
+        </div>
     </div>
+
+    <div class="gallery-dots" id="dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
 </section>
 
 <section class="details">
-<details open>
+<details>
 <summary>Technical Architecture & Features | โครงสร้างและระบบวิศวกรรม</summary>
-
 <div class="specs-list">
-• 10 kW Solar Cell System<br>
-• 150sqm Private Rooftop Terrace<br>
+• 10 kW Solar System<br>
+• 150sqm Rooftop Terrace<br>
 • Salt Water Infinity Pool (3×9m)<br>
-• QC by Architect Professor, CMU<br>
-• Automatic Garden Irrigation System<br>
-• 3-Phase Electricity — EV Charging Ready<br>
+• Architect QC (CMU)<br>
+• EV Charging Ready<br>
 • Italian Automatic Gate<br>
 • Samsung WindFree A/C<br><br>
-
 <strong>รายละเอียดเพิ่มเติม:</strong><br>
 • ระบบโซลาร์เซลล์ 10kW<br>
 • สระว่ายน้ำระบบเกลือ<br>
-• รองรับการชาร์จรถ EV<br>
-• ตรวจสอบงานโดยอาจารย์คณะสถาปัตย์ มช.
+• รองรับการชาร์จ EV
 </div>
-
 </details>
 </section>
 
@@ -177,16 +298,26 @@ footer {
 Indigo Real Estate • Ref: NAM-PHRAE-LUXE
 </footer>
 
+<script>
+const track = document.getElementById('gallery');
+const dots = document.querySelectorAll('#dots span');
+
+track.addEventListener('scroll', () => {
+    const index = Math.round(track.scrollLeft / (track.clientWidth * 0.78));
+    dots.forEach((d,i)=> d.classList.toggle('active', i===index));
+});
+</script>
+
 <!-- StatCounter -->
-<script type="text/javascript">
+<script>
 if (!window.location.search.includes('qwest=true')) {
     var sc_project=13208538;
     var sc_invisible=1;
     var sc_security="745ffb39";
-    var sc_script = document.createElement('script');
-    sc_script.type = 'text/javascript';
-    sc_script.async = true;
-    sc_script.src = 'https://www.statcounter.com/counter/counter.js';
+    var sc_script=document.createElement('script');
+    sc_script.type='text/javascript';
+    sc_script.async=true;
+    sc_script.src='https://www.statcounter.com/counter/counter.js';
     document.body.appendChild(sc_script);
 }
 </script>
