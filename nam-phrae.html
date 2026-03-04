@@ -65,7 +65,6 @@ body{
     padding:7px 16px;
     border:1px solid rgba(212,175,55,0.5);
     background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(6px);
 }
 
 .hero-title{
@@ -85,6 +84,31 @@ body{
     font-weight:300;
 }
 
+/* STATS BAR */
+
+.stats-bar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    background:#111;
+    border-top:1px solid #1a1a1a;
+    border-bottom:1px solid #1a1a1a;
+    text-align:center;
+    padding:25px 10px;
+}
+
+.stats-bar strong{
+    display:block;
+    color:#d4af37;
+    font-size:18px;
+}
+
+.stats-bar small{
+    font-size:11px;
+    opacity:0.6;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
 /* GALLERY */
 
 .gallery{
@@ -100,12 +124,10 @@ body{
     margin-bottom:20px;
 }
 
-/* Scroll container */
 .gallery-wrapper{
     position:relative;
 }
 
-/* Edge fade */
 .gallery-wrapper::before,
 .gallery-wrapper::after{
     content:'';
@@ -133,7 +155,6 @@ body{
     overflow-x:auto;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
-    scroll-behavior:smooth;
 }
 
 .gallery-track::-webkit-scrollbar{
@@ -144,10 +165,10 @@ body{
     flex:0 0 78vw;
     height:200px;
     object-fit:cover;
-    border-radius:16px;
+    border-radius:14px;
     scroll-snap-align:start;
     border:1px solid #1c1c1c;
-    transition:transform 0.5s ease, box-shadow 0.5s ease;
+    transition:transform 0.3s ease;
 }
 
 /* Desktop grid */
@@ -168,12 +189,11 @@ body{
 
     .gallery-track img{
         width:100%;
-        height:280px;
+        height:260px;
     }
 
     .gallery-track img:hover{
-        transform:scale(1.04);
-        box-shadow:0 20px 40px rgba(0,0,0,0.6);
+        transform:scale(1.02);
     }
 }
 
@@ -196,35 +216,34 @@ body{
 
 .gallery-dots span.active{
     background:#d4af37;
-    transform:scale(1.3);
 }
 
-/* DETAILS */
+/* CTA */
 
-.details{
-    padding:70px 8%;
-    max-width:1000px;
-    margin:auto;
+.cta-section{
+    padding:60px 8%;
+    text-align:center;
 }
 
-details{
-    background:#111;
-    border:1px solid #1e1e1e;
-    border-radius:12px;
+.cta-line{
+    background:#06C755;
+    color:#fff;
+    padding:16px 28px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-block;
+    margin:10px;
 }
 
-summary{
-    padding:18px;
-    cursor:pointer;
+.cta-agent{
+    border:1px solid #d4af37;
     color:#d4af37;
-    font-weight:500;
-}
-
-.specs-list{
-    padding:0 20px 24px;
-    line-height:1.8;
-    font-weight:300;
-    color:#ccc;
+    padding:16px 28px;
+    border-radius:50px;
+    text-decoration:none;
+    display:inline-block;
+    margin:10px;
 }
 
 footer{
@@ -254,6 +273,13 @@ footer{
     </div>
 </section>
 
+<div class="stats-bar">
+    <div><strong>4</strong><small>Beds</small></div>
+    <div><strong>5</strong><small>Baths</small></div>
+    <div><strong>10kW</strong><small>Solar</small></div>
+    <div><strong>150m²</strong><small>Terrace</small></div>
+</div>
+
 <section class="gallery">
     <div class="gallery-title">Property Gallery</div>
 
@@ -272,26 +298,16 @@ footer{
         <span></span>
         <span></span>
     </div>
-
 </section>
 
-<section class="details">
-<details>
-<summary>Technical Architecture & Features | โครงสร้างและระบบวิศวกรรม</summary>
-<div class="specs-list">
-• 10 kW Solar System<br>
-• 150sqm Rooftop Terrace<br>
-• Salt Water Infinity Pool (3×9m)<br>
-• Architect QC (CMU)<br>
-• EV Charging Ready<br>
-• Italian Automatic Gate<br>
-• Samsung WindFree A/C<br><br>
-<strong>รายละเอียดเพิ่มเติม:</strong><br>
-• ระบบโซลาร์เซลล์ 10kW<br>
-• สระว่ายน้ำระบบเกลือ<br>
-• รองรับการชาร์จ EV
-</div>
-</details>
+<section class="cta-section">
+    <a href="https://line.me/ti/p/~kintra_realestate" class="cta-line">
+        Request Private Viewing | นัดชมบ้าน
+    </a>
+
+    <a href="mailto:founder@kintra.tech" class="cta-agent">
+        Contact Agent Directly
+    </a>
 </section>
 
 <footer>
@@ -299,18 +315,17 @@ Indigo Real Estate • Ref: NAM-PHRAE-LUXE
 </footer>
 
 <script>
-const track = document.getElementById('gallery');
-const dots = document.querySelectorAll('#dots span');
-
-track.addEventListener('scroll', () => {
-    const index = Math.round(track.scrollLeft / (track.clientWidth * 0.78));
-    dots.forEach((d,i)=> d.classList.toggle('active', i===index));
+const track=document.getElementById('gallery');
+const dots=document.querySelectorAll('#dots span');
+track.addEventListener('scroll',()=>{
+    const index=Math.round(track.scrollLeft/(track.clientWidth*0.78));
+    dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 });
 </script>
 
 <!-- StatCounter -->
 <script>
-if (!window.location.search.includes('qwest=true')) {
+if(!window.location.search.includes('qwest=true')){
     var sc_project=13208538;
     var sc_invisible=1;
     var sc_security="745ffb39";
