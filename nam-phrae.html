@@ -1,302 +1,863 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Nam Phrae Mountain Estate · 4 Bed · ฿25,900,000</title>
+  <meta name="description" content="Luxury pool villa in Nam Phrae, Hang Dong. 4 bed, 5 bath, 700 sq.m, saltwater pool, rooftop terrace, 10kW solar. ฿25.9M." />
+  <meta property="og:title" content="Nam Phrae Mountain Estate · 4 Bed · ฿25,900,000" />
+  <meta property="og:description" content="Architectural luxury villa with Doi Suthep views. Saltwater pool, rooftop terrace, smart home, 10kW solar. Move-in ready." />
+  <meta property="og:image" content="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/00-20250826104103-321870.JPG" />
+  <meta property="og:url" content="https://kintra.tech/nam-phrae" />
+  <meta property="og:type" content="website" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nam Phrae Mountain Estate | Indigo Prestige Collection</title>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YPHQ44CX3S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YPHQ44CX3S');
+  </script>
 
-<!-- Open Graph Preview -->
-<meta property="og:title" content="Nam Phrae Mountain Estate | Indigo Prestige Collection">
-<meta property="og:description" content="4 Bedroom Architectural Mountain Estate with 10kW Solar & Infinity Pool. Hang Dong, Chiang Mai.">
-<meta property="og:image" content="https://kintra.tech/assets/nam-phrae-1.jpg">
-<meta property="og:url" content="https://kintra.tech/nam-phrae">
-<meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPHQ44CX3S"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-YPHQ44CX3S');
-</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
-
-body{
-    margin:0;
-    font-family:'Inter', sans-serif;
-    background:#0b0b0b;
-    color:#f5f5f5;
-}
-
-/* HERO */
-
-.hero{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-}
-
-.hero video{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.92));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
-
-.hero-content{ max-width:900px; }
-
-.hero-collection{
-    display:inline-block;
-    font-size:11px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#d4af37;
-    padding:7px 16px;
-    border:1px solid rgba(212,175,55,0.6);
-    background:rgba(0,0,0,0.5);
-}
-
-.hero-title{
-    font-family:'Playfair Display', serif;
-    font-size:clamp(38px,5vw,56px);
-    margin:24px 0;
-}
-
-.hero-sub{ opacity:0.8; font-size:15px; }
-.hero-price{ margin-top:18px; font-size:22px; font-weight:300; }
-
-/* STATS */
-
-.stats-bar{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    background:#111;
-    border-top:1px solid #1a1a1a;
-    border-bottom:1px solid #1a1a1a;
-    text-align:center;
-    padding:28px 10px;
-}
-
-.stats-bar strong{
-    display:block;
-    color:#d4af37;
-    font-size:18px;
-}
-
-.stats-bar small{
-    font-size:11px;
-    opacity:0.6;
-    letter-spacing:1px;
-    text-transform:uppercase;
-}
-
-/* GALLERY */
-
-.gallery{ padding:80px 8%; }
-
-.gallery-title{
-    color:#d4af37;
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:25px;
-}
-
-.gallery-track{
-    display:flex;
-    gap:16px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-}
-
-.gallery-track::-webkit-scrollbar{ display:none; }
-
-.gallery-track img{
-    flex:0 0 78vw;
-    height:210px;
-    object-fit:cover;
-    border-radius:14px;
-    scroll-snap-align:start;
-    border:1px solid #1c1c1c;
-}
-
-@media(min-width:900px){
-
-    .gallery-track{
-        display:grid;
-        grid-template-columns:repeat(4,1fr);
-        gap:28px;
-        overflow:visible;
+    :root {
+      --gold:       #C9A84C;
+      --gold-light: #E2C97A;
+      --dark:       #0F0F0F;
+      --surface:    #161616;
+      --surface2:   #1C1C1C;
+      --text:       #F0EDE8;
+      --muted:      #7A7570;
+      --border:     rgba(201,168,76,0.18);
     }
 
-    .gallery-track img{
-        width:100%;
-        height:280px;
-        transition:transform 0.3s ease;
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .gallery-track img:hover{ transform:scale(1.02); }
-}
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 580px;
+      overflow: hidden;
+    }
 
-/* ARCHITECTURE */
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transform: scale(1.06);
+      animation: slowZoom 9s ease-out forwards;
+    }
 
-.architecture{
-    padding:70px 8%;
-    max-width:1000px;
-    margin:auto;
-}
+    @keyframes slowZoom {
+      to { transform: scale(1); }
+    }
 
-details{
-    background:#111;
-    border:1px solid #1c1c1c;
-    border-radius:14px;
-}
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,15,15,0.1) 0%,
+        rgba(15,15,15,0.0) 30%,
+        rgba(15,15,15,0.6) 70%,
+        rgba(15,15,15,0.97) 100%
+      );
+    }
 
-summary{
-    padding:22px;
-    cursor:pointer;
-    color:#d4af37;
-    font-weight:500;
-    font-size:14px;
-    letter-spacing:1px;
-}
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 24px 40px;
+      animation: fadeUp 1s 0.25s both;
+    }
 
-.specs-content{
-    padding:0 22px 28px;
-    line-height:1.9;
-    font-weight:300;
-    color:#ccc;
-}
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-/* CTA */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      margin-bottom: 14px;
+    }
 
-.cta-section{
-    padding:100px 8% 90px;
-    text-align:center;
-}
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 10vw, 56px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
 
-.cta-line{
-    background:#06C755;
-    color:#fff;
-    padding:16px 32px;
-    border-radius:50px;
-    text-decoration:none;
-    font-weight:600;
-    display:inline-block;
-    margin:12px;
-}
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
 
-.cta-phone{
-    border:1px solid #d4af37;
-    color:#d4af37;
-    padding:16px 32px;
-    border-radius:50px;
-    text-decoration:none;
-    display:inline-block;
-    margin:12px;
-}
+    .hero-sub {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.55);
+      margin-bottom: 30px;
+    }
 
-footer{
-    text-align:center;
-    padding:60px;
-    font-size:12px;
-    opacity:0.4;
-    letter-spacing:1px;
-}
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-</style>
+    .btn-line-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #06C755;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      flex: 1;
+      justify-content: center;
+      transition: opacity 0.2s;
+    }
+    .btn-line-hero svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+    .btn-line-hero:hover { opacity: 0.88; }
+
+    .btn-phone-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      border: 1px solid rgba(240,237,232,0.25);
+      flex: 1;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .btn-phone-hero:hover { border-color: var(--gold); }
+
+    /* ─── STATS ─── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      margin: 20px 24px 0;
+      animation: fadeUp 1s 0.55s both;
+    }
+
+    .stat {
+      padding: 16px 8px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold-light);
+      display: block;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SHARED ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 24px;
+      opacity: 0.3;
+    }
+
+    section { padding: 52px 24px; }
+
+    .section-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    /* ─── DESCRIPTION ─── */
+    .description {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .description p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .description p:last-child { margin-bottom: 0; }
+
+    /* ─── PERKS ─── */
+    .perks {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+    }
+
+    .perk-list { display: flex; flex-direction: column; }
+
+    .perk-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .perk-item:last-child { border-bottom: none; }
+
+    .perk-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
+    }
+
+    .perk-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .perk-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-section {
+      padding: 40px 0 32px;
+      background: var(--dark);
+    }
+
+    .gallery-header { padding: 0 24px; margin-bottom: 20px; }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 3px;
+      overflow-x: auto;
+      padding: 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+
+    .gallery-item {
+      flex: 0 0 74vw;
+      max-width: 320px;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .gallery-item:first-child { flex: 0 0 86vw; max-width: 390px; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-hint {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    /* ─── FEATURES ─── */
+    .features {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-group { margin-bottom: 32px; }
+    .feature-group:last-child { margin-bottom: 0; }
+
+    .feature-group-title {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    .feature-list li {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.45;
+    }
+    .feature-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    /* ─── LANDMARKS ─── */
+    .landmarks { background: var(--dark); }
+
+    .landmark-list { display: flex; flex-direction: column; }
+
+    .landmark-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .landmark-item:last-child { border-bottom: none; }
+
+    .landmark-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .landmark-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .landmark-name {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .landmark-dist {
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 400;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── MAP ─── */
+    .map-section { padding: 0; background: var(--dark); }
+    .map-inner { padding: 0 24px 24px; }
+
+    .map-embed {
+      width: 100%;
+      height: 260px;
+      border: 1px solid var(--border);
+      display: block;
+      filter: grayscale(30%) brightness(0.85);
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 56px 24px;
+      text-align: center;
+    }
+
+    .price-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .price-period {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .price-note {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .btn-line-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #06C755;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 18px 32px;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 14px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-line-cta svg { width: 22px; height: 22px; fill: white; }
+    .btn-line-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-secondary-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      padding: 16px 32px;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 14px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary-cta:last-of-type { margin-bottom: 0; }
+    .btn-secondary-cta:hover { border-color: var(--gold); color: var(--text); }
+
+    .ref-tag {
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.2);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: #080808;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(201,168,76,0.4);
+    }
+
+    .footer-sub {
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.15);
+      margin-top: 4px;
+    }
+  </style>
 </head>
-
 <body>
 
-<section class="hero">
-    <video autoplay muted loop playsinline>
-        <source src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-villa.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay">
-        <div class="hero-content">
-            <div class="hero-collection">INDIGO PRESTIGE COLLECTION</div>
-            <h1 class="hero-title">Nam Phrae Mountain Estate</h1>
-            <div class="hero-sub">Panoramic Doi Suthep Views • Hang Dong</div>
-            <div class="hero-price">฿25,900,000</div>
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img"
+         src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/00-20250826104103-321870.JPG"
+         alt="Nam Phrae Mountain Estate"
+         loading="eager">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">Indigo Prestige Collection · For Sale</div>
+      <h1 class="hero-title">Nam Phrae<br><em>Mountain Estate</em></h1>
+      <p class="hero-sub">Nam Phrae · Hang Dong · Chiang Mai</p>
+      <div class="hero-cta-row">
+        <a class="btn-line-hero" href="https://line.me/ti/p/~0832000431"
+           onclick="gtag('event','line_click',{'event_category':'engagement','event_label':'hero'})">
+          <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE / WhatsApp
+        </a>
+        <a class="btn-phone-hero" href="tel:+66832000431">
+          ☎ 083 200 0431
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">4</span>
+      <span class="stat-label">Bedrooms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">5</span>
+      <span class="stat-label">Bathrooms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">700</span>
+      <span class="stat-label">sq.m</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">10kW</span>
+      <span class="stat-label">Solar</span>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <section class="description">
+    <span class="section-label">The Property</span>
+    <p>A landmark residence in the serene Nam Phrae area of Hang Dong — one of Chiang Mai's most desirable addresses. Designed for those who want space, privacy, and modern luxury without compromise.</p>
+    <p>700 sq.m of living space across two floors, panoramic Doi Suthep views from a 150 sq.m rooftop terrace, and a saltwater pool that stretches 12 metres. Everything is brand new and move-in ready.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PERKS -->
+  <section class="perks">
+    <span class="section-label">Why This Property</span>
+    <h2 class="section-title">Three reasons<br><em>to move fast</em></h2>
+    <div class="perk-list">
+      <div class="perk-item">
+        <div class="perk-number">1</div>
+        <div class="perk-body">
+          <div class="perk-title">XXL Scale</div>
+          <div class="perk-desc">700 sq.m usable space on 378 sq.wah of land. 6-car parking. 150 sq.m rooftop terrace with Doi Suthep views. Rare at this price point.</div>
         </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">2</div>
+        <div class="perk-body">
+          <div class="perk-title">Smart & Sustainable</div>
+          <div class="perk-desc">10kW solar system, smart home controls for lighting, gate and security from your phone, EV-ready 3-phase electricity, and positive air pressure throughout.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">3</div>
+        <div class="perk-body">
+          <div class="perk-title">Elite Location</div>
+          <div class="perk-desc">10 minutes to Panyaden International School, 15 minutes to IKEA and Kad Farang, 25 minutes to the airport.</div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<div class="stats-bar">
-    <div><strong>4</strong><small>Beds</small></div>
-    <div><strong>5</strong><small>Baths</small></div>
-    <div><strong>10kW</strong><small>Solar</small></div>
-    <div><strong>150m²</strong><small>Terrace</small></div>
-</div>
+  <div class="divider"></div>
 
-<section class="gallery">
-    <div class="gallery-title">Property Gallery</div>
-    <div class="gallery-track">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-1.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-2.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-3.jpg">
-        <img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nam-phrae-4.jpg">
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-header">
+      <span class="section-label">Photo Gallery</span>
     </div>
-</section>
+    <div class="gallery-scroll">
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/00-20250826104103-321870.JPG" alt="Estate exterior" loading="eager">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/01-20250826104103-324298.jpg" alt="Pool" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/02-20250826104103-485406.jpg" alt="Living area" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/04-20250826104103-853463.jpg" alt="Kitchen" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/05-20250826104105-294162.jpg" alt="Master bedroom" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/06-20250826104106-371653.jpg" alt="Bathroom" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/07-20250826104106-823655.jpg" alt="Rooftop terrace" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/08-20250826104106-589458.jpg" alt="Garden" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/09-20250826104108-779700.jpg" alt="View" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/10-20250826104108-500573.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/11-20250826104109-691373.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/12-20250826104109-207480.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/13-20250826104109-336434.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/14-20250826104110-337401.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/15-20250826104110-622342.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/16-20250826104112-174653.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/17-20250826104112-950658.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/18-20250826104113-418386.jpg" alt="Detail" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/8-20250826104107-551207.jpg" alt="Detail" loading="lazy">
+      </div>
+    </div>
+    <p class="gallery-hint">← swipe to explore →</p>
+  </div>
 
-<section class="architecture">
-<details>
-<summary>Technical Architecture & Features | โครงสร้างและระบบวิศวกรรม</summary>
-<div class="specs-content">
-• 10 kW Solar Energy System<br>
-• 3×9m Salt Water Infinity Pool<br>
-• 150 sqm Rooftop Terrace<br>
-• 3-Phase Electricity (EV Ready)<br>
-• Architect QC Supervision (CMU)
-</div>
-</details>
-</section>
+  <div class="divider"></div>
 
-<section class="cta-section">
-    <a href="https://line.me/ti/p/~0832000431" class="cta-line">
-        Contact Indigo via LINE
+  <!-- FEATURES -->
+  <section class="features">
+    <span class="section-label">What's Included</span>
+    <h2 class="section-title">Everything<br><em>you need</em></h2>
+
+    <div class="feature-group">
+      <div class="feature-group-title">Living Spaces</div>
+      <ul class="feature-list">
+        <li>700 sq.m usable area</li>
+        <li>4 bedrooms</li>
+        <li>5 bathrooms</li>
+        <li>Expansive living room</li>
+        <li>Western kitchen & island</li>
+        <li>3-metre dining table</li>
+        <li>Separate Thai kitchen</li>
+        <li>Laundry room</li>
+        <li>6-car parking</li>
+        <li>2 floors</li>
+      </ul>
+    </div>
+
+    <div class="feature-group">
+      <div class="feature-group-title">Outdoor & Pool</div>
+      <ul class="feature-list">
+        <li>Saltwater pool 4×12m</li>
+        <li>150 sq.m rooftop terrace</li>
+        <li>Doi Suthep views</li>
+        <li>Landscaped garden</li>
+        <li>Auto watering system</li>
+        <li>378 sq.wah land</li>
+      </ul>
+    </div>
+
+    <div class="feature-group">
+      <div class="feature-group-title">Smart & Sustainable</div>
+      <ul class="feature-list">
+        <li>10kW solar system</li>
+        <li>Smart home system</li>
+        <li>3-phase electricity</li>
+        <li>EV charging ready</li>
+        <li>CCTV & remote gate</li>
+        <li>Positive air pressure</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LANDMARKS -->
+  <section class="landmarks">
+    <span class="section-label">Location</span>
+    <h2 class="section-title">Everything<br><em>within reach</em></h2>
+    <div class="landmark-list">
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">Panyaden International School</span>
+        </div>
+        <span class="landmark-dist">10 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">IKEA Chiang Mai</span>
+        </div>
+        <span class="landmark-dist">15 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">Kad Farang Lifestyle Mall</span>
+        </div>
+        <span class="landmark-dist">15 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">Hang Dong Market</span>
+        </div>
+        <span class="landmark-dist">10 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">Chiang Mai City Centre</span>
+        </div>
+        <span class="landmark-dist">20 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left">
+          <div class="landmark-dot"></div>
+          <span class="landmark-name">Chiang Mai International Airport</span>
+        </div>
+        <span class="landmark-dist">25 min drive</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="map-inner">
+      <span class="section-label">Find Us</span>
+    </div>
+    <iframe
+      class="map-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.2!2d98.9215!3d18.7180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3c8c8c8c8c8c%3A0x8c8c8c8c8c8c8c8c!2sNam%20Phrae%2C%20Hang%20Dong%2C%20Chiang%20Mai!5e0!3m2!1sen!2sth!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Nam Phrae location map">
+    </iframe>
+  </div>
+
+  <div class="divider" style="margin-top:0;"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-label">Request a Viewing</span>
+    <div class="price-display">฿25,900,000</div>
+    <div class="price-period">Asking Price</div>
+    <p class="price-note">Private viewings available by appointment</p>
+
+    <a class="btn-line-cta" href="https://line.me/ti/p/~0832000431"
+       onclick="gtag('event','line_click',{'event_category':'engagement','event_label':'cta'})">
+      <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINE · @indigo_chiangmai
     </a>
-    <a href="tel:+66832000431" class="cta-phone">
-        Call 083-2000431
+
+    <a class="btn-secondary-cta" href="tel:+66832000431"
+       onclick="gtag('event','phone_click',{'event_category':'engagement','event_label':'cta'})">
+      ☎ &nbsp;083 200 0431
     </a>
-</section>
 
-<footer>
-Indigo MyChiangMaiHome • Marketing Presentation
-</footer>
+    <a class="btn-secondary-cta" href="https://wa.me/66832000431"
+       onclick="gtag('event','whatsapp_click',{'event_category':'engagement','event_label':'cta'})">
+      WhatsApp 083 200 0431
+    </a>
 
-<!-- StatCounter -->
-<script>
-if(!window.location.search.includes('qwest=true')){
-    var sc_project=13208538;
-    var sc_invisible=1;
-    var sc_security="745ffb39";
-    var sc_script=document.createElement('script');
-    sc_script.type='text/javascript';
-    sc_script.async=true;
-    sc_script.src='https://www.statcounter.com/counter/counter.js';
-    document.body.appendChild(sc_script);
-}
-</script>
+    <a class="btn-secondary-cta" href="mailto:info@mychiangmaihome.com">
+      info@mychiangmaihome.com
+    </a>
+
+    <p class="ref-tag">Ref: 4256 · Indigo Real Estate · Chiang Mai</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Kintra</div>
+    <div class="footer-sub">Property presentation by kintra.tech</div>
+  </footer>
+
+  <!-- StatCounter: Nam Phrae -->
+  <script>
+    if (!window.location.search.includes('qwest=true')) {
+      var sc_project = 13208538;
+      var sc_invisible = 1;
+      var sc_security = "745ffb39";
+      var sc_script = document.createElement('script');
+      sc_script.type = 'text/javascript';
+      sc_script.async = true;
+      sc_script.src = 'https://www.statcounter.com/counter/counter.js';
+      document.body.appendChild(sc_script);
+    }
+  </script>
 
 </body>
 </html>
