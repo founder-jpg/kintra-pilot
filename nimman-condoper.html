@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nimman Condo · 1BR on Nimmanhaemin · ฿22,000/mo</title>
+  <meta name="description" content="Stylish 1-bedroom condo on Nimmanhaemin Road, Chiang Mai. 54sqm, fully furnished, pool & fitness. ฿22,000/month." />
+  <meta property="og:title" content="Nimman Condo · 1BR on Nimmanhaemin" />
+  <meta property="og:description" content="54sqm fully furnished condo with pool, fitness & 24hr security. Heart of Nimman. ฿22,000/month." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo1.jpg" />
+  <meta property="og:url" content="https://kintra.tech/nimman-condo" />
+  <meta property="og:type" content="website" />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YPHQ44CX3S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YPHQ44CX3S');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #C9A96E;
+      --gold-light: #E8D5B0;
+      --dark: #0F0F0D;
+      --charcoal: #1C1C19;
+      --mid: #2E2E2A;
+      --warm-white: #F7F4EF;
+      --text-muted: #888880;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--warm-white); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    .hero { position: relative; height: 100svh; min-height: 580px; overflow: hidden; }
+    .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(1.04); animation: heroZoom 8s ease-out forwards; }
+    @keyframes heroZoom { to { transform: scale(1); } }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,15,13,0.15) 0%, rgba(15,15,13,0.05) 40%, rgba(15,15,13,0.7) 80%, rgba(15,15,13,0.95) 100%); }
+    .hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 1.8rem 2.8rem; animation: fadeUp 1.2s 0.3s both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-badge { display: inline-block; font-family: var(--font-body); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.3rem 0.8rem; margin-bottom: 1rem; opacity: 0.9; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(2.4rem, 8vw, 3.8rem); font-weight: 300; line-height: 1.08; margin-bottom: 0.5rem; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub { font-size: 0.85rem; color: rgba(247,244,239,0.65); letter-spacing: 0.04em; margin-bottom: 1.8rem; }
+    .hero-price { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--gold); }
+    .hero-price span { font-family: var(--font-body); font-size: 0.75rem; font-weight: 300; color: rgba(247,244,239,0.5); letter-spacing: 0.08em; margin-left: 0.4rem; }
+
+    .stats { background: var(--charcoal); border-top: 1px solid rgba(201,169,110,0.2); border-bottom: 1px solid rgba(201,169,110,0.2); padding: 1.4rem 1.8rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; animation: fadeUp 1s 0.6s both; }
+    .stat { text-align: center; padding: 0.6rem 0; }
+    .stat-value { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--gold); display: block; line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+
+    .section { padding: 3rem 1.8rem; }
+    .section-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: block; }
+
+    .description { background: var(--charcoal); }
+    .description p { font-family: var(--font-display); font-size: 1.15rem; font-weight: 300; line-height: 1.75; color: rgba(247,244,239,0.85); }
+    .description p + p { margin-top: 1rem; }
+
+    .gallery-section { background: var(--dark); padding: 2.5rem 0; }
+    .gallery-label { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); padding: 0 1.8rem; margin-bottom: 1.2rem; display: block; }
+    .gallery-scroll { display: flex; gap: 0.6rem; overflow-x: auto; padding: 0 1.8rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-item { flex: 0 0 78vw; max-width: 320px; aspect-ratio: 4/3; border-radius: 2px; overflow: hidden; scroll-snap-align: start; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .features { background: var(--mid); }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.5rem; }
+    .feature-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.9rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 2px; }
+    .feature-icon { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .feature-text { font-size: 0.78rem; line-height: 1.4; color: rgba(247,244,239,0.75); }
+
+    .amenities { background: var(--charcoal); }
+    .amenities-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
+    .amenity-tag { font-size: 0.72rem; letter-spacing: 0.06em; color: var(--gold-light); border: 1px solid rgba(201,169,110,0.3); padding: 0.4rem 0.9rem; border-radius: 1px; }
+
+    .location { background: var(--dark); }
+    .location-detail { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: rgba(247,244,239,0.7); line-height: 1.7; }
+
+    .cta-section { background: var(--charcoal); padding: 3rem 1.8rem 4rem; text-align: center; border-top: 1px solid rgba(201,169,110,0.15); }
+    .cta-heading { font-family: var(--font-display); font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 300; line-height: 1.2; margin-bottom: 0.6rem; }
+    .cta-heading em { font-style: italic; color: var(--gold-light); }
+    .cta-sub { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 0.04em; }
+    .line-btn { display: inline-flex; align-items: center; gap: 0.8rem; background: #06C755; color: #fff; font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em; text-decoration: none; padding: 1rem 2.2rem; border-radius: 2px; transition: all 0.25s ease; box-shadow: 0 4px 24px rgba(6,199,85,0.25); }
+    .line-btn:hover { background: #05b34d; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(6,199,85,0.35); }
+    .line-btn svg { width: 22px; height: 22px; fill: #fff; }
+    .ref-note { margin-top: 1.8rem; font-size: 0.68rem; letter-spacing: 0.1em; color: rgba(247,244,239,0.25); text-transform: uppercase; }
+
+    footer { background: var(--dark); padding: 1.5rem 1.8rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+    .footer-brand { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; }
+    .footer-note { font-size: 0.62rem; color: rgba(247,244,239,0.2); letter-spacing: 0.06em; }
+    .gold-divider { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); opacity: 0.3; margin: 0 1.8rem; }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <img class="hero-img" src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo9.jpg" alt="Nimman Condo Living Room" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">Nimmanhaemin Road · Chiang Mai</span>
+      <h1 class="hero-title">City Living,<br><em>Fully Furnished</em></h1>
+      <p class="hero-sub">1 Bedroom · 54 sqm · Private Balcony · Pool & Fitness</p>
+      <div class="hero-price">฿22,000 <span>/ month</span></div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">54</span><span class="stat-label">sqm</span></div>
+    <div class="stat"><span class="stat-value">1BR</span><span class="stat-label">Bedroom</span></div>
+    <div class="stat"><span class="stat-value">1BA</span><span class="stat-label">Bathroom</span></div>
+    <div class="stat"><span class="stat-value">฿22k</span><span class="stat-label">Per Month</span></div>
+  </div>
+
+  <section class="section description">
+    <span class="section-label">The Property</span>
+    <p>A well-appointed one-bedroom condo in the heart of Nimmanhaemin — Chiang Mai's most vibrant neighbourhood. Warm timber finishes, open-plan living, and a private balcony make this an exceptional base for professionals, couples, or long-stay visitors.</p>
+    <p>Everything is within walking distance: cafés, restaurants, boutiques, co-working spaces, and Chiang Mai's best nightlife. This is city living without compromise.</p>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <section class="gallery-section">
+    <span class="gallery-label">Gallery</span>
+    <div class="gallery-scroll">
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo1.jpg" alt="Open-plan living and kitchen" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo5.jpg" alt="Master bedroom" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo6.jpg" alt="Bedroom angle 2" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo4.jpg" alt="Bathroom with bathtub" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo7.jpg" alt="Kitchen and laundry" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo3.jpg" alt="Private balcony" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo8.jpg" alt="TV lounge area" loading="lazy" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo2.jpg" alt="Building exterior and view" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <section class="section features">
+    <span class="section-label">Interior Features</span>
+    <div class="features-grid">
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">Open-plan living, dining & kitchen</span></div>
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">Fully furnished with tasteful décor</span></div>
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">Bathtub & electronic WC</span></div>
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">In-unit washing machine</span></div>
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">Private balcony with seating</span></div>
+      <div class="feature-item"><span class="feature-icon">◈</span><span class="feature-text">Ample storage throughout</span></div>
+    </div>
+  </section>
+
+  <section class="section amenities">
+    <span class="section-label">Building Amenities</span>
+    <div class="amenities-list">
+      <span class="amenity-tag">Swimming Pool</span>
+      <span class="amenity-tag">Fitness Room</span>
+      <span class="amenity-tag">Steam Room</span>
+      <span class="amenity-tag">Laundry Service</span>
+      <span class="amenity-tag">24-Hour Security</span>
+      <span class="amenity-tag">Key Card Access</span>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <section class="section location">
+    <span class="section-label">Location</span>
+    <p class="location-detail">Nimmanhaemin Road — the cultural and social heart of Chiang Mai. Steps from the best cafés, restaurants, galleries, and co-working spaces in the city. Maya Mall and Nimman Promenade are minutes away on foot.</p>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="cta-heading">Ready to <em>view this property?</em></h2>
+    <p class="cta-sub">Contact Perfect Homes Chiang Mai via LINE</p>
+    <a class="line-btn" href="https://line.me/ti/p/~@perfecthomes" target="_blank" rel="noopener" onclick="gtag('event', 'line_click', { event_category: 'CTA', event_label: 'nimman_condo' })">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      Message on LINE
+    </a>
+    <p class="ref-note">Ref: UNQ002 · Perfect Homes Chiang Mai</p>
+  </section>
+
+  <footer>
+    <span class="footer-brand">Kintra</span>
+    <span class="footer-note">kintra.tech</span>
+  </footer>
+
+</body>
+</html>
