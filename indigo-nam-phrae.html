@@ -876,7 +876,7 @@
     document.body.style.overflow = '';
   }
   function showPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
-  function showNext() { current = (current + 1) % images.length; lbImg.src = images[current]; }
+  function showNext() { current = (current + 1) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
   const heroImg = document.querySelector('.hero-img');
   if (heroImg) {
     heroImg.style.cursor = 'zoom-in';
