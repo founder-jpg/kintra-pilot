@@ -842,6 +842,7 @@
 <!-- LIGHTBOX -->
 <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;">
   <img id="lightbox-img" style="max-width:95vw;max-height:92vh;object-fit:contain;border-radius:4px;box-shadow:0 0 60px rgba(0,0,0,0.8);">
+  <div id="lightbox-counter" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;">1 / 1</div>
   <div id="lightbox-close" style="position:absolute;top:20px;right:24px;color:white;font-size:32px;cursor:pointer;line-height:1;opacity:0.8;">✕</div>
   <div id="lightbox-prev" style="position:absolute;left:16px;color:white;font-size:40px;cursor:pointer;opacity:0.7;user-select:none;">‹</div>
   <div id="lightbox-next" style="position:absolute;right:16px;color:white;font-size:40px;cursor:pointer;opacity:0.7;user-select:none;">›</div>
@@ -859,6 +860,7 @@
     lbImg.src = images[current];
     lb.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length;
   }
 
   function closeLightbox() {
@@ -866,7 +868,7 @@
     document.body.style.overflow = '';
   }
 
-  function showPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; }
+  function showPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
   function showNext() { current = (current + 1) % images.length; lbImg.src = images[current]; }
 
   // Hero image
