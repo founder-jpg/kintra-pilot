@@ -336,11 +336,16 @@
 
     .gallery-hint {
       text-align: center;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--gold);
       margin-top: 16px;
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+    @keyframes pulse-hint {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     /* ─── FEATURES ─── */
@@ -827,10 +832,85 @@
   </footer>
 
   
-  <!-- StatCounter: Hang Dong -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    if (!window.location.search.includes('qwest=true')) {
-      var sc_project = 13208544;
-      var sc_invisible = 1;
-      var sc_security = "a77f2ddc";
-      var sc_script = doc
+  <!-- LIGHTBOX -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <img id="lightbox-img" style="max-width:95vw;max-height:92vh;object-fit:contain;border-radius:4px;box-shadow:0 0 60px rgba(0,0,0,0.8);">
+  <div id="lightbox-counter" style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;">1 / 1</div>
+  <div id="lightbox-close" style="position:absolute;top:20px;right:24px;color:white;font-size:32px;cursor:pointer;line-height:1;opacity:0.8;">✕</div>
+  <div id="lightbox-prev" style="position:absolute;left:16px;color:white;font-size:40px;cursor:pointer;opacity:0.7;user-select:none;">‹</div>
+  <div id="lightbox-next" style="position:absolute;right:16px;color:white;font-size:40px;cursor:pointer;opacity:0.7;user-select:none;">›</div>
+</div>
+<script>
+(function(){
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  let images = [];
+  let current = 0;
+
+  function openLightbox(imgs, idx) {
+    images = imgs; current = idx;
+    lbImg.src = images[current];
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length;
+  }
+  function closeLightbox() {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function showPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
+  function showNext() { current = (current + 1) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
+
+  const heroImg = document.querySelector('.hero-img');
+  if (heroImg) {
+    heroImg.style.cursor = 'zoom-in';
+    heroImg.addEventListener('click', () => {
+      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
+      openLightbox([heroImg.src, ...allImgs], 0);
+    });
+  }
+  document.querySelectorAll('.gallery-item img').forEach((img, idx) => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
+      openLightbox(allImgs, idx);
+    });
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); showPrev(); });
+  document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); showNext(); });
+  lb.addEventListener('click', function(e) { if(e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if(lb.style.display === 'flex') {
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showPrev();
+      if(e.key === 'ArrowRight') showNext();
+    }
+  });
+})();
+</script>
+
+<!-- StatCounter: Hang Dong -->
+<script>
+  if (!window.location.search.includes('qwest=true')) {
+    var sc_project = 13208544;
+    var sc_invisible = 1;
+    var sc_security = "a77f2ddc";
+    var sc_script = document.createElement('script');
+    sc_script.src = 'https://statcounter.com/counter/counter.js';
+    document.head.appendChild(sc_script);
+  }
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YPHQ44CX3S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YPHQ44CX3S');
+</script>
+
+</body>
+</html>
