@@ -178,16 +178,16 @@
       right: 20px;
       z-index: 2;
       pointer-events: none;
-      bottom: 148px; /* mobile: above buttons (40px pad + 44px btn + 12px gap + 12px clearance) */
+      top: 24px; /* mobile: top right corner, clear of all text */
     }
     @media (min-width: 480px) {
-      .price-badge { bottom: 140px; }
+      .price-badge { top: auto; bottom: 140px; }
     }
     @media (min-width: 768px) {
-      .price-badge { bottom: 120px; }
+      .price-badge { top: auto; bottom: 120px; }
     }
     @media (min-width: 1024px) {
-      .price-badge { bottom: 110px; }
+      .price-badge { top: auto; bottom: 110px; }
     }
     .price-badge-inner {
       display: inline-block;
