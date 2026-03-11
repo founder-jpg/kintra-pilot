@@ -50,9 +50,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─────────────────────────────
-       HERO
-    ───────────────────────────── */
     .hero {
       position: relative;
       height: 100svh;
@@ -68,6 +65,7 @@
       display: block;
       transform: scale(1.06);
       animation: slowZoom 9s ease-out forwards;
+      cursor: zoom-in;
     }
 
     @keyframes slowZoom {
@@ -84,6 +82,37 @@
         rgba(15,15,15,0.65) 72%,
         rgba(15,15,15,0.97) 100%
       );
+    }
+
+    .price-badge {
+      position: absolute;
+      right: 20px;
+      z-index: 2;
+      pointer-events: none;
+      top: 24px;
+    }
+    @media (min-width: 480px) {
+      .price-badge { top: auto; bottom: 140px; }
+    }
+    @media (min-width: 768px) {
+      .price-badge { top: auto; bottom: 120px; }
+    }
+    @media (min-width: 1024px) {
+      .price-badge { top: auto; bottom: 110px; }
+    }
+    .price-badge-inner {
+      display: inline-block;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid #C9A84C;
+      border-radius: 3px;
+      padding: 7px 16px;
+    }
+    .price-badge-inner span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #C9A84C;
+      letter-spacing: 0.06em;
     }
 
     .hero-content {
@@ -153,8 +182,8 @@
       flex: 1;
       justify-content: center;
       transition: opacity 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
-
     .btn-line-hero svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
     .btn-line-hero:hover { opacity: 0.88; }
 
@@ -174,13 +203,10 @@
       flex: 1;
       justify-content: center;
       transition: border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
     }
-
     .btn-phone-hero:hover { border-color: var(--gold); }
 
-    /* ─────────────────────────────
-       STATS BAR
-    ───────────────────────────── */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -213,9 +239,6 @@
       color: var(--muted);
     }
 
-    /* ─────────────────────────────
-       SHARED
-    ───────────────────────────── */
     .divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
@@ -241,12 +264,8 @@
       line-height: 1.2;
       margin-bottom: 20px;
     }
-
     .section-title em { font-style: italic; color: var(--gold-light); }
 
-    /* ─────────────────────────────
-       DESCRIPTION
-    ───────────────────────────── */
     .description {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -260,21 +279,14 @@
       color: var(--text);
       margin-bottom: 18px;
     }
-
     .description p:last-child { margin-bottom: 0; }
 
-    /* ─────────────────────────────
-       GALLERY
-    ───────────────────────────── */
     .gallery-section {
       padding: 40px 0 32px;
       background: var(--dark);
     }
 
-    .gallery-header {
-      padding: 0 24px;
-      margin-bottom: 20px;
-    }
+    .gallery-header { padding: 0 24px; margin-bottom: 20px; }
 
     .gallery-scroll {
       display: flex;
@@ -294,11 +306,7 @@
       overflow: hidden;
       scroll-snap-align: start;
     }
-
-    .gallery-item:first-child {
-      flex: 0 0 86vw;
-      max-width: 390px;
-    }
+    .gallery-item:first-child { flex: 0 0 86vw; max-width: 390px; }
 
     .gallery-item img {
       width: 100%;
@@ -306,8 +314,9 @@
       object-fit: cover;
       display: block;
       transition: transform 0.55s ease;
+      cursor: zoom-in;
+      -webkit-tap-highlight-color: transparent;
     }
-
     .gallery-item:hover img { transform: scale(1.04); }
 
     .gallery-hint {
@@ -324,9 +333,6 @@
       50% { opacity: 1; }
     }
 
-    /* ─────────────────────────────
-       FEATURES
-    ───────────────────────────── */
     .features {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -360,7 +366,6 @@
       position: relative;
       line-height: 1.45;
     }
-
     .feature-list li::before {
       content: '—';
       position: absolute;
@@ -370,17 +375,8 @@
       top: 2px;
     }
 
-    /* ─────────────────────────────
-       LANDMARKS
-    ───────────────────────────── */
-    .landmarks {
-      background: var(--dark);
-    }
-
-    .landmark-list {
-      display: flex;
-      flex-direction: column;
-    }
+    .landmarks { background: var(--dark); }
+    .landmark-list { display: flex; flex-direction: column; }
 
     .landmark-item {
       display: flex;
@@ -389,61 +385,31 @@
       padding: 14px 0;
       border-bottom: 1px solid var(--border);
     }
-
     .landmark-item:last-child { border-bottom: none; }
 
-    .landmark-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .landmark-left { display: flex; align-items: center; gap: 14px; }
 
     .landmark-dot {
-      width: 5px;
-      height: 5px;
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--gold);
       flex-shrink: 0;
     }
 
-    .landmark-name {
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 300;
-    }
+    .landmark-name { font-size: 14px; color: var(--text); font-weight: 300; }
+    .landmark-dist { font-size: 12px; color: var(--gold); font-weight: 400; white-space: nowrap; letter-spacing: 0.04em; }
 
-    .landmark-dist {
-      font-size: 12px;
-      color: var(--gold);
-      font-weight: 400;
-      white-space: nowrap;
-      letter-spacing: 0.04em;
-    }
-
-    /* ─────────────────────────────
-       MAP
-    ───────────────────────────── */
-    .map-section {
-      padding: 0;
-      background: var(--dark);
-    }
-
-    .map-inner {
-      padding: 0 24px 24px;
-    }
+    .map-section { padding: 0; background: var(--dark); }
+    .map-inner { padding: 0 24px 24px; }
 
     .map-embed {
       width: 100%;
       height: 260px;
-      border: none;
       display: block;
       border: 1px solid var(--border);
       filter: grayscale(30%) brightness(0.85);
     }
 
-    /* ─────────────────────────────
-       CTA SECTION
-    ───────────────────────────── */
     .cta-section {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -491,8 +457,8 @@
       max-width: 360px;
       margin: 0 auto 14px;
       transition: opacity 0.2s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
     }
-
     .btn-line-cta svg { width: 22px; height: 22px; fill: white; }
     .btn-line-cta:hover { opacity: 0.9; transform: translateY(-1px); }
 
@@ -513,7 +479,6 @@
       border: 1px solid var(--border);
       transition: border-color 0.2s, color 0.2s;
     }
-
     .btn-phone-cta:hover { border-color: var(--gold); color: var(--text); }
 
     .btn-whatsapp-cta {
@@ -533,7 +498,6 @@
       border: 1px solid var(--border);
       transition: border-color 0.2s, color 0.2s;
     }
-
     .btn-whatsapp-cta:hover { border-color: #25D366; color: var(--text); }
 
     .ref-tag {
@@ -544,9 +508,6 @@
       color: rgba(240,237,232,0.2);
     }
 
-    /* ─────────────────────────────
-       FOOTER
-    ───────────────────────────── */
     footer {
       padding: 24px;
       text-align: center;
@@ -569,31 +530,21 @@
       color: rgba(240,237,232,0.15);
       margin-top: 4px;
     }
-
-    /* ─────────────────────────────
-       SCROLL REVEAL
-    ───────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
   </style>
 </head>
 <body>
 
-  <!-- ── HERO ── -->
   <div class="hero">
     <img class="hero-img"
          src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/nimmancondo1.jpg"
          alt="Nimman Condo Living Room"
          loading="eager">
     <div class="hero-overlay"></div>
+    <div class="price-badge">
+      <div class="price-badge-inner">
+        <span>฿22,000/mo</span>
+      </div>
+    </div>
     <div class="hero-content">
       <div class="badge">Available Now · Nimmanhaemin Road</div>
       <h1 class="hero-title">Modern Living on<br><em>Nimmanhaemin</em></h1>
@@ -611,7 +562,6 @@
     </div>
   </div>
 
-  <!-- ── STATS ── -->
   <div class="stats">
     <div class="stat">
       <span class="stat-value">54</span>
@@ -631,8 +581,7 @@
     </div>
   </div>
 
-  <!-- ── DESCRIPTION ── -->
-  <section class="description reveal">
+  <section class="description">
     <span class="section-label">The Property</span>
     <p>A beautifully furnished one-bedroom condo in the heart of Chiang Mai's most vibrant neighbourhood. Clean lines, warm finishes, and everything you need — ready to move in.</p>
     <p>Step outside and you're surrounded by the best restaurants, cafés, and night markets the city has to offer. Come home to a pool, a gym, and 24-hour security.</p>
@@ -640,8 +589,7 @@
 
   <div class="divider"></div>
 
-  <!-- ── GALLERY ── -->
-  <div class="gallery-section reveal">
+  <div class="gallery-section">
     <div class="gallery-header">
       <span class="section-label">Photo Gallery</span>
     </div>
@@ -679,11 +627,9 @@
 
   <div class="divider"></div>
 
-  <!-- ── FEATURES ── -->
-  <section class="features reveal">
+  <section class="features">
     <span class="section-label">What's Included</span>
     <h2 class="section-title">Everything<br><em>you need</em></h2>
-
     <div class="feature-group">
       <div class="feature-group-title">Inside the Condo</div>
       <ul class="feature-list">
@@ -697,7 +643,6 @@
         <li>Ample storage</li>
       </ul>
     </div>
-
     <div class="feature-group">
       <div class="feature-group-title">Building Facilities</div>
       <ul class="feature-list">
@@ -713,208 +658,147 @@
 
   <div class="divider"></div>
 
-  <!-- ── LANDMARKS ── -->
-  <section class="landmarks reveal">
+  <section class="landmarks">
     <span class="section-label">Location</span>
     <h2 class="section-title">Everything<br><em>within reach</em></h2>
     <div class="landmark-list">
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Nimman restaurant strip</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Nimman restaurant strip</span></div>
         <span class="landmark-dist">2 min walk</span>
       </div>
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Maya Lifestyle Shopping Centre</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Maya Lifestyle Shopping Centre</span></div>
         <span class="landmark-dist">5 min walk</span>
       </div>
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Chiang Mai University</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Chiang Mai University</span></div>
         <span class="landmark-dist">8 min walk</span>
       </div>
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Chiang Mai Ram Hospital</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Chiang Mai Ram Hospital</span></div>
         <span class="landmark-dist">10 min drive</span>
       </div>
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Sunday Walking Street</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Sunday Walking Street</span></div>
         <span class="landmark-dist">15 min drive</span>
       </div>
       <div class="landmark-item">
-        <div class="landmark-left">
-          <div class="landmark-dot"></div>
-          <span class="landmark-name">Chiang Mai International Airport</span>
-        </div>
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Chiang Mai International Airport</span></div>
         <span class="landmark-dist">20 min drive</span>
       </div>
     </div>
   </section>
 
-  <!-- ── MAP ── -->
-  <div class="map-section reveal">
-    <div class="map-inner">
-      <span class="section-label">Find Us</span>
-    </div>
-    <iframe
-      class="map-embed"
+  <div class="map-section">
+    <div class="map-inner"><span class="section-label">Find Us</span></div>
+    <iframe class="map-embed"
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3777.3!2d98.9675!3d18.8022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3a4f9c6f77b5%3A0x5e9d35e8e5e5e5e5!2sNimmanhaemin%20Rd%2C%20Chiang%20Mai!5e0!3m2!1sen!2sth!4v1"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      title="Nimmanhaemin Road map">
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Nimmanhaemin Road map">
     </iframe>
   </div>
 
   <div class="divider" style="margin-top:0;"></div>
 
-  <!-- ── CTA ── -->
-  <section class="cta-section reveal">
+  <section class="cta-section">
     <span class="section-label">Enquire Now</span>
     <div class="price-display">฿22,000</div>
     <div class="price-period">Per Month</div>
     <p class="price-note">Viewings available 7 days a week</p>
-
     <a class="btn-line-cta" href="https://line.me/ti/p/~@perfecthomes"
        onclick="gtag('event','line_click',{'event_category':'engagement','event_label':'cta'})">
       <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
       Message on LINE
     </a>
-
     <a class="btn-phone-cta" href="tel:+66532450555"
        onclick="gtag('event','phone_click',{'event_category':'engagement','event_label':'cta'})">
       ☎ &nbsp;053 245 055
     </a>
-
     <a class="btn-whatsapp-cta" href="https://wa.me/66612675111"
        onclick="gtag('event','whatsapp_click',{'event_category':'engagement','event_label':'cta'})">
       WhatsApp +66 61 267 5111
     </a>
-
     <p class="ref-tag">Ref: UNQ002 · Perfect Homes Chiang Mai</p>
   </section>
 
-  <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-brand">Kintra</div>
     <div class="footer-sub">Property presentation by kintra.tech</div>
   </footer>
 
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;">
+    <div style="width:85vw;max-width:900px;aspect-ratio:4/3;position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.8);">
+      <img id="lightbox-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:#111;">
+    </div>
+    <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;">1 / 1</div>
+    <div id="lightbox-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.12em;font-family:'DM Sans',sans-serif;white-space:nowrap;">← swipe or tap arrows to navigate →</div>
+    <div id="lightbox-close" style="position:absolute;top:16px;right:16px;color:white;font-size:36px;cursor:pointer;line-height:1;opacity:0.9;padding:16px;z-index:100;-webkit-tap-highlight-color:transparent;outline:none;text-shadow:0 2px 8px rgba(0,0,0,0.8);">✕</div>
+    <div id="lightbox-prev" style="position:absolute;left:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to right,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
+      <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">‹</span>
+    </div>
+    <div id="lightbox-next" style="position:absolute;right:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to left,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
+      <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">›</span>
+    </div>
+  </div>
+
   <script>
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    let images = [], current = 0;
+    function openLightbox(imgs, idx) {
+      images = imgs; current = idx;
+      lbImg.src = images[current];
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lightbox-counter').textContent = (current+1) + ' / ' + images.length;
+    }
+    function closeLightbox() { lb.style.display = 'none'; document.body.style.overflow = ''; }
+    function showPrev() { current = (current-1+images.length)%images.length; lbImg.src=images[current]; document.getElementById('lightbox-counter').textContent=(current+1)+' / '+images.length; }
+    function showNext() { current = (current+1)%images.length; lbImg.src=images[current]; document.getElementById('lightbox-counter').textContent=(current+1)+' / '+images.length; }
+    const heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.addEventListener('click', () => {
+        const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i=>i.src);
+        openLightbox([heroImg.src,...allImgs], 0);
       });
-    }, { threshold: 0.1 });
-    revealEls.forEach(el => observer.observe(el));
+    }
+    document.querySelectorAll('.gallery-item img').forEach((img,idx) => {
+      img.addEventListener('click', () => {
+        const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i=>i.src);
+        openLightbox(allImgs, idx);
+      });
+    });
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', e=>{e.stopPropagation();showPrev();});
+    document.getElementById('lightbox-next').addEventListener('click', e=>{e.stopPropagation();showNext();});
+    lb.addEventListener('click', e=>{if(e.target===lb)closeLightbox();});
+    document.addEventListener('keydown', e=>{
+      if(lb.style.display==='flex'){
+        if(e.key==='Escape')closeLightbox();
+        if(e.key==='ArrowLeft')showPrev();
+        if(e.key==='ArrowRight')showNext();
+      }
+    });
+    let touchStartX=0;
+    lb.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+    lb.addEventListener('touchend',e=>{
+      const diff=touchStartX-e.changedTouches[0].clientX;
+      if(Math.abs(diff)>50){diff>0?showNext():showPrev();}
+    },{passive:true});
+  })();
   </script>
 
   <!-- StatCounter: Nimman Condo -->
   <script>
     if (!window.location.search.includes("qwest=true")) {
-      var sc_project = 13209389;
-      var sc_invisible = 1;
-      var sc_security = "c729219b";
-      var sc_script = document.createElement("script");
-      sc_script.type = "text/javascript";
-      sc_script.async = true;
-      sc_script.src = "https://www.statcounter.com/counter/counter.js";
+      var sc_project=13209389, sc_invisible=1, sc_security="c729219b";
+      var sc_script=document.createElement("script");
+      sc_script.async=true;
+      sc_script.src="https://www.statcounter.com/counter/counter.js";
       document.body.appendChild(sc_script);
     }
   </script>
-<!-- LIGHTBOX -->
-<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;">
-  <img id="lightbox-img" style="max-width:85vw;max-height:85vh;object-fit:contain;border-radius:4px;box-shadow:0 0 60px rgba(0,0,0,0.8);pointer-events:none;">
-  <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;">1 / 1</div>
-  <div id="lightbox-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.12em;font-family:'DM Sans',sans-serif;white-space:nowrap;">← swipe or tap arrows to navigate →</div>
-  <div id="lightbox-close" style="position:absolute;top:16px;right:16px;color:white;font-size:36px;cursor:pointer;line-height:1;opacity:0.9;padding:16px;z-index:100;-webkit-tap-highlight-color:transparent;outline:none;text-shadow:0 2px 8px rgba(0,0,0,0.8);">✕</div>
-  <div id="lightbox-prev" style="position:absolute;left:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to right,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
-    <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">‹</span>
-  </div>
-  <div id="lightbox-next" style="position:absolute;right:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to left,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
-    <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">›</span>
-  </div>
-</div>
-<script>
-(function(){
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  let images = [];
-  let current = 0;
 
-  function openLightbox(imgs, idx) {
-    images = imgs;
-    current = idx;
-    lbImg.src = images[current];
-    lb.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length;
-  }
-
-  function closeLightbox() {
-    lb.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  function showPrev() { current = (current - 1 + images.length) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
-  function showNext() { current = (current + 1) % images.length; lbImg.src = images[current]; document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length; }
-
-  // Hero image
-  const heroImg = document.querySelector('.hero-img');
-  if (heroImg) {
-    heroImg.style.cursor = 'zoom-in';
-    heroImg.addEventListener('click', () => {
-      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
-      openLightbox([heroImg.src, ...allImgs], 0);
-    });
-  }
-
-  // Gallery images
-  document.querySelectorAll('.gallery-item img').forEach((img, idx) => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
-      openLightbox(allImgs, idx);
-    });
-  });
-
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-  document.getElementById('lightbox-prev').addEventListener('click', e => { e.stopPropagation(); showPrev(); });
-  document.getElementById('lightbox-next').addEventListener('click', e => { e.stopPropagation(); showNext(); });
-  lb.addEventListener('click', function(e) { if(e.target === lb) closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    if(lb.style.display === 'flex') {
-      if(e.key === 'Escape') closeLightbox();
-      if(e.key === 'ArrowLeft') showPrev();
-      if(e.key === 'ArrowRight') showNext();
-    }
-  });
-
-  // Swipe support
-  let touchStartX = 0;
-  lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-  lb.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) { diff > 0 ? showNext() : showPrev(); }
-  }, {passive:true});
-})();
-</script>
 </body>
 </html>
