@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>D Condo Nim · 2 Bed · ฿23,000/mo</title>
+  <meta name="description" content="2-bedroom condo at D Condo Nim, Nimman, Chiang Mai. 60 sqm, 3rd floor, pool + jacuzzi, gym, fully furnished. Short term from ฿23,000/month." />
+  <meta property="og:title" content="D Condo Nim · 2 Bed · ฿23,000/mo" />
+  <meta property="og:description" content="2-bedroom short-stay at D Condo Nim on Nimman. Pool, gym, fully furnished. From ฿23,000/month." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_10.jpg" />
+  <meta property="og:url" content="https://kintra.tech/stayments-dcondo-nim.html" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- StatCounter -->
+  <script type="text/javascript">
+  var sc_project=13210105; var sc_invisible=1; var sc_security="b6f568a1";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13210105/0/b6f568a1/1/" alt="Web Analytics Made Easy - Statcounter" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0F0F0F;
+      --surface: #161616;
+      --border: rgba(255,255,255,0.07);
+      --gold: #C9A84C;
+      --gold-light: #E2C97A;
+      --text: #F0EDE8;
+      --muted: rgba(240,237,232,0.45);
+    }
+    html { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      overflow: hidden;
+      background: #111;
+      cursor: pointer;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .hero:hover .hero-img { transform: scale(1.02); }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 35%, rgba(0,0,0,0.72) 100%);
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 24px 40px;
+      animation: fadeUp 1s 0.25s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--border); padding: 5px 13px; margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 10vw, 56px); font-weight: 300;
+      line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-sub {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,232,0.55); margin-bottom: 30px;
+    }
+    .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-line-hero {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: #06C755; color: #fff; text-decoration: none;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 13px 22px; flex: 1; justify-content: center;
+      transition: opacity 0.2s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-line-hero svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+    .btn-line-hero:hover { opacity: 0.88; }
+    .btn-phone-hero {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--text); text-decoration: none;
+      font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 13px 22px; border: 1px solid rgba(240,237,232,0.25);
+      flex: 1; justify-content: center;
+      transition: border-color 0.2s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-phone-hero:hover { border-color: var(--gold); }
+    .gallery-hint {
+      font-size: 9px; letter-spacing: 0.15em; color: rgba(255,255,255,0.4);
+      font-family: 'DM Sans', sans-serif; text-align: center; margin-top: 16px;
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+    @keyframes pulse-hint { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ─── PRICE BADGE ─── */
+    .price-badge {
+      position: absolute;
+      top: 24px; right: 16px;
+      z-index: 10;
+      text-align: right;
+    }
+    @media (min-width: 480px) {
+      .price-badge { top: auto; bottom: 140px; }
+    }
+    @media (min-width: 768px) {
+      .price-badge { top: auto; bottom: 120px; }
+    }
+    @media (min-width: 1024px) {
+      .price-badge { top: auto; bottom: 110px; }
+    }
+    .price-badge-inner {
+      background: rgba(15,15,15,0.82);
+      border: 1px solid rgba(201,168,76,0.45);
+      padding: 10px 18px;
+      backdrop-filter: blur(8px);
+    }
+    .price-badge-inner span {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+    .price-badge-inner small {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.45);
+      margin-top: 3px;
+    }
+
+
+
+    /* ─── SHARE BLOCK ─── */
+    .share-block {
+      padding: 20px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .share-label {
+      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px; display: block;
+    }
+    .share-buttons { display: flex; gap: 10px; }
+    .share-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 7px; flex: 1; padding: 11px 10px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--border);
+      color: var(--text); background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'DM Sans', sans-serif; -webkit-tap-highlight-color: transparent;
+    }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .share-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+    .share-btn.line-share:hover { border-color: #06C755; color: #06C755; }
+    .share-btn.copied { border-color: var(--gold) !important; color: var(--gold) !important; }
+
+    /* ─── STATS ─── */
+    .stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border); margin: 20px 24px 0;
+    }
+    .stat {
+      padding: 14px 8px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-value {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 300; color: var(--gold-light); line-height: 1;
+    }
+    .stat-label {
+      display: block; font-size: 8px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); margin-top: 4px;
+    }
+
+    /* ─── AGENCY TAG ─── */
+    .agency-tag {
+      padding: 10px 24px 0;
+      background: var(--surface);
+    }
+
+    /* ─── SECTION SHARED ─── */
+    .section-label {
+      display: block; font-size: 9px; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 300; line-height: 1.2;
+      color: var(--text); margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+    .divider {
+      height: 1px; background: var(--border);
+      margin: 0 24px;
+    }
+
+    /* ─── DESCRIPTION ─── */
+    .description { background: var(--surface); border-top: 1px solid var(--border); padding: 24px; }
+    .description p {
+      font-size: 13px; line-height: 1.75; color: rgba(240,237,232,0.7);
+      margin-bottom: 12px;
+    }
+    .description p:last-child { margin-bottom: 0; }
+
+    /* ─── PERKS ─── */
+    .perks { padding: 24px; }
+    .perk-list { display: flex; flex-direction: column; gap: 16px; }
+    .perk-item { display: flex; gap: 16px; align-items: flex-start; }
+    .perk-number {
+      font-family: 'Cormorant Garamond', serif; font-size: 32px;
+      font-weight: 300; color: rgba(201,168,76,0.25); line-height: 1;
+      min-width: 28px;
+    }
+    .perk-title {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text); margin-bottom: 4px;
+    }
+    .perk-desc { font-size: 12px; line-height: 1.6; color: var(--muted); }
+
+    /* ─── FEATURES ─── */
+    .features { padding: 24px; background: var(--surface); }
+    .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .feature-item {
+      padding: 12px 14px; border: 1px solid var(--border);
+      font-size: 11px; letter-spacing: 0.06em; color: rgba(240,237,232,0.65);
+    }
+    .feature-item::before {
+      content: '—'; color: var(--gold); margin-right: 8px; font-size: 10px;
+    }
+
+    /* ─── GALLERY ─── */
+    .gallery-section { padding: 40px 0 32px; }
+    .gallery-header { padding: 0 24px; margin-bottom: 20px; }
+    .gallery-scroll {
+      display: flex; gap: 3px; overflow-x: auto; padding: 0 24px;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-item {
+      flex: 0 0 74vw; max-width: 320px; aspect-ratio: 4/3;
+      overflow: hidden; scroll-snap-align: start; cursor: pointer;
+    }
+    .gallery-item:first-child { flex: 0 0 86vw; max-width: 390px; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.55s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-hint-strip {
+      text-align: center; font-size: 12px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold); margin-top: 16px;
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+
+    /* ─── MAP ─── */
+    .map-section { padding: 0; background: var(--bg); }
+    .map-inner { padding: 24px 24px 16px; }
+    .map-embed {
+      width: 100%; height: 260px; border: none; display: block;
+      filter: grayscale(0.3) contrast(1.1);
+    }
+
+    /* ─── LANDMARKS ─── */
+    .landmarks { padding: 24px; background: var(--surface); }
+    .landmark-list { display: flex; flex-direction: column; gap: 10px; }
+    .landmark-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .landmark-item:last-child { border-bottom: none; }
+    .landmark-name { color: rgba(240,237,232,0.7); }
+    .landmark-dist { color: var(--gold); font-size: 11px; letter-spacing: 0.08em; }
+
+    /* ─── CTA ─── */
+    .cta-section { padding: 24px; text-align: center; }
+    .cta-section { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 24px; text-align: center; }
+    .price-display { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; color: var(--text); line-height: 1; margin-bottom: 4px; }
+    .price-period { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .price-note { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+    .btn-line-cta {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      background: #06C755; color: #fff; text-decoration: none;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 18px 32px; width: 100%; max-width: 360px; margin: 0 auto 14px;
+      transition: opacity 0.2s, transform 0.15s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-line-cta svg { width: 22px; height: 22px; fill: white; }
+    .btn-line-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-secondary-cta {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: transparent; color: var(--muted); text-decoration: none;
+      font-size: 13px; letter-spacing: 0.08em; padding: 16px 32px;
+      width: 100%; max-width: 360px; margin: 0 auto 14px;
+      border: 1px solid var(--border); transition: border-color 0.2s, color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-secondary-cta:last-of-type { margin-bottom: 0; }
+    .btn-secondary-cta:hover { border-color: var(--gold); color: var(--text); }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 300; margin-bottom: 6px;
+    }
+    .cta-sub {
+      font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+    .btn-line-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); padding: 13px 28px;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-line-cta:hover { background: rgba(201,168,76,0.08); }
+    .ref-tag {
+      font-size: 9px; letter-spacing: 0.14em; color: rgba(240,237,232,0.2);
+      margin-top: 16px; text-transform: uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 32px 24px 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif; font-size: 13px;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: rgba(201,168,76,0.4);
+    }
+    .footer-sub {
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(240,237,232,0.15); margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img" src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_10.jpg" alt="D Condo Nim Chiang Mai" onclick="openLightbox(0)" />
+    <div class="hero-overlay"></div>
+    <div class="price-badge">
+      <div class="price-badge-inner">
+        <span>฿23,000</span>
+        <small>Per Month</small>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="badge">Stayments · For Rent</div>
+      <h1 class="hero-title">D Condo Nim<br><em>Two Bedroom Suite</em></h1>
+      <p class="hero-sub">Nimman · Chiang Mai</p>
+      <div class="hero-cta-row">
+        <a class="btn-line-hero" href="https://line.me/R/ti/p/O6Yv0nN-7B" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          LINE / WhatsApp
+        </a>
+        <a class="btn-phone-hero" href="tel:+66954465707">☎ 095 446 5707</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">2</span>
+      <span class="stat-label">Bedrooms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">2</span>
+      <span class="stat-label">Bathrooms</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">60</span>
+      <span class="stat-label">sq.m</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">3rd</span>
+      <span class="stat-label">Floor</span>
+    </div>
+  </div>
+
+  <!-- AGENCY TAG -->
+  <div class="agency-tag">
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,237,232,0.35);">Listed by</span>
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-left:8px;">Stayments Properties · Chiang Mai</span>
+  </div>
+
+  <!-- SHARE BLOCK -->
+  <div class="share-block">
+    <span class="share-label">Send this listing to a client instantly</span>
+    <div class="share-buttons">
+      <a class="share-btn whatsapp" href="https://wa.me/?text=D%20Condo%20Nim%20%E2%82%BF23%2C000%2Fmo%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Fstayments-dcondo-nim.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.529 5.845L.057 23.571l5.886-1.452A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.865 9.865 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
+        WhatsApp
+      </a>
+      <a class="share-btn line-share" href="https://line.me/R/msg/text/?D%20Condo%20Nim%20%E2%82%BF23%2C000%2Fmo%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Fstayments-dcondo-nim.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINE
+      </a>
+      <button class="share-btn copy-link" onclick="copyLink(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        Copy Link
+      </button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DESCRIPTION -->
+  <section class="description">
+    <span class="section-label">The Property</span>
+    <p>A beautifully styled 2-bedroom short-stay in the heart of Nimman — Chiang Mai's most sought-after neighbourhood for cafés, restaurants, and creative energy. D Condo Nim sits right in the action, with easy access to Central Festival and the Old City.</p>
+    <p>60 sqm of open-plan living with an integrated kitchen, two generous bedrooms, two bathrooms and full resort facilities including pool with jacuzzi, sun terrace, gym and 24-hour security. Fully furnished and move-in ready.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PERKS -->
+  <section class="perks">
+    <span class="section-label">Why This Property</span>
+    <h2 class="section-title">Three reasons<br><em>to move fast</em></h2>
+    <div class="perk-list">
+      <div class="perk-item">
+        <div class="perk-number">1</div>
+        <div class="perk-body">
+          <div class="perk-title">Heart of Nimman</div>
+          <div class="perk-desc">D Condo Nim puts you steps from the best of Chiang Mai — Nimman's cafés, night markets, boutiques and restaurants are all within a 5-minute walk. Central Festival is just around the corner.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">2</div>
+        <div class="perk-body">
+          <div class="perk-title">Resort Facilities</div>
+          <div class="perk-desc">Swimming pool with integrated jacuzzi, sun terrace, fully equipped gym, keycard access, CCTV and 24-hour security — all included. The amenities of a resort at a condo price.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">3</div>
+        <div class="perk-body">
+          <div class="perk-title">Two Bedrooms, Two Bathrooms</div>
+          <div class="perk-desc">En-suite master bedroom plus a second bedroom with Jack &amp; Jill bathroom access. Fridge, microwave, hob, extractor, washing machine — fully furnished throughout. Short term from 3 months.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <span class="section-label">Property Details</span>
+    <div class="feature-grid">
+      <div class="feature-item">2 Bedrooms</div>
+      <div class="feature-item">2 Bathrooms</div>
+      <div class="feature-item">60.26 sq.m</div>
+      <div class="feature-item">3rd Floor</div>
+      <div class="feature-item">En-suite Master</div>
+      <div class="feature-item">Jack &amp; Jill Bath</div>
+      <div class="feature-item">Pool + Jacuzzi</div>
+      <div class="feature-item">Gym</div>
+      <div class="feature-item">Washing Machine</div>
+      <div class="feature-item">Hob + Extractor</div>
+      <div class="feature-item">6 Month: ฿23,000/mo</div>
+      <div class="feature-item">3 Month: ฿25,000/mo</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GALLERY -->
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <span class="section-label">Photo Gallery</span>
+    </div>
+    <div class="gallery-scroll">
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(0)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_1.jpg" alt="Living room" loading="eager" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(1)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_2.jpg" alt="Open plan living" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(2)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_3.jpg" alt="Master bedroom" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(3)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_5.jpg" alt="Garden view" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(4)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_6.jpg" alt="Second bedroom" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(5)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_7.jpg" alt="Master bedroom alt" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(6)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_8.jpg" alt="Second bedroom alt" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(7)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_9.jpg" alt="Bathroom" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(8)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_10.jpg" alt="Open plan kitchen" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(9)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_11.jpg" alt="Kitchen dining" loading="lazy" /></div>
+      <div class="gallery-item" style="cursor:pointer;" onclick="openLightbox(10)"><img src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_12.jpg" alt="Bathroom en-suite" loading="lazy" /></div>
+    </div>
+    <p class="gallery-hint-strip">← swipe to explore →</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LANDMARKS -->
+  <section class="landmarks">
+    <span class="section-label">Location</span>
+    <div class="landmark-list">
+      <div class="landmark-item">
+        <span class="landmark-name">Nimman Road</span>
+        <span class="landmark-dist">5 min walk</span>
+      </div>
+      <div class="landmark-item">
+        <span class="landmark-name">Central Festival Mall</span>
+        <span class="landmark-dist">5 min walk</span>
+      </div>
+      <div class="landmark-item">
+        <span class="landmark-name">Maya Mall</span>
+        <span class="landmark-dist">10 min walk</span>
+      </div>
+      <div class="landmark-item">
+        <span class="landmark-name">Old City Moat</span>
+        <span class="landmark-dist">10 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <span class="landmark-name">Chiang Mai Airport</span>
+        <span class="landmark-dist">20 min drive</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="map-inner"><span class="section-label">Find Us</span></div>
+    <iframe class="map-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3776.3!2d98.9680!3d18.7960!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30da3ed8b76adaab%3A0x86a62efc6c5f8a36!2sD+Condo+Nim!5e0!3m2!1sen!2sth!4v1"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Peaks Avenue location map">
+    </iframe>
+  </div>
+
+  <div class="divider" style="margin-top:0;"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-label">Request a Viewing</span>
+    <div class="price-display">฿23,000</div>
+    <div class="price-period">Per Month · 6 Month Lease</div>
+    <p class="price-note">Private viewings available by appointment</p>
+    <a class="btn-line-cta" href="https://line.me/R/ti/p/O6Yv0nN-7B" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINE · Stayments Properties
+    </a>
+    <a class="btn-secondary-cta" href="tel:+66954465707">
+      ☎ &nbsp;095 446 5707
+    </a>
+    <a class="btn-secondary-cta" href="https://wa.me/66954465707" target="_blank">
+      WhatsApp · 095 446 5707
+    </a>
+    <p class="ref-tag">Ref: STA-2109 · Stayments Properties · Chiang Mai</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Kintra</div>
+    <div class="footer-sub">Property presentation by kintra.tech</div>
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(201,168,76,0.12);">
+      <p style="font-size:11px;letter-spacing:0.08em;color:rgba(240,237,232,0.35);margin-bottom:10px;text-transform:uppercase;">Real estate agent? Want a page like this for your listings?</p>
+      <a href="https://line.me/ti/p/~kintratech"
+         style="display:inline-block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;text-decoration:none;border:1px solid rgba(201,168,76,0.35);padding:9px 20px;">
+        Talk to Kintra →
+      </a>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;">
+    <div style="width:85vw;max-width:900px;aspect-ratio:4/3;position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.8);">
+      <img id="lightbox-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:#111;">
+    </div>
+    <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:'DM Sans',sans-serif;">1 / 1</div>
+    <div id="lightbox-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.12em;font-family:'DM Sans',sans-serif;white-space:nowrap;">← swipe or tap arrows to navigate →</div>
+    <button onclick="closeLightbox()" style="position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);color:#fff;width:40px;height:40px;font-size:18px;cursor:pointer;z-index:100;">✕</button>
+    <div id="prev-zone" onclick="changeLightbox(-1)" style="position:absolute;left:0;top:0;width:15%;height:100%;cursor:pointer;display:flex;align-items:center;justify-content:flex-start;padding-left:12px;background:linear-gradient(to right,rgba(0,0,0,0.35),transparent);">
+      <span style="color:rgba(255,255,255,0.7);font-size:28px;line-height:1;">&#8249;</span>
+    </div>
+    <div id="next-zone" onclick="changeLightbox(1)" style="position:absolute;right:0;top:0;width:15%;height:100%;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;padding-right:12px;background:linear-gradient(to left,rgba(0,0,0,0.35),transparent);">
+      <span style="color:rgba(255,255,255,0.7);font-size:28px;line-height:1;">&#8250;</span>
+    </div>
+  </div>
+
+  <script>
+        const images = [
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_1.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_2.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_3.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_5.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_6.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_7.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_8.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_9.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_10.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_11.jpg',
+    'https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/dcondo-nim_Sta-2109_12.jpg',
+  ];
+  let current = 0;
+  let startX = 0;
+
+  function openLightbox(i) {
+    current = i;
+    document.getElementById('lightbox').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    updateLightbox();
+    // Swipe hint pulse
+    const hint = document.getElementById('lightbox-hint');
+    hint.style.animation = 'none';
+    setTimeout(() => { hint.style.animation = 'pulse 1.5s ease-in-out 3'; }, 100);
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function changeLightbox(dir) {
+    current = (current + dir + images.length) % images.length;
+    updateLightbox();
+  }
+  function updateLightbox() {
+    document.getElementById('lightbox-img').src = images[current];
+    document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length;
+  }
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (lb.style.display === 'none') return;
+    if (e.key === 'ArrowLeft') changeLightbox(-1);
+    if (e.key === 'ArrowRight') changeLightbox(1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+  // Touch swipe
+  document.getElementById('lightbox').addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  document.getElementById('lightbox').addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) changeLightbox(diff > 0 ? 1 : -1);
+  });
+
+  function copyLink(btn) {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      btn.classList.add('copied');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+    }).catch(() => {
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el); el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000);
+    });
+  }
+
+  // Pulse animation for swipe hint
+  const style = document.createElement('style');
+  style.textContent = '@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }';
+  document.head.appendChild(style);
+  </script>
+</body>
+</html>
