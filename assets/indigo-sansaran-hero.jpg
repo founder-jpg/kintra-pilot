@@ -7,7 +7,9 @@
   <meta name="description" content="Modern 4-bedroom pool villa in Sansaran Village, Hang Dong, Chiang Mai. Private pool, mountain setting, fully furnished. ฿59,000/month.">
   <meta property="og:title" content="Sansaran Pool Villa · 4 Bed · ฿59,000/mo">
   <meta property="og:description" content="Renovated 4-bed villa with private pool in Sansaran Village, Nong Kwai, Hang Dong. Mountain views, resort community. ฿59,000/month.">
-  <meta property="og:image" content="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/00-20250818104154-705549.jpg">
+  <meta property="og:image" content="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/indigo-sansaran-hero.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="800">
   <meta property="og:url" content="https://kintra.tech/indigo-sansaran.html">
   <meta property="og:type" content="website">
 
@@ -484,7 +486,7 @@
     .footer-sub { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.15); margin-top: 4px; }
   </style>
 <script src="./indigo-sansaran-hero_files/counter.js.download"></script><link rel="stylesheet" href="chrome-extension://ba648c64-351f-441e-9d92-f68c17ed6796/app/content-style.css"></head>
-<body style="">
+<body>
 
   <div class="hero">
     <img class="hero-img" src="./indigo-sansaran-hero_files/00-20250818104154-705549.jpg" alt="Sansaran Pool Villa Chiang Mai" onclick="openLightbox(0)">
@@ -518,6 +520,12 @@
 
   <!-- SHARE BLOCK -->
   <div class="share-block">
+  <!-- AGENCY TAG -->
+  <div class="agency-tag">
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(240,237,232,0.35);">Listed by</span>
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-left:8px;">Indigo Real Estate · Chiang Mai</span>
+  </div>
+
     <span class="share-label">Share this listing</span>
     <div class="share-buttons">
       <a class="share-btn whatsapp" href="https://wa.me/?text=Sansaran%20Pool%20Villa%20%E2%82%BF59%2C000%2Fmo%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Findigo-sansaran.html" target="_blank">
@@ -600,7 +608,7 @@
       <div class="gallery-item"><img src="./indigo-sansaran-hero_files/21-20250818104202-367022.jpg" alt="Community pool" loading="lazy"></div>
       <div class="gallery-item"><img src="./indigo-sansaran-hero_files/22-20250818104204-953109.jpg" alt="Gym" loading="lazy"></div>
       <div class="gallery-item"><img src="./indigo-sansaran-hero_files/23-20250818104204-487796.jpg" alt="Clubhouse" loading="lazy"></div>
-      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/24-20250818104205-994128.jpg" alt="Mountain view" loading="lazy"></div>
+      
     </div>
     &lt;
     <p class="gallery-hint">← swipe to explore →</p>
@@ -670,7 +678,7 @@
 
   <div class="map-section">
     <div class="map-inner"><span class="section-label">Find Us</span></div>
-    <iframe class="map-embed" src="./indigo-sansaran-hero_files/embed.html" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hang Dong location map" data-dashlane-frameid="229">
+    <iframe class="map-embed" src="./indigo-sansaran-hero_files/embed.html" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hang Dong location map" data-dashlane-frameid="266">
     </iframe>
   </div>
 
@@ -706,11 +714,11 @@
   </footer>
 
   <!-- LIGHTBOX -->
-  <div id="lightbox" style="display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.95); z-index: 9999; align-items: center; justify-content: center;">
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center;">
     <div style="width:85vw;max-width:900px;aspect-ratio:4/3;position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.8);">
-      <img id="lightbox-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:#111;" src="./indigo-sansaran-hero_files/24-20250818104205-994128.jpg">
+      <img id="lightbox-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:#111;">
     </div>
-    <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:&#39;DM Sans&#39;,sans-serif;">25 / 25</div>
+    <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:&#39;DM Sans&#39;,sans-serif;">1 / 1</div>
     <div id="lightbox-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.12em;font-family:&#39;DM Sans&#39;,sans-serif;white-space:nowrap;">← swipe or tap arrows to navigate →</div>
     <div id="lightbox-close" style="position:absolute;top:16px;right:16px;color:white;font-size:36px;cursor:pointer;line-height:1;opacity:0.9;padding:16px;z-index:100;-webkit-tap-highlight-color:transparent;outline:none;text-shadow:0 2px 8px rgba(0,0,0,0.8);">✕</div>
     <div id="lightbox-prev" style="position:absolute;left:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to right,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
