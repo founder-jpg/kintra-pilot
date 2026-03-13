@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://kintra.tech/indigo-sansaran.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Sansaran Pool Villa · 4 Bed · ฿59,000/mo</title>
+  <meta name="description" content="Modern 4-bedroom pool villa in Sansaran Village, Hang Dong, Chiang Mai. Private pool, mountain setting, fully furnished. ฿59,000/month.">
+  <meta property="og:title" content="Sansaran Pool Villa · 4 Bed · ฿59,000/mo">
+  <meta property="og:description" content="Renovated 4-bed villa with private pool in Sansaran Village, Nong Kwai, Hang Dong. Mountain views, resort community. ฿59,000/month.">
+  <meta property="og:image" content="https://www.mychiangmaihome.com/backoffice-indigo/public/Real-Estate-Gallery/00-20250818104154-705549.jpg">
+  <meta property="og:url" content="https://kintra.tech/indigo-sansaran.html">
+  <meta property="og:type" content="website">
+
+  <!-- Google Analytics -->
+  <script async="" src="./indigo-sansaran-hero_files/js(1)"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YPHQ44CX3S');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./indigo-sansaran-hero_files/css2" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #C9A84C;
+      --gold-light: #E2C97A;
+      --dark:       #0F0F0F;
+      --surface:    #161616;
+      --text:       #F0EDE8;
+      --muted:      #7A7570;
+      --border:     rgba(201,168,76,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 580px;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transform: scale(1.06);
+      animation: slowZoom 9s ease-out forwards;
+      cursor: zoom-in;
+    }
+
+    @keyframes slowZoom { to { transform: scale(1); } }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15,15,15,0.1) 0%,
+        rgba(15,15,15,0.0) 30%,
+        rgba(15,15,15,0.6) 70%,
+        rgba(15,15,15,0.97) 100%
+      );
+    }
+
+    .price-badge {
+      position: absolute;
+      right: 20px;
+      z-index: 2;
+      pointer-events: none;
+      top: 24px;
+    }
+    @media (min-width: 480px) {
+      .price-badge { top: auto; bottom: 140px; }
+    }
+    @media (min-width: 768px) {
+      .price-badge { top: auto; bottom: 120px; }
+    }
+    @media (min-width: 1024px) {
+      .price-badge { top: auto; bottom: 110px; }
+    }
+    .price-badge-inner {
+      display: inline-block;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid #C9A84C;
+      border-radius: 3px;
+      padding: 7px 16px;
+    }
+    .price-badge-inner span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: #C9A84C;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 24px 40px;
+      animation: fadeUp 1s 0.25s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 10vw, 56px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-sub {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240,237,232,0.55);
+      margin-bottom: 30px;
+    }
+
+    .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn-line-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #06C755;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      flex: 1;
+      justify-content: center;
+      transition: opacity 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-line-hero svg { width: 18px; height: 18px; fill: white; flex-shrink: 0; }
+    .btn-line-hero:hover { opacity: 0.88; }
+
+    .btn-phone-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      border: 1px solid rgba(240,237,232,0.25);
+      flex: 1;
+      justify-content: center;
+      transition: border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-phone-hero:hover { border-color: var(--gold); }
+
+
+    /* ─── SHARE BLOCK ─── */
+    .share-block {
+      padding: 20px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .share-label {
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .share-buttons { display: flex; gap: 10px; }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex: 1;
+      padding: 11px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .share-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+    .share-btn.line-share:hover { border-color: #06C755; color: #06C755; }
+    .share-btn.copied { border-color: var(--gold) !important; color: var(--gold) !important; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      margin: 20px 24px 0;
+      animation: fadeUp 1s 0.55s both;
+    }
+
+    .stat { padding: 16px 8px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--gold-light);
+      display: block;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 24px;
+      opacity: 0.3;
+    }
+
+    section { padding: 52px 24px; }
+
+    .section-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    .description { background: var(--surface); border-top: 1px solid var(--border); }
+
+    .description p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .description p:last-child { margin-bottom: 0; }
+
+    .perks { background: var(--dark); border-top: 1px solid var(--border); }
+    .perk-list { display: flex; flex-direction: column; }
+
+    .perk-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .perk-item:last-child { border-bottom: none; }
+
+    .perk-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
+    }
+
+    .perk-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; letter-spacing: 0.02em; }
+    .perk-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .gallery-section { padding: 40px 0 32px; background: var(--dark); }
+    .gallery-header { padding: 0 24px; margin-bottom: 20px; }
+
+    .gallery-scroll {
+      display: flex;
+      gap: 3px;
+      overflow-x: auto;
+      padding: 0 24px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+
+    .gallery-item {
+      flex: 0 0 74vw;
+      max-width: 320px;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    .gallery-item:first-child { flex: 0 0 86vw; max-width: 390px; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.55s ease;
+      cursor: zoom-in;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-hint {
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 16px;
+      animation: pulse-hint 2s ease-in-out infinite;
+    }
+    @keyframes pulse-hint { 0%,100%{opacity:0.5;} 50%{opacity:1;} }
+
+    .features { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .feature-group { margin-bottom: 32px; }
+    .feature-group:last-child { margin-bottom: 0; }
+
+    .feature-group-title {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+
+    .feature-list li {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.45;
+    }
+    .feature-list li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:10px; top:2px; }
+
+    .landmarks { background: var(--dark); }
+    .landmark-list { display: flex; flex-direction: column; }
+
+    .landmark-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .landmark-item:last-child { border-bottom: none; }
+    .landmark-left { display: flex; align-items: center; gap: 14px; }
+    .landmark-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+    .landmark-name { font-size: 14px; color: var(--text); font-weight: 300; }
+    .landmark-dist { font-size: 12px; color: var(--gold); font-weight: 400; white-space: nowrap; letter-spacing: 0.04em; }
+
+    .map-section { padding: 0; background: var(--dark); }
+    .map-inner { padding: 0 24px 24px; }
+
+    .map-embed {
+      width: 100%;
+      height: 260px;
+      display: block;
+      border: 1px solid var(--border);
+      filter: grayscale(30%) brightness(0.85);
+    }
+
+    .cta-section { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 24px; text-align: center; }
+
+    .price-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 46px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .price-period { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .price-note { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+
+    .btn-line-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #06C755;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 18px 32px;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 14px;
+      transition: opacity 0.2s, transform 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-line-cta svg { width: 22px; height: 22px; fill: white; }
+    .btn-line-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-secondary-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      padding: 16px 32px;
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto 14px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary-cta:last-of-type { margin-bottom: 0; }
+    .btn-secondary-cta:hover { border-color: var(--gold); color: var(--text); }
+
+    .ref-tag { margin-top: 28px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
+
+    footer { padding: 24px; text-align: center; border-top: 1px solid var(--border); background: #080808; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(201,168,76,0.4); }
+    .footer-sub { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.15); margin-top: 4px; }
+  </style>
+<script src="./indigo-sansaran-hero_files/counter.js.download"></script><link rel="stylesheet" href="chrome-extension://ba648c64-351f-441e-9d92-f68c17ed6796/app/content-style.css"></head>
+<body style="">
+
+  <div class="hero">
+    <img class="hero-img" src="./indigo-sansaran-hero_files/00-20250818104154-705549.jpg" alt="Sansaran Pool Villa Chiang Mai" onclick="openLightbox(0)">
+    <div class="hero-overlay"></div>
+    <div class="price-badge">
+      <div class="price-badge-inner">
+        <span>฿15,900,000</span>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="badge">Indigo · For Rent</div>
+      <h1 class="hero-title" style="font-size:clamp(2.2rem,7vw,4.2rem);">Sansaran<br><em>Private Pool Villa</em></h1>
+      <p class="hero-sub">Nong Kwai · Hang Dong · Chiang Mai</p>
+      <div class="hero-cta-row">
+        <a class="btn-line-hero" href="https://line.me/ti/p/~0832000431" onclick="gtag(&#39;event&#39;,&#39;line_click&#39;,{&#39;event_category&#39;:&#39;engagement&#39;,&#39;event_label&#39;:&#39;hero&#39;})">
+          <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path></svg>
+          LINE / WhatsApp
+        </a>
+        <a class="btn-phone-hero" href="tel:+66832000431">☎ 083 200 0431</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Bedrooms</span></div>
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Bathrooms</span></div>
+    <div class="stat"><span class="stat-value">99</span><span class="stat-label">sq. wah</span></div>
+    <div class="stat"><span class="stat-value">Pool</span><span class="stat-label">Salt Water</span></div>
+  </div>
+
+
+  <!-- SHARE BLOCK -->
+  <div class="share-block">
+    <span class="share-label">Share this listing</span>
+    <div class="share-buttons">
+      <a class="share-btn whatsapp" href="https://wa.me/?text=Sansaran%20Pool%20Villa%20%E2%82%BF59%2C000%2Fmo%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Findigo-sansaran.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.529 5.845L.057 23.571l5.886-1.452A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.865 9.865 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"></path></svg>
+        WhatsApp
+      </a>
+      <a class="share-btn line-share" href="https://line.me/R/msg/text/?Sansaran%20Pool%20Villa%20%E2%82%BF59%2C000%2Fmo%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Findigo-sansaran.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path></svg>
+        LINE
+      </a>
+      <button class="share-btn copy-link" onclick="copyLink(this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"></path></svg>
+        Copy Link
+      </button>
+    </div>
+  </div>
+
+  <section class="description">
+    <span class="section-label">The Property</span>
+    <p>A rare find tucked behind Kad Farang Village in Hang Dong — one of Chiang Mai's most sought-after residential addresses. Fully furnished, move-in ready, and designed for those who value total privacy.</p>
+    <p>Four generous bedrooms, five bathrooms, a salt-water pool hidden from street view, and a private gym. The European built-in kitchen sets the tone for everything else.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="perks">
+    <span class="section-label">Why This Property</span>
+    <h2 class="section-title">Three reasons<br><em>to move fast</em></h2>
+    <div class="perk-list">
+      <div class="perk-item">
+        <div class="perk-number">1</div>
+        <div class="perk-body">
+          <div class="perk-title">Ultra-Private</div>
+          <div class="perk-desc">Both the pool and entrance are hidden from street view — rare in this price range and location.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">2</div>
+        <div class="perk-body">
+          <div class="perk-title">Move-In Ready</div>
+          <div class="perk-desc">Fully furnished throughout with a high-end European built-in kitchen. Nothing to do but arrive.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">3</div>
+        <div class="perk-body">
+          <div class="perk-title">Elite Location</div>
+          <div class="perk-desc">2 minutes to Kad Farang Village shopping, 3 minutes to SBS International School.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="gallery-section">
+    <div class="gallery-header"><span class="section-label">Photo Gallery</span></div>
+    <div class="gallery-scroll">
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/00-20250818104154-705549.jpg" alt="Pool villa exterior" loading="eager"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/01-20250818104154-311246.jpg" alt="Living room" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/02-20250818104154-683456.jpg" alt="Dining kitchen" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/03-20250818104155-450405.jpg" alt="Master bedroom" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/04-20250818104155-717706.jpg" alt="Bedroom 2" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/05-20250818104155-557889.jpg" alt="Bedroom 3" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/06-20250818104155-855721.jpg" alt="Bedroom 4" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/07-20250818104157-848254.jpg" alt="Bathroom" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/08-20250818104157-887239.jpg" alt="Garden" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/09-20250818104157-999681.jpg" alt="Pool deck" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/10-20250818104157-633356.jpg" alt="Outdoor lounge" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/11-20250818104157-867139.jpg" alt="Kitchen detail" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/12-20250818104157-667184.jpg" alt="Hallway" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/13-20250818104157-717851.jpg" alt="Staircase" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/14-20250818104200-788773.jpg" alt="Pool side" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/15-20250818104200-145812.jpg" alt="Exterior front" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/16-20250818104201-328326.jpg" alt="Garden path" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/17-20250818104201-782838.jpg" alt="Living area" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/18-20250818104202-263304.jpg" alt="Bedroom detail" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/19-20250818104202-984857.jpg" alt="Bathroom 2" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/20-20250818104202-871211.jpg" alt="Pool evening" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/21-20250818104202-367022.jpg" alt="Community pool" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/22-20250818104204-953109.jpg" alt="Gym" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/23-20250818104204-487796.jpg" alt="Clubhouse" loading="lazy"></div>
+      <div class="gallery-item"><img src="./indigo-sansaran-hero_files/24-20250818104205-994128.jpg" alt="Mountain view" loading="lazy"></div>
+    </div>
+    &lt;
+    <p class="gallery-hint">← swipe to explore →</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="features">
+    <span class="section-label">What's Included</span>
+    <h2 class="section-title">Everything<br><em>you need</em></h2>
+    <div class="feature-group">
+      <div class="feature-group-title">Inside the Villa</div>
+      <ul class="feature-list">
+        <li>4 bedrooms</li>
+        <li>5 bathrooms</li>
+        <li>Fully furnished</li>
+        <li>European built-in kitchen</li>
+        <li>High-ceiling living area</li>
+        <li>Private gym</li>
+        <li>Full air conditioning</li>
+        <li>Smart home ready</li>
+        <li>High-level security system</li>
+        <li>Ample storage</li>
+      </ul>
+    </div>
+    <div class="feature-group">
+      <div class="feature-group-title">Outdoor &amp; Estate</div>
+      <ul class="feature-list">
+        <li>Salt-water pool</li>
+        <li>Private entrance</li>
+        <li>Street-hidden pool</li>
+        <li>99 sq. wah land</li>
+        <li>Landscaped garden</li>
+        <li>Secure gated plot</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="landmarks">
+    <span class="section-label">Location</span>
+    <h2 class="section-title">Everything<br><em>within reach</em></h2>
+    <div class="landmark-list">
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Central Airport Plaza</span></div>
+        <span class="landmark-dist">12 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Central Airport Plaza</span></div>
+        <span class="landmark-dist">12 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Central Airport Plaza</span></div>
+        <span class="landmark-dist">12 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Central Airport Plaza</span></div>
+        <span class="landmark-dist">12 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Central Airport Plaza</span></div>
+        <span class="landmark-dist">12 min drive</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="map-section">
+    <div class="map-inner"><span class="section-label">Find Us</span></div>
+    <iframe class="map-embed" src="./indigo-sansaran-hero_files/embed.html" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hang Dong location map" data-dashlane-frameid="229">
+    </iframe>
+  </div>
+
+  <div class="divider" style="margin-top:0;"></div>
+
+  <section class="cta-section">
+    <span class="section-label">Request a Viewing</span>
+    <div class="price-display">฿59,000</div>
+    <div class="price-period">Per Month · Incl. Pool &amp; Moo Baan Fees</div>
+    <p class="price-note">Private viewings available by appointment</p>
+    <a class="btn-line-cta" href="https://line.me/ti/p/~0832000431" onclick="gtag(&#39;event&#39;,&#39;line_click&#39;,{&#39;event_category&#39;:&#39;engagement&#39;,&#39;event_label&#39;:&#39;cta&#39;})">
+      <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path></svg>
+      LINE · @indigo_chiangmai
+    </a>
+    <a class="btn-secondary-cta" href="tel:+66832000431" onclick="gtag(&#39;event&#39;,&#39;phone_click&#39;,{&#39;event_category&#39;:&#39;engagement&#39;,&#39;event_label&#39;:&#39;cta&#39;})">
+      ☎ &nbsp;083 200 0431
+    </a>
+    <a class="btn-secondary-cta" href="https://wa.me/66832000431" onclick="gtag(&#39;event&#39;,&#39;whatsapp_click&#39;,{&#39;event_category&#39;:&#39;engagement&#39;,&#39;event_label&#39;:&#39;cta&#39;})">
+      WhatsApp 083 200 0431
+    </a>
+    <p class="ref-tag">Ref: 4248 · Indigo Real Estate · Chiang Mai</p>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Kintra</div>
+    <div class="footer-sub">Property presentation by kintra.tech</div>
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(201,168,76,0.12);">
+      <p style="font-size:11px;letter-spacing:0.08em;color:rgba(240,237,232,0.35);margin-bottom:10px;text-transform:uppercase;">Real estate agent? Want a page like this for your listings?</p>
+      <a href="https://line.me/ti/p/~kintratech" style="display:inline-block;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;text-decoration:none;border:1px solid rgba(201,168,76,0.35);padding:9px 20px;transition:border-color 0.2s;" onmouseover="this.style.borderColor=&#39;#C9A84C&#39;" onmouseout="this.style.borderColor=&#39;rgba(201,168,76,0.35)&#39;">
+        Talk to Kintra →
+      </a>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.95); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="width:85vw;max-width:900px;aspect-ratio:4/3;position:relative;border-radius:4px;overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,0.8);">
+      <img id="lightbox-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;background:#111;" src="./indigo-sansaran-hero_files/24-20250818104205-994128.jpg">
+    </div>
+    <div id="lightbox-counter" style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);color:#C9A84C;font-size:13px;letter-spacing:0.15em;font-family:&#39;DM Sans&#39;,sans-serif;">25 / 25</div>
+    <div id="lightbox-hint" style="position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.4);font-size:11px;letter-spacing:0.12em;font-family:&#39;DM Sans&#39;,sans-serif;white-space:nowrap;">← swipe or tap arrows to navigate →</div>
+    <div id="lightbox-close" style="position:absolute;top:16px;right:16px;color:white;font-size:36px;cursor:pointer;line-height:1;opacity:0.9;padding:16px;z-index:100;-webkit-tap-highlight-color:transparent;outline:none;text-shadow:0 2px 8px rgba(0,0,0,0.8);">✕</div>
+    <div id="lightbox-prev" style="position:absolute;left:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to right,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
+      <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">‹</span>
+    </div>
+    <div id="lightbox-next" style="position:absolute;right:0;top:0;bottom:0;width:80px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:linear-gradient(to left,rgba(0,0,0,0.4),transparent);z-index:10;outline:none;-webkit-tap-highlight-color:transparent;">
+      <span style="color:white;font-size:56px;line-height:1;text-shadow:0 2px 8px rgba(0,0,0,0.8);">›</span>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    let images = [], current = 0;
+    function openLightbox(imgs, idx) {
+      images = imgs; current = idx;
+      lbImg.src = images[current];
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
+    }
+    function closeLightbox() { lb.style.display='none'; document.body.style.overflow=''; }
+    function showPrev() { current=(current-1+images.length)%images.length; lbImg.src=images[current]; document.getElementById('lightbox-counter').textContent=(current+1)+' / '+images.length; }
+    function showNext() { current=(current+1)%images.length; lbImg.src=images[current]; document.getElementById('lightbox-counter').textContent=(current+1)+' / '+images.length; }
+    const heroImg = document.querySelector('.hero-img');
+    if (heroImg) {
+      heroImg.addEventListener('click', () => {
+        const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i=>i.src);
+        openLightbox([heroImg.src,...allImgs], 0);
+      });
+    }
+    document.querySelectorAll('.gallery-item img').forEach((img,idx) => {
+      img.addEventListener('click', () => {
+        const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i=>i.src);
+        openLightbox(allImgs, idx);
+      });
+    });
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-prev').addEventListener('click', e=>{e.stopPropagation();showPrev();});
+    document.getElementById('lightbox-next').addEventListener('click', e=>{e.stopPropagation();showNext();});
+    lb.addEventListener('click', e=>{if(e.target===lb)closeLightbox();});
+    document.addEventListener('keydown', e=>{
+      if(lb.style.display==='flex'){
+        if(e.key==='Escape')closeLightbox();
+        if(e.key==='ArrowLeft')showPrev();
+        if(e.key==='ArrowRight')showNext();
+      }
+    });
+    let touchStartX=0;
+    lb.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+    lb.addEventListener('touchend',e=>{
+      const diff=touchStartX-e.changedTouches[0].clientX;
+      if(Math.abs(diff)>50){diff>0?showNext():showPrev();}
+    },{passive:true});
+  })();
+  </script>
+
+  <!-- StatCounter: Hang Dong -->
+  <script>
+    if (!window.location.search.includes('qwest=true')) {
+      var sc_project=13140427, sc_invisible=1, sc_security="b5e2b0f0";
+      var sc_script=document.createElement('script');
+      sc_script.src='https://statcounter.com/counter/counter.js';
+      document.head.appendChild(sc_script);
+    }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async="" src="./indigo-sansaran-hero_files/js(1)"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YPHQ44CX3S');
+  </script>
+
+
+  <script>
+  function copyLink(btn) {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      btn.classList.add('copied');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+    }).catch(() => {
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000);
+    });
+  }
+  </script>
+
+
+</body></html>
