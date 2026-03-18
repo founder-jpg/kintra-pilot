@@ -803,8 +803,8 @@
       WhatsApp · Bay Villas
     </a>
 
-    <a class="btn-email-cta" href="/cdn-cgi/l/email-protection#9eecfbedfbece8ffeaf7f1f0eddef5f1f6eef6fff0f9fff0eeecf1eefbeceae7b0fdf1f3">
-      ✉ <span class="__cf_email__" data-cfemail="9eecfbedfbece8ffeaf7f1f0eddef5f1f6eef6fff0f9fff0eeecf1eefbeceae7b0fdf1f3">[email&#160;protected]</span>
+    <a class="btn-email-cta" id="emailBtn" href="#">
+      ✉ reservations@kohphanganproperty.com
     </a>
 
     <div class="listing-ref">Ref: BVP-001 · Bay Villas Koh Phangan</div>
@@ -884,4 +884,26 @@
         navigator.clipboard.writeText(window.location.href).then(() => {
           btn.textContent = 'Copied!';
           btn.classList.add('copied');
-          setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1
+          setTimeout(() => { btn.textContent = 'Copy Link'; btn.classList.remove('copied'); }, 2000);
+        });
+      } catch(e) {
+        const el = document.createElement('textarea');
+        el.value = window.location.href;
+        document.body.appendChild(el); el.select();
+        document.execCommand('copy'); document.body.removeChild(el);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000);
+      }
+    };
+
+    // Set email at runtime to prevent Cloudflare obfuscation
+    const emailBtn = document.getElementById('emailBtn');
+    if (emailBtn) {
+      emailBtn.href = 'mailto:' + 'reservations' + '@' + 'kohphanganproperty.com';
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
