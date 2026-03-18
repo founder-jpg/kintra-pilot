@@ -7,7 +7,9 @@
   <meta name="description" content="Perched 55m above Haad Salad Bay, Koh Phangan. 3-bedroom infinity pool villa with sweeping Gulf of Thailand views. Sleeps 6." />
   <meta property="og:title" content="Siamese Dream · Villa · Koh Phangan" />
   <meta property="og:description" content="Coastal luxury retreat perched 55m above Haad Salad Bay. Private infinity pool, 3 bedrooms, Gulf of Thailand views." />
-  <meta property="og:image" content="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-1.jpg" />
+  <meta property="og:image" content="https://res.cloudinary.com/dcupavjet/image/upload/v1773823097/siamese-dream-hero_t6zlqk.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://kintra.tech/bay-villa-siamese-dream.html" />
   <meta property="og:type" content="website" />
 
@@ -562,8 +564,8 @@
   <!-- HERO -->
   <div class="hero">
     <img class="hero-img"
-      src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-1.jpg"
-      alt="Siamese Dream Villa Koh Phangan"
+      src="https://res.cloudinary.com/dcupavjet/image/upload/v1773823097/siamese-dream-hero_t6zlqk.jpg"
+      alt="Siamese Dream Villa infinity pool sea view Koh Phangan"
       onclick="openLightbox(0)" />
     <div class="hero-overlay"></div>
     <div class="price-badge">
@@ -801,8 +803,8 @@
       WhatsApp · Bay Villas
     </a>
 
-    <a class="btn-email-cta" href="/cdn-cgi/l/email-protection#3d4f584e584f4b5c495452534e7d5652554d555c535a5c534d4f524d584f4944135e5250">
-      ✉ <span class="__cf_email__" data-cfemail="3b495e485e494d5a4f525455487b5054534b535a555c5a554b49544b5e494f4215585456">[email&#160;protected]</span>
+    <a class="btn-email-cta" href="/cdn-cgi/l/email-protection#9eecfbedfbece8ffeaf7f1f0eddef5f1f6eef6fff0f9fff0eeecf1eefbeceae7b0fdf1f3">
+      ✉ <span class="__cf_email__" data-cfemail="9eecfbedfbece8ffeaf7f1f0eddef5f1f6eef6fff0f9fff0eeecf1eefbeceae7b0fdf1f3">[email&#160;protected]</span>
     </a>
 
     <div class="listing-ref">Ref: BVP-001 · Bay Villas Koh Phangan</div>
@@ -826,30 +828,12 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function() {
-    // Lightbox
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
     let images = [], current = 0;
 
-    function openLightbox(idx) {
-      const heroImg = document.querySelector('.hero-img');
-      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
-      if (idx === 0 && arguments.callee.caller === null) {
-        images = [heroImg.src, ...allImgs];
-      } else {
-        images = allImgs;
-      }
-      current = idx;
-      lbImg.src = images[current];
-      document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
     window.openLightbox = function(idx) {
-      const heroImg = document.querySelector('.hero-img');
-      const allImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
-      images = allImgs;
+      images = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
       current = idx;
       lbImg.src = images[current];
       document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
@@ -900,11 +884,4 @@
         navigator.clipboard.writeText(window.location.href).then(() => {
           btn.textContent = 'Copied!';
           btn.classList.add('copied');
-          setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Link'; btn.classList.remove('copied'); }, 2000);
-        });
-      } catch(e) {
-        const el = document.createElement('textarea');
-        el.value = window.location.href;
-        document.body.appendChild(el);
-        el.select();
-        document.execCom
+          setTimeout(() => { btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1
