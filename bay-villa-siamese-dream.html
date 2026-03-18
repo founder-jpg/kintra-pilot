@@ -343,7 +343,6 @@
       max-width: 320px;
       height: 220px;
       overflow: hidden;
-      cursor: zoom-in;
     }
     .gallery-item:first-child { flex: 0 0 82vw; max-width: 370px; }
     .gallery-item img {
@@ -351,6 +350,7 @@
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
+      cursor: zoom-in;
     }
     .gallery-item:hover img { transform: scale(1.04); }
     .gallery-hint {
@@ -667,31 +667,31 @@
     </div>
     <div class="gallery-scroll">
       <div class="gallery-strip">
-        <div class="gallery-item" onclick="openLightbox(0)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-1.jpg" alt="Villa exterior and pool" loading="eager" /></div>
-        <div class="gallery-item" onclick="openLightbox(1)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-2.jpg" alt="Sea view from pool" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(2)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-3.jpg" alt="Living area" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(3)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-4.jpg" alt="Outdoor lounge" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(4)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-5.jpg" alt="Master bedroom" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(5)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-6.jpg" alt="Bedroom 2" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(6)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-7.jpg" alt="Bedroom 3" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(7)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-8.jpg" alt="Bathroom" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(8)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-9.jpg" alt="Kitchen" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(9)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-10.jpg" alt="Dining area" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(10)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-11.jpg" alt="Pool deck" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(11)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-12.jpg" alt="Sunset view" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(12)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-13.jpg" alt="Interior detail" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(13)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-14.jpg" alt="Garden" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(14)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-15.jpg" alt="Bay view" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(15)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-16.jpg" alt="Living room detail" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(16)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-17.jpg" alt="Pool evening" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(17)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-18.jpg" alt="Outdoor dining" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(18)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-19.jpg" alt="Aerial view" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(19)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-20.jpg" alt="Villa at dusk" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(20)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-21.jpg" alt="Sea panorama" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(21)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-22.jpg" alt="Bedroom detail" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(22)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-23.jpg" alt="Lounge" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(23)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-24.jpg" alt="Pool sunrise" loading="lazy" /></div>
-        <div class="gallery-item" onclick="openLightbox(24)"><img src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-25.jpg" alt="Villa overview" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(0)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-1.jpg" alt="Villa exterior and pool" loading="eager" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(1)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-2.jpg" alt="Sea view from pool" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(2)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-3.jpg" alt="Living area" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(3)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-4.jpg" alt="Outdoor lounge" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(4)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-5.jpg" alt="Master bedroom" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(5)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-6.jpg" alt="Bedroom 2" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(6)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-7.jpg" alt="Bedroom 3" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(7)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-8.jpg" alt="Bathroom" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(8)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-9.jpg" alt="Kitchen" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(9)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-10.jpg" alt="Dining area" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(10)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-11.jpg" alt="Pool deck" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(11)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-12.jpg" alt="Sunset view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(12)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-13.jpg" alt="Interior detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(13)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-14.jpg" alt="Garden" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(14)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-15.jpg" alt="Bay view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(15)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-16.jpg" alt="Living room detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(16)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-17.jpg" alt="Pool evening" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(17)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-18.jpg" alt="Outdoor dining" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(18)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-19.jpg" alt="Aerial view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(19)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-20.jpg" alt="Villa at dusk" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(20)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-21.jpg" alt="Sea panorama" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(21)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-22.jpg" alt="Bedroom detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(22)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-23.jpg" alt="Lounge" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(23)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-24.jpg" alt="Pool sunrise" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(24)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-25.jpg" alt="Villa overview" loading="lazy" /></div>
       </div>
     </div>
     <p class="gallery-hint">← swipe to explore →</p>
@@ -826,7 +826,7 @@
     <div id="lightbox-next" onclick="showNext()"><span>›</span></div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
   (function() {
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
