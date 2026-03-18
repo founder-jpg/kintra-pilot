@@ -804,7 +804,7 @@
     </a>
 
     <a class="btn-email-cta" id="emailBtn" href="#">
-      ✉ reservations@kohphanganproperty.com
+      ✉ <span class="__cf_email__" data-cfemail="5426312731262235203d3b3a27143f3b3c243c353a33353a24263b243126202d7a373b39">[email&#160;protected]</span>
     </a>
 
     <div class="listing-ref">Ref: BVP-001 · Bay Villas Koh Phangan</div>
@@ -814,7 +814,8 @@
   <footer class="footer">
     <div class="footer-brand">Kintra</div>
     <div class="footer-sub">Property presentation by kintra.tech</div>
-    <a class="footer-cta" href="https://line.me/ti/p/~kintratech">Talk to Kintra →</a>
+    <a class="footer-cta" href="https://line.me/ti/p/~kintratech" style="display:block;margin-bottom:10px;">Talk to Kintra →</a>
+    <a class="footer-cta" href="https://wa.me/66923521969">WhatsApp Kintra →</a>
   </footer>
 
   <!-- LIGHTBOX -->
@@ -826,7 +827,7 @@
     <div id="lightbox-next" onclick="showNext()"><span>›</span></div>
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   (function() {
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
@@ -896,14 +897,4 @@
       }
     };
 
-    // Set email at runtime to prevent Cloudflare obfuscation
-    const emailBtn = document.getElementById('emailBtn');
-    if (emailBtn) {
-      emailBtn.href = 'mailto:' + 'reservations' + '@' + 'kohphanganproperty.com';
-    }
-
-  })();
-  </script>
-
-</body>
-</html>
+    // Set email at runtime to prevent Cloudflare
