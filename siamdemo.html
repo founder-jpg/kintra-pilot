@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Siamese Dream · Villa · Koh Phangan</title>
+  <meta name="description" content="Perched 55m above Haad Salad Bay, Koh Phangan. 3-bedroom infinity pool villa with sweeping Gulf of Thailand views. Sleeps 6." />
+  <meta property="og:title" content="Siamese Dream · Villa · Koh Phangan" />
+  <meta property="og:description" content="Coastal luxury retreat perched 55m above Haad Salad Bay. Private infinity pool, 3 bedrooms, Gulf of Thailand views." />
+  <meta property="og:image" content="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-2.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://kintra.tech/bay-villa-siamese-dream.html" />
+  <meta property="og:type" content="website" />
+
+  <!-- StatCounter: Bay Villa Siamese Dream -->
+  <script type="text/javascript">
+  var sc_project=13211295; var sc_invisible=1; var sc_security="6bd4ce2f";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13211295/0/6bd4ce2f/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0D0C0A;
+      --surface:    #141310;
+      --gold:       #C8993A;
+      --gold-light: #E2BC6E;
+      --sand:       #F2EAD8;
+      --text:       #EDE8DF;
+      --muted:      rgba(237,232,223,0.45);
+      --border:     rgba(200,153,58,0.18);
+      --sea:        #4A8FA8;
+    }
+
+    html { scroll-behavior: smooth; background: var(--bg); }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+      transform: scale(1.06);
+      animation: slowZoom 10s ease-out forwards;
+      cursor: zoom-in;
+    }
+
+    @keyframes slowZoom { to { transform: scale(1); } }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,12,10,0.05) 0%,
+        rgba(13,12,10,0.0) 25%,
+        rgba(13,12,10,0.55) 65%,
+        rgba(13,12,10,0.96) 100%
+      );
+    }
+
+    .price-badge {
+      position: absolute;
+      right: 20px;
+      top: 24px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @media (min-width: 480px) { .price-badge { top: auto; bottom: 145px; } }
+    @media (min-width: 768px) { .price-badge { top: auto; bottom: 125px; } }
+
+    .price-badge-inner {
+      background: rgba(13,12,10,0.72);
+      border: 1px solid rgba(200,153,58,0.5);
+      padding: 9px 16px;
+      backdrop-filter: blur(8px);
+    }
+    .price-badge-inner span {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gold-light);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .price-badge-inner small {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.4);
+      margin-top: 3px;
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 24px 40px;
+      z-index: 3;
+      animation: fadeUp 1.2s 0.3s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .villa-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      padding: 5px 14px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-sub {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn-wa-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      flex: 1;
+      justify-content: center;
+      transition: opacity 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-wa-hero svg { width: 17px; height: 17px; fill: white; flex-shrink: 0; }
+    .btn-wa-hero:hover { opacity: 0.88; }
+
+    .btn-phone-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      border: 1px solid rgba(237,232,223,0.22);
+      flex: 1;
+      justify-content: center;
+      transition: border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-phone-hero:hover { border-color: var(--gold); }
+
+    /* ─── STATS ─── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      margin: 20px 24px 0;
+      animation: fadeUp 1s 0.55s both;
+    }
+    .stat { padding: 16px 8px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-value {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .stat-label {
+      display: block;
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* ─── AGENCY TAG ─── */
+    .agency-tag {
+      padding: 12px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── SHARE BLOCK ─── */
+    .share-block {
+      padding: 18px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .share-label {
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .share-buttons { display: flex; gap: 10px; }
+    .share-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 7px; flex: 1; padding: 11px 10px;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--border);
+      color: var(--text); background: transparent; cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'Jost', sans-serif; -webkit-tap-highlight-color: transparent;
+    }
+    .share-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .share-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+    .share-btn.copied { border-color: var(--gold) !important; color: var(--gold) !important; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 32px 24px;
+      opacity: 0.35;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    /* ─── DESCRIPTION ─── */
+    .description {
+      padding: 32px 24px 0;
+    }
+    .description p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(237,232,223,0.75);
+      margin-bottom: 14px;
+    }
+
+    /* ─── SECTION TITLE ─── */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    /* ─── PERKS ─── */
+    .perks { padding: 0 24px; }
+    .perk-list { display: flex; flex-direction: column; gap: 0; }
+    .perk-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .perk-item:last-child { border-bottom: none; }
+    .perk-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 32px;
+    }
+    .perk-title { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 5px; letter-spacing: 0.03em; }
+    .perk-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ─── GALLERY ─── */
+    .gallery-section { margin-top: 32px; }
+    .gallery-header { padding: 0 24px 16px; }
+    .gallery-scroll { overflow-x: auto; padding: 0 24px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-strip {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      padding-bottom: 4px;
+    }
+    .gallery-item {
+      flex: 0 0 72vw;
+      max-width: 320px;
+      height: 220px;
+      overflow: hidden;
+    }
+    .gallery-item:first-child { flex: 0 0 82vw; max-width: 370px; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      cursor: zoom-in;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-hint {
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px 0 0;
+      animation: pulse-hint 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-hint { 0%,100%{opacity:0.4;} 50%{opacity:0.9;} }
+
+    /* ─── FEATURES ─── */
+    .features { padding: 0 24px; }
+    .feature-group { margin-bottom: 28px; }
+    .feature-group-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+    .feature-list li {
+      font-size: 13px;
+      color: rgba(237,232,223,0.7);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .feature-list li::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:10px; top:2px; }
+
+    /* ─── LANDMARKS ─── */
+    .landmarks { padding: 0 24px; }
+    .landmark-list { display: flex; flex-direction: column; gap: 0; }
+    .landmark-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .landmark-item:last-child { border-bottom: none; }
+    .landmark-left { display: flex; align-items: center; gap: 12px; }
+    .landmark-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+    .landmark-name { font-size: 14px; color: var(--text); font-weight: 300; }
+    .landmark-dist { font-size: 12px; color: var(--gold); font-weight: 400; white-space: nowrap; letter-spacing: 0.04em; }
+
+    /* ─── MAP ─── */
+    .map-section { padding: 0 24px; }
+    .map-inner {
+      position: relative;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .map-embed {
+      width: 100%;
+      height: 240px;
+      border: none;
+      display: block;
+      filter: grayscale(0.3) brightness(0.85);
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      padding: 32px 24px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .price-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--gold-light);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .price-period { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .price-note { font-size: 13px; color: var(--muted); margin-bottom: 36px; }
+
+    .btn-wa-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 16px 24px;
+      width: 100%;
+      margin-bottom: 12px;
+      transition: opacity 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-wa-cta svg { width: 18px; height: 18px; fill: white; }
+    .btn-wa-cta:hover { opacity: 0.88; }
+
+    .btn-email-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      width: 100%;
+      border: 1px solid rgba(237,232,223,0.2);
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-email-cta:hover { border-color: var(--gold); }
+
+    .listing-ref {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(237,232,223,0.2);
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 28px 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .footer-sub {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .footer-cta {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 3px;
+      transition: border-color 0.2s;
+    }
+    .footer-cta:hover { border-color: var(--gold); }
+
+    /* ─── LIGHTBOX ─── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+    #lightbox-counter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; z-index: 10;
+    }
+    #lightbox-close {
+      position: absolute; top: 16px; right: 16px;
+      color: white; font-size: 32px; cursor: pointer;
+      line-height: 1; z-index: 100; padding: 16px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #lightbox-prev, #lightbox-next {
+      position: absolute; top: 0; bottom: 0; width: 80px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 10;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #lightbox-prev { left: 0; background: linear-gradient(to right, rgba(0,0,0,0.4), transparent); }
+    #lightbox-next { right: 0; background: linear-gradient(to left, rgba(0,0,0,0.4), transparent); }
+    #lightbox-prev span, #lightbox-next span { color: white; font-size: 28px; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img"
+      src="https://res.cloudinary.com/dcupavjet/image/upload/v1773823382/siamese-dream-hero_pblhv5.jpg"
+      alt="Siamese Dream Villa infinity pool sea view Koh Phangan"
+      onclick="openLightbox(0)" />
+    <div class="hero-overlay"></div>
+    <div class="price-badge">
+      <div class="price-badge-inner">
+        <span>On Request</span>
+        <small>Per Night</small>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="villa-badge">Bay Villas · Koh Phangan</div>
+      <h1 class="hero-title">Siamese<br><em>Dream</em></h1>
+      <p class="hero-sub">Haad Salad · Koh Phangan · Gulf of Thailand</p>
+      <div class="hero-cta-row">
+        <a class="btn-wa-hero" href="https://wa.me/66632089219" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.529 5.845L.057 23.571l5.886-1.452A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.865 9.865 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn-phone-hero" href="tel:+66632089219">☎ +66 63 208 9219</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat"><span class="stat-value">3</span><span class="stat-label">Bedrooms</span></div>
+    <div class="stat"><span class="stat-value">3</span><span class="stat-label">Bathrooms</span></div>
+    <div class="stat"><span class="stat-value">245</span><span class="stat-label">sq.m</span></div>
+    <div class="stat"><span class="stat-value">55m</span><span class="stat-label">Above Sea</span></div>
+  </div>
+
+  <!-- AGENCY TAG -->
+  <div class="agency-tag">
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(237,232,223,0.35);">Managed by</span>
+    <span style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(200,153,58,0.7);margin-left:8px;">Bay Villas · Koh Phangan</span>
+    <span style="display:block;margin-top:10px;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(237,232,223,0.35);">Available <span style="color:rgba(237,232,223,0.7);margin-left:8px;">Now</span></span>
+  </div>
+
+  <!-- SHARE BLOCK -->
+  <div class="share-block">
+    <span class="share-label">Share this villa</span>
+    <div class="share-buttons">
+      <a class="share-btn whatsapp" href="https://wa.me/?text=Siamese%20Dream%20Villa%20%E2%80%94%20Koh%20Phangan%20%E2%80%94%20https%3A%2F%2Fkintra.tech%2Fbay-villa-siamese-dream.html" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.529 5.845L.057 23.571l5.886-1.452A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.865 9.865 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
+        WhatsApp
+      </a>
+      <button class="share-btn" id="copyBtn" onclick="copyLink()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Link
+      </button>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DESCRIPTION -->
+  <section class="description">
+    <span class="section-label">The Villa</span>
+    <p>Perched 55 metres above the turquoise waters of Haad Salad Bay, Siamese Dream is a coastal luxury retreat where sophisticated design meets breathtaking oceanfront scenery. The villa faces north-east, capturing the first light of day and sweeping views across the Gulf of Thailand.</p>
+    <p>The name earns its keep — silky interiors blending Middle Eastern warmth with Asian artefacts and modern design, all framed by floor-to-ceiling glass that dissolves the boundary between inside and out. A private infinity pool hovers at the edge of the hillside, seemingly suspended above the sea.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PERKS -->
+  <section class="perks">
+    <span class="section-label">Why This Villa</span>
+    <h2 class="section-title">Three reasons<br><em>to book now</em></h2>
+    <div class="perk-list">
+      <div class="perk-item">
+        <div class="perk-number">1</div>
+        <div class="perk-body">
+          <div class="perk-title">The View Is Rare</div>
+          <div class="perk-desc">North-east facing at 55m above sea level — Haad Salad Bay stretches out below, with Koh Ma island visible in the distance. Few villas on the island offer this angle.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">2</div>
+        <div class="perk-body">
+          <div class="perk-title">Infinity Pool Over the Gulf</div>
+          <div class="perk-desc">A 25 sqm salt-chlorinated infinity pool with the horizon as its edge. The pool deck converts to a yoga space at dawn — the only sound is wind and water.</div>
+        </div>
+      </div>
+      <div class="perk-item">
+        <div class="perk-number">3</div>
+        <div class="perk-body">
+          <div class="perk-title">Full Concierge on Arrival</div>
+          <div class="perk-desc">In-villa spa, private chef, beach shuttle, babysitting — Bay Villas manages everything. Arrival to departure handled, nothing left to chance.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-header">
+      <span class="section-label">Photo Gallery</span>
+    </div>
+    <div class="gallery-scroll">
+      <div class="gallery-strip">
+        <div class="gallery-item"><img onclick="openLightbox(0)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-1.jpg" alt="Villa exterior and pool" loading="eager" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(1)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-2.jpg" alt="Sea view from pool" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(2)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-3.jpg" alt="Living area" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(3)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-4.jpg" alt="Outdoor lounge" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(4)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-5.jpg" alt="Master bedroom" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(5)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-6.jpg" alt="Bedroom 2" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(6)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-7.jpg" alt="Bedroom 3" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(7)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-8.jpg" alt="Bathroom" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(8)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-9.jpg" alt="Kitchen" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(9)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-10.jpg" alt="Dining area" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(10)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-11.jpg" alt="Pool deck" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(11)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-12.jpg" alt="Sunset view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(12)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-13.jpg" alt="Interior detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(13)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-14.jpg" alt="Garden" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(14)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-15.jpg" alt="Bay view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(15)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-16.jpg" alt="Living room detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(16)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-17.jpg" alt="Pool evening" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(17)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-18.jpg" alt="Outdoor dining" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(18)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-19.jpg" alt="Aerial view" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(19)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-20.jpg" alt="Villa at dusk" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(20)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-21.jpg" alt="Sea panorama" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(21)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-22.jpg" alt="Bedroom detail" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(22)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-23.jpg" alt="Lounge" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(23)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-24.jpg" alt="Pool sunrise" loading="lazy" /></div>
+        <div class="gallery-item"><img onclick="openLightbox(24)" src="https://bayvillasphangan.com/wp-content/uploads/2023/07/siamese-dream-25.jpg" alt="Villa overview" loading="lazy" /></div>
+      </div>
+    </div>
+    <p class="gallery-hint">← swipe to explore →</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <span class="section-label">What's Included</span>
+    <h2 class="section-title">Everything<br><em>in one place</em></h2>
+    <div class="feature-group">
+      <div class="feature-group-title">The Villa</div>
+      <ul class="feature-list">
+        <li>3 bedrooms · 3 en-suite bathrooms</li>
+        <li>2 king beds + 1 twin</li>
+        <li>245 sqm · sleeps 6 guests</li>
+        <li>Air conditioning + ceiling fans</li>
+        <li>55" Smart TV · 5.1 surround sound</li>
+        <li>Fully equipped kitchen</li>
+        <li>Oak breakfast bar</li>
+        <li>Rain showers · granite basins</li>
+      </ul>
+    </div>
+    <div class="feature-group">
+      <div class="feature-group-title">Outdoor</div>
+      <ul class="feature-list">
+        <li>Infinity pool 2.8×9m (25 sqm)</li>
+        <li>Salt-chlorination system</li>
+        <li>55m above sea level</li>
+        <li>Gulf of Thailand panorama</li>
+        <li>Outdoor dining for 8</li>
+        <li>Sunken lounge for 12</li>
+        <li>Yoga / fitness area</li>
+        <li>Private garden + BBQ</li>
+      </ul>
+    </div>
+    <div class="feature-group">
+      <div class="feature-group-title">Services</div>
+      <ul class="feature-list">
+        <li>Full housekeeping</li>
+        <li>Concierge · 24hr security</li>
+        <li>In-villa spa &amp; massage</li>
+        <li>Private chef available</li>
+        <li>Flow Café · breakfast to dinner</li>
+        <li>Beach shuttle service</li>
+        <li>Laundry service</li>
+        <li>Babysitting on request</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LANDMARKS -->
+  <section class="landmarks">
+    <span class="section-label">Location</span>
+    <h2 class="section-title">Haad Salad<br><em>Koh Phangan</em></h2>
+    <div class="landmark-list">
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Haad Salad Beach</span></div>
+        <span class="landmark-dist">3 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Haad Yao Beach</span></div>
+        <span class="landmark-dist">8 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Thong Sala Pier</span></div>
+        <span class="landmark-dist">20 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Haad Rin (Full Moon)</span></div>
+        <span class="landmark-dist">35 min drive</span>
+      </div>
+      <div class="landmark-item">
+        <div class="landmark-left"><div class="landmark-dot"></div><span class="landmark-name">Koh Samui Airport</span></div>
+        <span class="landmark-dist">45 min ferry + transfer</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MAP -->
+  <section class="map-section">
+    <span class="section-label">Find Us</span>
+    <div class="map-inner">
+      <iframe class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.5!2d100.0280!3d9.7580!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3101d0a01e57d8e5%3A0x1234!2sHaad+Salad+Koh+Phangan!5e0!3m2!1sen!2sth!4v1"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Haad Salad Koh Phangan location map">
+      </iframe>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <span class="section-label">Request a Booking</span>
+    <div class="price-display">On Request</div>
+    <div class="price-period">Per Night · Minimum 3 Nights</div>
+    <p class="price-note">Rates vary by season. Contact us for availability and pricing.</p>
+
+    <a class="btn-wa-cta" href="https://wa.me/66632089219" target="_blank"
+       onclick="gtag('event','whatsapp_click',{'event_category':'engagement','event_label':'cta'})">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.529 5.845L.057 23.571l5.886-1.452A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 01-5.031-1.374l-.361-.214-3.741.981.999-3.648-.235-.374A9.865 9.865 0 012.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
+      WhatsApp · Bay Villas
+    </a>
+
+    <a class="btn-email-cta" id="emailBtn" href="#">
+      ✉ <span class="__cf_email__" data-cfemail="5426312731262235203d3b3a27143f3b3c243c353a33353a24263b243126202d7a373b39">[email&#160;protected]</span>
+    </a>
+
+    <div class="listing-ref">Ref: BVP-001 · Bay Villas Koh Phangan</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">Kintra</div>
+    <div class="footer-sub">Property presentation by kintra.tech</div>
+    <a class="footer-cta" href="https://line.me/ti/p/~kintratech" style="display:block;margin-bottom:10px;">Talk to Kintra → LINE</a>
+    <a class="footer-cta" href="https://wa.me/66923521969">Talk to Kintra → WhatsApp</a>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="Villa photo" />
+    <div id="lightbox-counter">1 / 25</div>
+    <div id="lightbox-close" onclick="closeLightbox()">✕</div>
+    <div id="lightbox-prev" onclick="showPrev()"><span>‹</span></div>
+    <div id="lightbox-next" onclick="showNext()"><span>›</span></div>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  (function() {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    let images = [], current = 0;
+
+    window.openLightbox = function(idx) {
+      images = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
+      current = idx;
+      lbImg.src = images[current];
+      document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    window.showPrev = function() {
+      current = (current - 1 + images.length) % images.length;
+      lbImg.src = images[current];
+      document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
+    };
+
+    window.showNext = function() {
+      current = (current + 1) % images.length;
+      lbImg.src = images[current];
+      document.getElementById('lightbox-counter').textContent = (current+1)+' / '+images.length;
+    };
+
+    lb.addEventListener('click', function(e) {
+      if (e.target === lb || e.target === lbImg) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    lb.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? showNext() : showPrev();
+    }, {passive:true});
+
+    // Copy link
+    window.copyLink = function() {
+      const btn = document.getElementById('copyBtn');
+      try {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'Copy Link'; btn.classList.remove('copied'); }, 2000);
+        });
+      } catch(e) {
+        const el = document.createElement('textarea');
+        el.value = window.location.href;
+        document.body.appendChild(el); el.select();
+        document.execCommand('copy'); document.body.removeChild(el);
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy Link'; }, 2000);
+      }
+    };
+
+    // Set email at runtime to prevent Cloudflare
