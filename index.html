@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kintra — Beautiful villa pages for WhatsApp & LINE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a18;
+      --stone: #5c5c54;
+      --warm: #f5f2ec;
+      --cream: #faf8f4;
+      --gold: #b89a6a;
+      --gold-light: #d4b98a;
+      --white: #ffffff;
+      --border: rgba(26,26,24,0.1);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 70% 40%, rgba(184,154,106,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(184,154,106,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 74px);
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--stone);
+      max-width: 520px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .pill {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--stone);
+      background: var(--warm);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 16px 32px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold); transform: translateY(-1px); }
+    .btn-primary svg { width: 16px; height: 16px; }
+
+    .btn-ghost {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--stone);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--stone); }
+
+    .hero-note {
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--stone);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-note strong { color: var(--ink); font-weight: 500; }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 100px 40px;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .section-body {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--stone);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* ── EXAMPLES ── */
+    .examples-section {
+      background: var(--warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .examples-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-bottom: 64px;
+      align-items: end;
+    }
+
+    .examples-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .example-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .example-card:hover {
+      border-color: var(--gold-light);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(26,26,24,0.08);
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--warm);
+    }
+
+    .card-body {
+      padding: 20px 22px 22px;
+    }
+
+    .card-name {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--stone);
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .card-wa-note {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .card-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .example-card:hover .card-link { color: var(--gold); border-color: var(--gold-light); }
+
+    /* ── VALUE ── */
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 64px;
+      align-items: start;
+    }
+
+    .value-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .value-item:first-child { border-top: 1px solid var(--border); }
+
+    .value-num {
+      font-family: var(--serif);
+      font-size: 13px;
+      color: var(--gold);
+      min-width: 24px;
+      padding-top: 2px;
+    }
+
+    .value-text {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .value-text strong { font-weight: 500; display: block; margin-bottom: 4px; }
+    .value-text span { color: var(--stone); font-size: 14px; }
+
+    .value-aside {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 48px 40px;
+    }
+
+    .aside-quote {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.4;
+      margin-bottom: 32px;
+      color: var(--gold-light);
+    }
+
+    .aside-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.7);
+      line-height: 1.7;
+    }
+
+    /* ── PROBLEM/SOLUTION ── */
+    .ps-section { background: var(--warm); }
+
+    .ps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 64px;
+    }
+
+    .ps-col {
+      padding: 48px 40px;
+      background: var(--cream);
+    }
+    .ps-col:first-child { border-right: 1px solid var(--border); }
+
+    .ps-col-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .ps-col:first-child .ps-col-label { color: var(--stone); }
+    .ps-col:last-child .ps-col-label { color: var(--gold); }
+
+    .ps-col-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .ps-col-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.7;
+    }
+
+    /* ── PRICING ── */
+    .pricing-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pricing-box {
+      margin-top: 48px;
+      border: 1px solid var(--border);
+      padding: 56px 48px;
+      background: var(--white);
+    }
+
+    .pricing-tagline {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .pricing-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--stone);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .pricing-tiers {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .tier {
+      text-align: center;
+    }
+    .tier-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 6px;
+    }
+    .tier-name {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .tier-divider {
+      width: 1px;
+      background: var(--border);
+      margin: 0 8px;
+    }
+
+    /* ── FINAL CTA ── */
+    .cta-section {
+      background: var(--ink);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .cta-section .section-label { color: var(--gold); }
+
+    .cta-title {
+      font-family: var(--serif);
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .cta-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.65);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 16px 32px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-wa:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-wa svg { width: 18px; height: 18px; }
+
+    .btn-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(245,242,236,0.25);
+      color: var(--cream);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      padding: 16px 32px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-line:hover { border-color: var(--gold); background: rgba(184,154,106,0.1); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(245,242,236,0.08);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      color: rgba(245,242,236,0.5);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: rgba(245,242,236,0.3);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      section { padding: 72px 24px; }
+      .hero { padding: 100px 24px 72px; }
+
+      .examples-intro { grid-template-columns: 1fr; gap: 32px; }
+      .examples-cards { grid-template-columns: 1fr; gap: 16px; }
+
+      .value-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ps-grid { grid-template-columns: 1fr; gap: 2px; }
+      .ps-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+
+      .pricing-box { padding: 40px 28px; }
+      .tier-divider { display: none; }
+
+      footer { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">Kintra</a>
+    <a href="#contact" class="nav-cta">Get a sample page</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">For villa managers &amp; boutique agents</div>
+      <h1>One clean page<br>per villa — built for<br><em>WhatsApp &amp; LINE</em></h1>
+      <p class="hero-sub">Stop sending screenshots and long messages. Share one link. Your clients open a beautiful, mobile-ready villa page instantly.</p>
+      <div class="hero-pills">
+        <span class="pill">📱 Works on any phone</span>
+        <span class="pill">🔗 One link to share</span>
+        <span class="pill">⚡ Ready in 24 hours</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Get a free sample page
+        </a>
+        <a href="#examples" class="btn-ghost">See live examples ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section class="examples-section" id="examples">
+    <div class="section-inner">
+      <div class="examples-intro reveal">
+        <div>
+          <div class="section-label">Live examples</div>
+          <h2 class="section-title">See how<br>it works</h2>
+        </div>
+        <p class="section-body">Each villa gets its own clean, mobile-friendly page — ready to share in seconds. Click any example below to see what your clients would receive.</p>
+      </div>
+
+      <div class="examples-cards reveal">
+
+        <a href="https://kintra.tech/villa-kundalini" target="_blank" class="example-card">
+          <img
+            class="card-thumb"
+            src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/villa-kundalini_001.jpg"
+            alt="Villa Kundalini preview"
+            loading="lazy"
+            onerror="this.style.minHeight='200px';this.style.background='var(--warm)'"
+          />
+          <div class="card-body">
+            <div class="card-name">Villa Kundalini</div>
+            <div class="card-desc">Luxury pool villa · Chiang Mai</div>
+            <div class="card-wa-note">Designed for WhatsApp sharing</div>
+            <div class="card-link">View example →</div>
+          </div>
+        </a>
+
+        <a href="https://kintra.tech/villa-fallopia" target="_blank" class="example-card">
+          <img
+            class="card-thumb"
+            src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/villa-fallopia_001.jpg"
+            alt="Villa Fallopia preview"
+            loading="lazy"
+            onerror="this.style.minHeight='200px';this.style.background='var(--warm)'"
+          />
+          <div class="card-body">
+            <div class="card-name">Villa Fallopia</div>
+            <div class="card-desc">Contemporary estate · Chiang Mai</div>
+            <div class="card-wa-note">Designed for WhatsApp sharing</div>
+            <div class="card-link">View example →</div>
+          </div>
+        </a>
+
+        <a href="https://kintra.tech/villa-siamese-dream" target="_blank" class="example-card">
+          <img
+            class="card-thumb"
+            src="https://raw.githubusercontent.com/founder-jpg/kintra-pilot/main/assets/villa-siamese-dream_001.jpg"
+            alt="Villa Siamese Dream preview"
+            loading="lazy"
+            onerror="this.style.minHeight='200px';this.style.background='var(--warm)'"
+          />
+          <div class="card-body">
+            <div class="card-name">Villa Siamese Dream</div>
+            <div class="card-desc">Thai-style estate · Chiang Mai</div>
+            <div class="card-wa-note">Designed for WhatsApp sharing</div>
+            <div class="card-link">View example →</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section>
+    <div class="section-inner">
+      <div class="value-grid">
+        <div class="reveal">
+          <div class="section-label">Why Kintra</div>
+          <h2 class="section-title">Built for how<br>you already work</h2>
+          <p class="section-body" style="margin-top: 16px;">You're already sending villas over WhatsApp and LINE. Kintra makes that presentation effortless — one link, clean on any phone.</p>
+        </div>
+
+        <div class="reveal">
+          <ul class="value-list">
+            <li class="value-item">
+              <span class="value-num">01</span>
+              <div class="value-text">
+                <strong>Share instantly</strong>
+                <span>Send one link on WhatsApp or LINE — guests open a full property page immediately.</span>
+              </div>
+            </li>
+            <li class="value-item">
+              <span class="value-num">02</span>
+              <div class="value-text">
+                <strong>One clean link</strong>
+                <span>Replace long message threads and screenshot chains with a single shareable URL.</span>
+              </div>
+            </li>
+            <li class="value-item">
+              <span class="value-num">03</span>
+              <div class="value-text">
+                <strong>Perfect on mobile</strong>
+                <span>Designed for phones first — your clients see exactly what they need, nothing more.</span>
+              </div>
+            </li>
+            <li class="value-item">
+              <span class="value-num">04</span>
+              <div class="value-text">
+                <strong>Clients understand immediately</strong>
+                <span>Price, photos, key features — all in one view, with one tap to reach you.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="ps-section">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">The difference</div>
+        <h2 class="section-title">Make your listings<br>easier to present</h2>
+      </div>
+
+      <div class="ps-grid reveal">
+        <div class="ps-col">
+          <div class="ps-col-label">Before Kintra</div>
+          <div class="ps-col-title">Sending villas is messy</div>
+          <p class="ps-col-body">Screenshots in a chat. Long text descriptions. Prices buried in the middle of a message. Your villa looks great — but it's hard for clients to understand from a WhatsApp thread.</p>
+        </div>
+        <div class="ps-col">
+          <div class="ps-col-label">With Kintra</div>
+          <div class="ps-col-title">One link, full picture</div>
+          <p class="ps-col-body">Kintra gives each property a clean, beautiful page that works instantly on any phone. Clients open it, understand it, and reply faster — because the presentation does the work for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <div class="pricing-inner reveal">
+      <div class="section-label" style="text-align:center;">Pricing</div>
+      <h2 class="section-title" style="text-align:center;">Simple monthly pricing</h2>
+
+      <div class="pricing-box">
+        <p class="pricing-tagline">Priced for your portfolio size</p>
+        <p class="pricing-body">
+          Pricing depends on how many villas or listings you manage.<br>
+          Most clients start with a few properties, then expand as they see results.
+        </p>
+        <div class="pricing-tiers">
+          <div class="tier">
+            <div class="tier-label">Starting at</div>
+            <div class="tier-name">A few villas</div>
+          </div>
+          <div class="tier-divider"></div>
+          <div class="tier">
+            <div class="tier-label">Scales to</div>
+            <div class="tier-name">Full portfolio</div>
+          </div>
+          <div class="tier-divider"></div>
+          <div class="tier">
+            <div class="tier-label">Includes</div>
+            <div class="tier-name">All updates</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner reveal">
+      <div class="section-label">Get started</div>
+      <h2 class="cta-title">I can create a sample page for one of your villas</h2>
+      <p class="cta-sub">Just send me the listing — photos, price, key details — and I'll build a clean shareable page you can test with your clients.</p>
+      <div class="cta-buttons">
+        <a href="https://wa.me/66954465707" target="_blank" class="btn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Message on WhatsApp
+        </a>
+        <a href="https://line.me/ti/p/~kintratech" target="_blank" class="btn-line">
+          Connect on LINE
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Kintra</span>
+    <span class="footer-note">Beautiful villa pages for WhatsApp &amp; LINE · Southeast Asia</span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
